@@ -1,0 +1,43 @@
+<head>
+    <!-- Google fonts -->
+    <link href='http://fonts.googleapis.com/css?family=Exo+2:400,300,500,600,400italic&amp;subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.js"></script>
+
+    <script src="https://code.angularjs.org/1.5.7/angular.js"></script>
+
+</head>
+<section ng-app="sortableApp">
+  <h1>Sortable items</h1>
+  <div ng-controller="sortableController" class="section row">
+    <div class="col-sm-offset-2 col-sm-4">
+      <ul ui-sortable="sortableOptions" ng-model="list" class="list">
+        <li ng-repeat="item in list" class="item">{{item.text}}</li>
+      </ul>
+    </div>
+    <div class="col-sm-4">
+      <ul class="list logList">
+        <li ng-repeat="entry in sortingLog" class="logItem">{{entry.Text}}</li>
+      </ul>
+    </div>
+  </div>
+
+  <h1>Connected items</h1>
+  <div ng-controller="connectedController" class="section row connectedItemsExample">
+    <div class="col-sm-offset-2 col-sm-4">
+      <ul ui-sortable="sortableOptions" ng-model="leftArray" class="list">
+        <li ng-repeat="item in leftArray" class="item">{{item.text}}</li>
+      </ul>
+    </div>
+    <div class="col-sm-4">
+      <ul ui-sortable="sortableOptions" ng-model="rightArray" class="list">
+        <li ng-repeat="item in rightArray" class="item">{{item.text}}</li>
+      </ul>
+    </div>
+  </div>
+</section>

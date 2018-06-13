@@ -1,0 +1,29 @@
+{
+  "name": "theme-editor",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "karma start unit-tests/config/karma.conf.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DMarchikhin/theme-editor.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DMarchikhin/theme-editor/issues"
+  },
+  "homepage": "https://github.com/DMarchikhin/theme-editor#readme",
+  "devDependencies": {
+    "angular-mocks": "^1.4.3",
+    "jasmine-core": "^2.4.1",
+    "karma": "^1.0.0",
+    "karma-chrome-launcher": "^1.0.1",
+    "karma-jasmine": "^1.0.2"
+  },
+  "dependencies": {
+    "angular": "^1.5.7"
+  }
+}
