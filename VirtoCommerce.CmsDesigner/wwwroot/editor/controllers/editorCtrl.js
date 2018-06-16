@@ -352,7 +352,7 @@ function EditorCtrl($scope, $timeout, defaultSchema, presets, modelBuilder, stac
                                 cmsGitApi.refreshProduction($scope.cmsPage).then(function (response) {
                                     if (response.data === 'ok') {
                                         var url = _storefrontMasterUrl + $scope.settings.permalink;
-                                        window.open(url, '_blank');
+                                        setTimeout(function () { window.open(url, '_blank'); }, 1000);
                                     }
                                     else {
                                         alert('Error during refreshing');
@@ -452,7 +452,7 @@ function EditorCtrl($scope, $timeout, defaultSchema, presets, modelBuilder, stac
             $scope.previewBlockIsImagesLayout = false;
         }
         else if (type === 'image-with-text-overlay') {
-            block = { id: 'newblock' + _tempBlockId++, type: type, name: 'Image with text overlay', sectionHeight: 'medium', url: 'https://cdn2.slidemodel.com/wp-content/uploads/7243-01-low-poly-background-16x9-1.jpg', title: 'Image with text overlay', content: 'This is a subtitle where you can describe what this page is about. Add some text to make this block attractive to your customers', align: 'center', textBackground: false, textBackgroundColor: 'black', textBackgroundOpacityPercent: 50, textBackgroundOpacity: '0.5', ispreview: true };
+            block = { id: 'newblock' + _tempBlockId++, type: type, name: 'Image with text overlay', sectionHeight: 'medium', url: 'https://cdn2.slidemodel.com/wp-content/uploads/7243-01-low-poly-background-16x9-1.jpg', title: 'Image with text overlay', content: 'This is a subtitle where you can describe what this page is about. Add some text to make this block attractive to your customers', align: 'center', textBackground: false, textBackgroundColor: 'black', textBackgroundOpacityPercent: 50, textBackgroundOpacity: '0.5', blockWidth: 'screen', ispreview: true };
             $scope.selectedBlock = block;
             $scope.previewBlockIsImage = false;
             $scope.previewBlockIsImageWithText = false;
@@ -465,9 +465,7 @@ function EditorCtrl($scope, $timeout, defaultSchema, presets, modelBuilder, stac
         else if (type === 'image-carousel') {
             var images = [
                 { active: true, url: 'http://www.flowermeaning.com/flower-pics/Zinnia-4.jpg', title: 'Image content 1', content: 'Tell your story through images' },
-                { url: 'https://www.sciencenews.org/sites/default/files/2017/08/main/articles/story-3_main.jpg', title: 'Image content 2', content: 'Tell your story through images' },
-                { url: 'https://avatars.mds.yandex.net/get-pdb/34158/3f879c3c-4489-4d14-afbe-8dd19049e269/s1200', title: 'Image content 3', content: 'Tell your story through images' },
-                { url: 'https://avatars.mds.yandex.net/get-pdb/69339/962bc17a-b199-4894-8656-b472f5c3df54/s1200', title: 'Image content 4', content: 'Tell your story through images' }
+                { url: 'https://www.sciencenews.org/sites/default/files/2017/08/main/articles/story-3_main.jpg', title: 'Image content 2', content: 'Tell your story through images' }
             ];
             block = { id: 'newblock' + _tempBlockId++, type: type, name: 'Image carousel', images: images, autoRotate: true, rotationFrequency: '7000', contentSize: 'medium', blockWidth: 'screen', ispreview: true };
             $scope.selectedBlock = block;
