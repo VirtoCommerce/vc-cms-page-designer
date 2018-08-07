@@ -1,0 +1,8 @@
+<ul class="list">
+    <li class="list-item">
+        <a class="list-link"><i class="list-ico fa fa-wrench"></i><span class="list-t"> Presets </span></a>
+    </li>
+    <li class="list-item" *ngFor="let item of settings">
+        <a class="list-link"><i class="list-ico fa fa-{{ item.icon }}"></i><span class="list-t"> {{ item.icon }} </span></a>
+    </li>
+</ul>

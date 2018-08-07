@@ -1,0 +1,22 @@
+.nav {
+    display: flex;
+    margin-bottom: 1rem;
+    .tab {
+        align-items: stretch;
+        flex: 1 1 0%;
+        flex-flow: row nowrap;
+        text-align: center;
+        a {
+            padding: 16px;
+            margin: 0 0.4rem;
+            display: block;
+            border-bottom: 3px solid transparent;
+            &:hover {
+                border-bottom-color: #c4cdd5;
+            }
+        }
+        &.active a {
+            border-bottom-color: #5c6ac4;
+        }
+    }
+}
