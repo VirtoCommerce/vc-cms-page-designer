@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { ThemeService } from '../../services/theme.service';
+import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
 
 @Component({
     selector: 'app-theme-editor',
@@ -8,16 +7,22 @@ import { ThemeService } from '../../services/theme.service';
 })
 export class ThemeEditorComponent implements OnInit {
 
-    data: any;
-    settings: any[];
+    @Input() settings;
+    @Input() presets;
 
-    constructor(private themeService: ThemeService) { }
+    @Output() selectEvent = new EventEmitter<any>();
+
+    constructor() { }
 
     ngOnInit() {
-        this.themeService.loadData().subscribe( ([data, settings]) => {
-            this.data = data;
-            this.settings = settings;
-        });
+
     }
 
+    selectPresets() {
+        this.selectEvent.emit(this.presets);
+    }
+
+    selectItem(item: any) {
+        this.selectEvent.emit(item);
+    }
 }

@@ -1,0 +1,32 @@
+<div class="pane-section __selected" *ngIf="item">
+    <div class="pane-head">
+        <a class="pane-back" (click)="back()">
+            <i class="pane-ico fa fa-chevron-left"></i>
+        </a>
+        <div class="pane-t">
+            <i class="pane-ico fa fa-{{ item.icon }}"></i>
+            {{ item.name }}
+        </div>
+    </div>
+    <div class="pane-cnt">
+        <div class="pane-settings" [class.pane-t]="el.type === 'header'" *ngFor="let el of item.settings">
+
+            <!-- Header or Paragraph -->
+            {{el.content}}
+
+            <!-- Color picker -->
+            <app-color-item *ngIf="el.type === 'color'" [theme]="theme" [model]="el"></app-color-item>
+            <!-- Select -->
+            <app-select-item *ngIf="el.type === 'select'" [theme]="theme" [model]="el"></app-select-item>
+            <!-- Checkbox -->
+            <app-checkbox-item *ngIf="el.type === 'checkbox'" [theme]="theme" [model]="el"></app-checkbox-item>
+            <!-- Image -->
+
+            <!-- Input type="text" -->
+            <app-text-item *ngIf="el.type === 'text'" [theme]="theme" [model]="el"></app-text-item>
+            <!-- Info -->
+            <p *ngIf="el.type !== 'image' && el.info !== undefined" class="form-help">{{el.info}}</p>
+
+        </div>
+    </div>
+</div>

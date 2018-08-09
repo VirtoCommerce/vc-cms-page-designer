@@ -1,0 +1,7 @@
+<div class="pane-col pane-color" 
+     [(colorPicker)]="value" 
+     (colorPickerChange)="raiseValueChanged($event)"
+     [cpOKButton]="true"
+     [cpOKButtonClass]="'btn'">
+    <div class='bg' [style.background]="value"></div>
+</div>

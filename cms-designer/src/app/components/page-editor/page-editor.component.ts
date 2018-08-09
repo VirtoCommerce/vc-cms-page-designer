@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
     selector: 'app-page-editor',
@@ -7,9 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PageEditorComponent implements OnInit {
 
+    @Output() loadedEvent = new EventEmitter<boolean>();
+    @Output() selectEvent = new EventEmitter<any>();
+
     constructor() { }
 
     ngOnInit() {
+        this.loadedEvent.emit(true);
     }
 
 }

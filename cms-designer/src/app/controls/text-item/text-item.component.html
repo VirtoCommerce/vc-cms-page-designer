@@ -1,0 +1,4 @@
+<label [for]="model.id" class="form-label">{{model.label}}</label>
+<div class="form-input">
+    <input [id]="model.id" type="text" value="{{model.default}}" [(ngModel)]="theme[model.id]">
+</div>
