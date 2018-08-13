@@ -1,15 +1,33 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
-  selector: 'app-presets-editor',
-  templateUrl: './presets-editor.component.html',
-  styleUrls: ['./presets-editor.component.scss']
+    selector: 'app-presets-editor',
+    templateUrl: './presets-editor.component.html',
+    styleUrls: ['./presets-editor.component.scss']
 })
 export class PresetsEditorComponent implements OnInit {
 
-  constructor() { }
+    @Input() data: any;
+    @Input() theme: any;
+    @Output() backEvent = new EventEmitter<any>();
 
-  ngOnInit() {
-  }
+    savingPreset = false;
+    newPresetName = 'Preset name';
 
+    constructor() { }
+
+    ngOnInit() {
+    }
+
+    openPreset(name: string) {
+
+    }
+
+    removePreset(name: string) {
+
+    }
+
+    back() {
+        this.backEvent.emit(null);
+    }
 }

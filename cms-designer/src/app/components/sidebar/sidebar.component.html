@@ -5,7 +5,7 @@
         </div>
     </div>
     <div class="sidebar-main">
-        <div class="pane pane-index" [class.__disabled]="selected != null">
+        <div class="pane pane-index" [class.__disabled]="selected != null || showPreset">
             <div class="pane-head">
                 <div class="pane-t">Boundless</div>
             </div>
@@ -15,11 +15,12 @@
                         <app-page-editor (selectEvent)="selected = $event"></app-page-editor>
                     </app-tab>
                     <app-tab tabTitle="Theme" active="true">
-                        <app-theme-editor [settings]="settings" [presets]="presets" (selectEvent)="selected = $event"></app-theme-editor>
+                        <app-theme-editor [settings]="settings" (selectPresetEvent)="showPreset = true" (selectItemEvent)="selected = $event"></app-theme-editor>
                     </app-tab>
                 </app-tabs>
             </div>
         </div>
+        <app-presets-editor class="pane" [class.__selected]="showPreset" [data]="presets" [theme]="theme" (backEvent)="showPreset = false"></app-presets-editor>
         <app-theme-item-editor class="pane" [class.__selected]="selected != null" [item]="selected" [theme]="theme" (backEvent)="selected = null"></app-theme-item-editor>
     </div>
     <div class="sidebar-foot">

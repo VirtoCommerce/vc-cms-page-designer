@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { ColorPickerModule } from 'ngx-color-picker';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -11,8 +11,6 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { ThemeEditorComponent } from './components/theme-editor/theme-editor.component';
 import { PageEditorComponent } from './components/page-editor/page-editor.component';
 
-import { ThemeService } from './services/theme.service';
-import { PageService } from './services/page.service';
 import { TabsComponent } from './controls/tabs/tabs.component';
 import { TabComponent } from './controls/tabs/tab.component';
 import { ThemeItemEditorComponent } from './components/theme-editor/theme-item-editor.component';
@@ -46,13 +44,10 @@ import { ColorItemComponent } from './controls/color-item/color-item.component';
     imports: [
         BrowserModule,
         HttpClientModule,
-        FormsModule,
+        ReactiveFormsModule,
         ColorPickerModule
     ],
-    providers: [
-        ThemeService,
-        PageService
-    ],
+    providers: [ ],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

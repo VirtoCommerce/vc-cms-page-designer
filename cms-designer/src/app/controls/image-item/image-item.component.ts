@@ -1,15 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
-  selector: 'app-image-item',
-  templateUrl: './image-item.component.html',
-  styleUrls: ['./image-item.component.scss']
+    selector: 'app-image-item',
+    templateUrl: './image-item.component.html',
+    styleUrls: ['./image-item.component.scss']
 })
 export class ImageItemComponent implements OnInit {
 
-  constructor() { }
+    @Input() value: string;
+    @Output() valueChanged = new EventEmitter<string>();
 
-  ngOnInit() {
-  }
+    constructor() { }
 
+    ngOnInit() {
+    }
+
+    raiseValueChanged($event) {
+        this.valueChanged.emit($event);
+    }
 }

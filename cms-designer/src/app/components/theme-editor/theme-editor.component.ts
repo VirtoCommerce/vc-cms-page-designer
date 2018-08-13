@@ -8,21 +8,19 @@ import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
 export class ThemeEditorComponent implements OnInit {
 
     @Input() settings;
-    @Input() presets;
 
-    @Output() selectEvent = new EventEmitter<any>();
+    @Output() selectItemEvent = new EventEmitter<any>();
+    @Output() selectPresetEvent = new EventEmitter<any>();
 
     constructor() { }
 
-    ngOnInit() {
-
-    }
+    ngOnInit() { }
 
     selectPresets() {
-        this.selectEvent.emit(this.presets);
+        this.selectPresetEvent.emit();
     }
 
     selectItem(item: any) {
-        this.selectEvent.emit(item);
+        this.selectItemEvent.emit(item);
     }
 }

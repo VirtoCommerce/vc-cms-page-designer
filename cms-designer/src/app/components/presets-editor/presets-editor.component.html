@@ -1,14 +1,49 @@
-<div class="pane-cnt">
-
-    <div class="new-pressets-foot">
-        <label class="form-label new-preset-label">Preset name</label>
-
-        <button class="btn">Save</button>
-        <button class="btn">Cancel</button>
+<div class="pane-section __selected" *ngIf="data">
+    <div class="pane-head">
+        <a class="pane-back" (click)="back()">
+            <i class="pane-ico fa fa-chevron-left"></i>
+        </a>
+        <div class="pane-t">
+            <i class="pane-ico fa fa-wrench"></i>
+            Presets
+        </div>
     </div>
+    <div class="pane-cnt">
 
-    <div class="pressets-foot">
-        <button class="btn">Save current as new presset</button>
+        <ul class="list pressets-list">
+            <li class="list-item" *ngFor="let item of data.presets | keyvalue">
+                <div class="list-thumbnail" [class.super-active]="item.key == data.current" (click)="openPreset(item.key)">{{item.key}}</div>
+                <div class="list-actions">
+                    <a class="list-name" (click)="removePreset(item.key)">
+                        {{item.key}}
+                        <i class="list-ico fa fa-trash-o"></i>
+                    </a>
+                </div>
+            </li>
+            <li class="list-item" *ngIf="savingPreset">
+                <div class="list-thumbnail">{{newPresetName}}</div>
+                <div class="list-actions">
+                    <a class="list-name">
+                        {{newPresetName}}
+                        <i class="list-ico fa fa-trash-o"></i>
+                    </a>
+                </div>
+            </li>
+        </ul>
+
+
+        <div class="new-pressets-foot" *ngIf="savingPreset">
+            <label class="form-label new-preset-label">Preset name</label>
+            <div class="form-input new-preset-input">
+                <input type="text" >
+            </div>
+            <button class="btn">Save</button>
+            <button class="btn" (click)="savingPreset = false">Cancel</button>
+        </div>
+
+        <div class="pressets-foot" *ngIf="!savingPreset">
+            <button (click)="savingPreset = true" class="btn">Save current as new presset</button>
+        </div>
+
     </div>
-
 </div>
