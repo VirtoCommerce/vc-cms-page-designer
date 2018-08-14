@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+// import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { ColorPickerModule } from 'ngx-color-picker';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -44,7 +45,8 @@ import { ColorItemComponent } from './controls/color-item/color-item.component';
     imports: [
         BrowserModule,
         HttpClientModule,
-        ReactiveFormsModule,
+        // ReactiveFormsModule,
+        FormsModule,
         ColorPickerModule
     ],
     providers: [ ],

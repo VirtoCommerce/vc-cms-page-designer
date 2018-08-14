@@ -1,4 +1,9 @@
-<label for="{{setting.id}}" class="form-label">{{setting.label}}</label>
-<div ng-if="setting.type === 'image'" id="{{setting.id}}" class="form-file" editor-set-image model="editor.model[setting.id]"></div>
-<p ng-if="setting.type === 'image' && setting.info !== undefined" class="form-help">{{setting.info}}</p>
-<div ng-if="setting.type === 'image'" class="form-img"></div>
+<label [for]="model.id" class="form-label">{{model.label}}</label>
+<div class="form-file">
+    <div class='form-file'>
+        <input [id]="model.id" type='file' #fileInput>
+        <button class='btn' (click)="openFileDialog()">Choose file</button>
+    </div>
+</div>
+<p *ngIf="model.info !== undefined" class="form-help">{{model.info}}</p>
+<div class="form-img"></div>

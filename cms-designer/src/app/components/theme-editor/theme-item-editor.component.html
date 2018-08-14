@@ -21,7 +21,7 @@
             <!-- Checkbox -->
             <app-checkbox-item *ngIf="el.type === 'checkbox'" [theme]="theme" [model]="el"></app-checkbox-item>
             <!-- Image -->
-
+            <app-image-item *ngIf="el.type === 'image'" [theme]="theme" [model]="el"></app-image-item>
             <!-- Input type="text" -->
             <app-text-item *ngIf="el.type === 'text'" [theme]="theme" [model]="el"></app-text-item>
             <!-- Info -->

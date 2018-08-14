@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 
 @Component({
     selector: 'app-image-item',
@@ -7,15 +7,21 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 })
 export class ImageItemComponent implements OnInit {
 
-    @Input() value: string;
-    @Output() valueChanged = new EventEmitter<string>();
+    @ViewChild('fileInput', {read: ElementRef}) fileInput: ElementRef;
+
+    @Input() model;
+    @Input() theme;
 
     constructor() { }
 
     ngOnInit() {
     }
 
+    openFileDialog() {
+        this.fileInput.nativeElement.click();
+    }
+
     raiseValueChanged($event) {
-        this.valueChanged.emit($event);
+        this.theme[this.model.id] = $event;
     }
 }
