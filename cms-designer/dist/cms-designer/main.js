@@ -102,18 +102,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_sidebar_sidebar_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/sidebar/sidebar.component */ "./src/app/components/sidebar/sidebar.component.ts");
 /* harmony import */ var _components_theme_editor_theme_editor_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/theme-editor/theme-editor.component */ "./src/app/components/theme-editor/theme-editor.component.ts");
 /* harmony import */ var _components_page_editor_page_editor_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/page-editor/page-editor.component */ "./src/app/components/page-editor/page-editor.component.ts");
-/* harmony import */ var _services_theme_service__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./services/theme.service */ "./src/app/services/theme.service.ts");
-/* harmony import */ var _services_page_service__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./services/page.service */ "./src/app/services/page.service.ts");
-/* harmony import */ var _controls_tabs_tabs_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./controls/tabs/tabs.component */ "./src/app/controls/tabs/tabs.component.ts");
-/* harmony import */ var _controls_tabs_tab_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./controls/tabs/tab.component */ "./src/app/controls/tabs/tab.component.ts");
-/* harmony import */ var _components_theme_editor_theme_item_editor_component__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./components/theme-editor/theme-item-editor.component */ "./src/app/components/theme-editor/theme-item-editor.component.ts");
-/* harmony import */ var _components_presets_editor_presets_editor_component__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./components/presets-editor/presets-editor.component */ "./src/app/components/presets-editor/presets-editor.component.ts");
-/* harmony import */ var _controls_color_picker_color_picker_component__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./controls/color-picker/color-picker.component */ "./src/app/controls/color-picker/color-picker.component.ts");
-/* harmony import */ var _controls_select_item_select_item_component__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./controls/select-item/select-item.component */ "./src/app/controls/select-item/select-item.component.ts");
-/* harmony import */ var _controls_checkbox_item_checkbox_item_component__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./controls/checkbox-item/checkbox-item.component */ "./src/app/controls/checkbox-item/checkbox-item.component.ts");
-/* harmony import */ var _controls_image_item_image_item_component__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./controls/image-item/image-item.component */ "./src/app/controls/image-item/image-item.component.ts");
-/* harmony import */ var _controls_text_item_text_item_component__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./controls/text-item/text-item.component */ "./src/app/controls/text-item/text-item.component.ts");
-/* harmony import */ var _controls_color_item_color_item_component__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./controls/color-item/color-item.component */ "./src/app/controls/color-item/color-item.component.ts");
+/* harmony import */ var _controls_tabs_tabs_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./controls/tabs/tabs.component */ "./src/app/controls/tabs/tabs.component.ts");
+/* harmony import */ var _controls_tabs_tab_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./controls/tabs/tab.component */ "./src/app/controls/tabs/tab.component.ts");
+/* harmony import */ var _components_theme_editor_theme_item_editor_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/theme-editor/theme-item-editor.component */ "./src/app/components/theme-editor/theme-item-editor.component.ts");
+/* harmony import */ var _components_presets_editor_presets_editor_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/presets-editor/presets-editor.component */ "./src/app/components/presets-editor/presets-editor.component.ts");
+/* harmony import */ var _controls_color_picker_color_picker_component__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./controls/color-picker/color-picker.component */ "./src/app/controls/color-picker/color-picker.component.ts");
+/* harmony import */ var _controls_select_item_select_item_component__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./controls/select-item/select-item.component */ "./src/app/controls/select-item/select-item.component.ts");
+/* harmony import */ var _controls_checkbox_item_checkbox_item_component__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./controls/checkbox-item/checkbox-item.component */ "./src/app/controls/checkbox-item/checkbox-item.component.ts");
+/* harmony import */ var _controls_image_item_image_item_component__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./controls/image-item/image-item.component */ "./src/app/controls/image-item/image-item.component.ts");
+/* harmony import */ var _controls_text_item_text_item_component__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./controls/text-item/text-item.component */ "./src/app/controls/text-item/text-item.component.ts");
+/* harmony import */ var _controls_color_item_color_item_component__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./controls/color-item/color-item.component */ "./src/app/controls/color-item/color-item.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -122,8 +120,7 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 };
 
 
-
-
+// import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -155,27 +152,25 @@ var AppModule = /** @class */ (function () {
                 _components_sidebar_sidebar_component__WEBPACK_IMPORTED_MODULE_8__["SidebarComponent"],
                 _components_theme_editor_theme_editor_component__WEBPACK_IMPORTED_MODULE_9__["ThemeEditorComponent"],
                 _components_page_editor_page_editor_component__WEBPACK_IMPORTED_MODULE_10__["PageEditorComponent"],
-                _controls_tabs_tabs_component__WEBPACK_IMPORTED_MODULE_13__["TabsComponent"],
-                _controls_tabs_tab_component__WEBPACK_IMPORTED_MODULE_14__["TabComponent"],
-                _components_theme_editor_theme_item_editor_component__WEBPACK_IMPORTED_MODULE_15__["ThemeItemEditorComponent"],
-                _components_presets_editor_presets_editor_component__WEBPACK_IMPORTED_MODULE_16__["PresetsEditorComponent"],
-                _controls_color_picker_color_picker_component__WEBPACK_IMPORTED_MODULE_17__["ColorPickerComponent"],
-                _controls_select_item_select_item_component__WEBPACK_IMPORTED_MODULE_18__["SelectItemComponent"],
-                _controls_checkbox_item_checkbox_item_component__WEBPACK_IMPORTED_MODULE_19__["CheckboxItemComponent"],
-                _controls_image_item_image_item_component__WEBPACK_IMPORTED_MODULE_20__["ImageItemComponent"],
-                _controls_text_item_text_item_component__WEBPACK_IMPORTED_MODULE_21__["TextItemComponent"],
-                _controls_color_item_color_item_component__WEBPACK_IMPORTED_MODULE_22__["ColorItemComponent"]
+                _controls_tabs_tabs_component__WEBPACK_IMPORTED_MODULE_11__["TabsComponent"],
+                _controls_tabs_tab_component__WEBPACK_IMPORTED_MODULE_12__["TabComponent"],
+                _components_theme_editor_theme_item_editor_component__WEBPACK_IMPORTED_MODULE_13__["ThemeItemEditorComponent"],
+                _components_presets_editor_presets_editor_component__WEBPACK_IMPORTED_MODULE_14__["PresetsEditorComponent"],
+                _controls_color_picker_color_picker_component__WEBPACK_IMPORTED_MODULE_15__["ColorPickerComponent"],
+                _controls_select_item_select_item_component__WEBPACK_IMPORTED_MODULE_16__["SelectItemComponent"],
+                _controls_checkbox_item_checkbox_item_component__WEBPACK_IMPORTED_MODULE_17__["CheckboxItemComponent"],
+                _controls_image_item_image_item_component__WEBPACK_IMPORTED_MODULE_18__["ImageItemComponent"],
+                _controls_text_item_text_item_component__WEBPACK_IMPORTED_MODULE_19__["TextItemComponent"],
+                _controls_color_item_color_item_component__WEBPACK_IMPORTED_MODULE_20__["ColorItemComponent"]
             ],
             imports: [
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"],
                 _angular_common_http__WEBPACK_IMPORTED_MODULE_4__["HttpClientModule"],
+                // ReactiveFormsModule,
                 _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormsModule"],
                 ngx_color_picker__WEBPACK_IMPORTED_MODULE_3__["ColorPickerModule"]
             ],
-            providers: [
-                _services_theme_service__WEBPACK_IMPORTED_MODULE_11__["ThemeService"],
-                _services_page_service__WEBPACK_IMPORTED_MODULE_12__["PageService"]
-            ],
+            providers: [],
             bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_5__["AppComponent"]]
         })
     ], AppModule);
@@ -193,7 +188,7 @@ var AppModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<p>\n  page-editor works!\n</p>\n"
+module.exports = "<div class=\"pane-section __selected\" *ngIf=\"model\">\n    \n</div>"
 
 /***/ }),
 
@@ -219,6 +214,7 @@ module.exports = ""
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PageEditorComponent", function() { return PageEditorComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _models_page_model__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../models/page.model */ "./src/app/models/page.model.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -229,14 +225,20 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
+
 var PageEditorComponent = /** @class */ (function () {
     function PageEditorComponent() {
+        this.model = new _models_page_model__WEBPACK_IMPORTED_MODULE_1__["PageModel"]();
         this.loadedEvent = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
         this.selectEvent = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
     }
     PageEditorComponent.prototype.ngOnInit = function () {
         this.loadedEvent.emit(true);
     };
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
+        __metadata("design:type", Object)
+    ], PageEditorComponent.prototype, "model", void 0);
     __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Output"])(),
         __metadata("design:type", Object)
@@ -267,7 +269,7 @@ var PageEditorComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"pane-cnt\">\n\n    <div class=\"new-pressets-foot\">\n        <label class=\"form-label new-preset-label\">Preset name</label>\n\n        <button class=\"btn\">Save</button>\n        <button class=\"btn\">Cancel</button>\n    </div>\n\n    <div class=\"pressets-foot\">\n        <button class=\"btn\">Save current as new presset</button>\n    </div>\n\n</div>"
+module.exports = "<div class=\"pane-section __selected\" *ngIf=\"data\">\n    <div class=\"pane-head\">\n        <a class=\"pane-back\" (click)=\"back()\">\n            <i class=\"pane-ico fa fa-chevron-left\"></i>\n        </a>\n        <div class=\"pane-t\">\n            <i class=\"pane-ico fa fa-wrench\"></i>\n            Presets\n        </div>\n    </div>\n    <div class=\"pane-cnt\">\n\n        <ul class=\"list pressets-list\">\n            <li class=\"list-item\" *ngFor=\"let item of data.presets | keyvalue\">\n                <div class=\"list-thumbnail\" [class.super-active]=\"item.key == data.current\" (click)=\"openPreset(item.key)\">{{item.key}}</div>\n                <div class=\"list-actions\">\n                    <a class=\"list-name\" (click)=\"removePreset(item.key)\">\n                        {{item.key}}\n                        <i class=\"list-ico fa fa-trash-o\"></i>\n                    </a>\n                </div>\n            </li>\n            <li class=\"list-item\" *ngIf=\"savingPreset\">\n                <div class=\"list-thumbnail\">{{newPresetName}}</div>\n                <div class=\"list-actions\">\n                    <a class=\"list-name\">\n                        {{newPresetName}}\n                        <i class=\"list-ico fa fa-trash-o\"></i>\n                    </a>\n                </div>\n            </li>\n        </ul>\n\n\n        <div class=\"new-pressets-foot\" *ngIf=\"savingPreset\">\n            <label class=\"form-label new-preset-label\">Preset name</label>\n            <div class=\"form-input new-preset-input\">\n                <input type=\"text\" >\n            </div>\n            <button class=\"btn\">Save</button>\n            <button class=\"btn\" (click)=\"savingPreset = false\">Cancel</button>\n        </div>\n\n        <div class=\"pressets-foot\" *ngIf=\"!savingPreset\">\n            <button (click)=\"savingPreset = true\" class=\"btn\">Save current as new presset</button>\n        </div>\n\n    </div>\n</div>"
 
 /***/ }),
 
@@ -305,9 +307,31 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 var PresetsEditorComponent = /** @class */ (function () {
     function PresetsEditorComponent() {
+        this.backEvent = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
+        this.savingPreset = false;
+        this.newPresetName = 'Preset name';
     }
     PresetsEditorComponent.prototype.ngOnInit = function () {
     };
+    PresetsEditorComponent.prototype.openPreset = function (name) {
+    };
+    PresetsEditorComponent.prototype.removePreset = function (name) {
+    };
+    PresetsEditorComponent.prototype.back = function () {
+        this.backEvent.emit(null);
+    };
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
+        __metadata("design:type", Object)
+    ], PresetsEditorComponent.prototype, "data", void 0);
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
+        __metadata("design:type", Object)
+    ], PresetsEditorComponent.prototype, "theme", void 0);
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Output"])(),
+        __metadata("design:type", Object)
+    ], PresetsEditorComponent.prototype, "backEvent", void 0);
     PresetsEditorComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'app-presets-editor',
@@ -393,7 +417,7 @@ var PreviewComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"theme-sidebar\">\n    <div class=\"loader\" *ngIf=\"isPageLoading || isThemeLoading\">\n        <div class=\"loading\">\n            <img src=\"assets/images/loader.gif\" alt=\"\">\n        </div>\n    </div>\n    <div class=\"sidebar-main\">\n        <div class=\"pane pane-index\" [class.__disabled]=\"selected != null\">\n            <div class=\"pane-head\">\n                <div class=\"pane-t\">Boundless</div>\n            </div>\n            <div class=\"pane-cnt\">\n                <app-tabs>\n                    <app-tab tabTitle=\"Sections\">\n                        <app-page-editor (selectEvent)=\"selected = $event\"></app-page-editor>\n                    </app-tab>\n                    <app-tab tabTitle=\"Theme\" active=\"true\">\n                        <app-theme-editor [settings]=\"settings\" [presets]=\"presets\" (selectEvent)=\"selected = $event\"></app-theme-editor>\n                    </app-tab>\n                </app-tabs>\n            </div>\n        </div>\n        <app-theme-item-editor class=\"pane\" [class.__selected]=\"selected != null\" [item]=\"selected\" [theme]=\"theme\" (backEvent)=\"selected = null\"></app-theme-item-editor>\n    </div>\n    <div class=\"sidebar-foot\">\n        <button class=\"btn\">Clear changes</button>\n        <button class=\"btn\">Save changes</button>\n    </div>\n</div>"
+module.exports = "<div class=\"theme-sidebar\">\n    <div class=\"loader\" *ngIf=\"isPageLoading || isThemeLoading\">\n        <div class=\"loading\">\n            <img src=\"assets/images/loader.gif\" alt=\"\">\n        </div>\n    </div>\n    <div class=\"sidebar-main\">\n        <div class=\"pane pane-index\" [class.__disabled]=\"selected != null || showPreset\">\n            <div class=\"pane-head\">\n                <div class=\"pane-t\">Boundless</div>\n            </div>\n            <div class=\"pane-cnt\">\n                <app-tabs>\n                    <app-tab tabTitle=\"Sections\" active=\"true\">\n                        <app-page-editor (selectEvent)=\"selected = $event\"></app-page-editor>\n                    </app-tab>\n                    <app-tab tabTitle=\"Theme\">\n                        <app-theme-editor [settings]=\"settings\" (selectPresetEvent)=\"showPreset = true\" (selectItemEvent)=\"selected = $event\"></app-theme-editor>\n                    </app-tab>\n                </app-tabs>\n            </div>\n        </div>\n        <app-presets-editor class=\"pane\" [class.__selected]=\"showPreset\" [data]=\"presets\" [theme]=\"theme\" (backEvent)=\"showPreset = false\"></app-presets-editor>\n        <app-theme-item-editor class=\"pane\" [class.__selected]=\"selected != null\" [item]=\"selected\" [theme]=\"theme\" (backEvent)=\"selected = null\"></app-theme-item-editor>\n    </div>\n    <div class=\"sidebar-foot\">\n        <button class=\"btn\">Clear changes</button>\n        <button class=\"btn\">Save changes</button>\n    </div>\n</div>"
 
 /***/ }),
 
@@ -516,28 +540,28 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 var ThemeEditorComponent = /** @class */ (function () {
     function ThemeEditorComponent() {
-        this.selectEvent = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
+        this.selectItemEvent = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
+        this.selectPresetEvent = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
     }
-    ThemeEditorComponent.prototype.ngOnInit = function () {
-    };
+    ThemeEditorComponent.prototype.ngOnInit = function () { };
     ThemeEditorComponent.prototype.selectPresets = function () {
-        this.selectEvent.emit(this.presets);
+        this.selectPresetEvent.emit();
     };
     ThemeEditorComponent.prototype.selectItem = function (item) {
-        this.selectEvent.emit(item);
+        this.selectItemEvent.emit(item);
     };
     __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
         __metadata("design:type", Object)
     ], ThemeEditorComponent.prototype, "settings", void 0);
     __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Output"])(),
         __metadata("design:type", Object)
-    ], ThemeEditorComponent.prototype, "presets", void 0);
+    ], ThemeEditorComponent.prototype, "selectItemEvent", void 0);
     __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Output"])(),
         __metadata("design:type", Object)
-    ], ThemeEditorComponent.prototype, "selectEvent", void 0);
+    ], ThemeEditorComponent.prototype, "selectPresetEvent", void 0);
     ThemeEditorComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'app-theme-editor',
@@ -560,7 +584,7 @@ var ThemeEditorComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"pane-section __selected\" *ngIf=\"item\">\n    <div class=\"pane-head\">\n        <a class=\"pane-back\" (click)=\"back()\">\n            <i class=\"pane-ico fa fa-chevron-left\"></i>\n        </a>\n        <div class=\"pane-t\">\n            <i class=\"pane-ico fa fa-{{ item.icon }}\"></i>\n            {{ item.name }}\n        </div>\n    </div>\n    <div class=\"pane-cnt\">\n        <div class=\"pane-settings\" [class.pane-t]=\"el.type === 'header'\" *ngFor=\"let el of item.settings\">\n\n            <!-- Header or Paragraph -->\n            {{el.content}}\n\n            <!-- Color picker -->\n            <app-color-item *ngIf=\"el.type === 'color'\" [theme]=\"theme\" [model]=\"el\"></app-color-item>\n            <!-- Select -->\n            <app-select-item *ngIf=\"el.type === 'select'\" [theme]=\"theme\" [model]=\"el\"></app-select-item>\n            <!-- Checkbox -->\n            <app-checkbox-item *ngIf=\"el.type === 'checkbox'\" [theme]=\"theme\" [model]=\"el\"></app-checkbox-item>\n            <!-- Image -->\n\n            <!-- Input type=\"text\" -->\n            <app-text-item *ngIf=\"el.type === 'text'\" [theme]=\"theme\" [model]=\"el\"></app-text-item>\n            <!-- Info -->\n            <p *ngIf=\"el.type !== 'image' && el.info !== undefined\" class=\"form-help\">{{el.info}}</p>\n\n        </div>\n    </div>\n</div>"
+module.exports = "<div class=\"pane-section __selected\" *ngIf=\"item\">\n    <div class=\"pane-head\">\n        <a class=\"pane-back\" (click)=\"back()\">\n            <i class=\"pane-ico fa fa-chevron-left\"></i>\n        </a>\n        <div class=\"pane-t\">\n            <i class=\"pane-ico fa fa-{{ item.icon }}\"></i>\n            {{ item.name }}\n        </div>\n    </div>\n    <div class=\"pane-cnt\">\n        <div class=\"pane-settings\" [class.pane-t]=\"el.type === 'header'\" *ngFor=\"let el of item.settings\">\n\n            <!-- Header or Paragraph -->\n            {{el.content}}\n\n            <!-- Color picker -->\n            <app-color-item *ngIf=\"el.type === 'color'\" [theme]=\"theme\" [model]=\"el\"></app-color-item>\n            <!-- Select -->\n            <app-select-item *ngIf=\"el.type === 'select'\" [theme]=\"theme\" [model]=\"el\"></app-select-item>\n            <!-- Checkbox -->\n            <app-checkbox-item *ngIf=\"el.type === 'checkbox'\" [theme]=\"theme\" [model]=\"el\"></app-checkbox-item>\n            <!-- Image -->\n            <app-image-item *ngIf=\"el.type === 'image'\" [theme]=\"theme\" [model]=\"el\"></app-image-item>\n            <!-- Input type=\"text\" -->\n            <app-text-item *ngIf=\"el.type === 'text'\" [theme]=\"theme\" [model]=\"el\"></app-text-item>\n            <!-- Info -->\n            <p *ngIf=\"el.type !== 'image' && el.info !== undefined\" class=\"form-help\">{{el.info}}</p>\n\n        </div>\n    </div>\n</div>"
 
 /***/ }),
 
@@ -922,7 +946,7 @@ var ColorPickerComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!-- <label ng-if=\"setting.type === 'image'\" for=\"{{setting.id}}\" class=\"form-label\">{{setting.label}}</label>\n<div ng-if=\"setting.type === 'image'\" id=\"{{setting.id}}\" class=\"form-file\" editor-set-image model=\"editor.model[setting.id]\"></div>\n<p ng-if=\"setting.type === 'image' && setting.info !== undefined\" class=\"form-help\">{{setting.info}}</p>\n<div ng-if=\"setting.type === 'image'\" class=\"form-img\"></div> -->"
+module.exports = "<label [for]=\"model.id\" class=\"form-label\">{{model.label}}</label>\n<div class=\"form-file\">\n    <div class='form-file'>\n        <input [id]=\"model.id\" type='file' #fileInput>\n        <button class='btn' (click)=\"openFileDialog()\">Choose file</button>\n    </div>\n</div>\n<p *ngIf=\"model.info !== undefined\" class=\"form-help\">{{model.info}}</p>\n<div class=\"form-img\"></div>\n"
 
 /***/ }),
 
@@ -963,6 +987,24 @@ var ImageItemComponent = /** @class */ (function () {
     }
     ImageItemComponent.prototype.ngOnInit = function () {
     };
+    ImageItemComponent.prototype.openFileDialog = function () {
+        this.fileInput.nativeElement.click();
+    };
+    ImageItemComponent.prototype.raiseValueChanged = function ($event) {
+        this.theme[this.model.id] = $event;
+    };
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"])('fileInput', { read: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ElementRef"] }),
+        __metadata("design:type", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ElementRef"])
+    ], ImageItemComponent.prototype, "fileInput", void 0);
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
+        __metadata("design:type", Object)
+    ], ImageItemComponent.prototype, "model", void 0);
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
+        __metadata("design:type", Object)
+    ], ImageItemComponent.prototype, "theme", void 0);
     ImageItemComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'app-image-item',
@@ -1234,37 +1276,20 @@ var TextItemComponent = /** @class */ (function () {
 
 /***/ }),
 
-/***/ "./src/app/services/page.service.ts":
-/*!******************************************!*\
-  !*** ./src/app/services/page.service.ts ***!
-  \******************************************/
-/*! exports provided: PageService */
+/***/ "./src/app/models/page.model.ts":
+/*!**************************************!*\
+  !*** ./src/app/models/page.model.ts ***!
+  \**************************************/
+/*! exports provided: PageModel */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PageService", function() { return PageService; });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (undefined && undefined.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-var PageService = /** @class */ (function () {
-    function PageService() {
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PageModel", function() { return PageModel; });
+var PageModel = /** @class */ (function () {
+    function PageModel() {
     }
-    PageService = __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
-            providedIn: 'root'
-        }),
-        __metadata("design:paramtypes", [])
-    ], PageService);
-    return PageService;
+    return PageModel;
 }());
 
 
@@ -1304,7 +1329,9 @@ var ThemeService = /** @class */ (function () {
         return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["forkJoin"])(this.http.get('data/settings_data.json'), this.http.get('data/settings_schema.json'));
     };
     ThemeService = __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])(),
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
+            providedIn: 'root'
+        }),
         __metadata("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"]])
     ], ThemeService);
     return ThemeService;
