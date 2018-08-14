@@ -11,10 +11,10 @@
             </div>
             <div class="pane-cnt">
                 <app-tabs>
-                    <app-tab tabTitle="Sections">
+                    <app-tab tabTitle="Sections" active="true">
                         <app-page-editor (selectEvent)="selected = $event"></app-page-editor>
                     </app-tab>
-                    <app-tab tabTitle="Theme" active="true">
+                    <app-tab tabTitle="Theme">
                         <app-theme-editor [settings]="settings" (selectPresetEvent)="showPreset = true" (selectItemEvent)="selected = $event"></app-theme-editor>
                     </app-tab>
                 </app-tabs>
