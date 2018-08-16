@@ -807,7 +807,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ThemeService", function() { return ThemeService; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
-/* harmony import */ var _editor_module__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../editor.module */ "./src/app/editor/editor.module.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -817,7 +816,6 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-
 
 
 var ThemeService = /** @class */ (function () {
@@ -832,7 +830,7 @@ var ThemeService = /** @class */ (function () {
     };
     ThemeService = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
-            providedIn: _editor_module__WEBPACK_IMPORTED_MODULE_2__["EditorModule"]
+            providedIn: 'root'
         }),
         __metadata("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"]])
     ], ThemeService);
@@ -850,7 +848,7 @@ var ThemeService = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"theme-sidebar\">\n    <div class=\"loader\" *ngIf=\"isPageLoading || isThemeLoading\">\n        <div class=\"loading\">\n            <img src=\"assets/images/loader.gif\" alt=\"\">\n        </div>\n    </div>\n    <div class=\"sidebar-main\">\n        <div class=\"pane pane-index\" [class.__disabled]=\"selected != null || showPreset\">\n            <div class=\"pane-head\">\n                <div class=\"pane-t\">Boundless</div>\n            </div>\n            <div class=\"pane-cnt\">\n                <app-tabs>\n                    <app-tab tabTitle=\"Sections\">\n                        <app-page-editor (selectEvent)=\"selected = $event\"></app-page-editor>\n                    </app-tab>\n                    <app-tab *ngIf=\"settings$\" tabTitle=\"Theme\" active=\"true\">\n                        <app-theme-editor [settings]=\"settings$ | async\" (selectPresetEvent)=\"showPreset = true\" (selectItemEvent)=\"selected = $event\"></app-theme-editor>\n                    </app-tab>\n                </app-tabs>\n            </div>\n        </div>\n        <app-presets-editor class=\"pane\" [class.__selected]=\"showPreset\" [data]=\"presets\" [theme]=\"theme\" (backEvent)=\"showPreset = false\"></app-presets-editor>\n        <app-theme-item-editor class=\"pane\" [class.__selected]=\"selected != null\" [item]=\"selected\" [theme]=\"theme\" (backEvent)=\"selected = null\"></app-theme-item-editor>\n    </div>\n    <div class=\"sidebar-foot\">\n        <button class=\"btn\">Clear changes</button>\n        <button class=\"btn\">Save changes</button>\n    </div>\n</div>"
+module.exports = "<div class=\"theme-sidebar\">\n    <div class=\"loader\" *ngIf=\"isPageLoading || isThemeLoading\">\n        <div class=\"loading\">\n            <img src=\"assets/images/loader.gif\" alt=\"\">\n        </div>\n    </div>\n    <div class=\"sidebar-main\">\n        <div class=\"pane pane-index\" [class.__disabled]=\"(currentThemeItem$|async) || (showPresets$|async)\">\n            <div class=\"pane-head\">\n                <div class=\"pane-t\">Boundless</div>\n            </div>\n            <div class=\"pane-cnt\">\n                <app-tabs>\n                    <app-tab tabTitle=\"Sections\">\n                        <app-page-editor (selectEvent)=\"selected = $event\"></app-page-editor>\n                    </app-tab>\n                    <app-tab *ngIf=\"settings$\" tabTitle=\"Theme\" active=\"true\">\n                        <app-theme-editor [settings]=\"settings$ | async\" (selectPresetEvent)=\"turnOnPresets()\" (selectItemEvent)=\"selectThemeItem($event)\"></app-theme-editor>\n                    </app-tab>\n                </app-tabs>\n            </div>\n        </div>\n        <app-presets-editor class=\"pane __selected\" \n                            *ngIf=\"showPresets$|async\" \n                            [data]=\"presets$|async\" \n                            [theme]=\"theme$|async\" \n                            (backEvent)=\"turnOffPresets()\"></app-presets-editor>\n        <app-theme-item-editor class=\"pane __selected\" \n                               *ngIf=\"currentThemeItem$|async as currentThemeItem\"\n                               [item]=\"currentThemeItem\"\n                               [theme]=\"theme$|async\"\n                               (backEvent)=\"selectThemeItem(null)\"></app-theme-item-editor>\n    </div>\n    <div class=\"sidebar-foot\">\n        <button class=\"btn\">Clear changes</button>\n        <button class=\"btn\">Save changes</button>\n    </div>\n</div>"
 
 /***/ }),
 
@@ -897,13 +895,27 @@ var SidebarComponent = /** @class */ (function () {
         this.store = store;
         this.isPageLoading = false;
         this.isThemeLoading = false;
-        this.selected = null;
     }
     SidebarComponent.prototype.ngOnInit = function () {
         this.store.dispatch(new _state_editor_actions__WEBPACK_IMPORTED_MODULE_3__["LoadPresets"]());
         this.store.dispatch(new _state_editor_actions__WEBPACK_IMPORTED_MODULE_3__["LoadSettings"]());
         this.presets$ = this.store.pipe(Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_1__["select"])(_state__WEBPACK_IMPORTED_MODULE_2__["getPresets"]));
         this.settings$ = this.store.pipe(Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_1__["select"])(_state__WEBPACK_IMPORTED_MODULE_2__["getSettings"]));
+        this.theme$ = this.store.pipe(Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_1__["select"])(_state__WEBPACK_IMPORTED_MODULE_2__["getCurrentTheme"]));
+        this.currentThemeItem$ = this.store.pipe(Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_1__["select"])(_state__WEBPACK_IMPORTED_MODULE_2__["getCurrentThemeItem"]));
+        this.showPresets$ = this.store.pipe(Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_1__["select"])(_state__WEBPACK_IMPORTED_MODULE_2__["getShowPresetsEditor"]));
+        this.showPresets$.subscribe(function (v) {
+            console.log(v);
+        });
+    };
+    SidebarComponent.prototype.selectThemeItem = function (item) {
+        this.store.dispatch(new _state_editor_actions__WEBPACK_IMPORTED_MODULE_3__["SelectThemeItem"](item));
+    };
+    SidebarComponent.prototype.turnOnPresets = function () {
+        this.store.dispatch(new _state_editor_actions__WEBPACK_IMPORTED_MODULE_3__["TogglePresetsPane"](true));
+    };
+    SidebarComponent.prototype.turnOffPresets = function () {
+        this.store.dispatch(new _state_editor_actions__WEBPACK_IMPORTED_MODULE_3__["TogglePresetsPane"](false));
     };
     SidebarComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -924,37 +936,31 @@ var SidebarComponent = /** @class */ (function () {
 /*!************************************************!*\
   !*** ./src/app/editor/state/editor.actions.ts ***!
   \************************************************/
-/*! exports provided: EditorActionTypes, ShowCurrentThemeItem, LoadPresets, LoadPresetsSuccess, LoadPresetsFail, LoadSettings, LoadSettingsSuccess, LoadSettingsFail */
+/*! exports provided: EditorActionTypes, LoadPresets, LoadPresetsSuccess, LoadPresetsFail, LoadSettings, LoadSettingsSuccess, LoadSettingsFail, SelectThemeItem, TogglePresetsPane */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EditorActionTypes", function() { return EditorActionTypes; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ShowCurrentThemeItem", function() { return ShowCurrentThemeItem; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LoadPresets", function() { return LoadPresets; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LoadPresetsSuccess", function() { return LoadPresetsSuccess; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LoadPresetsFail", function() { return LoadPresetsFail; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LoadSettings", function() { return LoadSettings; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LoadSettingsSuccess", function() { return LoadSettingsSuccess; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LoadSettingsFail", function() { return LoadSettingsFail; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SelectThemeItem", function() { return SelectThemeItem; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TogglePresetsPane", function() { return TogglePresetsPane; });
 var EditorActionTypes;
 (function (EditorActionTypes) {
-    EditorActionTypes["ShowCurrentThemeItem"] = "Show current theme item";
     EditorActionTypes["LoadPresets"] = "Load Presets";
     EditorActionTypes["LoadPresetsSuccess"] = "Load Presets Success";
     EditorActionTypes["LoadPresetsFail"] = "Load Presets Fail";
     EditorActionTypes["LoadSettings"] = "Load Settings";
     EditorActionTypes["LoadSettingsSuccess"] = "Load Settings Success";
     EditorActionTypes["LoadSettingsFail"] = "Load Settings Fail";
+    EditorActionTypes["SelectThemeItem"] = "Select Theme Item";
+    EditorActionTypes["TogglePresetsPane"] = "Toggle Presets Pane";
 })(EditorActionTypes || (EditorActionTypes = {}));
-var ShowCurrentThemeItem = /** @class */ (function () {
-    function ShowCurrentThemeItem(payload) {
-        this.payload = payload;
-        this.type = EditorActionTypes.ShowCurrentThemeItem;
-    }
-    return ShowCurrentThemeItem;
-}());
-
 var LoadPresets = /** @class */ (function () {
     function LoadPresets() {
         this.type = EditorActionTypes.LoadPresets;
@@ -1001,6 +1007,22 @@ var LoadSettingsFail = /** @class */ (function () {
     return LoadSettingsFail;
 }());
 
+var SelectThemeItem = /** @class */ (function () {
+    function SelectThemeItem(payload) {
+        this.payload = payload;
+        this.type = EditorActionTypes.SelectThemeItem;
+    }
+    return SelectThemeItem;
+}());
+
+var TogglePresetsPane = /** @class */ (function () {
+    function TogglePresetsPane(payload) {
+        this.payload = payload;
+        this.type = EditorActionTypes.TogglePresetsPane;
+    }
+    return TogglePresetsPane;
+}());
+
 
 
 /***/ }),
@@ -1042,10 +1064,10 @@ var EditorEffects = /** @class */ (function () {
         this.themeService = themeService;
         this.actions$ = actions$;
         this.loadPresets$ = this.actions$.pipe(Object(_ngrx_effects__WEBPACK_IMPORTED_MODULE_1__["ofType"])(_editor_actions__WEBPACK_IMPORTED_MODULE_5__["EditorActionTypes"].LoadPresets), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["mergeMap"])(function (action) {
-            return _this.themeService.loadPresets().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (data) { return (new _editor_actions__WEBPACK_IMPORTED_MODULE_5__["LoadPresetsSuccess"](data)); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(function (err) { return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["of"])(new _editor_actions__WEBPACK_IMPORTED_MODULE_5__["LoadPresetsFail"](err)); }));
+            return _this.themeService.loadPresets().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (data) { return new _editor_actions__WEBPACK_IMPORTED_MODULE_5__["LoadPresetsSuccess"](data); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(function (err) { return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["of"])(new _editor_actions__WEBPACK_IMPORTED_MODULE_5__["LoadPresetsFail"](err)); }));
         }));
         this.loadSettings$ = this.actions$.pipe(Object(_ngrx_effects__WEBPACK_IMPORTED_MODULE_1__["ofType"])(_editor_actions__WEBPACK_IMPORTED_MODULE_5__["EditorActionTypes"].LoadSettings), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["mergeMap"])(function (action) {
-            return _this.themeService.loadSettings().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (data) { return (new _editor_actions__WEBPACK_IMPORTED_MODULE_5__["LoadSettingsSuccess"](data)); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(function (err) { return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["of"])(new _editor_actions__WEBPACK_IMPORTED_MODULE_5__["LoadSettingsFail"](err)); }));
+            return _this.themeService.loadSettings().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (data) { return new _editor_actions__WEBPACK_IMPORTED_MODULE_5__["LoadSettingsSuccess"](data); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(function (err) { return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["of"])(new _editor_actions__WEBPACK_IMPORTED_MODULE_5__["LoadSettingsFail"](err)); }));
         }));
     }
     __decorate([
@@ -1088,25 +1110,28 @@ var __assign = (undefined && undefined.__assign) || Object.assign || function(t)
 };
 
 var initialState = {
-    showThemeEditor: false,
+    showPresetsEditor: false,
     currentThemeItem: null,
     error: '',
+    currentTheme: {},
     presets: null,
     settings: []
 };
 function reducer(state, action) {
     if (state === void 0) { state = initialState; }
     switch (action.type) {
-        case _editor_actions__WEBPACK_IMPORTED_MODULE_0__["EditorActionTypes"].ShowCurrentThemeItem:
-            return __assign({}, state, { showThemeEditor: true, currentThemeItem: action.payload });
         case _editor_actions__WEBPACK_IMPORTED_MODULE_0__["EditorActionTypes"].LoadSettingsSuccess:
             return __assign({}, state, { settings: action.payload });
         case _editor_actions__WEBPACK_IMPORTED_MODULE_0__["EditorActionTypes"].LoadSettingsFail:
             return __assign({}, state, { error: action.payload });
         case _editor_actions__WEBPACK_IMPORTED_MODULE_0__["EditorActionTypes"].LoadPresetsSuccess:
-            return __assign({}, state, { presets: action.payload });
+            return __assign({}, state, { currentTheme: __assign({}, action.payload.presets[action.payload.current]), presets: action.payload });
         case _editor_actions__WEBPACK_IMPORTED_MODULE_0__["EditorActionTypes"].LoadPresetsFail:
             return __assign({}, state, { error: action.payload });
+        case _editor_actions__WEBPACK_IMPORTED_MODULE_0__["EditorActionTypes"].SelectThemeItem:
+            return __assign({}, state, { currentThemeItem: action.payload });
+        case _editor_actions__WEBPACK_IMPORTED_MODULE_0__["EditorActionTypes"].TogglePresetsPane:
+            return __assign({}, state, { showPresetsEditor: action.payload });
     }
     return state;
 }
@@ -1118,21 +1143,22 @@ function reducer(state, action) {
 /*!***************************************!*\
   !*** ./src/app/editor/state/index.ts ***!
   \***************************************/
-/*! exports provided: getShowThemeEditor, getCurrentThemeItem, getPresets, getSettings, getError */
+/*! exports provided: getCurrentThemeItem, getShowPresetsEditor, getPresets, getSettings, getError, getCurrentTheme */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getShowThemeEditor", function() { return getShowThemeEditor; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getCurrentThemeItem", function() { return getCurrentThemeItem; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getShowPresetsEditor", function() { return getShowPresetsEditor; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getPresets", function() { return getPresets; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getSettings", function() { return getSettings; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getError", function() { return getError; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getCurrentTheme", function() { return getCurrentTheme; });
 /* harmony import */ var _ngrx_store__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ngrx/store */ "./node_modules/@ngrx/store/fesm5/store.js");
 
 var getEditorFeatureState = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createFeatureSelector"])('editor');
-var getShowThemeEditor = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(getEditorFeatureState, function (state) { return state.showThemeEditor; });
 var getCurrentThemeItem = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(getEditorFeatureState, function (state) { return state.currentThemeItem; });
+var getShowPresetsEditor = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(getEditorFeatureState, function (state) { return state.showPresetsEditor; });
 // export const getCurrentProduct = createSelector(
 //     getEditorFeatureState,
 //     getCurrentProductId,
@@ -1153,6 +1179,7 @@ var getCurrentThemeItem = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["creat
 var getPresets = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(getEditorFeatureState, function (state) { return state.presets; });
 var getSettings = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(getEditorFeatureState, function (state) { return state.settings; });
 var getError = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(getEditorFeatureState, function (state) { return state.error; });
+var getCurrentTheme = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(getEditorFeatureState, function (state) { return state.currentTheme; });
 
 
 /***/ }),
@@ -1644,11 +1671,13 @@ var TabsComponent = /** @class */ (function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SharedModule", function() { return SharedModule; });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var ngx_color_picker__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ngx-color-picker */ "./node_modules/ngx-color-picker/dist/ngx-color-picker.es5.js");
-/* harmony import */ var _controls_tabs_tabs_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./controls/tabs/tabs.component */ "./src/app/shared/controls/tabs/tabs.component.ts");
-/* harmony import */ var _controls_tabs_tab_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./controls/tabs/tab.component */ "./src/app/shared/controls/tabs/tab.component.ts");
-/* harmony import */ var _controls_color_picker_color_picker_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./controls/color-picker/color-picker.component */ "./src/app/shared/controls/color-picker/color-picker.component.ts");
+/* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/platform-browser */ "./node_modules/@angular/platform-browser/fesm5/platform-browser.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+/* harmony import */ var ngx_color_picker__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ngx-color-picker */ "./node_modules/ngx-color-picker/dist/ngx-color-picker.es5.js");
+/* harmony import */ var _controls_tabs_tabs_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./controls/tabs/tabs.component */ "./src/app/shared/controls/tabs/tabs.component.ts");
+/* harmony import */ var _controls_tabs_tab_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./controls/tabs/tab.component */ "./src/app/shared/controls/tabs/tab.component.ts");
+/* harmony import */ var _controls_color_picker_color_picker_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./controls/color-picker/color-picker.component */ "./src/app/shared/controls/color-picker/color-picker.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1657,22 +1686,27 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 };
 
 
+// import { ReactiveFormsModule } from '@angular/forms';
+
+
 
 
 
 var components = [
-    _controls_tabs_tabs_component__WEBPACK_IMPORTED_MODULE_2__["TabsComponent"],
-    _controls_tabs_tab_component__WEBPACK_IMPORTED_MODULE_3__["TabComponent"],
-    _controls_color_picker_color_picker_component__WEBPACK_IMPORTED_MODULE_4__["ColorPickerComponent"]
+    _controls_tabs_tabs_component__WEBPACK_IMPORTED_MODULE_4__["TabsComponent"],
+    _controls_tabs_tab_component__WEBPACK_IMPORTED_MODULE_5__["TabComponent"],
+    _controls_color_picker_color_picker_component__WEBPACK_IMPORTED_MODULE_6__["ColorPickerComponent"]
 ];
 var SharedModule = /** @class */ (function () {
     function SharedModule() {
     }
     SharedModule = __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["NgModule"])({
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
             declarations: components,
             imports: [
-                ngx_color_picker__WEBPACK_IMPORTED_MODULE_1__["ColorPickerModule"]
+                _angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"],
+                _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormsModule"],
+                ngx_color_picker__WEBPACK_IMPORTED_MODULE_3__["ColorPickerModule"]
             ],
             exports: components
         })
