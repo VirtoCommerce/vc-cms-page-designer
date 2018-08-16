@@ -91,6 +91,18 @@ MIT
 MIT
 MIT
 
+@ngrx/effects@6.1.0
+MIT
+MIT
+
+@ngrx/store-devtools@6.1.0
+MIT
+MIT
+
+@ngrx/store@6.1.0
+MIT
+MIT
+
 ngx-color-picker@6.6.0
 MIT
 MIT License

@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter, Input, AfterViewInit } from '@angular/core';
-import { ThemeItemModel } from '../../models/themes/theme-item.model';
+import { ThemeItemModel } from '../models/themes/theme-item.model';
 
 @Component({
     selector: 'app-theme-item-editor',

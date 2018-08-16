@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
-import { PageModel } from '../../models/page.model';
+import { PageModel } from '../models/page.model';
 
 @Component({
     selector: 'app-page-editor',

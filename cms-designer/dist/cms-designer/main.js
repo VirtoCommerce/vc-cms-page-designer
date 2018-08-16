@@ -93,25 +93,459 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AppModule", function() { return AppModule; });
 /* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/platform-browser */ "./node_modules/@angular/platform-browser/fesm5/platform-browser.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _ngrx_store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ngrx/store */ "./node_modules/@ngrx/store/fesm5/store.js");
+/* harmony import */ var _ngrx_store_devtools__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ngrx/store-devtools */ "./node_modules/@ngrx/store-devtools/fesm5/store-devtools.js");
+/* harmony import */ var _ngrx_effects__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ngrx/effects */ "./node_modules/@ngrx/effects/fesm5/effects.js");
+/* harmony import */ var _editor_editor_module__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./editor/editor.module */ "./src/app/editor/editor.module.ts");
+/* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
+/* harmony import */ var _shared_components_preview_preview_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./shared/components/preview/preview.component */ "./src/app/shared/components/preview/preview.component.ts");
+/* harmony import */ var _shared_components_toolbar_toolbar_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./shared/components/toolbar/toolbar.component */ "./src/app/shared/components/toolbar/toolbar.component.ts");
+/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../environments/environment */ "./src/environments/environment.ts");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+
+// import { ReactiveFormsModule } from '@angular/forms';
+
+
+
+
+
+
+
+
+var AppModule = /** @class */ (function () {
+    function AppModule() {
+    }
+    AppModule = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
+            declarations: [
+                _app_component__WEBPACK_IMPORTED_MODULE_6__["AppComponent"],
+                _shared_components_preview_preview_component__WEBPACK_IMPORTED_MODULE_7__["PreviewComponent"],
+                _shared_components_toolbar_toolbar_component__WEBPACK_IMPORTED_MODULE_8__["ToolbarComponent"]
+            ],
+            imports: [
+                _angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"],
+                _editor_editor_module__WEBPACK_IMPORTED_MODULE_5__["EditorModule"],
+                _ngrx_store__WEBPACK_IMPORTED_MODULE_2__["StoreModule"].forRoot({}),
+                _ngrx_store_devtools__WEBPACK_IMPORTED_MODULE_3__["StoreDevtoolsModule"].instrument({
+                    name: 'CMS',
+                    maxAge: 25,
+                    logOnly: _environments_environment__WEBPACK_IMPORTED_MODULE_9__["environment"].production,
+                }),
+                _ngrx_effects__WEBPACK_IMPORTED_MODULE_4__["EffectsModule"].forRoot([])
+            ],
+            providers: [],
+            bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_6__["AppComponent"]]
+        })
+    ], AppModule);
+    return AppModule;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/editor/controls/checkbox-item/checkbox-item.component.html":
+/*!****************************************************************************!*\
+  !*** ./src/app/editor/controls/checkbox-item/checkbox-item.component.html ***!
+  \****************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"pane-row\">\n    <div class=\"form-input\">\n        <label class=\"form-label __switch\">\n            <input type=\"checkbox\" [(ngModel)]=\"theme[model.id]\">\n            <span class=\"switch\"></span>\n        </label>\n    </div>\n    <div class=\"pane-name\">{{model.label}}</div>\n</div>"
+
+/***/ }),
+
+/***/ "./src/app/editor/controls/checkbox-item/checkbox-item.component.scss":
+/*!****************************************************************************!*\
+  !*** ./src/app/editor/controls/checkbox-item/checkbox-item.component.scss ***!
+  \****************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/editor/controls/checkbox-item/checkbox-item.component.ts":
+/*!**************************************************************************!*\
+  !*** ./src/app/editor/controls/checkbox-item/checkbox-item.component.ts ***!
+  \**************************************************************************/
+/*! exports provided: CheckboxItemComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CheckboxItemComponent", function() { return CheckboxItemComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var CheckboxItemComponent = /** @class */ (function () {
+    function CheckboxItemComponent() {
+    }
+    CheckboxItemComponent.prototype.ngOnInit = function () {
+    };
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
+        __metadata("design:type", Object)
+    ], CheckboxItemComponent.prototype, "model", void 0);
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
+        __metadata("design:type", Object)
+    ], CheckboxItemComponent.prototype, "theme", void 0);
+    CheckboxItemComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-checkbox-item',
+            template: __webpack_require__(/*! ./checkbox-item.component.html */ "./src/app/editor/controls/checkbox-item/checkbox-item.component.html"),
+            styles: [__webpack_require__(/*! ./checkbox-item.component.scss */ "./src/app/editor/controls/checkbox-item/checkbox-item.component.scss")]
+        }),
+        __metadata("design:paramtypes", [])
+    ], CheckboxItemComponent);
+    return CheckboxItemComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/editor/controls/color-item/color-item.component.html":
+/*!**********************************************************************!*\
+  !*** ./src/app/editor/controls/color-item/color-item.component.html ***!
+  \**********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"pane-row\">\n    <app-color-picker [value]=\"theme[model.id]\" (valueChanged)=\"valueChanged($event)\"></app-color-picker>\n    <div class=\"pane-col pane-name\">{{model.label}}</div>\n</div>\n"
+
+/***/ }),
+
+/***/ "./src/app/editor/controls/color-item/color-item.component.scss":
+/*!**********************************************************************!*\
+  !*** ./src/app/editor/controls/color-item/color-item.component.scss ***!
+  \**********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/editor/controls/color-item/color-item.component.ts":
+/*!********************************************************************!*\
+  !*** ./src/app/editor/controls/color-item/color-item.component.ts ***!
+  \********************************************************************/
+/*! exports provided: ColorItemComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ColorItemComponent", function() { return ColorItemComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var ColorItemComponent = /** @class */ (function () {
+    function ColorItemComponent() {
+    }
+    ColorItemComponent.prototype.ngOnInit = function () { };
+    ColorItemComponent.prototype.valueChanged = function ($event) {
+        this.theme[this.model.id] = $event;
+    };
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
+        __metadata("design:type", Object)
+    ], ColorItemComponent.prototype, "model", void 0);
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
+        __metadata("design:type", Object)
+    ], ColorItemComponent.prototype, "theme", void 0);
+    ColorItemComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-color-item',
+            template: __webpack_require__(/*! ./color-item.component.html */ "./src/app/editor/controls/color-item/color-item.component.html"),
+            styles: [__webpack_require__(/*! ./color-item.component.scss */ "./src/app/editor/controls/color-item/color-item.component.scss")]
+        }),
+        __metadata("design:paramtypes", [])
+    ], ColorItemComponent);
+    return ColorItemComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/editor/controls/image-item/image-item.component.html":
+/*!**********************************************************************!*\
+  !*** ./src/app/editor/controls/image-item/image-item.component.html ***!
+  \**********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<label [for]=\"model.id\" class=\"form-label\">{{model.label}}</label>\n<div class=\"form-file\">\n    <div class='form-file'>\n        <input [id]=\"model.id\" type='file' #fileInput>\n        <button class='btn' (click)=\"openFileDialog()\">Choose file</button>\n    </div>\n</div>\n<p *ngIf=\"model.info !== undefined\" class=\"form-help\">{{model.info}}</p>\n<div class=\"form-img\"></div>\n"
+
+/***/ }),
+
+/***/ "./src/app/editor/controls/image-item/image-item.component.scss":
+/*!**********************************************************************!*\
+  !*** ./src/app/editor/controls/image-item/image-item.component.scss ***!
+  \**********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/editor/controls/image-item/image-item.component.ts":
+/*!********************************************************************!*\
+  !*** ./src/app/editor/controls/image-item/image-item.component.ts ***!
+  \********************************************************************/
+/*! exports provided: ImageItemComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ImageItemComponent", function() { return ImageItemComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var ImageItemComponent = /** @class */ (function () {
+    function ImageItemComponent() {
+    }
+    ImageItemComponent.prototype.ngOnInit = function () {
+    };
+    ImageItemComponent.prototype.openFileDialog = function () {
+        this.fileInput.nativeElement.click();
+    };
+    ImageItemComponent.prototype.raiseValueChanged = function ($event) {
+        this.theme[this.model.id] = $event;
+    };
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"])('fileInput', { read: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ElementRef"] }),
+        __metadata("design:type", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ElementRef"])
+    ], ImageItemComponent.prototype, "fileInput", void 0);
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
+        __metadata("design:type", Object)
+    ], ImageItemComponent.prototype, "model", void 0);
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
+        __metadata("design:type", Object)
+    ], ImageItemComponent.prototype, "theme", void 0);
+    ImageItemComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-image-item',
+            template: __webpack_require__(/*! ./image-item.component.html */ "./src/app/editor/controls/image-item/image-item.component.html"),
+            styles: [__webpack_require__(/*! ./image-item.component.scss */ "./src/app/editor/controls/image-item/image-item.component.scss")]
+        }),
+        __metadata("design:paramtypes", [])
+    ], ImageItemComponent);
+    return ImageItemComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/editor/controls/select-item/select-item.component.html":
+/*!************************************************************************!*\
+  !*** ./src/app/editor/controls/select-item/select-item.component.html ***!
+  \************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<label *ngIf=\"model.label !== undefined\" [for]=\"model.id\" class=\"form-label\">{{model.label}}</label>\n<div class=\"form-input __select\">\n    <select [id]=\"model.id\" [(ngModel)]=\"theme[model.id]\">\n        <option *ngFor=\"let option of model.options\" value=\"{{option.value}}\">\n            {{option.label}}\n        </option>\n    </select>\n</div>\n"
+
+/***/ }),
+
+/***/ "./src/app/editor/controls/select-item/select-item.component.scss":
+/*!************************************************************************!*\
+  !*** ./src/app/editor/controls/select-item/select-item.component.scss ***!
+  \************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/editor/controls/select-item/select-item.component.ts":
+/*!**********************************************************************!*\
+  !*** ./src/app/editor/controls/select-item/select-item.component.ts ***!
+  \**********************************************************************/
+/*! exports provided: SelectItemComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SelectItemComponent", function() { return SelectItemComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var SelectItemComponent = /** @class */ (function () {
+    function SelectItemComponent() {
+    }
+    SelectItemComponent.prototype.ngOnInit = function () {
+    };
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
+        __metadata("design:type", Object)
+    ], SelectItemComponent.prototype, "model", void 0);
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
+        __metadata("design:type", Object)
+    ], SelectItemComponent.prototype, "theme", void 0);
+    SelectItemComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-select-item',
+            template: __webpack_require__(/*! ./select-item.component.html */ "./src/app/editor/controls/select-item/select-item.component.html"),
+            styles: [__webpack_require__(/*! ./select-item.component.scss */ "./src/app/editor/controls/select-item/select-item.component.scss")]
+        }),
+        __metadata("design:paramtypes", [])
+    ], SelectItemComponent);
+    return SelectItemComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/editor/controls/text-item/text-item.component.html":
+/*!********************************************************************!*\
+  !*** ./src/app/editor/controls/text-item/text-item.component.html ***!
+  \********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<label [for]=\"model.id\" class=\"form-label\">{{model.label}}</label>\n<div class=\"form-input\">\n    <input [id]=\"model.id\" type=\"text\" value=\"{{model.default}}\" [(ngModel)]=\"theme[model.id]\">\n</div>"
+
+/***/ }),
+
+/***/ "./src/app/editor/controls/text-item/text-item.component.scss":
+/*!********************************************************************!*\
+  !*** ./src/app/editor/controls/text-item/text-item.component.scss ***!
+  \********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/editor/controls/text-item/text-item.component.ts":
+/*!******************************************************************!*\
+  !*** ./src/app/editor/controls/text-item/text-item.component.ts ***!
+  \******************************************************************/
+/*! exports provided: TextItemComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TextItemComponent", function() { return TextItemComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var TextItemComponent = /** @class */ (function () {
+    function TextItemComponent() {
+    }
+    TextItemComponent.prototype.ngOnInit = function () {
+    };
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
+        __metadata("design:type", Object)
+    ], TextItemComponent.prototype, "model", void 0);
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
+        __metadata("design:type", Object)
+    ], TextItemComponent.prototype, "theme", void 0);
+    TextItemComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-text-item',
+            template: __webpack_require__(/*! ./text-item.component.html */ "./src/app/editor/controls/text-item/text-item.component.html"),
+            styles: [__webpack_require__(/*! ./text-item.component.scss */ "./src/app/editor/controls/text-item/text-item.component.scss")]
+        }),
+        __metadata("design:paramtypes", [])
+    ], TextItemComponent);
+    return TextItemComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/editor/editor.module.ts":
+/*!*****************************************!*\
+  !*** ./src/app/editor/editor.module.ts ***!
+  \*****************************************/
+/*! exports provided: EditorModule */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EditorModule", function() { return EditorModule; });
+/* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/platform-browser */ "./node_modules/@angular/platform-browser/fesm5/platform-browser.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
-/* harmony import */ var ngx_color_picker__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ngx-color-picker */ "./node_modules/ngx-color-picker/dist/ngx-color-picker.es5.js");
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
-/* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
-/* harmony import */ var _components_toolbar_toolbar_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/toolbar/toolbar.component */ "./src/app/components/toolbar/toolbar.component.ts");
-/* harmony import */ var _components_preview_preview_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/preview/preview.component */ "./src/app/components/preview/preview.component.ts");
-/* harmony import */ var _components_sidebar_sidebar_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/sidebar/sidebar.component */ "./src/app/components/sidebar/sidebar.component.ts");
-/* harmony import */ var _components_theme_editor_theme_editor_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/theme-editor/theme-editor.component */ "./src/app/components/theme-editor/theme-editor.component.ts");
-/* harmony import */ var _components_page_editor_page_editor_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/page-editor/page-editor.component */ "./src/app/components/page-editor/page-editor.component.ts");
-/* harmony import */ var _controls_tabs_tabs_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./controls/tabs/tabs.component */ "./src/app/controls/tabs/tabs.component.ts");
-/* harmony import */ var _controls_tabs_tab_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./controls/tabs/tab.component */ "./src/app/controls/tabs/tab.component.ts");
-/* harmony import */ var _components_theme_editor_theme_item_editor_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/theme-editor/theme-item-editor.component */ "./src/app/components/theme-editor/theme-item-editor.component.ts");
-/* harmony import */ var _components_presets_editor_presets_editor_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/presets-editor/presets-editor.component */ "./src/app/components/presets-editor/presets-editor.component.ts");
-/* harmony import */ var _controls_color_picker_color_picker_component__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./controls/color-picker/color-picker.component */ "./src/app/controls/color-picker/color-picker.component.ts");
-/* harmony import */ var _controls_select_item_select_item_component__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./controls/select-item/select-item.component */ "./src/app/controls/select-item/select-item.component.ts");
-/* harmony import */ var _controls_checkbox_item_checkbox_item_component__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./controls/checkbox-item/checkbox-item.component */ "./src/app/controls/checkbox-item/checkbox-item.component.ts");
-/* harmony import */ var _controls_image_item_image_item_component__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./controls/image-item/image-item.component */ "./src/app/controls/image-item/image-item.component.ts");
-/* harmony import */ var _controls_text_item_text_item_component__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./controls/text-item/text-item.component */ "./src/app/controls/text-item/text-item.component.ts");
-/* harmony import */ var _controls_color_item_color_item_component__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./controls/color-item/color-item.component */ "./src/app/controls/color-item/color-item.component.ts");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+/* harmony import */ var _ngrx_store__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ngrx/store */ "./node_modules/@ngrx/store/fesm5/store.js");
+/* harmony import */ var _ngrx_effects__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ngrx/effects */ "./node_modules/@ngrx/effects/fesm5/effects.js");
+/* harmony import */ var _shared_shared_module__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../shared/shared.module */ "./src/app/shared/shared.module.ts");
+/* harmony import */ var _sidebar_sidebar_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./sidebar/sidebar.component */ "./src/app/editor/sidebar/sidebar.component.ts");
+/* harmony import */ var _theme_editor_theme_editor_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./theme-editor/theme-editor.component */ "./src/app/editor/theme-editor/theme-editor.component.ts");
+/* harmony import */ var _page_editor_page_editor_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./page-editor/page-editor.component */ "./src/app/editor/page-editor/page-editor.component.ts");
+/* harmony import */ var _theme_editor_theme_item_editor_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./theme-editor/theme-item-editor.component */ "./src/app/editor/theme-editor/theme-item-editor.component.ts");
+/* harmony import */ var _presets_editor_presets_editor_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./presets-editor/presets-editor.component */ "./src/app/editor/presets-editor/presets-editor.component.ts");
+/* harmony import */ var _controls_select_item_select_item_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./controls/select-item/select-item.component */ "./src/app/editor/controls/select-item/select-item.component.ts");
+/* harmony import */ var _controls_checkbox_item_checkbox_item_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./controls/checkbox-item/checkbox-item.component */ "./src/app/editor/controls/checkbox-item/checkbox-item.component.ts");
+/* harmony import */ var _controls_image_item_image_item_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./controls/image-item/image-item.component */ "./src/app/editor/controls/image-item/image-item.component.ts");
+/* harmony import */ var _controls_text_item_text_item_component__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./controls/text-item/text-item.component */ "./src/app/editor/controls/text-item/text-item.component.ts");
+/* harmony import */ var _controls_color_item_color_item_component__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./controls/color-item/color-item.component */ "./src/app/editor/controls/color-item/color-item.component.ts");
+/* harmony import */ var _state_editor_reducer__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./state/editor.reducer */ "./src/app/editor/state/editor.reducer.ts");
+/* harmony import */ var _state_editor_effects__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./state/editor.effects */ "./src/app/editor/state/editor.effects.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -138,53 +572,67 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 
 
-
-
-var AppModule = /** @class */ (function () {
-    function AppModule() {
+var EditorModule = /** @class */ (function () {
+    function EditorModule() {
     }
-    AppModule = __decorate([
+    EditorModule = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
             declarations: [
-                _app_component__WEBPACK_IMPORTED_MODULE_5__["AppComponent"],
-                _components_toolbar_toolbar_component__WEBPACK_IMPORTED_MODULE_6__["ToolbarComponent"],
-                _components_preview_preview_component__WEBPACK_IMPORTED_MODULE_7__["PreviewComponent"],
-                _components_sidebar_sidebar_component__WEBPACK_IMPORTED_MODULE_8__["SidebarComponent"],
-                _components_theme_editor_theme_editor_component__WEBPACK_IMPORTED_MODULE_9__["ThemeEditorComponent"],
-                _components_page_editor_page_editor_component__WEBPACK_IMPORTED_MODULE_10__["PageEditorComponent"],
-                _controls_tabs_tabs_component__WEBPACK_IMPORTED_MODULE_11__["TabsComponent"],
-                _controls_tabs_tab_component__WEBPACK_IMPORTED_MODULE_12__["TabComponent"],
-                _components_theme_editor_theme_item_editor_component__WEBPACK_IMPORTED_MODULE_13__["ThemeItemEditorComponent"],
-                _components_presets_editor_presets_editor_component__WEBPACK_IMPORTED_MODULE_14__["PresetsEditorComponent"],
-                _controls_color_picker_color_picker_component__WEBPACK_IMPORTED_MODULE_15__["ColorPickerComponent"],
-                _controls_select_item_select_item_component__WEBPACK_IMPORTED_MODULE_16__["SelectItemComponent"],
-                _controls_checkbox_item_checkbox_item_component__WEBPACK_IMPORTED_MODULE_17__["CheckboxItemComponent"],
-                _controls_image_item_image_item_component__WEBPACK_IMPORTED_MODULE_18__["ImageItemComponent"],
-                _controls_text_item_text_item_component__WEBPACK_IMPORTED_MODULE_19__["TextItemComponent"],
-                _controls_color_item_color_item_component__WEBPACK_IMPORTED_MODULE_20__["ColorItemComponent"]
+                _sidebar_sidebar_component__WEBPACK_IMPORTED_MODULE_7__["SidebarComponent"],
+                _theme_editor_theme_editor_component__WEBPACK_IMPORTED_MODULE_8__["ThemeEditorComponent"],
+                _page_editor_page_editor_component__WEBPACK_IMPORTED_MODULE_9__["PageEditorComponent"],
+                _theme_editor_theme_item_editor_component__WEBPACK_IMPORTED_MODULE_10__["ThemeItemEditorComponent"],
+                _presets_editor_presets_editor_component__WEBPACK_IMPORTED_MODULE_11__["PresetsEditorComponent"],
+                _controls_select_item_select_item_component__WEBPACK_IMPORTED_MODULE_12__["SelectItemComponent"],
+                _controls_checkbox_item_checkbox_item_component__WEBPACK_IMPORTED_MODULE_13__["CheckboxItemComponent"],
+                _controls_image_item_image_item_component__WEBPACK_IMPORTED_MODULE_14__["ImageItemComponent"],
+                _controls_text_item_text_item_component__WEBPACK_IMPORTED_MODULE_15__["TextItemComponent"],
+                _controls_color_item_color_item_component__WEBPACK_IMPORTED_MODULE_16__["ColorItemComponent"]
             ],
             imports: [
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"],
-                _angular_common_http__WEBPACK_IMPORTED_MODULE_4__["HttpClientModule"],
-                // ReactiveFormsModule,
+                _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClientModule"],
                 _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormsModule"],
-                ngx_color_picker__WEBPACK_IMPORTED_MODULE_3__["ColorPickerModule"]
+                _shared_shared_module__WEBPACK_IMPORTED_MODULE_6__["SharedModule"],
+                _ngrx_store__WEBPACK_IMPORTED_MODULE_4__["StoreModule"].forFeature('editor', _state_editor_reducer__WEBPACK_IMPORTED_MODULE_17__["reducer"]),
+                _ngrx_effects__WEBPACK_IMPORTED_MODULE_5__["EffectsModule"].forFeature([_state_editor_effects__WEBPACK_IMPORTED_MODULE_18__["EditorEffects"]])
             ],
-            providers: [],
-            bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_5__["AppComponent"]]
+            exports: [
+                _sidebar_sidebar_component__WEBPACK_IMPORTED_MODULE_7__["SidebarComponent"]
+            ]
         })
-    ], AppModule);
-    return AppModule;
+    ], EditorModule);
+    return EditorModule;
 }());
 
 
 
 /***/ }),
 
-/***/ "./src/app/components/page-editor/page-editor.component.html":
-/*!*******************************************************************!*\
-  !*** ./src/app/components/page-editor/page-editor.component.html ***!
-  \*******************************************************************/
+/***/ "./src/app/editor/models/page.model.ts":
+/*!*********************************************!*\
+  !*** ./src/app/editor/models/page.model.ts ***!
+  \*********************************************/
+/*! exports provided: PageModel */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PageModel", function() { return PageModel; });
+var PageModel = /** @class */ (function () {
+    function PageModel() {
+    }
+    return PageModel;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/editor/page-editor/page-editor.component.html":
+/*!***************************************************************!*\
+  !*** ./src/app/editor/page-editor/page-editor.component.html ***!
+  \***************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -192,10 +640,10 @@ module.exports = "<div class=\"pane-section __selected\" *ngIf=\"model\">\n    \
 
 /***/ }),
 
-/***/ "./src/app/components/page-editor/page-editor.component.scss":
-/*!*******************************************************************!*\
-  !*** ./src/app/components/page-editor/page-editor.component.scss ***!
-  \*******************************************************************/
+/***/ "./src/app/editor/page-editor/page-editor.component.scss":
+/*!***************************************************************!*\
+  !*** ./src/app/editor/page-editor/page-editor.component.scss ***!
+  \***************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -203,10 +651,10 @@ module.exports = ""
 
 /***/ }),
 
-/***/ "./src/app/components/page-editor/page-editor.component.ts":
-/*!*****************************************************************!*\
-  !*** ./src/app/components/page-editor/page-editor.component.ts ***!
-  \*****************************************************************/
+/***/ "./src/app/editor/page-editor/page-editor.component.ts":
+/*!*************************************************************!*\
+  !*** ./src/app/editor/page-editor/page-editor.component.ts ***!
+  \*************************************************************/
 /*! exports provided: PageEditorComponent */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -214,7 +662,7 @@ module.exports = ""
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PageEditorComponent", function() { return PageEditorComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _models_page_model__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../models/page.model */ "./src/app/models/page.model.ts");
+/* harmony import */ var _models_page_model__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../models/page.model */ "./src/app/editor/models/page.model.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -250,8 +698,8 @@ var PageEditorComponent = /** @class */ (function () {
     PageEditorComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'app-page-editor',
-            template: __webpack_require__(/*! ./page-editor.component.html */ "./src/app/components/page-editor/page-editor.component.html"),
-            styles: [__webpack_require__(/*! ./page-editor.component.scss */ "./src/app/components/page-editor/page-editor.component.scss")]
+            template: __webpack_require__(/*! ./page-editor.component.html */ "./src/app/editor/page-editor/page-editor.component.html"),
+            styles: [__webpack_require__(/*! ./page-editor.component.scss */ "./src/app/editor/page-editor/page-editor.component.scss")]
         }),
         __metadata("design:paramtypes", [])
     ], PageEditorComponent);
@@ -262,10 +710,10 @@ var PageEditorComponent = /** @class */ (function () {
 
 /***/ }),
 
-/***/ "./src/app/components/presets-editor/presets-editor.component.html":
-/*!*************************************************************************!*\
-  !*** ./src/app/components/presets-editor/presets-editor.component.html ***!
-  \*************************************************************************/
+/***/ "./src/app/editor/presets-editor/presets-editor.component.html":
+/*!*********************************************************************!*\
+  !*** ./src/app/editor/presets-editor/presets-editor.component.html ***!
+  \*********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -273,10 +721,10 @@ module.exports = "<div class=\"pane-section __selected\" *ngIf=\"data\">\n    <d
 
 /***/ }),
 
-/***/ "./src/app/components/presets-editor/presets-editor.component.scss":
-/*!*************************************************************************!*\
-  !*** ./src/app/components/presets-editor/presets-editor.component.scss ***!
-  \*************************************************************************/
+/***/ "./src/app/editor/presets-editor/presets-editor.component.scss":
+/*!*********************************************************************!*\
+  !*** ./src/app/editor/presets-editor/presets-editor.component.scss ***!
+  \*********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -284,10 +732,10 @@ module.exports = ""
 
 /***/ }),
 
-/***/ "./src/app/components/presets-editor/presets-editor.component.ts":
-/*!***********************************************************************!*\
-  !*** ./src/app/components/presets-editor/presets-editor.component.ts ***!
-  \***********************************************************************/
+/***/ "./src/app/editor/presets-editor/presets-editor.component.ts":
+/*!*******************************************************************!*\
+  !*** ./src/app/editor/presets-editor/presets-editor.component.ts ***!
+  \*******************************************************************/
 /*! exports provided: PresetsEditorComponent */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -335,8 +783,8 @@ var PresetsEditorComponent = /** @class */ (function () {
     PresetsEditorComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'app-presets-editor',
-            template: __webpack_require__(/*! ./presets-editor.component.html */ "./src/app/components/presets-editor/presets-editor.component.html"),
-            styles: [__webpack_require__(/*! ./presets-editor.component.scss */ "./src/app/components/presets-editor/presets-editor.component.scss")]
+            template: __webpack_require__(/*! ./presets-editor.component.html */ "./src/app/editor/presets-editor/presets-editor.component.html"),
+            styles: [__webpack_require__(/*! ./presets-editor.component.scss */ "./src/app/editor/presets-editor/presets-editor.component.scss")]
         }),
         __metadata("design:paramtypes", [])
     ], PresetsEditorComponent);
@@ -347,39 +795,19 @@ var PresetsEditorComponent = /** @class */ (function () {
 
 /***/ }),
 
-/***/ "./src/app/components/preview/preview.component.html":
-/*!***********************************************************!*\
-  !*** ./src/app/components/preview/preview.component.html ***!
-  \***********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "<div class=\"theme-cnt\">\n    <div class=\"theme-preview\" data-size=\"desktop\">\n        <!-- <iframe src=\"http://virtocommerce.com\" scrolling=\"yes\"></iframe> -->\n    </div>\n    <a class=\"theme-toggle js-toggle\"></a>\n    <ul class=\"list __nav\">\n        <li class=\"list-item\">\n            <a class=\"list-link __selected js-size\" data-size=\"desktop\">\n                <i class=\"list-ico fa fa-desktop\"></i>\n                Desktop\n            </a>\n        </li>\n        <li class=\"list-item\">\n            <a class=\"list-link js-size\" data-size=\"tablet\">\n                <i class=\"list-ico fa fa-tablet\"></i>\n                Tablet\n            </a>\n        </li>\n        <li class=\"list-item\">\n            <a class=\"list-link js-size\" data-size=\"mobile\">\n                <i class=\"list-ico fa fa-mobile\"></i>\n                Mobile\n            </a>\n        </li>\n    </ul>\n</div>"
-
-/***/ }),
-
-/***/ "./src/app/components/preview/preview.component.scss":
-/*!***********************************************************!*\
-  !*** ./src/app/components/preview/preview.component.scss ***!
-  \***********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = ""
-
-/***/ }),
-
-/***/ "./src/app/components/preview/preview.component.ts":
-/*!*********************************************************!*\
-  !*** ./src/app/components/preview/preview.component.ts ***!
-  \*********************************************************/
-/*! exports provided: PreviewComponent */
+/***/ "./src/app/editor/services/theme.service.ts":
+/*!**************************************************!*\
+  !*** ./src/app/editor/services/theme.service.ts ***!
+  \**************************************************/
+/*! exports provided: ThemeService */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PreviewComponent", function() { return PreviewComponent; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ThemeService", function() { return ThemeService; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+/* harmony import */ var _editor_module__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../editor.module */ "./src/app/editor/editor.module.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -390,41 +818,46 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
-var PreviewComponent = /** @class */ (function () {
-    function PreviewComponent() {
+
+
+var ThemeService = /** @class */ (function () {
+    function ThemeService(http) {
+        this.http = http;
     }
-    PreviewComponent.prototype.ngOnInit = function () {
+    ThemeService.prototype.loadPresets = function () {
+        return this.http.get('data/settings_data.json');
     };
-    PreviewComponent = __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
-            selector: 'app-preview',
-            template: __webpack_require__(/*! ./preview.component.html */ "./src/app/components/preview/preview.component.html"),
-            styles: [__webpack_require__(/*! ./preview.component.scss */ "./src/app/components/preview/preview.component.scss")]
+    ThemeService.prototype.loadSettings = function () {
+        return this.http.get('data/settings_schema.json');
+    };
+    ThemeService = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
+            providedIn: _editor_module__WEBPACK_IMPORTED_MODULE_2__["EditorModule"]
         }),
-        __metadata("design:paramtypes", [])
-    ], PreviewComponent);
-    return PreviewComponent;
+        __metadata("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"]])
+    ], ThemeService);
+    return ThemeService;
 }());
 
 
 
 /***/ }),
 
-/***/ "./src/app/components/sidebar/sidebar.component.html":
-/*!***********************************************************!*\
-  !*** ./src/app/components/sidebar/sidebar.component.html ***!
-  \***********************************************************/
+/***/ "./src/app/editor/sidebar/sidebar.component.html":
+/*!*******************************************************!*\
+  !*** ./src/app/editor/sidebar/sidebar.component.html ***!
+  \*******************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"theme-sidebar\">\n    <div class=\"loader\" *ngIf=\"isPageLoading || isThemeLoading\">\n        <div class=\"loading\">\n            <img src=\"assets/images/loader.gif\" alt=\"\">\n        </div>\n    </div>\n    <div class=\"sidebar-main\">\n        <div class=\"pane pane-index\" [class.__disabled]=\"selected != null || showPreset\">\n            <div class=\"pane-head\">\n                <div class=\"pane-t\">Boundless</div>\n            </div>\n            <div class=\"pane-cnt\">\n                <app-tabs>\n                    <app-tab tabTitle=\"Sections\" active=\"true\">\n                        <app-page-editor (selectEvent)=\"selected = $event\"></app-page-editor>\n                    </app-tab>\n                    <app-tab tabTitle=\"Theme\">\n                        <app-theme-editor [settings]=\"settings\" (selectPresetEvent)=\"showPreset = true\" (selectItemEvent)=\"selected = $event\"></app-theme-editor>\n                    </app-tab>\n                </app-tabs>\n            </div>\n        </div>\n        <app-presets-editor class=\"pane\" [class.__selected]=\"showPreset\" [data]=\"presets\" [theme]=\"theme\" (backEvent)=\"showPreset = false\"></app-presets-editor>\n        <app-theme-item-editor class=\"pane\" [class.__selected]=\"selected != null\" [item]=\"selected\" [theme]=\"theme\" (backEvent)=\"selected = null\"></app-theme-item-editor>\n    </div>\n    <div class=\"sidebar-foot\">\n        <button class=\"btn\">Clear changes</button>\n        <button class=\"btn\">Save changes</button>\n    </div>\n</div>"
+module.exports = "<div class=\"theme-sidebar\">\n    <div class=\"loader\" *ngIf=\"isPageLoading || isThemeLoading\">\n        <div class=\"loading\">\n            <img src=\"assets/images/loader.gif\" alt=\"\">\n        </div>\n    </div>\n    <div class=\"sidebar-main\">\n        <div class=\"pane pane-index\" [class.__disabled]=\"selected != null || showPreset\">\n            <div class=\"pane-head\">\n                <div class=\"pane-t\">Boundless</div>\n            </div>\n            <div class=\"pane-cnt\">\n                <app-tabs>\n                    <app-tab tabTitle=\"Sections\">\n                        <app-page-editor (selectEvent)=\"selected = $event\"></app-page-editor>\n                    </app-tab>\n                    <app-tab *ngIf=\"settings$\" tabTitle=\"Theme\" active=\"true\">\n                        <app-theme-editor [settings]=\"settings$ | async\" (selectPresetEvent)=\"showPreset = true\" (selectItemEvent)=\"selected = $event\"></app-theme-editor>\n                    </app-tab>\n                </app-tabs>\n            </div>\n        </div>\n        <app-presets-editor class=\"pane\" [class.__selected]=\"showPreset\" [data]=\"presets\" [theme]=\"theme\" (backEvent)=\"showPreset = false\"></app-presets-editor>\n        <app-theme-item-editor class=\"pane\" [class.__selected]=\"selected != null\" [item]=\"selected\" [theme]=\"theme\" (backEvent)=\"selected = null\"></app-theme-item-editor>\n    </div>\n    <div class=\"sidebar-foot\">\n        <button class=\"btn\">Clear changes</button>\n        <button class=\"btn\">Save changes</button>\n    </div>\n</div>"
 
 /***/ }),
 
-/***/ "./src/app/components/sidebar/sidebar.component.scss":
-/*!***********************************************************!*\
-  !*** ./src/app/components/sidebar/sidebar.component.scss ***!
-  \***********************************************************/
+/***/ "./src/app/editor/sidebar/sidebar.component.scss":
+/*!*******************************************************!*\
+  !*** ./src/app/editor/sidebar/sidebar.component.scss ***!
+  \*******************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -432,10 +865,10 @@ module.exports = ""
 
 /***/ }),
 
-/***/ "./src/app/components/sidebar/sidebar.component.ts":
-/*!*********************************************************!*\
-  !*** ./src/app/components/sidebar/sidebar.component.ts ***!
-  \*********************************************************/
+/***/ "./src/app/editor/sidebar/sidebar.component.ts":
+/*!*****************************************************!*\
+  !*** ./src/app/editor/sidebar/sidebar.component.ts ***!
+  \*****************************************************/
 /*! exports provided: SidebarComponent */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -443,15 +876,9 @@ module.exports = ""
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SidebarComponent", function() { return SidebarComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _services_theme_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../services/theme.service */ "./src/app/services/theme.service.ts");
-var __assign = (undefined && undefined.__assign) || Object.assign || function(t) {
-    for (var s, i = 1, n = arguments.length; i < n; i++) {
-        s = arguments[i];
-        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-            t[p] = s[p];
-    }
-    return t;
-};
+/* harmony import */ var _ngrx_store__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @ngrx/store */ "./node_modules/@ngrx/store/fesm5/store.js");
+/* harmony import */ var _state__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../state */ "./src/app/editor/state/index.ts");
+/* harmony import */ var _state_editor_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../state/editor.actions */ "./src/app/editor/state/editor.actions.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -463,30 +890,28 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 };
 
 
+
+
 var SidebarComponent = /** @class */ (function () {
-    function SidebarComponent(themeService) {
-        this.themeService = themeService;
+    function SidebarComponent(store) {
+        this.store = store;
         this.isPageLoading = false;
-        this.isThemeLoading = true;
+        this.isThemeLoading = false;
         this.selected = null;
     }
     SidebarComponent.prototype.ngOnInit = function () {
-        var _this = this;
-        this.themeService.loadData().subscribe(function (_a) {
-            var presets = _a[0], settings = _a[1];
-            _this.presets = presets;
-            _this.settings = settings;
-            _this.theme = __assign({}, presets.presets[presets.current]);
-            _this.isThemeLoading = false;
-        });
+        this.store.dispatch(new _state_editor_actions__WEBPACK_IMPORTED_MODULE_3__["LoadPresets"]());
+        this.store.dispatch(new _state_editor_actions__WEBPACK_IMPORTED_MODULE_3__["LoadSettings"]());
+        this.presets$ = this.store.pipe(Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_1__["select"])(_state__WEBPACK_IMPORTED_MODULE_2__["getPresets"]));
+        this.settings$ = this.store.pipe(Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_1__["select"])(_state__WEBPACK_IMPORTED_MODULE_2__["getSettings"]));
     };
     SidebarComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'app-sidebar',
-            template: __webpack_require__(/*! ./sidebar.component.html */ "./src/app/components/sidebar/sidebar.component.html"),
-            styles: [__webpack_require__(/*! ./sidebar.component.scss */ "./src/app/components/sidebar/sidebar.component.scss")]
+            template: __webpack_require__(/*! ./sidebar.component.html */ "./src/app/editor/sidebar/sidebar.component.html"),
+            styles: [__webpack_require__(/*! ./sidebar.component.scss */ "./src/app/editor/sidebar/sidebar.component.scss")]
         }),
-        __metadata("design:paramtypes", [_services_theme_service__WEBPACK_IMPORTED_MODULE_1__["ThemeService"]])
+        __metadata("design:paramtypes", [_ngrx_store__WEBPACK_IMPORTED_MODULE_1__["Store"]])
     ], SidebarComponent);
     return SidebarComponent;
 }());
@@ -495,10 +920,247 @@ var SidebarComponent = /** @class */ (function () {
 
 /***/ }),
 
-/***/ "./src/app/components/theme-editor/theme-editor.component.html":
-/*!*********************************************************************!*\
-  !*** ./src/app/components/theme-editor/theme-editor.component.html ***!
-  \*********************************************************************/
+/***/ "./src/app/editor/state/editor.actions.ts":
+/*!************************************************!*\
+  !*** ./src/app/editor/state/editor.actions.ts ***!
+  \************************************************/
+/*! exports provided: EditorActionTypes, ShowCurrentThemeItem, LoadPresets, LoadPresetsSuccess, LoadPresetsFail, LoadSettings, LoadSettingsSuccess, LoadSettingsFail */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EditorActionTypes", function() { return EditorActionTypes; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ShowCurrentThemeItem", function() { return ShowCurrentThemeItem; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LoadPresets", function() { return LoadPresets; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LoadPresetsSuccess", function() { return LoadPresetsSuccess; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LoadPresetsFail", function() { return LoadPresetsFail; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LoadSettings", function() { return LoadSettings; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LoadSettingsSuccess", function() { return LoadSettingsSuccess; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LoadSettingsFail", function() { return LoadSettingsFail; });
+var EditorActionTypes;
+(function (EditorActionTypes) {
+    EditorActionTypes["ShowCurrentThemeItem"] = "Show current theme item";
+    EditorActionTypes["LoadPresets"] = "Load Presets";
+    EditorActionTypes["LoadPresetsSuccess"] = "Load Presets Success";
+    EditorActionTypes["LoadPresetsFail"] = "Load Presets Fail";
+    EditorActionTypes["LoadSettings"] = "Load Settings";
+    EditorActionTypes["LoadSettingsSuccess"] = "Load Settings Success";
+    EditorActionTypes["LoadSettingsFail"] = "Load Settings Fail";
+})(EditorActionTypes || (EditorActionTypes = {}));
+var ShowCurrentThemeItem = /** @class */ (function () {
+    function ShowCurrentThemeItem(payload) {
+        this.payload = payload;
+        this.type = EditorActionTypes.ShowCurrentThemeItem;
+    }
+    return ShowCurrentThemeItem;
+}());
+
+var LoadPresets = /** @class */ (function () {
+    function LoadPresets() {
+        this.type = EditorActionTypes.LoadPresets;
+    }
+    return LoadPresets;
+}());
+
+var LoadPresetsSuccess = /** @class */ (function () {
+    function LoadPresetsSuccess(payload) {
+        this.payload = payload;
+        this.type = EditorActionTypes.LoadPresetsSuccess;
+    }
+    return LoadPresetsSuccess;
+}());
+
+var LoadPresetsFail = /** @class */ (function () {
+    function LoadPresetsFail(payload) {
+        this.payload = payload;
+        this.type = EditorActionTypes.LoadPresetsFail;
+    }
+    return LoadPresetsFail;
+}());
+
+var LoadSettings = /** @class */ (function () {
+    function LoadSettings() {
+        this.type = EditorActionTypes.LoadSettings;
+    }
+    return LoadSettings;
+}());
+
+var LoadSettingsSuccess = /** @class */ (function () {
+    function LoadSettingsSuccess(payload) {
+        this.payload = payload;
+        this.type = EditorActionTypes.LoadSettingsSuccess;
+    }
+    return LoadSettingsSuccess;
+}());
+
+var LoadSettingsFail = /** @class */ (function () {
+    function LoadSettingsFail(payload) {
+        this.payload = payload;
+        this.type = EditorActionTypes.LoadSettingsFail;
+    }
+    return LoadSettingsFail;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/editor/state/editor.effects.ts":
+/*!************************************************!*\
+  !*** ./src/app/editor/state/editor.effects.ts ***!
+  \************************************************/
+/*! exports provided: EditorEffects */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EditorEffects", function() { return EditorEffects; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _ngrx_effects__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @ngrx/effects */ "./node_modules/@ngrx/effects/fesm5/effects.js");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+/* harmony import */ var _services_theme_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../services/theme.service */ "./src/app/editor/services/theme.service.ts");
+/* harmony import */ var _editor_actions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./editor.actions */ "./src/app/editor/state/editor.actions.ts");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+
+var EditorEffects = /** @class */ (function () {
+    function EditorEffects(themeService, actions$) {
+        var _this = this;
+        this.themeService = themeService;
+        this.actions$ = actions$;
+        this.loadPresets$ = this.actions$.pipe(Object(_ngrx_effects__WEBPACK_IMPORTED_MODULE_1__["ofType"])(_editor_actions__WEBPACK_IMPORTED_MODULE_5__["EditorActionTypes"].LoadPresets), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["mergeMap"])(function (action) {
+            return _this.themeService.loadPresets().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (data) { return (new _editor_actions__WEBPACK_IMPORTED_MODULE_5__["LoadPresetsSuccess"](data)); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(function (err) { return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["of"])(new _editor_actions__WEBPACK_IMPORTED_MODULE_5__["LoadPresetsFail"](err)); }));
+        }));
+        this.loadSettings$ = this.actions$.pipe(Object(_ngrx_effects__WEBPACK_IMPORTED_MODULE_1__["ofType"])(_editor_actions__WEBPACK_IMPORTED_MODULE_5__["EditorActionTypes"].LoadSettings), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["mergeMap"])(function (action) {
+            return _this.themeService.loadSettings().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (data) { return (new _editor_actions__WEBPACK_IMPORTED_MODULE_5__["LoadSettingsSuccess"](data)); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(function (err) { return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["of"])(new _editor_actions__WEBPACK_IMPORTED_MODULE_5__["LoadSettingsFail"](err)); }));
+        }));
+    }
+    __decorate([
+        Object(_ngrx_effects__WEBPACK_IMPORTED_MODULE_1__["Effect"])(),
+        __metadata("design:type", rxjs__WEBPACK_IMPORTED_MODULE_2__["Observable"])
+    ], EditorEffects.prototype, "loadPresets$", void 0);
+    __decorate([
+        Object(_ngrx_effects__WEBPACK_IMPORTED_MODULE_1__["Effect"])(),
+        __metadata("design:type", rxjs__WEBPACK_IMPORTED_MODULE_2__["Observable"])
+    ], EditorEffects.prototype, "loadSettings$", void 0);
+    EditorEffects = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])(),
+        __metadata("design:paramtypes", [_services_theme_service__WEBPACK_IMPORTED_MODULE_4__["ThemeService"], _ngrx_effects__WEBPACK_IMPORTED_MODULE_1__["Actions"]])
+    ], EditorEffects);
+    return EditorEffects;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/editor/state/editor.reducer.ts":
+/*!************************************************!*\
+  !*** ./src/app/editor/state/editor.reducer.ts ***!
+  \************************************************/
+/*! exports provided: reducer */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "reducer", function() { return reducer; });
+/* harmony import */ var _editor_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./editor.actions */ "./src/app/editor/state/editor.actions.ts");
+var __assign = (undefined && undefined.__assign) || Object.assign || function(t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+        s = arguments[i];
+        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+            t[p] = s[p];
+    }
+    return t;
+};
+
+var initialState = {
+    showThemeEditor: false,
+    currentThemeItem: null,
+    error: '',
+    presets: null,
+    settings: []
+};
+function reducer(state, action) {
+    if (state === void 0) { state = initialState; }
+    switch (action.type) {
+        case _editor_actions__WEBPACK_IMPORTED_MODULE_0__["EditorActionTypes"].ShowCurrentThemeItem:
+            return __assign({}, state, { showThemeEditor: true, currentThemeItem: action.payload });
+        case _editor_actions__WEBPACK_IMPORTED_MODULE_0__["EditorActionTypes"].LoadSettingsSuccess:
+            return __assign({}, state, { settings: action.payload });
+        case _editor_actions__WEBPACK_IMPORTED_MODULE_0__["EditorActionTypes"].LoadSettingsFail:
+            return __assign({}, state, { error: action.payload });
+        case _editor_actions__WEBPACK_IMPORTED_MODULE_0__["EditorActionTypes"].LoadPresetsSuccess:
+            return __assign({}, state, { presets: action.payload });
+        case _editor_actions__WEBPACK_IMPORTED_MODULE_0__["EditorActionTypes"].LoadPresetsFail:
+            return __assign({}, state, { error: action.payload });
+    }
+    return state;
+}
+
+
+/***/ }),
+
+/***/ "./src/app/editor/state/index.ts":
+/*!***************************************!*\
+  !*** ./src/app/editor/state/index.ts ***!
+  \***************************************/
+/*! exports provided: getShowThemeEditor, getCurrentThemeItem, getPresets, getSettings, getError */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getShowThemeEditor", function() { return getShowThemeEditor; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getCurrentThemeItem", function() { return getCurrentThemeItem; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getPresets", function() { return getPresets; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getSettings", function() { return getSettings; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getError", function() { return getError; });
+/* harmony import */ var _ngrx_store__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ngrx/store */ "./node_modules/@ngrx/store/fesm5/store.js");
+
+var getEditorFeatureState = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createFeatureSelector"])('editor');
+var getShowThemeEditor = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(getEditorFeatureState, function (state) { return state.showThemeEditor; });
+var getCurrentThemeItem = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(getEditorFeatureState, function (state) { return state.currentThemeItem; });
+// export const getCurrentProduct = createSelector(
+//     getEditorFeatureState,
+//     getCurrentProductId,
+//     (state, currentProductId) => {
+//         if (currentProductId === 0) {
+//             return {
+//                 id: 0,
+//                 productName: '',
+//                 productCode: 'New',
+//                 description: '',
+//                 starRating: 0
+//             };
+//         } else {
+//             return currentProductId ? state.products.find(p => p.id === currentProductId) : null;
+//         }
+//     }
+// );
+var getPresets = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(getEditorFeatureState, function (state) { return state.presets; });
+var getSettings = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(getEditorFeatureState, function (state) { return state.settings; });
+var getError = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(getEditorFeatureState, function (state) { return state.error; });
+
+
+/***/ }),
+
+/***/ "./src/app/editor/theme-editor/theme-editor.component.html":
+/*!*****************************************************************!*\
+  !*** ./src/app/editor/theme-editor/theme-editor.component.html ***!
+  \*****************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -506,10 +1168,10 @@ module.exports = "<ul class=\"list\">\n    <li class=\"list-item\">\n        <a 
 
 /***/ }),
 
-/***/ "./src/app/components/theme-editor/theme-editor.component.scss":
-/*!*********************************************************************!*\
-  !*** ./src/app/components/theme-editor/theme-editor.component.scss ***!
-  \*********************************************************************/
+/***/ "./src/app/editor/theme-editor/theme-editor.component.scss":
+/*!*****************************************************************!*\
+  !*** ./src/app/editor/theme-editor/theme-editor.component.scss ***!
+  \*****************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -517,10 +1179,10 @@ module.exports = ""
 
 /***/ }),
 
-/***/ "./src/app/components/theme-editor/theme-editor.component.ts":
-/*!*******************************************************************!*\
-  !*** ./src/app/components/theme-editor/theme-editor.component.ts ***!
-  \*******************************************************************/
+/***/ "./src/app/editor/theme-editor/theme-editor.component.ts":
+/*!***************************************************************!*\
+  !*** ./src/app/editor/theme-editor/theme-editor.component.ts ***!
+  \***************************************************************/
 /*! exports provided: ThemeEditorComponent */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -565,8 +1227,8 @@ var ThemeEditorComponent = /** @class */ (function () {
     ThemeEditorComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'app-theme-editor',
-            template: __webpack_require__(/*! ./theme-editor.component.html */ "./src/app/components/theme-editor/theme-editor.component.html"),
-            styles: [__webpack_require__(/*! ./theme-editor.component.scss */ "./src/app/components/theme-editor/theme-editor.component.scss")]
+            template: __webpack_require__(/*! ./theme-editor.component.html */ "./src/app/editor/theme-editor/theme-editor.component.html"),
+            styles: [__webpack_require__(/*! ./theme-editor.component.scss */ "./src/app/editor/theme-editor/theme-editor.component.scss")]
         }),
         __metadata("design:paramtypes", [])
     ], ThemeEditorComponent);
@@ -577,21 +1239,21 @@ var ThemeEditorComponent = /** @class */ (function () {
 
 /***/ }),
 
-/***/ "./src/app/components/theme-editor/theme-item-editor.component.html":
-/*!**************************************************************************!*\
-  !*** ./src/app/components/theme-editor/theme-item-editor.component.html ***!
-  \**************************************************************************/
+/***/ "./src/app/editor/theme-editor/theme-item-editor.component.html":
+/*!**********************************************************************!*\
+  !*** ./src/app/editor/theme-editor/theme-item-editor.component.html ***!
+  \**********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"pane-section __selected\" *ngIf=\"item\">\n    <div class=\"pane-head\">\n        <a class=\"pane-back\" (click)=\"back()\">\n            <i class=\"pane-ico fa fa-chevron-left\"></i>\n        </a>\n        <div class=\"pane-t\">\n            <i class=\"pane-ico fa fa-{{ item.icon }}\"></i>\n            {{ item.name }}\n        </div>\n    </div>\n    <div class=\"pane-cnt\">\n        <div class=\"pane-settings\" [class.pane-t]=\"el.type === 'header'\" *ngFor=\"let el of item.settings\">\n\n            <!-- Header or Paragraph -->\n            {{el.content}}\n\n            <!-- Color picker -->\n            <app-color-item *ngIf=\"el.type === 'color'\" [theme]=\"theme\" [model]=\"el\"></app-color-item>\n            <!-- Select -->\n            <app-select-item *ngIf=\"el.type === 'select'\" [theme]=\"theme\" [model]=\"el\"></app-select-item>\n            <!-- Checkbox -->\n            <app-checkbox-item *ngIf=\"el.type === 'checkbox'\" [theme]=\"theme\" [model]=\"el\"></app-checkbox-item>\n            <!-- Image -->\n            <app-image-item *ngIf=\"el.type === 'image'\" [theme]=\"theme\" [model]=\"el\"></app-image-item>\n            <!-- Input type=\"text\" -->\n            <app-text-item *ngIf=\"el.type === 'text'\" [theme]=\"theme\" [model]=\"el\"></app-text-item>\n            <!-- Info -->\n            <p *ngIf=\"el.type !== 'image' && el.info !== undefined\" class=\"form-help\">{{el.info}}</p>\n\n        </div>\n    </div>\n</div>"
+module.exports = "<div class=\"pane-section __selected\" *ngIf=\"item\">\n    <div class=\"pane-head\">\n        <a class=\"pane-back\" (click)=\"back()\">\n            <i class=\"pane-ico fa fa-chevron-left\"></i>\n        </a>\n        <div class=\"pane-t\">\n            <i class=\"pane-ico fa fa-{{ item.icon }}\"></i>\n            {{ item.name }}\n        </div>\n    </div>\n    <div class=\"pane-cnt\">\n        <div class=\"pane-settings\" \n             *ngFor=\"let el of item.settings\"\n             [class.pane-t]=\"el.type === 'header'\"\n             [ngSwitch]=\"el.type\">\n\n            <!-- Header or Paragraph -->\n            {{el.content}}\n\n            <!-- Color picker -->\n            <app-color-item *ngSwitchCase=\"'color'\" [theme]=\"theme\" [model]=\"el\"></app-color-item>\n            <!-- Select -->\n            <app-select-item *ngSwitchCase=\"'select'\" [theme]=\"theme\" [model]=\"el\"></app-select-item>\n            <!-- Checkbox -->\n            <app-checkbox-item *ngSwitchCase=\"'checkbox'\" [theme]=\"theme\" [model]=\"el\"></app-checkbox-item>\n            <!-- Image -->\n            <app-image-item *ngSwitchCase=\"'image'\" [theme]=\"theme\" [model]=\"el\"></app-image-item>\n            <!-- Input type=\"text\" -->\n            <app-text-item *ngSwitchCase=\"'text'\" [theme]=\"theme\" [model]=\"el\"></app-text-item>\n            <!-- Info -->\n            <p *ngIf=\"el.type !== 'image' && el.info !== undefined\" class=\"form-help\">{{el.info}}</p>\n\n        </div>\n    </div>\n</div>"
 
 /***/ }),
 
-/***/ "./src/app/components/theme-editor/theme-item-editor.component.scss":
-/*!**************************************************************************!*\
-  !*** ./src/app/components/theme-editor/theme-item-editor.component.scss ***!
-  \**************************************************************************/
+/***/ "./src/app/editor/theme-editor/theme-item-editor.component.scss":
+/*!**********************************************************************!*\
+  !*** ./src/app/editor/theme-editor/theme-item-editor.component.scss ***!
+  \**********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -599,10 +1261,10 @@ module.exports = ""
 
 /***/ }),
 
-/***/ "./src/app/components/theme-editor/theme-item-editor.component.ts":
-/*!************************************************************************!*\
-  !*** ./src/app/components/theme-editor/theme-item-editor.component.ts ***!
-  \************************************************************************/
+/***/ "./src/app/editor/theme-editor/theme-item-editor.component.ts":
+/*!********************************************************************!*\
+  !*** ./src/app/editor/theme-editor/theme-item-editor.component.ts ***!
+  \********************************************************************/
 /*! exports provided: ThemeItemEditorComponent */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -645,8 +1307,8 @@ var ThemeItemEditorComponent = /** @class */ (function () {
     ThemeItemEditorComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'app-theme-item-editor',
-            template: __webpack_require__(/*! ./theme-item-editor.component.html */ "./src/app/components/theme-editor/theme-item-editor.component.html"),
-            styles: [__webpack_require__(/*! ./theme-item-editor.component.scss */ "./src/app/components/theme-editor/theme-item-editor.component.scss")]
+            template: __webpack_require__(/*! ./theme-item-editor.component.html */ "./src/app/editor/theme-editor/theme-item-editor.component.html"),
+            styles: [__webpack_require__(/*! ./theme-item-editor.component.scss */ "./src/app/editor/theme-editor/theme-item-editor.component.scss")]
         }),
         __metadata("design:paramtypes", [])
     ], ThemeItemEditorComponent);
@@ -657,21 +1319,21 @@ var ThemeItemEditorComponent = /** @class */ (function () {
 
 /***/ }),
 
-/***/ "./src/app/components/toolbar/toolbar.component.html":
-/*!***********************************************************!*\
-  !*** ./src/app/components/toolbar/toolbar.component.html ***!
-  \***********************************************************/
+/***/ "./src/app/shared/components/preview/preview.component.html":
+/*!******************************************************************!*\
+  !*** ./src/app/shared/components/preview/preview.component.html ***!
+  \******************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ul class=\"menu\">\n    <li class=\"menu-item\">\n        <a href=\"#\" class=\"menu-link\">\n            <i class=\"menu-ico fa fa-home\"></i>\n            Back\n        </a>\n    </li>\n    <li class=\"menu-item\">\n        <a href=\"#\" class=\"menu-link\">\n            <i class=\"menu-ico fa fa-code\"></i>\n            Edit HTML/CSS\n        </a>\n    </li>\n    <li class=\"menu-item\">\n        <a href=\"#\" class=\"menu-link\">\n            <i class=\"menu-ico fa fa-globe\"></i>\n            Edit languages\n        </a>\n    </li>\n    <li class=\"menu-item\">\n        <a href=\"#\" class=\"menu-link\">\n            <i class=\"menu-ico fa fa-map\"></i>\n            Edit navigation\n        </a>\n    </li>\n</ul>"
+module.exports = "<div class=\"theme-cnt\">\n    <div class=\"theme-preview\" data-size=\"desktop\">\n        <!-- <iframe src=\"http://virtocommerce.com\" scrolling=\"yes\"></iframe> -->\n    </div>\n    <a class=\"theme-toggle js-toggle\"></a>\n    <ul class=\"list __nav\">\n        <li class=\"list-item\">\n            <a class=\"list-link __selected js-size\" data-size=\"desktop\">\n                <i class=\"list-ico fa fa-desktop\"></i>\n                Desktop\n            </a>\n        </li>\n        <li class=\"list-item\">\n            <a class=\"list-link js-size\" data-size=\"tablet\">\n                <i class=\"list-ico fa fa-tablet\"></i>\n                Tablet\n            </a>\n        </li>\n        <li class=\"list-item\">\n            <a class=\"list-link js-size\" data-size=\"mobile\">\n                <i class=\"list-ico fa fa-mobile\"></i>\n                Mobile\n            </a>\n        </li>\n    </ul>\n</div>"
 
 /***/ }),
 
-/***/ "./src/app/components/toolbar/toolbar.component.scss":
-/*!***********************************************************!*\
-  !*** ./src/app/components/toolbar/toolbar.component.scss ***!
-  \***********************************************************/
+/***/ "./src/app/shared/components/preview/preview.component.scss":
+/*!******************************************************************!*\
+  !*** ./src/app/shared/components/preview/preview.component.scss ***!
+  \******************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -679,10 +1341,73 @@ module.exports = ""
 
 /***/ }),
 
-/***/ "./src/app/components/toolbar/toolbar.component.ts":
-/*!*********************************************************!*\
-  !*** ./src/app/components/toolbar/toolbar.component.ts ***!
-  \*********************************************************/
+/***/ "./src/app/shared/components/preview/preview.component.ts":
+/*!****************************************************************!*\
+  !*** ./src/app/shared/components/preview/preview.component.ts ***!
+  \****************************************************************/
+/*! exports provided: PreviewComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PreviewComponent", function() { return PreviewComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var PreviewComponent = /** @class */ (function () {
+    function PreviewComponent() {
+    }
+    PreviewComponent.prototype.ngOnInit = function () {
+    };
+    PreviewComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-preview',
+            template: __webpack_require__(/*! ./preview.component.html */ "./src/app/shared/components/preview/preview.component.html"),
+            styles: [__webpack_require__(/*! ./preview.component.scss */ "./src/app/shared/components/preview/preview.component.scss")]
+        }),
+        __metadata("design:paramtypes", [])
+    ], PreviewComponent);
+    return PreviewComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/shared/components/toolbar/toolbar.component.html":
+/*!******************************************************************!*\
+  !*** ./src/app/shared/components/toolbar/toolbar.component.html ***!
+  \******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<ul class=\"menu\">\n    <li class=\"menu-item\">\n        <a href=\"#\" class=\"menu-link\">\n            <i class=\"menu-ico fa fa-home\"></i>\n            Back\n        </a>\n    </li>\n    <li class=\"menu-item\">\n        <a href=\"#\" class=\"menu-link\">\n            <i class=\"menu-ico fa fa-code\"></i>\n            Edit HTML/CSS\n        </a>\n    </li>\n    <li class=\"menu-item\">\n        <a href=\"#\" class=\"menu-link\">\n            <i class=\"menu-ico fa fa-globe\"></i>\n            Edit languages\n        </a>\n    </li>\n    <li class=\"menu-item\">\n        <a href=\"#\" class=\"menu-link\">\n            <i class=\"menu-ico fa fa-map\"></i>\n            Edit navigation\n        </a>\n    </li>\n</ul>"
+
+/***/ }),
+
+/***/ "./src/app/shared/components/toolbar/toolbar.component.scss":
+/*!******************************************************************!*\
+  !*** ./src/app/shared/components/toolbar/toolbar.component.scss ***!
+  \******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/shared/components/toolbar/toolbar.component.ts":
+/*!****************************************************************!*\
+  !*** ./src/app/shared/components/toolbar/toolbar.component.ts ***!
+  \****************************************************************/
 /*! exports provided: ToolbarComponent */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -708,8 +1433,8 @@ var ToolbarComponent = /** @class */ (function () {
     ToolbarComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'app-toolbar',
-            template: __webpack_require__(/*! ./toolbar.component.html */ "./src/app/components/toolbar/toolbar.component.html"),
-            styles: [__webpack_require__(/*! ./toolbar.component.scss */ "./src/app/components/toolbar/toolbar.component.scss")]
+            template: __webpack_require__(/*! ./toolbar.component.html */ "./src/app/shared/components/toolbar/toolbar.component.html"),
+            styles: [__webpack_require__(/*! ./toolbar.component.scss */ "./src/app/shared/components/toolbar/toolbar.component.scss")]
         }),
         __metadata("design:paramtypes", [])
     ], ToolbarComponent);
@@ -720,154 +1445,10 @@ var ToolbarComponent = /** @class */ (function () {
 
 /***/ }),
 
-/***/ "./src/app/controls/checkbox-item/checkbox-item.component.html":
-/*!*********************************************************************!*\
-  !*** ./src/app/controls/checkbox-item/checkbox-item.component.html ***!
-  \*********************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "<div class=\"pane-row\">\n    <div class=\"form-input\">\n        <label class=\"form-label __switch\">\n            <input type=\"checkbox\" [(ngModel)]=\"theme[model.id]\">\n            <span class=\"switch\"></span>\n        </label>\n    </div>\n    <div class=\"pane-name\">{{model.label}}</div>\n</div>"
-
-/***/ }),
-
-/***/ "./src/app/controls/checkbox-item/checkbox-item.component.scss":
-/*!*********************************************************************!*\
-  !*** ./src/app/controls/checkbox-item/checkbox-item.component.scss ***!
-  \*********************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = ""
-
-/***/ }),
-
-/***/ "./src/app/controls/checkbox-item/checkbox-item.component.ts":
-/*!*******************************************************************!*\
-  !*** ./src/app/controls/checkbox-item/checkbox-item.component.ts ***!
-  \*******************************************************************/
-/*! exports provided: CheckboxItemComponent */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CheckboxItemComponent", function() { return CheckboxItemComponent; });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (undefined && undefined.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-var CheckboxItemComponent = /** @class */ (function () {
-    function CheckboxItemComponent() {
-    }
-    CheckboxItemComponent.prototype.ngOnInit = function () {
-    };
-    __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
-        __metadata("design:type", Object)
-    ], CheckboxItemComponent.prototype, "model", void 0);
-    __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
-        __metadata("design:type", Object)
-    ], CheckboxItemComponent.prototype, "theme", void 0);
-    CheckboxItemComponent = __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
-            selector: 'app-checkbox-item',
-            template: __webpack_require__(/*! ./checkbox-item.component.html */ "./src/app/controls/checkbox-item/checkbox-item.component.html"),
-            styles: [__webpack_require__(/*! ./checkbox-item.component.scss */ "./src/app/controls/checkbox-item/checkbox-item.component.scss")]
-        }),
-        __metadata("design:paramtypes", [])
-    ], CheckboxItemComponent);
-    return CheckboxItemComponent;
-}());
-
-
-
-/***/ }),
-
-/***/ "./src/app/controls/color-item/color-item.component.html":
-/*!***************************************************************!*\
-  !*** ./src/app/controls/color-item/color-item.component.html ***!
-  \***************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "<div class=\"pane-row\">\n    <app-color-picker [value]=\"theme[model.id]\" (valueChanged)=\"valueChanged($event)\"></app-color-picker>\n    <div class=\"pane-col pane-name\">{{model.label}}</div>\n</div>\n"
-
-/***/ }),
-
-/***/ "./src/app/controls/color-item/color-item.component.scss":
-/*!***************************************************************!*\
-  !*** ./src/app/controls/color-item/color-item.component.scss ***!
-  \***************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = ""
-
-/***/ }),
-
-/***/ "./src/app/controls/color-item/color-item.component.ts":
-/*!*************************************************************!*\
-  !*** ./src/app/controls/color-item/color-item.component.ts ***!
-  \*************************************************************/
-/*! exports provided: ColorItemComponent */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ColorItemComponent", function() { return ColorItemComponent; });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (undefined && undefined.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-var ColorItemComponent = /** @class */ (function () {
-    function ColorItemComponent() {
-    }
-    ColorItemComponent.prototype.ngOnInit = function () { };
-    ColorItemComponent.prototype.valueChanged = function ($event) {
-        this.theme[this.model.id] = $event;
-    };
-    __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
-        __metadata("design:type", Object)
-    ], ColorItemComponent.prototype, "model", void 0);
-    __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
-        __metadata("design:type", Object)
-    ], ColorItemComponent.prototype, "theme", void 0);
-    ColorItemComponent = __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
-            selector: 'app-color-item',
-            template: __webpack_require__(/*! ./color-item.component.html */ "./src/app/controls/color-item/color-item.component.html"),
-            styles: [__webpack_require__(/*! ./color-item.component.scss */ "./src/app/controls/color-item/color-item.component.scss")]
-        }),
-        __metadata("design:paramtypes", [])
-    ], ColorItemComponent);
-    return ColorItemComponent;
-}());
-
-
-
-/***/ }),
-
-/***/ "./src/app/controls/color-picker/color-picker.component.html":
-/*!*******************************************************************!*\
-  !*** ./src/app/controls/color-picker/color-picker.component.html ***!
-  \*******************************************************************/
+/***/ "./src/app/shared/controls/color-picker/color-picker.component.html":
+/*!**************************************************************************!*\
+  !*** ./src/app/shared/controls/color-picker/color-picker.component.html ***!
+  \**************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -875,10 +1456,10 @@ module.exports = "<div class=\"pane-col pane-color\" \n     [(colorPicker)]=\"va
 
 /***/ }),
 
-/***/ "./src/app/controls/color-picker/color-picker.component.scss":
-/*!*******************************************************************!*\
-  !*** ./src/app/controls/color-picker/color-picker.component.scss ***!
-  \*******************************************************************/
+/***/ "./src/app/shared/controls/color-picker/color-picker.component.scss":
+/*!**************************************************************************!*\
+  !*** ./src/app/shared/controls/color-picker/color-picker.component.scss ***!
+  \**************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -886,10 +1467,10 @@ module.exports = ""
 
 /***/ }),
 
-/***/ "./src/app/controls/color-picker/color-picker.component.ts":
-/*!*****************************************************************!*\
-  !*** ./src/app/controls/color-picker/color-picker.component.ts ***!
-  \*****************************************************************/
+/***/ "./src/app/shared/controls/color-picker/color-picker.component.ts":
+/*!************************************************************************!*\
+  !*** ./src/app/shared/controls/color-picker/color-picker.component.ts ***!
+  \************************************************************************/
 /*! exports provided: ColorPickerComponent */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -927,8 +1508,8 @@ var ColorPickerComponent = /** @class */ (function () {
     ColorPickerComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'app-color-picker',
-            template: __webpack_require__(/*! ./color-picker.component.html */ "./src/app/controls/color-picker/color-picker.component.html"),
-            styles: [__webpack_require__(/*! ./color-picker.component.scss */ "./src/app/controls/color-picker/color-picker.component.scss")]
+            template: __webpack_require__(/*! ./color-picker.component.html */ "./src/app/shared/controls/color-picker/color-picker.component.html"),
+            styles: [__webpack_require__(/*! ./color-picker.component.scss */ "./src/app/shared/controls/color-picker/color-picker.component.scss")]
         }),
         __metadata("design:paramtypes", [])
     ], ColorPickerComponent);
@@ -939,162 +1520,10 @@ var ColorPickerComponent = /** @class */ (function () {
 
 /***/ }),
 
-/***/ "./src/app/controls/image-item/image-item.component.html":
-/*!***************************************************************!*\
-  !*** ./src/app/controls/image-item/image-item.component.html ***!
-  \***************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "<label [for]=\"model.id\" class=\"form-label\">{{model.label}}</label>\n<div class=\"form-file\">\n    <div class='form-file'>\n        <input [id]=\"model.id\" type='file' #fileInput>\n        <button class='btn' (click)=\"openFileDialog()\">Choose file</button>\n    </div>\n</div>\n<p *ngIf=\"model.info !== undefined\" class=\"form-help\">{{model.info}}</p>\n<div class=\"form-img\"></div>\n"
-
-/***/ }),
-
-/***/ "./src/app/controls/image-item/image-item.component.scss":
-/*!***************************************************************!*\
-  !*** ./src/app/controls/image-item/image-item.component.scss ***!
-  \***************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = ""
-
-/***/ }),
-
-/***/ "./src/app/controls/image-item/image-item.component.ts":
-/*!*************************************************************!*\
-  !*** ./src/app/controls/image-item/image-item.component.ts ***!
-  \*************************************************************/
-/*! exports provided: ImageItemComponent */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ImageItemComponent", function() { return ImageItemComponent; });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (undefined && undefined.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-var ImageItemComponent = /** @class */ (function () {
-    function ImageItemComponent() {
-    }
-    ImageItemComponent.prototype.ngOnInit = function () {
-    };
-    ImageItemComponent.prototype.openFileDialog = function () {
-        this.fileInput.nativeElement.click();
-    };
-    ImageItemComponent.prototype.raiseValueChanged = function ($event) {
-        this.theme[this.model.id] = $event;
-    };
-    __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"])('fileInput', { read: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ElementRef"] }),
-        __metadata("design:type", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ElementRef"])
-    ], ImageItemComponent.prototype, "fileInput", void 0);
-    __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
-        __metadata("design:type", Object)
-    ], ImageItemComponent.prototype, "model", void 0);
-    __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
-        __metadata("design:type", Object)
-    ], ImageItemComponent.prototype, "theme", void 0);
-    ImageItemComponent = __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
-            selector: 'app-image-item',
-            template: __webpack_require__(/*! ./image-item.component.html */ "./src/app/controls/image-item/image-item.component.html"),
-            styles: [__webpack_require__(/*! ./image-item.component.scss */ "./src/app/controls/image-item/image-item.component.scss")]
-        }),
-        __metadata("design:paramtypes", [])
-    ], ImageItemComponent);
-    return ImageItemComponent;
-}());
-
-
-
-/***/ }),
-
-/***/ "./src/app/controls/select-item/select-item.component.html":
-/*!*****************************************************************!*\
-  !*** ./src/app/controls/select-item/select-item.component.html ***!
-  \*****************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "<label *ngIf=\"model.label !== undefined\" [for]=\"model.id\" class=\"form-label\">{{model.label}}</label>\n<div class=\"form-input __select\">\n    <select [id]=\"model.id\" [(ngModel)]=\"theme[model.id]\">\n        <option *ngFor=\"let option of model.options\" value=\"{{option.value}}\">\n            {{option.label}}\n        </option>\n    </select>\n</div>\n"
-
-/***/ }),
-
-/***/ "./src/app/controls/select-item/select-item.component.scss":
-/*!*****************************************************************!*\
-  !*** ./src/app/controls/select-item/select-item.component.scss ***!
-  \*****************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = ""
-
-/***/ }),
-
-/***/ "./src/app/controls/select-item/select-item.component.ts":
-/*!***************************************************************!*\
-  !*** ./src/app/controls/select-item/select-item.component.ts ***!
-  \***************************************************************/
-/*! exports provided: SelectItemComponent */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SelectItemComponent", function() { return SelectItemComponent; });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (undefined && undefined.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-var SelectItemComponent = /** @class */ (function () {
-    function SelectItemComponent() {
-    }
-    SelectItemComponent.prototype.ngOnInit = function () {
-    };
-    __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
-        __metadata("design:type", Object)
-    ], SelectItemComponent.prototype, "model", void 0);
-    __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
-        __metadata("design:type", Object)
-    ], SelectItemComponent.prototype, "theme", void 0);
-    SelectItemComponent = __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
-            selector: 'app-select-item',
-            template: __webpack_require__(/*! ./select-item.component.html */ "./src/app/controls/select-item/select-item.component.html"),
-            styles: [__webpack_require__(/*! ./select-item.component.scss */ "./src/app/controls/select-item/select-item.component.scss")]
-        }),
-        __metadata("design:paramtypes", [])
-    ], SelectItemComponent);
-    return SelectItemComponent;
-}());
-
-
-
-/***/ }),
-
-/***/ "./src/app/controls/tabs/tab.component.ts":
-/*!************************************************!*\
-  !*** ./src/app/controls/tabs/tab.component.ts ***!
-  \************************************************/
+/***/ "./src/app/shared/controls/tabs/tab.component.ts":
+/*!*******************************************************!*\
+  !*** ./src/app/shared/controls/tabs/tab.component.ts ***!
+  \*******************************************************/
 /*! exports provided: TabComponent */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -1139,10 +1568,10 @@ var TabComponent = /** @class */ (function () {
 
 /***/ }),
 
-/***/ "./src/app/controls/tabs/tabs.component.scss":
-/*!***************************************************!*\
-  !*** ./src/app/controls/tabs/tabs.component.scss ***!
-  \***************************************************/
+/***/ "./src/app/shared/controls/tabs/tabs.component.scss":
+/*!**********************************************************!*\
+  !*** ./src/app/shared/controls/tabs/tabs.component.scss ***!
+  \**********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -1150,10 +1579,10 @@ module.exports = ".nav {\n  display: flex;\n  margin-bottom: 1rem; }\n  .nav .ta
 
 /***/ }),
 
-/***/ "./src/app/controls/tabs/tabs.component.ts":
-/*!*************************************************!*\
-  !*** ./src/app/controls/tabs/tabs.component.ts ***!
-  \*************************************************/
+/***/ "./src/app/shared/controls/tabs/tabs.component.ts":
+/*!********************************************************!*\
+  !*** ./src/app/shared/controls/tabs/tabs.component.ts ***!
+  \********************************************************/
 /*! exports provided: TabsComponent */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -1161,7 +1590,7 @@ module.exports = ".nav {\n  display: flex;\n  margin-bottom: 1rem; }\n  .nav .ta
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TabsComponent", function() { return TabsComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _tab_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./tab.component */ "./src/app/controls/tabs/tab.component.ts");
+/* harmony import */ var _tab_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./tab.component */ "./src/app/shared/controls/tabs/tab.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1194,7 +1623,7 @@ var TabsComponent = /** @class */ (function () {
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'app-tabs',
             template: "\n        <div class=\"nav\">\n            <div class=\"tab\" *ngFor=\"let tab of tabs\" (click)=\"selectTab(tab)\" [class.active]=\"tab.active\">\n                <a href=\"#\">{{tab.tabTitle}}</a>\n            </div>\n        </div>\n        <ng-content></ng-content>\n    ",
-            styles: [__webpack_require__(/*! ./tabs.component.scss */ "./src/app/controls/tabs/tabs.component.scss")]
+            styles: [__webpack_require__(/*! ./tabs.component.scss */ "./src/app/shared/controls/tabs/tabs.component.scss")]
         }),
         __metadata("design:paramtypes", [])
     ], TabsComponent);
@@ -1205,136 +1634,50 @@ var TabsComponent = /** @class */ (function () {
 
 /***/ }),
 
-/***/ "./src/app/controls/text-item/text-item.component.html":
-/*!*************************************************************!*\
-  !*** ./src/app/controls/text-item/text-item.component.html ***!
-  \*************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "<label [for]=\"model.id\" class=\"form-label\">{{model.label}}</label>\n<div class=\"form-input\">\n    <input [id]=\"model.id\" type=\"text\" value=\"{{model.default}}\" [(ngModel)]=\"theme[model.id]\">\n</div>"
-
-/***/ }),
-
-/***/ "./src/app/controls/text-item/text-item.component.scss":
-/*!*************************************************************!*\
-  !*** ./src/app/controls/text-item/text-item.component.scss ***!
-  \*************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = ""
-
-/***/ }),
-
-/***/ "./src/app/controls/text-item/text-item.component.ts":
-/*!***********************************************************!*\
-  !*** ./src/app/controls/text-item/text-item.component.ts ***!
-  \***********************************************************/
-/*! exports provided: TextItemComponent */
+/***/ "./src/app/shared/shared.module.ts":
+/*!*****************************************!*\
+  !*** ./src/app/shared/shared.module.ts ***!
+  \*****************************************/
+/*! exports provided: SharedModule */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TextItemComponent", function() { return TextItemComponent; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SharedModule", function() { return SharedModule; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var ngx_color_picker__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ngx-color-picker */ "./node_modules/ngx-color-picker/dist/ngx-color-picker.es5.js");
+/* harmony import */ var _controls_tabs_tabs_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./controls/tabs/tabs.component */ "./src/app/shared/controls/tabs/tabs.component.ts");
+/* harmony import */ var _controls_tabs_tab_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./controls/tabs/tab.component */ "./src/app/shared/controls/tabs/tab.component.ts");
+/* harmony import */ var _controls_color_picker_color_picker_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./controls/color-picker/color-picker.component */ "./src/app/shared/controls/color-picker/color-picker.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-var __metadata = (undefined && undefined.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
 
-var TextItemComponent = /** @class */ (function () {
-    function TextItemComponent() {
+
+
+
+
+var components = [
+    _controls_tabs_tabs_component__WEBPACK_IMPORTED_MODULE_2__["TabsComponent"],
+    _controls_tabs_tab_component__WEBPACK_IMPORTED_MODULE_3__["TabComponent"],
+    _controls_color_picker_color_picker_component__WEBPACK_IMPORTED_MODULE_4__["ColorPickerComponent"]
+];
+var SharedModule = /** @class */ (function () {
+    function SharedModule() {
     }
-    TextItemComponent.prototype.ngOnInit = function () {
-    };
-    __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
-        __metadata("design:type", Object)
-    ], TextItemComponent.prototype, "model", void 0);
-    __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
-        __metadata("design:type", Object)
-    ], TextItemComponent.prototype, "theme", void 0);
-    TextItemComponent = __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
-            selector: 'app-text-item',
-            template: __webpack_require__(/*! ./text-item.component.html */ "./src/app/controls/text-item/text-item.component.html"),
-            styles: [__webpack_require__(/*! ./text-item.component.scss */ "./src/app/controls/text-item/text-item.component.scss")]
-        }),
-        __metadata("design:paramtypes", [])
-    ], TextItemComponent);
-    return TextItemComponent;
-}());
-
-
-
-/***/ }),
-
-/***/ "./src/app/models/page.model.ts":
-/*!**************************************!*\
-  !*** ./src/app/models/page.model.ts ***!
-  \**************************************/
-/*! exports provided: PageModel */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PageModel", function() { return PageModel; });
-var PageModel = /** @class */ (function () {
-    function PageModel() {
-    }
-    return PageModel;
-}());
-
-
-
-/***/ }),
-
-/***/ "./src/app/services/theme.service.ts":
-/*!*******************************************!*\
-  !*** ./src/app/services/theme.service.ts ***!
-  \*******************************************/
-/*! exports provided: ThemeService */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ThemeService", function() { return ThemeService; });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
-var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (undefined && undefined.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-var ThemeService = /** @class */ (function () {
-    function ThemeService(http) {
-        this.http = http;
-    }
-    ThemeService.prototype.loadData = function () {
-        return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["forkJoin"])(this.http.get('data/settings_data.json'), this.http.get('data/settings_schema.json'));
-    };
-    ThemeService = __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
-            providedIn: 'root'
-        }),
-        __metadata("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"]])
-    ], ThemeService);
-    return ThemeService;
+    SharedModule = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["NgModule"])({
+            declarations: components,
+            imports: [
+                ngx_color_picker__WEBPACK_IMPORTED_MODULE_1__["ColorPickerModule"]
+            ],
+            exports: components
+        })
+    ], SharedModule);
+    return SharedModule;
 }());
 
 
