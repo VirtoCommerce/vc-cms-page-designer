@@ -56,9 +56,13 @@ export function reducer(state = initialState, action: EditorActions): EditorStat
                 showPresetsEditor: action.payload
             };
         case EditorActionTypes.LoadPageSuccess:
+            const model = new PageModel();
+            model.sections = action.payload.filter(x => x.type !== 'settings');
+            const settings = action.payload.find(x => x.type === 'settings') || { type: 'settings' };
+            model.settings = settings;
             return {
                 ...state,
-                page: action.payload
+                page: model
             };
         case EditorActionTypes.LoadPageFail:
             return {

@@ -21,7 +21,6 @@ export class PageEditorComponent implements OnInit {
     icon(type: string): string {
         switch (type) {
             case 'text': return 'font';
-            case 'settings': return 'wrench';
             case 'image-carousel': return 'images';
             case 'textcolumns-with-images': return 'columns';
         }
@@ -34,5 +33,9 @@ export class PageEditorComponent implements OnInit {
 
     addNewBlock() {
         this.addNewBlockEvent.emit();
+    }
+
+    selectSettings() {
+        this.selectEvent.emit(this.model.settings);
     }
 }

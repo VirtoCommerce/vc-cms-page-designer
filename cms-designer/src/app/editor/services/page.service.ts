@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { PageModel } from '../models/page.model';
 import { Observable } from 'rxjs';
+import { SectionModel } from '../models/section.model';
 
 @Injectable({
     providedIn: 'root'
@@ -9,7 +10,7 @@ import { Observable } from 'rxjs';
 export class PageService {
     constructor(private http: HttpClient) { }
 
-    loadPage(): Observable<PageModel> {
-        return this.http.get<PageModel>('data/page_data.json');
+    loadPage(): Observable<SectionModel[]> {
+        return this.http.get<SectionModel[]>('data/page_data.json');
     }
 }

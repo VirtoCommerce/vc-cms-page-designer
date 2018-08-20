@@ -1,5 +1,6 @@
 import { SectionModel } from './section.model';
 
 export class PageModel {
-    sections?: SectionModel[];
+    settings: SectionModel;
+    sections: SectionModel[];
 }

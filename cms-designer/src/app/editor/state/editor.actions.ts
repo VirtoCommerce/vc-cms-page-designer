@@ -2,6 +2,7 @@ import { Action } from '@ngrx/store';
 import { PresetsModel } from '../models/themes/presets.model';
 import { ThemeItemModel } from '../models/themes/theme-item.model';
 import { PageModel } from '../models/page.model';
+import { SectionModel } from '../models/section.model';
 
 export enum EditorActionTypes {
     LoadPresets = 'Load Presets',
@@ -55,7 +56,7 @@ export class LoadPage implements Action {
 
 export class LoadPageSuccess implements Action {
     readonly type = EditorActionTypes.LoadPageSuccess;
-    constructor(public payload: PageModel) { }
+    constructor(public payload: SectionModel[]) { }
 }
 
 export class LoadPageFail implements Action {
