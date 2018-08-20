@@ -1,6 +1,7 @@
 import { Action } from '@ngrx/store';
 import { PresetsModel } from '../models/themes/presets.model';
 import { ThemeItemModel } from '../models/themes/theme-item.model';
+import { PageModel } from '../models/page.model';
 
 export enum EditorActionTypes {
     LoadPresets = 'Load Presets',
@@ -10,7 +11,10 @@ export enum EditorActionTypes {
     LoadSettingsSuccess = 'Load Settings Success',
     LoadSettingsFail = 'Load Settings Fail',
     SelectThemeItem = 'Select Theme Item',
-    TogglePresetsPane = 'Toggle Presets Pane'
+    TogglePresetsPane = 'Toggle Presets Pane',
+    LoadPage = 'Load Page',
+    LoadPageSuccess = 'Load Page Success',
+    LoadPageFail = 'Load Page Fail'
 }
 
 export class LoadPresets implements Action {
@@ -45,6 +49,20 @@ export class LoadSettingsFail implements Action {
     constructor(public payload: string) { }
 }
 
+export class LoadPage implements Action {
+    readonly type = EditorActionTypes.LoadPage;
+}
+
+export class LoadPageSuccess implements Action {
+    readonly type = EditorActionTypes.LoadPageSuccess;
+    constructor(public payload: PageModel) { }
+}
+
+export class LoadPageFail implements Action {
+    readonly type = EditorActionTypes.LoadPageFail;
+    constructor(public payload: string) { }
+}
+
 export class SelectThemeItem implements Action {
     readonly type = EditorActionTypes.SelectThemeItem;
 
@@ -64,4 +82,7 @@ export type EditorActions = LoadPresets
     | LoadSettingsSuccess
     | LoadSettingsFail
     | SelectThemeItem
-    | TogglePresetsPane;
+    | TogglePresetsPane
+    | LoadPage
+    | LoadPageSuccess
+    | LoadPageFail;

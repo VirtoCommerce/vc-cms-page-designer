@@ -1,5 +1,6 @@
 import { EditorActionTypes, EditorActions } from './editor.actions';
 import { PresetsModel } from '../models/themes/presets.model';
+import { PageModel } from '../models/page.model';
 
 export interface EditorState {
     showPresetsEditor: boolean;
@@ -8,6 +9,7 @@ export interface EditorState {
     currentTheme: any;
     presets: PresetsModel;
     settings: any[];
+    page: PageModel;
 }
 
 const initialState: EditorState = {
@@ -16,7 +18,8 @@ const initialState: EditorState = {
     error: '',
     currentTheme: {},
     presets: null,
-    settings: []
+    settings: [],
+    page: null
 };
 
 export function reducer(state = initialState, action: EditorActions): EditorState {
@@ -51,6 +54,16 @@ export function reducer(state = initialState, action: EditorActions): EditorStat
             return {
                 ...state,
                 showPresetsEditor: action.payload
+            };
+        case EditorActionTypes.LoadPageSuccess:
+            return {
+                ...state,
+                page: action.payload
+            };
+        case EditorActionTypes.LoadPageFail:
+            return {
+                ...state,
+                error: action.payload
             };
     }
     return state;

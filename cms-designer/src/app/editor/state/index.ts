@@ -18,6 +18,11 @@ export const getShowPresetsEditor = createSelector(
     state => state.showPresetsEditor
 );
 
+export const getPage = createSelector(
+    getEditorFeatureState,
+    state => state.page
+);
+
 // export const getCurrentProduct = createSelector(
 //     getEditorFeatureState,
 //     getCurrentProductId,

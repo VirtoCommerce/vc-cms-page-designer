@@ -11,10 +11,12 @@
             </div>
             <div class="pane-cnt">
                 <app-tabs>
-                    <app-tab tabTitle="Sections">
-                        <app-page-editor (selectEvent)="selected = $event"></app-page-editor>
+                    <app-tab tabTitle="Sections" active="true">
+                        <app-page-editor [model]="page$ | async" 
+                                         (selectEvent)="selectPageItem($event)"
+                                         (addNewBlockEvent)="selectNewBlockType()"></app-page-editor>
                     </app-tab>
-                    <app-tab *ngIf="settings$" tabTitle="Theme" active="true">
+                    <app-tab *ngIf="settings$" tabTitle="Theme">
                         <app-theme-editor [settings]="settings$ | async" (selectPresetEvent)="turnOnPresets()" (selectItemEvent)="selectThemeItem($event)"></app-theme-editor>
                     </app-tab>
                 </app-tabs>

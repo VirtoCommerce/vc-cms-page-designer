@@ -1,3 +1,14 @@
 <div class="pane-section __selected" *ngIf="model">
-    
+    <ul class="list">
+        <li class="list-item" *ngFor="let item of model">
+            <a class="list-link" (click)="selectItem(item)">
+                <i class="list-ico fa fa-{{ icon(item.type) }}"></i><span class="list-t">{{ item.name }}</span>
+            </a>
+        </li>
+        <li class="list-item">
+            <a class="list-link" (click)="addNewBlock()">
+                <i class="list-ico fa fa-plus-square"></i><span class="list-t">Add block</span>
+            </a>
+        </li>
+    </ul>
 </div>

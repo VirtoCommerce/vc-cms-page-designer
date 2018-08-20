@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { PageModel } from '../models/page.model';
+import { SectionModel } from '../models/section.model';
 
 @Component({
     selector: 'app-page-editor',
@@ -8,15 +9,30 @@ import { PageModel } from '../models/page.model';
 })
 export class PageEditorComponent implements OnInit {
 
-    @Input() model = new PageModel();
+    @Input() model: PageModel;
 
-    @Output() loadedEvent = new EventEmitter<boolean>();
-    @Output() selectEvent = new EventEmitter<any>();
+    @Output() selectEvent = new EventEmitter<SectionModel>();
+    @Output() addNewBlockEvent = new EventEmitter<any>();
 
     constructor() { }
 
-    ngOnInit() {
-        this.loadedEvent.emit(true);
+    ngOnInit() { }
+
+    icon(type: string): string {
+        switch (type) {
+            case 'text': return 'font';
+            case 'settings': return 'wrench';
+            case 'image-carousel': return 'images';
+            case 'textcolumns-with-images': return 'columns';
+        }
+        return type;
     }
 
+    selectItem(item: SectionModel) {
+        this.selectEvent.emit(item);
+    }
+
+    addNewBlock() {
+        this.addNewBlockEvent.emit();
+    }
 }

@@ -6,6 +6,8 @@ import * as fromEditor from '../state';
 import * as editorActions from '../state/editor.actions';
 
 import { PresetsModel } from '../models/themes/presets.model';
+import { PageModel } from '../models/page.model';
+import { SectionModel } from '../models/section.model';
 
 @Component({
     selector: 'app-sidebar',
@@ -20,6 +22,8 @@ export class SidebarComponent implements OnInit {
     currentThemeItem$: Observable<any>;
     showPresets$: Observable<boolean>;
 
+    page$: Observable<PageModel>;
+
     isPageLoading = false;
     isThemeLoading = false;
 
@@ -28,6 +32,7 @@ export class SidebarComponent implements OnInit {
     ngOnInit() {
         this.store.dispatch(new editorActions.LoadPresets());
         this.store.dispatch(new editorActions.LoadSettings());
+        this.store.dispatch(new editorActions.LoadPage());
 
         this.presets$ = this.store.pipe(select(fromEditor.getPresets));
         this.settings$ = this.store.pipe(select(fromEditor.getSettings));
@@ -36,12 +41,10 @@ export class SidebarComponent implements OnInit {
         this.currentThemeItem$ = this.store.pipe(select(fromEditor.getCurrentThemeItem));
         this.showPresets$ = this.store.pipe(select(fromEditor.getShowPresetsEditor));
 
-        this.showPresets$.subscribe(v => {
-            console.log(v);
-        });
+        this.page$ = this.store.pipe(select(fromEditor.getPage));
     }
 
-    selectThemeItem(item) {
+    selectThemeItem(item: any) {
         this.store.dispatch(new editorActions.SelectThemeItem(item));
     }
 
@@ -51,5 +54,13 @@ export class SidebarComponent implements OnInit {
 
     turnOffPresets() {
         this.store.dispatch(new editorActions.TogglePresetsPane(false));
+    }
+
+    selectPageItem(item: SectionModel) {
+        console.log(item);
+    }
+
+    selectNewBlockType() {
+        console.log('select new block type');
     }
 }
