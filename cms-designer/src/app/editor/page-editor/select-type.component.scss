@@ -1,0 +1,17 @@
+.list-link {
+    flex-grow: 1;
+}
+
+.list-button {
+    background: linear-gradient(to bottom, #6371c7, #5563c1);
+    box-shadow: inset 0 1px 0 0 #6f7bcb;
+    color: white;
+    padding: 0.3rem 1rem;
+    line-height: 1rem;
+    border-radius: .2rem;
+}
+
+.list-item {
+    display: flex;
+    align-items: center;
+}

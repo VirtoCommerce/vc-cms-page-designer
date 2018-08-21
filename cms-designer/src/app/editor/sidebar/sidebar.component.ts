@@ -19,8 +19,11 @@ export class SidebarComponent implements OnInit {
     presets$: Observable<PresetsModel>;
     settings$: Observable<any[]>;
     theme$: Observable<any>;
+    blockTypes$: Observable<any>;
     currentThemeItem$: Observable<any>;
+    currentSectionItem$: Observable<SectionModel>;
     showPresets$: Observable<boolean>;
+    addNewSectionMode$: Observable<boolean>;
 
     page$: Observable<PageModel>;
 
@@ -33,6 +36,7 @@ export class SidebarComponent implements OnInit {
         this.store.dispatch(new editorActions.LoadPresets());
         this.store.dispatch(new editorActions.LoadSettings());
         this.store.dispatch(new editorActions.LoadPage());
+        this.store.dispatch(new editorActions.LoadBlockTypes());
 
         this.presets$ = this.store.pipe(select(fromEditor.getPresets));
         this.settings$ = this.store.pipe(select(fromEditor.getSettings));
@@ -40,6 +44,10 @@ export class SidebarComponent implements OnInit {
 
         this.currentThemeItem$ = this.store.pipe(select(fromEditor.getCurrentThemeItem));
         this.showPresets$ = this.store.pipe(select(fromEditor.getShowPresetsEditor));
+
+        this.currentSectionItem$ = this.store.pipe(select(fromEditor.getCurrentSectionItem));
+        this.addNewSectionMode$ = this.store.pipe(select(fromEditor.getAddNewSectionMode));
+        this.blockTypes$ = this.store.pipe(select(fromEditor.getBlockTypes));
 
         this.page$ = this.store.pipe(select(fromEditor.getPage));
     }
@@ -57,10 +65,18 @@ export class SidebarComponent implements OnInit {
     }
 
     selectPageItem(item: SectionModel) {
-        console.log(item);
+        this.store.dispatch(new editorActions.SelectPageItem(item));
     }
 
-    selectNewBlockType() {
-        console.log('select new block type');
+    setNewBlockMode(visible) {
+        this.store.dispatch(new editorActions.ToggleNewBlockPane(visible));
+    }
+
+    previewBlockType(type: string) {
+        console.log(`preview ${type}`);
+    }
+
+    selectBlockType(type: string) {
+        console.log(`${type} selected`);
     }
 }

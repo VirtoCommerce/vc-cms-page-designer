@@ -5,7 +5,7 @@
         </div>
     </div>
     <div class="sidebar-main">
-        <div class="pane pane-index" [class.__disabled]="(currentThemeItem$|async) || (showPresets$|async)">
+        <div class="pane pane-index" [class.__disabled]="(currentThemeItem$|async) || (showPresets$|async) || (addNewSectionMode$|async)">
             <div class="pane-head">
                 <div class="pane-t">Boundless</div>
             </div>
@@ -14,7 +14,7 @@
                     <app-tab tabTitle="Sections" active="true">
                         <app-page-editor [model]="page$ | async" 
                                          (selectEvent)="selectPageItem($event)"
-                                         (addNewBlockEvent)="selectNewBlockType()"></app-page-editor>
+                                         (addNewBlockEvent)="setNewBlockMode(true)"></app-page-editor>
                     </app-tab>
                     <app-tab *ngIf="settings$" tabTitle="Theme">
                         <app-theme-editor [settings]="settings$ | async" (selectPresetEvent)="turnOnPresets()" (selectItemEvent)="selectThemeItem($event)"></app-theme-editor>
@@ -22,8 +22,16 @@
                 </app-tabs>
             </div>
         </div>
+        <app-page-item-editor class="pane __selected"
+                              *ngIf="currentSectionItem$|async as currentSectionItem"></app-page-item-editor>
+        <app-select-type class="pane __selected"
+                         *ngIf="addNewSectionMode$ | async"
+                         [types]="blockTypes$ | async"
+                         (backEvent)="setNewBlockMode(false)"
+                         (previewBlockEvent)="previewBlockType($event)"
+                         (selectBlockEvent)="selectBlockType($event)"></app-select-type>
         <app-presets-editor class="pane __selected" 
-                            *ngIf="showPresets$|async" 
+                            *ngIf="showPresets$|async"
                             [data]="presets$|async" 
                             [theme]="theme$|async" 
                             (backEvent)="turnOffPresets()"></app-presets-editor>

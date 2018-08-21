@@ -11,6 +11,7 @@ import { SharedModule } from '../shared/shared.module';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { ThemeEditorComponent } from './theme-editor/theme-editor.component';
 import { PageEditorComponent } from './page-editor/page-editor.component';
+import { SelectTypeComponent } from './page-editor/select-type.component';
 
 import { ThemeItemEditorComponent } from './theme-editor/theme-item-editor.component';
 import { PresetsEditorComponent } from './presets-editor/presets-editor.component';
@@ -19,9 +20,11 @@ import { CheckboxItemComponent } from './controls/checkbox-item/checkbox-item.co
 import { ImageItemComponent } from './controls/image-item/image-item.component';
 import { TextItemComponent } from './controls/text-item/text-item.component';
 import { ColorItemComponent } from './controls/color-item/color-item.component';
+import { SectionIconDirective } from './controls/icons.directive';
 
 import { reducer } from './state/editor.reducer';
 import { EditorEffects } from './state/editor.effects';
+import { PageItemEditorComponent } from './page-editor/page-item-editor.component';
 
 @NgModule({
     declarations: [
@@ -34,7 +37,10 @@ import { EditorEffects } from './state/editor.effects';
         CheckboxItemComponent,
         ImageItemComponent,
         TextItemComponent,
-        ColorItemComponent
+        ColorItemComponent,
+        SelectTypeComponent,
+        SectionIconDirective,
+        PageItemEditorComponent
     ],
     imports: [
         BrowserModule,

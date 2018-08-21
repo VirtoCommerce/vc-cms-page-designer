@@ -16,10 +16,10 @@ export class EditorEffects {
     loadPresets$: Observable<Action> = this.actions$.pipe(
         ofType(editorActions.EditorActionTypes.LoadPresets),
         mergeMap(action =>
-          this.themeService.loadPresets().pipe(
-            map(data => new editorActions.LoadPresetsSuccess(data)),
-            catchError(err => of(new editorActions.LoadPresetsFail(err)))
-          )
+            this.themeService.loadPresets().pipe(
+                map(data => new editorActions.LoadPresetsSuccess(data)),
+                catchError(err => of(new editorActions.LoadPresetsFail(err)))
+            )
         )
     );
 
@@ -27,10 +27,10 @@ export class EditorEffects {
     loadSettings$: Observable<Action> = this.actions$.pipe(
         ofType(editorActions.EditorActionTypes.LoadSettings),
         mergeMap(action =>
-          this.themeService.loadSettings().pipe(
-            map(data => new editorActions.LoadSettingsSuccess(data)),
-            catchError(err => of(new editorActions.LoadSettingsFail(err)))
-          )
+            this.themeService.loadSettings().pipe(
+                map(data => new editorActions.LoadSettingsSuccess(data)),
+                catchError(err => of(new editorActions.LoadSettingsFail(err)))
+            )
         )
     );
 
@@ -38,10 +38,18 @@ export class EditorEffects {
     loadPage$: Observable<Action> = this.actions$.pipe(
         ofType(editorActions.EditorActionTypes.LoadPage),
         mergeMap(action =>
-          this.pageService.loadPage().pipe(
-            map(data => new editorActions.LoadPageSuccess(data)),
-            catchError(err => of(new editorActions.LoadPageFail(err)))
-          )
+            this.pageService.loadPage().pipe(
+                map(data => new editorActions.LoadPageSuccess(data)),
+                catchError(err => of(new editorActions.LoadPageFail(err)))
+            )
+        )
+    );
+
+    @Effect()
+    loadBlockTypes$: Observable<Action> = this.actions$.pipe(
+        ofType(editorActions.EditorActionTypes.LoadBlockTypes),
+        mergeMap(action =>
+            of(new editorActions.BlockTypesLoaded(this.pageService.availableTypes))
         )
     );
 }

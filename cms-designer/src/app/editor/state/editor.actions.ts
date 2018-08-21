@@ -15,7 +15,11 @@ export enum EditorActionTypes {
     TogglePresetsPane = 'Toggle Presets Pane',
     LoadPage = 'Load Page',
     LoadPageSuccess = 'Load Page Success',
-    LoadPageFail = 'Load Page Fail'
+    LoadPageFail = 'Load Page Fail',
+    ToggleNewBlockPane = 'Toggle New Block Pane',
+    SelectPageItem = 'Select Page Item',
+    LoadBlockTypes = 'Load Block Types',
+    BlockTypesLoaded = 'Block Types Loaded'
 }
 
 export class LoadPresets implements Action {
@@ -76,6 +80,28 @@ export class TogglePresetsPane implements Action {
     constructor(public payload: boolean) { }
 }
 
+export class SelectPageItem implements Action {
+    readonly type = EditorActionTypes.SelectPageItem;
+
+    constructor(public payload: SectionModel) { }
+}
+
+export class ToggleNewBlockPane implements Action {
+    readonly type = EditorActionTypes.ToggleNewBlockPane;
+
+    constructor(public payload: boolean) { }
+}
+
+export class LoadBlockTypes implements Action {
+    readonly type = EditorActionTypes.LoadBlockTypes;
+}
+
+export class BlockTypesLoaded implements Action {
+    readonly type = EditorActionTypes.BlockTypesLoaded;
+
+    constructor(public payload: any[]) { }
+}
+
 export type EditorActions = LoadPresets
     | LoadPresetsSuccess
     | LoadPresetsFail
@@ -86,4 +112,7 @@ export type EditorActions = LoadPresets
     | TogglePresetsPane
     | LoadPage
     | LoadPageSuccess
-    | LoadPageFail;
+    | LoadPageFail
+    | ToggleNewBlockPane
+    | SelectPageItem
+    | BlockTypesLoaded;

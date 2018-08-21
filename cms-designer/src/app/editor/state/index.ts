@@ -13,6 +13,21 @@ export const getCurrentThemeItem = createSelector(
     state => state.currentThemeItem
 );
 
+export const getCurrentSectionItem = createSelector(
+    getEditorFeatureState,
+    state => state.currentSectionItem
+);
+
+export const getAddNewSectionMode = createSelector(
+    getEditorFeatureState,
+    state => state.showNewBlockSelector
+);
+
+export const getBlockTypes = createSelector(
+    getEditorFeatureState,
+    state => state.blockTypes
+);
+
 export const getShowPresetsEditor = createSelector(
     getEditorFeatureState,
     state => state.showPresetsEditor

@@ -18,15 +18,6 @@ export class PageEditorComponent implements OnInit {
 
     ngOnInit() { }
 
-    icon(type: string): string {
-        switch (type) {
-            case 'text': return 'font';
-            case 'image-carousel': return 'images';
-            case 'textcolumns-with-images': return 'columns';
-        }
-        return type;
-    }
-
     selectItem(item: SectionModel) {
         this.selectEvent.emit(item);
     }
