@@ -25,7 +25,9 @@
     "@ngrx/store": "^6.1.0",
     "@ngrx/store-devtools": "^6.1.0",
     "core-js": "^2.5.4",
+    "ngx-bootstrap": "^3.0.1",
     "ngx-color-picker": "^6.6.0",
+    "ngx-weditor": "^1.0.6",
     "rxjs": "^6.0.0",
     "zone.js": "~0.8.26"
   },

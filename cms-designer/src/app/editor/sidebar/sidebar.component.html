@@ -5,7 +5,7 @@
         </div>
     </div>
     <div class="sidebar-main">
-        <div class="pane pane-index" [class.__disabled]="(currentThemeItem$|async) || (showPresets$|async) || (addNewSectionMode$|async)">
+        <div class="pane pane-index" [class.__disabled]="hideRoot$|async">
             <div class="pane-head">
                 <div class="pane-t">Boundless</div>
             </div>
@@ -23,7 +23,9 @@
             </div>
         </div>
         <app-page-item-editor class="pane __selected"
-                              *ngIf="currentSectionItem$|async as currentSectionItem"></app-page-item-editor>
+                              *ngIf="currentSectionItem$|async as currentSectionItem"
+                              [model]="currentSectionItem"
+                              (backEvent)="cancelEditBlock()"></app-page-item-editor>
         <app-select-type class="pane __selected"
                          *ngIf="addNewSectionMode$ | async"
                          [types]="blockTypes$ | async"

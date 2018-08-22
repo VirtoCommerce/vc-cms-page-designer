@@ -61,6 +61,11 @@ export const getPresets = createSelector(
     state => state.presets
 );
 
+export const getHideRoot = createSelector(
+    getEditorFeatureState,
+    state => state.currentSectionItem != null || state.currentThemeItem != null || state.showNewBlockSelector || state.showPresetsEditor
+);
+
 export const getSettings = createSelector(
     getEditorFeatureState,
     state => state.settings

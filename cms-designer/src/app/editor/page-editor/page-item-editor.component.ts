@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ViewContainerRef, ComponentFactoryResolver } from '@angular/core';
+import { SectionModel } from '../models/section.model';
+import { BlocksComponentFactory } from '../block-editors/blocks-component.factory';
+import { BlockHostDirective } from '../block-editors/block-host.directive';
 
 @Component({
     selector: 'app-page-item-editor',
@@ -7,9 +10,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PageItemEditorComponent implements OnInit {
 
-    constructor() { }
+    @Input() model: SectionModel;
+    @Output() backEvent = new EventEmitter<any>();
+
+    @ViewChild(BlockHostDirective) host: BlockHostDirective;
+
+    constructor(private componentFactoryResolver: ComponentFactoryResolver, private blocksFactory: BlocksComponentFactory) { }
 
     ngOnInit() {
+        const type = this.blocksFactory.resolve(this.model.type);
+        if (type != null) {
+            const factory = this.componentFactoryResolver.resolveComponentFactory(type);
+            const component = this.host.viewContainerRef.createComponent(factory);
+
+            (<any>component.instance).model = this.model;
+        }
     }
 
+    back() {
+        this.backEvent.emit();
+    }
 }

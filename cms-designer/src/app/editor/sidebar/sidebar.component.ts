@@ -24,6 +24,7 @@ export class SidebarComponent implements OnInit {
     currentSectionItem$: Observable<SectionModel>;
     showPresets$: Observable<boolean>;
     addNewSectionMode$: Observable<boolean>;
+    hideRoot$: Observable<boolean>;
 
     page$: Observable<PageModel>;
 
@@ -37,6 +38,8 @@ export class SidebarComponent implements OnInit {
         this.store.dispatch(new editorActions.LoadSettings());
         this.store.dispatch(new editorActions.LoadPage());
         this.store.dispatch(new editorActions.LoadBlockTypes());
+
+        this.hideRoot$ = this.store.pipe(select(fromEditor.getHideRoot));
 
         this.presets$ = this.store.pipe(select(fromEditor.getPresets));
         this.settings$ = this.store.pipe(select(fromEditor.getSettings));
@@ -70,6 +73,10 @@ export class SidebarComponent implements OnInit {
 
     setNewBlockMode(visible) {
         this.store.dispatch(new editorActions.ToggleNewBlockPane(visible));
+    }
+
+    cancelEditBlock() {
+        this.store.dispatch(new editorActions.SelectPageItem(null));
     }
 
     previewBlockType(type: string) {
