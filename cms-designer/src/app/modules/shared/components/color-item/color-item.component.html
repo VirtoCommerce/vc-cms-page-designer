@@ -1,0 +1,10 @@
+<div class="pane-row">
+    <div class="pane-col pane-color" 
+        [colorPicker]="value"
+        (colorPickerChange)="onChange($event)" 
+        [cpOKButton]="true"
+        [cpOKButtonClass]="'btn'">
+        <div class='bg' [style.background]="value"></div>
+    </div>
+    <div class="pane-col pane-name">{{ label }}</div>
+</div>

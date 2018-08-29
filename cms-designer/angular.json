@@ -50,10 +50,9 @@
               "src/css/base-modules.css",
               "src/css/project-modules.css",
               "src/css/cosmetic.css",
+              "src/css/font-awesome.css",
               "src/css/main.css",
-              "src/css/colorpicker.css",
-              "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
-              "node_modules/@fortawesome/fontawesome-free/css/v4-shims.min.css"
+              "src/css/colorpicker.css"
             ],
             "scripts": []
           },

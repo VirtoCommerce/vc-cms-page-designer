@@ -180,7 +180,7 @@ body
             .theme-cnt .theme-toggle::after
             {
                 content: '';
-                font-family: 'FontAwesome';
+                font-family: 'Font Awesome 5 Free';
                 font-size: 14px;
             }
 
@@ -662,8 +662,8 @@ body
                         .pane-settings .form-input.__select::after
                         {
                             color: #a1c0d4;
-                            content: '';
-                            font-family: 'FontAwesome';
+                            content: '\f0d7';
+                            font-family: 'Font Awesome 5 Free';
                             font-size: 22px;
                             position: absolute;
                             right: 10px;
@@ -775,7 +775,7 @@ body
                         {
                             color: #dee9f0;
                             content: '';
-                            font-family: 'FontAwesome';
+                            font-family: 'Font Awesome 5 Free';
                             font-size: 34px;
                             left: 50%;
                             position: absolute;

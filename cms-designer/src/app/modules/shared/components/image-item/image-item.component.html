@@ -1,0 +1,9 @@
+<label class="form-label">{{ label }}</label>
+<div class="form-file">
+    <div class='form-file'>
+        <input type='file' #fileInput>
+        <button class='btn' (click)="openFileDialog()">Choose file</button>
+    </div>
+</div>
+<p *ngIf="info" class="form-help">{{info}}</p>
+<div class="form-img"></div>

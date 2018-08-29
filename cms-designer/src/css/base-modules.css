@@ -1543,7 +1543,7 @@ fieldset + fieldset
             bottom: 0;
             color: #43b0e6;
             content: '';
-            font-family: 'FontAwesome';
+            font-family: 'Font Awesome 5 Free';
             font-size: 11px;
             font-weight: normal;
             left: 0;
@@ -1670,8 +1670,8 @@ fieldset + fieldset
             .__switch .switch::before
             {
                 color: #fff;
-                content: '';
-                font-family: 'FontAwesome';
+                content: '\f00d';
+                font-family: 'Font Awesome 5 Free';
                 font-size: 12px;
                 font-weight: normal;
                 line-height: 20px;
@@ -2094,7 +2094,7 @@ button.btn
     border-style: solid;
     border-width: 15px;
     content: '';
-    font-family: 'FontAwesome';
+    font-family: 'Font Awesome 5 Free';
     font-size: 16px;
     position: absolute;
     right: 0;
@@ -2105,7 +2105,7 @@ button.btn
 {
     color: #fff;
     content: "";
-    font-family: "FontAwesome";
+    font-family: "Font Awesome 5 Free";
     font-size: 10px;
     line-height: 0;
     position: absolute;
@@ -2409,7 +2409,7 @@ button.btn
     {
         color: #a6a6a6;
         content: '';
-        font-family: 'FontAwesome';
+        font-family: 'Font Awesome 5 Free';
         font-size: 16px;
         position: absolute;
         right: 20px;
@@ -2459,7 +2459,7 @@ button.btn
     {
         color: #a6a6a6;
         content: "";
-        font-family: "FontAwesome";
+        font-family: "Font Awesome 5 Free";
         font-size: 16px;
         position: absolute;
         right: 30px;
@@ -2483,7 +2483,7 @@ button.btn
         border-style: solid;
         border-width: 15px;
         content: "";
-        font-family: "FontAwesome";
+        font-family: "Font Awesome 5 Free";
         font-size: 16px;
         position: absolute;
         right: 0;
@@ -2500,7 +2500,7 @@ button.btn
     {
         color: #fff;
         content: "";
-        font-family: "FontAwesome";
+        font-family: "Font Awesome 5 Free";
         font-size: 10px;
         line-height: 0;
         position: absolute;
@@ -2723,7 +2723,7 @@ button.btn
             border-style: solid;
             border-width: 15px;
             content: '';
-            font-family: 'FontAwesome';
+            font-family: 'Font Awesome 5 Free';
             font-size: 16px;
             position: absolute;
             right: 0;
@@ -2740,7 +2740,7 @@ button.btn
         {
             color: #fff;
             content: "";
-            font-family: "FontAwesome";
+            font-family: "Font Awesome 5 Free";
             font-size: 10px;
             line-height: 0;
             position: absolute;
@@ -3615,7 +3615,7 @@ button.btn
 
         .dropdown-menu .glyphicon
         {
-            font-family: 'FontAwesome';
+            font-family: 'Font Awesome 5 Free';
             font-style: normal;
         }
 
@@ -3785,7 +3785,7 @@ button.btn
 {
     color: #43b0e6;
     content: '';
-    font-family: 'FontAwesome';
+    font-family: 'Font Awesome 5 Free';
     font-size: 12px;
     text-shadow: none;
     top: 0;
@@ -4240,7 +4240,7 @@ tags-input .tags .tag-item .remove-button
                         {
                             color: #c2c2c2;
                             content: '';
-                            font-family: 'FontAwesome';
+                            font-family: 'Font Awesome 5 Free';
                             font-size: 14px;
                             left: 0;
                             position: absolute;
@@ -4371,7 +4371,7 @@ tags-input .tags .tag-item .remove-button
             {
                 color: #fff;
                 content: '';
-                font-family: 'FontAwesome';
+                font-family: 'Font Awesome 5 Free';
                 left: 20px;
                 position: absolute;
                 top: 2px;
@@ -5336,7 +5336,7 @@ tags-input .tags .tag-item .remove-button
 {
     content: '';
     font-size: 17px;
-    font-family: 'FontAwesome';
+    font-family: 'Font Awesome 5 Free';
     margin: 0;
 }
 

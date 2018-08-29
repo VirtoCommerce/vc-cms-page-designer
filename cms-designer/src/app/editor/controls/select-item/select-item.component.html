@@ -1,8 +1,0 @@
-<label *ngIf="model.label !== undefined" [for]="model.id" class="form-label">{{model.label}}</label>
-<div class="form-input __select">
-    <select [id]="model.id" [(ngModel)]="theme[model.id]">
-        <option *ngFor="let option of model.options" value="{{option.value}}">
-            {{option.label}}
-        </option>
-    </select>
-</div>
