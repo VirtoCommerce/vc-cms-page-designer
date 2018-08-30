@@ -388,6 +388,7 @@ body
                 {
                     display: none;
                     overflow: hidden;
+                    background-color: white;
                 }
 
                 .pane .pane-section.__selected

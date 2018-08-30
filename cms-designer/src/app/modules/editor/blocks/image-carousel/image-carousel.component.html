@@ -2,7 +2,8 @@
     <div class="pane-row">
         <div class="form-input">
             <label class="form-label __switch">
-                <input type="checkbox" [(ngModel)]="model.autoRotate">
+                    <!-- [(ngModel)]="model.autoRotate" -->
+                <input type="checkbox" /> 
                 <span class="switch"></span>
             </label>
         </div>
@@ -12,7 +13,8 @@
 <div class="pane-settings">
     <label class="form-label">Rotation frequency</label>
     <div class="form-input __select">
-        <select [(ngModel)]="model.rotationFrequency">
+            <!-- [(ngModel)]="model.rotationFrequency" -->
+        <select>
             <option value="5000">5 seconds</option>
             <option value="6000">6 seconds</option>
             <option value="7000">7 seconds</option>
@@ -24,7 +26,8 @@
 <div class="pane-settings">
     <label class="form-label">Content size</label>
     <div class="form-input __select">
-        <select [(ngModel)]="model.contentSize">
+            <!-- [(ngModel)]="model.contentSize" -->
+        <select>
             <option value="extraSmall">Extra small</option>
             <option value="small">Small</option>
             <option value="medium">Mediun</option>
@@ -36,7 +39,8 @@
 <div class="pane-settings">
     <label class="form-label">Block width</label>
     <div class="form-input __select">
-        <select [(ngModel)]="model.blockWidth">
+            <!-- [(ngModel)]="model.blockWidth" -->
+        <select>
             <option value="screen">Screen</option>
             <option value="container">Container</option>
             <option value="small">Small</option>

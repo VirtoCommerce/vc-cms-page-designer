@@ -1,16 +1,17 @@
-import { Component, Input, EventEmitter, Output, OnInit, forwardRef } from '@angular/core';
+import { Component, OnInit, Input, forwardRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
-    selector: 'app-text-editor',
-    templateUrl: './text-editor.component.html',
+    selector: 'app-string-item',
+    templateUrl: './string-item.component.html',
+    styleUrls: ['./string-item.component.scss'],
     providers: [{
         provide: NG_VALUE_ACCESSOR,
-        useExisting: forwardRef(() => TextEditorComponent),
+        useExisting: forwardRef(() => StringItemComponent),
         multi: true,
     }]
 })
-export class TextEditorComponent implements OnInit, ControlValueAccessor {
+export class StringItemComponent implements OnInit, ControlValueAccessor {
 
     @Input() label: string;
 
@@ -18,7 +19,7 @@ export class TextEditorComponent implements OnInit, ControlValueAccessor {
 
     constructor() { }
 
-    ngOnInit(): void { }
+    ngOnInit() { }
 
     onChange = (_: any) => { };
 
@@ -31,5 +32,4 @@ export class TextEditorComponent implements OnInit, ControlValueAccessor {
     }
 
     registerOnTouched(): void { }
-
 }

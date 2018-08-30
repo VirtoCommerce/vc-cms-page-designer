@@ -8,10 +8,9 @@ import {
     ColorItemComponent,
     ImageItemComponent,
     SelectItemComponent,
-    StringEditorComponent,
+    StringItemComponent,
     TabsComponent,
     TabComponent,
-    TextEditorComponent,
     TextItemComponent,
     SectionIconDirective
 
@@ -22,11 +21,10 @@ const COMPONENTS = [
     ColorItemComponent,
     ImageItemComponent,
     SelectItemComponent,
-    // StringEditorComponent,
     TabsComponent,
     TabComponent,
-    // TextEditorComponent,
     TextItemComponent,
+    StringItemComponent,
     SectionIconDirective
 ];
 

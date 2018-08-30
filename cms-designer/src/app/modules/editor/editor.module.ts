@@ -13,6 +13,13 @@ import {
     SelectTypeComponent
 } from './components';
 
+import {
+    BlockHostDirective,
+    SimpleTextComponent,
+    SettingsEditorComponent,
+    ImageCarouselComponent
+} from './blocks';
+
 import { reducer } from './state/editor.reducer';
 import { EditorEffects } from './state/editor.effects';
 
@@ -22,9 +29,20 @@ const COMPONENTS = [
     SelectTypeComponent
 ];
 
+const BLOCKS = [
+    SimpleTextComponent,
+    SettingsEditorComponent,
+    ImageCarouselComponent
+];
+
 @NgModule({
-    declarations: COMPONENTS,
+    declarations: [
+        ...COMPONENTS,
+        ...BLOCKS,
+        BlockHostDirective
+    ],
     exports: COMPONENTS,
+    entryComponents: BLOCKS,
     imports: [
         BrowserModule,
         HttpClientModule,
