@@ -6,6 +6,7 @@ export interface EditorState {
     showNewBlockSelector: boolean;
     currentSectionItem: SectionModel;
     error: string;
+    pageLoading: boolean;
     page: PageModel;
     blockTypes: any[];
 }
@@ -14,6 +15,7 @@ const initialState: EditorState = {
     showNewBlockSelector: false,
     currentSectionItem: null,
     error: '',
+    pageLoading: false,
     page: null,
     blockTypes: []
 };
@@ -30,19 +32,22 @@ export function reducer(state = initialState, action: EditorActions): EditorStat
                 ...state,
                 blockTypes: action.payload
             };
-        case EditorActionTypes.LoadPageSuccess:
-            const model = new PageModel();
-            model.sections = action.payload.filter(x => x.type !== 'settings');
-            const settings = action.payload.find(x => x.type === 'settings') || { type: 'settings' };
-            model.settings = settings;
+        case EditorActionTypes.LoadPage:
             return {
                 ...state,
-                page: model
+                pageLoading: true
+            };
+        case EditorActionTypes.LoadPageSuccess:
+            return {
+                ...state,
+                page: action.payload,
+                pageLoading: false
             };
         case EditorActionTypes.LoadPageFail:
             return {
                 ...state,
-                error: action.payload
+                error: action.payload,
+                pageLoading: false
             };
         case EditorActionTypes.SelectPageItem:
             return {

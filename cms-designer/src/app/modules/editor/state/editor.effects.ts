@@ -2,10 +2,11 @@ import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Action } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
-import { mergeMap, map, catchError } from 'rxjs/operators';
+import { mergeMap, map, catchError, debounceTime } from 'rxjs/operators';
 
 import * as editorActions from './editor.actions';
 import { PageService } from '../services/page.service';
+import { PageModel } from '../models/page.model';
 
 @Injectable()
 export class EditorEffects {
@@ -16,7 +17,13 @@ export class EditorEffects {
         ofType(editorActions.EditorActionTypes.LoadPage),
         mergeMap(action =>
             this.pageService.loadPage().pipe(
-                map(data => new editorActions.LoadPageSuccess(data)),
+                map(data => {
+                    const model = new PageModel();
+                    model.sections = data.filter(x => x.type !== 'settings');
+                    const settings = data.find(x => x.type === 'settings') || { type: 'settings' };
+                    model.settings = settings;
+                    return new editorActions.LoadPageSuccess(model);
+                }),
                 catchError(err => of(new editorActions.LoadPageFail(err)))
             )
         )

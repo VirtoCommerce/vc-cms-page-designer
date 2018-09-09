@@ -28,6 +28,11 @@ export const getPage = createSelector(
     state => state.page
 );
 
+export const getPageLoading = createSelector(
+    getEditorFeatureState,
+    state => state.pageLoading
+);
+
 // export const getCurrentProduct = createSelector(
 //     getEditorFeatureState,
 //     getCurrentProductId,

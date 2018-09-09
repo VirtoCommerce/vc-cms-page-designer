@@ -5,6 +5,8 @@ export interface ThemeState {
     showPresetsEditor: boolean;
     currentThemeItem: any;
     error: string;
+    settingsLoading: boolean;
+    presetsLoading: boolean;
     currentTheme: any;
     presets: PresetsModel;
     settings: any[];
@@ -14,6 +16,8 @@ const initialState: ThemeState = {
     showPresetsEditor: false,
     currentThemeItem: null,
     error: '',
+    settingsLoading: false,
+    presetsLoading: false,
     currentTheme: {},
     presets: null,
     settings: []

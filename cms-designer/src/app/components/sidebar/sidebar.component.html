@@ -1,12 +1,12 @@
 <div class="theme-sidebar">
-    <div class="loader" *ngIf="isPageLoading || isThemeLoading">
+    <div class="loader" *ngIf="isLoading$ | async">
         <div class="loading">
             <img src="assets/images/loader.gif" alt="">
         </div>
     </div>
     <div class="sidebar-main">
         <!-- <div class="pane pane-index" [class.__disabled]="hideRoot$|async"> -->
-        <div class="pane pane-index" [class.__disabled]="hideRoot$|async">
+        <div class="pane pane-index">
             <div class="pane-head">
                 <div class="pane-t">Boundless</div>
             </div>

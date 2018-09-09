@@ -19,7 +19,7 @@ export class LoadPage implements Action {
 
 export class LoadPageSuccess implements Action {
     readonly type = EditorActionTypes.LoadPageSuccess;
-    constructor(public payload: SectionModel[]) { }
+    constructor(public payload: PageModel) { }
 }
 
 export class LoadPageFail implements Action {

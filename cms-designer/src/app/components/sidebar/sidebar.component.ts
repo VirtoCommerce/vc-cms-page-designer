@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Observable, combineLatest } from 'rxjs';
 
 import * as fromEditor from '../../modules/editor/state';
 import * as editorActions from '../../modules/editor/state/editor.actions';
@@ -31,7 +31,8 @@ export class SidebarComponent implements OnInit {
     currentThemeItem$: Observable<any>;
     showPresets$: Observable<boolean>;
 
-    // hideRoot$: Observable<boolean>;
+    // combined states
+    isLoading$: Observable<boolean>;
 
     constructor(private store: Store<fromEditor.State>) { }
 
@@ -55,7 +56,17 @@ export class SidebarComponent implements OnInit {
         this.currentThemeItem$ = this.store.pipe(select(fromTheme.getCurrentThemeItem));
         this.showPresets$ = this.store.pipe(select(fromTheme.getShowPresetsEditor));
 
-        // this.hideRoot$ = this.store.pipe(select(fromEditor.getHideRoot));
+        // combined states
+
+        const pageLoading$ = this.store.pipe(select(fromEditor.getPageLoading));
+        const settingsLoading$ = this.store.pipe(select(fromTheme.getSettingsLoading));
+        const presetsLoading$ = this.store.pipe(select(fromTheme.getPresetsLoading));
+
+        this.isLoading$ = combineLatest(
+            pageLoading$,
+            settingsLoading$,
+            presetsLoading$,
+            (pageLoading, settingsLoading, presetsLoading) => pageLoading || settingsLoading || presetsLoading);
     }
 
     //#region theme editor actions
