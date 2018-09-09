@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 
 @Component({
     selector: 'app-image-carousel',
@@ -8,4 +9,5 @@ export class ImageCarouselComponent {
     static Key = 'image-carousel';
 
     @Input() model: any;
+    @Input() group: FormGroup;
 }

@@ -2,7 +2,7 @@
 
     <label class="form-label">{{ label }}</label>
     <div class="form-input">
-        <textarea></textarea>
+        <textarea [value]="value" (change)="onChange($event)"></textarea>
     </div>
 
 </div>

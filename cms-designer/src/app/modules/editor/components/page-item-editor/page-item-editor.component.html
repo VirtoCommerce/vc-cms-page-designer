@@ -6,11 +6,13 @@
         <div class="pane-t">Edit block</div>
     </div>
     <div class="pane-cnt">
-        <div class="pane-settings">
-            <app-string-item label="Block name"></app-string-item>
-        </div>
-        <div class="pane-settings">
-            <ng-template appBlockHost></ng-template>
-        </div>
+        <form [formGroup]="form">
+            <div class="pane-settings">
+                <app-string-item label="Block name" formControlName="name"></app-string-item>
+            </div>
+            <div class="pane-settings">
+                <ng-template appBlockHost></ng-template>
+            </div>
+        </form>
     </div>
 </div>

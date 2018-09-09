@@ -1,65 +1,67 @@
-<div class="pane-settings">
-    <div class="pane-row">
-        <div class="form-input">
-            <label class="form-label __switch">
+<div [formGroup]="group">
+    <div class="pane-settings">
+        <div class="pane-row">
+            <div class="form-input">
+                <label class="form-label __switch">
                     <!-- [(ngModel)]="model.autoRotate" -->
-                <input type="checkbox" /> 
-                <span class="switch"></span>
-            </label>
+                    <input type="checkbox" />
+                    <span class="switch"></span>
+                </label>
+            </div>
+            <div class="pane-name">Auto-rotate images</div>
         </div>
-        <div class="pane-name">Auto-rotate images</div>
     </div>
-</div>
-<div class="pane-settings">
-    <label class="form-label">Rotation frequency</label>
-    <div class="form-input __select">
+    <div class="pane-settings">
+        <label class="form-label">Rotation frequency</label>
+        <div class="form-input __select">
             <!-- [(ngModel)]="model.rotationFrequency" -->
-        <select>
-            <option value="5000">5 seconds</option>
-            <option value="6000">6 seconds</option>
-            <option value="7000">7 seconds</option>
-            <option value="8000">8 seconds</option>
-            <option value="9000">9 seconds</option>
-        </select>
-    </div>
-</div>
-<div class="pane-settings">
-    <label class="form-label">Content size</label>
-    <div class="form-input __select">
-            <!-- [(ngModel)]="model.contentSize" -->
-        <select>
-            <option value="extraSmall">Extra small</option>
-            <option value="small">Small</option>
-            <option value="medium">Mediun</option>
-            <option value="large">Large</option>
-            <option value="extraLarge">Extra large</option>
-        </select>
-    </div>
-</div>
-<div class="pane-settings">
-    <label class="form-label">Block width</label>
-    <div class="form-input __select">
-            <!-- [(ngModel)]="model.blockWidth" -->
-        <select>
-            <option value="screen">Screen</option>
-            <option value="container">Container</option>
-            <option value="small">Small</option>
-        </select>
-    </div>
-</div>
-<div class="pane-settings">
-    <label class="form-label">Pictures</label>
-    <div class="form-file">
-        <div class='form-file'>
-            <input type='file' #fileInput>
-            <button class='btn'>Choose file</button>
+            <select>
+                <option value="5000">5 seconds</option>
+                <option value="6000">6 seconds</option>
+                <option value="7000">7 seconds</option>
+                <option value="8000">8 seconds</option>
+                <option value="9000">9 seconds</option>
+            </select>
         </div>
     </div>
+    <div class="pane-settings">
+        <label class="form-label">Content size</label>
+        <div class="form-input __select">
+            <!-- [(ngModel)]="model.contentSize" -->
+            <select>
+                <option value="extraSmall">Extra small</option>
+                <option value="small">Small</option>
+                <option value="medium">Mediun</option>
+                <option value="large">Large</option>
+                <option value="extraLarge">Extra large</option>
+            </select>
+        </div>
+    </div>
+    <div class="pane-settings">
+        <label class="form-label">Block width</label>
+        <div class="form-input __select">
+            <!-- [(ngModel)]="model.blockWidth" -->
+            <select>
+                <option value="screen">Screen</option>
+                <option value="container">Container</option>
+                <option value="small">Small</option>
+            </select>
+        </div>
+    </div>
+    <div class="pane-settings">
+        <label class="form-label">Pictures</label>
+        <div class="form-file">
+            <div class='form-file'>
+                <input type='file' #fileInput>
+                <button class='btn'>Choose file</button>
+            </div>
+        </div>
 
-    <div>
-        <div class="form-img"></div>
-        <!-- "title": "Image content",
+        <div>
+            <div class="form-img"></div>
+            <!-- "title": "Image content",
         "content": "Tell your story through images" -->
 
+        </div>
     </div>
 </div>

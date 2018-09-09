@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 
 @Component({
     selector: 'app-settings-editor',
@@ -10,9 +11,12 @@ export class SettingsEditorComponent implements OnInit {
     static Key = 'settings';
 
     @Input() model: any;
+    @Input() group: FormGroup;
 
     constructor() { }
 
-    ngOnInit() { }
+    ngOnInit() {
+        console.log(this.group);
+    }
 
 }
