@@ -23,7 +23,7 @@ export class PageItemEditorComponent implements OnInit {
                 private fb: FormBuilder) { }
 
     ngOnInit() {
-        this.form = this.fb.group({});
+        this.form = this.fb.group({name: this.fb.control(this.model.name)});
         const type = this.blocksFactory.resolve(this.model.type);
         if (type != null) {
             const factory = this.componentFactoryResolver.resolveComponentFactory(type);
@@ -31,7 +31,7 @@ export class PageItemEditorComponent implements OnInit {
 
             (<any>component.instance).model = this.model;
             (<any>component.instance).group = this.form;
-            const uneditableProperties = ['type', 'id'];
+            const uneditableProperties = ['type', 'id', 'name'];
             Object.keys(this.model)
                 .filter(x => uneditableProperties.indexOf(x) === -1)
                 .forEach(x => this.form.addControl(x, this.fb.control(this.model[x])));
