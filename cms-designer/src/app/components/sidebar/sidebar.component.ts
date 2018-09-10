@@ -95,7 +95,8 @@ export class SidebarComponent implements OnInit {
         this.store.dispatch(new editorActions.ToggleNewBlockPane(visible));
     }
 
-    cancelEditBlock() {
+    completeEditBlock(event: SectionModel) {
+        // here need to save section
         this.store.dispatch(new editorActions.SelectPageItem(null));
     }
 

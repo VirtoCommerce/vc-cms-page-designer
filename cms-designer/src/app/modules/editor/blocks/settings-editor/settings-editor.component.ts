@@ -15,8 +15,6 @@ export class SettingsEditorComponent implements OnInit {
 
     constructor() { }
 
-    ngOnInit() {
-        console.log(this.group);
-    }
+    ngOnInit() { }
 
 }
