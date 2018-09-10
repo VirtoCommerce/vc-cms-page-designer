@@ -9,9 +9,10 @@
         <form [formGroup]="form">
             <div class="pane-settings">
                 <app-string-item label="Block name" formControlName="name"></app-string-item>
+                <div *ngIf="(name.touched || name.dirty) && name.invalid" class="invalid">The Name is required</div>
             </div>
             <div class="pane-settings">
-                <ng-template appBlockHost></ng-template>
+                <ng-container appBlockHost></ng-container>
             </div>
         </form>
     </div>

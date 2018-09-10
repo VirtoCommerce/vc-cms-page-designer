@@ -2,7 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ViewContaine
 import { SectionModel } from '../../models/section.model';
 import { BlocksComponentFactory } from '../../blocks/blocks-component.factory';
 import { BlockHostDirective } from '../../blocks/block-host.directive';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
     selector: 'app-page-item-editor',
@@ -12,18 +12,19 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 export class PageItemEditorComponent implements OnInit {
 
     @Input() model: SectionModel;
-    @Output() backEvent = new EventEmitter<any>();
+    @Output() backEvent = new EventEmitter<SectionModel>();
 
     @ViewChild(BlockHostDirective) host: BlockHostDirective;
 
     form: FormGroup;
+    get name() { return this.form.get('name'); }
 
     constructor(private componentFactoryResolver: ComponentFactoryResolver,
                 private blocksFactory: BlocksComponentFactory,
                 private fb: FormBuilder) { }
 
     ngOnInit() {
-        this.form = this.fb.group({name: this.fb.control(this.model.name)});
+        this.form = this.fb.group({name: [this.model.name, Validators.required]});
         const type = this.blocksFactory.resolve(this.model.type);
         if (type != null) {
             const factory = this.componentFactoryResolver.resolveComponentFactory(type);
@@ -39,6 +40,6 @@ export class PageItemEditorComponent implements OnInit {
     }
 
     back() {
-        this.backEvent.emit();
+        this.backEvent.emit(this.form.value);
     }
 }

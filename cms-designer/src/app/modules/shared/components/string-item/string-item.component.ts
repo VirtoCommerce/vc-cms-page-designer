@@ -21,15 +21,23 @@ export class StringItemComponent implements OnInit, ControlValueAccessor {
 
     ngOnInit() { }
 
-    onChange = (_: any) => { };
+    onTouched = (_: any) => { };
+
+    onChange(event: any) {
+        this.propagateChange(event.target.value);
+    }
 
     writeValue(obj: any): void {
         this.value = obj as string;
     }
 
     registerOnChange(fn: any): void {
-        this.onChange = fn;
+        this.propagateChange = fn;
     }
 
-    registerOnTouched(): void { }
+    registerOnTouched(fn: any): void {
+        this.onTouched = fn;
+    }
+
+    private propagateChange = (_: any) => { };
 }

@@ -1,4 +1,4 @@
 <label class="form-label">{{label}}</label>
 <div class="form-input">
-    <input type="text" [value]="value" (change)="onChange($event)">
+    <input type="text" [value]="value" (keyup)="onChange($event)" (change)="onChange($event)" (blur)="onTouched($event)">
 </div>
