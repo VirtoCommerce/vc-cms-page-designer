@@ -1,6 +1,6 @@
 <div class="theme-cnt">
     <div class="theme-preview" data-size="desktop">
-        <iframe [src]="storeUrl" scrolling="yes"></iframe>
+        <iframe #preview [src]="storeUrl" scrolling="yes" (load)="previewLoaded()"></iframe>
     </div>
     <a class="theme-toggle js-toggle"></a>
     <ul class="list __nav">

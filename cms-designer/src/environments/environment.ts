@@ -4,7 +4,7 @@
 
 export const environment = {
     production: false,
-    storeUrl: 'http://localhost:2082'
+    storeUrl: 'http://localhost:2082/designer-preview'
 };
 
 /*

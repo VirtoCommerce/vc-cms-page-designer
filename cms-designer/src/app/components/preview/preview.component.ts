@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ElementRef, ViewChild } from '@angular/core';
 import { SafeUrl } from '@angular/platform-browser';
 
 @Component({
@@ -9,9 +9,16 @@ import { SafeUrl } from '@angular/platform-browser';
 export class PreviewComponent implements OnInit {
 
     @Input() storeUrl: SafeUrl;
+    // @ViewChild('preview') previewRef: ElementRef;
+    // private get preview() { return (<any>this.previewRef.nativeElement).contentWindow; }
 
     constructor() { }
 
-    ngOnInit() { }
+    ngOnInit() {
+        // this.preview
+    }
 
+    previewLoaded() {
+        console.log('preview loaded');
+    }
 }

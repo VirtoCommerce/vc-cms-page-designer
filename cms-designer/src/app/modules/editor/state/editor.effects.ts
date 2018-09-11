@@ -2,15 +2,16 @@ import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Action } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
-import { mergeMap, map, catchError, debounceTime } from 'rxjs/operators';
+import { mergeMap, map, catchError, tap } from 'rxjs/operators';
 
 import * as editorActions from './editor.actions';
 import { PageService } from '../services/page.service';
 import { PageModel } from '../models/page.model';
+import { PreviewService } from '../services/preview.service';
 
 @Injectable()
 export class EditorEffects {
-    constructor(private pageService: PageService, private actions$: Actions) { }
+    constructor(private pageService: PageService, private preview: PreviewService, private actions$: Actions) { }
 
     @Effect()
     loadPage$: Observable<Action> = this.actions$.pipe(
@@ -35,5 +36,13 @@ export class EditorEffects {
         mergeMap(action =>
             of(new editorActions.BlockTypesLoaded(this.pageService.availableTypes))
         )
+    );
+
+    @Effect({ dispatch: false })
+    sendPageToStore$ = this.actions$.pipe(
+        ofType<editorActions.LoadPageSuccess>(editorActions.EditorActionTypes.LoadPageSuccess),
+        tap(action => {
+            this.preview.page(action.payload);
+        })
     );
 }
