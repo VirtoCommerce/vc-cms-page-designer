@@ -6,8 +6,11 @@ import { environment } from '../../../../environments/environment';
     providedIn: 'root'
 })
 export class PreviewService {
-    page(page: PageModel) {
-        console.log(page);
+    page(page: PageModel, target: Window) {
+        if (page && target) {
+            const message = { type: 'page', page };
+            target.postMessage(message, environment.storeUrl);
+        }
 
 
         // const message = { type: 'page', page };

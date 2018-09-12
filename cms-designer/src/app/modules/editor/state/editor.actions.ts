@@ -10,7 +10,14 @@ export enum EditorActionTypes {
     ToggleNewBlockPane = 'Toggle New Block Pane',
     SelectPageItem = 'Select Page Item',
     LoadBlockTypes = 'Load Block Types',
-    BlockTypesLoaded = 'Block Types Loaded'
+    BlockTypesLoaded = 'Block Types Loaded',
+    PreviewReady = 'Preview is ready'
+}
+
+export class PreviewReady implements Action {
+    readonly type = EditorActionTypes.PreviewReady;
+
+    constructor(public payload: Window) { }
 }
 
 export class LoadPage implements Action {
@@ -54,4 +61,5 @@ export type EditorActions = LoadPage
     | LoadPageFail
     | ToggleNewBlockPane
     | SelectPageItem
-    | BlockTypesLoaded;
+    | BlockTypesLoaded
+    | PreviewReady;

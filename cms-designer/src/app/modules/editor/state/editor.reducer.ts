@@ -9,6 +9,7 @@ export interface EditorState {
     pageLoading: boolean;
     page: PageModel;
     blockTypes: any[];
+    previewWindow: Window;
 }
 
 const initialState: EditorState = {
@@ -17,7 +18,8 @@ const initialState: EditorState = {
     error: '',
     pageLoading: false,
     page: null,
-    blockTypes: []
+    blockTypes: [],
+    previewWindow: null
 };
 
 export function reducer(state = initialState, action: EditorActions): EditorState {
@@ -31,6 +33,11 @@ export function reducer(state = initialState, action: EditorActions): EditorStat
             return {
                 ...state,
                 blockTypes: action.payload
+            };
+        case EditorActionTypes.PreviewReady:
+            return {
+                ...state,
+                previewWindow: action.payload
             };
         case EditorActionTypes.LoadPage:
             return {
