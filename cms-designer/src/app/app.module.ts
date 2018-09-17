@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { StoreModule } from '@ngrx/store';
+import { StoreModule, Action } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
 
@@ -14,6 +14,7 @@ import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 
 import { environment } from '../environments/environment';
+import { EditorActionTypes } from './modules/editor/state/editor.actions';
 
 @NgModule({
     declarations: [
@@ -29,6 +30,14 @@ import { environment } from '../environments/environment';
             name: 'CMS',
             maxAge: 25,
             logOnly: environment.production,
+            // actionSanitizer: (action: { type: string; payload?: any }, id: number): Action => {
+            //             if (action.type === EditorActionTypes.PreviewReady) {
+            //                 return { type: EditorActionTypes.PreviewReady };
+            //             }
+            //             return action;
+            //         },
+            // stateSanitizer: (state: any, id: number): any => {
+            // }
         }),
         EffectsModule.forRoot([]),
 

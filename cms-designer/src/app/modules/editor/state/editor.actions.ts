@@ -16,8 +16,6 @@ export enum EditorActionTypes {
 
 export class PreviewReady implements Action {
     readonly type = EditorActionTypes.PreviewReady;
-
-    constructor(public payload: Window) { }
 }
 
 export class LoadPage implements Action {

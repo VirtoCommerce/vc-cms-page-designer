@@ -14,7 +14,7 @@ export class PreviewComponent implements OnInit {
 
     @Input() storeUrl: SafeUrl;
     @ViewChild('preview') previewRef: ElementRef;
-    private get preview() { return (<any>this.previewRef.nativeElement).contentWindow; }
+    // private get preview() { return (<any>this.previewRef.nativeElement).contentWindow; }
 
     constructor(private store: Store<fromEditor.State>) { }
 
@@ -23,6 +23,6 @@ export class PreviewComponent implements OnInit {
     }
 
     previewLoaded() {
-        this.store.dispatch(new editorActions.PreviewReady(this.preview));
+        this.store.dispatch(new editorActions.PreviewReady());
     }
 }

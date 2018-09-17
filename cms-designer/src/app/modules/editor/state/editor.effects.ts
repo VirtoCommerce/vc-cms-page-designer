@@ -49,7 +49,9 @@ export class EditorEffects {
         ofType<editorActions.LoadPageSuccess>(editorActions.EditorActionTypes.LoadPageSuccess),
         withLatestFrom(this.store$),
         tap(([action, state]) => {
-            this.preview.page(action.payload, state.editor.previewWindow);
+            if (state.editor.previewIsReady) {
+                this.preview.page(action.payload);
+            }
         })
     );
 
@@ -59,7 +61,7 @@ export class EditorEffects {
         ofType<editorActions.PreviewReady>(editorActions.EditorActionTypes.PreviewReady),
         withLatestFrom(this.store$),
         tap(([action, state]) => {
-            this.preview.page(state.editor.page, action.payload);
+            this.preview.page(state.editor.page);
         })
     );
 }

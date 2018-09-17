@@ -6,10 +6,15 @@ import { environment } from '../../../../environments/environment';
     providedIn: 'root'
 })
 export class PreviewService {
-    page(page: PageModel, target: Window) {
-        if (page && target) {
-            const message = { type: 'page', page };
-            target.postMessage(message, environment.storeUrl);
+
+    page(page: PageModel) {
+        const element = document.getElementById('preview');
+        if (element != null) {
+            const target = (<HTMLIFrameElement>element).contentWindow;
+            if (page && target) {
+                const message = { type: 'page', page };
+                target.postMessage(message, environment.storeUrl);
+            }
         }
 
 
