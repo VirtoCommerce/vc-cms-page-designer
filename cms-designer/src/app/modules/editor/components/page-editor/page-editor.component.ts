@@ -23,6 +23,7 @@ export class PageEditorComponent implements OnInit {
     }
 
     addNewBlock() {
+        // todo: add unique id to new block
         this.addNewBlockEvent.emit();
     }
 

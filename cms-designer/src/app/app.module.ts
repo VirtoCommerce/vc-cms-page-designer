@@ -4,6 +4,8 @@ import { StoreModule, Action } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
 
+import { DndModule } from 'ngx-drag-drop';
+
 import { SharedModule } from './modules/shared/shared.module';
 import { EditorModule } from './modules/editor/editor.module';
 import { ThemeModule } from './modules/theme/theme.module';
@@ -43,7 +45,9 @@ import { EditorActionTypes } from './modules/editor/state/editor.actions';
 
         EditorModule,
         SharedModule,
-        ThemeModule
+        ThemeModule,
+
+        DndModule
     ],
     providers: [],
     bootstrap: [AppComponent]
