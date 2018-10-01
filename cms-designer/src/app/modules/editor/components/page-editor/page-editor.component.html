@@ -1,25 +1,17 @@
 <div class="pane-section __selected" *ngIf="model">
-    <ul class="list" dndDropzone
-        dndEffectAllowed="move">
+    <ul class="list">
         <li class="list-item">
             <a class="list-link" (click)="selectSettings()">
                 <i class="list-ico fa fa-wrench"></i><span class="list-t">Settings</span>
             </a>
         </li>
 
-        <!-- <li dndPlaceHolderRef>
-            <span class="list-link">Drop me here!</span>
-        </li> -->
-
-
-        <!-- [dndDraggable]="item"
-        dndEffectAllowed="move" -->
-
         <li class="list-item" *ngFor="let item of model.sections">
             <a class="list-link" (click)="selectItem(item)">
                 <i class="list-ico fa" appSectionIcon="{{ item.type }}"></i><span class="list-t">{{ item.name }}</span>
             </a>
         </li>
+
         <li class="list-item create">
             <a class="list-link" (click)="addNewBlock()">
                 <i class="list-ico fa fa-plus-square"></i><span class="list-t">Add block</span>
