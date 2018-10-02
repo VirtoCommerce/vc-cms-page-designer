@@ -17,7 +17,12 @@ import {
     BlockHostDirective,
     SimpleTextComponent,
     SettingsEditorComponent,
-    ImageCarouselComponent
+    ImageCarouselComponent,
+
+    ImageLayoutComponent,
+    ImageWithTextComponent,
+    ImageWithTextOverlayComponent,
+    TextColumnsWithImagesComponent
 } from './blocks';
 
 import { reducer } from './state/editor.reducer';
@@ -32,7 +37,12 @@ const COMPONENTS = [
 const BLOCKS = [
     SimpleTextComponent,
     SettingsEditorComponent,
-    ImageCarouselComponent
+    ImageCarouselComponent,
+
+    ImageLayoutComponent,
+    ImageWithTextComponent,
+    ImageWithTextOverlayComponent,
+    TextColumnsWithImagesComponent
 ];
 
 @NgModule({

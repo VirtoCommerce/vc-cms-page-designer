@@ -12,14 +12,13 @@ export class PageService {
 
     availableTypes = [
         { type: 'text',                     name: 'Simple text' },
-        { type: 'image',                    name: 'Simple image',               inactive: true },
+        { type: 'image',                    name: 'Simple image',               inactive: true }, // still empty control
         { type: 'image-with-text',          name: 'Image with text',            inactive: true },
         { type: 'image-with-text-overlay',  name: 'Image with text overlay',    inactive: true },
-        { type: 'image-carousel',           name: 'Image carousel',             inactive: true },
+        { type: 'image-carousel',           name: 'Image carousel',             inactive: false }, // added to system, but still empty
         { type: 'textcolumns-with-images',  name: 'Text columns with images',   inactive: true },
         { type: 'images-layout',            name: 'Images layout',              inactive: true }
     ];
-
 
     constructor(private http: HttpClient) { }
 
