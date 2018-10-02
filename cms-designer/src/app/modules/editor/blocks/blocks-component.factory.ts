@@ -2,6 +2,7 @@ import { Type, Injectable } from '@angular/core';
 import { SettingsEditorComponent } from './settings-editor/settings-editor.component';
 import { SimpleTextComponent } from './simple-text/simple-text.component';
 import { ImageCarouselComponent } from './image-carousel/image-carousel.component';
+import { SectionModel } from '../models/section.model';
 
 @Injectable({
     providedIn: 'root'
@@ -18,5 +19,10 @@ export class BlocksComponentFactory {
     resolve(type: string): Type<any> {
         const result = this.components[type];
         return result;
+    }
+
+    create(type: string): SectionModel {
+        const itemEditor = this.components[type];
+        return (<any>itemEditor).createModel();
     }
 }

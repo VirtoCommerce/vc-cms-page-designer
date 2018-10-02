@@ -11,11 +11,13 @@ import { PageService } from '../services/page.service';
 import { PageModel } from '../models/page.model';
 import { PreviewService } from '../services/preview.service';
 import { EditorState } from './editor.reducer';
+import { BlocksComponentFactory } from '../blocks/blocks-component.factory';
 
 @Injectable()
 export class EditorEffects {
     constructor(private pageService: PageService,
                 private preview: PreviewService,
+                private blockFactory: BlocksComponentFactory,
                 private actions$: Actions, private store$: Store<fromEditor.State>) { }
 
     @Effect()
@@ -44,6 +46,16 @@ export class EditorEffects {
         )
     );
 
+    @Effect()
+    createPageItemModelByType$ = this.actions$.pipe(
+        ofType(editorActions.EditorActionTypes.CreatePageItem),
+        map((action: editorActions.CreatePageItem) => action.payload),
+        map(type => this.blockFactory.create(type)),
+        mergeMap(item =>
+            of(new editorActions.AddPageItem(item))
+        )
+    );
+
     @Effect({ dispatch: false })
     sendPageToStoreWhenPageLoaded$ = this.actions$.pipe(
         ofType<editorActions.LoadPageSuccess>(editorActions.EditorActionTypes.LoadPageSuccess),
@@ -64,4 +76,5 @@ export class EditorEffects {
             this.preview.page(state.editor.page);
         })
     );
+
 }

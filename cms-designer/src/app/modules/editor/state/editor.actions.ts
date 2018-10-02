@@ -9,6 +9,9 @@ export enum EditorActionTypes {
     LoadPageFail = 'Load Page Fail',
     ToggleNewBlockPane = 'Toggle New Block Pane',
     SelectPageItem = 'Select Page Item',
+    CreatePageItem = 'Create Page Item',
+    AddPageItem = 'Add Page Item',
+    UpdatePageItem = 'Update Page Item',
     LoadBlockTypes = 'Load Block Types',
     BlockTypesLoaded = 'Block Types Loaded',
     PreviewReady = 'Preview is ready'
@@ -38,6 +41,24 @@ export class SelectPageItem implements Action {
     constructor(public payload: SectionModel) { }
 }
 
+export class CreatePageItem implements Action {
+    readonly type = EditorActionTypes.CreatePageItem;
+
+    constructor(public payload: string) { }
+}
+
+export class AddPageItem implements Action {
+    readonly type = EditorActionTypes.AddPageItem;
+
+    constructor(public payload: SectionModel) { }
+}
+
+export class UpdatePageItem implements Action {
+    readonly type = EditorActionTypes.UpdatePageItem;
+
+    constructor(public payload: SectionModel) { }
+}
+
 export class ToggleNewBlockPane implements Action {
     readonly type = EditorActionTypes.ToggleNewBlockPane;
 
@@ -59,5 +80,8 @@ export type EditorActions = LoadPage
     | LoadPageFail
     | ToggleNewBlockPane
     | SelectPageItem
+    | CreatePageItem
+    | AddPageItem
+    | UpdatePageItem
     | BlockTypesLoaded
     | PreviewReady;

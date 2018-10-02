@@ -40,6 +40,9 @@ export class PageItemEditorComponent implements OnInit {
     }
 
     back() {
-        this.backEvent.emit(this.form.value);
+        const result = {
+            ...this.form.value
+        };
+        this.backEvent.emit(result);
     }
 }
