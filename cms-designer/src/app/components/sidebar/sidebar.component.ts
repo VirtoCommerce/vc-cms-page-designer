@@ -48,7 +48,7 @@ export class SidebarComponent implements OnInit {
 
         // theme editor
         this.store.dispatch(new themeActions.LoadPresets());
-        this.store.dispatch(new themeActions.LoadSettings());
+        this.store.dispatch(new themeActions.LoadSchema());
 
         this.presets$ = this.store.pipe(select(fromTheme.getPresets));
         this.settings$ = this.store.pipe(select(fromTheme.getSettings));
@@ -59,14 +59,14 @@ export class SidebarComponent implements OnInit {
         // combined states
 
         const pageLoading$ = this.store.pipe(select(fromEditor.getPageLoading));
-        const settingsLoading$ = this.store.pipe(select(fromTheme.getSettingsLoading));
+        const schemaLoading$ = this.store.pipe(select(fromTheme.getSchemaLoading));
         const presetsLoading$ = this.store.pipe(select(fromTheme.getPresetsLoading));
 
         this.isLoading$ = combineLatest(
             pageLoading$,
-            settingsLoading$,
+            schemaLoading$,
             presetsLoading$,
-            (pageLoading, settingsLoading, presetsLoading) => pageLoading || settingsLoading || presetsLoading);
+            (pageLoading, schemaLoading, presetsLoading) => pageLoading || schemaLoading || presetsLoading);
     }
 
     //#region theme editor actions
@@ -88,6 +88,7 @@ export class SidebarComponent implements OnInit {
     //#region page editor actions
 
     selectPageItem(item: SectionModel) {
+        console.log(item);
         this.store.dispatch(new editorActions.SelectPageItem(item));
     }
 
@@ -96,8 +97,9 @@ export class SidebarComponent implements OnInit {
     }
 
     completeEditBlock(event: SectionModel) {
+        console.log(event);
         // here need to save section
-        this.store.dispatch(new editorActions.SelectPageItem(null));
+        this.store.dispatch(new editorActions.UpdatePageItem(event));
     }
 
     previewBlockType(type: string) {
@@ -105,7 +107,7 @@ export class SidebarComponent implements OnInit {
     }
 
     selectBlockType(type: string) {
-        this.store.dispatch(new editorActions.SelectPageItem({ type: type, name: type }));
+        this.store.dispatch(new editorActions.CreatePageItem(type));
     }
 
     //#endregion

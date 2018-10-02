@@ -5,7 +5,7 @@ export interface ThemeState {
     showPresetsEditor: boolean;
     currentThemeItem: any;
     error: string;
-    settingsLoading: boolean;
+    schemaLoading: boolean;
     presetsLoading: boolean;
     currentTheme: any;
     presets: PresetsModel;
@@ -16,7 +16,7 @@ const initialState: ThemeState = {
     showPresetsEditor: false,
     currentThemeItem: null,
     error: '',
-    settingsLoading: false,
+    schemaLoading: false,
     presetsLoading: false,
     currentTheme: {},
     presets: null,
@@ -25,12 +25,12 @@ const initialState: ThemeState = {
 
 export function reducer(state = initialState, action: ThemeActions): ThemeState {
     switch (action.type) {
-        case ThemeActionTypes.LoadSettingsSuccess:
+        case ThemeActionTypes.LoadSchemaSuccess:
             return {
                 ...state,
                 settings: action.payload
             };
-        case ThemeActionTypes.LoadSettingsFail:
+        case ThemeActionTypes.LoadSchemaFail:
             return {
                 ...state,
                 error: action.payload

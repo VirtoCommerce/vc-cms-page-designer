@@ -18,9 +18,9 @@ export const getShowPresetsEditor = createSelector(
     state => state.showPresetsEditor
 );
 
-export const getSettingsLoading = createSelector(
+export const getSchemaLoading = createSelector(
     getThemeFeatureState,
-    state => state.settingsLoading
+    state => state.schemaLoading
 );
 
 export const getPresetsLoading = createSelector(

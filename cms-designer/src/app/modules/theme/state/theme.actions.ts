@@ -7,9 +7,9 @@ export enum ThemeActionTypes {
     LoadPresets = 'Load Presets',
     LoadPresetsSuccess = 'Load Presets Success',
     LoadPresetsFail = 'Load Presets Fail',
-    LoadSettings = 'Load Settings',
-    LoadSettingsSuccess = 'Load Settings Success',
-    LoadSettingsFail = 'Load Settings Fail',
+    LoadSchema = 'Load Schema',
+    LoadSchemaSuccess = 'Load Schema Success',
+    LoadSchemaFail = 'Load Schema Fail',
     SelectThemeItem = 'Select Theme Item',
     TogglePresetsPane = 'Toggle Presets Pane'
 }
@@ -30,18 +30,18 @@ export class LoadPresetsFail implements Action {
     constructor(public payload: string) { }
 }
 
-export class LoadSettings implements Action {
-    readonly type = ThemeActionTypes.LoadSettings;
+export class LoadSchema implements Action {
+    readonly type = ThemeActionTypes.LoadSchema;
 }
 
-export class LoadSettingsSuccess implements Action {
-    readonly type = ThemeActionTypes.LoadSettingsSuccess;
+export class LoadSchemaSuccess implements Action {
+    readonly type = ThemeActionTypes.LoadSchemaSuccess;
 
     constructor(public payload: ThemeItemModel[]) { }
 }
 
-export class LoadSettingsFail implements Action {
-    readonly type = ThemeActionTypes.LoadSettingsFail;
+export class LoadSchemaFail implements Action {
+    readonly type = ThemeActionTypes.LoadSchemaFail;
 
     constructor(public payload: string) { }
 }
@@ -61,8 +61,8 @@ export class TogglePresetsPane implements Action {
 export type ThemeActions = LoadPresets
     | LoadPresetsSuccess
     | LoadPresetsFail
-    | LoadSettings
-    | LoadSettingsSuccess
-    | LoadSettingsFail
+    | LoadSchema
+    | LoadSchemaSuccess
+    | LoadSchemaFail
     | SelectThemeItem
     | TogglePresetsPane;
