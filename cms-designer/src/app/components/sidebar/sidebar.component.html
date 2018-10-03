@@ -13,38 +13,24 @@
             <div class="pane-cnt">
                 <app-tabs>
                     <app-tab tabTitle="Sections" active="true">
-                        <app-page-editor [model]="page$ | async" 
-                                         (selectEvent)="selectPageItem($event)"
-                                         (addNewBlockEvent)="setNewBlockMode(true)"></app-page-editor>
+                        <app-page-editor [model]="page$ | async" (selectEvent)="selectPageItem($event)"
+                            (addNewBlockEvent)="setNewBlockMode(true)"></app-page-editor>
                     </app-tab>
-                    <app-tab *ngIf="settings$" tabTitle="Theme">
-                        <app-theme-editor [settings]="settings$ | async" (selectPresetEvent)="turnOnPresets()" (selectItemEvent)="selectThemeItem($event)"></app-theme-editor>
+                    <app-tab *ngIf="schema$ | async" tabTitle="Theme">
+                        <app-theme-editor [schema]="schema$ | async" (selectPresetEvent)="turnOnPresets()"
+                            (selectItemEvent)="selectThemeItem($event)"></app-theme-editor>
                     </app-tab>
                 </app-tabs>
             </div>
         </div>
-        <app-page-item-editor class="pane __selected"
-                              *ngIf="currentSectionItem$|async as currentSectionItem"
-                              [model]="currentSectionItem"
-                              (valueChangedEvent)="updateBlockPreview($event)"
-                              (removeBlockEvent)="removeBlock($event)"
-                              (backEvent)="completeEditBlock($event)"></app-page-item-editor>
-        <app-select-type class="pane __selected"
-                         *ngIf="addNewSectionMode$ | async"
-                         [types]="blockTypes$ | async"
-                         (backEvent)="setNewBlockMode(false)"
-                         (previewBlockEvent)="previewBlockType($event)"
-                         (selectBlockEvent)="selectBlockType($event)"></app-select-type>
-        <app-presets-editor class="pane __selected" 
-                            *ngIf="showPresets$|async"
-                            [data]="presets$|async" 
-                            [theme]="theme$|async" 
-                            (backEvent)="turnOffPresets()"></app-presets-editor>
-        <app-theme-item-editor class="pane __selected" 
-                               *ngIf="currentThemeItem$|async as currentThemeItem"
-                               [item]="currentThemeItem"
-                               [theme]="theme$|async"
-                               (backEvent)="selectThemeItem(null)"></app-theme-item-editor>
+        <app-page-item-editor class="pane __selected" *ngIf="currentSectionItem$|async as currentSectionItem" [model]="currentSectionItem"
+            (valueChangedEvent)="updateBlockPreview($event)" (removeBlockEvent)="removeBlock($event)" (backEvent)="completeEditBlock($event)"></app-page-item-editor>
+        <app-select-type class="pane __selected" *ngIf="addNewSectionMode$ | async" [types]="blockTypes$ | async"
+            (backEvent)="setNewBlockMode(false)" (previewBlockEvent)="previewBlockType($event)" (selectBlockEvent)="selectBlockType($event)"></app-select-type>
+        <app-presets-editor class="pane __selected" *ngIf="showPresets$|async" [data]="presets$|async" [theme]="theme$|async"
+            (backEvent)="turnOffPresets()"></app-presets-editor>
+        <app-theme-item-editor class="pane __selected" *ngIf="currentThemeItem$|async as currentThemeItem" [item]="currentThemeItem"
+            [theme]="theme$|async" (backEvent)="selectThemeItem(null)"></app-theme-item-editor>
     </div>
     <div class="sidebar-foot">
         <button class="btn">Clear changes</button>

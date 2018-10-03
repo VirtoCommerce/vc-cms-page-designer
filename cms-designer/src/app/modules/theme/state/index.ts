@@ -33,9 +33,9 @@ export const getPresets = createSelector(
     state => state.presets
 );
 
-export const getSettings = createSelector(
+export const getSchema = createSelector(
     getThemeFeatureState,
-    state => state.settings
+    state => state.schema
 );
 
 export const getError = createSelector(

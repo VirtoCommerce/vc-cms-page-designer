@@ -16,7 +16,7 @@ export class ThemeService {
         return this.http.get<PresetsModel>('data/settings_data.json');
     }
 
-    loadSettings(): Observable<ThemeItemModel[]> {
+    loadSchema(): Observable<ThemeItemModel[]> {
         return this.http.get<ThemeItemModel[]>('data/settings_schema.json');
     }
 

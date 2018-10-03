@@ -7,7 +7,7 @@ import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
 })
 export class ThemeEditorComponent implements OnInit {
 
-    @Input() settings;
+    @Input() schema;
 
     @Output() selectItemEvent = new EventEmitter<any>();
     @Output() selectPresetEvent = new EventEmitter<any>();

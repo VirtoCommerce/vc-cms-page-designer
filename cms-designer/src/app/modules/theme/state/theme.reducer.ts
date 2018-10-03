@@ -9,7 +9,7 @@ export interface ThemeState {
     presetsLoading: boolean;
     currentTheme: any;
     presets: PresetsModel;
-    settings: any[];
+    schema: any[];
 }
 
 const initialState: ThemeState = {
@@ -20,7 +20,7 @@ const initialState: ThemeState = {
     presetsLoading: false,
     currentTheme: {},
     presets: null,
-    settings: []
+    schema: []
 };
 
 export function reducer(state = initialState, action: ThemeActions): ThemeState {
@@ -28,7 +28,7 @@ export function reducer(state = initialState, action: ThemeActions): ThemeState 
         case ThemeActionTypes.LoadSchemaSuccess:
             return {
                 ...state,
-                settings: action.payload
+                schema: action.payload
             };
         case ThemeActionTypes.LoadSchemaFail:
             return {

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Action, Store } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
-import { mergeMap, map, catchError, withLatestFrom } from 'rxjs/operators';
+import { mergeMap, map, catchError } from 'rxjs/operators';
 
 import { ThemeService } from '../services/theme.service';
 import { ThemeState } from './theme.reducer';
@@ -28,7 +28,7 @@ export class ThemeEffects {
     loadSchema$: Observable<Action> = this.actions$.pipe(
         ofType(themeActions.ThemeActionTypes.LoadSchema),
         mergeMap(action =>
-            this.themeService.loadSettings().pipe(
+            this.themeService.loadSchema().pipe(
                 map(data => new themeActions.LoadSchemaSuccess(data)),
                 catchError(err => of(new themeActions.LoadSchemaFail(err)))
             )

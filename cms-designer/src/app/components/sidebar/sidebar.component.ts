@@ -26,7 +26,7 @@ export class SidebarComponent implements OnInit {
 
     // theme editor states
     presets$: Observable<PresetsModel>;
-    settings$: Observable<any[]>;
+    schema$: Observable<any[]>;
     theme$: Observable<any>;
     currentThemeItem$: Observable<any>;
     showPresets$: Observable<boolean>;
@@ -51,7 +51,7 @@ export class SidebarComponent implements OnInit {
         this.store.dispatch(new themeActions.LoadSchema());
 
         this.presets$ = this.store.pipe(select(fromTheme.getPresets));
-        this.settings$ = this.store.pipe(select(fromTheme.getSettings));
+        this.schema$ = this.store.pipe(select(fromTheme.getSchema));
         this.theme$ = this.store.pipe(select(fromTheme.getCurrentTheme));
         this.currentThemeItem$ = this.store.pipe(select(fromTheme.getCurrentThemeItem));
         this.showPresets$ = this.store.pipe(select(fromTheme.getShowPresetsEditor));
