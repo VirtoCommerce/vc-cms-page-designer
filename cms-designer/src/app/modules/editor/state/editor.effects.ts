@@ -69,10 +69,19 @@ export class EditorEffects {
 
     @Effect({ dispatch: false })
     sendUpdatedBlockToStoreLoaded$ = this.actions$.pipe(
-        ofType<editorActions.UpdateBlockItem>(editorActions.EditorActionTypes.UpdateBlockItem),
+        ofType<editorActions.UpdateBlockPreview>(editorActions.EditorActionTypes.UpdateBlockPreview),
         filter(action => action.payload.type !== 'settings'),
         tap(action => {
             this.preview.addOrUpdateBlock(action.payload);
+        })
+    );
+
+    @Effect({ dispatch: false })
+    sendRemoveBlockToStoreLoaded$ = this.actions$.pipe(
+        ofType<editorActions.RemovePageItem>(editorActions.EditorActionTypes.RemovePageItem),
+        filter(action => action.payload.type !== 'settings'),
+        tap(action => {
+            this.preview.removeBlock(action.payload);
         })
     );
 

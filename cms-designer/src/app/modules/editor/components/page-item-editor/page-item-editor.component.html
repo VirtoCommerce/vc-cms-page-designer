@@ -15,5 +15,8 @@
                 <ng-container appBlockHost></ng-container>
             </div>
         </form>
+        <div class="pane-settings">
+            <button *ngIf="model.type !== 'settings'" class="btn" (click)="removeBlock()">Remove block</button>
+        </div>
     </div>
 </div>

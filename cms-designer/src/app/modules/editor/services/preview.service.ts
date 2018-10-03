@@ -15,6 +15,10 @@ export class PreviewService {
         this.send('addOrUpdate', block);
     }
 
+    removeBlock(block: SectionModel) {
+        this.send('remove', block.id);
+    }
+
     private send(type: string, model: any) {
         const element = document.getElementById('preview');
         if (element != null) {

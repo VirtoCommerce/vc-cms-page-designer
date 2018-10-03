@@ -27,6 +27,7 @@
                               *ngIf="currentSectionItem$|async as currentSectionItem"
                               [model]="currentSectionItem"
                               (valueChangedEvent)="updateBlockPreview($event)"
+                              (removeBlockEvent)="removeBlock($event)"
                               (backEvent)="completeEditBlock($event)"></app-page-item-editor>
         <app-select-type class="pane __selected"
                          *ngIf="addNewSectionMode$ | async"

@@ -14,6 +14,7 @@ export class PageItemEditorComponent implements OnInit {
     @Input() model: SectionModel;
     @Output() backEvent = new EventEmitter<SectionModel>();
     @Output() valueChangedEvent = new EventEmitter<SectionModel>();
+    @Output() removeBlockEvent = new EventEmitter<SectionModel>();
 
     @ViewChild(BlockHostDirective) host: BlockHostDirective;
 
@@ -48,6 +49,10 @@ export class PageItemEditorComponent implements OnInit {
         // this value will be applyed onto current section in the editor.reducer
         // therefore i should not apply the uneditable properties
         this.backEvent.emit(this.form.value);
+    }
+
+    removeBlock() {
+        this.removeBlockEvent.emit(this.model);
     }
 
     private getModel(): SectionModel {

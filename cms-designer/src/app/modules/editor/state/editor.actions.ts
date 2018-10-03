@@ -12,7 +12,8 @@ export enum EditorActionTypes {
     CreatePageItem = 'Create Page Item',
     AddPageItem = 'Add Page Item',
     UpdatePageItem = 'Update Page Item',
-    UpdateBlockItem = 'Update Block Item',
+    UpdateBlockPreview = 'Update Block Preview',
+    RemovePageItem = 'Remove Page Item',
     BlockTypesLoaded = 'Block Types Loaded',
     LoadBlockTypes = 'Load Block Types',
     PreviewReady = 'Preview is ready'
@@ -48,6 +49,12 @@ export class CreatePageItem implements Action {
     constructor(public payload: string) { }
 }
 
+export class RemovePageItem implements Action {
+    readonly type = EditorActionTypes.RemovePageItem;
+
+    constructor(public payload: SectionModel) { }
+}
+
 export class AddPageItem implements Action {
     readonly type = EditorActionTypes.AddPageItem;
 
@@ -60,8 +67,8 @@ export class UpdatePageItem implements Action {
     constructor(public payload: SectionModel) { }
 }
 
-export class UpdateBlockItem implements Action {
-    readonly type = EditorActionTypes.UpdateBlockItem;
+export class UpdateBlockPreview implements Action {
+    readonly type = EditorActionTypes.UpdateBlockPreview;
 
     constructor(public payload: SectionModel) { }
 }
@@ -90,6 +97,7 @@ export type EditorActions = LoadPage
     | CreatePageItem
     | AddPageItem
     | UpdatePageItem
-    | UpdateBlockItem
+    | UpdateBlockPreview
+    | RemovePageItem
     | BlockTypesLoaded
     | PreviewReady;
