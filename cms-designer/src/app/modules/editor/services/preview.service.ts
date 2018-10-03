@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { PageModel } from '../models/page.model';
+import { PageModel, SectionModel } from '../models';
 import { environment } from '../../../../environments/environment';
 
 @Injectable({
@@ -8,39 +8,21 @@ import { environment } from '../../../../environments/environment';
 export class PreviewService {
 
     page(page: PageModel) {
+        this.send('page', page);
+    }
+
+    addBlock(block: SectionModel) {
+        this.send('add', block);
+    }
+
+    private send(type: string, model: any) {
         const element = document.getElementById('preview');
         if (element != null) {
             const target = (<HTMLIFrameElement>element).contentWindow;
-            if (page && target) {
-                const message = { type: 'page', page };
+            if (model && target) {
+                const message = { type: type, content: model };
                 target.postMessage(message, environment.storeUrl);
             }
         }
-
-
-        // const message = { type: 'page', page };
-        // const win = document.getElementById('preview').contentWindow;
-
-        // win.postMessage(message, environment.storeUrl);
-
-
-        // var message = { type: 'syncPageBlocks', cmsPage: $scope.cmsPage };
-
-        // console.log(message);
-
-        // var win = document.getElementById('preview').contentWindow;
-        // win.postMessage(message, _storefrontUrl);
-
-        // window.postMessage('cms-designer-page', page);
-
-
-        /*****************************************/
-        // window.addEventListener('message', function (e) {
-        //     if (e.data && e.data.type) {
-        //         if (e.data.type === 'sync') {
-        //             syncCmsPage(e.data);
-        //         }
-        //     }
-        // });
     }
 }
