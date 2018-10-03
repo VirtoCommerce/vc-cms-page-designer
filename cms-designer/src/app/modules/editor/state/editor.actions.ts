@@ -12,8 +12,8 @@ export enum EditorActionTypes {
     CreatePageItem = 'Create Page Item',
     AddPageItem = 'Add Page Item',
     UpdatePageItem = 'Update Page Item',
-    LoadBlockTypes = 'Load Block Types',
     BlockTypesLoaded = 'Block Types Loaded',
+    LoadBlockTypes = 'Load Block Types',
     PreviewReady = 'Preview is ready'
 }
 

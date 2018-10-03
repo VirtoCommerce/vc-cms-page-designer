@@ -11,8 +11,8 @@ export class PreviewService {
         this.send('page', page);
     }
 
-    addBlock(block: SectionModel) {
-        this.send('add', block);
+    addOrUpdateBlock(block: SectionModel) {
+        this.send('addOrUpdate', block);
     }
 
     private send(type: string, model: any) {

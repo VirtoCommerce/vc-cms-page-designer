@@ -30,6 +30,7 @@ export class TextItemComponent implements OnInit, ControlValueAccessor {
         this.onChange = fn;
     }
 
-    registerOnTouched(): void { }
+    registerOnTouched(): void {
+    }
 
 }

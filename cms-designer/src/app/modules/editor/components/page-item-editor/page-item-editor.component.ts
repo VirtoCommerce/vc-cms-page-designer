@@ -13,6 +13,7 @@ export class PageItemEditorComponent implements OnInit {
 
     @Input() model: SectionModel;
     @Output() backEvent = new EventEmitter<SectionModel>();
+    @Output() valueChangedEvent = new EventEmitter<SectionModel>();
 
     @ViewChild(BlockHostDirective) host: BlockHostDirective;
 
@@ -37,12 +38,22 @@ export class PageItemEditorComponent implements OnInit {
                 .filter(x => uneditableProperties.indexOf(x) === -1)
                 .forEach(x => this.form.addControl(x, this.fb.control(this.model[x])));
         }
+
+        this.form.valueChanges.subscribe(value => {
+            this.valueChangedEvent.emit(this.getModel());
+        });
     }
 
     back() {
+        this.backEvent.emit(this.getModel());
+    }
+
+    private getModel(): SectionModel {
         const result = {
-            ...this.form.value
+            ...this.form.value,
+            id: this.model.id,
+            type: this.model.type
         };
-        this.backEvent.emit(result);
+        return result;
     }
 }

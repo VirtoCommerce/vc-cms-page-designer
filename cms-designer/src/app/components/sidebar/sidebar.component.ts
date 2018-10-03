@@ -106,6 +106,10 @@ export class SidebarComponent implements OnInit {
         console.log(`preview ${type}`);
     }
 
+    updateBlockPreview(item: SectionModel) {
+        this.store.dispatch(new editorActions.UpdatePageItem(item));
+    }
+
     selectBlockType(type: string) {
         this.store.dispatch(new editorActions.CreatePageItem(type));
     }

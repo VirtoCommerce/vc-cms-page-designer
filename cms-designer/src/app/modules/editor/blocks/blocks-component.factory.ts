@@ -23,6 +23,7 @@ export class BlocksComponentFactory {
 
     create(type: string): SectionModel {
         const itemEditor = this.components[type];
-        return (<any>itemEditor).createModel();
+        const result = (<any>itemEditor).createModel();
+        return result;
     }
 }

@@ -10,7 +10,6 @@ import * as fromEditor from '.';
 import { PageService } from '../services/page.service';
 import { PageModel } from '../models/page.model';
 import { PreviewService } from '../services/preview.service';
-import { EditorState } from './editor.reducer';
 import { BlocksComponentFactory } from '../blocks/blocks-component.factory';
 
 @Injectable()
@@ -23,7 +22,7 @@ export class EditorEffects {
     @Effect()
     loadPage$: Observable<Action> = this.actions$.pipe(
         ofType(editorActions.EditorActionTypes.LoadPage),
-        mergeMap(action =>
+        mergeMap(_ =>
             this.pageService.loadPage().pipe(
                 map(data => {
                     const model = new PageModel();
@@ -41,7 +40,7 @@ export class EditorEffects {
     @Effect()
     loadBlockTypes$: Observable<Action> = this.actions$.pipe(
         ofType(editorActions.EditorActionTypes.LoadBlockTypes),
-        mergeMap(action =>
+        mergeMap(_ =>
             of(new editorActions.BlockTypesLoaded(this.pageService.availableTypes))
         )
     );
@@ -54,6 +53,26 @@ export class EditorEffects {
         mergeMap(item =>
             of(new editorActions.AddPageItem(item))
         )
+    );
+
+    @Effect({ dispatch: false })
+    sendNewBlockToStoreLoaded$ = this.actions$.pipe(
+        ofType<editorActions.AddPageItem>(editorActions.EditorActionTypes.AddPageItem),
+        withLatestFrom(this.store$),
+        tap(([action, store]) => {
+            if (!action.payload.id) {
+                action.payload.id = Math.max(...store.editor.page.sections.map(v => v.id || 0)) + 1;
+            }
+            this.preview.addOrUpdateBlock(action.payload);
+        })
+    );
+
+    @Effect({ dispatch: false })
+    sendUpdatedBlockToStoreLoaded$ = this.actions$.pipe(
+        ofType<editorActions.UpdatePageItem>(editorActions.EditorActionTypes.UpdatePageItem),
+        tap(action => {
+            this.preview.addOrUpdateBlock(action.payload);
+        })
     );
 
     @Effect({ dispatch: false })
@@ -72,7 +91,7 @@ export class EditorEffects {
     sendPageToStoreWhenPreviewLoaded$ = this.actions$.pipe(
         ofType<editorActions.PreviewReady>(editorActions.EditorActionTypes.PreviewReady),
         withLatestFrom(this.store$),
-        tap(([action, state]) => {
+        tap(([_, state]) => {
             this.preview.page(state.editor.page);
         })
     );
