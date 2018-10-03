@@ -88,24 +88,13 @@ export class EditorEffects {
     );
 
     @Effect({ dispatch: false })
-    sendPageToStoreWhenPageLoaded$ = this.actions$.pipe(
-        ofType<editorActions.LoadPageSuccess>(editorActions.EditorActionTypes.LoadPageSuccess),
+    sendPageToStore$ = this.actions$.pipe(
+        ofType(editorActions.EditorActionTypes.LoadPageSuccess, editorActions.EditorActionTypes.PreviewReady),
         withLatestFrom(this.store$),
-        tap(([action, state]) => {
+        tap(([_, state]) => {
             if (state.editor.previewIsReady) {
-                this.preview.page(action.payload);
+                this.preview.page(state.editor.page);
             }
         })
     );
-
-    // todo: combine with sendPageToStoreWhenPageLoaded$
-    @Effect({ dispatch: false })
-    sendPageToStoreWhenPreviewLoaded$ = this.actions$.pipe(
-        ofType<editorActions.PreviewReady>(editorActions.EditorActionTypes.PreviewReady),
-        withLatestFrom(this.store$),
-        tap(([_, state]) => {
-            this.preview.page(state.editor.page);
-        })
-    );
-
 }
