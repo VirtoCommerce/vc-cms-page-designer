@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Action, Store } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
-import { mergeMap, map, catchError, tap, withLatestFrom, filter } from 'rxjs/operators';
+import { mergeMap, map, catchError, tap, withLatestFrom, filter, debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 import * as editorActions from './editor.actions';
 import * as fromEditor from '.';
@@ -71,6 +71,8 @@ export class EditorEffects {
     sendUpdatedBlockToStoreLoaded$ = this.actions$.pipe(
         ofType<editorActions.UpdateBlockPreview>(editorActions.EditorActionTypes.UpdateBlockPreview),
         filter(action => action.payload.type !== 'settings'),
+        debounceTime(500),
+        distinctUntilChanged(),
         tap(action => {
             this.preview.addOrUpdateBlock(action.payload);
         })
