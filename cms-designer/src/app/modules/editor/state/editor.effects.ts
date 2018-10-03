@@ -69,7 +69,7 @@ export class EditorEffects {
 
     @Effect({ dispatch: false })
     sendUpdatedBlockToStoreLoaded$ = this.actions$.pipe(
-        ofType<editorActions.UpdatePageItem>(editorActions.EditorActionTypes.UpdatePageItem),
+        ofType<editorActions.UpdateBlockItem>(editorActions.EditorActionTypes.UpdateBlockItem),
         tap(action => {
             this.preview.addOrUpdateBlock(action.payload);
         })

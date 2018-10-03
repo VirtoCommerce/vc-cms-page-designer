@@ -45,7 +45,9 @@ export class PageItemEditorComponent implements OnInit {
     }
 
     back() {
-        this.backEvent.emit(this.getModel());
+        // this value will be applyed onto current section in the editor.reducer
+        // therefore i should not apply the uneditable properties
+        this.backEvent.emit(this.form.value);
     }
 
     private getModel(): SectionModel {

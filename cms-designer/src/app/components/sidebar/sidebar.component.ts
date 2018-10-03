@@ -107,7 +107,7 @@ export class SidebarComponent implements OnInit {
     }
 
     updateBlockPreview(item: SectionModel) {
-        this.store.dispatch(new editorActions.UpdatePageItem(item));
+        this.store.dispatch(new editorActions.UpdateBlockItem(item));
     }
 
     selectBlockType(type: string) {

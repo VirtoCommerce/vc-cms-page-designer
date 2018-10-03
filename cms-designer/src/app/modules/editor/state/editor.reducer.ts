@@ -62,6 +62,12 @@ export function reducer(state = initialState, action: EditorActions): EditorStat
                 showNewBlockSelector: action.payload ? false : state.showNewBlockSelector,
                 currentSectionItem: action.payload
             };
+        case EditorActionTypes.UpdatePageItem:
+            Object.assign(state.currentSectionItem, action.payload);
+            return {
+                ...state,
+                currentSectionItem: null
+            };
         case EditorActionTypes.AddPageItem:
             state.page.sections.push(action.payload);
             return {
