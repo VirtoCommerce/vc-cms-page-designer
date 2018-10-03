@@ -88,7 +88,6 @@ export class SidebarComponent implements OnInit {
     //#region page editor actions
 
     selectPageItem(item: SectionModel) {
-        console.log(item);
         this.store.dispatch(new editorActions.SelectPageItem(item));
     }
 
@@ -97,8 +96,6 @@ export class SidebarComponent implements OnInit {
     }
 
     completeEditBlock(event: SectionModel) {
-        console.log(event);
-        // here need to save section
         this.store.dispatch(new editorActions.UpdatePageItem(event));
     }
 

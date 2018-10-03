@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Action, Store } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
-import { mergeMap, map, catchError, tap, withLatestFrom } from 'rxjs/operators';
+import { mergeMap, map, catchError, tap, withLatestFrom, filter } from 'rxjs/operators';
 
 import * as editorActions from './editor.actions';
 import * as fromEditor from '.';
@@ -70,6 +70,7 @@ export class EditorEffects {
     @Effect({ dispatch: false })
     sendUpdatedBlockToStoreLoaded$ = this.actions$.pipe(
         ofType<editorActions.UpdateBlockItem>(editorActions.EditorActionTypes.UpdateBlockItem),
+        filter(action => action.payload.type !== 'settings'),
         tap(action => {
             this.preview.addOrUpdateBlock(action.payload);
         })
