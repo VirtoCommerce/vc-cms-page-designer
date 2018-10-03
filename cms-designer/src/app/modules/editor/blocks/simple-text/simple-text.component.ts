@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { SectionModel } from '../../models/section.model';
+import { BlockType } from '../../models/block-type.model';
 
 @Component({
     selector: 'app-simple-text-editor',
@@ -14,11 +15,19 @@ export class SimpleTextComponent implements OnInit {
 
     constructor() { }
 
-    static createModel(): SectionModel {
+    static createModel(item: BlockType): SectionModel {
         return <SectionModel>{
             type: SimpleTextComponent.Key,
-            name: SimpleTextComponent.Key,
+            name: item.name,
             content: ''
+        };
+    }
+
+    static createPreview(): SectionModel {
+        return <SectionModel>{
+            type: SimpleTextComponent.Key,
+            name: 'Name of the Block',
+            content: 'Some beautyful content'
         };
     }
 

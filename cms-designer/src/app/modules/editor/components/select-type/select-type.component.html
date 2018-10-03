@@ -8,7 +8,7 @@
     <div class="pane-cnt">
         <ul class="list">
             <li class="list-item" *ngFor="let item of types">
-                <a class="list-link" (click)="previewItem(item.type)"><i class="list-ico fa fa-{{item.type}}"></i><span class="list-t"> {{ item.name }} </span></a>
+                <a class="list-link" (click)="previewItem(item)"><i class="list-ico fa fa-{{item.type}}"></i><span class="list-t"> {{ item.name }} </span></a>
                 <a class="list-button" *ngIf="selectedItem == item.type && !item.inactive"
                                        (click)="selectItem(item)">Add</a>
             </li>

@@ -56,6 +56,14 @@ export class EditorEffects {
     );
 
     @Effect({ dispatch: false })
+    sendPreviewPageItem$ = this.actions$.pipe(
+        ofType<editorActions.PreviewPageItem>(editorActions.EditorActionTypes.PreviewPageItem),
+        map(action => action.payload),
+        map(item => !!item ? this.blockFactory.createPreview(item.type) : null),
+        tap(item => this.preview.addOrUpdateBlock(item))
+    );
+
+    @Effect({ dispatch: false })
     sendNewBlockToStoreLoaded$ = this.actions$.pipe(
         ofType<editorActions.AddPageItem>(editorActions.EditorActionTypes.AddPageItem),
         withLatestFrom(this.store$),

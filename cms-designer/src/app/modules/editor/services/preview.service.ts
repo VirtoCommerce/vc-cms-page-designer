@@ -23,7 +23,7 @@ export class PreviewService {
         const element = document.getElementById('preview');
         if (element != null) {
             const target = (<HTMLIFrameElement>element).contentWindow;
-            if (model && target) {
+            if (!!target) {
                 const message = { type: type, content: model };
                 target.postMessage(message, environment.storeUrl);
             }

@@ -4,13 +4,14 @@ import { Observable } from 'rxjs';
 
 import { PageModel } from '../models/page.model';
 import { SectionModel } from '../models/section.model';
+import { BlockType } from '../models/block-type.model';
 
 @Injectable({
     providedIn: 'root'
 })
 export class PageService {
 
-    availableTypes = [
+    availableTypes: BlockType[] = [
         { type: 'text',                     name: 'Simple text' },
         { type: 'image',                    name: 'Simple image',               inactive: true }, // still empty control
         { type: 'image-with-text',          name: 'Image with text',            inactive: true },

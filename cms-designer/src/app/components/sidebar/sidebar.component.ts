@@ -10,6 +10,7 @@ import * as themeActions from '../../modules/theme/state/theme.actions';
 import { PresetsModel } from '../../modules/theme/models/presets.model';
 import { PageModel } from '../../modules/editor/models/page.model';
 import { SectionModel } from '../../modules/editor/models/section.model';
+import { BlockType } from '../../modules/editor/models/block-type.model';
 
 @Component({
     selector: 'app-sidebar',
@@ -93,22 +94,27 @@ export class SidebarComponent implements OnInit {
 
     setNewBlockMode(visible) {
         this.store.dispatch(new editorActions.ToggleNewBlockPane(visible));
+        if (!visible) {
+            this.store.dispatch(new editorActions.PreviewPageItem(null));
+        }
     }
 
     completeEditBlock(event: SectionModel) {
         this.store.dispatch(new editorActions.UpdatePageItem(event));
     }
 
-    previewBlockType(type: string) {
-        console.log(`preview ${type}`);
+    previewBlockType(type: BlockType) {
+        this.store.dispatch(new editorActions.PreviewPageItem(type));
     }
 
     updateBlockPreview(item: SectionModel) {
         this.store.dispatch(new editorActions.UpdateBlockPreview(item));
     }
 
-    selectBlockType(type: string) {
-        this.store.dispatch(new editorActions.CreatePageItem(type));
+    selectBlockType(item: BlockType) {
+        if (!item.inactive) {
+            this.store.dispatch(new editorActions.CreatePageItem(item));
+        }
     }
 
     removeBlock(item: SectionModel) {

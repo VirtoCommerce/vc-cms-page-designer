@@ -3,6 +3,7 @@ import { SettingsEditorComponent } from './settings-editor/settings-editor.compo
 import { SimpleTextComponent } from './simple-text/simple-text.component';
 import { ImageCarouselComponent } from './image-carousel/image-carousel.component';
 import { SectionModel } from '../models/section.model';
+import { BlockType } from '../models/block-type.model';
 
 @Injectable({
     providedIn: 'root'
@@ -21,9 +22,15 @@ export class BlocksComponentFactory {
         return result;
     }
 
-    create(type: string): SectionModel {
+    create(item: BlockType): SectionModel {
+        const itemEditor = this.components[item.type];
+        const result = (<any>itemEditor).createModel(item);
+        return result;
+    }
+
+    createPreview(type: string): SectionModel {
         const itemEditor = this.components[type];
-        const result = (<any>itemEditor).createModel();
+        const result = (<any>itemEditor).createPreview();
         return result;
     }
 }

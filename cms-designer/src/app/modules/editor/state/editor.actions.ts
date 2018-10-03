@@ -2,6 +2,7 @@ import { Action } from '@ngrx/store';
 
 import { PageModel } from '../models/page.model';
 import { SectionModel } from '../models/section.model';
+import { BlockType } from '../models/block-type.model';
 
 export enum EditorActionTypes {
     LoadPage = 'Load Page',
@@ -16,7 +17,8 @@ export enum EditorActionTypes {
     RemovePageItem = 'Remove Page Item',
     BlockTypesLoaded = 'Block Types Loaded',
     LoadBlockTypes = 'Load Block Types',
-    PreviewReady = 'Preview is ready'
+    PreviewReady = 'Preview is ready',
+    PreviewPageItem = 'Preview Page Item'
 }
 
 export class PreviewReady implements Action {
@@ -46,7 +48,13 @@ export class SelectPageItem implements Action {
 export class CreatePageItem implements Action {
     readonly type = EditorActionTypes.CreatePageItem;
 
-    constructor(public payload: string) { }
+    constructor(public payload: BlockType) { }
+}
+
+export class PreviewPageItem implements Action {
+    readonly type = EditorActionTypes.PreviewPageItem;
+
+    constructor(public payload: BlockType) { }
 }
 
 export class RemovePageItem implements Action {
