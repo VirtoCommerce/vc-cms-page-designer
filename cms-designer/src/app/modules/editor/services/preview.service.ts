@@ -19,6 +19,10 @@ export class PreviewService {
         this.send('remove', block.id);
     }
 
+    changeOrder(currentIndex: number, newIndex: number) {
+        this.send('move', { currentIndex, newIndex });
+    }
+
     private send(type: string, model: any) {
         const element = document.getElementById('preview');
         if (element != null) {

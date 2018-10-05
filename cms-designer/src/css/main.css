@@ -873,3 +873,23 @@ body
 .new-preset-input {
   margin: 0 0 20px;
 }
+
+.dragging {
+    cursor: move;
+    user-select: none;
+    background: #dee9f0;
+}
+
+.list-dragger {
+    padding: 10px 20px; 
+    background-color: white;
+    position: absolute;
+    top: 0;
+    width: 75%;
+    margin-left: 5%;
+    z-index: 1;
+}
+
+[appSortableList] {
+    position: relative;
+}

@@ -14,6 +14,7 @@
                 <app-tabs>
                     <app-tab tabTitle="Sections" active="true">
                         <app-page-editor [model]="page$ | async" (selectEvent)="selectPageItem($event)"
+                        (orderChangedEvent)="onOrderChanged($event)"
                             (addNewBlockEvent)="setNewBlockMode(true)"></app-page-editor>
                     </app-tab>
                     <app-tab *ngIf="schema$ | async" tabTitle="Theme">

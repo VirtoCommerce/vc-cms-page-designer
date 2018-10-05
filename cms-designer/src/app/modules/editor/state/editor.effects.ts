@@ -87,6 +87,14 @@ export class EditorEffects {
     );
 
     @Effect({ dispatch: false })
+    sendBlocksOrderChanged$ = this.actions$.pipe(
+        ofType<editorActions.OrderChanged>(editorActions.EditorActionTypes.OrderChanged),
+        tap(action => {
+            this.preview.changeOrder(action.payload.currentIndex, action.payload.newIndex);
+        })
+    );
+
+    @Effect({ dispatch: false })
     sendRemoveBlockToStoreLoaded$ = this.actions$.pipe(
         ofType<editorActions.RemovePageItem>(editorActions.EditorActionTypes.RemovePageItem),
         filter(action => action.payload.type !== 'settings'),

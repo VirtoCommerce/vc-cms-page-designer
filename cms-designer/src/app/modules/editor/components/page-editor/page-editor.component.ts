@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { PageModel } from '../../models/page.model';
 import { SectionModel } from '../../models/section.model';
+import { SortEvent } from '../../../shared/draggable';
 
 @Component({
     selector: 'app-page-editor',
@@ -13,6 +14,7 @@ export class PageEditorComponent implements OnInit {
 
     @Output() selectEvent = new EventEmitter<SectionModel>();
     @Output() addNewBlockEvent = new EventEmitter<any>();
+    @Output() orderChangedEvent = new EventEmitter<SortEvent>();
 
     constructor() { }
 
@@ -23,11 +25,23 @@ export class PageEditorComponent implements OnInit {
     }
 
     addNewBlock() {
-        // todo: add unique id to new block
         this.addNewBlockEvent.emit();
     }
 
     selectSettings() {
         this.selectEvent.emit(this.model.settings);
+    }
+
+    sortItems(event: SortEvent) {
+        // todo: подумать, может стоит отправлять событие не в конце d-n-d, а синхронно?
+        if (event.complete) {
+            this.orderChangedEvent.emit(event);
+        } else {
+            const current = this.model.sections[event.currentIndex];
+            const swapWith = this.model.sections[event.newIndex];
+
+            this.model.sections[event.newIndex] = current;
+            this.model.sections[event.currentIndex] = swapWith;
+        }
     }
 }

@@ -13,8 +13,13 @@ import {
     TabComponent,
     TextItemComponent,
     SectionIconDirective
+} from './components';
 
-} from './components/index';
+import {
+    DraggableDirective,
+    DraggableHelperDirective,
+    SortableListDirective
+} from './draggable';
 
 const COMPONENTS = [
     CheckboxItemComponent,
@@ -25,7 +30,11 @@ const COMPONENTS = [
     TabComponent,
     TextItemComponent,
     StringItemComponent,
-    SectionIconDirective
+    SectionIconDirective,
+
+    DraggableDirective,
+    DraggableHelperDirective,
+    SortableListDirective
 ];
 
 // const EDITOR_COMPONENTS = [SettingsEditorComponent, SimpleTextComponent, ImageCarouselComponent];

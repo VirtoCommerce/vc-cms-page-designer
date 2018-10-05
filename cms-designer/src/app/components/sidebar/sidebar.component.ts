@@ -11,6 +11,7 @@ import { PresetsModel } from '../../modules/theme/models/presets.model';
 import { PageModel } from '../../modules/editor/models/page.model';
 import { SectionModel } from '../../modules/editor/models/section.model';
 import { BlockType } from '../../modules/editor/models/block-type.model';
+import { SortEvent } from '../../modules/shared/draggable';
 
 @Component({
     selector: 'app-sidebar',
@@ -115,6 +116,10 @@ export class SidebarComponent implements OnInit {
         if (!item.inactive) {
             this.store.dispatch(new editorActions.CreatePageItem(item));
         }
+    }
+
+    onOrderChanged(event: SortEvent) {
+        this.store.dispatch(new editorActions.OrderChanged(event));
     }
 
     removeBlock(item: SectionModel) {

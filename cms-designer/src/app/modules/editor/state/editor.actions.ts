@@ -3,6 +3,7 @@ import { Action } from '@ngrx/store';
 import { PageModel } from '../models/page.model';
 import { SectionModel } from '../models/section.model';
 import { BlockType } from '../models/block-type.model';
+import { SortEvent } from '../../shared/draggable';
 
 export enum EditorActionTypes {
     LoadPage = 'Load Page',
@@ -18,7 +19,8 @@ export enum EditorActionTypes {
     BlockTypesLoaded = 'Block Types Loaded',
     LoadBlockTypes = 'Load Block Types',
     PreviewReady = 'Preview is ready',
-    PreviewPageItem = 'Preview Page Item'
+    PreviewPageItem = 'Preview Page Item',
+    OrderChanged = 'Order Changed'
 }
 
 export class PreviewReady implements Action {
@@ -97,6 +99,12 @@ export class BlockTypesLoaded implements Action {
     constructor(public payload: any[]) { }
 }
 
+export class OrderChanged implements Action {
+    readonly type = EditorActionTypes.OrderChanged;
+
+    constructor(public payload: SortEvent) { }
+}
+
 export type EditorActions = LoadPage
     | LoadPageSuccess
     | LoadPageFail
@@ -108,4 +116,5 @@ export type EditorActions = LoadPage
     | UpdateBlockPreview
     | RemovePageItem
     | BlockTypesLoaded
-    | PreviewReady;
+    | PreviewReady
+    | OrderChanged;
