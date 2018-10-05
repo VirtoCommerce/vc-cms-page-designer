@@ -1,0 +1,14 @@
+<div [formGroup]="group">
+    <div class="pane-settings">
+        <app-select-item [options]="sizeOptions" label="Choose image size" formControlName="imageSize"></app-select-item>
+    </div>
+    <div class="pane-settings">
+        <app-image-item label="Upload picture" formControlName="url"></app-image-item>
+    </div>
+    <div class="pane-settings">
+        <app-select-item [options]="alignOptions" label="Choose text alignment" formControlName="align"></app-select-item>
+    </div>
+    <div class="pane-settings">
+        <app-text-item label="Content" formControlName="content"></app-text-item>
+    </div>
+</div>

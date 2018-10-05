@@ -16,11 +16,12 @@ import {
 import {
     BlockHostDirective,
     SimpleTextComponent,
+    SimpleImageComponent,
     SettingsEditorComponent,
     ImageCarouselComponent,
+    ImageWithTextComponent,
 
     ImageLayoutComponent,
-    ImageWithTextComponent,
     ImageWithTextOverlayComponent,
     TextColumnsWithImagesComponent
 } from './blocks';
@@ -36,11 +37,12 @@ const COMPONENTS = [
 
 const BLOCKS = [
     SimpleTextComponent,
+    SimpleImageComponent,
     SettingsEditorComponent,
     ImageCarouselComponent,
+    ImageWithTextComponent,
 
     ImageLayoutComponent,
-    ImageWithTextComponent,
     ImageWithTextOverlayComponent,
     TextColumnsWithImagesComponent
 ];

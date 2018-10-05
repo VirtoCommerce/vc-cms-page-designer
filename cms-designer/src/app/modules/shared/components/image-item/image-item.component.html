@@ -1,9 +1,13 @@
-<label class="form-label">{{ label }}</label>
-<div class="form-file">
-    <div class='form-file'>
-        <input type='file' #fileInput>
-        <button class='btn' (click)="openFileDialog()">Choose file</button>
+<div class="pane-settings">
+    <label class="form-label">{{ label }}</label>
+    <div class="form-file">
+        <div class='form-file'>
+            <input type='file' #fileInput>
+            <button class='btn' (click)="openFileDialog()">Choose file</button>
+        </div>
+    </div>
+    <p *ngIf="info" class="form-help">{{info}}</p>
+    <div *ngIf="value" class="form-img">
+        <img [src]="value" />
     </div>
 </div>
-<p *ngIf="info" class="form-help">{{info}}</p>
-<div class="form-img"></div>

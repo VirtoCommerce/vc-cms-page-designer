@@ -1,9 +1,6 @@
-<div class="pane-settings">
-
-    <label class="form-label">{{ label }}</label>
-    <div class="form-input">
-        <quill-editor [style]="{ height: '400px' }" (onContentChanged)="onChange($event)" [modules]="editorConfig" (onEditorCreated)="onCreated($event)">
-        </quill-editor>
-    </div>
-
+<label class="form-label">{{ label }}</label>
+<div class="form-input">
+    <quill-editor [style]="{ height: '400px' }" (onContentChanged)="onChange($event)" [modules]="editorConfig"
+        (onEditorCreated)="onCreated($event)">
+    </quill-editor>
 </div>

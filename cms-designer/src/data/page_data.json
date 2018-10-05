@@ -6,29 +6,34 @@
         "name": "Settings"
     },
     {
+        "align": "left",
+        "content": "This is a paragraph where you can describe your chosen product, collection, or blog posts. Add some text to make this block attractive to your customers",
+        "id": "newblock1",
+        "imageSize": "medium",
+        "name": "Image with text",
+        "type": "image-with-text",
+        "url": "http://download.seaicons.com/icons/sora-meliae/matrilineare/1024/Places-folder-pictures-icon.png"
+    },
+    {
         "type": "text",
         "content": "Type something hello!",
-        "name": "Text3333",
-        "ispreview": false
+        "name": "Text3333"        
     },
     {
         "type": "text",
         "content": "Lorem ipsum",
-        "name": "Text",
-        "ispreview": false
+        "name": "Text"        
     },
     {
         "type": "image",
         "name": "Image",
         "url": "http://dev-cms-vm.westeurope.cloudapp.azure.com/admin/Assets/blogs/7047371_original.jpg",
-        "imageSize": "medium",
-        "ispreview": false
+        "imageSize": "medium"        
     },
     {
         "type": "text",
         "content": "Type somethin wetr dfsg sdfg g",
         "name": "Text",
-        "ispreview": false,
         "anchorName": "345345",
         "title": "fgdfgdf"
     },
@@ -57,15 +62,13 @@
         "autoRotate": true,
         "rotationFrequency": "7000",
         "contentSize": "medium",
-        "blockWidth": "screen",
-        "ispreview": false
+        "blockWidth": "screen"
     },
     {
         "type": "image",
         "name": "Image",
         "url": "http://download.seaicons.com/icons/sora-meliae/matrilineare/1024/Places-folder-pictures-icon.png",
-        "imageSize": "medium",
-        "ispreview": false
+        "imageSize": "medium"
     },
     {
         "type": "textcolumns-with-images",
@@ -100,8 +103,7 @@
         "columnCount": "3",
         "imageAlignment": "top",
         "width": "33%",
-        "imageSize": "medium",
-        "ispreview": false
+        "imageSize": "medium"
     },
     {
         "type": "textcolumns-with-images",
@@ -136,7 +138,6 @@
         "columnCount": "3",
         "imageAlignment": "top",
         "width": "33%",
-        "imageSize": "medium",
-        "ispreview": false
+        "imageSize": "medium"
     }
 ]

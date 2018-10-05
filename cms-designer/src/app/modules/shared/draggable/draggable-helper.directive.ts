@@ -39,7 +39,7 @@ export class DraggableHelperDirective implements OnInit {
 
     private onDragMove(event: PointerEvent): void {
         let top = event.clientY - this.startPosition;
-        if (top < 3 && !this.element) {
+        if (Math.abs(top) < 3 && !this.element) {
             return;
         }
         if (!this.element) {

@@ -1,0 +1,8 @@
+<div [formGroup]="group">
+    <div class="pane-settings">
+        <app-select-item [options]="options" label="Choose size" formControlName="imageSize"></app-select-item>
+    </div>
+    <div class="pane-settings">
+        <app-image-item label="Upload picture" formControlName="url"></app-image-item>
+    </div>
+</div>

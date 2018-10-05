@@ -1,7 +1,7 @@
 <label *ngIf="label" class="form-label">{{label}}</label>
-<div class="form-input __select">
-    <select>
-        <option *ngFor="let option of options" value="{{option[valueName]}}" [selected]="value === option[valueName]">
+<div class="form-input __select" *ngIf="options">
+    <select (change)="onChange($event.target.value)">
+        <option *ngFor="let option of options" [value]="option[valueName]" [selected]="value === option[valueName]">
             {{option[valueLabel]}}
         </option>
     </select>
