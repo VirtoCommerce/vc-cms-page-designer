@@ -857,6 +857,10 @@ body
     -ms-scrollbar-face-color: #e6e6e6;
     -ms-scrollbar-shadow-color: #e6e6e6;
     -ms-scrollbar-track-color: #f9f9f9;
+    scrollbar-arrow-color: #f9f9f9;
+    scrollbar-face-color: #e6e6e6;
+    scrollbar-shadow-color: #e6e6e6;
+    scrollbar-track-color: #f9f9f9;
 }
 
 .new-pressets-foot {
@@ -887,6 +891,7 @@ body
     top: 0;
     width: 75%;
     margin-left: 5%;
+    font-size: 14px;
     z-index: 1;
 }
 

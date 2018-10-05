@@ -52,7 +52,8 @@
               "src/css/cosmetic.css",
               "src/css/font-awesome.css",
               "src/css/main.css",
-              "src/css/colorpicker.css"
+              "src/css/colorpicker.css",
+              "node_modules/quill/dist/quill.snow.css"
             ],
             "scripts": []
           },

@@ -38,13 +38,16 @@ export class DraggableHelperDirective implements OnInit {
     }
 
     private onDragMove(event: PointerEvent): void {
+        let top = event.clientY - this.startPosition;
+        if (top < 3 && !this.element) {
+            return;
+        }
         if (!this.element) {
             this.element = this.viewContainerRef.createEmbeddedView(this.templateRef).rootNodes[0];
 
             // helper element position = original element position
             this.element.style.top = this.draggable.element.nativeElement.offsetTop + 'px';
         }
-        let top = event.clientY - this.startPosition;
         top = Math.max(this.draggable.positionMin, top);
         top = Math.min(this.draggable.positionMax, top);
         this.draggable.position = top;
