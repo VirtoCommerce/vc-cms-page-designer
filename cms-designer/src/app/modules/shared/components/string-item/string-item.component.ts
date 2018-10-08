@@ -28,7 +28,7 @@ export class StringItemComponent implements OnInit, ControlValueAccessor {
     }
 
     writeValue(obj: any): void {
-        this.value = obj as string;
+        this.value = obj || '';
     }
 
     registerOnChange(fn: any): void {
