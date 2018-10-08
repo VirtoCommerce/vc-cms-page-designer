@@ -21,9 +21,9 @@ import {
     ImageCarouselComponent,
     ImageWithTextComponent,
     ImageWithTextOverlayComponent,
+    TextColumnsWithImagesComponent,
 
-    ImageLayoutComponent,
-    TextColumnsWithImagesComponent
+    ImageLayoutComponent
 } from './blocks';
 
 import { reducer } from './state/editor.reducer';
@@ -42,9 +42,9 @@ const BLOCKS = [
     ImageCarouselComponent,
     ImageWithTextComponent,
     ImageWithTextOverlayComponent,
+    TextColumnsWithImagesComponent,
 
-    ImageLayoutComponent,
-    TextColumnsWithImagesComponent
+    ImageLayoutComponent
 ];
 
 @NgModule({

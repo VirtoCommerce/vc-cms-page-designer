@@ -26,7 +26,7 @@ export class ImageCarouselComponent {
         { label: '6000', value: '6 seconds' },
         { label: '7000', value: '7 seconds' },
         { label: '8000', value: '8 seconds' },
-        { label: '9000', value: '9 seconds' },
+        { label: '9000', value: '9 seconds' }
     ];
 
     constructor(private formHelper: FormsHelper) { }
@@ -77,6 +77,6 @@ export class ImageCarouselComponent {
     }
 
     getFormArray(name: string): FormArray {
-        return this.group.get('images') as FormArray;
+        return this.group.get(name) as FormArray;
     }
 }
