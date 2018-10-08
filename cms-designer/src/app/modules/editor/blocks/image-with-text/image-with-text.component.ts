@@ -26,10 +26,11 @@ export class ImageWithTextComponent implements OnInit {
 
     constructor() { }
 
-    static createModel(item: BlockType): SectionModel {
+    static createModel(item?: BlockType): SectionModel {
         return <SectionModel>{
             type: ImageWithTextComponent.Key,
-            name: item.name,
+            name: item ? item.name : '',
+            title: '',
             align: 'left',
             content: '',
             url: 'http://download.seaicons.com/icons/sora-meliae/matrilineare/1024/Places-folder-pictures-icon.png',
@@ -41,6 +42,7 @@ export class ImageWithTextComponent implements OnInit {
         return <SectionModel>{
             type: ImageWithTextComponent.Key,
             name: 'Name of the Block',
+            title: 'Title',
             align: 'left',
             content: 'This is a paragraph where you can describe your chosen product, collection, or ' +
                      'blog posts. Add some text to make this block attractive to your customers',
