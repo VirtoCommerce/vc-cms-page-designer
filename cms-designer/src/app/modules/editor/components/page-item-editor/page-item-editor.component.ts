@@ -3,6 +3,8 @@ import { SectionModel } from '../../models/section.model';
 import { BlocksComponentFactory } from '../../blocks/blocks-component.factory';
 import { BlockHostDirective } from '../../blocks/block-host.directive';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { isArray } from 'util';
+import { FormsHelper } from '../../forms.helper';
 
 @Component({
     selector: 'app-page-item-editor',
@@ -22,11 +24,12 @@ export class PageItemEditorComponent implements OnInit {
     get name() { return this.form.get('name'); }
 
     constructor(private componentFactoryResolver: ComponentFactoryResolver,
-                private blocksFactory: BlocksComponentFactory,
-                private fb: FormBuilder) { }
+        private blocksFactory: BlocksComponentFactory,
+        private fb: FormBuilder,
+        private formHelper: FormsHelper) { }
 
     ngOnInit() {
-        this.form = this.fb.group({name: [this.model.name, Validators.required]});
+        this.form = this.fb.group({ name: [this.model.name, Validators.required] });
         const type = this.blocksFactory.resolve(this.model.type);
         if (type != null) {
             const factory = this.componentFactoryResolver.resolveComponentFactory(type);
@@ -35,9 +38,8 @@ export class PageItemEditorComponent implements OnInit {
             (<any>component.instance).model = this.model;
             (<any>component.instance).group = this.form;
             const uneditableProperties = ['type', 'id', 'name'];
-            Object.keys(this.model)
-                .filter(x => uneditableProperties.indexOf(x) === -1)
-                .forEach(x => this.form.addControl(x, this.fb.control(this.model[x])));
+            const keys = Object.keys(this.model).filter(x => uneditableProperties.indexOf(x) === -1);
+            this.formHelper.fillFormRecursively(this.model, this.form, keys);
         }
 
         this.form.valueChanges.subscribe(value => {
