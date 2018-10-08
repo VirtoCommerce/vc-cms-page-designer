@@ -10,7 +10,7 @@
 
     <div class="pane-settings">
         <app-accordeon formArrayName="columns">
-            <app-acc-item *ngFor="let item of getFormArray('columns').controls; let i = index;" [title]="getTitle(item)" [active]="false">
+            <app-acc-item *ngFor="let item of getFormArray('columns').controls; let i = index;" [title]="getTitle(item)">
                 <div [formGroupName]="i">
                     <div class="pane-settings">
                         <app-string-item label="Title" formControlName="title"></app-string-item>
@@ -35,34 +35,3 @@
         <button class="btn" (click)="addColumn()">Add Column</button>
     </div>
 </div>
-
-
-<!-- {
-    columnCount: "3",
-    columns: [{
-        content: "Share blog posts, products, or promotions with your customers. Use this text to describe products, share
-        details on availability and style, or as a space to display recent reviews or FAQs.",
-        title: "Column 1",
-        url: "https://www.infographicdesignteam.com/blog/wp-content/uploads/2016/08/social-media-facebook-post35.jpg",
-        width: "33%"
-    }, {
-        content: "Share blog posts, products, or promotions with your customers. Use this text to describe products, share
-        details on availability and style, or as a space to display recent reviews or FAQs.",
-        title: "Column 2",
-        url: "https://www.infographicdesignteam.com/blog/wp-content/uploads/2016/08/social-media-facebook-post35.jpg",
-        width: "33%"
-    }, {
-        content: "Share blog posts, products, or promotions with your customers. Use this text to describe products, share
-        details on availability and style, or as a space to display recent reviews or FAQs.",
-        title: "Column 3",
-        url: "https://www.infographicdesignteam.com/blog/wp-content/uploads/2016/08/social-media-facebook-post35.jpg",
-        width: "33%"
-    }],
-    id: "newblock2",
-    imageAlignment: "top",
-    imageSize: "medium",
-    ispreview: true,
-    name: "Text columns with images",
-    type: "textcolumns-with-images",
-    width: "33%"
-} -->

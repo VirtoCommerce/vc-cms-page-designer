@@ -8,7 +8,7 @@ import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 })
 export class AccItemComponent implements OnInit, OnDestroy {
 
-    private _active = true;
+    private _active = false;
 
     @Input() title: string;
     @Input() set active(value: boolean) {

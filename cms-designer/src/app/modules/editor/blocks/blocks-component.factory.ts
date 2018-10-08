@@ -6,7 +6,8 @@ import {
     ImageWithTextComponent,
     ImageCarouselComponent,
     ImageWithTextOverlayComponent,
-    TextColumnsWithImagesComponent
+    TextColumnsWithImagesComponent,
+    ImageLayoutComponent
 } from '.';
 import { SectionModel, BlockType } from '../models';
 
@@ -24,9 +25,7 @@ export class BlocksComponentFactory {
         this.components[ImageWithTextOverlayComponent.Key] = { name: 'Image with text overlay', type: ImageWithTextOverlayComponent };
         this.components[ImageCarouselComponent.Key] = { name: 'Image carousel', type: ImageCarouselComponent };
         this.components[TextColumnsWithImagesComponent.Key] = { name: 'Text columns with images', type: TextColumnsWithImagesComponent };
-
-        // { type: 'images-layout',            name: 'Images layout',              inactive: true }
-
+        this.components[ImageLayoutComponent.Key] = { name: 'Image layout', type: ImageLayoutComponent };
     }
 
     getComponentsDescriptors(): BlockType[] {

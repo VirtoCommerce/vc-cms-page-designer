@@ -22,7 +22,6 @@ import {
     ImageWithTextComponent,
     ImageWithTextOverlayComponent,
     TextColumnsWithImagesComponent,
-
     ImageLayoutComponent
 } from './blocks';
 
@@ -43,7 +42,6 @@ const BLOCKS = [
     ImageWithTextComponent,
     ImageWithTextOverlayComponent,
     TextColumnsWithImagesComponent,
-
     ImageLayoutComponent
 ];
 

@@ -6,6 +6,4 @@ export * from './image-carousel/image-carousel.component';
 export * from './image-with-text/image-with-text.component';
 export * from './image-with-text-overlay/image-with-text-overlay.component';
 export * from './textcolumns-with-images/textcolumns-with-images.component';
-
-export * from './_images-layout/images-layout.component';
-
+export * from './images-layout/images-layout.component';
