@@ -1,0 +1,12 @@
+<div class="panel panel-default">
+    <div class="panel-heading" (click)="toggleOpen($event)" [ngClass]="{'opened': active}">
+        <h4 class="panel-title">
+            <a href tabindex="0"><span>{{ title }}</span></a>
+        </h4>
+    </div>
+    <div class="panel-collapse" [hidden]="!active">
+        <div class="panel-body">
+            <ng-content></ng-content>
+        </div>
+    </div>
+</div>

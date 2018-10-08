@@ -1,0 +1,7 @@
+.panel-heading {
+    padding: 10px 20px;
+    cursor: pointer;
+    &:hover, &.opened {
+        background-color: #ecf7fc;
+    }
+}

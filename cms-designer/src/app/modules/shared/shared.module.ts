@@ -10,10 +10,13 @@ import {
     ImageItemComponent,
     SelectItemComponent,
     StringItemComponent,
-    TabsComponent,
-    TabComponent,
     TextItemComponent,
     SliderItemComponent,
+
+    TabsComponent,
+    TabComponent,
+    AccordeonComponent,
+    AccItemComponent,
     SectionIconDirective
 } from './components';
 
@@ -28,12 +31,15 @@ const COMPONENTS = [
     ColorItemComponent,
     ImageItemComponent,
     SelectItemComponent,
-    TabsComponent,
-    TabComponent,
     TextItemComponent,
     StringItemComponent,
-    SectionIconDirective,
     SliderItemComponent,
+
+    TabsComponent,
+    TabComponent,
+    AccordeonComponent,
+    AccItemComponent,
+    SectionIconDirective,
 
     DraggableDirective,
     DraggableHelperDirective,
