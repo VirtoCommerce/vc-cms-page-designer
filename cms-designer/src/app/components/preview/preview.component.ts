@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, ElementRef, ViewChild, Output, EventEmitter } from '@angular/core';
 import { SafeUrl } from '@angular/platform-browser';
 import { Store } from '@ngrx/store';
 
@@ -13,6 +13,7 @@ import * as fromEditor from '../../modules/editor/state';
 export class PreviewComponent implements OnInit {
 
     @Input() storeUrl: SafeUrl;
+    @Input() mode: string;
     @ViewChild('preview') previewRef: ElementRef;
     // private get preview() { return (<any>this.previewRef.nativeElement).contentWindow; }
 
@@ -24,5 +25,13 @@ export class PreviewComponent implements OnInit {
 
     previewLoaded() {
         this.store.dispatch(new editorActions.PreviewReady());
+    }
+
+    onChangeMode(mode) {
+        this.mode = mode;
+    }
+
+    trackByIndex(index, item) {
+        return index;
     }
 }

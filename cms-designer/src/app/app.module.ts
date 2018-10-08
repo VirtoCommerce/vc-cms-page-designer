@@ -15,13 +15,15 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 
 import { environment } from '../environments/environment';
 import { EditorActionTypes } from './modules/editor/state/editor.actions';
+import { PreviewModeButtonComponent } from './components/preview-mode-button/preview-mode-button.component';
 
 @NgModule({
     declarations: [
         AppComponent,
         PreviewComponent,
         ToolbarComponent,
-        SidebarComponent
+        SidebarComponent,
+        PreviewModeButtonComponent
     ],
     imports: [
         BrowserModule,

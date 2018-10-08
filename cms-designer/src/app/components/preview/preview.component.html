@@ -1,26 +1,11 @@
 <div class="theme-cnt">
-    <div class="theme-preview" data-size="desktop">
+    <div class="theme-preview" [ngClass]="mode">
         <iframe id="preview" [src]="storeUrl" scrolling="yes" (load)="previewLoaded()"></iframe>
     </div>
     <a class="theme-toggle js-toggle"></a>
     <ul class="list __nav">
-        <li class="list-item">
-            <a class="list-link __selected js-size" data-size="desktop">
-                <i class="list-ico fa fa-desktop"></i>
-                Desktop
-            </a>
-        </li>
-        <li class="list-item">
-            <a class="list-link js-size" data-size="tablet">
-                <i class="list-ico fa fa-tablet"></i>
-                Tablet
-            </a>
-        </li>
-        <li class="list-item">
-            <a class="list-link js-size" data-size="mobile">
-                <i class="list-ico fa fa-mobile"></i>
-                Mobile
-            </a>
+        <li class="list-item" *ngFor="let modeItem of ['desktop', 'tablet', 'mobile']; trackBy: trackByIndex">
+            <app-preview-mode-button (change)="onChangeMode($event)" [selected]="mode == modeItem" [type]="modeItem" title="{{ modeItem | titlecase }}"></app-preview-mode-button>
         </li>
     </ul>
 </div>
