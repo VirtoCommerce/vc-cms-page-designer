@@ -3,8 +3,10 @@
         [colorPicker]="value"
         (colorPickerChange)="onChange($event)" 
         [cpOKButton]="true"
-        [cpOKButtonClass]="'btn'">
-        <div class='bg' [style.background]="value"></div>
+        [cpOKButtonClass]="'btn'"
+        [style.backgroundColor]="value">
+
+        <div class='bg'></div>
     </div>
     <div class="pane-col pane-name">{{ label }}</div>
 </div>

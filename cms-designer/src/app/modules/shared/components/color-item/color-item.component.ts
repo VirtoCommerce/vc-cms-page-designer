@@ -27,7 +27,10 @@ export class ColorItemComponent implements OnInit, ControlValueAccessor {
     }
 
     registerOnChange(fn: any): void {
-        this.onChange = fn;
+        this.onChange = value => {
+            this.value = value;
+            fn(value);
+        };
     }
 
     registerOnTouched(): void { }
