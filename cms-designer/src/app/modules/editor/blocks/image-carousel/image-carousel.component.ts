@@ -1,7 +1,9 @@
 import { Component, Input } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, AbstractControl, FormArray } from '@angular/forms';
 import { SectionModel } from '../../models/section.model';
 import { BlockType } from '../../models/block-type.model';
+import { BlocksComponentFactory } from '../blocks-component.factory';
+import { FormsHelper } from '../../forms.helper';
 
 @Component({
     selector: 'app-image-carousel',
@@ -13,6 +15,22 @@ export class ImageCarouselComponent {
     @Input() model: any;
     @Input() group: FormGroup;
 
+    blockWidthOptions = [
+        { label: 'Screen', value: 'screen' },
+        { label: 'Container', value: 'container' },
+        { label: 'Small', value: 'small' }
+    ];
+
+    rotationFrequencyOptions = [
+        { label: '5000', value: '5 seconds' },
+        { label: '6000', value: '6 seconds' },
+        { label: '7000', value: '7 seconds' },
+        { label: '8000', value: '8 seconds' },
+        { label: '9000', value: '9 seconds' },
+    ];
+
+    constructor(private formHelper: FormsHelper) { }
+
     static createModel(item: BlockType): SectionModel {
         return <SectionModel>{
             type: ImageCarouselComponent.Key,
@@ -20,7 +38,6 @@ export class ImageCarouselComponent {
             images: [],
             autoRotate: true,
             rotationFrequency: '7000',
-            contentSize: 'medium',
             blockWidth: 'screen'
         };
     }
@@ -32,8 +49,30 @@ export class ImageCarouselComponent {
             images: [],
             autoRotate: true,
             rotationFrequency: '7000',
-            contentSize: 'medium',
             blockWidth: 'screen',
         };
+    }
+
+    private generateImageItem(): any {
+        return {
+            title: 'New Item',
+            content: '',
+            url: ''
+        };
+    }
+
+    addImage() {
+        const group = this.formHelper.fillFormRecursively(this.generateImageItem());
+        const images = this.group.get('images') as FormArray;
+        images.push(group);
+    }
+
+    removeImage(index: number) {
+        const images = this.group.get('images') as FormArray;
+        images.removeAt(index);
+    }
+
+    getTitle(item: FormGroup) {
+        return item.controls.title.value || '<empty title>';
     }
 }

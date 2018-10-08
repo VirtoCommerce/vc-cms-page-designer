@@ -42,7 +42,6 @@
         "name": "Image carousel",
         "images": [
             {
-                "active": true,
                 "url": "http://www.flowermeaning.com/flower-pics/Zinnia-4.jpg",
                 "title": "Image content 1",
                 "content": "Tell your story through images"
@@ -53,7 +52,6 @@
                 "content": "Tell your story through images"
             },
             {
-                "id": "i2",
                 "url": "https://www.sciencenews.org/sites/default/files/2017/08/main/articles/story-3_main.jpg",
                 "title": "Image content",
                 "content": "Tell your story through images"
