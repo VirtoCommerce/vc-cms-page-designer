@@ -41,7 +41,7 @@ export class EditorEffects {
     loadBlockTypes$: Observable<Action> = this.actions$.pipe(
         ofType(editorActions.EditorActionTypes.LoadBlockTypes),
         mergeMap(_ =>
-            of(new editorActions.BlockTypesLoaded(this.pageService.availableTypes))
+            of(new editorActions.BlockTypesLoaded(this.blockFactory.getComponentsDescriptors()))
         )
     );
 

@@ -113,9 +113,7 @@ export class SidebarComponent implements OnInit {
     }
 
     selectBlockType(item: BlockType) {
-        if (!item.inactive) {
-            this.store.dispatch(new editorActions.CreatePageItem(item));
-        }
+        this.store.dispatch(new editorActions.CreatePageItem(item));
     }
 
     onOrderChanged(event: SortEvent) {

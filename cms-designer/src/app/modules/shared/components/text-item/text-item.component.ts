@@ -48,7 +48,6 @@ export class TextItemComponent implements OnInit, ControlValueAccessor {
     onChange = (_: any) => { };
 
     writeValue(obj: any): void {
-        console.log(`write value: ${obj}`);
         this.value = obj as string;
         if (this.editor != null) {
             this.editor.setText(this.value);
@@ -57,7 +56,6 @@ export class TextItemComponent implements OnInit, ControlValueAccessor {
 
     registerOnChange(fn: any): void {
         this.onChange = (value) => {
-            console.log(`apply value: ${value.html}`);
             fn(value.html);
         };
     }
