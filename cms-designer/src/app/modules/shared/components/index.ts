@@ -7,3 +7,4 @@ export * from './tabs/tab.component';
 export * from './text-item/text-item.component';
 export * from './string-item/string-item.component';
 export * from './section-icon.directive';
+export * from './slider-item/slider-item.component';

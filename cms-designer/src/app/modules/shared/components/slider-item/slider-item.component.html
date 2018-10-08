@@ -1,0 +1,4 @@
+<label class="form-label">{{label}}</label>
+<div class="form-input">
+    <input type="number" [min]="min" [max]="max" [value]="value" (keyup)="onChange($event)" (change)="onChange($event)" (blur)="onTouched($event)">
+</div>

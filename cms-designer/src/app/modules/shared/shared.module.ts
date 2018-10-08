@@ -13,6 +13,7 @@ import {
     TabsComponent,
     TabComponent,
     TextItemComponent,
+    SliderItemComponent,
     SectionIconDirective
 } from './components';
 
@@ -32,6 +33,7 @@ const COMPONENTS = [
     TextItemComponent,
     StringItemComponent,
     SectionIconDirective,
+    SliderItemComponent,
 
     DraggableDirective,
     DraggableHelperDirective,
