@@ -1,6 +1,10 @@
 <div [formGroup]="group">
 
     <div class="pane-settings">
+        <app-color-item label="Text color" formControlName="textColor"></app-color-item>
+    </div>
+
+    <div class="pane-settings">
         <app-checkbox-item label="Use text background" formControlName="textBackground"></app-checkbox-item>
     </div>
 

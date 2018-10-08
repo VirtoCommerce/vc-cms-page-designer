@@ -35,6 +35,7 @@ export class ImageWithTextOverlayComponent {
             // sectionHeight: 'medium',
             textBackground: false,
             textBackgroundColor: 'black',
+            textColor: 'white',
             textBackgroundOpacity: 0.5,
             title: 'Image with text overlay',
             url: 'https://cdn2.slidemodel.com/wp-content/uploads/7243-01-low-poly-background-16x9-1.jpg'
@@ -52,6 +53,7 @@ export class ImageWithTextOverlayComponent {
             // sectionHeight: 'medium',
             textBackground: false,
             textBackgroundColor: 'black',
+            textColor: 'white',
             textBackgroundOpacity: 0.5,
             title: 'Image with text overlay',
             url: 'https://cdn2.slidemodel.com/wp-content/uploads/7243-01-low-poly-background-16x9-1.jpg'
