@@ -20,9 +20,9 @@ import {
     SettingsEditorComponent,
     ImageCarouselComponent,
     ImageWithTextComponent,
+    ImageWithTextOverlayComponent,
 
     ImageLayoutComponent,
-    ImageWithTextOverlayComponent,
     TextColumnsWithImagesComponent
 } from './blocks';
 
@@ -41,9 +41,9 @@ const BLOCKS = [
     SettingsEditorComponent,
     ImageCarouselComponent,
     ImageWithTextComponent,
+    ImageWithTextOverlayComponent,
 
     ImageLayoutComponent,
-    ImageWithTextOverlayComponent,
     TextColumnsWithImagesComponent
 ];
 

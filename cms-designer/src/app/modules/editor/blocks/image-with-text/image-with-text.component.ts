@@ -13,37 +13,15 @@ export class ImageWithTextComponent implements OnInit {
     @Input() group: FormGroup;
 
     sizeOptions = [
-        {
-            label: 'Small',
-            value: 'small'
-        },
-        {
-            label: 'Medium',
-            value: 'medium'
-        },
-        {
-            label: 'Large',
-            value: 'large'
-        },
-        {
-            label: 'Extra Large',
-            value: 'xlarge'
-        }
+        { label: 'Small', value: 'small' },
+        { label: 'Medium', value: 'medium' },
+        { label: 'Large', value: 'large' },
+        { label: 'Extra Large', value: 'xlarge' }
     ];
 
     alignOptions = [
-        {
-            label: 'Left',
-            value: 'left'
-        },
-        {
-            label: 'Center',
-            value: 'center'
-        },
-        {
-            label: 'Right',
-            value: 'right'
-        }
+        { label: 'Left', value: 'left' },
+        { label: 'Right', value: 'right' }
     ];
 
     constructor() { }

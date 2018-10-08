@@ -1,0 +1,44 @@
+<div [formGroup]="group">
+
+    <div class="pane-settings">
+        <app-checkbox-item label="Use text background" formControlName="textBackground"></app-checkbox-item>
+    </div>
+
+    <div *ngIf="group.get('textBackground').value">
+        <div class="pane-settings">
+            <app-color-item label="Text background color" formControlName="textBackgroundColor"></app-color-item>
+        </div>
+        <div class="pane-settings">
+            <app-slider-item label="Text background opacity" min="0" max="100" formControlName="textBackgroundOpacity"></app-slider-item>
+        </div>
+    </div>
+
+
+    <div class="pane-settings">
+        <app-image-item label="Upload picture" formControlName="url"></app-image-item>
+    </div>
+    <div class="pane-settings">
+        <app-select-item [options]="alignOptions" label="Choose text alignment" formControlName="align"></app-select-item>
+    </div>
+    <div class="pane-settings">
+        <app-text-item label="Content" formControlName="content"></app-text-item>
+    </div>
+
+    <div class="pane-settings">
+        <app-select-item [options]="blockWidthOptions" label="Block width" formControlName="blockWidth"></app-select-item>
+    </div>
+</div>
+
+
+<!-- 
+url: "https://cdn2.slidemodel.com/wp-content/uploads/7243-01-low-poly-background-16x9-1.jpg"
+
+align: "center"
+content: "This is a subtitle where you can describe what this page is about. Add some text to make this block attractive to your customers"
+
+blockWidth: "screen"
+sectionHeight: "medium"
+
+textBackground: false
+textBackgroundColor: "black"
+ -->
