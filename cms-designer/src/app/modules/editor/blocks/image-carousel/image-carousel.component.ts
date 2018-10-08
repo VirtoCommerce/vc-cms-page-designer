@@ -55,7 +55,7 @@ export class ImageCarouselComponent {
 
     private generateImageItem(): any {
         return {
-            title: 'New Item',
+            title: '',
             content: '',
             url: ''
         };
@@ -63,16 +63,20 @@ export class ImageCarouselComponent {
 
     addImage() {
         const group = this.formHelper.fillFormRecursively(this.generateImageItem());
-        const images = this.group.get('images') as FormArray;
+        const images = this.getFormArray('images');
         images.push(group);
     }
 
     removeImage(index: number) {
-        const images = this.group.get('images') as FormArray;
+        const images = this.getFormArray('images');
         images.removeAt(index);
     }
 
     getTitle(item: FormGroup) {
         return item.controls.title.value || '<empty title>';
+    }
+
+    getFormArray(name: string): FormArray {
+        return this.group.get('images') as FormArray;
     }
 }

@@ -13,7 +13,7 @@
 
     <div class="pane-settings">
         <app-accordeon formArrayName="images">
-            <app-acc-item *ngFor="let item of group.get('images').controls; let i = index;" [title]="getTitle(item)" [active]="false">
+            <app-acc-item *ngFor="let item of getFormArray('images').controls; let i = index;" [title]="getTitle(item)" [active]="false">
                 <div [formGroupName]="i" style="border-left: 3px solid #43b0e6; padding-left: 10px;">
                     <div class="pane-settings">
                         <app-string-item label="Title" formControlName="title"></app-string-item>

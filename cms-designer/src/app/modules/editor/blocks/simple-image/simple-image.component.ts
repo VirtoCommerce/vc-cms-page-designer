@@ -14,22 +14,10 @@ export class SimpleImageComponent implements OnInit {
     @Input() group: FormGroup;
 
     options = [
-        {
-            label: 'Small',
-            value: 'small'
-        },
-        {
-            label: 'Medium',
-            value: 'medium'
-        },
-        {
-            label: 'Large',
-            value: 'large'
-        },
-        {
-            label: 'Extra Large',
-            value: 'xlarge'
-        }
+        { label: 'Small', value: 'small' },
+        { label: 'Medium', value: 'medium' },
+        { label: 'Large', value: 'large' },
+        { label: 'Extra Large', value: 'xlarge' }
     ];
 
     constructor() { }
