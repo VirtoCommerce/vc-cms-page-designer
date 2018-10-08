@@ -41,8 +41,8 @@ export class BlocksComponentFactory {
         return result.type;
     }
 
-    create(item: BlockType): SectionModel {
-        const itemEditorType = this.components[item.type].type;
+    create(item: string | BlockType): SectionModel {
+        const itemEditorType = this.components[(typeof item === 'string') ? item : item.type].type;
         const result = (<any>itemEditorType).createModel(item);
         return result;
     }

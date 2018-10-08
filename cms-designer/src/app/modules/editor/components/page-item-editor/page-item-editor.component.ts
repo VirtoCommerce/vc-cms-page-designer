@@ -38,8 +38,9 @@ export class PageItemEditorComponent implements OnInit {
             (<any>component.instance).model = this.model;
             (<any>component.instance).group = this.form;
             const uneditableProperties = ['type', 'id', 'name'];
-            const keys = Object.keys(this.model).filter(x => uneditableProperties.indexOf(x) === -1);
-            this.formHelper.fillFormRecursively(this.model, this.form, keys);
+            const extendedModel = Object.assign(this.blocksFactory.create(this.model.type), this.model);
+            const keys = Object.keys(extendedModel).filter(x => uneditableProperties.indexOf(x) === -1);
+            this.formHelper.fillFormRecursively(extendedModel, this.form, keys);
         }
 
         this.form.valueChanges.subscribe(value => {
