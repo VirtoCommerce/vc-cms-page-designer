@@ -49,7 +49,7 @@ export class ImageCarouselComponent {
             images: [],
             autoRotate: true,
             rotationFrequency: '7000',
-            blockWidth: 'screen',
+            blockWidth: 'screen'
         };
     }
 
