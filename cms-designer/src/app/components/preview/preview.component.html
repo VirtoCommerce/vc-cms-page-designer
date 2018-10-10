@@ -1,10 +1,10 @@
-<div class="theme-cnt">
+<div #wrapper class="theme-cnt">
     <div class="theme-preview" [ngClass]="mode">
         <iframe id="preview" [src]="storeUrl" scrolling="yes" (load)="previewLoaded()"></iframe>
     </div>
-    <a class="theme-toggle js-toggle"></a>
+    <a class="theme-toggle js-toggle" (click)="toggleFullscreen()"></a>
     <ul class="list __nav">
-        <li class="list-item" *ngFor="let modeItem of ['desktop', 'tablet', 'mobile']; trackBy: trackByIndex">
+        <li class="list-item" *ngFor="let modeItem of ['desktop', 'tablet', 'mobile']">
             <app-preview-mode-button (change)="onChangeMode($event)" [selected]="mode == modeItem" [type]="modeItem" title="{{ modeItem | titlecase }}"></app-preview-mode-button>
         </li>
     </ul>

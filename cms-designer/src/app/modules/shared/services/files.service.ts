@@ -1,21 +1,35 @@
 import { Injectable } from '@angular/core';
-import { HttpRequest, HttpClient } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
+import { environment } from 'src/environments/environment';
+import { tap, map } from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root'
 })
 export class FilesService {
 
-    private apiCreateEndpoint = '';
-
     constructor(private http: HttpClient) { }
 
-    upload(file: File): Observable<string> {
-        // const request = new HttpRequest('POST', this.apiCreateEndpoint, {}, {
-        //     reportProgress: true
-        // });
-        // return this.http.request(request);
-        return of('https://virtocommerce.com/themes/assets/bg-enterprise.jpg');
+    uploadFile(file: any, name: string): Observable<string> {
+        const assetEndpoint = 'api/platform/assets';
+        const url = `${environment.platformUrl}/${assetEndpoint}?folderUrl=blogs&name=${name}&api_key=${environment.apiKey}`;
+        const form = new FormData();
+        form.append('upload', file, name);
+        return this.http.post<FileDescriptor[]>(url, form).pipe(
+            tap(x => console.log(x)),
+            map(x => x[0].url)
+        );
     }
+
+}
+interface FileDescriptor {
+    contentType: string;
+    fileName: string;
+    key: string;
+    mimeType: string;
+    name: string;
+    relativeUrl: string;
+    size: number;
+    url: string;
 }

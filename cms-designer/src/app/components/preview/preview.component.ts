@@ -14,14 +14,11 @@ export class PreviewComponent implements OnInit {
 
     @Input() storeUrl: SafeUrl;
     @Input() mode: string;
-    @ViewChild('preview') previewRef: ElementRef;
-    // private get preview() { return (<any>this.previewRef.nativeElement).contentWindow; }
+    @ViewChild('wrapper') wrapperRef: ElementRef;
 
     constructor(private store: Store<fromEditor.State>) { }
 
-    ngOnInit() {
-        // this.preview
-    }
+    ngOnInit() { }
 
     previewLoaded() {
         this.store.dispatch(new editorActions.PreviewReady());
@@ -31,7 +28,7 @@ export class PreviewComponent implements OnInit {
         this.mode = mode;
     }
 
-    trackByIndex(index, item) {
-        return index;
+    toggleFullscreen() {
+        this.wrapperRef.nativeElement.classList.toggle('fullscreen');
     }
 }

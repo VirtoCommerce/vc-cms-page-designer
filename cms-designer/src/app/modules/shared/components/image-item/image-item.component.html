@@ -1,7 +1,7 @@
 <label class="form-label">{{ label }}</label>
 <div class="form-file">
     <div class='form-file'>
-        <input type='file' #fileInput>
+        <input type='file' #fileInput (change)="onChange($event)" accept=".png,.gif,.jpg,.jpeg">
         <button class='btn' (click)="openFileDialog()">Choose file</button>
     </div>
 </div>

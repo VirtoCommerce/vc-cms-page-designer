@@ -7,14 +7,14 @@ import { mergeMap, map, catchError, tap, withLatestFrom, filter, debounceTime, d
 import * as editorActions from './editor.actions';
 import * as fromEditor from '.';
 
-import { PageService } from '../services/page.service';
+import { PlatformService } from '../services/platform.service';
 import { PageModel } from '../models/page.model';
 import { PreviewService } from '../services/preview.service';
 import { BlocksComponentFactory } from '../blocks/blocks-component.factory';
 
 @Injectable()
 export class EditorEffects {
-    constructor(private pageService: PageService,
+    constructor(private platform: PlatformService,
                 private preview: PreviewService,
                 private blockFactory: BlocksComponentFactory,
                 private actions$: Actions, private store$: Store<fromEditor.State>) { }
@@ -23,7 +23,7 @@ export class EditorEffects {
     loadPage$: Observable<Action> = this.actions$.pipe(
         ofType(editorActions.EditorActionTypes.LoadPage),
         mergeMap(_ =>
-            this.pageService.loadPage().pipe(
+            this.platform.loadPage().pipe(
                 map(data => {
                     const model = new PageModel();
                     model.sections = data.filter(x => x.type !== 'settings');

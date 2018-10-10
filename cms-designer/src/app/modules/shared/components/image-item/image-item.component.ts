@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef, forwardRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { FilesService } from '../../services/files.service';
 
 @Component({
     selector: 'app-image-item',
@@ -13,14 +14,14 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 })
 export class ImageItemComponent implements OnInit, ControlValueAccessor {
 
-    @ViewChild('fileInput', {read: ElementRef}) fileInput: ElementRef;
+    @ViewChild('fileInput', { read: ElementRef }) fileInput: ElementRef;
 
     @Input() label: string;
     @Input() info: string;
 
     value: string;
 
-    constructor() { }
+    constructor(private files: FilesService) { }
 
     ngOnInit() { }
 
@@ -34,7 +35,15 @@ export class ImageItemComponent implements OnInit, ControlValueAccessor {
         this.value = obj as string;
     }
     registerOnChange(fn: any): void {
-        this.onChange = fn;
+        this.onChange = (event) => {
+            const file = event.target.files[0];
+            const subscription = this.files.uploadFile(event.target, file.name).subscribe(x => {
+                console.log(x);
+                subscription.unsubscribe();
+                this.value = x;
+                fn(x);
+            });
+        };
     }
     registerOnTouched(): void { }
 
