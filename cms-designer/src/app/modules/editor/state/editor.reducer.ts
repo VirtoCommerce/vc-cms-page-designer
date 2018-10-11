@@ -7,6 +7,7 @@ export interface EditorState {
     currentSectionItem: SectionModel;
     error: string;
     pageLoading: boolean;
+    initialPage: PageModel;
     page: PageModel;
     blockTypes: any[];
     previewIsReady: boolean;
@@ -17,6 +18,7 @@ const initialState: EditorState = {
     currentSectionItem: null,
     error: '',
     pageLoading: false,
+    initialPage: null,
     page: null,
     blockTypes: [],
     previewIsReady: false
@@ -48,6 +50,7 @@ export function reducer(state = initialState, action: EditorActions): EditorStat
             return {
                 ...state,
                 page: action.payload,
+                initialPage: JSON.parse(JSON.stringify(action.payload)),
                 pageLoading: false
             };
         case EditorActionTypes.LoadPageFail:
@@ -84,6 +87,28 @@ export function reducer(state = initialState, action: EditorActions): EditorStat
                 ...state,
                 showNewBlockSelector: false,
                 currentSectionItem: action.payload
+            };
+        case EditorActionTypes.SavePageSuccess:
+            return {
+                ...state,
+                pageLoading: false,
+                initialPage: JSON.parse(JSON.stringify(state.page))
+            };
+        case EditorActionTypes.SavePage:
+            return {
+                ...state,
+                pageLoading: true
+            };
+        case EditorActionTypes.SavePageFail:
+            return {
+                ...state,
+                pageLoading: false,
+                error: action.payload
+            };
+        case EditorActionTypes.ClearChanges:
+            return {
+                ...state,
+                page: JSON.parse(JSON.stringify(state.initialPage))
             };
     }
     return state;

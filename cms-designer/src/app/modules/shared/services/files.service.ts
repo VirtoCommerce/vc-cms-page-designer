@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { tap, map } from 'rxjs/operators';
@@ -11,13 +11,14 @@ export class FilesService {
 
     constructor(private http: HttpClient) { }
 
-    uploadFile(file: any, name: string): Observable<string> {
+    uploadFile(file: File, name: string): Observable<string> {
         const assetEndpoint = 'api/platform/assets';
         const url = `${environment.platformUrl}/${assetEndpoint}?folderUrl=blogs&name=${name}&api_key=${environment.apiKey}`;
         const form = new FormData();
-        form.append('upload', file, name);
+
+        form.append('uploadedFile', file, name);
+
         return this.http.post<FileDescriptor[]>(url, form).pipe(
-            tap(x => console.log(x)),
             map(x => x[0].url)
         );
     }

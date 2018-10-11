@@ -1,8 +1,18 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Action, Store } from '@ngrx/store';
-import { Observable, of } from 'rxjs';
-import { mergeMap, map, catchError, tap, withLatestFrom, filter, debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { Observable, of, merge } from 'rxjs';
+import {
+    catchError,
+    debounceTime,
+    distinctUntilChanged,
+    filter,
+    mergeMap,
+    map,
+    switchMap,
+    tap,
+    withLatestFrom
+} from 'rxjs/operators';
 
 import * as editorActions from './editor.actions';
 import * as fromEditor from '.';
@@ -15,15 +25,15 @@ import { BlocksComponentFactory } from '../blocks/blocks-component.factory';
 @Injectable()
 export class EditorEffects {
     constructor(private platform: PlatformService,
-                private preview: PreviewService,
-                private blockFactory: BlocksComponentFactory,
-                private actions$: Actions, private store$: Store<fromEditor.State>) { }
+        private preview: PreviewService,
+        private blockFactory: BlocksComponentFactory,
+        private actions$: Actions, private store$: Store<fromEditor.State>) { }
 
     @Effect()
     loadPage$: Observable<Action> = this.actions$.pipe(
-        ofType(editorActions.EditorActionTypes.LoadPage),
-        mergeMap(_ =>
-            this.platform.loadPage().pipe(
+        ofType<editorActions.LoadPage>(editorActions.EditorActionTypes.LoadPage),
+        mergeMap(action =>
+            this.platform.loadPage(action.payload).pipe(
                 map(data => {
                     const model = new PageModel();
                     model.sections = data.filter(x => x.type !== 'settings');
@@ -33,6 +43,18 @@ export class EditorEffects {
                     return new editorActions.LoadPageSuccess(model);
                 }),
                 catchError(err => of(new editorActions.LoadPageFail(err)))
+            )
+        )
+    );
+
+    @Effect()
+    uploadPage$: Observable<Action> = this.actions$.pipe(
+        ofType<editorActions.SavePage>(editorActions.EditorActionTypes.SavePage),
+        withLatestFrom(this.store$.select(state => state.editor.page)),
+        switchMap(([action, page]) =>
+            this.platform.uploadPage([page.settings, ...page.sections], action.payload).pipe(
+                map(result => new editorActions.SavePageSuccess()),
+                catchError(err => of(new editorActions.SavePageFail(err)))
             )
         )
     );

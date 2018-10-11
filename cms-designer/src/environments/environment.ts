@@ -6,8 +6,9 @@ export const environment = {
     production: false,
     storeUrl: 'http://localhost:2082/designer-preview',
     baseUrl: '/',
-    platformUrl: 'http://localhost/virto',
-    apiKey: '1bae446bae4a4ee2bfb7aab43cbcbca0'
+    platformUrl: 'http://localhost/admin',
+    contentUrl: '/api/content/cms/pages/',
+    apiKey: '4f35d297210e4bfbb827ea33089a59f4'
 };
 
 /*

@@ -34,7 +34,7 @@
             [theme]="theme$|async" (backEvent)="selectThemeItem(null)"></app-theme-item-editor>
     </div>
     <div class="sidebar-foot">
-        <button class="btn">Clear changes</button>
-        <button class="btn">Save changes</button>
+        <button class="btn" (click)="clearChanges()">Clear changes</button>
+        <button class="btn" (click)="saveChanges()">Save changes</button>
     </div>
 </div>

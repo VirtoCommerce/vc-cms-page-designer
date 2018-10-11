@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
 import { StoreModule, Action } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
@@ -27,6 +28,7 @@ import { PreviewModeButtonComponent } from './components/preview-mode-button/pre
     ],
     imports: [
         BrowserModule,
+        RouterModule.forRoot([]),
         StoreModule.forRoot({}),
         StoreDevtoolsModule.instrument({
             name: 'CMS',

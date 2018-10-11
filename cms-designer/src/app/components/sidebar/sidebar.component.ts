@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Store, select } from '@ngrx/store';
 import { Observable, combineLatest } from 'rxjs';
 
@@ -12,6 +13,7 @@ import { PageModel } from '../../modules/editor/models/page.model';
 import { SectionModel } from '../../modules/editor/models/section.model';
 import { BlockType } from '../../modules/editor/models/block-type.model';
 import { SortEvent } from '../../modules/shared/draggable';
+import { PageDescriptor } from 'src/app/modules/editor/models';
 
 @Component({
     selector: 'app-sidebar',
@@ -36,11 +38,18 @@ export class SidebarComponent implements OnInit {
     // combined states
     isLoading$: Observable<boolean>;
 
-    constructor(private store: Store<fromEditor.State>) { }
+    private params: PageDescriptor;
+
+    constructor(private store: Store<fromEditor.State>, private route: ActivatedRoute) { }
 
     ngOnInit() {
         // page editor
-        this.store.dispatch(new editorActions.LoadPage());
+        this.route.queryParams.subscribe(x => {
+            if (x.storeId && x.path) {
+                this.params = <PageDescriptor>x;
+                this.store.dispatch(new editorActions.LoadPage(this.params));
+            }
+        });
         this.store.dispatch(new editorActions.LoadBlockTypes());
 
         this.currentSectionItem$ = this.store.pipe(select(fromEditor.getCurrentSectionItem));
@@ -124,4 +133,12 @@ export class SidebarComponent implements OnInit {
         this.store.dispatch(new editorActions.RemovePageItem(item));
     }
     //#endregion
+
+    saveChanges() {
+        this.store.dispatch(new editorActions.SavePage(this.params));
+    }
+
+    clearChanges() {
+        this.store.dispatch(new editorActions.ClearChanges());
+    }
 }

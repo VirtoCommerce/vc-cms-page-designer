@@ -4,6 +4,7 @@ import { PageModel } from '../models/page.model';
 import { SectionModel } from '../models/section.model';
 import { BlockType } from '../models/block-type.model';
 import { SortEvent } from '../../shared/draggable';
+import { PageDescriptor } from '../models/page.descriptor';
 
 export enum EditorActionTypes {
     LoadPage = 'Load Page',
@@ -20,7 +21,11 @@ export enum EditorActionTypes {
     LoadBlockTypes = 'Load Block Types',
     PreviewReady = 'Preview is ready',
     PreviewPageItem = 'Preview Page Item',
-    OrderChanged = 'Order Changed'
+    OrderChanged = 'Order Changed',
+    SavePage = 'Save Page',
+    SavePageSuccess = 'Save Page Success',
+    SavePageFail = 'Save Page Fail',
+    ClearChanges = 'Clear Changes'
 }
 
 export class PreviewReady implements Action {
@@ -29,6 +34,8 @@ export class PreviewReady implements Action {
 
 export class LoadPage implements Action {
     readonly type = EditorActionTypes.LoadPage;
+
+    constructor(public payload: PageDescriptor) { }
 }
 
 export class LoadPageSuccess implements Action {
@@ -105,6 +112,26 @@ export class OrderChanged implements Action {
     constructor(public payload: SortEvent) { }
 }
 
+export class SavePage implements Action {
+    readonly type = EditorActionTypes.SavePage;
+
+    constructor(public payload: PageDescriptor) { }
+}
+
+export class SavePageSuccess implements Action {
+    readonly type = EditorActionTypes.SavePageSuccess;
+}
+
+export class SavePageFail implements Action {
+    readonly type = EditorActionTypes.SavePageFail;
+
+    constructor(public payload: string) { }
+}
+
+export class ClearChanges implements Action {
+    readonly type = EditorActionTypes.ClearChanges;
+}
+
 export type EditorActions = LoadPage
     | LoadPageSuccess
     | LoadPageFail
@@ -117,4 +144,8 @@ export type EditorActions = LoadPage
     | RemovePageItem
     | BlockTypesLoaded
     | PreviewReady
-    | OrderChanged;
+    | OrderChanged
+    | SavePage
+    | SavePageSuccess
+    | SavePageFail
+    | ClearChanges;
