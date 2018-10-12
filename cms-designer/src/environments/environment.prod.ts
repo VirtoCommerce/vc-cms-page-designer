@@ -4,5 +4,5 @@ export const environment = {
   baseUrl: '/v2/designer/',
   platformUrl: 'http://dev-cms-vm.westeurope.cloudapp.azure.com/v2/admin',
   contentUrl: '/api/content/cms/pages/',
-  apiKey: '4f35d297210e4bfbb827ea33089a59f4'
+  apiKey: 'bc0f9c8e8e664d6689f8b4e3d19b6e88'
 };
