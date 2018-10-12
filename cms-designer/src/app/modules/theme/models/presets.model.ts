@@ -1,4 +1,4 @@
 export interface PresetsModel {
     current: string;
-    presets: any;
+    presets: { [key: string]: { [key: string]: string | number | boolean } };
 }

@@ -13,16 +13,29 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 })
 export class SelectItemComponent implements OnInit, ControlValueAccessor {
 
-    @Input() label;
-    @Input() options;
+    @Input() label: string;
+    @Input() options: { label: string; value: string; group?: string }[];
     @Input() valueName = 'value';
     @Input() valueLabel = 'label';
 
+    group = false;
+    groups: { [key: string]: { label: string; value: string; }[] };
     value: any;
 
     constructor() { }
 
-    ngOnInit() { }
+    ngOnInit() {
+        this.group = this.options.some(x => !!x.group);
+        if (this.group) {
+            this.groups = {};
+            this.options.forEach(x => {
+                if (!this.groups[x.group]) {
+                    this.groups[x.group] = [];
+                }
+                this.groups[x.group].push(x);
+            });
+        }
+    }
 
     onChange = (_: any) => { };
 

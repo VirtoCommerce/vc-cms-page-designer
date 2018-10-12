@@ -1,7 +1,7 @@
 import { Action } from '@ngrx/store';
 
 import { PresetsModel } from '../models/presets.model';
-import { ThemeItemModel } from '../models/theme-item.model';
+import { SchemaItemModel } from '../models/schema-item.model';
 
 export enum ThemeActionTypes {
     LoadPresets = 'Load Presets',
@@ -10,8 +10,13 @@ export enum ThemeActionTypes {
     LoadSchema = 'Load Schema',
     LoadSchemaSuccess = 'Load Schema Success',
     LoadSchemaFail = 'Load Schema Fail',
-    SelectThemeItem = 'Select Theme Item',
-    TogglePresetsPane = 'Toggle Presets Pane'
+    SelectSchemaItem = 'Select Schema Item',
+    TogglePresetsPane = 'Toggle Presets Pane',
+    UpdateTheme = 'Update Theme',
+    ClearThemeChanges = 'Clear Theme Changes',
+    RemovePreset = 'Remove Preset',
+    CreatePreset = 'Create Preset',
+    SelectPreset = 'Select Preset'
 }
 
 export class LoadPresets implements Action {
@@ -37,7 +42,7 @@ export class LoadSchema implements Action {
 export class LoadSchemaSuccess implements Action {
     readonly type = ThemeActionTypes.LoadSchemaSuccess;
 
-    constructor(public payload: ThemeItemModel[]) { }
+    constructor(public payload: SchemaItemModel[]) { }
 }
 
 export class LoadSchemaFail implements Action {
@@ -46,10 +51,10 @@ export class LoadSchemaFail implements Action {
     constructor(public payload: string) { }
 }
 
-export class SelectThemeItem implements Action {
-    readonly type = ThemeActionTypes.SelectThemeItem;
+export class SelectSchemaItem implements Action {
+    readonly type = ThemeActionTypes.SelectSchemaItem;
 
-    constructor(public payload: any) { }
+    constructor(public payload: SchemaItemModel) { }
 }
 
 export class TogglePresetsPane implements Action {
@@ -58,11 +63,44 @@ export class TogglePresetsPane implements Action {
     constructor(public payload: boolean) { }
 }
 
+export class UpdateTheme implements Action {
+    readonly type = ThemeActionTypes.UpdateTheme;
+
+    constructor(public payload: {[key: string]: any}) { }
+}
+
+export class ClearThemeChanges implements Action {
+    readonly type = ThemeActionTypes.ClearThemeChanges;
+}
+
+export class RemovePreset implements Action {
+    readonly type = ThemeActionTypes.RemovePreset;
+
+    constructor(public payload: string) { }
+}
+
+export class CreatePreset implements Action {
+    readonly type = ThemeActionTypes.CreatePreset;
+
+    constructor(public payload: string) { }
+}
+
+export class SelectPreset implements Action {
+    readonly type = ThemeActionTypes.SelectPreset;
+
+    constructor(public payload: string) { }
+}
+
 export type ThemeActions = LoadPresets
     | LoadPresetsSuccess
     | LoadPresetsFail
     | LoadSchema
     | LoadSchemaSuccess
     | LoadSchemaFail
-    | SelectThemeItem
-    | TogglePresetsPane;
+    | SelectSchemaItem
+    | TogglePresetsPane
+    | UpdateTheme
+    | ClearThemeChanges
+    | RemovePreset
+    | CreatePreset
+    | SelectPreset;

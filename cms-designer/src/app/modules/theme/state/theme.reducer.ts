@@ -1,25 +1,28 @@
-import { ThemeActionTypes, ThemeActions } from './theme.actions';
+import { ThemeActionTypes, ThemeActions, CreatePreset } from './theme.actions';
 import { PresetsModel } from '../models/presets.model';
+import { SchemaItemModel } from '../models/schema-item.model';
 
 export interface ThemeState {
     showPresetsEditor: boolean;
-    currentThemeItem: any;
+    selectedSchemaItem: SchemaItemModel;
     error: string;
     schemaLoading: boolean;
     presetsLoading: boolean;
-    currentTheme: any;
+    editableTheme: { [key: string]: string | number | boolean };
     presets: PresetsModel;
-    schema: any[];
+    initialPresets: string;
+    schema: SchemaItemModel[];
 }
 
 const initialState: ThemeState = {
     showPresetsEditor: false,
-    currentThemeItem: null,
+    selectedSchemaItem: null,
     error: '',
     schemaLoading: false,
     presetsLoading: false,
-    currentTheme: {},
+    editableTheme: {},
     presets: null,
+    initialPresets: null,
     schema: []
 };
 
@@ -38,24 +41,64 @@ export function reducer(state = initialState, action: ThemeActions): ThemeState 
         case ThemeActionTypes.LoadPresetsSuccess:
             return {
                 ...state,
-                currentTheme: { ...action.payload.presets[action.payload.current] },
-                presets: action.payload
+                editableTheme: { ...action.payload.presets[action.payload.current] },
+                presets: action.payload,
+                initialPresets: JSON.stringify(action.payload)
             };
         case ThemeActionTypes.LoadPresetsFail:
             return {
                 ...state,
                 error: action.payload
             };
-        case ThemeActionTypes.SelectThemeItem:
+        case ThemeActionTypes.SelectSchemaItem:
             return {
                 ...state,
-                currentThemeItem: action.payload
+                selectedSchemaItem: action.payload
             };
         case ThemeActionTypes.TogglePresetsPane:
             return {
                 ...state,
                 showPresetsEditor: action.payload
             };
+        case ThemeActionTypes.UpdateTheme:
+            return {
+                ...state,
+                editableTheme: { ...state.editableTheme, ...action.payload }
+            };
+        case ThemeActionTypes.ClearThemeChanges:
+            return {
+                ...state,
+                presets: JSON.parse(state.initialPresets)
+            };
+        case ThemeActionTypes.RemovePreset:
+            if (action.payload !== state.presets.current) {
+                const newPresets = state.presets;
+                delete newPresets.presets[action.payload];
+                return {
+                    ...state,
+                    presets: newPresets
+                };
+            }
+            break;
+        case ThemeActionTypes.CreatePreset: {
+            const newPresets = state.presets;
+            newPresets.presets[action.payload] = { ...state.editableTheme };
+            newPresets.current = action.payload;
+            return {
+                ...state,
+                presets: newPresets
+            };
+        }
+        case ThemeActionTypes.SelectPreset: {
+            const newPresets = state.presets;
+            newPresets.presets[newPresets.current] = { ...state.editableTheme };
+            newPresets.current = action.payload;
+            return {
+                ...state,
+                editableTheme: { ...newPresets.presets[action.payload] },
+                presets: newPresets
+            };
+        }
     }
     return state;
 }

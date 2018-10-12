@@ -1,5 +1,5 @@
 import { createFeatureSelector, createSelector, ActionReducerMap } from '@ngrx/store';
-import * as fromRoot from '../../../state/app.state';
+import * as fromRoot from '../../../state';
 import * as fromTheme from './theme.reducer';
 
 export interface State extends fromRoot.State {
@@ -8,9 +8,9 @@ export interface State extends fromRoot.State {
 
 const getThemeFeatureState = createFeatureSelector<fromTheme.ThemeState>('theme');
 
-export const getCurrentThemeItem = createSelector(
+export const getCurrentSchemaItem = createSelector(
     getThemeFeatureState,
-    state => state.currentThemeItem
+    state => state.selectedSchemaItem
 );
 
 export const getShowPresetsEditor = createSelector(
@@ -43,7 +43,7 @@ export const getError = createSelector(
     state => state.error
 );
 
-export const getCurrentTheme = createSelector(
+export const getEditableTheme = createSelector(
     getThemeFeatureState,
-    state => state.currentTheme
+    state => state.editableTheme
 );

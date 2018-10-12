@@ -4,7 +4,7 @@ import { PageModel } from '../models/page.model';
 import { SectionModel } from '../models/section.model';
 import { BlockType } from '../models/block-type.model';
 import { SortEvent } from '../../shared/draggable';
-import { PageDescriptor } from '../models/page.descriptor';
+import { PageDescriptor } from 'src/app/models/page.descriptor';
 
 export enum EditorActionTypes {
     LoadPage = 'Load Page',
@@ -25,7 +25,7 @@ export enum EditorActionTypes {
     SavePage = 'Save Page',
     SavePageSuccess = 'Save Page Success',
     SavePageFail = 'Save Page Fail',
-    ClearChanges = 'Clear Changes'
+    ClearPageChanges = 'Clear Page Changes'
 }
 
 export class PreviewReady implements Action {
@@ -128,8 +128,8 @@ export class SavePageFail implements Action {
     constructor(public payload: string) { }
 }
 
-export class ClearChanges implements Action {
-    readonly type = EditorActionTypes.ClearChanges;
+export class ClearPageChanges implements Action {
+    readonly type = EditorActionTypes.ClearPageChanges;
 }
 
 export type EditorActions = LoadPage
@@ -148,4 +148,4 @@ export type EditorActions = LoadPage
     | SavePage
     | SavePageSuccess
     | SavePageFail
-    | ClearChanges;
+    | ClearPageChanges;

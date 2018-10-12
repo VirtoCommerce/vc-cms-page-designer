@@ -3,6 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { Store, select } from '@ngrx/store';
 import { Observable, combineLatest } from 'rxjs';
 
+import * as fromRoot from '../../state';
+import * as rootActions from '../../state/root.actions';
 import * as fromEditor from '../../modules/editor/state';
 import * as editorActions from '../../modules/editor/state/editor.actions';
 import * as fromTheme from '../../modules/theme/state';
@@ -13,7 +15,8 @@ import { PageModel } from '../../modules/editor/models/page.model';
 import { SectionModel } from '../../modules/editor/models/section.model';
 import { BlockType } from '../../modules/editor/models/block-type.model';
 import { SortEvent } from '../../modules/shared/draggable';
-import { PageDescriptor } from 'src/app/modules/editor/models';
+import { PageDescriptor } from 'src/app/models/page.descriptor';
+import { SchemaItemModel } from 'src/app/modules/theme/models/schema-item.model';
 
 @Component({
     selector: 'app-sidebar',
@@ -25,14 +28,14 @@ export class SidebarComponent implements OnInit {
     // page editor states
     currentSectionItem$: Observable<SectionModel>;
     addNewSectionMode$: Observable<boolean>;
-    blockTypes$: Observable<any>;
+    blockTypes$: Observable<BlockType[]>;
     page$: Observable<PageModel>;
 
     // theme editor states
     presets$: Observable<PresetsModel>;
-    schema$: Observable<any[]>;
-    theme$: Observable<any>;
-    currentThemeItem$: Observable<any>;
+    schema$: Observable<SchemaItemModel[]>;
+    theme$: Observable<{[key: string]: string|number|boolean}>;
+    currentSchemaItem$: Observable<SchemaItemModel>;
     showPresets$: Observable<boolean>;
 
     // combined states
@@ -40,7 +43,7 @@ export class SidebarComponent implements OnInit {
 
     private params: PageDescriptor;
 
-    constructor(private store: Store<fromEditor.State>, private route: ActivatedRoute) { }
+    constructor(private store: Store<fromRoot.State>, private route: ActivatedRoute) { }
 
     ngOnInit() {
         // page editor
@@ -63,8 +66,8 @@ export class SidebarComponent implements OnInit {
 
         this.presets$ = this.store.pipe(select(fromTheme.getPresets));
         this.schema$ = this.store.pipe(select(fromTheme.getSchema));
-        this.theme$ = this.store.pipe(select(fromTheme.getCurrentTheme));
-        this.currentThemeItem$ = this.store.pipe(select(fromTheme.getCurrentThemeItem));
+        this.theme$ = this.store.pipe(select(fromTheme.getEditableTheme));
+        this.currentSchemaItem$ = this.store.pipe(select(fromTheme.getCurrentSchemaItem));
         this.showPresets$ = this.store.pipe(select(fromTheme.getShowPresetsEditor));
 
         // combined states
@@ -82,8 +85,25 @@ export class SidebarComponent implements OnInit {
 
     //#region theme editor actions
 
-    selectThemeItem(item: any) {
-        this.store.dispatch(new themeActions.SelectThemeItem(item));
+    selectSchemaItem(item: SchemaItemModel) {
+        this.store.dispatch(new themeActions.SelectSchemaItem(item));
+    }
+
+    updateTheme(themeValues: {[key: string]: any}) {
+        this.store.dispatch(new themeActions.SelectSchemaItem(null));
+        this.store.dispatch(new themeActions.UpdateTheme(themeValues));
+    }
+
+    onRemovePreset(name: string) {
+        this.store.dispatch(new themeActions.RemovePreset(name));
+    }
+
+    onSelectPreset(name: string) {
+        this.store.dispatch(new themeActions.SelectPreset(name));
+    }
+
+    onSavePreset(name: string) {
+        this.store.dispatch(new themeActions.CreatePreset(name));
     }
 
     turnOnPresets() {
@@ -135,10 +155,10 @@ export class SidebarComponent implements OnInit {
     //#endregion
 
     saveChanges() {
-        this.store.dispatch(new editorActions.SavePage(this.params));
+        this.store.dispatch(new rootActions.SaveData(this.params));
     }
 
     clearChanges() {
-        this.store.dispatch(new editorActions.ClearChanges());
+        this.store.dispatch(new rootActions.ResetData());
     }
 }

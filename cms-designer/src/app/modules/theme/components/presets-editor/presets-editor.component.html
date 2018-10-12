@@ -12,7 +12,7 @@
 
         <ul class="list pressets-list">
             <li class="list-item" *ngFor="let item of data.presets | keyvalue">
-                <div class="list-thumbnail" [class.super-active]="item.key == data.current" (click)="openPreset(item.key)">{{item.key}}</div>
+                <div class="list-thumbnail" [class.super-active]="item.key == data.current" (click)="selectPreset(item.key)">{{item.key}}</div>
                 <div class="list-actions">
                     <a class="list-name" (click)="removePreset(item.key)">
                         {{item.key}}
@@ -32,13 +32,15 @@
         </ul>
 
 
-        <div class="new-pressets-foot" *ngIf="savingPreset">
+        <div class="new-pressets-foot" *ngIf="savingPreset" [formGroup]="form">
             <label class="form-label new-preset-label">Preset name</label>
             <div class="form-input new-preset-input">
-                <input type="text" >
+                <input type="text" formControlName="name" />
             </div>
-            <button class="btn">Save</button>
-            <button class="btn" (click)="savingPreset = false">Cancel</button>
+            <div class="sidebar-foot">
+                <button class="btn" [disabled]="form.invalid" (click)="savePreset()">Save</button>
+                <button class="btn" (click)="savingPreset = false">Cancel</button>
+            </div>
         </div>
 
         <div class="pressets-foot" *ngIf="!savingPreset">

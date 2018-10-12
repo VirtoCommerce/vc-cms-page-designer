@@ -19,7 +19,7 @@
                     </app-tab>
                     <app-tab *ngIf="schema$ | async" tabTitle="Theme">
                         <app-theme-editor [schema]="schema$ | async" (selectPresetEvent)="turnOnPresets()"
-                            (selectItemEvent)="selectThemeItem($event)"></app-theme-editor>
+                            (selectItemEvent)="selectSchemaItem($event)"></app-theme-editor>
                     </app-tab>
                 </app-tabs>
             </div>
@@ -29,9 +29,10 @@
         <app-select-type class="pane __selected" *ngIf="addNewSectionMode$ | async" [types]="blockTypes$ | async"
             (backEvent)="setNewBlockMode(false)" (previewBlockEvent)="previewBlockType($event)" (selectBlockEvent)="selectBlockType($event)"></app-select-type>
         <app-presets-editor class="pane __selected" *ngIf="showPresets$|async" [data]="presets$|async" [theme]="theme$|async"
-            (backEvent)="turnOffPresets()"></app-presets-editor>
-        <app-theme-item-editor class="pane __selected" *ngIf="currentThemeItem$|async as currentThemeItem" [item]="currentThemeItem"
-            [theme]="theme$|async" (backEvent)="selectThemeItem(null)"></app-theme-item-editor>
+            (savePresetEvent)="onSavePreset($event)" (selectPresetEvent)="onSelectPreset($event)"
+            (backEvent)="turnOffPresets()" (removePresetEvent)="onRemovePreset($event)"></app-presets-editor>
+        <app-theme-item-editor class="pane __selected" *ngIf="currentSchemaItem$|async as currentSchemaItem" [schema]="currentSchemaItem"
+            [theme]="theme$|async" (backEvent)="updateTheme($event)"></app-theme-item-editor>
     </div>
     <div class="sidebar-foot">
         <button class="btn" (click)="clearChanges()">Clear changes</button>

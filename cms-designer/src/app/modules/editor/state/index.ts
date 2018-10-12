@@ -1,5 +1,5 @@
 import { createFeatureSelector, createSelector, ActionReducerMap } from '@ngrx/store';
-import * as fromRoot from '../../../state/app.state';
+import * as fromRoot from '../../../state';
 import * as fromEditor from './editor.reducer';
 
 export interface State extends fromRoot.State {

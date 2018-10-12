@@ -13,10 +13,11 @@ import { AppComponent } from './app.component';
 import { PreviewComponent } from './components/preview/preview.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
-
-import { environment } from '../environments/environment';
-import { EditorActionTypes } from './modules/editor/state/editor.actions';
 import { PreviewModeButtonComponent } from './components/preview-mode-button/preview-mode-button.component';
+
+import { RootEffects } from './state/root.effects';
+import { reducer } from './state/root.reducer';
+import { environment } from '../environments/environment';
 
 @NgModule({
     declarations: [
@@ -29,7 +30,9 @@ import { PreviewModeButtonComponent } from './components/preview-mode-button/pre
     imports: [
         BrowserModule,
         RouterModule.forRoot([]),
-        StoreModule.forRoot({}),
+        StoreModule.forRoot({
+            'root': reducer
+        }),
         StoreDevtoolsModule.instrument({
             name: 'CMS',
             maxAge: 25,
@@ -43,7 +46,7 @@ import { PreviewModeButtonComponent } from './components/preview-mode-button/pre
             // stateSanitizer: (state: any, id: number): any => {
             // }
         }),
-        EffectsModule.forRoot([]),
+        EffectsModule.forRoot([RootEffects]),
 
         EditorModule,
         SharedModule,

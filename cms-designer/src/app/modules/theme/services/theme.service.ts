@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-import { ThemeItemModel } from '../models/theme-item.model';
+import { SchemaItemModel } from '../models/schema-item.model';
 import { PresetsModel } from '../models/presets.model';
 
 @Injectable({
@@ -16,8 +16,8 @@ export class ThemeService {
         return this.http.get<PresetsModel>('data/settings_data.json');
     }
 
-    loadSchema(): Observable<ThemeItemModel[]> {
-        return this.http.get<ThemeItemModel[]>('data/settings_schema.json');
+    loadSchema(): Observable<SchemaItemModel[]> {
+        return this.http.get<SchemaItemModel[]>('data/settings_schema.json');
     }
 
 }

@@ -1,15 +1,14 @@
 import { EditorActionTypes, EditorActions } from './editor.actions';
-import { PageModel } from '../models/page.model';
-import { SectionModel } from '../models/section.model';
+import { PageModel, SectionModel, BlockType } from '../models';
 
 export interface EditorState {
     showNewBlockSelector: boolean;
     currentSectionItem: SectionModel;
     error: string;
     pageLoading: boolean;
-    initialPage: PageModel;
+    initialPage: string;
     page: PageModel;
-    blockTypes: any[];
+    blockTypes: BlockType[];
     previewIsReady: boolean;
 }
 
@@ -50,7 +49,7 @@ export function reducer(state = initialState, action: EditorActions): EditorStat
             return {
                 ...state,
                 page: action.payload,
-                initialPage: JSON.parse(JSON.stringify(action.payload)),
+                initialPage: JSON.stringify(action.payload),
                 pageLoading: false
             };
         case EditorActionTypes.LoadPageFail:
@@ -91,7 +90,7 @@ export function reducer(state = initialState, action: EditorActions): EditorStat
             return {
                 ...state,
                 pageLoading: false,
-                initialPage: JSON.parse(JSON.stringify(state.page))
+                initialPage: JSON.stringify(state.page)
             };
         case EditorActionTypes.SavePage:
             return {
@@ -104,10 +103,10 @@ export function reducer(state = initialState, action: EditorActions): EditorStat
                 pageLoading: false,
                 error: action.payload
             };
-        case EditorActionTypes.ClearChanges:
+        case EditorActionTypes.ClearPageChanges:
             return {
                 ...state,
-                page: JSON.parse(JSON.stringify(state.initialPage))
+                page: JSON.parse(state.initialPage)
             };
     }
     return state;
