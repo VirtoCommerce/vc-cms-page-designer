@@ -72,7 +72,6 @@ export function reducer(state = initialState, action: EditorActions): EditorStat
                 currentSectionItem: null
             };
         case EditorActionTypes.RemovePageItem:
-            console.log(action.payload);
             const index = state.page.sections.indexOf(action.payload);
             if (index !== -1) {
                 state.page.sections.splice(index, 1);

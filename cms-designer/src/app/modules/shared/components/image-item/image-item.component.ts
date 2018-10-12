@@ -38,7 +38,6 @@ export class ImageItemComponent implements OnInit, ControlValueAccessor {
         this.onChange = (event) => {
             const file = event.target.files[0];
             const subscription = this.files.uploadFile(file, file.name).subscribe(x => {
-                console.log(x);
                 subscription.unsubscribe();
                 this.value = x;
                 fn(x);

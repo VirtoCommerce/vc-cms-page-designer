@@ -16,9 +16,7 @@ export class PlatformService {
     loadPage(params: PageDescriptor): Observable<SectionModel[]> {
         const url = this.generateUrl(params);
 
-        return this.http.get<SectionModel[]>(url).pipe(
-            tap(x => console.log(x))
-        );
+        return this.http.get<SectionModel[]>(url);
     }
 
     uploadPage(page: SectionModel[], params: PageDescriptor): Observable<any> {
