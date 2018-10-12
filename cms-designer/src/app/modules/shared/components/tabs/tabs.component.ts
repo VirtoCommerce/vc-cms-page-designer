@@ -5,7 +5,7 @@ import { TabComponent } from './tab.component';
     selector: 'app-tabs',
     template: `
         <div class="nav">
-            <div class="tab" *ngFor="let tab of tabs" (click)="selectTab(tab)" [class.active]="tab.active">
+            <div class="tab" *ngFor="let tab of tabs" (click)="selectTab($event, tab)" [class.active]="tab.active">
                 <a href="#">{{tab.tabTitle}}</a>
             </div>
         </div>
@@ -22,11 +22,14 @@ export class TabsComponent implements AfterContentInit {
     ngAfterContentInit() {
         const activeTabs = this.tabs.filter(tab => tab.active);
         if (activeTabs.length === 0) {
-            this.selectTab(this.tabs.first);
+            this.selectTab(null, this.tabs.first);
         }
     }
 
-    selectTab(tab: TabComponent) {
+    selectTab(event: MouseEvent, tab: TabComponent) {
+        if (event) {
+            event.preventDefault();
+        }
         this.tabs.toArray().forEach(t => t.active = false);
         tab.active = true;
     }
