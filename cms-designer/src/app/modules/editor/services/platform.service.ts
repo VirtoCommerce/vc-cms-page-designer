@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 
-import { SectionModel, PageDescriptor, PageModel } from '../models/';
+import { SectionModel, PageModel } from '../models/';
 import { environment } from 'src/environments/environment';
-import { tap, delay } from 'rxjs/operators';
+import { PageDescriptor } from 'src/app/models/page.descriptor';
 
 @Injectable({
     providedIn: 'root'
