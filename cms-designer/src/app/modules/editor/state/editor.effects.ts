@@ -19,7 +19,7 @@ import * as fromEditor from '.';
 
 import { PlatformService } from '../services/platform.service';
 import { PageModel } from '../models/page.model';
-import { PreviewService } from '../services/preview.service';
+import { PreviewService } from '../../../services/preview.service';
 import { BlocksComponentFactory } from '../blocks/blocks-component.factory';
 
 @Injectable()

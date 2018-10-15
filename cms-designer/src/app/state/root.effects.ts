@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Action, Store } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
-import { mergeMap, map, catchError, withLatestFrom, tap, switchMap, concatMapTo } from 'rxjs/operators';
+import { mergeMap, map, catchError, withLatestFrom, tap, switchMap, concatMapTo, concatMap, switchMapTo } from 'rxjs/operators';
 
 import * as rootActions from './root.actions';
 import * as fromRoot from '.';
@@ -31,9 +31,28 @@ export class RootEffects {
     @Effect()
     resetData$: Observable<Action> = this.actions$.pipe(
         ofType(rootActions.RootActionTypes.ResetData),
-        concatMapTo([
+        switchMapTo([
             new editorActions.ClearPageChanges(),
             new themeActions.ClearThemeChanges()
+        ])
+    );
+
+    @Effect()
+    loadData$: Observable<Action> = this.actions$.pipe(
+        ofType<rootActions.LoadData>(rootActions.RootActionTypes.LoadData),
+        switchMap(action => [
+            new editorActions.LoadPage(action.payload),
+            new themeActions.LoadPresets(action.payload),
+            new themeActions.LoadSchema()
+        ])
+    );
+
+    @Effect()
+    saveData$: Observable<Action> = this.actions$.pipe(
+        ofType<rootActions.SaveData>(rootActions.RootActionTypes.SaveData),
+        switchMap(action => [
+            new editorActions.SavePage(action.payload),
+            new themeActions.SavePresets(action.payload)
         ])
     );
 }

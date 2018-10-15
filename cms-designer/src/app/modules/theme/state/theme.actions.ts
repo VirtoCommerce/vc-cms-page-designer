@@ -1,3 +1,4 @@
+import { PageDescriptor } from 'src/app/models/page.descriptor';
 import { Action } from '@ngrx/store';
 
 import { PresetsModel } from '../models/presets.model';
@@ -7,6 +8,9 @@ export enum ThemeActionTypes {
     LoadPresets = 'Load Presets',
     LoadPresetsSuccess = 'Load Presets Success',
     LoadPresetsFail = 'Load Presets Fail',
+    SavePresets = 'Save Presets',
+    SavePresetsSuccess = 'Save Presets Success',
+    SavePresetsFail = 'Save Presets Fail',
     LoadSchema = 'Load Schema',
     LoadSchemaSuccess = 'Load Schema Success',
     LoadSchemaFail = 'Load Schema Fail',
@@ -21,6 +25,8 @@ export enum ThemeActionTypes {
 
 export class LoadPresets implements Action {
     readonly type = ThemeActionTypes.LoadPresets;
+
+    constructor(public payload: PageDescriptor) { }
 }
 
 export class LoadPresetsSuccess implements Action {
@@ -31,6 +37,22 @@ export class LoadPresetsSuccess implements Action {
 
 export class LoadPresetsFail implements Action {
     readonly type = ThemeActionTypes.LoadPresetsFail;
+
+    constructor(public payload: string) { }
+}
+
+export class SavePresets implements Action {
+    readonly type = ThemeActionTypes.SavePresets;
+
+    constructor(public payload: PageDescriptor) { }
+}
+
+export class SavePresetsSuccess implements Action {
+    readonly type = ThemeActionTypes.SavePresetsSuccess;
+}
+
+export class SavePresetsFail implements Action {
+    readonly type = ThemeActionTypes.SavePresetsFail;
 
     constructor(public payload: string) { }
 }
@@ -94,6 +116,9 @@ export class SelectPreset implements Action {
 export type ThemeActions = LoadPresets
     | LoadPresetsSuccess
     | LoadPresetsFail
+    | SavePresets
+    | SavePresetsSuccess
+    | SavePresetsFail
     | LoadSchema
     | LoadSchemaSuccess
     | LoadSchemaFail

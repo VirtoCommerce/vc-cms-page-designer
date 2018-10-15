@@ -38,6 +38,20 @@ export function reducer(state = initialState, action: ThemeActions): ThemeState 
                 ...state,
                 error: action.payload
             };
+        case ThemeActionTypes.SavePresetsSuccess:
+            return {
+                ...state,
+                initialPresets: JSON.stringify(state.presets)
+            };
+        case ThemeActionTypes.SavePresets: {
+            const newPreset = state.presets;
+            newPreset.presets[newPreset.current] = { ...state.editableTheme };
+            return {
+                ...state,
+                presets: newPreset,
+                initialPresets: JSON.stringify(action.payload)
+            };
+        }
         case ThemeActionTypes.LoadPresetsSuccess:
             return {
                 ...state,

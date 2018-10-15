@@ -6,6 +6,9 @@ export enum RootActionTypes {
     SaveData = 'Save Data',
     SaveDataSuccess = 'Save Data Success',
     SaveDataFail = 'Save Data Fail',
+    LoadData = 'Load Data',
+    LoadDataSuccess = 'Load Data Success',
+    LoadDataFail = 'Load Data Fail'
 }
 
 export class ResetData implements Action {
@@ -28,8 +31,27 @@ export class SaveDataFail implements Action {
     constructor(public payload: string) { }
 }
 
+export class LoadData implements Action {
+    readonly type = RootActionTypes.LoadData;
+
+    constructor(public payload: PageDescriptor) { }
+}
+
+export class LoadDataSuccess implements Action {
+    readonly type = RootActionTypes.LoadDataSuccess;
+}
+
+export class LoadDataFail implements Action {
+    readonly type = RootActionTypes.LoadDataFail;
+
+    constructor(public payload: string) { }
+}
+
 
 export type RootActions = ResetData
     | SaveData
+    | SaveDataSuccess
     | SaveDataFail
-    | SaveDataSuccess;
+    | LoadData
+    | LoadDataSuccess
+    | LoadDataFail;

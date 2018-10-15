@@ -50,7 +50,11 @@ export class SidebarComponent implements OnInit {
         this.route.queryParams.subscribe(x => {
             if (x.storeId && x.path) {
                 this.params = <PageDescriptor>x;
-                this.store.dispatch(new editorActions.LoadPage(this.params));
+                this.store.dispatch(new rootActions.LoadData(this.params));
+
+                // theme editor
+                // this.store.dispatch(new themeActions.LoadPresets(this.params));
+                // this.store.dispatch(new themeActions.LoadSchema());
             }
         });
         this.store.dispatch(new editorActions.LoadBlockTypes());
@@ -59,10 +63,6 @@ export class SidebarComponent implements OnInit {
         this.addNewSectionMode$ = this.store.pipe(select(fromEditor.getAddNewSectionMode));
         this.blockTypes$ = this.store.pipe(select(fromEditor.getBlockTypes));
         this.page$ = this.store.pipe(select(fromEditor.getPage));
-
-        // theme editor
-        this.store.dispatch(new themeActions.LoadPresets());
-        this.store.dispatch(new themeActions.LoadSchema());
 
         this.presets$ = this.store.pipe(select(fromTheme.getPresets));
         this.schema$ = this.store.pipe(select(fromTheme.getSchema));

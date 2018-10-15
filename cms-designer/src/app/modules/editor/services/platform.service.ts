@@ -25,7 +25,7 @@ export class PlatformService {
     }
 
     private generateUrl(params: PageDescriptor): string {
-        const url = `${environment.platformUrl}${environment.contentUrl}${params.storeId}`
+        const url = `${environment.platformUrl}${environment.apiBaseUrl}${environment.pageUrl}${params.storeId}`
             + `?relativeUrl=${params.path}&api_key=${environment.apiKey}`;
         return url;
     }

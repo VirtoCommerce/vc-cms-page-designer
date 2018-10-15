@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { PageModel, SectionModel } from '../models';
-import { environment } from '../../../../environments/environment';
+import { PageModel, SectionModel } from '../modules/editor/models';
+import { environment } from '../../environments/environment';
 
 @Injectable({
     providedIn: 'root'
@@ -21,6 +21,10 @@ export class PreviewService {
 
     changeOrder(currentIndex: number, newIndex: number) {
         this.send('move', { currentIndex, newIndex });
+    }
+
+    reload() {
+        this.send('reload', {});
     }
 
     private send(type: string, model: any) {
