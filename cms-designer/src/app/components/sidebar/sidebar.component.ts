@@ -34,12 +34,13 @@ export class SidebarComponent implements OnInit {
     // theme editor states
     presets$: Observable<PresetsModel>;
     schema$: Observable<SchemaItemModel[]>;
-    theme$: Observable<{[key: string]: string|number|boolean}>;
+    theme$: Observable<{ [key: string]: string | number | boolean }>;
     currentSchemaItem$: Observable<SchemaItemModel>;
     showPresets$: Observable<boolean>;
 
     // combined states
     isLoading$: Observable<boolean>;
+    isEditMode$: Observable<boolean>;
 
     private params: PageDescriptor;
 
@@ -81,6 +82,14 @@ export class SidebarComponent implements OnInit {
             schemaLoading$,
             presetsLoading$,
             (pageLoading, schemaLoading, presetsLoading) => pageLoading || schemaLoading || presetsLoading);
+        this.isEditMode$ = combineLatest(
+            this.currentSectionItem$,
+            this.addNewSectionMode$,
+            this.showPresets$,
+            this.currentSchemaItem$,
+            (currentSectionItem, addNewSectionMode, showPresets, currentSchemaItem) =>
+                !!currentSectionItem || !!addNewSectionMode || !!showPresets || !!currentSchemaItem);
+
     }
 
     //#region theme editor actions
@@ -89,7 +98,7 @@ export class SidebarComponent implements OnInit {
         this.store.dispatch(new themeActions.SelectSchemaItem(item));
     }
 
-    updateTheme(themeValues: {[key: string]: any}) {
+    updateTheme(themeValues: { [key: string]: any }) {
         this.store.dispatch(new themeActions.SelectSchemaItem(null));
         this.store.dispatch(new themeActions.UpdateTheme(themeValues));
     }

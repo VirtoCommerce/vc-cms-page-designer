@@ -34,7 +34,7 @@
         <app-theme-item-editor class="pane __selected" *ngIf="currentSchemaItem$|async as currentSchemaItem" [schema]="currentSchemaItem"
             [theme]="theme$|async" (backEvent)="updateTheme($event)"></app-theme-item-editor>
     </div>
-    <div class="sidebar-foot">
+    <div class="sidebar-foot" *ngIf="!(isEditMode$|async)">
         <button class="btn" (click)="clearChanges()">Clear changes</button>
         <button class="btn" (click)="saveChanges()">Save changes</button>
     </div>
