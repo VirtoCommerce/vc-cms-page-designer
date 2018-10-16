@@ -17,14 +17,14 @@ import {
 import * as editorActions from './editor.actions';
 import * as fromEditor from '.';
 
-import { PlatformService } from '../services/platform.service';
+import { PagesService } from '../services/pages.service';
 import { PageModel } from '../models/page.model';
 import { PreviewService } from '../../../services/preview.service';
 import { BlocksComponentFactory } from '../blocks/blocks-component.factory';
 
 @Injectable()
 export class EditorEffects {
-    constructor(private platform: PlatformService,
+    constructor(private pages: PagesService,
         private preview: PreviewService,
         private blockFactory: BlocksComponentFactory,
         private actions$: Actions, private store$: Store<fromEditor.State>) { }
@@ -33,7 +33,7 @@ export class EditorEffects {
     loadPage$: Observable<Action> = this.actions$.pipe(
         ofType<editorActions.LoadPage>(editorActions.EditorActionTypes.LoadPage),
         mergeMap(action =>
-            this.platform.loadPage(action.payload).pipe(
+            this.pages.downloadPage(action.payload).pipe(
                 map(data => {
                     const model = new PageModel();
                     model.sections = data.filter(x => x.type !== 'settings');
@@ -52,7 +52,7 @@ export class EditorEffects {
         ofType<editorActions.SavePage>(editorActions.EditorActionTypes.SavePage),
         withLatestFrom(this.store$.select(state => state.editor.page)),
         switchMap(([action, page]) =>
-            this.platform.uploadPage([page.settings, ...page.sections], action.payload).pipe(
+            this.pages.uploadPage([page.settings, ...page.sections], action.payload).pipe(
                 map(result => new editorActions.SavePageSuccess()),
                 catchError(err => of(new editorActions.SavePageFail(err)))
             )

@@ -43,7 +43,7 @@ export class RootEffects {
         switchMap(action => [
             new editorActions.LoadPage(action.payload),
             new themeActions.LoadPresets(action.payload),
-            new themeActions.LoadSchema()
+            new themeActions.LoadSchema(action.payload)
         ])
     );
 

@@ -24,7 +24,7 @@ export class PreviewService {
     }
 
     reload() {
-        this.send('reload', {});
+        this.send('css', {});
     }
 
     private send(type: string, model: any) {

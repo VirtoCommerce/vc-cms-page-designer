@@ -29,9 +29,9 @@ export class ThemeEffects {
 
     @Effect()
     loadSchema$: Observable<Action> = this.actions$.pipe(
-        ofType(themeActions.ThemeActionTypes.LoadSchema),
-        mergeMap(_ =>
-            this.themeService.loadSchema().pipe(
+        ofType<themeActions.LoadSchema>(themeActions.ThemeActionTypes.LoadSchema),
+        mergeMap(action =>
+            this.themeService.loadSchema(action.payload).pipe(
                 map(data => new themeActions.LoadSchemaSuccess(data)),
                 catchError(err => of(new themeActions.LoadSchemaFail(err)))
             )

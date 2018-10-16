@@ -13,7 +13,8 @@ import { AppComponent } from './app.component';
 import { PreviewComponent } from './components/preview/preview.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
-import { PreviewModeButtonComponent } from './components/preview-mode-button/preview-mode-button.component';
+import { PreviewModeButtonComponent } from './components/preview/preview-mode-button/preview-mode-button.component';
+import { ToolbarButtonComponent } from './components/toolbar/toolbar-button/toolbar-button.component';
 
 import { RootEffects } from './state/root.effects';
 import { reducer } from './state/root.reducer';
@@ -25,7 +26,8 @@ import { environment } from '../environments/environment';
         PreviewComponent,
         ToolbarComponent,
         SidebarComponent,
-        PreviewModeButtonComponent
+        PreviewModeButtonComponent,
+        ToolbarButtonComponent
     ],
     imports: [
         BrowserModule,

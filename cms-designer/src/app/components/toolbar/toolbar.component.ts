@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
 @Component({
     selector: 'app-toolbar',
@@ -11,4 +12,15 @@ export class ToolbarComponent implements OnInit {
 
     ngOnInit() { }
 
+    closeEditor() {
+        console.log(window.opener);
+        // todo: need to check the changes
+        if (window.opener && !window.opener.closed) {
+            window.opener.focus();
+            window.close();
+        } else {
+            window.stop();
+            window.location.href = `${environment.platformUrl}#/workspace/content`;
+        }
+    }
 }

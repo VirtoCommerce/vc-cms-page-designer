@@ -48,9 +48,9 @@ export class SidebarComponent implements OnInit {
 
     ngOnInit() {
         // page editor
-        this.route.queryParams.subscribe(x => {
-            if (x.storeId && x.path) {
-                this.params = <PageDescriptor>x;
+        this.route.queryParams.subscribe(query => {
+            if (query.storeId && query.path && query.contentType) {
+                this.params = <PageDescriptor>query;
                 this.store.dispatch(new rootActions.LoadData(this.params));
 
                 // theme editor

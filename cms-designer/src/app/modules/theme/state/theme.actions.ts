@@ -59,6 +59,8 @@ export class SavePresetsFail implements Action {
 
 export class LoadSchema implements Action {
     readonly type = ThemeActionTypes.LoadSchema;
+
+    constructor(public payload: PageDescriptor) { }
 }
 
 export class LoadSchemaSuccess implements Action {

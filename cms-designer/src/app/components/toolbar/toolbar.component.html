@@ -1,26 +1,14 @@
 <ul class="menu">
     <li class="menu-item">
-        <a href="#" class="menu-link">
-            <i class="menu-ico fa fa-home"></i>
-            Back
-        </a>
+        <app-toolbar-button icon="home" title="Back" (buttonClick)="closeEditor()"></app-toolbar-button>
     </li>
     <li class="menu-item">
-        <a href="#" class="menu-link">
-            <i class="menu-ico fa fa-code"></i>
-            Edit HTML/CSS
-        </a>
+        <app-toolbar-button icon="code" title="Edit HTML/CSS"></app-toolbar-button>
     </li>
     <li class="menu-item">
-        <a href="#" class="menu-link">
-            <i class="menu-ico fa fa-globe"></i>
-            Edit languages
-        </a>
+        <app-toolbar-button icon="globe" title="Edit languages"></app-toolbar-button>
     </li>
     <li class="menu-item">
-        <a href="#" class="menu-link">
-            <i class="menu-ico fa fa-map"></i>
-            Edit navigation
-        </a>
+        <app-toolbar-button icon="map" title="Edit navigation"></app-toolbar-button>
     </li>
 </ul>
