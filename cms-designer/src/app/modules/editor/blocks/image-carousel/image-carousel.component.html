@@ -12,8 +12,9 @@
     </div>
 
     <div class="pane-settings">
-        <app-accordeon formArrayName="images">
-            <app-acc-item *ngFor="let item of getFormArray('images').controls; let i = index;" [title]="getTitle(item)">
+        <app-accordeon appSortableList formArrayName="images" (sort)="sortItems($event)">
+            <app-acc-item *ngFor="let item of getFormArray('images').controls; let i = index;" [title]="getTitle(item)"
+                appDraggable>
                 <div [formGroupName]="i">
                     <div class="pane-settings">
                         <app-string-item label="Title" formControlName="title"></app-string-item>
@@ -27,6 +28,11 @@
                     <div class="pane-settings">
                         <button class="btn" (click)="removeImage(i)">Remove Image</button>
                     </div>
+                </div>
+                <div *appDraggableHelper>
+                    <h4 class="panel-title">
+                        <a href tabindex="0"><span>{{ getTitle(item) }}</span></a>
+                    </h4>
                 </div>
             </app-acc-item>
         </app-accordeon>

@@ -4,6 +4,7 @@ import { SectionModel } from '../../models/section.model';
 import { BlockType } from '../../models/block-type.model';
 import { BlocksComponentFactory } from '../blocks-component.factory';
 import { FormsHelper } from '../../forms.helper';
+import { SortEvent } from 'src/app/modules/shared/draggable';
 
 @Component({
     selector: 'app-image-carousel',
@@ -78,5 +79,18 @@ export class ImageCarouselComponent {
 
     getFormArray(name: string): FormArray {
         return this.group.get(name) as FormArray;
+    }
+
+    sortItems(event: SortEvent) {
+        if (event.complete) {
+            console.log(this.group);
+        } else {
+            const images = this.getFormArray('images').controls;
+            const current = images[event.currentIndex];
+            const swapWith = images[event.newIndex];
+
+            images[event.newIndex] = current;
+            images[event.currentIndex] = swapWith;
+        }
     }
 }
