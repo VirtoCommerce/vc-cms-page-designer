@@ -49,7 +49,7 @@ export function reducer(state = initialState, action: ThemeActions): ThemeState 
             return {
                 ...state,
                 presets: newPreset,
-                initialPresets: JSON.stringify(action.payload)
+                initialPresets: JSON.stringify(newPreset)
             };
         }
         case ThemeActionTypes.LoadPresetsSuccess:

@@ -55,15 +55,4 @@ export class ThemeEffects {
         ofType<themeActions.SavePresetsSuccess>(themeActions.ThemeActionTypes.SavePresetsSuccess),
         tap(_ => this.preview.reload())
     );
-
-    // @Effect({ dispatch: false })
-    // sendPageToStore$ = this.actions$.pipe(
-    //     ofType(themeActions.ThemeActionTypes.LoadPresetsSuccess, themeActions.ThemeActionTypes.LoadSchemaSuccess),
-    //     withLatestFrom(this.store$),
-    //     tap(([_, state]) => {
-    //         if (state.theme.) {
-    //             this.preview.page(state.editor.page);
-    //         }
-    //     })
-    // );
 }

@@ -90,7 +90,7 @@ export class TogglePresetsPane implements Action {
 export class UpdateTheme implements Action {
     readonly type = ThemeActionTypes.UpdateTheme;
 
-    constructor(public payload: {[key: string]: any}) { }
+    constructor(public payload: {[key: string]: string|number|boolean}) { }
 }
 
 export class ClearThemeChanges implements Action {
