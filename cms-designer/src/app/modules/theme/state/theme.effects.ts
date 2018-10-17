@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Action, Store } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
-import { mergeMap, map, catchError, withLatestFrom, tap, switchMap } from 'rxjs/operators';
+import { mergeMap, map, catchError, withLatestFrom, tap, switchMap, debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 import { ThemeService } from '../services/theme.service';
 import { PreviewService } from 'src/app/services/preview.service';
@@ -50,9 +50,16 @@ export class ThemeEffects {
         )
     );
 
-    // @Effect({ dispatch: false })
-    // uploadPreviewPreset$ = this.actions$.pipe(
-    //     ofType(themeActions.ThemeActionTypes.UpdateTheme, themeActions.ThemeActionTypes.LoadPresetsSuccess),
-    //     tap(_ => this.themeService.uploadPresets())
-    // );
+    @Effect({ dispatch: false })
+    uploadPreviewPreset$ = this.actions$.pipe(
+        ofType(
+            themeActions.ThemeActionTypes.UpdateTheme,
+            themeActions.ThemeActionTypes.SelectPreset,
+            themeActions.ThemeActionTypes.LoadPresetsSuccess,
+            themeActions.ThemeActionTypes.ClearThemeChanges),
+        debounceTime(2000),
+        distinctUntilChanged(),
+        withLatestFrom(this.store$.select(state => state.theme.presets)),
+        tap(([_, theme]) => this.themeService.uploadDraft(theme).subscribe(() => this.preview.reload()))
+    );
 }
