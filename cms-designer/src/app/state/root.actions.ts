@@ -1,5 +1,4 @@
 import { Action } from '@ngrx/store';
-import { PageDescriptor } from '../models/page.descriptor';
 
 export enum RootActionTypes {
     ResetData = 'Reset Data',
@@ -17,8 +16,6 @@ export class ResetData implements Action {
 
 export class SaveData implements Action {
     readonly type = RootActionTypes.SaveData;
-
-    constructor(public payload: PageDescriptor) { }
 }
 
 export class SaveDataSuccess implements Action {
@@ -33,8 +30,6 @@ export class SaveDataFail implements Action {
 
 export class LoadData implements Action {
     readonly type = RootActionTypes.LoadData;
-
-    constructor(public payload: PageDescriptor) { }
 }
 
 export class LoadDataSuccess implements Action {

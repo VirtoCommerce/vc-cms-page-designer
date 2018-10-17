@@ -4,7 +4,6 @@ import { PageModel } from '../models/page.model';
 import { SectionModel } from '../models/section.model';
 import { BlockType } from '../models/block-type.model';
 import { SortEvent } from '../../shared/draggable';
-import { PageDescriptor } from 'src/app/models/page.descriptor';
 
 export enum EditorActionTypes {
     LoadPage = 'Load Page',
@@ -34,8 +33,6 @@ export class PreviewReady implements Action {
 
 export class LoadPage implements Action {
     readonly type = EditorActionTypes.LoadPage;
-
-    constructor(public payload: PageDescriptor) { }
 }
 
 export class LoadPageSuccess implements Action {
@@ -114,8 +111,6 @@ export class OrderChanged implements Action {
 
 export class SavePage implements Action {
     readonly type = EditorActionTypes.SavePage;
-
-    constructor(public payload: PageDescriptor) { }
 }
 
 export class SavePageSuccess implements Action {

@@ -1,4 +1,3 @@
-import { PageDescriptor } from 'src/app/models/page.descriptor';
 import { Action } from '@ngrx/store';
 
 import { PresetsModel } from '../models/presets.model';
@@ -25,8 +24,6 @@ export enum ThemeActionTypes {
 
 export class LoadPresets implements Action {
     readonly type = ThemeActionTypes.LoadPresets;
-
-    constructor(public payload: PageDescriptor) { }
 }
 
 export class LoadPresetsSuccess implements Action {
@@ -43,8 +40,6 @@ export class LoadPresetsFail implements Action {
 
 export class SavePresets implements Action {
     readonly type = ThemeActionTypes.SavePresets;
-
-    constructor(public payload: PageDescriptor) { }
 }
 
 export class SavePresetsSuccess implements Action {
@@ -59,8 +54,6 @@ export class SavePresetsFail implements Action {
 
 export class LoadSchema implements Action {
     readonly type = ThemeActionTypes.LoadSchema;
-
-    constructor(public payload: PageDescriptor) { }
 }
 
 export class LoadSchemaSuccess implements Action {
@@ -90,7 +83,7 @@ export class TogglePresetsPane implements Action {
 export class UpdateTheme implements Action {
     readonly type = ThemeActionTypes.UpdateTheme;
 
-    constructor(public payload: {[key: string]: string|number|boolean}) { }
+    constructor(public payload: { [key: string]: string | number | boolean }) { }
 }
 
 export class ClearThemeChanges implements Action {

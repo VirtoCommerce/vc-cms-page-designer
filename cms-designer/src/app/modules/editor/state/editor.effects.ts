@@ -32,8 +32,8 @@ export class EditorEffects {
     @Effect()
     loadPage$: Observable<Action> = this.actions$.pipe(
         ofType<editorActions.LoadPage>(editorActions.EditorActionTypes.LoadPage),
-        mergeMap(action =>
-            this.pages.downloadPage(action.payload).pipe(
+        mergeMap(_ =>
+            this.pages.downloadPage().pipe(
                 map(data => {
                     const model = new PageModel();
                     model.sections = data.filter(x => x.type !== 'settings');
@@ -51,9 +51,9 @@ export class EditorEffects {
     uploadPage$: Observable<Action> = this.actions$.pipe(
         ofType<editorActions.SavePage>(editorActions.EditorActionTypes.SavePage),
         withLatestFrom(this.store$.select(state => state.editor.page)),
-        switchMap(([action, page]) =>
-            this.pages.uploadPage([page.settings, ...page.sections], action.payload).pipe(
-                map(result => new editorActions.SavePageSuccess()),
+        switchMap(([_, page]) =>
+            this.pages.uploadPage([page.settings, ...page.sections]).pipe(
+                map(() => new editorActions.SavePageSuccess()),
                 catchError(err => of(new editorActions.SavePageFail(err)))
             )
         )

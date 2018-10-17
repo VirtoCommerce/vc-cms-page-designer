@@ -32,7 +32,7 @@
             (savePresetEvent)="onSavePreset($event)" (selectPresetEvent)="onSelectPreset($event)"
             (backEvent)="turnOffPresets()" (removePresetEvent)="onRemovePreset($event)"></app-presets-editor>
         <app-theme-item-editor class="pane __selected" *ngIf="currentSchemaItem$|async as currentSchemaItem" [schema]="currentSchemaItem"
-            [theme]="theme$|async" (backEvent)="updateTheme($event)"></app-theme-item-editor>
+            [theme]="theme$|async" (valueChangedEvent)="liveUpdateTheme($event)" (backEvent)="closeThemeItemEditor()"></app-theme-item-editor>
     </div>
     <div class="sidebar-foot" *ngIf="!(isEditMode$|async)">
         <button class="btn" (click)="clearChanges()">Clear changes</button>

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { Store, select } from '@ngrx/store';
 import { Observable, combineLatest } from 'rxjs';
 
@@ -15,7 +14,6 @@ import { PageModel } from '../../modules/editor/models/page.model';
 import { SectionModel } from '../../modules/editor/models/section.model';
 import { BlockType } from '../../modules/editor/models/block-type.model';
 import { SortEvent } from '../../modules/shared/draggable';
-import { PageDescriptor } from 'src/app/models/page.descriptor';
 import { SchemaItemModel } from 'src/app/modules/theme/models/schema-item.model';
 
 @Component({
@@ -42,22 +40,11 @@ export class SidebarComponent implements OnInit {
     isLoading$: Observable<boolean>;
     isEditMode$: Observable<boolean>;
 
-    private params: PageDescriptor;
-
-    constructor(private store: Store<fromRoot.State>, private route: ActivatedRoute) { }
+    constructor(private store: Store<fromRoot.State>) { }
 
     ngOnInit() {
+        this.store.dispatch(new rootActions.LoadData());
         // page editor
-        this.route.queryParams.subscribe(query => {
-            if (query.storeId && query.path && query.contentType) {
-                this.params = <PageDescriptor>query;
-                this.store.dispatch(new rootActions.LoadData(this.params));
-
-                // theme editor
-                // this.store.dispatch(new themeActions.LoadPresets(this.params));
-                // this.store.dispatch(new themeActions.LoadSchema());
-            }
-        });
         this.store.dispatch(new editorActions.LoadBlockTypes());
 
         this.currentSectionItem$ = this.store.pipe(select(fromEditor.getCurrentSectionItem));
@@ -98,9 +85,8 @@ export class SidebarComponent implements OnInit {
         this.store.dispatch(new themeActions.SelectSchemaItem(item));
     }
 
-    updateTheme(themeValues: { [key: string]: any }) {
+    closeThemeItemEditor() {
         this.store.dispatch(new themeActions.SelectSchemaItem(null));
-        this.store.dispatch(new themeActions.UpdateTheme(themeValues));
     }
 
     onRemovePreset(name: string) {
@@ -121,6 +107,10 @@ export class SidebarComponent implements OnInit {
 
     turnOffPresets() {
         this.store.dispatch(new themeActions.TogglePresetsPane(false));
+    }
+
+    liveUpdateTheme(themeValues: {[key: string]: string|number|boolean}) {
+        this.store.dispatch(new themeActions.UpdateTheme(themeValues));
     }
 
     //#endregion
@@ -164,7 +154,7 @@ export class SidebarComponent implements OnInit {
     //#endregion
 
     saveChanges() {
-        this.store.dispatch(new rootActions.SaveData(this.params));
+        this.store.dispatch(new rootActions.SaveData());
     }
 
     clearChanges() {

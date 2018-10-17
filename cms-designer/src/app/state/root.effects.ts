@@ -41,9 +41,9 @@ export class RootEffects {
     loadData$: Observable<Action> = this.actions$.pipe(
         ofType<rootActions.LoadData>(rootActions.RootActionTypes.LoadData),
         switchMap(action => [
-            new editorActions.LoadPage(action.payload),
-            new themeActions.LoadPresets(action.payload),
-            new themeActions.LoadSchema(action.payload)
+            new editorActions.LoadPage(),
+            new themeActions.LoadPresets(),
+            new themeActions.LoadSchema()
         ])
     );
 
@@ -51,8 +51,8 @@ export class RootEffects {
     saveData$: Observable<Action> = this.actions$.pipe(
         ofType<rootActions.SaveData>(rootActions.RootActionTypes.SaveData),
         switchMap(action => [
-            new editorActions.SavePage(action.payload),
-            new themeActions.SavePresets(action.payload)
+            new editorActions.SavePage(),
+            new themeActions.SavePresets()
         ])
     );
 }

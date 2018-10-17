@@ -19,8 +19,8 @@ export class ThemeEffects {
     @Effect()
     loadPresets$: Observable<Action> = this.actions$.pipe(
         ofType<themeActions.LoadPresets>(themeActions.ThemeActionTypes.LoadPresets),
-        mergeMap(action =>
-            this.themeService.loadPresets(action.payload).pipe(
+        mergeMap(_ =>
+            this.themeService.loadPresets().pipe(
                 map(data => new themeActions.LoadPresetsSuccess(data)),
                 catchError(err => of(new themeActions.LoadPresetsFail(err)))
             )
@@ -30,8 +30,8 @@ export class ThemeEffects {
     @Effect()
     loadSchema$: Observable<Action> = this.actions$.pipe(
         ofType<themeActions.LoadSchema>(themeActions.ThemeActionTypes.LoadSchema),
-        mergeMap(action =>
-            this.themeService.loadSchema(action.payload).pipe(
+        mergeMap(_ =>
+            this.themeService.loadSchema().pipe(
                 map(data => new themeActions.LoadSchemaSuccess(data)),
                 catchError(err => of(new themeActions.LoadSchemaFail(err)))
             )
@@ -42,17 +42,17 @@ export class ThemeEffects {
     uploadPresets$: Observable<Action> = this.actions$.pipe(
         ofType<themeActions.SavePresets>(themeActions.ThemeActionTypes.SavePresets),
         withLatestFrom(this.store$.select(state => state.theme.presets)),
-        switchMap(([action, theme]) =>
-            this.themeService.uploadPresets(theme, action.payload).pipe(
-                map(_ => new themeActions.SavePresetsSuccess()),
+        switchMap(([_, theme]) =>
+            this.themeService.uploadPresets(theme).pipe(
+                map(() => new themeActions.SavePresetsSuccess()),
                 catchError(err => of(new themeActions.SavePresetsFail(err)))
             )
         )
     );
 
-    @Effect({ dispatch: false })
-    sendPreviewPageItem$ = this.actions$.pipe(
-        ofType<themeActions.SavePresetsSuccess>(themeActions.ThemeActionTypes.SavePresetsSuccess),
-        tap(_ => this.preview.reload())
-    );
+    // @Effect({ dispatch: false })
+    // uploadPreviewPreset$ = this.actions$.pipe(
+    //     ofType(themeActions.ThemeActionTypes.UpdateTheme, themeActions.ThemeActionTypes.LoadPresetsSuccess),
+    //     tap(_ => this.themeService.uploadPresets())
+    // );
 }

@@ -14,6 +14,7 @@ export class ThemeItemEditorComponent implements OnInit, AfterViewInit {
     @Input() schema: SchemaItemModel;
     @Input() theme: {[key: string]: any};
     @Output() backEvent = new EventEmitter<{[key: string]: any}>();
+    @Output() valueChangedEvent = new EventEmitter<any>();
 
     constructor(private fb: FormBuilder) { }
 
@@ -25,10 +26,20 @@ export class ThemeItemEditorComponent implements OnInit, AfterViewInit {
             const control = this.fb.control(this.theme[x.id]);
             this.form.addControl(x.id, control);
         });
+
+        this.form.valueChanges.subscribe(_ => {
+            this.valueChangedEvent.emit(this.getModel());
+        });
     }
 
     back() {
-        this.backEvent.emit(this.form.value);
+        this.backEvent.emit();
     }
 
+    private getModel() {
+        const result = {
+            ...this.form.value,
+        };
+        return result;
+    }
 }

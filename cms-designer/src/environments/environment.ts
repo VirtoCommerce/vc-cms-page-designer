@@ -4,7 +4,7 @@
 
 export const environment = {
     production: false,
-    storeUrl: 'http://localhost:2082/designer-preview',
+    storeUrl: 'http://localhost:2082/designer-preview?mode=preview',
     baseUrl: '/',
     platformUrl: 'http://localhost/admin',
     apiBaseUrl: '/api/content',
