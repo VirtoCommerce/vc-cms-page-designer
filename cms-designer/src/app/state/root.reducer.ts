@@ -9,11 +9,5 @@ const initialState: RootState = {
 };
 
 export function reducer(state = initialState, action: RootActions): RootState {
-    // switch (action.type) {
-    //     case RootActionTypes.ResetData:
-    //         return {
-    //             ...state,
-    //         };
-    // }
     return state;
 }

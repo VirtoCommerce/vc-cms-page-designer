@@ -1,3 +1,4 @@
+import { getIsEditMode } from './../../state/index';
 import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable, combineLatest } from 'rxjs';
@@ -60,22 +61,8 @@ export class SidebarComponent implements OnInit {
 
         // combined states
 
-        const pageLoading$ = this.store.pipe(select(fromEditor.getPageLoading));
-        const schemaLoading$ = this.store.pipe(select(fromTheme.getSchemaLoading));
-        const presetsLoading$ = this.store.pipe(select(fromTheme.getPresetsLoading));
-
-        this.isLoading$ = combineLatest(
-            pageLoading$,
-            schemaLoading$,
-            presetsLoading$,
-            (pageLoading, schemaLoading, presetsLoading) => pageLoading || schemaLoading || presetsLoading);
-        this.isEditMode$ = combineLatest(
-            this.currentSectionItem$,
-            this.addNewSectionMode$,
-            this.showPresets$,
-            this.currentSchemaItem$,
-            (currentSectionItem, addNewSectionMode, showPresets, currentSchemaItem) =>
-                !!currentSectionItem || !!addNewSectionMode || !!showPresets || !!currentSchemaItem);
+        this.isLoading$ = this.store.pipe(select(fromRoot.getIsLoading));
+        this.isEditMode$ = this.store.pipe(select(fromRoot.getIsEditMode));
 
     }
 
