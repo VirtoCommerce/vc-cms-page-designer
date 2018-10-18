@@ -1,3 +1,4 @@
+import { ApiUrlsService } from './services/api-url.service';
 import { Component, OnInit } from '@angular/core';
 import { environment } from '../environments/environment';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
@@ -11,9 +12,9 @@ export class AppComponent implements OnInit {
     title = 'cms-designer';
     storeUrl: SafeUrl;
 
-    constructor(private sanitizer: DomSanitizer) { }
+    constructor(private urls: ApiUrlsService) { }
 
     ngOnInit(): void {
-        this.storeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(environment.storeUrl);
+        this.storeUrl = this.urls.getStoreUrl();
     }
 }

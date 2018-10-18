@@ -4,6 +4,8 @@ import { StoreModule, Action } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
 
+import { CookieService } from 'ngx-cookie-service';
+
 import { SharedModule } from './modules/shared/shared.module';
 import { EditorModule } from './modules/editor/editor.module';
 import { ThemeModule } from './modules/theme/theme.module';
@@ -52,7 +54,7 @@ import { environment } from '../environments/environment';
         SharedModule,
         ThemeModule
     ],
-    providers: [],
+    providers: [CookieService],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

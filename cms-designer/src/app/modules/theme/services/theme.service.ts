@@ -20,10 +20,10 @@ export class ThemeService {
     }
 
     uploadPresets(model: PresetsModel): Observable<any> {
-        return this.platform.uploadPreset(model, 'settings_data.json');
+        return this.platform.uploadPreset(model);
     }
 
     uploadDraft(model: PresetsModel): Observable<any> {
-        return this.platform.uploadPreset(model, 'draft_settings_data.json');
+        return this.platform.uploadDraftPreset(model);
     }
 }

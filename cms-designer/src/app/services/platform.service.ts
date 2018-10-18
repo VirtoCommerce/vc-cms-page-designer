@@ -2,7 +2,7 @@ import { PresetsModel } from './../modules/theme/models/presets.model';
 import { ApiUrlsService } from './api-url.service';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 
 import { PageDescriptor } from 'src/app/models/page.descriptor';
 import { SectionModel } from '../modules/editor/models';
@@ -24,13 +24,18 @@ export class PlatformService {
     }
 
     downloadPreset<T>(filename: string): Observable<T> {
-        const params = this.createPresetParams(filename);
+        const params = this.createPresetParams(false, filename);
         return this.downloadModel<T>(params);
     }
 
-    uploadPreset(model: PresetsModel, filename: string): Observable<any> {
+    uploadPreset(model: PresetsModel): Observable<any> {
         const params = this.createPresetParams();
-        return this.uploadModel<PresetsModel>(model, params, filename);
+        return this.uploadModel<PresetsModel>(model, params, 'settings_data.json');
+    }
+
+    uploadDraftPreset(model: PresetsModel): Observable<any> {
+        const params = this.createPresetParams(true);
+        return this.uploadModel<PresetsModel>(model, params, this.generateDraftPresetName());
     }
 
     downloadPage(): Observable<SectionModel[]> {
@@ -59,12 +64,18 @@ export class PlatformService {
         return this.http.post(url, form);
     }
 
-    private createPresetParams(filename: string = null) {
+    private createPresetParams(isDraft = false, filename: string = null) {
         const result = {
             ...this.params,
             contentType: 'themes',
-            path: '/default/config' + (!!filename ? `/${filename}` : '')
+            path: '/default/config' + (isDraft ? '/drafts' : '') + (!!filename ? `/${filename}` : '')
         };
         return result;
     }
+
+    private generateDraftPresetName(): string {
+        const prefix = this.urls.getCurrentSessionId();
+        return `${prefix}_settings_data.json`;
+    }
+
 }
