@@ -6,25 +6,25 @@ import { BlockType } from '../models/block-type.model';
 import { SortEvent } from '../../shared/draggable';
 
 export enum EditorActionTypes {
-    LoadPage = 'Load Page',
-    LoadPageSuccess = 'Load Page Success',
-    LoadPageFail = 'Load Page Fail',
-    ToggleNewBlockPane = 'Toggle New Block Pane',
-    SelectPageItem = 'Select Page Item',
-    CreatePageItem = 'Create Page Item',
-    AddPageItem = 'Add Page Item',
-    UpdatePageItem = 'Update Page Item',
-    UpdateBlockPreview = 'Update Block Preview',
-    RemovePageItem = 'Remove Page Item',
-    BlockTypesLoaded = 'Block Types Loaded',
-    LoadBlockTypes = 'Load Block Types',
-    PreviewReady = 'Preview is ready',
-    PreviewPageItem = 'Preview Page Item',
-    OrderChanged = 'Order Changed',
-    SavePage = 'Save Page',
-    SavePageSuccess = 'Save Page Success',
-    SavePageFail = 'Save Page Fail',
-    ClearPageChanges = 'Clear Page Changes'
+    LoadPage = '[Page] Load Page',
+    LoadPageSuccess = '[Page] Load Page Success',
+    LoadPageFail = '[Page] Load Page Fail',
+    ToggleNewBlockPane = '[Page] Toggle New Block Pane',
+    SelectPageItem = '[Page] Select Page Item',
+    CreatePageItem = '[Page] Create Page Item',
+    AddPageItem = '[Page] Add Page Item',
+    UpdatePageItem = '[Page] Update Page Item',
+    UpdateBlockPreview = '[Page] Update Block Preview',
+    RemovePageItem = '[Page] Remove Page Item',
+    BlockTypesLoaded = '[Page] Block Types Loaded',
+    LoadBlockTypes = '[Page] Load Block Types',
+    PreviewReady = '[Page] Preview is ready',
+    PreviewPageItem = '[Page] Preview Page Item',
+    OrderChanged = '[Page] Order Changed',
+    SavePage = '[Page] Save Page',
+    SavePageSuccess = '[Page] Save Page Success',
+    SavePageFail = '[Page] Save Page Fail',
+    ClearPageChanges = '[Page] Clear Page Changes'
 }
 
 export class PreviewReady implements Action {

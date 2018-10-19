@@ -4,22 +4,22 @@ import { PresetsModel } from '../models/presets.model';
 import { SchemaItemModel } from '../models/schema-item.model';
 
 export enum ThemeActionTypes {
-    LoadPresets = 'Load Presets',
-    LoadPresetsSuccess = 'Load Presets Success',
-    LoadPresetsFail = 'Load Presets Fail',
-    SavePresets = 'Save Presets',
-    SavePresetsSuccess = 'Save Presets Success',
-    SavePresetsFail = 'Save Presets Fail',
-    LoadSchema = 'Load Schema',
-    LoadSchemaSuccess = 'Load Schema Success',
-    LoadSchemaFail = 'Load Schema Fail',
-    SelectSchemaItem = 'Select Schema Item',
-    TogglePresetsPane = 'Toggle Presets Pane',
-    UpdateTheme = 'Update Theme',
-    ClearThemeChanges = 'Clear Theme Changes',
-    RemovePreset = 'Remove Preset',
-    CreatePreset = 'Create Preset',
-    SelectPreset = 'Select Preset'
+    LoadPresets = '[Theme] Load Presets',
+    LoadPresetsSuccess = '[Theme] Load Presets Success',
+    LoadPresetsFail = '[Theme] Load Presets Fail',
+    SavePresets = '[Theme] Save Presets',
+    SavePresetsSuccess = '[Theme] Save Presets Success',
+    SavePresetsFail = '[Theme] Save Presets Fail',
+    LoadSchema = '[Theme] Load Schema',
+    LoadSchemaSuccess = '[Theme] Load Schema Success',
+    LoadSchemaFail = '[Theme] Load Schema Fail',
+    SelectSchemaItem = '[Theme] Select Schema Item',
+    TogglePresetsPane = '[Theme] Toggle Presets Pane',
+    UpdateTheme = '[Theme] Update Theme',
+    ClearThemeChanges = '[Theme] Clear Theme Changes',
+    RemovePreset = '[Theme] Remove Preset',
+    CreatePreset = '[Theme] Create Preset',
+    SelectPreset = '[Theme] Select Preset'
 }
 
 export class LoadPresets implements Action {

@@ -1,13 +1,13 @@
 import { Action } from '@ngrx/store';
 
 export enum RootActionTypes {
-    ResetData = 'Reset Data',
-    SaveData = 'Save Data',
-    SaveDataSuccess = 'Save Data Success',
-    SaveDataFail = 'Save Data Fail',
-    LoadData = 'Load Data',
-    LoadDataSuccess = 'Load Data Success',
-    LoadDataFail = 'Load Data Fail'
+    ResetData = '[Root] Reset Data',
+    SaveData = '[Root] Save Data',
+    SaveDataSuccess = '[Root] Save Data Success',
+    SaveDataFail = '[Root] Save Data Fail',
+    LoadData = '[Root] Load Data',
+    LoadDataSuccess = '[Root] Load Data Success',
+    LoadDataFail = '[Root] Load Data Fail'
 }
 
 export class ResetData implements Action {
