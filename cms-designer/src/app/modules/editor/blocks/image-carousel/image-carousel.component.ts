@@ -3,7 +3,7 @@ import { FormGroup, AbstractControl, FormArray } from '@angular/forms';
 import { SectionModel } from '../../models/section.model';
 import { BlockType } from '../../models/block-type.model';
 import { BlocksComponentFactory } from '../blocks-component.factory';
-import { FormsHelper } from '../../forms.helper';
+import { FormsHelper } from '../../services/forms.helper';
 import { SortEvent } from 'src/app/modules/shared/draggable';
 
 @Component({

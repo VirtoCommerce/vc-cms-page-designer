@@ -1,6 +1,6 @@
 import { SectionModel } from './section.model';
 
-export class PageModel {
+export interface PageModel {
     settings: SectionModel;
     sections: SectionModel[];
 }

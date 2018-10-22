@@ -14,7 +14,7 @@ export interface ThemeState {
     schema: SchemaItemModel[];
 }
 
-const initialState: ThemeState = {
+export const initialState: ThemeState = {
     showPresetsEditor: false,
     selectedSchemaItem: null,
     error: '',

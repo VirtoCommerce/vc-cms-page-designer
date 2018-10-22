@@ -4,7 +4,7 @@ import { BlocksComponentFactory } from '../../blocks/blocks-component.factory';
 import { BlockHostDirective } from '../../blocks/block-host.directive';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { isArray } from 'util';
-import { FormsHelper } from '../../forms.helper';
+import { FormsHelper } from '../../services/forms.helper';
 
 @Component({
     selector: 'app-page-item-editor',
