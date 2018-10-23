@@ -82,9 +82,7 @@ export class ImageCarouselComponent {
     }
 
     sortItems(event: SortEvent) {
-        if (event.complete) {
-            console.log(this.group);
-        } else {
+        if (!event.complete) {
             const images = this.getFormArray('images').controls;
             const current = images[event.currentIndex];
             const swapWith = images[event.newIndex];

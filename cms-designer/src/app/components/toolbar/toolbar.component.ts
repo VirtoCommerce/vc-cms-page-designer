@@ -13,7 +13,6 @@ export class ToolbarComponent implements OnInit {
     ngOnInit() { }
 
     closeEditor() {
-        console.log(window.opener);
         // todo: need to check the changes
         if (window.opener && !window.opener.closed) {
             window.opener.focus();

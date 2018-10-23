@@ -59,7 +59,6 @@ describe('PreviewComponent', () => {
         fixture.detectChanges();
 
         const buttons = fixture.debugElement.queryAll(By.directive(PreviewModeButtonComponent));
-        console.log(buttons);
         (<PreviewModeButtonComponent>buttons[1].componentInstance).onButtonClick();
 
         fixture.detectChanges();
@@ -83,14 +82,12 @@ describe('PreviewComponent', () => {
         fixture.detectChanges();
 
         let fullscreenObj = fixture.debugElement.query(By.css('.fullscreen'));
-        console.log(fullscreenObj);
         expect(fullscreenObj).not.toBeNull();
 
         toggler.triggerEventHandler('click', { });
         fixture.detectChanges();
 
         fullscreenObj = fixture.debugElement.query(By.css('.fullscreen'));
-        console.log(fullscreenObj);
         expect(fullscreenObj).toBeNull();
     });
 });
