@@ -1,7 +1,6 @@
 import { ApiUrlsService } from './services/api-url.service';
 import { Component, OnInit } from '@angular/core';
-import { environment } from '../environments/environment';
-import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { SafeUrl } from '@angular/platform-browser';
 
 @Component({
     selector: 'app-root',
