@@ -15,7 +15,5 @@ export class AppComponent implements OnInit {
 
     ngOnInit(): void {
         this.storeUrl = this.urls.getStoreUrl();
-        console.log(this.urls);
-        console.log(this.storeUrl);
     }
 }

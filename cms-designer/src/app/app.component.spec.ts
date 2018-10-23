@@ -44,8 +44,6 @@ describe('AppComponent', () => {
     it('should get safe store url and pass it to preview', inject([DomSanitizer], (sanitizer: DomSanitizer) => {
         const url = 'http://localhost/';
         const safeUrl = sanitizer.bypassSecurityTrustUrl(url);
-        console.log('created');
-        console.log(safeUrl);
 
         mockUrls.getStoreUrl.and.returnValue(safeUrl);
 
