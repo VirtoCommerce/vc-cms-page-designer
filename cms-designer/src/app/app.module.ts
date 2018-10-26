@@ -20,6 +20,8 @@ import { ToolbarButtonComponent } from './components/toolbar/toolbar-button/tool
 import { RootEffects } from './state/root.effects';
 import { reducer } from './state/root.reducer';
 import { environment } from '../environments/environment';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AppHttpInterceptor } from './services/app-http.interceptor';
 
 @NgModule({
     declarations: [
@@ -54,7 +56,10 @@ import { environment } from '../environments/environment';
         SharedModule,
         ThemeModule
     ],
-    providers: [CookieService],
+    providers: [
+        CookieService,
+        { provide: HTTP_INTERCEPTORS, useClass: AppHttpInterceptor, multi: true },
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule { }
