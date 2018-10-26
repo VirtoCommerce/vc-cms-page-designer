@@ -16,14 +16,14 @@ export class ApiUrlsService {
     generateDownloadUrl(params: PageDescriptor): string {
         const path = encodeURIComponent(params.path);
         const url = `${environment.platformUrl}${environment.apiBaseUrl}/${params.contentType}/${params.storeId}`
-            + `?relativeUrl=${path}&api_key=${environment.apiKey}`;
+            + `?relativeUrl=${path}`;
         return url;
     }
 
     generateUploadUrl(params: PageDescriptor): string {
         const path = encodeURIComponent(params.path);
         const url = `${environment.platformUrl}${environment.apiBaseUrl}/${params.contentType}/${params.storeId}`
-            + `?folderUrl=${path}&api_key=${environment.apiKey}`;
+            + `?folderUrl=${path}`;
         return url;
     }
 

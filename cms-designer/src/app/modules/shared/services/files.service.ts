@@ -13,7 +13,7 @@ export class FilesService {
 
     uploadFile(file: File, name: string): Observable<string> {
         const assetEndpoint = 'api/platform/assets';
-        const url = `${environment.platformUrl}/${assetEndpoint}?folderUrl=blogs&name=${name}&api_key=${environment.apiKey}`;
+        const url = `${environment.platformUrl}/${assetEndpoint}?folderUrl=blogs&name=${name}`;
         const form = new FormData();
 
         form.append('uploadedFile', file, name);

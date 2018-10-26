@@ -9,8 +9,7 @@ export const environment = {
     baseUrl: '/',
     platformUrl: 'http://localhost/admin',
     apiBaseUrl: '/api/content',
-    themeUrl: '/themes/',
-    apiKey: '4f35d297210e4bfbb827ea33089a59f4',
+    themeUrl: '/themes/'
 };
 
 /*
