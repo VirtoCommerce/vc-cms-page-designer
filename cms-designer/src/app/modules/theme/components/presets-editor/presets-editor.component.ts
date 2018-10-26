@@ -1,3 +1,4 @@
+import { environment } from './../../../../../environments/environment.local';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
@@ -25,6 +26,11 @@ export class PresetsEditorComponent implements OnInit {
         this.form = this.fb.group({
             name: ['', Validators.required]
         });
+    }
+
+    getThemeThumb(key: string): string {
+        // /en-US/themes/assets/thumb_dark.png
+        return `url(${environment.storeBaseUrl}/themes/assets/thumb_${key.replace(' ', '_')}.png)`;
     }
 
     selectPreset(name: string) {

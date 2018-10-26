@@ -28,7 +28,8 @@ export class ApiUrlsService {
     }
 
     getStoreUrl(): SafeUrl {
-        return this.sanitizer.bypassSecurityTrustResourceUrl(environment.storeUrl + '?preview_mode=' + this.getCurrentSessionId());
+        const url = `${environment.storeBaseUrl}${environment.storePreviewPath}?preview_mode=${this.getCurrentSessionId()}`;
+        return this.sanitizer.bypassSecurityTrustResourceUrl(url);
     }
 
     getCurrentSessionId(): string {
