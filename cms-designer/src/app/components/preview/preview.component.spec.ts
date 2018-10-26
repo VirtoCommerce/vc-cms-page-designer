@@ -1,6 +1,6 @@
-import { Store } from '@ngrx/store';
 import { By, DomSanitizer } from '@angular/platform-browser';
 import { ComponentFixture, TestBed, inject } from '@angular/core/testing';
+import { Store } from '@ngrx/store';
 
 import { PreviewComponent } from './preview.component';
 import { PreviewModeButtonComponent } from './preview-mode-button/preview-mode-button.component';

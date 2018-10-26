@@ -14,8 +14,7 @@
                 <app-tabs>
                     <app-tab tabTitle="Sections" active="true">
                         <app-page-editor [model]="page$ | async" (selectEvent)="selectPageItem($event)"
-                        (orderChangedEvent)="onOrderChanged($event)"
-                            (addNewBlockEvent)="setNewBlockMode(true)"></app-page-editor>
+                            (orderChangedEvent)="onOrderChanged($event)" (addNewBlockEvent)="setNewBlockMode(true)"></app-page-editor>
                     </app-tab>
                     <app-tab *ngIf="schema$ | async" tabTitle="Theme">
                         <app-theme-editor [schema]="schema$ | async" (selectPresetEvent)="turnOnPresets()"
@@ -29,8 +28,8 @@
         <app-select-type class="pane __selected" *ngIf="addNewSectionMode$ | async" [types]="blockTypes$ | async"
             (backEvent)="setNewBlockMode(false)" (previewBlockEvent)="previewBlockType($event)" (selectBlockEvent)="selectBlockType($event)"></app-select-type>
         <app-presets-editor class="pane __selected" *ngIf="showPresets$|async" [data]="presets$|async" [theme]="theme$|async"
-            (savePresetEvent)="onSavePreset($event)" (selectPresetEvent)="onSelectPreset($event)"
-            (backEvent)="turnOffPresets()" (removePresetEvent)="onRemovePreset($event)"></app-presets-editor>
+            (savePresetEvent)="onSavePreset($event)" (selectPresetEvent)="onSelectPreset($event)" (backEvent)="turnOffPresets()"
+            (removePresetEvent)="onRemovePreset($event)"></app-presets-editor>
         <app-theme-item-editor class="pane __selected" *ngIf="currentSchemaItem$|async as currentSchemaItem" [schema]="currentSchemaItem"
             [theme]="theme$|async" (valueChangedEvent)="liveUpdateTheme($event)" (backEvent)="closeThemeItemEditor()"></app-theme-item-editor>
     </div>
