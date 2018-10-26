@@ -33,7 +33,7 @@ export class PreviewService {
             const target = (<HTMLIFrameElement>element).contentWindow;
             if (!!target) {
                 const message = { type: type, content: model };
-                target.postMessage(message, environment.storeUrl);
+                target.postMessage(message, environment.storeBaseUrl + environment.storePreviewPath);
             }
         }
     }

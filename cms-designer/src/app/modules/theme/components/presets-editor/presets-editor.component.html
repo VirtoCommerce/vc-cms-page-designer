@@ -12,7 +12,11 @@
 
         <ul class="list pressets-list">
             <li class="list-item" *ngFor="let item of data.presets | keyvalue">
-                <div class="list-thumbnail" [class.super-active]="item.key == data.current" (click)="selectPreset(item.key)">{{item.key}}</div>
+                <div class="list-thumbnail" [class.super-active]="item.key == data.current"
+                    [ngStyle]="{'background-image': getThemeThumb(item.key)}"
+                    (click)="selectPreset(item.key)">
+                    <span>{{item.key}}</span>
+                </div>
                 <div class="list-actions">
                     <a class="list-name" (click)="removePreset(item.key)">
                         {{item.key}}
