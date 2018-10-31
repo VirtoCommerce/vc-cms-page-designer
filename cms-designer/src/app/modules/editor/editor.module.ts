@@ -15,6 +15,7 @@ import {
 
 import {
     BlockHostDirective,
+    CategoryBlockComponent,
     SimpleTextComponent,
     SimpleImageComponent,
     SettingsEditorComponent,
@@ -35,6 +36,7 @@ const COMPONENTS = [
 ];
 
 const BLOCKS = [
+    CategoryBlockComponent,
     SimpleTextComponent,
     SimpleImageComponent,
     SettingsEditorComponent,

@@ -27,9 +27,9 @@ export class ApiUrlsService {
         return url;
     }
 
-    getStoreUrl(): SafeUrl {
+    getStoreUrl(safe = true): SafeUrl|string {
         const url = `${environment.storeBaseUrl}${environment.storePreviewPath}?preview_mode=${this.getCurrentSessionId()}`;
-        return this.sanitizer.bypassSecurityTrustResourceUrl(url);
+        return safe ? this.sanitizer.bypassSecurityTrustResourceUrl(url) : url;
     }
 
     getCurrentSessionId(): string {
@@ -37,6 +37,14 @@ export class ApiUrlsService {
             ? this.cookies.get(this.SESSION_ID)
             : this.generatePrefixAndSetCookie();
         return result;
+    }
+
+    getCategoriesEndPoint(params: PageDescriptor): string {
+        return null;
+    }
+
+    getStoresEndPoint(params: PageDescriptor): string {
+        return null;
     }
 
     private generatePrefixAndSetCookie(): string {

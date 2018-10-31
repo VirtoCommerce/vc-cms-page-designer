@@ -1,3 +1,4 @@
+import { CategoryModel } from './../models/category.model';
 import { Action } from '@ngrx/store';
 
 import { PageModel } from '../models/page.model';
@@ -24,7 +25,10 @@ export enum EditorActionTypes {
     SavePage = '[Page] Save Page',
     SavePageSuccess = '[Page] Save Page Success',
     SavePageFail = '[Page] Save Page Fail',
-    ClearPageChanges = '[Page] Clear Page Changes'
+    ClearPageChanges = '[Page] Clear Page Changes',
+    LoadCategories = '[Page] Load Categories',
+    LoadCategoriesSuccess = '[Page] Load Categories Success',
+    LoadCategoriesFail = '[Page] Load Categories Fail'
 }
 
 export class PreviewReady implements Action {
@@ -127,6 +131,21 @@ export class ClearPageChanges implements Action {
     readonly type = EditorActionTypes.ClearPageChanges;
 }
 
+export class LoadCategories implements Action {
+    readonly type = EditorActionTypes.LoadCategories;
+}
+
+export class LoadCategoriesSuccess implements Action {
+    readonly type = EditorActionTypes.LoadCategoriesSuccess;
+    constructor(public payload: CategoryModel[]) { }
+}
+
+export class LoadCategoriesFail implements Action {
+    readonly type = EditorActionTypes.LoadCategoriesFail;
+
+    constructor(public payload: string) { }
+}
+
 export type EditorActions = LoadPage
     | LoadPageSuccess
     | LoadPageFail
@@ -143,4 +162,7 @@ export type EditorActions = LoadPage
     | SavePage
     | SavePageSuccess
     | SavePageFail
-    | ClearPageChanges;
+    | ClearPageChanges
+    | LoadCategories
+    | LoadCategoriesSuccess
+    | LoadCategoriesFail;

@@ -1,3 +1,4 @@
+import { CatalogService } from './../services/catalog.service';
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Action, Store } from '@ngrx/store';
@@ -26,13 +27,14 @@ import { BlocksComponentFactory } from '../blocks/blocks-component.factory';
 export class EditorEffects {
     constructor(private pages: PagesService,
         private preview: PreviewService,
+        private catalog: CatalogService,
         private blockFactory: BlocksComponentFactory,
         private actions$: Actions, private store$: Store<fromEditor.State>) { }
 
     @Effect()
     loadPage$: Observable<Action> = this.actions$.pipe(
         ofType<editorActions.LoadPage>(editorActions.EditorActionTypes.LoadPage),
-        mergeMap(_ =>
+        switchMap(_ =>
             this.pages.downloadPage().pipe(
                 map(data => {
                     const model = new PageModel();
@@ -46,6 +48,17 @@ export class EditorEffects {
             )
         )
     );
+
+    // @Effect()
+    // loadCategories$: Observable<Action> = this.actions$.pipe(
+    //     ofType<editorActions.LoadCategories>(editorActions.EditorActionTypes.LoadCategories),
+    //     switchMap(_ =>
+    //         this.catalog.getCategories().pipe(
+    //             map(x => new editorActions.LoadCategoriesSuccess(x)),
+    //             catchError(err => of(new editorActions.LoadPageFail(err)))
+    //         )
+    //     )
+    // );
 
     @Effect()
     uploadPage$: Observable<Action> = this.actions$.pipe(
@@ -98,31 +111,31 @@ export class EditorEffects {
     );
 
     @Effect({ dispatch: false })
+    scrollPreviewToObject$ = this.actions$.pipe(
+        ofType<editorActions.SelectPageItem>(editorActions.EditorActionTypes.SelectPageItem),
+        tap(action => this.preview.scrollTo(action.payload) )
+    );
+
+    @Effect({ dispatch: false })
     sendUpdatedBlockToStoreLoaded$ = this.actions$.pipe(
         ofType<editorActions.UpdateBlockPreview>(editorActions.EditorActionTypes.UpdateBlockPreview),
         filter(action => action.payload.type !== 'settings'),
         debounceTime(500),
         distinctUntilChanged(),
-        tap(action => {
-            this.preview.addOrUpdateBlock(action.payload);
-        })
+        tap(action => this.preview.addOrUpdateBlock(action.payload))
     );
 
     @Effect({ dispatch: false })
     sendBlocksOrderChanged$ = this.actions$.pipe(
         ofType<editorActions.OrderChanged>(editorActions.EditorActionTypes.OrderChanged),
-        tap(action => {
-            this.preview.changeOrder(action.payload.currentIndex, action.payload.newIndex);
-        })
+        tap(action => this.preview.changeOrder(action.payload.currentIndex, action.payload.newIndex))
     );
 
     @Effect({ dispatch: false })
     sendRemoveBlockToStoreLoaded$ = this.actions$.pipe(
         ofType<editorActions.RemovePageItem>(editorActions.EditorActionTypes.RemovePageItem),
         filter(action => action.payload.type !== 'settings'),
-        tap(action => {
-            this.preview.removeBlock(action.payload);
-        })
+        tap(action => this.preview.removeBlock(action.payload))
     );
 
     @Effect({ dispatch: false })

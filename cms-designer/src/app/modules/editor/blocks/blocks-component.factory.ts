@@ -30,7 +30,7 @@ export class BlocksComponentFactory {
 
     getComponentsDescriptors(): BlockType[] {
         const keys = Object.keys(this.components);
-        return keys.map(key => <BlockType>{
+        return keys.filter(x => this.components[x].name !== 'Settings').map(key => <BlockType>{
             name: this.components[key].name,
             type: key
         });
