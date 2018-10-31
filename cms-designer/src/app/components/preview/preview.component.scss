@@ -16,3 +16,9 @@
     right: 0;
     z-index: 1;
 }
+
+#loading-indicator {
+    height: 4px;
+    background-color: red;
+    width: 0;
+}
