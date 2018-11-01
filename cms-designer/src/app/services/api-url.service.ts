@@ -10,19 +10,34 @@ import { SafeUrl, DomSanitizer } from '@angular/platform-browser';
 export class ApiUrlsService {
 
     private readonly SESSION_ID = 'sessionId';
+    private params: PageDescriptor;
 
-    constructor(private sanitizer: DomSanitizer, private cookies: CookieService) { }
+    constructor(private sanitizer: DomSanitizer, private cookies: CookieService) {
+        const urlParams = new URLSearchParams(window.location.search);
 
-    generateDownloadUrl(params: PageDescriptor): string {
-        const path = encodeURIComponent(params.path);
-        const url = `${environment.platformUrl}${environment.apiBaseUrl}/${params.contentType}/${params.storeId}`
+        const index = this.params.path.lastIndexOf('/');
+        const filename = index !== -1 ? this.params.path.substr(index + 1) : this.params.path;
+        const uploadPath = index === -1 ? '' : this.params.path.substr(0, index - 1);
+
+        this.params = {
+            storeId: urlParams.get('storeId'),
+            path: urlParams.get('path'),
+            contentType: urlParams.get('contentType'),
+            filename: filename,
+            uploadPath: uploadPath
+        };
+    }
+
+    generateDownloadUrl(contentType: string, filepath: string): string {
+        const path = encodeURIComponent(filepath || this.params.path);
+        const url = `${environment.platformUrl}${environment.apiBaseUrl}/${contentType || this.params.contentType}/${this.params.storeId}`
             + `?relativeUrl=${path}`;
         return url;
     }
 
-    generateUploadUrl(params: PageDescriptor): string {
-        const path = encodeURIComponent(params.path);
-        const url = `${environment.platformUrl}${environment.apiBaseUrl}/${params.contentType}/${params.storeId}`
+    generateUploadUrl(pathToUpload: string = null): string {
+        const path = encodeURIComponent(pathToUpload || this.params.path);
+        const url = `${environment.platformUrl}${environment.apiBaseUrl}/${this.params.contentType}/${this.params.storeId}`
             + `?folderUrl=${path}`;
         return url;
     }
@@ -39,11 +54,15 @@ export class ApiUrlsService {
         return result;
     }
 
-    getCategoriesEndPoint(params: PageDescriptor): string {
+    chooseFilename(givenFilename: string): string {
+        return givenFilename || this.params.filename;
+    }
+
+    getCategoriesEndPoint(): string {
         return null;
     }
 
-    getStoresEndPoint(params: PageDescriptor): string {
+    getStoresEndPoint(): string {
         return null;
     }
 

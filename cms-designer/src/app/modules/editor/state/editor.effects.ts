@@ -37,11 +37,11 @@ export class EditorEffects {
         switchMap(_ =>
             this.pages.downloadPage().pipe(
                 map(data => {
-                    const model = new PageModel();
-                    model.sections = data.filter(x => x.type !== 'settings');
+                    const model = <PageModel> {
+                        sections: data.filter(x => x.type !== 'settings'),
+                        settings: data.find(x => x.type === 'settings') || { type: 'settings' }
+                    };
                     model.sections.forEach((x, index) => x.id = index + 1);
-                    const settings = data.find(x => x.type === 'settings') || { type: 'settings' };
-                    model.settings = settings;
                     return new editorActions.LoadPageSuccess(model);
                 }),
                 catchError(err => of(new editorActions.LoadPageFail(err)))
