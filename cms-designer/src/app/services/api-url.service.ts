@@ -33,7 +33,7 @@ export class ApiUrlsService {
     }
 
     generateUploadUrl(pathToUpload: string = null): string {
-        const path = encodeURIComponent(pathToUpload || this.params.path);
+        const path = encodeURIComponent(pathToUpload || this.params.uploadPath);
         const url = `${environment.platformUrl}${environment.apiBaseUrl}/${this.params.contentType}/${this.params.storeId}`
             + `?folderUrl=${path}`;
         return url;
@@ -56,11 +56,15 @@ export class ApiUrlsService {
     }
 
     getCategoriesEndPoint(): string {
-        return null;
+        // /admin/api/catalog/listentries
+        const url = `${environment.platformUrl}/api/catalog/listentries`;
+        return url;
     }
 
     getStoresEndPoint(): string {
-        return null;
+        // /admin/api/stores/{Electronics}
+        const url = `${environment.platformUrl}/api/stores/${this.params.storeId}`;
+        return url;
     }
 
     private generatePrefixAndSetCookie(): string {

@@ -14,7 +14,7 @@ export class PlatformService {
     constructor(private http: HttpClient, private urls: ApiUrlsService) { }
 
     downloadPreset<T>(filename: string): Observable<T> {
-        return this.downloadModel<T>('themes', '/default/config/settings_data.json');
+        return this.downloadModel<T>('themes', `/default/config/${filename}`);
     }
 
     uploadPreset(model: PresetsModel): Observable<any> {
