@@ -8,6 +8,11 @@ export interface State extends fromRoot.State {
 
 const getEditorFeatureState = createFeatureSelector<fromEditor.EditorState>('editor');
 
+export const getCategories = createSelector(
+    getEditorFeatureState,
+    state => state.categories
+);
+
 export const getCurrentSectionItem = createSelector(
     getEditorFeatureState,
     state => state.currentSectionItem

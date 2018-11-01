@@ -1,5 +1,5 @@
 import { EditorActionTypes, EditorActions } from './editor.actions';
-import { PageModel, SectionModel, BlockType } from '../models';
+import { PageModel, SectionModel, BlockType, CategoryModel } from '../models';
 
 export interface EditorState {
     showNewBlockSelector: boolean;
@@ -10,6 +10,7 @@ export interface EditorState {
     page: PageModel;
     blockTypes: BlockType[];
     previewIsReady: boolean;
+    categories: CategoryModel[];
 }
 
 const initialState: EditorState = {
@@ -20,11 +21,22 @@ const initialState: EditorState = {
     initialPage: null,
     page: null,
     blockTypes: [],
-    previewIsReady: false
+    previewIsReady: false,
+    categories: []
 };
 
 export function reducer(state = initialState, action: EditorActions): EditorState {
     switch (action.type) {
+        case EditorActionTypes.LoadCategoriesSuccess:
+            return {
+                ...state,
+                categories: action.payload
+            };
+        case EditorActionTypes.LoadCategoriesFail:
+            return {
+                ...state,
+                error: action.payload
+            };
         case EditorActionTypes.ToggleNewBlockPane:
             return {
                 ...state,

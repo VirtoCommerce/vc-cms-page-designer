@@ -22,6 +22,7 @@ import { PagesService } from '../services/pages.service';
 import { PageModel } from '../models/page.model';
 import { PreviewService } from '../../../services/preview.service';
 import { BlocksComponentFactory } from '../blocks/blocks-component.factory';
+import { CategoryModel } from '../models';
 
 @Injectable()
 export class EditorEffects {
@@ -49,16 +50,16 @@ export class EditorEffects {
         )
     );
 
-    // @Effect()
-    // loadCategories$: Observable<Action> = this.actions$.pipe(
-    //     ofType<editorActions.LoadCategories>(editorActions.EditorActionTypes.LoadCategories),
-    //     switchMap(_ =>
-    //         this.catalog.getCategories().pipe(
-    //             map(x => new editorActions.LoadCategoriesSuccess(x)),
-    //             catchError(err => of(new editorActions.LoadPageFail(err)))
-    //         )
-    //     )
-    // );
+    @Effect()
+    loadCategories$: Observable<Action> = this.actions$.pipe(
+        ofType<editorActions.LoadCategories>(editorActions.EditorActionTypes.LoadCategories),
+        switchMap(_ =>
+            this.catalog.getCategories().pipe(
+                map(x => new editorActions.LoadCategoriesSuccess(x)),
+                catchError(err => of(new editorActions.LoadPageFail(err)))
+            )
+        )
+    );
 
     @Effect()
     uploadPage$: Observable<Action> = this.actions$.pipe(
