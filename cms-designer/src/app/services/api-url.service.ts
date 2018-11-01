@@ -15,17 +15,14 @@ export class ApiUrlsService {
     constructor(private sanitizer: DomSanitizer, private cookies: CookieService) {
         const urlParams = new URLSearchParams(window.location.search);
 
-        const index = this.params.path.lastIndexOf('/');
-        const filename = index !== -1 ? this.params.path.substr(index + 1) : this.params.path;
-        const uploadPath = index === -1 ? '' : this.params.path.substr(0, index - 1);
-
         this.params = {
             storeId: urlParams.get('storeId'),
             path: urlParams.get('path'),
             contentType: urlParams.get('contentType'),
-            filename: filename,
-            uploadPath: uploadPath
         };
+        const index = this.params.path.lastIndexOf('/');
+        this.params.filename = index !== -1 ? this.params.path.substr(index + 1) : this.params.path;
+        this.params.uploadPath = index === -1 ? '' : this.params.path.substr(0, index - 1);
     }
 
     generateDownloadUrl(contentType: string, filepath: string): string {
