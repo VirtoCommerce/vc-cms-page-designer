@@ -10,26 +10,38 @@ import { SafeUrl, DomSanitizer } from '@angular/platform-browser';
 export class ApiUrlsService {
 
     private readonly SESSION_ID = 'sessionId';
+    private params: PageDescriptor;
 
-    constructor(private sanitizer: DomSanitizer, private cookies: CookieService) { }
+    constructor(private sanitizer: DomSanitizer, private cookies: CookieService) {
+        const urlParams = new URLSearchParams(window.location.search);
 
-    generateDownloadUrl(params: PageDescriptor): string {
-        const path = encodeURIComponent(params.path);
-        const url = `${environment.platformUrl}${environment.apiBaseUrl}/${params.contentType}/${params.storeId}`
+        this.params = {
+            storeId: urlParams.get('storeId'),
+            path: urlParams.get('path'),
+            contentType: urlParams.get('contentType'),
+        };
+        const index = this.params.path.lastIndexOf('/');
+        this.params.filename = index !== -1 ? this.params.path.substr(index + 1) : this.params.path;
+        this.params.uploadPath = index === -1 ? '' : this.params.path.substr(0, index - 1);
+    }
+
+    generateDownloadUrl(contentType: string, filepath: string): string {
+        const path = encodeURIComponent(filepath || this.params.path);
+        const url = `${environment.platformUrl}${environment.apiBaseUrl}/${contentType || this.params.contentType}/${this.params.storeId}`
             + `?relativeUrl=${path}`;
         return url;
     }
 
-    generateUploadUrl(params: PageDescriptor): string {
-        const path = encodeURIComponent(params.path);
-        const url = `${environment.platformUrl}${environment.apiBaseUrl}/${params.contentType}/${params.storeId}`
+    generateUploadUrl(pathToUpload: string = null): string {
+        const path = encodeURIComponent(pathToUpload || this.params.uploadPath);
+        const url = `${environment.platformUrl}${environment.apiBaseUrl}/${this.params.contentType}/${this.params.storeId}`
             + `?folderUrl=${path}`;
         return url;
     }
 
-    getStoreUrl(): SafeUrl {
+    getStoreUrl(safe = true): SafeUrl|string {
         const url = `${environment.storeBaseUrl}${environment.storePreviewPath}?preview_mode=${this.getCurrentSessionId()}`;
-        return this.sanitizer.bypassSecurityTrustResourceUrl(url);
+        return safe ? this.sanitizer.bypassSecurityTrustResourceUrl(url) : url;
     }
 
     getCurrentSessionId(): string {
@@ -37,6 +49,22 @@ export class ApiUrlsService {
             ? this.cookies.get(this.SESSION_ID)
             : this.generatePrefixAndSetCookie();
         return result;
+    }
+
+    chooseFilename(givenFilename: string): string {
+        return givenFilename || this.params.filename;
+    }
+
+    getCategoriesEndPoint(): string {
+        // /admin/api/catalog/listentries
+        const url = `${environment.platformUrl}/api/catalog/listentries`;
+        return url;
+    }
+
+    getStoresEndPoint(): string {
+        // /admin/api/stores/{Electronics}
+        const url = `${environment.platformUrl}/api/stores/${this.params.storeId}`;
+        return url;
     }
 
     private generatePrefixAndSetCookie(): string {

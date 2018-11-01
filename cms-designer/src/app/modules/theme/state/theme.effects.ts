@@ -60,6 +60,6 @@ export class ThemeEffects {
         debounceTime(2000),
         distinctUntilChanged(),
         withLatestFrom(this.store$.select(state => state.theme.presets)),
-        tap(([_, theme]) => this.themeService.uploadDraft(theme).subscribe(() => this.preview.reload()))
+        tap(([_, presets]) => this.themeService.uploadDraft(presets).subscribe(() => this.preview.reload()))
     );
 }

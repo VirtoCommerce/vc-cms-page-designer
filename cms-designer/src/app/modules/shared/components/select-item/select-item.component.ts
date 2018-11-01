@@ -1,3 +1,4 @@
+import { DomSanitizer } from '@angular/platform-browser';
 import { Component, OnInit, Input, forwardRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
@@ -22,7 +23,7 @@ export class SelectItemComponent implements OnInit, ControlValueAccessor {
     groups: { [key: string]: { label: string; value: string; }[] };
     value: any;
 
-    constructor() { }
+    constructor(private sanitizer: DomSanitizer) { }
 
     ngOnInit() {
         this.group = this.options.some(x => !!x.group);
@@ -48,4 +49,11 @@ export class SelectItemComponent implements OnInit, ControlValueAccessor {
 
     registerOnTouched(): void { }
 
+    getDisplayValue(option) {
+        return this.sanitizer.bypassSecurityTrustHtml(option[this.valueLabel]);
+    }
+
+    getTrackValue(option) {
+        return option[this.valueName];
+    }
 }

@@ -7,3 +7,4 @@ export * from './image-with-text/image-with-text.component';
 export * from './image-with-text-overlay/image-with-text-overlay.component';
 export * from './textcolumns-with-images/textcolumns-with-images.component';
 export * from './images-layout/images-layout.component';
+export * from './category-block/category-block.component';

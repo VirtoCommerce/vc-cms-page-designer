@@ -75,9 +75,13 @@ export function reducer(state = initialState, action: ThemeActions): ThemeState 
                 showPresetsEditor: action.payload
             };
         case ThemeActionTypes.UpdateTheme:
+            const currentTheme = { ...state.editableTheme, ...action.payload };
+            const presets = state.presets;
+            presets.presets[presets.current] = currentTheme;
             return {
                 ...state,
-                editableTheme: { ...state.editableTheme, ...action.payload }
+                presets: presets,
+                editableTheme: currentTheme
             };
         case ThemeActionTypes.ClearThemeChanges:
             return {

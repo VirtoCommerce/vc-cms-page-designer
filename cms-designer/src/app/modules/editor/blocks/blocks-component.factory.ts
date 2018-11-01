@@ -1,3 +1,4 @@
+import { CategoryBlockComponent } from './category-block/category-block.component';
 import { Type, Injectable } from '@angular/core';
 import {
     SettingsEditorComponent,
@@ -26,11 +27,12 @@ export class BlocksComponentFactory {
         this.components[ImageCarouselComponent.Key] = { name: 'Image carousel', type: ImageCarouselComponent };
         this.components[TextColumnsWithImagesComponent.Key] = { name: 'Text columns with images', type: TextColumnsWithImagesComponent };
         this.components[ImageLayoutComponent.Key] = { name: 'Image layout', type: ImageLayoutComponent };
+        this.components[CategoryBlockComponent.Key] = { name: 'Category', type: CategoryBlockComponent };
     }
 
     getComponentsDescriptors(): BlockType[] {
         const keys = Object.keys(this.components);
-        return keys.map(key => <BlockType>{
+        return keys.filter(x => this.components[x].name !== 'Settings').map(key => <BlockType>{
             name: this.components[key].name,
             type: key
         });

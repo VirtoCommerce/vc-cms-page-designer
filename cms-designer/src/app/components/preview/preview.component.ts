@@ -14,6 +14,8 @@ export class PreviewComponent implements OnInit {
 
     @Input() storeUrl: SafeUrl;
     @Input() mode: string;
+    @Input() progress = 0;
+    @ViewChild('wrapper') wrapperRef: ElementRef;
 
     isFullScreen = false;
 
