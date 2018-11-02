@@ -32,7 +32,6 @@ export class PreviewComponent implements OnInit {
     }
 
     toggleFullscreen() {
-        console.log('toggle occured');
         this.isFullScreen = !this.isFullScreen;
     }
 }

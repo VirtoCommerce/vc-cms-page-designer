@@ -41,7 +41,6 @@ export class SidebarComponent implements OnInit {
 
     ngOnInit() {
         this.store.dispatch(new rootActions.LoadData());
-        // page editor
         this.store.dispatch(new editorActions.LoadBlockTypes());
 
         this.currentSectionItem$ = this.store.pipe(select(fromEditor.getCurrentSectionItem));

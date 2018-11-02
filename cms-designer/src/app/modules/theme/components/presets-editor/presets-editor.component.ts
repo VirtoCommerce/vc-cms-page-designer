@@ -1,6 +1,7 @@
-import { environment } from './../../../../../environments/environment.local';
+import { environment } from 'src/environments/environment.local';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { PresetsModel } from '../../models';
 
 @Component({
     selector: 'app-presets-editor',
@@ -9,8 +10,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 })
 export class PresetsEditorComponent implements OnInit {
 
-    @Input() data: any;
-    @Input() theme: any;
+    @Input() data: PresetsModel;
     @Output() backEvent = new EventEmitter<any>();
     @Output() removePresetEvent = new EventEmitter<string>();
     @Output() savePresetEvent = new EventEmitter<string>();

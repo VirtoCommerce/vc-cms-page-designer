@@ -27,7 +27,7 @@
             (valueChangedEvent)="updateBlockPreview($event)" (removeBlockEvent)="removeBlock($event)" (backEvent)="completeEditBlock($event)"></app-page-item-editor>
         <app-select-type class="pane __selected" *ngIf="addNewSectionMode$ | async" [types]="blockTypes$ | async"
             (backEvent)="setNewBlockMode(false)" (previewBlockEvent)="previewBlockType($event)" (selectBlockEvent)="selectBlockType($event)"></app-select-type>
-        <app-presets-editor class="pane __selected" *ngIf="showPresets$|async" [data]="presets$|async" [theme]="theme$|async"
+        <app-presets-editor class="pane __selected" *ngIf="showPresets$|async" [data]="presets$|async"
             (savePresetEvent)="onSavePreset($event)" (selectPresetEvent)="onSelectPreset($event)" (backEvent)="turnOffPresets()"
             (removePresetEvent)="onRemovePreset($event)"></app-presets-editor>
         <app-theme-item-editor class="pane __selected" *ngIf="currentSchemaItem$|async as currentSchemaItem" [schema]="currentSchemaItem"
