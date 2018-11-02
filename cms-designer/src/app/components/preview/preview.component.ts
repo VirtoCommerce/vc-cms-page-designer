@@ -15,7 +15,9 @@ export class PreviewComponent implements OnInit {
     @Input() storeUrl: SafeUrl;
     @Input() mode: string;
     @Input() progress = 0;
-    @ViewChild('wrapper') wrapperRef: ElementRef;
+    // @ViewChild('wrapper') wrapperRef: ElementRef;
+
+    isFullScreen = false;
 
     constructor(private store: Store<fromEditor.State>) { }
 
@@ -30,6 +32,6 @@ export class PreviewComponent implements OnInit {
     }
 
     toggleFullscreen() {
-        this.wrapperRef.nativeElement.classList.toggle('fullscreen');
+        this.isFullScreen = !this.isFullScreen;
     }
 }

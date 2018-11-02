@@ -3,7 +3,7 @@ import { FormGroup, AbstractControl, FormArray } from '@angular/forms';
 import { SectionModel } from '../../models/section.model';
 import { BlockType } from '../../models/block-type.model';
 import { BlocksComponentFactory } from '../blocks-component.factory';
-import { FormsHelper } from '../../forms.helper';
+import { FormsHelper } from '../../services/forms.helper';
 import { SortEvent } from 'src/app/modules/shared/draggable';
 
 @Component({
@@ -82,9 +82,7 @@ export class ImageCarouselComponent {
     }
 
     sortItems(event: SortEvent) {
-        if (event.complete) {
-            console.log(this.group);
-        } else {
+        if (!event.complete) {
             const images = this.getFormArray('images').controls;
             const current = images[event.currentIndex];
             const swapWith = images[event.newIndex];

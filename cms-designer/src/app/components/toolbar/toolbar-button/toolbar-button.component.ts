@@ -11,6 +11,7 @@ export class ToolbarButtonComponent {
 
     onClick(event: MouseEvent) {
         event.preventDefault();
+        event.stopPropagation();
         this.buttonClick.emit();
     }
 }

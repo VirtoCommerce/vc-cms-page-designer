@@ -1,7 +1,6 @@
-import { getIsEditMode } from './../../state/index';
 import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { Observable, combineLatest } from 'rxjs';
+import { Observable } from 'rxjs';
 
 import * as fromRoot from '../../state';
 import * as rootActions from '../../state/root.actions';
@@ -10,12 +9,9 @@ import * as editorActions from '../../modules/editor/state/editor.actions';
 import * as fromTheme from '../../modules/theme/state';
 import * as themeActions from '../../modules/theme/state/theme.actions';
 
-import { PresetsModel } from '../../modules/theme/models/presets.model';
-import { PageModel } from '../../modules/editor/models/page.model';
-import { SectionModel } from '../../modules/editor/models/section.model';
-import { BlockType } from '../../modules/editor/models/block-type.model';
+import { PageModel, SectionModel, BlockType } from '../../modules/editor/models/';
+import { PresetsModel, SchemaItemModel } from '../../modules/theme/models/';
 import { SortEvent } from '../../modules/shared/draggable';
-import { SchemaItemModel } from 'src/app/modules/theme/models/schema-item.model';
 
 @Component({
     selector: 'app-sidebar',
@@ -45,7 +41,6 @@ export class SidebarComponent implements OnInit {
 
     ngOnInit() {
         this.store.dispatch(new rootActions.LoadData());
-        // page editor
         this.store.dispatch(new editorActions.LoadBlockTypes());
 
         this.currentSectionItem$ = this.store.pipe(select(fromEditor.getCurrentSectionItem));

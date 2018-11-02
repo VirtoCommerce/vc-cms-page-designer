@@ -1,4 +1,4 @@
-import { FormsHelper } from './../../forms.helper';
+import { FormsHelper } from '../../services/forms.helper';
 import { Component, Input } from '@angular/core';
 import { FormGroup, FormArray } from '@angular/forms';
 import { BlockType, SectionModel } from '../../models';
