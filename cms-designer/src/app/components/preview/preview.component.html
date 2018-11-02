@@ -1,4 +1,4 @@
-<div #wrapper class="theme-cnt">
+<div #wrapper class="theme-cnt" [class.fullscreen]="isFullScreen">
     <div id="loading-indicator" [style]="{ width: progress + '%' }"></div>
     <div class="theme-preview" [ngClass]="mode">
         <iframe id="preview" [src]="storeUrl" scrolling="yes" (load)="previewLoaded()"></iframe>

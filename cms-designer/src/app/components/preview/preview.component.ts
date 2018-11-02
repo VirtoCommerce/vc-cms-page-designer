@@ -15,7 +15,7 @@ export class PreviewComponent implements OnInit {
     @Input() storeUrl: SafeUrl;
     @Input() mode: string;
     @Input() progress = 0;
-    @ViewChild('wrapper') wrapperRef: ElementRef;
+    // @ViewChild('wrapper') wrapperRef: ElementRef;
 
     isFullScreen = false;
 
@@ -32,6 +32,7 @@ export class PreviewComponent implements OnInit {
     }
 
     toggleFullscreen() {
+        console.log('toggle occured');
         this.isFullScreen = !this.isFullScreen;
     }
 }
