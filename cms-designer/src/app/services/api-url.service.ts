@@ -32,10 +32,10 @@ export class ApiUrlsService {
         return url;
     }
 
-    generateUploadUrl(pathToUpload: string = null): string {
+    generateUploadUrl(contentType: string = null, pathToUpload: string = null): string {
         const path = encodeURIComponent(pathToUpload || this.params.uploadPath);
-        const url = `${environment.platformUrl}${environment.apiBaseUrl}/${this.params.contentType}/${this.params.storeId}`
-            + `?folderUrl=${path}`;
+        const type = contentType || this.params.contentType;
+        const url = `${environment.platformUrl}${environment.apiBaseUrl}/${type}/${this.params.storeId}?folderUrl=${path}`;
         return url;
     }
 

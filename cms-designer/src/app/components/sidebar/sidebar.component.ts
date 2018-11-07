@@ -36,6 +36,7 @@ export class SidebarComponent implements OnInit {
     // combined states
     isLoading$: Observable<boolean>;
     isEditMode$: Observable<boolean>;
+    isDirty$: Observable<boolean>;
 
     constructor(private store: Store<fromRoot.State>) { }
 
@@ -58,6 +59,7 @@ export class SidebarComponent implements OnInit {
 
         this.isLoading$ = this.store.pipe(select(fromRoot.getIsLoading));
         this.isEditMode$ = this.store.pipe(select(fromRoot.getIsEditMode));
+        this.isDirty$ = this.store.pipe(select(fromRoot.getIsDirty));
 
     }
 
@@ -84,15 +86,19 @@ export class SidebarComponent implements OnInit {
     }
 
     turnOnPresets() {
-        this.store.dispatch(new themeActions.TogglePresetsPane(true));
+        this.store.dispatch(new themeActions.ShowPresetsPane());
     }
 
     turnOffPresets() {
-        this.store.dispatch(new themeActions.TogglePresetsPane(false));
+        this.store.dispatch(new themeActions.CancelPreset());
     }
 
     liveUpdateTheme(themeValues: {[key: string]: string|number|boolean}) {
         this.store.dispatch(new themeActions.UpdateTheme(themeValues));
+    }
+
+    applyPresetAsTheme(name: string) {
+        this.store.dispatch(new themeActions.ApplyPreset(name));
     }
 
     //#endregion

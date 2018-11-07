@@ -11,6 +11,7 @@ export interface EditorState {
     blockTypes: BlockType[];
     previewIsReady: boolean;
     categories: CategoryModel[];
+    dirty: boolean;
 }
 
 const initialState: EditorState = {
@@ -22,7 +23,8 @@ const initialState: EditorState = {
     page: null,
     blockTypes: [],
     previewIsReady: false,
-    categories: []
+    categories: [],
+    dirty: true // todo: should be changed in reducer (always is true for now)
 };
 
 export function reducer(state = initialState, action: EditorActions): EditorState {

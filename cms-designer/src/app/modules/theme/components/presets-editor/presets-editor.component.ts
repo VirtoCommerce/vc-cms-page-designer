@@ -10,11 +10,13 @@ import { PresetsModel } from '../../models';
 })
 export class PresetsEditorComponent implements OnInit {
 
+    current: string = null;
     @Input() data: PresetsModel;
     @Output() backEvent = new EventEmitter<any>();
     @Output() removePresetEvent = new EventEmitter<string>();
     @Output() savePresetEvent = new EventEmitter<string>();
     @Output() selectPresetEvent = new EventEmitter<string>();
+    @Output() applyThemeEvent = new EventEmitter<string>();
 
     form: FormGroup;
     savingPreset = false;
@@ -34,12 +36,15 @@ export class PresetsEditorComponent implements OnInit {
     }
 
     selectPreset(name: string) {
+        this.current = name;
         this.selectPresetEvent.emit(name);
     }
 
     savePreset() {
-        this.savePresetEvent.emit(this.form.get('name').value);
+        const name = this.form.get('name').value;
+        this.savePresetEvent.emit(name);
         this.savingPreset = false;
+        this.current = name;
     }
 
     removePreset(name: string) {
@@ -48,5 +53,9 @@ export class PresetsEditorComponent implements OnInit {
 
     back() {
         this.backEvent.emit(null);
+    }
+
+    applyPreset() {
+        this.applyThemeEvent.emit(this.current);
     }
 }

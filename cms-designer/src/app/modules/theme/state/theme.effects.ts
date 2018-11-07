@@ -18,11 +18,11 @@ export class ThemeEffects {
 
     @Effect()
     loadPresets$: Observable<Action> = this.actions$.pipe(
-        ofType<themeActions.LoadPresets>(themeActions.ThemeActionTypes.LoadPresets),
+        ofType<themeActions.LoadThemes>(themeActions.ThemeActionTypes.LoadThemes),
         mergeMap(_ =>
             this.themeService.loadPresets().pipe(
-                map(data => new themeActions.LoadPresetsSuccess(data)),
-                catchError(err => of(new themeActions.LoadPresetsFail(err)))
+                map(data => new themeActions.LoadThemesSuccess(data)),
+                catchError(err => of(new themeActions.LoadThemesFail(err)))
             )
         )
     );
@@ -40,12 +40,12 @@ export class ThemeEffects {
 
     @Effect()
     uploadPresets$: Observable<Action> = this.actions$.pipe(
-        ofType<themeActions.SavePresets>(themeActions.ThemeActionTypes.SavePresets),
+        ofType<themeActions.SaveTheme>(themeActions.ThemeActionTypes.SaveTheme),
         withLatestFrom(this.store$.select(state => state.theme.presets)),
         switchMap(([_, theme]) =>
             this.themeService.uploadPresets(theme).pipe(
-                map(() => new themeActions.SavePresetsSuccess()),
-                catchError(err => of(new themeActions.SavePresetsFail(err)))
+                map(() => new themeActions.SaveThemeSuccess()),
+                catchError(err => of(new themeActions.SaveThemeFail(err)))
             )
         )
     );
@@ -55,11 +55,13 @@ export class ThemeEffects {
         ofType(
             themeActions.ThemeActionTypes.UpdateTheme,
             themeActions.ThemeActionTypes.SelectPreset,
-            themeActions.ThemeActionTypes.LoadPresetsSuccess,
-            themeActions.ThemeActionTypes.ClearThemeChanges),
+            themeActions.ThemeActionTypes.LoadThemesSuccess,
+            themeActions.ThemeActionTypes.ClearThemeChanges,
+            themeActions.ThemeActionTypes.CancelPreset,
+            themeActions.ThemeActionTypes.ApplyPreset),
         debounceTime(2000),
         distinctUntilChanged(),
         withLatestFrom(this.store$.select(state => state.theme.presets)),
-        tap(([_, presets]) => this.themeService.uploadDraft(presets).subscribe(() => this.preview.reload()))
+        tap(([_, theme]) => this.themeService.uploadDraft(theme).subscribe(() => this.preview.reload()))
     );
 }

@@ -25,3 +25,9 @@ export const getIsEditMode = createSelector(
     (sectionItem, addSection, schemaItem, presetsEditor) =>
         !!sectionItem || !!addSection || !!schemaItem || !!presetsEditor
 );
+
+export const getIsDirty = createSelector(
+    fromTheme.getIsDirty,
+    fromEditor.getIsDirty,
+    (themeDirty, editorDirty) => themeDirty || editorDirty
+);

@@ -12,8 +12,7 @@
 
         <ul class="list pressets-list">
             <li class="list-item" *ngFor="let item of data.presets | keyvalue">
-                <div class="list-thumbnail" [class.super-active]="item.key == data.current"
-                    [ngStyle]="{'background-image': getThemeThumb(item.key)}"
+                <div class="list-thumbnail" [class.super-active]="item.key == current" [ngStyle]="{'background-image': getThemeThumb(item.key)}"
                     (click)="selectPreset(item.key)">
                     <span>{{item.key}}</span>
                 </div>
@@ -42,8 +41,8 @@
                 <input type="text" formControlName="name" />
             </div>
             <div class="sidebar-foot">
-                <button class="btn" [disabled]="form.invalid" (click)="savePreset()">Save</button>
                 <button class="btn" (click)="savingPreset = false">Cancel</button>
+                <button class="btn" [disabled]="form.invalid" (click)="savePreset()">Save</button>
             </div>
         </div>
 
@@ -51,5 +50,12 @@
             <button (click)="savingPreset = true" class="btn">Save current as new presset</button>
         </div>
 
+        <p class="pane-settings">Changing your theme's style will affect both the settings and look and feel of your store.</p>
+        <p class="pane-settings">Some settings will be lost when you change your style, but you will not lose any content from your store.</p>
+
+        <div class="sidebar-foot" *ngIf="!savingPreset">
+            <button class="btn" (click)="back()">Cancel</button>
+            <button class="btn" [disabled]="!current" (click)="applyPreset()">Apply preset</button>
+        </div>
     </div>
 </div>

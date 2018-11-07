@@ -4,17 +4,19 @@ import { PresetsModel } from '../models/presets.model';
 import { SchemaItemModel } from '../models/schema-item.model';
 
 export enum ThemeActionTypes {
-    LoadPresets = '[Theme] Load Presets',
-    LoadPresetsSuccess = '[Theme] Load Presets Success',
-    LoadPresetsFail = '[Theme] Load Presets Fail',
-    SavePresets = '[Theme] Save Presets',
-    SavePresetsSuccess = '[Theme] Save Presets Success',
-    SavePresetsFail = '[Theme] Save Presets Fail',
+    LoadThemes = '[Theme] Load Themes',
+    LoadThemesSuccess = '[Theme] Load Themes Success',
+    LoadThemesFail = '[Theme] Load Themes Fail',
+    SaveTheme = '[Theme] Save Theme',
+    SaveThemeSuccess = '[Theme] Save Theme Success',
+    SaveThemeFail = '[Theme] Save Theme Fail',
     LoadSchema = '[Theme] Load Schema',
     LoadSchemaSuccess = '[Theme] Load Schema Success',
     LoadSchemaFail = '[Theme] Load Schema Fail',
     SelectSchemaItem = '[Theme] Select Schema Item',
-    TogglePresetsPane = '[Theme] Toggle Presets Pane',
+    ShowPresetsPane = '[Theme] Show Presets Pane',
+    CancelPreset = '[Theme] Cancel preset',
+    ApplyPreset = '[Theme] Apply preset',
     UpdateTheme = '[Theme] Update Theme',
     ClearThemeChanges = '[Theme] Clear Theme Changes',
     RemovePreset = '[Theme] Remove Preset',
@@ -22,32 +24,32 @@ export enum ThemeActionTypes {
     SelectPreset = '[Theme] Select Preset'
 }
 
-export class LoadPresets implements Action {
-    readonly type = ThemeActionTypes.LoadPresets;
+export class LoadThemes implements Action {
+    readonly type = ThemeActionTypes.LoadThemes;
 }
 
-export class LoadPresetsSuccess implements Action {
-    readonly type = ThemeActionTypes.LoadPresetsSuccess;
+export class LoadThemesSuccess implements Action {
+    readonly type = ThemeActionTypes.LoadThemesSuccess;
 
     constructor(public payload: PresetsModel) { }
 }
 
-export class LoadPresetsFail implements Action {
-    readonly type = ThemeActionTypes.LoadPresetsFail;
+export class LoadThemesFail implements Action {
+    readonly type = ThemeActionTypes.LoadThemesFail;
 
     constructor(public payload: string) { }
 }
 
-export class SavePresets implements Action {
-    readonly type = ThemeActionTypes.SavePresets;
+export class SaveTheme implements Action {
+    readonly type = ThemeActionTypes.SaveTheme;
 }
 
-export class SavePresetsSuccess implements Action {
-    readonly type = ThemeActionTypes.SavePresetsSuccess;
+export class SaveThemeSuccess implements Action {
+    readonly type = ThemeActionTypes.SaveThemeSuccess;
 }
 
-export class SavePresetsFail implements Action {
-    readonly type = ThemeActionTypes.SavePresetsFail;
+export class SaveThemeFail implements Action {
+    readonly type = ThemeActionTypes.SaveThemeFail;
 
     constructor(public payload: string) { }
 }
@@ -74,10 +76,18 @@ export class SelectSchemaItem implements Action {
     constructor(public payload: SchemaItemModel) { }
 }
 
-export class TogglePresetsPane implements Action {
-    readonly type = ThemeActionTypes.TogglePresetsPane;
+export class ShowPresetsPane implements Action {
+    readonly type = ThemeActionTypes.ShowPresetsPane;
+}
 
-    constructor(public payload: boolean) { }
+export class CancelPreset implements Action {
+    readonly type = ThemeActionTypes.CancelPreset;
+}
+
+export class ApplyPreset implements Action {
+    readonly type = ThemeActionTypes.ApplyPreset;
+
+    constructor(public payload: string) { }
 }
 
 export class UpdateTheme implements Action {
@@ -108,17 +118,19 @@ export class SelectPreset implements Action {
     constructor(public payload: string) { }
 }
 
-export type ThemeActions = LoadPresets
-    | LoadPresetsSuccess
-    | LoadPresetsFail
-    | SavePresets
-    | SavePresetsSuccess
-    | SavePresetsFail
+export type ThemeActions = LoadThemes
+    | LoadThemesSuccess
+    | LoadThemesFail
+    | SaveTheme
+    | SaveThemeSuccess
+    | SaveThemeFail
     | LoadSchema
     | LoadSchemaSuccess
     | LoadSchemaFail
     | SelectSchemaItem
-    | TogglePresetsPane
+    | ShowPresetsPane
+    | ApplyPreset
+    | CancelPreset
     | UpdateTheme
     | ClearThemeChanges
     | RemovePreset

@@ -18,11 +18,11 @@ export class PlatformService {
     }
 
     uploadPreset(model: PresetsModel): Observable<any> {
-        return this.uploadModel<PresetsModel>(model, '/default/config', 'settings_data.json');
+        return this.uploadModel<PresetsModel>(model, 'themes', '/default/config', 'settings_data.json');
     }
 
     uploadDraftPreset(model: PresetsModel): Observable<any> {
-        return this.uploadModel<PresetsModel>(model, '/default/config/drafts', this.generateDraftPresetName());
+        return this.uploadModel<PresetsModel>(model, 'themes', '/default/config/drafts', this.generateDraftPresetName());
     }
 
     downloadPage(): Observable<SectionModel[]> {
@@ -38,8 +38,8 @@ export class PlatformService {
         return this.http.get<T>(url);
     }
 
-    private uploadModel<T>(model: T, pathToUpload: string = null, filename: string = null): Observable<any> {
-        const url = this.urls.generateUploadUrl(pathToUpload);
+    private uploadModel<T>(model: T, contentType: string = null, pathToUpload: string = null, filename: string = null): Observable<any> {
+        const url = this.urls.generateUploadUrl(contentType, pathToUpload);
         const form = new FormData();
         form.append(this.urls.chooseFilename(filename), JSON.stringify(model, null, 4));
         return this.http.post(url, form);

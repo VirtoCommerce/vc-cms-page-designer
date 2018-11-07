@@ -29,12 +29,12 @@
             (backEvent)="setNewBlockMode(false)" (previewBlockEvent)="previewBlockType($event)" (selectBlockEvent)="selectBlockType($event)"></app-select-type>
         <app-presets-editor class="pane __selected" *ngIf="showPresets$|async" [data]="presets$|async"
             (savePresetEvent)="onSavePreset($event)" (selectPresetEvent)="onSelectPreset($event)" (backEvent)="turnOffPresets()"
-            (removePresetEvent)="onRemovePreset($event)"></app-presets-editor>
+            (applyThemeEvent)="applyPresetAsTheme($event)" (removePresetEvent)="onRemovePreset($event)"></app-presets-editor>
         <app-theme-item-editor class="pane __selected" *ngIf="currentSchemaItem$|async as currentSchemaItem" [schema]="currentSchemaItem"
             [theme]="theme$|async" (valueChangedEvent)="liveUpdateTheme($event)" (backEvent)="closeThemeItemEditor()"></app-theme-item-editor>
     </div>
     <div class="sidebar-foot" *ngIf="!(isEditMode$|async)">
-        <button class="btn" (click)="clearChanges()">Clear changes</button>
-        <button class="btn" (click)="saveChanges()">Save changes</button>
+        <button [disabled]="!(isDirty$|async)" class="btn" (click)="clearChanges()">Clear changes</button>
+        <button [disabled]="!(isDirty$|async)" class="btn" (click)="saveChanges()">Save changes</button>
     </div>
 </div>

@@ -34,36 +34,36 @@ export class PreviewService {
     }
 
     reload() {
-        const request = new HttpRequest('GET', '', {
-            reportProgress: true,
-            responseType: 'text'
-        });
-        this.http.request(request).pipe(
-            map(event => this.getEventMessage(event)),
-            tap(message => this.showProgress(message)),
-            last(), // return last (completed) message to caller
-            catchError(x => this.handleError(x))
-        ).subscribe(x => {
-            const element = document.getElementById('preview');
-            // (<HTMLIFrameElement>element).src = <string>this.urls.getStoreUrl(false);
-        });
-        // this.send('settings', {});
+        // const request = new HttpRequest('GET', '', {
+        //     reportProgress: true,
+        //     responseType: 'text'
+        // });
+        // this.http.request(request).pipe(
+        //     map(event => this.getEventMessage(event)),
+        //     tap(message => this.showProgress(message)),
+        //     last(), // return last (completed) message to caller
+        //     catchError(x => this.handleError(x))
+        // ).subscribe(x => {
+        //     const element = document.getElementById('preview');
+        //     // (<HTMLIFrameElement>element).src = <string>this.urls.getStoreUrl(false);
+        // });
+        this.send('settings', {});
     }
 
-    private getEventMessage(event: HttpEvent<any>) {
-        switch (event.type) {
-            case HttpEventType.DownloadProgress:
-                // Compute and show the % done:
-                const percentDone = Math.round(100 * event.loaded / event.total);
-                return `percent done ${percentDone}`;
+    // private getEventMessage(event: HttpEvent<any>) {
+    //     switch (event.type) {
+    //         case HttpEventType.DownloadProgress:
+    //             // Compute and show the % done:
+    //             const percentDone = Math.round(100 * event.loaded / event.total);
+    //             return `percent done ${percentDone}`;
 
-            case HttpEventType.Response:
-                return `Page completely downloaded`;
+    //         case HttpEventType.Response:
+    //             return `Page completely downloaded`;
 
-            default:
-                return `event received: ${event.type}`;
-        }
-    }
+    //         default:
+    //             return `event received: ${event.type}`;
+    //     }
+    // }
 
     private send(type: string, model: any) {
         const element = document.getElementById('preview');

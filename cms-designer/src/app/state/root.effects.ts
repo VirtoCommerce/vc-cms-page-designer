@@ -42,7 +42,7 @@ export class RootEffects {
         ofType<rootActions.LoadData>(rootActions.RootActionTypes.LoadData),
         switchMap(action => [
             new editorActions.LoadPage(),
-            new themeActions.LoadPresets(),
+            new themeActions.LoadThemes(),
             new themeActions.LoadSchema()
         ])
     );
@@ -52,7 +52,7 @@ export class RootEffects {
         ofType<rootActions.SaveData>(rootActions.RootActionTypes.SaveData),
         switchMap(action => [
             new editorActions.SavePage(),
-            new themeActions.SavePresets()
+            new themeActions.SaveTheme()
         ])
     );
 }
