@@ -101,7 +101,8 @@ export function reducer(state = initialState, action: ThemeActions): ThemeState 
                 ...state,
                 editableTheme: newTheme,
                 presets: newPresets,
-                showPresetsEditor: false
+                showPresetsEditor: false,
+                dirty: true
             };
         }
         case ThemeActionTypes.UpdateTheme: {
@@ -134,7 +135,8 @@ export function reducer(state = initialState, action: ThemeActions): ThemeState 
                 delete newPresets.presets[action.payload];
                 return {
                     ...state,
-                    presets: newPresets
+                    presets: newPresets,
+                    dirty: true
                 };
             }
             break;
@@ -144,7 +146,8 @@ export function reducer(state = initialState, action: ThemeActions): ThemeState 
             newPresets.current = { ...state.editableTheme };
             return {
                 ...state,
-                presets: newPresets
+                presets: newPresets,
+                dirty: true
             };
         }
         case ThemeActionTypes.SelectPreset: {
