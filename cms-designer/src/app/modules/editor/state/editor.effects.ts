@@ -141,7 +141,11 @@ export class EditorEffects {
 
     @Effect({ dispatch: false })
     sendPageToStore$ = this.actions$.pipe(
-        ofType(editorActions.EditorActionTypes.LoadPageSuccess, editorActions.EditorActionTypes.PreviewReady),
+        ofType(
+            editorActions.EditorActionTypes.LoadPageSuccess,
+            editorActions.EditorActionTypes.PreviewReady,
+            editorActions.EditorActionTypes.ClearPageChanges
+        ),
         withLatestFrom(this.store$),
         tap(([_, state]) => {
             if (state.editor.previewIsReady) {

@@ -24,9 +24,9 @@ const initialState: EditorState = {
     blockTypes: [],
     previewIsReady: false,
     categories: [],
-    dirty: true // todo: should be changed in reducer (always is true for now)
+    dirty: true
 };
-
+// todo: state should be immutable, in this case objects in state are mutable
 export function reducer(state = initialState, action: EditorActions): EditorState {
     switch (action.type) {
         case EditorActionTypes.LoadCategoriesSuccess:
@@ -64,7 +64,8 @@ export function reducer(state = initialState, action: EditorActions): EditorStat
                 ...state,
                 page: action.payload,
                 initialPage: JSON.stringify(action.payload),
-                pageLoading: false
+                pageLoading: false,
+                dirty: false
             };
         case EditorActionTypes.LoadPageFail:
             return {
@@ -82,7 +83,8 @@ export function reducer(state = initialState, action: EditorActions): EditorStat
             Object.assign(state.currentSectionItem, action.payload);
             return {
                 ...state,
-                currentSectionItem: null
+                currentSectionItem: null,
+                dirty: true
             };
         case EditorActionTypes.RemovePageItem:
             const index = state.page.sections.indexOf(action.payload);
@@ -91,20 +93,23 @@ export function reducer(state = initialState, action: EditorActions): EditorStat
             }
             return {
                 ...state,
-                currentSectionItem: null
+                currentSectionItem: null,
+                dirty: true
             };
         case EditorActionTypes.AddPageItem:
             state.page.sections.push(action.payload);
             return {
                 ...state,
                 showNewBlockSelector: false,
-                currentSectionItem: action.payload
+                currentSectionItem: action.payload,
+                dirty: true
             };
         case EditorActionTypes.SavePageSuccess:
             return {
                 ...state,
                 pageLoading: false,
-                initialPage: JSON.stringify(state.page)
+                initialPage: JSON.stringify(state.page),
+                dirty: false
             };
         case EditorActionTypes.SavePage:
             return {
@@ -120,7 +125,8 @@ export function reducer(state = initialState, action: EditorActions): EditorStat
         case EditorActionTypes.ClearPageChanges:
             return {
                 ...state,
-                page: JSON.parse(state.initialPage)
+                page: JSON.parse(state.initialPage),
+                dirty: false
             };
     }
     return state;
