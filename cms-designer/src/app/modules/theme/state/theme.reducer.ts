@@ -1,4 +1,4 @@
-import { ThemeActionTypes, ThemeActions, CreatePreset, SaveThemeSuccess } from './theme.actions';
+import { ThemeActionTypes, ThemeActions, CreatePreset, SaveThemeSuccess, LoadSchema } from './theme.actions';
 import { PresetsModel } from '../models/presets.model';
 import { SchemaItemModel } from '../models/schema-item.model';
 
@@ -30,25 +30,24 @@ export const initialState: ThemeState = {
 
 export function reducer(state = initialState, action: ThemeActions): ThemeState {
     switch (action.type) {
+        case ThemeActionTypes.LoadSchema:
+            return {
+                ...state,
+                schemaLoading: true
+            };
         case ThemeActionTypes.LoadSchemaSuccess:
             return {
                 ...state,
-                schema: action.payload
+                schema: action.payload,
+                schemaLoading: false
             };
         case ThemeActionTypes.LoadSchemaFail:
             return {
                 ...state,
-                error: action.payload
+                error: action.payload,
+                schemaLoading: false
             };
-        case ThemeActionTypes.SaveThemeSuccess: {
-            return {
-                ...state,
-                initialPresets: JSON.stringify(state.presets),
-                dirty: false
-            };
-        }
         case ThemeActionTypes.SaveTheme: {
-            // executes before saving
             const newPreset = { ...state.presets };
             newPreset.current = { ...state.editableTheme };
             return {
@@ -56,23 +55,37 @@ export function reducer(state = initialState, action: ThemeActions): ThemeState 
                 presets: newPreset
             };
         }
-        case ThemeActionTypes.LoadThemesSuccess: {
-            const currentTheme = typeof action.payload.current === 'string'
-                ? action.payload.presets[action.payload.current]
-                : action.payload.current;
-            const newPresets = action.payload;
-            newPresets.current = currentTheme;
+        case ThemeActionTypes.SaveThemeSuccess: {
             return {
                 ...state,
-                editableTheme: { ...currentTheme },
+                initialPresets: JSON.stringify(state.presets),
+                dirty: false
+            };
+        }
+        case ThemeActionTypes.LoadThemes: {
+            return {
+                ...state,
+                presetsLoading: true
+            };
+        }
+        case ThemeActionTypes.LoadThemesSuccess: {
+            const newPresets = action.payload;
+            if (typeof action.payload.current === 'string') {
+                newPresets.current = { ...action.payload.presets[action.payload.current] };
+            }
+            return {
+                ...state,
+                editableTheme: { ...<any>newPresets.current },
                 initialPresets: JSON.stringify(action.payload),
-                presets: newPresets
+                presets: newPresets,
+                presetsLoading: false
             };
         }
         case ThemeActionTypes.LoadThemesFail:
             return {
                 ...state,
-                error: action.payload
+                error: action.payload,
+                presetsLoading: false
             };
         case ThemeActionTypes.SelectSchemaItem:
             return {
@@ -118,14 +131,13 @@ export function reducer(state = initialState, action: ThemeActions): ThemeState 
         }
         case ThemeActionTypes.ClearThemeChanges: {
             const newPresets = JSON.parse(state.initialPresets);
-            const currentTheme = typeof state.presets.current === 'string'
-                ? newPresets[state.presets.current]
-                : newPresets.current;
-            newPresets.current = currentTheme;
+            if (typeof newPresets.current === 'string') {
+                newPresets.current = { ...newPresets.presets[newPresets.current] };
+            }
             return {
                 ...state,
                 presets: newPresets,
-                editableTheme: { ...currentTheme },
+                editableTheme: { ...newPresets.current },
                 dirty: false
             };
         }
