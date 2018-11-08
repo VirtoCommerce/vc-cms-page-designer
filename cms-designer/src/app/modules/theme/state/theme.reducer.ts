@@ -141,17 +141,15 @@ export function reducer(state = initialState, action: ThemeActions): ThemeState 
                 dirty: false
             };
         }
-        case ThemeActionTypes.RemovePreset:
-            if (action.payload !== state.presets.current) {
-                const newPresets = { ...state.presets };
-                delete newPresets.presets[action.payload];
-                return {
-                    ...state,
-                    presets: newPresets,
-                    dirty: true
-                };
-            }
-            break;
+        case ThemeActionTypes.RemovePreset: {
+            const newPresets = { ...state.presets };
+            delete newPresets.presets[action.payload];
+            return {
+                ...state,
+                presets: newPresets,
+                dirty: true
+            };
+        }
         case ThemeActionTypes.CreatePreset: {
             const newPresets = { ...state.presets };
             newPresets.presets[action.payload] = { ...state.editableTheme };
