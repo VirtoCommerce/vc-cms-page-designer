@@ -12,7 +12,7 @@ import * as fromTheme from '.';
 @Injectable()
 export class ThemeEffects {
     constructor(private themeService: ThemeService,
-        private preview: PreviewService,
+        private preview: PreviewService, // нужно убирать отсюда, выносить в root state
         private actions$: Actions,
         private store$: Store<fromTheme.State>) { }
 

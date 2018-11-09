@@ -34,6 +34,18 @@ export class PreviewService {
     }
 
     reload() {
+        // план действий
+        //  нужен второй айфрейм - shadow
+        //  загрузка в shadow
+        //  отображение display
+        //  после срабатываения loaded сообщаем что страница загружена
+        //  отправляем туда все блоки
+        //  меняем айфреймы местами
+        //  нужна обработка ошибок на всех этапах
+        //  лоадер работает с самого начала, до подмены
+        //  событие settings должно вызываться раньше чем page!!
+
+
         // const request = new HttpRequest('GET', '', {
         //     reportProgress: true,
         //     responseType: 'text'
@@ -66,6 +78,7 @@ export class PreviewService {
     // }
 
     private send(type: string, model: any) {
+        console.log(type);
         const element = document.getElementById('preview');
         if (element != null) {
             const target = (<HTMLIFrameElement>element).contentWindow;

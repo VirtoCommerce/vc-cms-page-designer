@@ -27,7 +27,7 @@ import { CategoryModel } from '../models';
 @Injectable()
 export class EditorEffects {
     constructor(private pages: PagesService,
-        private preview: PreviewService,
+        private preview: PreviewService, // нужно убирать отсюда, выносить в rootState
         private catalog: CatalogService,
         private blockFactory: BlocksComponentFactory,
         private actions$: Actions, private store$: Store<fromEditor.State>) { }
