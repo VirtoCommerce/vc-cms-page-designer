@@ -81,6 +81,11 @@ export function reducer(state = initialState, action: EditorActions): EditorStat
                 pageLoading: false,
                 dirty: false
             };
+        case EditorActionTypes.OrderChanged:
+            return {
+                ...state,
+                dirty: true
+            };
         case EditorActionTypes.PreviewReady:
             return {
                 ...state,
