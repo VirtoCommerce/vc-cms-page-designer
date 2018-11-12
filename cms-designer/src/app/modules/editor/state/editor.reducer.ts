@@ -12,6 +12,8 @@ export interface EditorState {
     previewIsReady: boolean;
     categories: CategoryModel[];
     dirty: boolean;
+    primaryFrameId: string;
+    secondaryFrameId: string;
 }
 
 const initialState: EditorState = {
@@ -24,7 +26,9 @@ const initialState: EditorState = {
     blockTypes: [],
     previewIsReady: false,
     categories: [],
-    dirty: true
+    dirty: true,
+    primaryFrameId: 'preview1',
+    secondaryFrameId: 'preview2'
 };
 // todo: state should be immutable, in this case objects in state are mutable
 export function reducer(state = initialState, action: EditorActions): EditorState {
@@ -115,6 +119,12 @@ export function reducer(state = initialState, action: EditorActions): EditorStat
                 ...state,
                 showNewBlockSelector: action.payload ? false : state.showNewBlockSelector,
                 currentSectionItem: action.payload
+            };
+        case EditorActionTypes.ToggleFrames:
+            return {
+                ...state,
+                primaryFrameId: state.secondaryFrameId,
+                secondaryFrameId: state.primaryFrameId
             };
         case EditorActionTypes.ToggleNewBlockPane:
             return {

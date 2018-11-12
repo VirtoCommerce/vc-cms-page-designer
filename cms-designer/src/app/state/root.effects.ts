@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Action, Store } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
-import { switchMapTo, debounceTime, distinctUntilChanged, withLatestFrom, tap, filter, map } from 'rxjs/operators';
+import { switchMapTo, debounceTime, distinctUntilChanged, withLatestFrom, tap, filter, map, switchMap } from 'rxjs/operators';
 import { PreviewService } from '../services/preview.service';
 
 import * as rootActions from './root.actions';
@@ -56,7 +56,8 @@ export class RootEffects {
     @Effect({ dispatch: false })
     uploadPreviewPreset$ = this.actions$.pipe(
         ofType(themeActions.ThemeActionTypes.UpdateDraftSuccess),
-        tap(() => this.preview.reload())
+        withLatestFrom(this.editorStore$),
+        tap(([_, store]) => this.preview.reload(store.editor.secondaryFrameId))
     );
 
     // editor
@@ -65,7 +66,8 @@ export class RootEffects {
     sendPreviewPageItem$ = this.actions$.pipe(
         ofType<editorActions.PreviewPageItem>(editorActions.EditorActionTypes.PreviewPageItem),
         map(action => action.payload),
-        tap(item => this.preview.addOrUpdateBlock(item))
+        withLatestFrom(this.editorStore$),
+        tap(([item, store]) => this.preview.addOrUpdateBlock(item, store.editor.primaryFrameId))
     );
 
     @Effect({ dispatch: false })
@@ -76,14 +78,15 @@ export class RootEffects {
             if (!action.payload.id) {
                 action.payload.id = Math.max(...store.editor.page.sections.map(v => v.id || 0)) + 1;
             }
-            this.preview.addOrUpdateBlock(action.payload);
+            this.preview.addOrUpdateBlock(action.payload, store.editor.primaryFrameId);
         })
     );
 
     @Effect({ dispatch: false })
     scrollPreviewToObject$ = this.actions$.pipe(
         ofType<editorActions.SelectPageItem>(editorActions.EditorActionTypes.SelectPageItem),
-        tap(action => this.preview.scrollTo(action.payload))
+        withLatestFrom(this.editorStore$),
+        tap(([action, store]) => this.preview.scrollTo(action.payload, store.editor.primaryFrameId))
     );
 
     @Effect({ dispatch: false })
@@ -92,32 +95,53 @@ export class RootEffects {
         filter(action => action.payload.type !== 'settings'),
         debounceTime(500),
         distinctUntilChanged(),
-        tap(action => this.preview.addOrUpdateBlock(action.payload))
+        withLatestFrom(this.editorStore$),
+        tap(([action, store]) => this.preview.addOrUpdateBlock(action.payload, store.editor.primaryFrameId))
     );
 
     @Effect({ dispatch: false })
     sendBlocksOrderChanged$ = this.actions$.pipe(
         ofType<editorActions.OrderChanged>(editorActions.EditorActionTypes.OrderChanged),
-        tap(action => this.preview.changeOrder(action.payload.currentIndex, action.payload.newIndex))
+        withLatestFrom(this.editorStore$),
+        tap(([action, store]) =>
+            this.preview.changeOrder(action.payload.currentIndex, action.payload.newIndex, store.editor.primaryFrameId))
     );
 
     @Effect({ dispatch: false })
     sendRemoveBlockToStoreLoaded$ = this.actions$.pipe(
         ofType<editorActions.RemovePageItem>(editorActions.EditorActionTypes.RemovePageItem),
         filter(action => action.payload.type !== 'settings'),
-        tap(action => this.preview.removeBlock(action.payload))
+        withLatestFrom(this.editorStore$),
+        tap(([action, store]) => this.preview.removeBlock(action.payload, store.editor.primaryFrameId))
+    );
+
+    @Effect()
+    reloadPageInBackground$ = this.actions$.pipe(
+        ofType(
+            editorActions.EditorActionTypes.LoadPageSuccess,
+            editorActions.EditorActionTypes.ClearPageChanges
+        ),
+        withLatestFrom(this.editorStore$),
+        switchMap(([_, store]) => of(new editorActions.PreviewReady(store.editor.secondaryFrameId)))
+    );
+
+    @Effect()
+    sendPageToStore$ = this.actions$.pipe(
+        ofType<editorActions.PreviewReady>(editorActions.EditorActionTypes.PreviewReady),
+        withLatestFrom(this.editorStore$, this.themeStore$),
+        filter(([action, editorStore, themeStore]) =>
+            editorStore.editor.previewIsReady && themeStore.theme.draftUploaded),
+        switchMap(([_, editorStore, themeStore]) => {
+            this.preview.page(editorStore.editor.page, editorStore.editor.secondaryFrameId);
+            return of(new editorActions.ToggleFrames());
+        })
     );
 
     @Effect({ dispatch: false })
-    sendPageToStore$ = this.actions$.pipe(
-        ofType(
-            editorActions.EditorActionTypes.LoadPageSuccess,
-            editorActions.EditorActionTypes.PreviewReady,
-            editorActions.EditorActionTypes.ClearPageChanges
-        ),
-        withLatestFrom(this.editorStore$, this.themeStore$),
-        filter(([_, editorStore, themeStore]) => editorStore.editor.previewIsReady && themeStore.theme.draftUploaded),
-        tap(([_, store]) => this.preview.page(store.editor.page))
+    toggleFrames$ = this.actions$.pipe(
+        ofType(editorActions.EditorActionTypes.ToggleFrames),
+        withLatestFrom(this.editorStore$),
+        tap(([_, store]) => this.preview.toggleFrames(store.editor.secondaryFrameId, store.editor.primaryFrameId))
     );
 
 }

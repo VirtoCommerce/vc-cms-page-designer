@@ -23,8 +23,14 @@ export class PreviewComponent implements OnInit {
 
     ngOnInit() { }
 
-    previewLoaded() {
-        this.store.dispatch(new editorActions.PreviewReady());
+    primaryPreviewLoaded() {
+        console.log('primary');
+        this.store.dispatch(new editorActions.PreviewReady('preview1'));
+    }
+
+    secondaryPreviewLoaded() {
+        console.log('secondary');
+        this.store.dispatch(new editorActions.PreviewReady('preview2'));
     }
 
     onChangeMode(mode) {

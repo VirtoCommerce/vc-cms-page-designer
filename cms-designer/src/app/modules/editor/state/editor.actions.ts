@@ -27,6 +27,7 @@ export enum EditorActionTypes {
     SavePageFail = '[Page] Save Page Fail',
     SavePageSuccess = '[Page] Save Page Success',
     SelectPageItem = '[Page] Select Page Item',
+    ToggleFrames = '[Page] Toggle Frames',
     ToggleNewBlockPane = '[Page] Toggle New Block Pane',
     UpdateBlockPreview = '[Page] Update Block Preview',
     UpdatePageItem = '[Page] Update Page Item'
@@ -107,6 +108,8 @@ export class PreviewPageItemOfType implements Action {
 
 export class PreviewReady implements Action {
     readonly type = EditorActionTypes.PreviewReady;
+
+    constructor(public payload: string) { }
 }
 
 export class RemovePageItem implements Action {
@@ -133,6 +136,10 @@ export class SelectPageItem implements Action {
     readonly type = EditorActionTypes.SelectPageItem;
 
     constructor(public payload: SectionModel) { }
+}
+
+export class ToggleFrames implements Action {
+    readonly type = EditorActionTypes.ToggleFrames;
 }
 
 export class ToggleNewBlockPane implements Action {
@@ -174,6 +181,7 @@ export type EditorActions = LoadPage
     | SavePageFail
     | SavePageSuccess
     | SelectPageItem
+    | ToggleFrames
     | ToggleNewBlockPane
     | UpdateBlockPreview
     | UpdatePageItem;
