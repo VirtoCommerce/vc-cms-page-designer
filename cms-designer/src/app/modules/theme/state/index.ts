@@ -1,4 +1,4 @@
-import { createFeatureSelector, createSelector, ActionReducerMap } from '@ngrx/store';
+import { createFeatureSelector, createSelector } from '@ngrx/store';
 import * as fromRoot from '../../../state';
 import * as fromTheme from './theme.reducer';
 

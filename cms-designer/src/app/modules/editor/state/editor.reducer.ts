@@ -29,35 +29,45 @@ const initialState: EditorState = {
 // todo: state should be immutable, in this case objects in state are mutable
 export function reducer(state = initialState, action: EditorActions): EditorState {
     switch (action.type) {
-        case EditorActionTypes.LoadCategoriesSuccess:
+        case EditorActionTypes.AddPageItem:
+            state.page.sections.push(action.payload);
             return {
                 ...state,
-                categories: action.payload
-            };
-        case EditorActionTypes.LoadCategoriesFail:
-            return {
-                ...state,
-                error: action.payload
-            };
-        case EditorActionTypes.ToggleNewBlockPane:
-            return {
-                ...state,
-                showNewBlockSelector: action.payload
+                showNewBlockSelector: false,
+                currentSectionItem: action.payload,
+                dirty: true
             };
         case EditorActionTypes.BlockTypesLoaded:
             return {
                 ...state,
                 blockTypes: action.payload
             };
-        case EditorActionTypes.PreviewReady:
+        case EditorActionTypes.ClearPageChanges:
             return {
                 ...state,
-                previewIsReady: true
+                page: JSON.parse(state.initialPage),
+                dirty: false
+            };
+        case EditorActionTypes.LoadCategoriesFail:
+            return {
+                ...state,
+                error: action.payload
+            };
+        case EditorActionTypes.LoadCategoriesSuccess:
+            return {
+                ...state,
+                categories: action.payload
             };
         case EditorActionTypes.LoadPage:
             return {
                 ...state,
                 pageLoading: true
+            };
+        case EditorActionTypes.LoadPageFail:
+            return {
+                ...state,
+                error: action.payload,
+                pageLoading: false
             };
         case EditorActionTypes.LoadPageSuccess:
             return {
@@ -67,24 +77,10 @@ export function reducer(state = initialState, action: EditorActions): EditorStat
                 pageLoading: false,
                 dirty: false
             };
-        case EditorActionTypes.LoadPageFail:
+        case EditorActionTypes.PreviewReady:
             return {
                 ...state,
-                error: action.payload,
-                pageLoading: false
-            };
-        case EditorActionTypes.SelectPageItem:
-            return {
-                ...state,
-                showNewBlockSelector: action.payload ? false : state.showNewBlockSelector,
-                currentSectionItem: action.payload
-            };
-        case EditorActionTypes.UpdatePageItem:
-            Object.assign(state.currentSectionItem, action.payload);
-            return {
-                ...state,
-                currentSectionItem: null,
-                dirty: true
+                previewIsReady: true
             };
         case EditorActionTypes.RemovePageItem:
             const index = state.page.sections.indexOf(action.payload);
@@ -95,21 +91,6 @@ export function reducer(state = initialState, action: EditorActions): EditorStat
                 ...state,
                 currentSectionItem: null,
                 dirty: true
-            };
-        case EditorActionTypes.AddPageItem:
-            state.page.sections.push(action.payload);
-            return {
-                ...state,
-                showNewBlockSelector: false,
-                currentSectionItem: action.payload,
-                dirty: true
-            };
-        case EditorActionTypes.SavePageSuccess:
-            return {
-                ...state,
-                pageLoading: false,
-                initialPage: JSON.stringify(state.page),
-                dirty: false
             };
         case EditorActionTypes.SavePage:
             return {
@@ -122,11 +103,30 @@ export function reducer(state = initialState, action: EditorActions): EditorStat
                 pageLoading: false,
                 error: action.payload
             };
-        case EditorActionTypes.ClearPageChanges:
+        case EditorActionTypes.SavePageSuccess:
             return {
                 ...state,
-                page: JSON.parse(state.initialPage),
+                pageLoading: false,
+                initialPage: JSON.stringify(state.page),
                 dirty: false
+            };
+        case EditorActionTypes.SelectPageItem:
+            return {
+                ...state,
+                showNewBlockSelector: action.payload ? false : state.showNewBlockSelector,
+                currentSectionItem: action.payload
+            };
+        case EditorActionTypes.ToggleNewBlockPane:
+            return {
+                ...state,
+                showNewBlockSelector: action.payload
+            };
+        case EditorActionTypes.UpdatePageItem:
+            Object.assign(state.currentSectionItem, action.payload);
+            return {
+                ...state,
+                currentSectionItem: null,
+                dirty: true
             };
     }
     return state;

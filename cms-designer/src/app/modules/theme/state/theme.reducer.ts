@@ -13,6 +13,7 @@ export interface ThemeState {
     initialPresets: string; // initial file with presets and theme as string
     schema: SchemaItemModel[]; // the settings schema
     dirty: boolean;
+    draftUploaded: boolean;
 }
 
 export const initialState: ThemeState = {
@@ -25,7 +26,8 @@ export const initialState: ThemeState = {
     presets: null,
     initialPresets: null,
     schema: [],
-    dirty: false
+    dirty: false,
+    draftUploaded: false
 };
 
 export function reducer(state = initialState, action: ThemeActions): ThemeState {
@@ -166,6 +168,12 @@ export function reducer(state = initialState, action: ThemeActions): ThemeState 
             return {
                 ...state,
                 presets: newPresets
+            };
+        }
+        case ThemeActionTypes.UpdateDraftSuccess: {
+            return {
+                ...state,
+                draftUploaded: true
             };
         }
     }

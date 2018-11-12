@@ -1,3 +1,4 @@
+import { PreviewPageItemOfType } from './../../modules/editor/state/editor.actions';
 import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
@@ -112,7 +113,7 @@ export class SidebarComponent implements OnInit {
     setNewBlockMode(visible) {
         this.store.dispatch(new editorActions.ToggleNewBlockPane(visible));
         if (!visible) {
-            this.store.dispatch(new editorActions.PreviewPageItem(null));
+            this.store.dispatch(new editorActions.PreviewPageItemOfType(null));
         }
     }
 
@@ -121,7 +122,7 @@ export class SidebarComponent implements OnInit {
     }
 
     previewBlockType(type: BlockType) {
-        this.store.dispatch(new editorActions.PreviewPageItem(type));
+        this.store.dispatch(new editorActions.PreviewPageItemOfType(type));
     }
 
     updateBlockPreview(item: SectionModel) {

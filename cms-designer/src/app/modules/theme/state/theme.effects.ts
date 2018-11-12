@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Action, Store } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
-import { mergeMap, map, catchError, withLatestFrom, tap, switchMap, debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { mergeMap, map, catchError, withLatestFrom, tap, switchMap, debounceTime, distinctUntilChanged, switchMapTo } from 'rxjs/operators';
 
 import { ThemeService } from '../services/theme.service';
 import { PreviewService } from 'src/app/services/preview.service';
@@ -12,7 +12,6 @@ import * as fromTheme from '.';
 @Injectable()
 export class ThemeEffects {
     constructor(private themeService: ThemeService,
-        private preview: PreviewService, // нужно убирать отсюда, выносить в root state
         private actions$: Actions,
         private store$: Store<fromTheme.State>) { }
 
@@ -50,8 +49,8 @@ export class ThemeEffects {
         )
     );
 
-    @Effect({ dispatch: false })
-    uploadPreviewPreset$ = this.actions$.pipe(
+    @Effect()
+    uploadPreviewPreset$: Observable<Action> = this.actions$.pipe(
         ofType(
             themeActions.ThemeActionTypes.UpdateTheme,
             themeActions.ThemeActionTypes.SelectPreset,
@@ -61,7 +60,18 @@ export class ThemeEffects {
             themeActions.ThemeActionTypes.ApplyPreset),
         debounceTime(2000),
         distinctUntilChanged(),
+        switchMapTo([new themeActions.UpdateDraft()])
+    );
+
+    @Effect()
+    updateDraft$: Observable<Action> = this.actions$.pipe(
+        ofType(themeActions.ThemeActionTypes.UpdateDraft),
         withLatestFrom(this.store$.select(state => state.theme.presets)),
-        tap(([_, theme]) => this.themeService.uploadDraft(theme).subscribe(() => this.preview.reload()))
+        switchMap(([_, theme]) =>
+            this.themeService.uploadDraft(theme).pipe(
+                map(() => new themeActions.UpdateDraftSuccess()),
+                catchError(() => of(new themeActions.UpdateDraftFail()))
+            )
+        )
     );
 }

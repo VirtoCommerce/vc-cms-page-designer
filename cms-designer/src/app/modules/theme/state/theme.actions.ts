@@ -21,7 +21,10 @@ export enum ThemeActionTypes {
     ClearThemeChanges = '[Theme] Clear Theme Changes',
     RemovePreset = '[Theme] Remove Preset',
     CreatePreset = '[Theme] Create Preset',
-    SelectPreset = '[Theme] Select Preset'
+    SelectPreset = '[Theme] Select Preset',
+    UpdateDraft = '[Theme] Update Draft',
+    UpdateDraftSuccess = '[Theme] Update Draft Success',
+    UpdateDraftFail = '[Theme] Update Draft Fail'
 }
 
 export class LoadThemes implements Action {
@@ -118,6 +121,19 @@ export class SelectPreset implements Action {
     constructor(public payload: string) { }
 }
 
+export class UpdateDraft implements Action {
+    readonly type = ThemeActionTypes.UpdateDraft;
+}
+
+export class UpdateDraftSuccess implements Action {
+    readonly type = ThemeActionTypes.UpdateDraftSuccess;
+}
+
+export class UpdateDraftFail implements Action {
+    readonly type = ThemeActionTypes.UpdateDraftFail;
+}
+
+
 export type ThemeActions = LoadThemes
     | LoadThemesSuccess
     | LoadThemesFail
@@ -135,4 +151,7 @@ export type ThemeActions = LoadThemes
     | ClearThemeChanges
     | RemovePreset
     | CreatePreset
-    | SelectPreset;
+    | SelectPreset
+    | UpdateDraft
+    | UpdateDraftSuccess
+    | UpdateDraftFail;

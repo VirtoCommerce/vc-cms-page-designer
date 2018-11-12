@@ -7,70 +7,29 @@ import { BlockType } from '../models/block-type.model';
 import { SortEvent } from '../../shared/draggable';
 
 export enum EditorActionTypes {
-    LoadPage = '[Page] Load Page',
-    LoadPageSuccess = '[Page] Load Page Success',
-    LoadPageFail = '[Page] Load Page Fail',
-    ToggleNewBlockPane = '[Page] Toggle New Block Pane',
-    SelectPageItem = '[Page] Select Page Item',
-    CreatePageItem = '[Page] Create Page Item',
     AddPageItem = '[Page] Add Page Item',
-    UpdatePageItem = '[Page] Update Page Item',
-    UpdateBlockPreview = '[Page] Update Block Preview',
-    RemovePageItem = '[Page] Remove Page Item',
     BlockTypesLoaded = '[Page] Block Types Loaded',
-    LoadBlockTypes = '[Page] Load Block Types',
-    PreviewReady = '[Page] Preview is ready',
-    PreviewPageItem = '[Page] Preview Page Item',
-    OrderChanged = '[Page] Order Changed',
-    SavePage = '[Page] Save Page',
-    SavePageSuccess = '[Page] Save Page Success',
-    SavePageFail = '[Page] Save Page Fail',
     ClearPageChanges = '[Page] Clear Page Changes',
+    CreatePageItem = '[Page] Create Page Item',
+    LoadBlockTypes = '[Page] Load Block Types',
     LoadCategories = '[Page] Load Categories',
+    LoadCategoriesFail = '[Page] Load Categories Fail',
     LoadCategoriesSuccess = '[Page] Load Categories Success',
-    LoadCategoriesFail = '[Page] Load Categories Fail'
-}
-
-export class PreviewReady implements Action {
-    readonly type = EditorActionTypes.PreviewReady;
-}
-
-export class LoadPage implements Action {
-    readonly type = EditorActionTypes.LoadPage;
-}
-
-export class LoadPageSuccess implements Action {
-    readonly type = EditorActionTypes.LoadPageSuccess;
-    constructor(public payload: PageModel) { }
-}
-
-export class LoadPageFail implements Action {
-    readonly type = EditorActionTypes.LoadPageFail;
-    constructor(public payload: string) { }
-}
-
-export class SelectPageItem implements Action {
-    readonly type = EditorActionTypes.SelectPageItem;
-
-    constructor(public payload: SectionModel) { }
-}
-
-export class CreatePageItem implements Action {
-    readonly type = EditorActionTypes.CreatePageItem;
-
-    constructor(public payload: BlockType) { }
-}
-
-export class PreviewPageItem implements Action {
-    readonly type = EditorActionTypes.PreviewPageItem;
-
-    constructor(public payload: BlockType) { }
-}
-
-export class RemovePageItem implements Action {
-    readonly type = EditorActionTypes.RemovePageItem;
-
-    constructor(public payload: SectionModel) { }
+    LoadPage = '[Page] Load Page',
+    LoadPageFail = '[Page] Load Page Fail',
+    LoadPageSuccess = '[Page] Load Page Success',
+    OrderChanged = '[Page] Order Changed',
+    PreviewPageItem = '[Page] Preview Page Item',
+    PreviewPageItemOfType = '[Page] Preview Page Item Of Type',
+    PreviewReady = '[Page] Preview is ready',
+    RemovePageItem = '[Page] Remove Page Item',
+    SavePage = '[Page] Save Page',
+    SavePageFail = '[Page] Save Page Fail',
+    SavePageSuccess = '[Page] Save Page Success',
+    SelectPageItem = '[Page] Select Page Item',
+    ToggleNewBlockPane = '[Page] Toggle New Block Pane',
+    UpdateBlockPreview = '[Page] Update Block Preview',
+    UpdatePageItem = '[Page] Update Page Item'
 }
 
 export class AddPageItem implements Action {
@@ -79,14 +38,99 @@ export class AddPageItem implements Action {
     constructor(public payload: SectionModel) { }
 }
 
-export class UpdatePageItem implements Action {
-    readonly type = EditorActionTypes.UpdatePageItem;
+export class BlockTypesLoaded implements Action {
+    readonly type = EditorActionTypes.BlockTypesLoaded;
+
+    constructor(public payload: any[]) { }
+}
+
+export class ClearPageChanges implements Action {
+    readonly type = EditorActionTypes.ClearPageChanges;
+}
+
+export class CreatePageItem implements Action {
+    readonly type = EditorActionTypes.CreatePageItem;
+
+    constructor(public payload: BlockType) { }
+}
+
+export class LoadBlockTypes implements Action {
+    readonly type = EditorActionTypes.LoadBlockTypes;
+}
+
+export class LoadCategories implements Action {
+    readonly type = EditorActionTypes.LoadCategories;
+}
+
+export class LoadCategoriesFail implements Action {
+    readonly type = EditorActionTypes.LoadCategoriesFail;
+
+    constructor(public payload: string) { }
+}
+
+export class LoadCategoriesSuccess implements Action {
+    readonly type = EditorActionTypes.LoadCategoriesSuccess;
+    constructor(public payload: CategoryModel[]) { }
+}
+
+export class LoadPage implements Action {
+    readonly type = EditorActionTypes.LoadPage;
+}
+
+export class LoadPageFail implements Action {
+    readonly type = EditorActionTypes.LoadPageFail;
+    constructor(public payload: string) { }
+}
+
+export class LoadPageSuccess implements Action {
+    readonly type = EditorActionTypes.LoadPageSuccess;
+    constructor(public payload: PageModel) { }
+}
+
+export class OrderChanged implements Action {
+    readonly type = EditorActionTypes.OrderChanged;
+
+    constructor(public payload: SortEvent) { }
+}
+
+export class PreviewPageItem implements Action {
+    readonly type = EditorActionTypes.PreviewPageItem;
 
     constructor(public payload: SectionModel) { }
 }
 
-export class UpdateBlockPreview implements Action {
-    readonly type = EditorActionTypes.UpdateBlockPreview;
+export class PreviewPageItemOfType implements Action {
+    readonly type = EditorActionTypes.PreviewPageItemOfType;
+
+    constructor(public payload: BlockType) { }
+}
+
+export class PreviewReady implements Action {
+    readonly type = EditorActionTypes.PreviewReady;
+}
+
+export class RemovePageItem implements Action {
+    readonly type = EditorActionTypes.RemovePageItem;
+
+    constructor(public payload: SectionModel) { }
+}
+
+export class SavePage implements Action {
+    readonly type = EditorActionTypes.SavePage;
+}
+
+export class SavePageFail implements Action {
+    readonly type = EditorActionTypes.SavePageFail;
+
+    constructor(public payload: string) { }
+}
+
+export class SavePageSuccess implements Action {
+    readonly type = EditorActionTypes.SavePageSuccess;
+}
+
+export class SelectPageItem implements Action {
+    readonly type = EditorActionTypes.SelectPageItem;
 
     constructor(public payload: SectionModel) { }
 }
@@ -97,72 +141,39 @@ export class ToggleNewBlockPane implements Action {
     constructor(public payload: boolean) { }
 }
 
-export class LoadBlockTypes implements Action {
-    readonly type = EditorActionTypes.LoadBlockTypes;
+export class UpdateBlockPreview implements Action {
+    readonly type = EditorActionTypes.UpdateBlockPreview;
+
+    constructor(public payload: SectionModel) { }
 }
 
-export class BlockTypesLoaded implements Action {
-    readonly type = EditorActionTypes.BlockTypesLoaded;
+export class UpdatePageItem implements Action {
+    readonly type = EditorActionTypes.UpdatePageItem;
 
-    constructor(public payload: any[]) { }
-}
-
-export class OrderChanged implements Action {
-    readonly type = EditorActionTypes.OrderChanged;
-
-    constructor(public payload: SortEvent) { }
-}
-
-export class SavePage implements Action {
-    readonly type = EditorActionTypes.SavePage;
-}
-
-export class SavePageSuccess implements Action {
-    readonly type = EditorActionTypes.SavePageSuccess;
-}
-
-export class SavePageFail implements Action {
-    readonly type = EditorActionTypes.SavePageFail;
-
-    constructor(public payload: string) { }
-}
-
-export class ClearPageChanges implements Action {
-    readonly type = EditorActionTypes.ClearPageChanges;
-}
-
-export class LoadCategories implements Action {
-    readonly type = EditorActionTypes.LoadCategories;
-}
-
-export class LoadCategoriesSuccess implements Action {
-    readonly type = EditorActionTypes.LoadCategoriesSuccess;
-    constructor(public payload: CategoryModel[]) { }
-}
-
-export class LoadCategoriesFail implements Action {
-    readonly type = EditorActionTypes.LoadCategoriesFail;
-
-    constructor(public payload: string) { }
+    constructor(public payload: SectionModel) { }
 }
 
 export type EditorActions = LoadPage
+    | AddPageItem
+    | BlockTypesLoaded
+    | ClearPageChanges
+    | CreatePageItem
+    | LoadBlockTypes
+    | LoadCategories
+    | LoadCategoriesFail
+    | LoadCategoriesSuccess
+    | LoadPage
     | LoadPageSuccess
     | LoadPageFail
-    | ToggleNewBlockPane
-    | SelectPageItem
-    | CreatePageItem
-    | AddPageItem
-    | UpdatePageItem
-    | UpdateBlockPreview
-    | RemovePageItem
-    | BlockTypesLoaded
-    | PreviewReady
     | OrderChanged
+    | PreviewPageItem
+    | PreviewPageItemOfType
+    | PreviewReady
+    | RemovePageItem
     | SavePage
-    | SavePageSuccess
     | SavePageFail
-    | ClearPageChanges
-    | LoadCategories
-    | LoadCategoriesSuccess
-    | LoadCategoriesFail;
+    | SavePageSuccess
+    | SelectPageItem
+    | ToggleNewBlockPane
+    | UpdateBlockPreview
+    | UpdatePageItem;

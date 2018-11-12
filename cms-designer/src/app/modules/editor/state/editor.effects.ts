@@ -27,7 +27,6 @@ import { CategoryModel } from '../models';
 @Injectable()
 export class EditorEffects {
     constructor(private pages: PagesService,
-        private preview: PreviewService, // нужно убирать отсюда, выносить в rootState
         private catalog: CatalogService,
         private blockFactory: BlocksComponentFactory,
         private actions$: Actions, private store$: Store<fromEditor.State>) { }
@@ -38,7 +37,7 @@ export class EditorEffects {
         switchMap(_ =>
             this.pages.downloadPage().pipe(
                 map(data => {
-                    const model = <PageModel> {
+                    const model = <PageModel>{
                         sections: data.filter(x => x.type !== 'settings'),
                         settings: data.find(x => x.type === 'settings') || { type: 'settings' }
                     };
@@ -91,66 +90,13 @@ export class EditorEffects {
         )
     );
 
-    @Effect({ dispatch: false })
-    sendPreviewPageItem$ = this.actions$.pipe(
-        ofType<editorActions.PreviewPageItem>(editorActions.EditorActionTypes.PreviewPageItem),
+    @Effect()
+    convertPageTypeToPreviewSection$ = this.actions$.pipe(
+        ofType<editorActions.PreviewPageItemOfType>(editorActions.EditorActionTypes.PreviewPageItemOfType),
         map(action => action.payload),
         map(item => !!item ? this.blockFactory.createPreview(item.type) : null),
-        tap(item => this.preview.addOrUpdateBlock(item))
-    );
-
-    @Effect({ dispatch: false })
-    sendNewBlockToStoreLoaded$ = this.actions$.pipe(
-        ofType<editorActions.AddPageItem>(editorActions.EditorActionTypes.AddPageItem),
-        withLatestFrom(this.store$),
-        tap(([action, store]) => {
-            if (!action.payload.id) {
-                action.payload.id = Math.max(...store.editor.page.sections.map(v => v.id || 0)) + 1;
-            }
-            this.preview.addOrUpdateBlock(action.payload);
-        })
-    );
-
-    @Effect({ dispatch: false })
-    scrollPreviewToObject$ = this.actions$.pipe(
-        ofType<editorActions.SelectPageItem>(editorActions.EditorActionTypes.SelectPageItem),
-        tap(action => this.preview.scrollTo(action.payload) )
-    );
-
-    @Effect({ dispatch: false })
-    sendUpdatedBlockToStoreLoaded$ = this.actions$.pipe(
-        ofType<editorActions.UpdateBlockPreview>(editorActions.EditorActionTypes.UpdateBlockPreview),
-        filter(action => action.payload.type !== 'settings'),
-        debounceTime(500),
-        distinctUntilChanged(),
-        tap(action => this.preview.addOrUpdateBlock(action.payload))
-    );
-
-    @Effect({ dispatch: false })
-    sendBlocksOrderChanged$ = this.actions$.pipe(
-        ofType<editorActions.OrderChanged>(editorActions.EditorActionTypes.OrderChanged),
-        tap(action => this.preview.changeOrder(action.payload.currentIndex, action.payload.newIndex))
-    );
-
-    @Effect({ dispatch: false })
-    sendRemoveBlockToStoreLoaded$ = this.actions$.pipe(
-        ofType<editorActions.RemovePageItem>(editorActions.EditorActionTypes.RemovePageItem),
-        filter(action => action.payload.type !== 'settings'),
-        tap(action => this.preview.removeBlock(action.payload))
-    );
-
-    @Effect({ dispatch: false })
-    sendPageToStore$ = this.actions$.pipe(
-        ofType(
-            editorActions.EditorActionTypes.LoadPageSuccess,
-            editorActions.EditorActionTypes.PreviewReady,
-            editorActions.EditorActionTypes.ClearPageChanges
-        ),
-        withLatestFrom(this.store$),
-        tap(([_, state]) => {
-            if (state.editor.previewIsReady) {
-                this.preview.page(state.editor.page);
-            }
-        })
+        mergeMap(item =>
+            of(new editorActions.PreviewPageItem(item))
+        )
     );
 }
