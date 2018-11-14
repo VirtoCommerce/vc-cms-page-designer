@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { SchemaItemModel, PresetsModel } from '../models/';
+import { PresetsModel } from '../models/';
 import { PlatformService } from 'src/app/services/platform.service';
+import { BlockModel } from '../../shared/models';
 
 @Injectable({
     providedIn: 'root'
@@ -15,8 +16,8 @@ export class ThemeService {
         return this.platform.downloadPreset<PresetsModel>('settings_data.json');
     }
 
-    loadSchema(): Observable<SchemaItemModel[]> {
-        return this.platform.downloadPreset<SchemaItemModel[]>('settings_schema.json');
+    loadSchema(): Observable<BlockModel[]> {
+        return this.platform.downloadPreset<BlockModel[]>('settings_schema.json');
     }
 
     uploadPresets(model: PresetsModel): Observable<any> {

@@ -1,7 +1,7 @@
 import { Action } from '@ngrx/store';
 
 import { PresetsModel } from '../models/presets.model';
-import { SchemaItemModel } from '../models/schema-item.model';
+import { BlockModel } from '../../shared/models';
 
 export enum ThemeActionTypes {
     LoadThemes = '[Theme] Load Themes',
@@ -64,7 +64,7 @@ export class LoadSchema implements Action {
 export class LoadSchemaSuccess implements Action {
     readonly type = ThemeActionTypes.LoadSchemaSuccess;
 
-    constructor(public payload: SchemaItemModel[]) { }
+    constructor(public payload: BlockModel[]) { }
 }
 
 export class LoadSchemaFail implements Action {
@@ -76,7 +76,7 @@ export class LoadSchemaFail implements Action {
 export class SelectSchemaItem implements Action {
     readonly type = ThemeActionTypes.SelectSchemaItem;
 
-    constructor(public payload: SchemaItemModel) { }
+    constructor(public payload: BlockModel) { }
 }
 
 export class ShowPresetsPane implements Action {

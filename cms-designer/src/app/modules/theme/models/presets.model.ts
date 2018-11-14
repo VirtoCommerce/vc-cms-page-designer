@@ -1,4 +1,6 @@
+import { ValueType } from './index';
+
 export interface PresetsModel {
-    current: { [key: string]: string | number | boolean } | string;
-    presets: { [key: string]: { [key: string]: string | number | boolean } };
+    current: { [key: string]: ValueType } | string;
+    presets: { [key: string]: { [key: string]: ValueType } };
 }

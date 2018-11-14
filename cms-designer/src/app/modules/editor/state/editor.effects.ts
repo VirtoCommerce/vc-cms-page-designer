@@ -1,4 +1,4 @@
-import { CatalogService } from './../services/catalog.service';
+// import { CatalogService } from './../services/catalog.service';
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Action, Store } from '@ngrx/store';
@@ -20,14 +20,13 @@ import * as fromEditor from '.';
 
 import { PagesService } from '../services/pages.service';
 import { PageModel } from '../models/page.model';
-import { PreviewService } from '../../../services/preview.service';
 import { BlocksComponentFactory } from '../blocks/blocks-component.factory';
-import { CategoryModel } from '../models';
+// import { CategoryModel } from '../models';
 
 @Injectable()
 export class EditorEffects {
     constructor(private pages: PagesService,
-        private catalog: CatalogService,
+        // private catalog: CatalogService,
         private blockFactory: BlocksComponentFactory,
         private actions$: Actions, private store$: Store<fromEditor.State>) { }
 
@@ -49,16 +48,16 @@ export class EditorEffects {
         )
     );
 
-    @Effect()
-    loadCategories$: Observable<Action> = this.actions$.pipe(
-        ofType<editorActions.LoadCategories>(editorActions.EditorActionTypes.LoadCategories),
-        switchMap(_ =>
-            this.catalog.getCategories().pipe(
-                map(x => new editorActions.LoadCategoriesSuccess(x)),
-                catchError(err => of(new editorActions.LoadPageFail(err)))
-            )
-        )
-    );
+    // @Effect()
+    // loadCategories$: Observable<Action> = this.actions$.pipe(
+    //     ofType<editorActions.LoadCategories>(editorActions.EditorActionTypes.LoadCategories),
+    //     switchMap(_ =>
+    //         this.catalog.getCategories().pipe(
+    //             map(x => new editorActions.LoadCategoriesSuccess(x)),
+    //             catchError(err => of(new editorActions.LoadPageFail(err)))
+    //         )
+    //     )
+    // );
 
     @Effect()
     uploadPage$: Observable<Action> = this.actions$.pipe(

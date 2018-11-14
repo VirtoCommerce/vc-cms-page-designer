@@ -1,17 +1,18 @@
 import { ThemeActionTypes, ThemeActions, CreatePreset, SaveThemeSuccess, LoadSchema } from './theme.actions';
 import { PresetsModel } from '../models/presets.model';
-import { SchemaItemModel } from '../models/schema-item.model';
+import { ValueType } from '../models';
+import { BlockModel } from '../../shared/models';
 
 export interface ThemeState {
     showPresetsEditor: boolean;
     error: string;
     schemaLoading: boolean;
     presetsLoading: boolean;
-    selectedSchemaItem: SchemaItemModel; // this section corresponds to section from schema
-    editableTheme: { [key: string]: string | number | boolean }; // the current theme
+    selectedSchemaItem: BlockModel; // this section corresponds to section from schema
+    editableTheme: { [key: string]: ValueType }; // the current theme
     presets: PresetsModel; // the whole presets file which used as transport for preview
     initialPresets: string; // initial file with presets and theme as string
-    schema: SchemaItemModel[]; // the settings schema
+    schema: BlockModel[]; // the settings schema
     dirty: boolean;
     draftUploaded: boolean;
 }

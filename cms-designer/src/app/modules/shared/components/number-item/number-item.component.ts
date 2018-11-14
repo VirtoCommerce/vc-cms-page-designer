@@ -2,15 +2,15 @@ import { Component, OnInit, Input, forwardRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
-    selector: 'app-slider-item',
-    templateUrl: './slider-item.component.html',
+    selector: 'app-number-item',
+    templateUrl: './number-item.component.html',
     providers: [{
         provide: NG_VALUE_ACCESSOR,
-        useExisting: forwardRef(() => SliderItemComponent),
+        useExisting: forwardRef(() => NumberItemComponent),
         multi: true,
     }]
 })
-export class SliderItemComponent implements OnInit, ControlValueAccessor {
+export class NumberItemComponent implements OnInit, ControlValueAccessor {
 
     @Input() label: string;
     @Input() min: number;

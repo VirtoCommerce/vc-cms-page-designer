@@ -11,7 +11,7 @@ import {
     SelectItemComponent,
     StringItemComponent,
     TextItemComponent,
-    SliderItemComponent,
+    NumberItemComponent,
 
     TabsComponent,
     TabComponent,
@@ -33,7 +33,7 @@ const COMPONENTS = [
     SelectItemComponent,
     TextItemComponent,
     StringItemComponent,
-    SliderItemComponent,
+    NumberItemComponent,
 
     TabsComponent,
     TabComponent,

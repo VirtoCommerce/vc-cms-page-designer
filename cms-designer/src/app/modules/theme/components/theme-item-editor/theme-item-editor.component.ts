@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter, Input, AfterViewInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { SchemaItemModel } from '../../models/schema-item.model';
+import { BlockModel } from 'src/app/modules/shared/models';
+import { ValueType } from '../../models';
 
 @Component({
     selector: 'app-theme-item-editor',
@@ -11,9 +12,9 @@ export class ThemeItemEditorComponent implements OnInit, AfterViewInit {
 
     form: FormGroup;
 
-    @Input() schema: SchemaItemModel;
-    @Input() theme: {[key: string]: any};
-    @Output() backEvent = new EventEmitter<{[key: string]: any}>();
+    @Input() schema: BlockModel;
+    @Input() theme: {[key: string]: ValueType};
+    @Output() backEvent = new EventEmitter<{[key: string]: ValueType}>();
     @Output() valueChangedEvent = new EventEmitter<any>();
 
     constructor(private fb: FormBuilder) { }

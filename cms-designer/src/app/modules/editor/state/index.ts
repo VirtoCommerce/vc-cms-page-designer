@@ -13,10 +13,10 @@ export const getIsDirty = createSelector(
     state => state.dirty
 );
 
-export const getCategories = createSelector(
-    getEditorFeatureState,
-    state => state.categories
-);
+// export const getCategories = createSelector(
+//     getEditorFeatureState,
+//     state => state.categories
+// );
 
 export const getCurrentSectionItem = createSelector(
     getEditorFeatureState,

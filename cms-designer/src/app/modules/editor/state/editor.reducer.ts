@@ -1,5 +1,5 @@
 import { EditorActionTypes, EditorActions } from './editor.actions';
-import { PageModel, SectionModel, BlockType, CategoryModel } from '../models';
+import { PageModel, SectionModel, BlockType } from '../models';
 
 export interface EditorState {
     showNewBlockSelector: boolean;
@@ -10,7 +10,7 @@ export interface EditorState {
     page: PageModel;
     blockTypes: BlockType[];
     previewIsReady: boolean;
-    categories: CategoryModel[];
+    // categories: CategoryModel[];
     dirty: boolean;
     primaryFrameId: string;
     secondaryFrameId: string;
@@ -25,7 +25,7 @@ const initialState: EditorState = {
     page: null,
     blockTypes: [],
     previewIsReady: false,
-    categories: [],
+    // categories: [],
     dirty: true,
     primaryFrameId: 'preview1',
     secondaryFrameId: 'preview2'
@@ -52,16 +52,16 @@ export function reducer(state = initialState, action: EditorActions): EditorStat
                 page: JSON.parse(state.initialPage),
                 dirty: false
             };
-        case EditorActionTypes.LoadCategoriesFail:
-            return {
-                ...state,
-                error: action.payload
-            };
-        case EditorActionTypes.LoadCategoriesSuccess:
-            return {
-                ...state,
-                categories: action.payload
-            };
+        // case EditorActionTypes.LoadCategoriesFail:
+        //     return {
+        //         ...state,
+        //         error: action.payload
+        //     };
+        // case EditorActionTypes.LoadCategoriesSuccess:
+        //     return {
+        //         ...state,
+        //         categories: action.payload
+        //     };
         case EditorActionTypes.LoadPage:
             return {
                 ...state,

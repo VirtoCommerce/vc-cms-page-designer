@@ -1,29 +1,359 @@
 {
-    "category-block": {
-
-    },
-    "image-carousel": {
-
-    },
-    "image-with-text": {
-
-    },
-    "image-with-text-overlay": {
-
-    },
-    "images-layout": {
-
-    },
     "settings-editor": {
 
     },
+    "image-carousel": {
+        "name": "Image carousel",
+        "icon": "",
+        "displayField": "label",
+        "fields": [
+            {
+                "id": "name",
+                "label": "Block name",
+                "type": "string",
+                "default": "Image carousel"
+            },
+            {
+                "id": "width",
+                "label": "Block width",
+                "type": "select",
+                "default": "screen",
+                "options": [
+                    { "label": "Screen", "value": "screen" },
+                    { "label": "Container", "value": "container" },
+                    { "label": "Small", "value": "small" }
+                ]
+            },
+            {
+                "id": "rotate",
+                "label": "Auto-rotate images",
+                "type": "checkbox",
+                "default": true
+            },
+            {
+                "id": "frequency",
+                "label": "Rotation frequency",
+                "type": "select",
+                "default": "5000",
+                "options": [
+                    { "label": "5000", "value": "5 seconds" },
+                    { "label": "6000", "value": "6 seconds" },
+                    { "label": "7000", "value": "7 seconds" },
+                    { "label": "8000", "value": "8 seconds" },
+                    { "label": "9000", "value": "9 seconds" }
+                ]
+            },
+            {
+                "id": "images",
+                "label": "Images",
+                "type": "collection",
+                "addText": "Add image",
+                "removeText": "Remove image",
+                "displayField": "title",
+                "element": [
+                    {
+                        "id": "title",
+                        "label": "Title",
+                        "type": "string"
+                    },
+                    {
+                        "id": "image",
+                        "label": "Upload picture",
+                        "type": "image",
+                        "previewWidth": 120,
+                        "previewHeight": 80
+                    },
+                    {
+                        "id": "content",
+                        "label": "Content",
+                        "type": "text"
+                    }
+                ]
+            }
+        ]
+    },
+    "image-with-text": {
+        "name": "Image with text",
+        "icon": "",
+        "fields": [
+            {
+                "id": "name",
+                "label": "Block name",
+                "type": "string",
+                "default": "Image with text"
+            },
+            {
+                "id": "title",
+                "label": "Title",
+                "type": "string"
+            },
+            {
+                "id": "size",
+                "label": "Choose image size",
+                "type": "select",
+                "default": "small",
+                "options": [
+                    { "label": "Small", "value": "small" },
+                    { "label": "Medium", "value": "medium" },
+                    { "label": "Large", "value": "large" },
+                    { "label": "Extra-Large", "value": "xlarge" }
+                ]
+            },
+            {
+                "id": "align",
+                "label": "Choose image alignment",
+                "type": "select",
+                "default": "left",
+                "options": [
+                    { "label": "Left", "value": "left" },
+                    { "label": "Right", "value": "right" },
+                    { "label": "Top", "value": "tio" },
+                    { "label": "Bottom", "value": "bottom" }
+                ]
+            },
+            {
+                "id": "content",
+                "label": "Content",
+                "type": "text"
+            }
+        ]
+    },
+    "image-with-text-overlay": {
+        "name": "Image with text overlay",
+        "icon": "",
+        "fields": [
+            {
+                "id": "name",
+                "label": "Block name",
+                "type": "string"
+            },
+            {
+                "id": "textColor",
+                "label": "Text color",
+                "type": "color",
+                "default": "black"
+            },
+            {
+                "id": "textOpacity",
+                "label": "Text opacity",
+                "type": "number",
+                "default": "opacity"
+            },
+            {
+                "id": "image",
+                "label": "Upload picture",
+                "type": "image",
+                "previewWith": 120,
+                "previewHeight": 80
+            },
+            {
+                "id": "align",
+                "label": "Choose text alignment",
+                "type": "select",
+                "default": "center",
+                "options": [
+                    { "label": "Left", "value": "left" },
+                    { "label": "Center", "value": "center" },
+                    { "label": "Right", "value": "right" }
+                ]
+            },
+            {
+                "id": "width",
+                "label": "Block width",
+                "type": "select",
+                "default": "screen",
+                "options": [
+                    { "label": "Screen", "value": "screen" },
+                    { "label": "Container", "value": "container" },
+                    { "label": "Small", "value": "small" }
+                ]
+            },
+            {
+                "id": "content",
+                "label": "Content",
+                "type": "text"
+            }
+        ]
+    },
+    "images-layout": {
+        "name": "Images layout",
+        "icon": "",
+        "fields": [
+            {
+                "id": "name",
+                "label": "Block name",
+                "type": "string",
+                "default": "Image carousel"
+            },
+            {
+                "id": "layout",
+                "label": "Layout",
+                "type": "select",
+                "default": "one-two",
+                "options": [
+                    { "label": "One left, two right", "value": "one-two" },
+                    { "label": "Two left, one right", "value": "two-one" },
+                    { "label": "One left, one right", "value": "one-one" }
+                ]
+            },
+            {
+                "id": "images",
+                "label": "Images",
+                "type": "collection",
+                "addText": "Add image",
+                "removeText": "Remove image",
+                "displayField": "title",
+                "element": [
+                    {
+                        "id": "title",
+                        "label": "Title",
+                        "type": "string"
+                    },
+                    {
+                        "id": "image",
+                        "label": "Upload picture",
+                        "type": "image",
+                        "previewWidth": 120,
+                        "previewHeight": 80
+                    }
+                ]
+            }
+        ]
+    },
     "simple-image": {
-
+        "name": "Simple image",
+        "icon": "",
+        "fields": [
+            {
+                "id": "name",
+                "label": "Block name",
+                "type": "string"
+            },
+            {
+                "id": "size",
+                "label": "Choose size",
+                "type": "select",
+                "default": "medium",
+                "options": [
+                    { "label": "Small", "value": "small" },
+                    { "label": "Medium", "value": "medium" },
+                    { "label": "Large", "value": "large" },
+                    { "label": "Extra Large", "value": "xlarge" }
+                ]
+            },
+            {
+                "id": "image",
+                "label": "Upload picture",
+                "type": "image",
+                "previewWidth": 120,
+                "previewHeight": 80
+            }
+        ]
     },
     "simple-text": {
-
+        "name": "Simple text",
+        "icon": "",
+        "fields": [
+            {
+                "id": "name",
+                "label": "Block name",
+                "type": "string",
+                "default": "Text"
+            },
+            {
+                "id": "content",
+                "label": "Content",
+                "type": "text"
+            }
+        ]
     },
     "textcolumns-with-images": {
-        
+        "name": "Text columns with images",
+        "icon": "",
+        "fields": [
+            {
+                "id": "name",
+                "label": "Block name",
+                "type": "string",
+                "default": "Text columns with images"
+            },
+            {
+                "id": "align",
+                "label": "Image alignment",
+                "type": "select",
+                "default": "top",
+                "options": [
+                    { "label": "Top", "value": "top" },
+                    { "label": "Bottom", "value": "bottom" }
+                ]
+            },
+            {
+                "id": "size",
+                "label": "Image size",
+                "type": "select",
+                "default": "medium",
+                "options": [
+                    { "label": "Small", "value": "small" },
+                    { "label": "Medium", "value": "medium" },
+                    { "label": "Large", "value": "large" }
+                ]
+            },
+            {
+                "id": "columns",
+                "label": "Columns",
+                "type": "collection",
+                "addText": "Add column",
+                "removeText": "Remove column",
+                "displayField": "title",
+                "element": [
+                    {
+                        "id": "title",
+                        "label": "Title",
+                        "type": "string"
+                    },
+                    {
+                        "id": "image",
+                        "label": "Upload picture",
+                        "type": "image",
+                        "previewWidth": 120,
+                        "previewHeight": 80
+                    },
+                    {
+                        "id": "content",
+                        "label": "Content",
+                        "type": "text"
+                    },
+                    {
+                        "id": "width",
+                        "label": "Flex width",
+                        "type": "number"
+                    }
+                ]
+            }
+
+        ]
+    },
+    "category-block": {
+        "name": "Category",
+        "icon": "",
+        "fields": [
+            {
+                "id": "name",
+                "label": "Block name",
+                "type": "string",
+                "default": "Category"
+            },
+            {
+                "id": "title",
+                "label": "Title",
+                "type": "string"
+            },
+            {
+                "id": "categoryId",
+                "label": "Category id",
+                "type": "string",
+                "placeholder": "Enter category id"
+            }
+        ]
     }
 }

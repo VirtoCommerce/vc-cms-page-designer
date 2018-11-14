@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 
 import * as fromEditor from 'src/app/modules/editor/state';
 import * as editorActions from 'src/app/modules/editor/state/editor.actions';
-import { CategoryModel, BlockType, SectionModel } from '../../models';
+import { BlockType, SectionModel } from '../../models';
 
 @Component({
     templateUrl: './category-block.component.html'
@@ -16,7 +16,7 @@ export class CategoryBlockComponent implements OnInit {
     @Input() model: any;
     @Input() group: FormGroup;
 
-    categories$: Observable<CategoryModel[]>;
+    categories: [];
 
     constructor(private store: Store<fromEditor.State>) { }
 
@@ -39,8 +39,8 @@ export class CategoryBlockComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.store.dispatch(new editorActions.LoadCategories());
-        this.categories$ = this.store.select(fromEditor.getCategories);
+        // this.store.dispatch(new editorActions.LoadCategories());
+        // this.categories$ = this.store.select(fromEditor.getCategories);
     }
 
 }

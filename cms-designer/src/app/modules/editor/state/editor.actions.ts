@@ -1,4 +1,4 @@
-import { CategoryModel } from './../models/category.model';
+// import { CategoryModel } from './../models/category.model';
 import { Action } from '@ngrx/store';
 
 import { PageModel } from '../models/page.model';
@@ -12,9 +12,9 @@ export enum EditorActionTypes {
     ClearPageChanges = '[Page] Clear Page Changes',
     CreatePageItem = '[Page] Create Page Item',
     LoadBlockTypes = '[Page] Load Block Types',
-    LoadCategories = '[Page] Load Categories',
-    LoadCategoriesFail = '[Page] Load Categories Fail',
-    LoadCategoriesSuccess = '[Page] Load Categories Success',
+    // LoadCategories = '[Page] Load Categories',
+    // LoadCategoriesFail = '[Page] Load Categories Fail',
+    // LoadCategoriesSuccess = '[Page] Load Categories Success',
     LoadPage = '[Page] Load Page',
     LoadPageFail = '[Page] Load Page Fail',
     LoadPageSuccess = '[Page] Load Page Success',
@@ -59,20 +59,20 @@ export class LoadBlockTypes implements Action {
     readonly type = EditorActionTypes.LoadBlockTypes;
 }
 
-export class LoadCategories implements Action {
-    readonly type = EditorActionTypes.LoadCategories;
-}
+// export class LoadCategories implements Action {
+//     readonly type = EditorActionTypes.LoadCategories;
+// }
 
-export class LoadCategoriesFail implements Action {
-    readonly type = EditorActionTypes.LoadCategoriesFail;
+// export class LoadCategoriesFail implements Action {
+//     readonly type = EditorActionTypes.LoadCategoriesFail;
 
-    constructor(public payload: string) { }
-}
+//     constructor(public payload: string) { }
+// }
 
-export class LoadCategoriesSuccess implements Action {
-    readonly type = EditorActionTypes.LoadCategoriesSuccess;
-    constructor(public payload: CategoryModel[]) { }
-}
+// export class LoadCategoriesSuccess implements Action {
+//     readonly type = EditorActionTypes.LoadCategoriesSuccess;
+//     constructor(public payload: CategoryModel[]) { }
+// }
 
 export class LoadPage implements Action {
     readonly type = EditorActionTypes.LoadPage;
@@ -166,9 +166,9 @@ export type EditorActions = LoadPage
     | ClearPageChanges
     | CreatePageItem
     | LoadBlockTypes
-    | LoadCategories
-    | LoadCategoriesFail
-    | LoadCategoriesSuccess
+    // | LoadCategories
+    // | LoadCategoriesFail
+    // | LoadCategoriesSuccess
     | LoadPage
     | LoadPageSuccess
     | LoadPageFail

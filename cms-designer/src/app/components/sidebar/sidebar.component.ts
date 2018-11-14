@@ -1,4 +1,3 @@
-import { PreviewPageItemOfType } from './../../modules/editor/state/editor.actions';
 import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
@@ -10,9 +9,10 @@ import * as editorActions from '../../modules/editor/state/editor.actions';
 import * as fromTheme from '../../modules/theme/state';
 import * as themeActions from '../../modules/theme/state/theme.actions';
 
-import { PageModel, SectionModel, BlockType } from '../../modules/editor/models/';
-import { PresetsModel, SchemaItemModel } from '../../modules/theme/models/';
 import { SortEvent } from '../../modules/shared/draggable';
+import { PageModel, SectionModel, BlockType } from '../../modules/editor/models/';
+import { PresetsModel, ValueType } from '../../modules/theme/models/';
+import { BlockModel } from 'src/app/modules/shared/models';
 
 @Component({
     selector: 'app-sidebar',
@@ -29,9 +29,9 @@ export class SidebarComponent implements OnInit {
 
     // theme editor states
     presets$: Observable<PresetsModel>;
-    schema$: Observable<SchemaItemModel[]>;
-    theme$: Observable<{ [key: string]: string | number | boolean }>;
-    currentSchemaItem$: Observable<SchemaItemModel>;
+    schema$: Observable<BlockModel[]>;
+    theme$: Observable<{ [key: string]: ValueType }>;
+    currentSchemaItem$: Observable<BlockModel>;
     showPresets$: Observable<boolean>;
 
     // combined states
@@ -66,7 +66,7 @@ export class SidebarComponent implements OnInit {
 
     //#region theme editor actions
 
-    selectSchemaItem(item: SchemaItemModel) {
+    selectSchemaItem(item: BlockModel) {
         this.store.dispatch(new themeActions.SelectSchemaItem(item));
     }
 
