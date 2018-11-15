@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { BlockValuesModel, BlocksSchema } from 'src/app/modules/shared/models';
 import { PageModel } from '../../models/page.model';
-import { SectionModel } from '../../models/section.model';
 import { SortEvent } from '../../../shared/draggable';
 
 @Component({
@@ -11,8 +11,9 @@ import { SortEvent } from '../../../shared/draggable';
 export class PageEditorComponent implements OnInit {
 
     @Input() model: PageModel;
+    @Input() schema: BlocksSchema;
 
-    @Output() selectEvent = new EventEmitter<SectionModel>();
+    @Output() selectEvent = new EventEmitter<BlockValuesModel>();
     @Output() addNewBlockEvent = new EventEmitter<any>();
     @Output() orderChangedEvent = new EventEmitter<SortEvent>();
 
@@ -20,7 +21,7 @@ export class PageEditorComponent implements OnInit {
 
     ngOnInit() { }
 
-    selectItem(item: SectionModel) {
+    selectItem(item: BlockValuesModel) {
         this.selectEvent.emit(item);
     }
 
@@ -28,20 +29,28 @@ export class PageEditorComponent implements OnInit {
         this.addNewBlockEvent.emit();
     }
 
-    selectSettings() {
-        this.selectEvent.emit(this.model.settings);
-    }
-
     sortItems(event: SortEvent) {
         // todo: подумать, может стоит отправлять событие не в конце d-n-d, а синхронно?
         if (event.complete) {
             this.orderChangedEvent.emit(event);
         } else {
-            const current = this.model.sections[event.currentIndex];
-            const swapWith = this.model.sections[event.newIndex];
+            const current = this.model[event.currentIndex];
+            const swapWith = this.model[event.newIndex];
 
-            this.model.sections[event.newIndex] = current;
-            this.model.sections[event.currentIndex] = swapWith;
+            this.model[event.newIndex] = current;
+            this.model[event.currentIndex] = swapWith;
         }
+    }
+    getBlockName(item): string {
+        const schemaItem = this.schema[item.type];
+        let result: string = null;
+        if (!!schemaItem) {
+            const displayProperty = schemaItem.displayField;
+            if (!!displayProperty) {
+                result = this.model[displayProperty];
+            }
+        }
+        const unknownBlock = <any>item;
+        return result || unknownBlock.name || unknownBlock.title || '<unnamed block>';
     }
 }

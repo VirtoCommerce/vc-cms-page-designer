@@ -1,44 +1,16 @@
-import { Component, OnInit, Input, forwardRef } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { BaseControlComponent } from './../base-control.component';
+import { NumberControlDescriptor } from '../../models';
 
 @Component({
     selector: 'app-number-item',
-    templateUrl: './number-item.component.html',
-    providers: [{
-        provide: NG_VALUE_ACCESSOR,
-        useExisting: forwardRef(() => NumberItemComponent),
-        multi: true,
-    }]
+    templateUrl: './number-item.component.html'
 })
-export class NumberItemComponent implements OnInit, ControlValueAccessor {
+export class NumberItemComponent extends BaseControlComponent<NumberControlDescriptor> implements OnInit {
 
-    @Input() label: string;
-    @Input() min: number;
-    @Input() max: number;
-
-    value: string;
-
-    constructor() { }
+    constructor() {
+        super();
+    }
 
     ngOnInit() { }
-
-    onTouched = (_: any) => { };
-
-    onChange(event: any) {
-        this.propagateChange(event.target.value);
-    }
-
-    writeValue(obj: any): void {
-        this.value = obj as string;
-    }
-
-    registerOnChange(fn: any): void {
-        this.propagateChange = fn;
-    }
-
-    registerOnTouched(fn: any): void {
-        this.onTouched = fn;
-    }
-
-    private propagateChange = (_: any) => { };
 }

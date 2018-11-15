@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
-import { BlockType } from '../../models/block-type.model';
+import { BlockSchema, BlocksSchema } from 'src/app/modules/shared/models';
 
 @Component({
     selector: 'app-select-type',
@@ -8,10 +8,10 @@ import { BlockType } from '../../models/block-type.model';
 })
 export class SelectTypeComponent implements OnInit {
 
-    @Input() types: BlockType[];
+    @Input() schema: BlocksSchema;
     @Output() backEvent = new EventEmitter<any>();
-    @Output() previewBlockEvent = new EventEmitter<BlockType>();
-    @Output() selectBlockEvent = new EventEmitter<BlockType>();
+    @Output() previewBlockEvent = new EventEmitter<BlockSchema>();
+    @Output() selectBlockEvent = new EventEmitter<BlockSchema>();
 
     selectedItem: string;
 
@@ -24,12 +24,12 @@ export class SelectTypeComponent implements OnInit {
         this.backEvent.emit();
     }
 
-    previewItem(item: BlockType) {
+    previewItem(item: BlockSchema) {
         this.selectedItem = item.type;
         this.previewBlockEvent.emit(item);
     }
 
-    selectItem(item: BlockType) {
+    selectItem(item: BlockSchema) {
         this.selectBlockEvent.emit(item);
     }
 }

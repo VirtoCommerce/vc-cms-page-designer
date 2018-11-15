@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 
 import { PresetsModel } from '../models/';
 import { PlatformService } from 'src/app/services/platform.service';
-import { BlockModel } from '../../shared/models';
+import { BlockSchema } from '../../shared/models';
 
 @Injectable({
     providedIn: 'root'
@@ -16,8 +16,8 @@ export class ThemeService {
         return this.platform.downloadPreset<PresetsModel>('settings_data.json');
     }
 
-    loadSchema(): Observable<BlockModel[]> {
-        return this.platform.downloadPreset<BlockModel[]>('settings_schema.json');
+    loadSchema(): Observable<BlockSchema[]> {
+        return this.platform.downloadPreset<BlockSchema[]>('settings_schema.json');
     }
 
     uploadPresets(model: PresetsModel): Observable<any> {

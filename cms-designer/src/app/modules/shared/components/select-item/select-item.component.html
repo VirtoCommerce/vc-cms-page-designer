@@ -1,16 +1,15 @@
-<label *ngIf="label" class="form-label">{{label}}</label>
-<div class="form-input __select" *ngIf="options">
+<label *ngIf="descriptor.label" class="form-label">{{descriptor.label}}</label>
+<div class="form-input __select" *ngIf="descriptor.options">
     <select (change)="onChange($event.target.value)">
         <ng-container *ngIf="!group">
-            <option *ngFor="let option of options; trackBy: getTrackValue" [value]="option[valueName]" [selected]="value === option[valueName]"
+            <option *ngFor="let option of descriptor.options; trackBy: getTrackValue" [value]="option.value" [selected]="value === option.value"
                 [innerHTML]="getDisplayValue(option)">
             </option>
         </ng-container>
         <ng-container *ngIf="group">
             <optgroup *ngFor="let g of groups | keyvalue" [label]="g.key">
-                <option *ngFor="let option of g.value; trackBy: getTrackValue"
-                        [value]="option[valueName]" [selected]="value === option[valueName]">
-                    {{option[valueLabel]}}
+                <option *ngFor="let option of g.value; trackBy: getTrackValue" [value]="option.value" [selected]="value === option.value">
+                    {{option.label}}
                 </option>
             </optgroup>
         </ng-container>

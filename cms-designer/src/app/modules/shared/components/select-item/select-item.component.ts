@@ -1,35 +1,28 @@
+import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import { Component, OnInit, Input, forwardRef } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { BaseControlComponent } from '../base-control.component';
+import { OptionModel, SelectControlDescriptor } from '../../models';
 
 @Component({
     selector: 'app-select-item',
     templateUrl: './select-item.component.html',
-    styleUrls: ['./select-item.component.scss'],
-    providers: [{
-        provide: NG_VALUE_ACCESSOR,
-        useExisting: forwardRef(() => SelectItemComponent),
-        multi: true,
-    }]
+    styleUrls: ['./select-item.component.scss']
 })
-export class SelectItemComponent implements OnInit, ControlValueAccessor {
-
-    @Input() label: string;
-    @Input() options: { label: string; value: string; group?: string }[];
-    @Input() valueName = 'value';
-    @Input() valueLabel = 'label';
+export class SelectItemComponent extends BaseControlComponent<SelectControlDescriptor> implements OnInit {
 
     group = false;
     groups: { [key: string]: { label: string; value: string; }[] };
     value: any;
 
-    constructor(private sanitizer: DomSanitizer) { }
+    constructor(private sanitizer: DomSanitizer) {
+        super();
+    }
 
     ngOnInit() {
-        this.group = this.options.some(x => !!x.group);
+        this.group = this.descriptor.options.some(x => !!x.group);
         if (this.group) {
             this.groups = {};
-            this.options.forEach(x => {
+            this.descriptor.options.forEach(x => {
                 if (!this.groups[x.group]) {
                     this.groups[x.group] = [];
                 }
@@ -38,22 +31,11 @@ export class SelectItemComponent implements OnInit, ControlValueAccessor {
         }
     }
 
-    onChange = (_: any) => { };
-
-    writeValue(obj: any): void {
-        this.value = obj;
-    }
-    registerOnChange(fn: any): void {
-        this.onChange = fn;
+    getDisplayValue(option: OptionModel) {
+        return this.sanitizer.bypassSecurityTrustHtml(option.label);
     }
 
-    registerOnTouched(): void { }
-
-    getDisplayValue(option) {
-        return this.sanitizer.bypassSecurityTrustHtml(option[this.valueLabel]);
-    }
-
-    getTrackValue(option) {
-        return option[this.valueName];
+    getTrackValue(option: OptionModel) {
+        return option.value;
     }
 }

@@ -1,11 +1,11 @@
-<label class="form-label">{{ label }}</label>
+<label class="form-label">{{ descriptor.label }}</label>
 <div class="form-file">
     <div class='form-file'>
         <input type='file' #fileInput (change)="onChange($event)" accept=".png,.gif,.jpg,.jpeg">
         <button class='btn' (click)="openFileDialog()">Choose file</button>
     </div>
 </div>
-<p *ngIf="info" class="form-help">{{info}}</p>
+<p *ngIf="descriptor?.info" class="form-help">{{descriptor.info}}</p>
 <div *ngIf="value" class="form-img">
     <img [src]="value" />
 </div>

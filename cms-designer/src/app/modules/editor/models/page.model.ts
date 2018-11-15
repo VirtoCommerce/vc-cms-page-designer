@@ -1,6 +1,3 @@
-import { SectionModel } from './section.model';
+import { BlockValuesModel } from '../../shared/models';
 
-export interface PageModel {
-    settings: SectionModel;
-    sections: SectionModel[];
-}
+export type PageModel = BlockValuesModel[];

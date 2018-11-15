@@ -1,10 +1,10 @@
+import { BlockValuesModel } from './../../shared/models/block-values.model';
 // import { CategoryModel } from './../models/category.model';
 import { Action } from '@ngrx/store';
 
 import { PageModel } from '../models/page.model';
-import { SectionModel } from '../models/section.model';
-import { BlockType } from '../models/block-type.model';
 import { SortEvent } from '../../shared/draggable';
+import { BlockSchema, BlocksSchema } from 'src/app/modules/shared/models';
 
 export enum EditorActionTypes {
     AddPageItem = '[Page] Add Page Item',
@@ -36,13 +36,13 @@ export enum EditorActionTypes {
 export class AddPageItem implements Action {
     readonly type = EditorActionTypes.AddPageItem;
 
-    constructor(public payload: SectionModel) { }
+    constructor(public payload: BlockValuesModel) { }
 }
 
 export class BlockTypesLoaded implements Action {
     readonly type = EditorActionTypes.BlockTypesLoaded;
 
-    constructor(public payload: any[]) { }
+    constructor(public payload: BlocksSchema) { }
 }
 
 export class ClearPageChanges implements Action {
@@ -52,7 +52,7 @@ export class ClearPageChanges implements Action {
 export class CreatePageItem implements Action {
     readonly type = EditorActionTypes.CreatePageItem;
 
-    constructor(public payload: BlockType) { }
+    constructor(public payload: BlockSchema) { }
 }
 
 export class LoadBlockTypes implements Action {
@@ -97,13 +97,13 @@ export class OrderChanged implements Action {
 export class PreviewPageItem implements Action {
     readonly type = EditorActionTypes.PreviewPageItem;
 
-    constructor(public payload: SectionModel) { }
+    constructor(public payload: BlockValuesModel) { }
 }
 
 export class PreviewPageItemOfType implements Action {
     readonly type = EditorActionTypes.PreviewPageItemOfType;
 
-    constructor(public payload: BlockType) { }
+    constructor(public payload: BlockSchema) { }
 }
 
 export class PreviewReady implements Action {
@@ -115,7 +115,7 @@ export class PreviewReady implements Action {
 export class RemovePageItem implements Action {
     readonly type = EditorActionTypes.RemovePageItem;
 
-    constructor(public payload: SectionModel) { }
+    constructor(public payload: BlockValuesModel) { }
 }
 
 export class SavePage implements Action {
@@ -135,7 +135,7 @@ export class SavePageSuccess implements Action {
 export class SelectPageItem implements Action {
     readonly type = EditorActionTypes.SelectPageItem;
 
-    constructor(public payload: SectionModel) { }
+    constructor(public payload: BlockValuesModel) { }
 }
 
 export class ToggleFrames implements Action {
@@ -151,13 +151,13 @@ export class ToggleNewBlockPane implements Action {
 export class UpdateBlockPreview implements Action {
     readonly type = EditorActionTypes.UpdateBlockPreview;
 
-    constructor(public payload: SectionModel) { }
+    constructor(public payload: BlockValuesModel) { }
 }
 
 export class UpdatePageItem implements Action {
     readonly type = EditorActionTypes.UpdatePageItem;
 
-    constructor(public payload: SectionModel) { }
+    constructor(public payload: BlockValuesModel) { }
 }
 
 export type EditorActions = LoadPage

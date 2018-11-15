@@ -28,9 +28,9 @@ export const getAddNewSectionMode = createSelector(
     state => state.showNewBlockSelector
 );
 
-export const getBlockTypes = createSelector(
+export const getBlocksSchema = createSelector(
     getEditorFeatureState,
-    state => state.blockTypes
+    state => state.blocksSchema
 );
 
 export const getPage = createSelector(

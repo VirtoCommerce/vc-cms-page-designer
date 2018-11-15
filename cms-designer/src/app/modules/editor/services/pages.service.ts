@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { PlatformService } from 'src/app/services/platform.service';
-
-import { SectionModel } from '../models';
+import { PageModel } from './../models/page.model';
 
 @Injectable({
     providedIn: 'root'
@@ -11,11 +10,11 @@ export class PagesService {
 
     constructor(private platform: PlatformService) { }
 
-    downloadPage(): Observable<SectionModel[]> {
+    downloadPage(): Observable<PageModel> {
         return this.platform.downloadPage();
     }
 
-    uploadPage(page: SectionModel[]): Observable<any> {
+    uploadPage(page: PageModel): Observable<any> {
         return this.platform.uploadPage(page);
     }
 }

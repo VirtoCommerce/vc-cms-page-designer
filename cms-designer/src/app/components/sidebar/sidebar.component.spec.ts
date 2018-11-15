@@ -11,7 +11,8 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { of } from 'rxjs';
 import { By } from '@angular/platform-browser';
-import { SchemaItemModel, PresetsModel } from 'src/app/modules/theme/models';
+import { PresetsModel } from 'src/app/modules/theme/models';
+import { BlockSchema } from 'src/app/modules/shared/models';
 
 @Component({ selector: 'app-tab', template: '<div><ng-content></ng-content></div>' }) class FakeTabComponent { }
 
@@ -111,12 +112,12 @@ describe('SidebarComponent', () => {
     });
 
     it('selectSchemaItem dispatches the SelectSchemaItem action with correct parameters', () => {
-        fixture.componentInstance.schema$ = of([]);
+        fixture.componentInstance.themeSchema$ = of([]);
         fixture.detectChanges();
         store.dispatch.calls.reset();
         const themeEditor = fixture.debugElement.query(By.directive(ThemeEditorStubComponent));
 
-        const item = <SchemaItemModel>{
+        const item = <BlockSchema>{
             name: 'test'
         };
 
@@ -131,10 +132,10 @@ describe('SidebarComponent', () => {
 
     it('closeThemeItemEditor dispatches the SelectSchemaItem action with null', () => {
         // A
-        const item = <SchemaItemModel>{
+        const item = <BlockSchema>{
             name: 'test'
         };
-        fixture.componentInstance.currentSchemaItem$ = of(item);
+        fixture.componentInstance.currentThemeSchemaItem$ = of(item);
         fixture.detectChanges();
         store.dispatch.calls.reset();
         // A

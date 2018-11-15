@@ -5,18 +5,15 @@
         </a>
         <div class="pane-t">Edit block</div>
     </div>
-    <div class="pane-cnt">
+    <div class="pane-cnt" *ngIf="schemaExists && model && schema">
         <form [formGroup]="form">
-            <div class="pane-settings">
-                <app-string-item label="Block name" formControlName="name"></app-string-item>
-                <div *ngIf="(name.touched || name.dirty) && name.invalid" class="invalid">The Name is required</div>
-            </div>
-            <div class="pane-settings">
-                <ng-container appBlockHost></ng-container>
-            </div>
+            <app-block-form [group]="form" [model]="model" [schema]="schema[model.type]"></app-block-form>
         </form>
         <div class="pane-settings">
             <button *ngIf="model.type !== 'settings'" class="btn" (click)="removeBlock()">Remove block</button>
         </div>
+    </div>
+    <div class="pane-cnt" *ngIf="!schemaExists">
+        <p>There are no descriptors for this block type</p>
     </div>
 </div>

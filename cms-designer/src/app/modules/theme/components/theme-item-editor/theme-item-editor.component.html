@@ -9,27 +9,15 @@
         </div>
     </div>
     <div class="pane-cnt" [formGroup]="form">
-        <div class="pane-settings" 
-             *ngFor="let el of schema.settings"
-             [class.pane-t]="el.type === 'header'"
-             [ngSwitch]="el.type">
+        <app-block-form [group]="form" [model]="theme" [schema]="schema"></app-block-form>
+        <!-- <div class="pane-settings" *ngFor="let el of schema.settings" [class.pane-t]="el.type === 'header'">
 
-            <!-- Header or Paragraph -->
-            {{el.content}}
+            {{ getContent(el) }}
 
-            <!-- Color picker -->
-            <app-color-item *ngSwitchCase="'color'" label="{{ el.label }}" [formControlName]="el.id"></app-color-item>
-            <!-- Select -->
-            <app-select-item *ngSwitchCase="'select'" [options]="el.options" label="{{ el.label }}" [formControlName]="el.id"></app-select-item>
-            <!-- Checkbox -->
-            <app-checkbox-item *ngSwitchCase="'checkbox'" label="{{ el.label }}" [formControlName]='el.id'></app-checkbox-item>
-            <!-- Image -->
-            <app-image-item *ngSwitchCase="'image'" label="{{ el.label }}" [formControlName]='el.id'></app-image-item>
-            <!-- Input type="text" -->
-            <app-string-item *ngSwitchCase="'text'" label="{{ el.label }}" [formControlName]='el.id'></app-string-item>
-            <!-- Info -->
-            <p *ngIf="el.type !== 'image' && el.info !== undefined" class="form-help">{{el.info}}</p>
+            <app-control-holder *ngIf="el.type !== 'header' && el.type !== 'paragraph'" [descriptor]="el" [formControlName]="el.id || null"></app-control-holder>
 
-        </div>
+            <p *ngIf="el.type !== 'image' && getInfo(el) !== undefined" class="form-help">{{getInfo(el)}}</p>
+
+        </div> -->
     </div>
 </div>

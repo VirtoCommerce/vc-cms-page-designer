@@ -20,7 +20,7 @@ export const getIsLoading = createSelector(
 export const getIsEditMode = createSelector(
     fromEditor.getCurrentSectionItem,
     fromEditor.getAddNewSectionMode,
-    fromTheme.getCurrentSchemaItem,
+    fromTheme.getCurrentThemeSchemaItem,
     fromTheme.getShowPresetsEditor,
     (sectionItem, addSection, schemaItem, presetsEditor) =>
         !!sectionItem || !!addSection || !!schemaItem || !!presetsEditor

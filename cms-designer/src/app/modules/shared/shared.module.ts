@@ -1,3 +1,4 @@
+import { BlockFormComponent } from './components/block-form/block-form.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -20,37 +21,47 @@ import {
     SectionIconDirective
 } from './components';
 
+import { ControlHolderComponent } from './components/control-holder.component';
+import { ControlHostDirective } from './components/control-host.directive';
+
 import {
     DraggableDirective,
     DraggableHelperDirective,
     SortableListDirective
 } from './draggable';
 
-const COMPONENTS = [
+const CONTROLS = [
     CheckboxItemComponent,
     ColorItemComponent,
     ImageItemComponent,
     SelectItemComponent,
     TextItemComponent,
     StringItemComponent,
-    NumberItemComponent,
+    NumberItemComponent
+];
+
+const COMPONENTS = [
+    ...CONTROLS,
 
     TabsComponent,
     TabComponent,
     AccordeonComponent,
     AccItemComponent,
     SectionIconDirective,
+    ControlHolderComponent,
+    BlockFormComponent,
 
     DraggableDirective,
     DraggableHelperDirective,
     SortableListDirective
 ];
 
-// const EDITOR_COMPONENTS = [SettingsEditorComponent, SimpleTextComponent, ImageCarouselComponent];
-// entryComponents: [...EDITOR_COMPONENTS],
-
 @NgModule({
-    declarations: COMPONENTS,
+    declarations: [
+        ...COMPONENTS,
+        ControlHostDirective
+    ],
+    entryComponents: [...CONTROLS],
     imports: [
         BrowserModule,
         ReactiveFormsModule,

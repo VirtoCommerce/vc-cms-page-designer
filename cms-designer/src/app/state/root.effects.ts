@@ -76,7 +76,7 @@ export class RootEffects {
         withLatestFrom(this.editorStore$),
         tap(([action, store]) => {
             if (!action.payload.id) {
-                action.payload.id = Math.max(...store.editor.page.sections.map(v => v.id || 0)) + 1;
+                action.payload.id = Math.max(...store.editor.page.map(v => <number>v.id || 0)) + 1;
             }
             this.preview.addOrUpdateBlock(action.payload, store.editor.primaryFrameId);
         })

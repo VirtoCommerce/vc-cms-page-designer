@@ -11,3 +11,4 @@ export * from './tabs/tabs.component';
 export * from './tabs/tab.component';
 export * from './accordion/accordion.component';
 export * from './accordion/acc-item.component';
+export * from './block-form/block-form.component';

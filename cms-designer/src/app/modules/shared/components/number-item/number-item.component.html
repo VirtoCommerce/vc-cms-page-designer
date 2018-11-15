@@ -1,4 +1,10 @@
-<label class="form-label">{{label}}</label>
+<label class="form-label">{{descriptor.label}}</label>
 <div class="form-input">
-    <input type="number" [min]="min" [max]="max" [value]="value" (keyup)="onChange($event)" (change)="onChange($event)" (blur)="onTouched($event)">
+    <input type="number"
+        [min]="descriptor.min"
+        [max]="descriptor.max"
+        [value]="value"
+        (keyup)="onChange($event.target.value)"
+        (change)="onChange($event.target.value)"
+        (blur)="onTouched($event.target.value)">
 </div>

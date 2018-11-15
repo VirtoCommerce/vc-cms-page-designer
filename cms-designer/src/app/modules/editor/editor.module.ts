@@ -13,19 +13,6 @@ import {
     SelectTypeComponent
 } from './components';
 
-import {
-    BlockHostDirective,
-    CategoryBlockComponent,
-    SimpleTextComponent,
-    SimpleImageComponent,
-    SettingsEditorComponent,
-    ImageCarouselComponent,
-    ImageWithTextComponent,
-    ImageWithTextOverlayComponent,
-    TextColumnsWithImagesComponent,
-    ImageLayoutComponent
-} from './blocks';
-
 import { reducer } from './state/editor.reducer';
 import { EditorEffects } from './state/editor.effects';
 
@@ -35,26 +22,11 @@ const COMPONENTS = [
     SelectTypeComponent
 ];
 
-const BLOCKS = [
-    CategoryBlockComponent,
-    SimpleTextComponent,
-    SimpleImageComponent,
-    SettingsEditorComponent,
-    ImageCarouselComponent,
-    ImageWithTextComponent,
-    ImageWithTextOverlayComponent,
-    TextColumnsWithImagesComponent,
-    ImageLayoutComponent
-];
-
 @NgModule({
     declarations: [
         ...COMPONENTS,
-        ...BLOCKS,
-        BlockHostDirective
     ],
     exports: COMPONENTS,
-    entryComponents: BLOCKS,
     imports: [
         BrowserModule,
         HttpClientModule,

@@ -1,36 +1,17 @@
-import { Component, OnInit, Input, forwardRef } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { BaseControlComponent } from '../base-control.component';
+import { CheckboxControlDescriptor } from '../../models';
 
 @Component({
     selector: 'app-checkbox-item',
     templateUrl: './checkbox-item.component.html',
-    styleUrls: ['./checkbox-item.component.scss'],
-    providers: [{
-        provide: NG_VALUE_ACCESSOR,
-        useExisting: forwardRef(() => CheckboxItemComponent),
-        multi: true,
-    }]
+    styleUrls: ['./checkbox-item.component.scss']
 })
-export class CheckboxItemComponent implements OnInit, ControlValueAccessor {
+export class CheckboxItemComponent extends BaseControlComponent<CheckboxControlDescriptor> implements OnInit {
 
-    @Input() label: string;
-
-    value = false;
-
-    constructor() { }
+    constructor() {
+        super();
+    }
 
     ngOnInit() { }
-
-    onChange = (_: any) => { };
-
-    writeValue(obj: any): void {
-        this.value = obj as boolean;
-    }
-
-    registerOnChange(fn: any): void {
-        this.onChange = fn;
-    }
-
-    registerOnTouched(): void { }
-
 }

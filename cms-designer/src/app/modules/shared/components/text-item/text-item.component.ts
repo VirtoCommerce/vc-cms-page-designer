@@ -1,22 +1,14 @@
-import { Component, Input, EventEmitter, Output, OnInit, forwardRef } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { QuillEditorComponent } from 'ngx-quill';
+import { Component, OnInit } from '@angular/core';
+import { BaseControlComponent } from '../base-control.component';
+import { TextControlDescriptor } from '../../models';
 
 @Component({
     selector: 'app-text-item',
-    templateUrl: './text-item.component.html',
-    providers: [{
-        provide: NG_VALUE_ACCESSOR,
-        useExisting: forwardRef(() => TextItemComponent),
-        multi: true,
-    }]
+    templateUrl: './text-item.component.html'
 })
-export class TextItemComponent implements OnInit, ControlValueAccessor {
-
-    @Input() label: string;
+export class TextItemComponent extends BaseControlComponent<TextControlDescriptor> implements OnInit {
 
     private editor: any;
-    private value: string;
 
     editorConfig = {
         toolbar: [
@@ -41,26 +33,17 @@ export class TextItemComponent implements OnInit, ControlValueAccessor {
         ]
     };
 
-    constructor() { }
+    constructor() {
+        super();
+    }
 
     ngOnInit(): void { }
 
-    onChange = (_: any) => { };
-
-    writeValue(obj: any): void {
-        this.value = obj as string;
+    setValue(obj: any): void {
+        super.setValue(obj);
         if (this.editor != null) {
             this.editor.setText(this.value);
         }
-}
-
-    registerOnChange(fn: any): void {
-        this.onChange = (value) => {
-            fn(value.html);
-        };
-    }
-
-    registerOnTouched(): void {
     }
 
     onCreated(editor) {

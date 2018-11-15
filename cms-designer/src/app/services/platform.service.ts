@@ -1,10 +1,9 @@
-import { PresetsModel } from './../modules/theme/models/presets.model';
-import { ApiUrlsService } from './api-url.service';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-
-import { SectionModel } from '../modules/editor/models';
+import { ApiUrlsService } from './api-url.service';
+import { PresetsModel } from './../modules/theme/models/presets.model';
+import { PageModel } from '../modules/editor/models';
 
 @Injectable({
     providedIn: 'root'
@@ -25,12 +24,12 @@ export class PlatformService {
         return this.uploadModel<PresetsModel>(model, 'themes', '/default/config/drafts', this.generateDraftPresetName());
     }
 
-    downloadPage(): Observable<SectionModel[]> {
-        return this.downloadModel<SectionModel[]>();
+    downloadPage(): Observable<PageModel> {
+        return this.downloadModel<PageModel>();
     }
 
-    uploadPage(model: SectionModel[]): Observable<any> {
-        return this.uploadModel<SectionModel[]>(model);
+    uploadPage(model: PageModel): Observable<PageModel> {
+        return this.uploadModel<PageModel>(model);
     }
 
     private downloadModel<T>(contentType: string = null, filepath: string = null): Observable<T> {

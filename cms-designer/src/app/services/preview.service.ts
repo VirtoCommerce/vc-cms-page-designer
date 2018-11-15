@@ -1,27 +1,24 @@
 import { Injectable } from '@angular/core';
-import { PageModel, SectionModel } from '../modules/editor/models';
 import { environment } from '../../environments/environment';
-import { HttpClient, HttpRequest, HttpEvent, HttpEventType } from '@angular/common/http';
-import { map, tap, last, catchError } from 'rxjs/operators';
-import { of } from 'rxjs';
-import { ApiUrlsService } from './api-url.service';
+import { BlockValuesModel } from 'src/app/modules/shared/models';
+import { PageModel } from '../modules/editor/models';
 
 @Injectable({
     providedIn: 'root'
 })
 export class PreviewService {
 
-    constructor(private http: HttpClient, private urls: ApiUrlsService) { }
+    constructor() { }
 
     page(page: PageModel, frameId: string) {
         this.send('page', page, frameId);
     }
 
-    addOrUpdateBlock(block: SectionModel, frameId: string) {
+    addOrUpdateBlock(block: BlockValuesModel, frameId: string) {
         this.send('addOrUpdate', block, frameId);
     }
 
-    removeBlock(block: SectionModel, frameId: string) {
+    removeBlock(block: BlockValuesModel, frameId: string) {
         this.send('remove', block.id, frameId);
     }
 
@@ -29,36 +26,11 @@ export class PreviewService {
         this.send('move', { currentIndex, newIndex }, frameId);
     }
 
-    scrollTo(block: SectionModel, frameId: string) {
+    scrollTo(block: BlockValuesModel, frameId: string) {
         this.send('scrollTo', { id: block.id }, frameId);
     }
 
     reload(frameId: string) {
-        // план действий
-        //  нужен второй айфрейм - shadow
-        //  загрузка в shadow
-        //  отображение display
-        //  после срабатываения loaded сообщаем что страница загружена
-        //  отправляем туда все блоки
-        //  меняем айфреймы местами
-        //  нужна обработка ошибок на всех этапах
-        //  лоадер работает с самого начала, до подмены
-        //  событие settings должно вызываться раньше чем page!!
-
-
-        // const request = new HttpRequest('GET', '', {
-        //     reportProgress: true,
-        //     responseType: 'text'
-        // });
-        // this.http.request(request).pipe(
-        //     map(event => this.getEventMessage(event)),
-        //     tap(message => this.showProgress(message)),
-        //     last(), // return last (completed) message to caller
-        //     catchError(x => this.handleError(x))
-        // ).subscribe(x => {
-        //     const element = document.getElementById('preview');
-        //     // (<HTMLIFrameElement>element).src = <string>this.urls.getStoreUrl(false);
-        // });
         this.send('settings', {}, frameId);
     }
 
@@ -85,14 +57,5 @@ export class PreviewService {
                 }
             }
         }
-    }
-
-    private handleError(error: any) {
-        console.log('error occured', error);
-        return of(error);
-    }
-
-    private showProgress(message: string) {
-        console.log(message);
     }
 }

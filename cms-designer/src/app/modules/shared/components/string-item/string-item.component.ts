@@ -1,43 +1,17 @@
-import { Component, OnInit, Input, forwardRef } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { BaseControlComponent } from '../base-control.component';
+import { StringControlDescriptor } from '../../models';
 
 @Component({
     selector: 'app-string-item',
     templateUrl: './string-item.component.html',
-    styleUrls: ['./string-item.component.scss'],
-    providers: [{
-        provide: NG_VALUE_ACCESSOR,
-        useExisting: forwardRef(() => StringItemComponent),
-        multi: true,
-    }]
+    styleUrls: ['./string-item.component.scss']
 })
-export class StringItemComponent implements OnInit, ControlValueAccessor {
+export class StringItemComponent extends BaseControlComponent<StringControlDescriptor> implements OnInit {
 
-    @Input() label: string;
-
-    value: string;
-
-    constructor() { }
+    constructor() {
+        super();
+    }
 
     ngOnInit() { }
-
-    onTouched = (_: any) => { };
-
-    onChange(event: any) {
-        this.propagateChange(event.target.value);
-    }
-
-    writeValue(obj: any): void {
-        this.value = obj || '';
-    }
-
-    registerOnChange(fn: any): void {
-        this.propagateChange = fn;
-    }
-
-    registerOnTouched(fn: any): void {
-        this.onTouched = fn;
-    }
-
-    private propagateChange = (_: any) => { };
 }

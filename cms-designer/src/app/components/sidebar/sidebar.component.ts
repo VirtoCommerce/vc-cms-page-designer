@@ -1,3 +1,4 @@
+import { BlocksSchema } from './../../modules/shared/models/block.schema';
 import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
@@ -10,9 +11,9 @@ import * as fromTheme from '../../modules/theme/state';
 import * as themeActions from '../../modules/theme/state/theme.actions';
 
 import { SortEvent } from '../../modules/shared/draggable';
-import { PageModel, SectionModel, BlockType } from '../../modules/editor/models/';
-import { PresetsModel, ValueType } from '../../modules/theme/models/';
-import { BlockModel } from 'src/app/modules/shared/models';
+import { PageModel } from '../../modules/editor/models/';
+import { PresetsModel } from '../../modules/theme/models/';
+import { BlockSchema, BlockValuesModel, ValueType } from 'src/app/modules/shared/models';
 
 @Component({
     selector: 'app-sidebar',
@@ -22,16 +23,16 @@ import { BlockModel } from 'src/app/modules/shared/models';
 export class SidebarComponent implements OnInit {
 
     // page editor states
-    currentSectionItem$: Observable<SectionModel>;
+    currentSectionItem$: Observable<BlockValuesModel>;
     addNewSectionMode$: Observable<boolean>;
-    blockTypes$: Observable<BlockType[]>;
+    blocksSchema$: Observable<BlocksSchema>;
     page$: Observable<PageModel>;
 
     // theme editor states
     presets$: Observable<PresetsModel>;
-    schema$: Observable<BlockModel[]>;
+    themeSchema$: Observable<BlockSchema[]>;
     theme$: Observable<{ [key: string]: ValueType }>;
-    currentSchemaItem$: Observable<BlockModel>;
+    currentThemeSchemaItem$: Observable<BlockSchema>;
     showPresets$: Observable<boolean>;
 
     // combined states
@@ -47,13 +48,13 @@ export class SidebarComponent implements OnInit {
 
         this.currentSectionItem$ = this.store.pipe(select(fromEditor.getCurrentSectionItem));
         this.addNewSectionMode$ = this.store.pipe(select(fromEditor.getAddNewSectionMode));
-        this.blockTypes$ = this.store.pipe(select(fromEditor.getBlockTypes));
+        this.blocksSchema$ = this.store.pipe(select(fromEditor.getBlocksSchema));
         this.page$ = this.store.pipe(select(fromEditor.getPage));
 
         this.presets$ = this.store.pipe(select(fromTheme.getPresets));
-        this.schema$ = this.store.pipe(select(fromTheme.getSchema));
+        this.themeSchema$ = this.store.pipe(select(fromTheme.getSchema));
         this.theme$ = this.store.pipe(select(fromTheme.getEditableTheme));
-        this.currentSchemaItem$ = this.store.pipe(select(fromTheme.getCurrentSchemaItem));
+        this.currentThemeSchemaItem$ = this.store.pipe(select(fromTheme.getCurrentThemeSchemaItem));
         this.showPresets$ = this.store.pipe(select(fromTheme.getShowPresetsEditor));
 
         // combined states
@@ -66,7 +67,7 @@ export class SidebarComponent implements OnInit {
 
     //#region theme editor actions
 
-    selectSchemaItem(item: BlockModel) {
+    selectSchemaItem(item: BlockSchema) {
         this.store.dispatch(new themeActions.SelectSchemaItem(item));
     }
 
@@ -106,7 +107,7 @@ export class SidebarComponent implements OnInit {
 
     //#region page editor actions
 
-    selectPageItem(item: SectionModel) {
+    selectPageItem(item: BlockValuesModel) {
         this.store.dispatch(new editorActions.SelectPageItem(item));
     }
 
@@ -117,19 +118,19 @@ export class SidebarComponent implements OnInit {
         }
     }
 
-    completeEditBlock(event: SectionModel) {
+    completeEditBlock(event: BlockValuesModel) {
         this.store.dispatch(new editorActions.UpdatePageItem(event));
     }
 
-    previewBlockType(type: BlockType) {
+    previewBlockType(type: BlockSchema) {
         this.store.dispatch(new editorActions.PreviewPageItemOfType(type));
     }
 
-    updateBlockPreview(item: SectionModel) {
+    updateBlockPreview(item: BlockValuesModel) {
         this.store.dispatch(new editorActions.UpdateBlockPreview(item));
     }
 
-    selectBlockType(item: BlockType) {
+    selectBlockType(item: BlockSchema) {
         this.store.dispatch(new editorActions.CreatePageItem(item));
     }
 
@@ -137,7 +138,7 @@ export class SidebarComponent implements OnInit {
         this.store.dispatch(new editorActions.OrderChanged(event));
     }
 
-    removeBlock(item: SectionModel) {
+    removeBlock(item: BlockValuesModel) {
         this.store.dispatch(new editorActions.RemovePageItem(item));
     }
     //#endregion

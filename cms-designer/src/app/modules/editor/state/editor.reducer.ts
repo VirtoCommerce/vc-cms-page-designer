@@ -1,14 +1,15 @@
 import { EditorActionTypes, EditorActions } from './editor.actions';
-import { PageModel, SectionModel, BlockType } from '../models';
+import { BlocksSchema, BlockValuesModel } from 'src/app/modules/shared/models';
+import { PageModel } from '../models';
 
 export interface EditorState {
     showNewBlockSelector: boolean;
-    currentSectionItem: SectionModel;
+    currentSectionItem: BlockValuesModel;
     error: string;
     pageLoading: boolean;
     initialPage: string;
     page: PageModel;
-    blockTypes: BlockType[];
+    blocksSchema: BlocksSchema;
     previewIsReady: boolean;
     // categories: CategoryModel[];
     dirty: boolean;
@@ -23,7 +24,7 @@ const initialState: EditorState = {
     pageLoading: false,
     initialPage: null,
     page: null,
-    blockTypes: [],
+    blocksSchema: null,
     previewIsReady: false,
     // categories: [],
     dirty: true,
@@ -34,7 +35,7 @@ const initialState: EditorState = {
 export function reducer(state = initialState, action: EditorActions): EditorState {
     switch (action.type) {
         case EditorActionTypes.AddPageItem:
-            state.page.sections.push(action.payload);
+            state.page.push(action.payload);
             return {
                 ...state,
                 showNewBlockSelector: false,
@@ -44,7 +45,7 @@ export function reducer(state = initialState, action: EditorActions): EditorStat
         case EditorActionTypes.BlockTypesLoaded:
             return {
                 ...state,
-                blockTypes: action.payload
+                blocksSchema: action.payload
             };
         case EditorActionTypes.ClearPageChanges:
             return {
@@ -92,9 +93,9 @@ export function reducer(state = initialState, action: EditorActions): EditorStat
                 previewIsReady: true
             };
         case EditorActionTypes.RemovePageItem:
-            const index = state.page.sections.indexOf(action.payload);
+            const index = state.page.indexOf(action.payload);
             if (index !== -1) {
-                state.page.sections.splice(index, 1);
+                state.page.splice(index, 1);
             }
             return {
                 ...state,

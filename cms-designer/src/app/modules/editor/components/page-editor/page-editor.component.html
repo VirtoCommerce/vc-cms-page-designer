@@ -1,17 +1,12 @@
-<div class="pane-section __selected" *ngIf="model">
-    <div class="list-item">
-        <a class="list-link" (click)="selectSettings()">
-            <i class="list-ico fa fa-wrench"></i><span class="list-t">Settings</span>
-        </a>
-    </div>
+<div class="pane-section __selected" *ngIf="model && schema">
     <ul appSortableList class="list" (sort)="sortItems($event)">
 
-        <li class="list-item" *ngFor="let item of model.sections" appDraggable>
+        <li class="list-item" *ngFor="let item of model" appDraggable>
             <a class="list-link" (click)="selectItem(item)">
-                <i class="list-ico fa dragger" appSectionIcon="{{ item.type }}"></i><span class="list-t">{{ item.name }}</span>
+                <i class="list-ico fa dragger" appSectionIcon="{{ item.type }}"></i><span class="list-t">{{ getBlockName(item) }}</span>
             </a>
             <div *appDraggableHelper class="list-dragger">
-                <i class="list-ico fa dragger" appSectionIcon="{{ item.type }}"></i><span class="list-t">{{ item.name }}</span>
+                <i class="list-ico fa dragger" appSectionIcon="{{ item.type }}"></i><span class="list-t">{{ getBlockName(item) }}</span>
             </div>
         </li>
 

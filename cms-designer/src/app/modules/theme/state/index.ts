@@ -13,7 +13,7 @@ export const getIsDirty = createSelector(
     state => state.dirty
 );
 
-export const getCurrentSchemaItem = createSelector(
+export const getCurrentThemeSchemaItem = createSelector(
     getThemeFeatureState,
     state => state.selectedSchemaItem
 );

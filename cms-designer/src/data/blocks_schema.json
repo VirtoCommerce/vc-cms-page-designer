@@ -1,12 +1,25 @@
 {
-    "settings-editor": {
-
+    "settings": {
+        "name": "Settings",
+        "icon": "settings",
+        "settings": [
+            {
+                "id": "title",
+                "label": "Title",
+                "type": "string"
+            },
+            {
+                "id": "permalink",
+                "label": "Permalink",
+                "type": "string"
+            }
+        ]
     },
     "image-carousel": {
         "name": "Image carousel",
         "icon": "",
-        "displayField": "label",
-        "fields": [
+        "displayField": "name",
+        "settings": [
             {
                 "id": "name",
                 "label": "Block name",
@@ -75,7 +88,8 @@
     "image-with-text": {
         "name": "Image with text",
         "icon": "",
-        "fields": [
+        "displayField": "name",
+        "settings": [
             {
                 "id": "name",
                 "label": "Block name",
@@ -121,7 +135,7 @@
     "image-with-text-overlay": {
         "name": "Image with text overlay",
         "icon": "",
-        "fields": [
+        "settings": [
             {
                 "id": "name",
                 "label": "Block name",
@@ -178,7 +192,7 @@
     "images-layout": {
         "name": "Images layout",
         "icon": "",
-        "fields": [
+        "settings": [
             {
                 "id": "name",
                 "label": "Block name",
@@ -220,10 +234,10 @@
             }
         ]
     },
-    "simple-image": {
+    "image": {
         "name": "Simple image",
         "icon": "",
-        "fields": [
+        "settings": [
             {
                 "id": "name",
                 "label": "Block name",
@@ -250,10 +264,11 @@
             }
         ]
     },
-    "simple-text": {
+    "text": {
         "name": "Simple text",
         "icon": "",
-        "fields": [
+        "displayField": "name",
+        "settings": [
             {
                 "id": "name",
                 "label": "Block name",
@@ -270,7 +285,7 @@
     "textcolumns-with-images": {
         "name": "Text columns with images",
         "icon": "",
-        "fields": [
+        "settings": [
             {
                 "id": "name",
                 "label": "Block name",
@@ -333,10 +348,10 @@
 
         ]
     },
-    "category-block": {
+    "category": {
         "name": "Category",
         "icon": "",
-        "fields": [
+        "settings": [
             {
                 "id": "name",
                 "label": "Block name",
