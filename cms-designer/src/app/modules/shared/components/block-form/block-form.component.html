@@ -1,9 +1,5 @@
-<div class="pane-settings" *ngFor="let control of schema.settings" [class.pane-t]="control.type === 'header'">
-    <!-- Header or Paragraph -->
-    {{ getContent(control) }}
-    <app-control-holder *ngIf="control.type !== 'header' && control.type !== 'paragraph'" [descriptor]="control"
-        [group]="group" [formControlName]="getFormControlName(control)" [formArrayName]="getFormArrayName(control)"></app-control-holder>
-
-    <!-- Info -->
-    <p *ngIf="control.type !== 'image' && getInfo(control) !== undefined" class="form-help">{{getInfo(control)}}</p>
+<div>
+    <form [formGroup]="form">
+        <app-elements-form [group]="form" [descriptors]="schema.settings"></app-elements-form>
+    </form>
 </div>

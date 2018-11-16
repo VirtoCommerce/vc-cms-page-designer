@@ -9,6 +9,7 @@ import {
     TextItemComponent,
     CollectionComponent
 } from '.';
+import { ControlDescriptor } from '../models';
 
 @Injectable({
     providedIn: 'root'
@@ -25,6 +26,11 @@ export class ControlsFactory {
         this.controls['string'] = StringItemComponent;
         this.controls['text'] = TextItemComponent;
         this.controls['collection'] = CollectionComponent;
+    }
+
+    descriptorForCollection(descriptor: ControlDescriptor): boolean {
+        // todo: bad practice. const used twice, here and in the control factory
+        return descriptor.type === 'collection';
     }
 
     resolve(type: string): Type<any> {

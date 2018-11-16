@@ -1,6 +1,4 @@
-import { DisplayTextControlDescriptor } from './../../../shared/models/display-text-control.descriptor';
 import { Component, OnInit, Output, EventEmitter, Input, AfterViewInit } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
 import { BlockSchema, ValueType } from 'src/app/modules/shared/models';
 
 @Component({
@@ -10,32 +8,18 @@ import { BlockSchema, ValueType } from 'src/app/modules/shared/models';
 })
 export class ThemeItemEditorComponent implements OnInit, AfterViewInit {
 
-    form: FormGroup;
-
     @Input() schema: BlockSchema;
     @Input() theme: {[key: string]: ValueType};
     @Output() backEvent = new EventEmitter<{[key: string]: ValueType}>();
     @Output() valueChangedEvent = new EventEmitter<any>();
 
-    constructor(private fb: FormBuilder) { }
+    constructor() { }
 
     ngAfterViewInit(): void { }
 
-    ngOnInit() {
-        this.form = this.fb.group({ });
-        this.form.valueChanges.subscribe(_ => {
-            this.valueChangedEvent.emit(this.getModel());
-        });
-    }
+    ngOnInit() { }
 
     back() {
         this.backEvent.emit();
-    }
-
-    private getModel() {
-        const result = {
-            ...this.form.value,
-        };
-        return result;
     }
 }

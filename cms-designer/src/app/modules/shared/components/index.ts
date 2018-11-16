@@ -1,6 +1,7 @@
 export * from './accordion/accordion.component';
 export * from './accordion/acc-item.component';
 export * from './block-form/block-form.component';
+export * from './elements-form/elements-form.component';
 export * from './section-icon.directive';
 export * from './tabs/tabs.component';
 export * from './tabs/tab.component';
@@ -13,6 +14,7 @@ export * from './control-host.directive';
 import { AccordeonComponent } from './accordion/accordion.component';
 import { AccItemComponent } from './accordion/acc-item.component';
 import { BlockFormComponent } from './block-form/block-form.component';
+import { ElementsFormComponent } from './elements-form/elements-form.component';
 import { SectionIconDirective } from './section-icon.directive';
 import { TabsComponent } from './tabs/tabs.component';
 import { TabComponent } from './tabs/tab.component';
@@ -27,10 +29,11 @@ export const COMPONENTS = [
     TabComponent,
     AccordeonComponent,
     AccItemComponent,
+    BlockFormComponent,
     SectionIconDirective,
     ControlHolderComponent,
     ControlHostDirective,
-    BlockFormComponent,
+    ElementsFormComponent,
 
     DraggableDirective,
     DraggableHelperDirective,

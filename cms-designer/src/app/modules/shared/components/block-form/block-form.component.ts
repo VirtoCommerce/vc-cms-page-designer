@@ -1,27 +1,36 @@
-import { CollectionControlDescriptor } from './../../models/collection-control.descriptor';
-import { Component, Input, OnInit } from '@angular/core';
+import { BlockSchema, BlockValuesModel, CollectionControlDescriptor } from 'src/app/modules/shared/models';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { DisplayTextControlDescriptor, BlockSchema, ValueType, ControlDescriptor } from '../../models';
+import { ControlDescriptor } from '../../models';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { ControlsFactory } from '../../controls/controls.factory';
 
 @Component({
     selector: 'app-block-form',
     templateUrl: './block-form.component.html'
 })
 export class BlockFormComponent implements OnInit {
-    @Input() group: FormGroup;
-    @Input() schema: BlockSchema;
-    @Input() model: { [key: string]: ValueType };
 
-    constructor(private fb: FormBuilder) { }
+    @Input() model: BlockValuesModel; // модель используется при создании формы, для получения значений
+    @Input() schema: BlockSchema; // схема редактируемого блока
 
-    ngOnInit(): void {
-        this.fillFormRecursively(this.model, this.group, this.schema.settings);
+    @Output() modelChange = new EventEmitter<BlockValuesModel>();
+
+    form: FormGroup;
+
+    constructor(private fb: FormBuilder, private factory: ControlsFactory) { }
+
+    ngOnInit() {
+        this.form = this.fb.group({});
+        this.form.valueChanges.subscribe(value => {
+            this.modelChange.emit(value);
+        });
+        this.fillFormRecursively(this.model, this.form, this.schema.settings);
     }
 
     private fillFormRecursively(model: any, form: FormGroup, keys: ControlDescriptor[]): FormGroup {
         keys.filter(x => !!x.id).forEach(descriptor => {
             const value = model[descriptor.id];
-            if (this.descriptorForCollection(descriptor)) {
+            if (this.factory.descriptorForCollection(descriptor)) {
                 const arrayDescriptor = <CollectionControlDescriptor>descriptor;
                 // value is array here, so item is array element.
                 const groups = value.map(item => this.fillFormRecursively(item, this.fb.group({}), arrayDescriptor.element));
@@ -31,35 +40,5 @@ export class BlockFormComponent implements OnInit {
             }
         });
         return form;
-    }
-
-    getContent(el: DisplayTextControlDescriptor) {
-        return el.content;
-    }
-
-    getInfo(el) {
-        if (!!el) {
-            return el.info;
-        }
-        return null;
-    }
-
-    getFormControlName(descriptor: ControlDescriptor): string {
-        if (this.descriptorForCollection(descriptor)) {
-            return null;
-        }
-        return descriptor.id;
-    }
-
-    getFormArrayName(descriptor: ControlDescriptor): string {
-        if (!this.descriptorForCollection(descriptor)) {
-            return null;
-        }
-        return descriptor.id;
-    }
-
-    private descriptorForCollection(descriptor: ControlDescriptor): boolean {
-        // todo: bad practice. const used twice, here and in the control factory
-        return descriptor.type === 'collection';
     }
 }

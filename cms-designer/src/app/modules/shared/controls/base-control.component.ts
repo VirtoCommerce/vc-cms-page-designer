@@ -1,6 +1,6 @@
 import { Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { BaseDescriptor } from '../models';
+import { BaseDescriptor, BlockSchema } from '../models';
 
 export class BaseControlComponent<T extends BaseDescriptor> {
     @Input() descriptor: T;

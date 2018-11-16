@@ -23,7 +23,10 @@
                 </app-tabs>
             </div>
         </div>
-        <app-page-item-editor class="pane __selected" *ngIf="currentSectionItem$|async as currentSectionItem" [model]="currentSectionItem" [schema]="blocksSchema$ | async"
+        <app-page-item-editor class="pane __selected" 
+            *ngIf="currentSectionItem$|async as currentSectionItem" 
+            [model]="currentSectionItem" 
+            [schema]="(blocksSchema$ | async)[currentSectionItem.type]"
             (valueChangedEvent)="updateBlockPreview($event)" (removeBlockEvent)="removeBlock($event)" (backEvent)="completeEditBlock($event)"></app-page-item-editor>
         <app-select-type class="pane __selected" *ngIf="addNewSectionMode$ | async" [schema]="blocksSchema$ | async"
             (backEvent)="setNewBlockMode(false)" (previewBlockEvent)="previewBlockType($event)" (selectBlockEvent)="selectBlockType($event)"></app-select-type>

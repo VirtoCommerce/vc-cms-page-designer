@@ -70,7 +70,7 @@
                         "type": "string"
                     },
                     {
-                        "id": "image",
+                        "id": "url",
                         "label": "Upload picture",
                         "type": "image",
                         "previewWidth": 120,
@@ -102,7 +102,7 @@
                 "type": "string"
             },
             {
-                "id": "image",
+                "id": "url",
                 "label": "Upload picture",
                 "type": "image",
                 "previewWith": 120,
@@ -161,7 +161,7 @@
                 "default": "opacity"
             },
             {
-                "id": "image",
+                "id": "url",
                 "label": "Upload picture",
                 "type": "image",
                 "previewWith": 120,
@@ -231,7 +231,7 @@
                         "type": "string"
                     },
                     {
-                        "id": "image",
+                        "id": "url",
                         "label": "Upload picture",
                         "type": "image",
                         "previewWidth": 120,
@@ -263,7 +263,7 @@
                 ]
             },
             {
-                "id": "image",
+                "id": "url",
                 "label": "Upload picture",
                 "type": "image",
                 "previewWidth": 120,
@@ -334,7 +334,7 @@
                         "type": "string"
                     },
                     {
-                        "id": "image",
+                        "id": "url",
                         "label": "Upload picture",
                         "type": "image",
                         "previewWidth": 120,

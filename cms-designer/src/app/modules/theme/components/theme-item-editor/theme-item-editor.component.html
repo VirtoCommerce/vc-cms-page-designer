@@ -8,16 +8,7 @@
             {{ schema.name }}
         </div>
     </div>
-    <div class="pane-cnt" [formGroup]="form">
-        <app-block-form [group]="form" [model]="theme" [schema]="schema"></app-block-form>
-        <!-- <div class="pane-settings" *ngFor="let el of schema.settings" [class.pane-t]="el.type === 'header'">
-
-            {{ getContent(el) }}
-
-            <app-control-holder *ngIf="el.type !== 'header' && el.type !== 'paragraph'" [descriptor]="el" [formControlName]="el.id || null"></app-control-holder>
-
-            <p *ngIf="el.type !== 'image' && getInfo(el) !== undefined" class="form-help">{{getInfo(el)}}</p>
-
-        </div> -->
+    <div class="pane-cnt">
+        <app-block-form [(model)]="theme" [schema]="schema"></app-block-form>
     </div>
 </div>

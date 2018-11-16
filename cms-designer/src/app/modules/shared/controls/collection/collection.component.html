@@ -4,8 +4,8 @@
             <app-acc-item *ngFor="let item of getControls(); let i = index;" [title]="getTitle(item)" appDraggable>
                 <div [formGroupName]="i">
 
-                    <!-- <app-control-holder *ngIf="control.type !== 'header' && control.type !== 'paragraph'" [descriptor]="control"
-                        [group]="group" [formControlName]="getFormControlName(control)" [formArrayName]="getFormArrayName(control)"></app-control-holder> -->
+                    <app-elements-form
+                        [group]="group"></app-elements-form>
 
                     <div class="pane-settings">
                         <button class="btn" (click)="removeElement(i)">{{ getRemoveButtonTitle() }}</button>

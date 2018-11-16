@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { ApiUrlsService } from './api-url.service';
 import { PresetsModel } from './../modules/theme/models/presets.model';
 import { PageModel } from '../modules/editor/models';
+import { tap } from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root'
@@ -34,7 +35,11 @@ export class PlatformService {
 
     private downloadModel<T>(contentType: string = null, filepath: string = null): Observable<T> {
         const url = this.urls.generateDownloadUrl(contentType, filepath);
-        return this.http.get<T>(url);
+        return this.http.get<T>(url).pipe(
+            tap(x => {
+                console.log(x);
+            })
+        );
     }
 
     private uploadModel<T>(model: T, contentType: string = null, pathToUpload: string = null, filename: string = null): Observable<any> {

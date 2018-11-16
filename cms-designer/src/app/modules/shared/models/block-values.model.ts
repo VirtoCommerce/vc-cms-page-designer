@@ -1,6 +1,6 @@
 export class BlockValuesModel {
     type: string;
-    [key: string]: ValueType
+    [key: string]: ValueType | ValueType[];
 }
 
 export type ValueType = string | number | boolean;

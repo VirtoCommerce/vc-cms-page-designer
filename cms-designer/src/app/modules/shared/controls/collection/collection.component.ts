@@ -3,6 +3,7 @@ import { BaseControlComponent } from '../base-control.component';
 import { CollectionControlDescriptor } from './../../models/collection-control.descriptor';
 import { SortEvent } from './../../components/draggable/sortable-list.directive';
 import { FormArray, AbstractControl } from '@angular/forms';
+import { ControlDescriptor } from '../../models';
 
 @Component({
     templateUrl: './collection.component.html'
@@ -34,6 +35,10 @@ export class CollectionComponent extends BaseControlComponent<CollectionControlD
     getAddButtonTitle(): string {
         // todo
         return 'Add item';
+    }
+
+    getElementSchema(): ControlDescriptor[] {
+        return this.descriptor.element;
     }
 
     getControls(): AbstractControl[] {
