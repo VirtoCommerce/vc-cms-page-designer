@@ -59,7 +59,7 @@
             {
                 "id": "images",
                 "label": "Images",
-                "type": "collection",
+                "type": "list",
                 "addText": "Add image",
                 "removeText": "Remove image",
                 "displayField": "title",
@@ -220,7 +220,7 @@
             {
                 "id": "images",
                 "label": "Images",
-                "type": "collection",
+                "type": "list",
                 "addText": "Add image",
                 "removeText": "Remove image",
                 "displayField": "title",
@@ -323,7 +323,7 @@
             {
                 "id": "columns",
                 "label": "Columns",
-                "type": "collection",
+                "type": "list",
                 "addText": "Add column",
                 "removeText": "Remove column",
                 "displayField": "title",

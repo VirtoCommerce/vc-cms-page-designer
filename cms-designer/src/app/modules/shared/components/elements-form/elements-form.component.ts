@@ -28,20 +28,19 @@ export class ElementsFormComponent implements OnInit {
     }
 
     displaySimpleControl(descriptor: ControlDescriptor): boolean {
-        return descriptor.type !== 'header' && descriptor.type !== 'paragraph' && descriptor.type !== 'collection';
+        return descriptor.type !== 'header' && descriptor.type !== 'paragraph' && descriptor.type !== 'list';
     }
 
     displayCollection(descriptor: ControlDescriptor): boolean {
-        return descriptor.type === 'collection';
+        return descriptor.type === 'list';
     }
 
     sortItems(event: SortEvent) {
         // todo
     }
 
-    getTitle(item: any): string {
-        // todo
-        return '<no title>';
+    getTitle(item: FormGroup, control: CollectionControlDescriptor): string {
+        return (control.displayField ? item.value[control.displayField] : null) || '<no title>';
     }
 
     removeElement(index: number) {
@@ -52,14 +51,12 @@ export class ElementsFormComponent implements OnInit {
         // todo
     }
 
-    getRemoveButtonTitle(): string {
-        // todo
-        return 'Remove item';
+    getRemoveButtonTitle(descriptor: CollectionControlDescriptor): string {
+        return descriptor.removeText || 'Add item';
     }
 
-    getAddButtonTitle(): string {
-        // todo
-        return 'Add item';
+    getAddButtonTitle(descriptor: CollectionControlDescriptor): string {
+        return descriptor.addText || 'Add item';
     }
 
     getElementDescriptors(descriptor: CollectionControlDescriptor): ControlDescriptor[] {

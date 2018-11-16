@@ -35,7 +35,7 @@ export class ControlHolderComponent implements OnInit, ControlValueAccessor {
     ngOnInit(): void {
         const type = this.controlsFactory.resolve(this.descriptor.type);
         if (!type) {
-            console.log('unknown component type', this.descriptor.type);
+            console.log('unknown component type:', this.descriptor);
         } else {
             const factory = this.componentFactoryResolver.resolveComponentFactory(type);
             const container = this.host.viewContainerRef;

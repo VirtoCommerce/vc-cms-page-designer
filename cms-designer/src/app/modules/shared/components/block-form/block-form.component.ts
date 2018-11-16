@@ -17,7 +17,7 @@ export class BlockFormComponent implements OnInit {
 
     form: FormGroup;
 
-    constructor(private fb: FormBuilder, private factory: ControlsFactory) { }
+    constructor(private fb: FormBuilder) { }
 
     ngOnInit() {
         this.form = this.fb.group({});
@@ -30,7 +30,7 @@ export class BlockFormComponent implements OnInit {
     private fillFormRecursively(model: any, form: FormGroup, keys: ControlDescriptor[]): FormGroup {
         keys.filter(x => !!x.id).forEach(descriptor => {
             const value = model[descriptor.id];
-            if (this.factory.descriptorForCollection(descriptor)) {
+            if (descriptor.type === 'list') {
                 const arrayDescriptor = <CollectionControlDescriptor>descriptor;
                 // value is array here, so item is array element.
                 const groups = value.map(item => this.fillFormRecursively(item, this.fb.group({}), arrayDescriptor.element));

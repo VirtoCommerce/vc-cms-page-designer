@@ -1,42 +1,37 @@
 <div [formGroup]="group">
-    <ng-container *ngIf="!!descriptors">
-        <div class="pane-settings" *ngFor="let control of descriptors" [class.pane-t]="control.type === 'header'">
-            <!-- Header or Paragraph -->
-            {{ getContent(control) }}
-            <!-- Simple control -->
-            <app-control-holder *ngIf="displaySimpleControl(control)" [descriptor]="control" [group]="group"
-                [formControlName]="control.id"></app-control-holder>
-            <!-- complext control (collection) -->
-            <div *ngIf="displayCollection(control)">
-                <div [formArrayName]="control.id">
-                    <app-accordeon appSortableList (sort)="sortItems($event)">
-                        <app-acc-item *ngFor="let item of getControls(control); let i = index;" [title]="getTitle(item)"
-                            appDraggable>
-                            <div [formGroupName]="i">
+    <div class="pane-settings" *ngFor="let control of descriptors" [class.pane-t]="control.type === 'header'">
+        <!-- Header or Paragraph -->
+        {{ getContent(control) }}
+        <!-- Simple control -->
+        <app-control-holder *ngIf="displaySimpleControl(control)" [descriptor]="control" [group]="group"
+            [formControlName]="control.id"></app-control-holder>
+        <!-- complext control (collection) -->
+        <div *ngIf="displayCollection(control)">
+            <div [formArrayName]="control.id">
+                <app-accordeon appSortableList (sort)="sortItems($event)">
+                    <app-acc-item *ngFor="let item of getControls(control); let i = index;" [title]="getTitle(item, control)"
+                        appDraggable>
+                        <div [formGroupName]="i">
 
-                                <app-elements-form [group]="item" [descriptors]="getElementDescriptors(control)"></app-elements-form>
+                            <app-elements-form [group]="item" [descriptors]="getElementDescriptors(control)"></app-elements-form>
 
-                                <div class="pane-settings">
-                                    <button class="btn" (click)="removeElement(i)">{{ getRemoveButtonTitle() }}</button>
-                                </div>
+                            <div class="pane-settings">
+                                <button class="btn" (click)="removeElement(i)">{{ getRemoveButtonTitle(control) }}</button>
                             </div>
-                            <div *appDraggableHelper>
-                                <h4 class="panel-title">
-                                    <a href tabindex="0"><span>{{ getTitle(item) }}</span></a>
-                                </h4>
-                            </div>
-                        </app-acc-item>
-                    </app-accordeon>
-                </div>
-                <div>
-                    <button class="btn" (click)="addElement()">{{ getAddButtonTitle() }}</button>
-                </div>
+                        </div>
+                        <div *appDraggableHelper>
+                            <h4 class="panel-title">
+                                <a href tabindex="0"><span>{{ getTitle(item, control) }}</span></a>
+                            </h4>
+                        </div>
+                    </app-acc-item>
+                </app-accordeon>
             </div>
-            <!-- Info -->
-            <p *ngIf="control.type !== 'image' && getInfo(control) !== undefined" class="form-help">{{getInfo(control)}}</p>
+            <div>
+                <button class="btn" (click)="addElement()">{{ getAddButtonTitle(control) }}</button>
+            </div>
         </div>
-    </ng-container>
-    <div class="pane-cnt" *ngIf="!descriptors">
-        <p>There are no descriptors for this block type</p>
+        <!-- Info -->
+        <p *ngIf="control.type !== 'image' && getInfo(control) !== undefined" class="form-help">{{getInfo(control)}}</p>
     </div>
 </div>
