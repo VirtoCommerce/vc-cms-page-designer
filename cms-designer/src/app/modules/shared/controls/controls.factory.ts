@@ -6,8 +6,8 @@ import {
     NumberItemComponent,
     SelectItemComponent,
     StringItemComponent,
-    AccordeonComponent,
-    TextItemComponent
+    TextItemComponent,
+    CollectionComponent
 } from '.';
 
 @Injectable({
@@ -24,7 +24,7 @@ export class ControlsFactory {
         this.controls['select'] = SelectItemComponent;
         this.controls['string'] = StringItemComponent;
         this.controls['text'] = TextItemComponent;
-        this.controls['collection'] = AccordeonComponent;
+        this.controls['collection'] = CollectionComponent;
     }
 
     resolve(type: string): Type<any> {

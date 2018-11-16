@@ -102,6 +102,13 @@
                 "type": "string"
             },
             {
+                "id": "image",
+                "label": "Upload picture",
+                "type": "image",
+                "previewWith": 120,
+                "previewHeight": 80
+            },
+            {
                 "id": "size",
                 "label": "Choose image size",
                 "type": "select",

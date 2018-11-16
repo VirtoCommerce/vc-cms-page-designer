@@ -1,6 +1,6 @@
 import { BaseDescriptor } from '.';
 
 export interface DisplayTextControlDescriptor extends BaseDescriptor {
-    // for header and paragraph
+    type: 'header' | 'paragraph';
     content: string;
 }

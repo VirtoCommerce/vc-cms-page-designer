@@ -1,7 +1,7 @@
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormGroup, FormControlName } from '@angular/forms';
 
-import { BaseControlComponent } from './base-control.component';
-import { ControlsFactory } from './controls.factory';
+import { BaseControlComponent } from '../controls/base-control.component';
+import { ControlsFactory } from '../controls/controls.factory';
 import {
     Component,
     ComponentFactoryResolver,
@@ -28,6 +28,7 @@ export class ControlHolderComponent implements OnInit, ControlValueAccessor {
 
     @ViewChild(ControlHostDirective) host: ControlHostDirective;
     @Input() descriptor: ControlDescriptor;
+    @Input() group: FormGroup;
 
     constructor(private componentFactoryResolver: ComponentFactoryResolver, private controlsFactory: ControlsFactory) { }
 
@@ -42,6 +43,7 @@ export class ControlHolderComponent implements OnInit, ControlValueAccessor {
             container.clear();
             this.component = container.createComponent(factory).instance;
             this.component.descriptor = this.descriptor;
+            this.component.group = this.group;
         }
     }
 

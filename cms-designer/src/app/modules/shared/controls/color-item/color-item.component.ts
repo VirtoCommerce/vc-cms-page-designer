@@ -15,4 +15,10 @@ export class ColorItemComponent extends BaseControlComponent<ColorControlDescrip
 
     ngOnInit() { }
 
+    registerOnChange(fn: any): void {
+        this.onChange = value => {
+            this.value = value;
+            fn(value);
+        };
+    }
 }

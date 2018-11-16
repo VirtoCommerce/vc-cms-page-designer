@@ -10,7 +10,7 @@ import { OptionModel, SelectControlDescriptor } from '../../models';
 })
 export class SelectItemComponent extends BaseControlComponent<SelectControlDescriptor> implements OnInit {
 
-    group = false;
+    groupItems = false;
     groups: { [key: string]: { label: string; value: string; }[] };
     value: any;
 
@@ -19,8 +19,8 @@ export class SelectItemComponent extends BaseControlComponent<SelectControlDescr
     }
 
     ngOnInit() {
-        this.group = this.descriptor.options.some(x => !!x.group);
-        if (this.group) {
+        this.groupItems = this.descriptor.options.some(x => !!x.group);
+        if (this.groupItems) {
             this.groups = {};
             this.descriptor.options.forEach(x => {
                 if (!this.groups[x.group]) {

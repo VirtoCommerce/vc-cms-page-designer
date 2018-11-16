@@ -18,7 +18,7 @@ import * as fromEditor from '.';
 
 import { PagesService } from '../services/pages.service';
 import { PageModel } from '../models/page.model';
-import { ControlsFactory } from '../../shared/components/controls.factory';
+import { ControlsFactory } from '../../shared/controls/controls.factory';
 import { BlocksService } from '../services/blocks.service';
 // import { CategoryModel } from '../models';
 

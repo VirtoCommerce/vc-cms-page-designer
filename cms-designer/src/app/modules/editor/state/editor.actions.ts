@@ -3,7 +3,7 @@ import { BlockValuesModel } from './../../shared/models/block-values.model';
 import { Action } from '@ngrx/store';
 
 import { PageModel } from '../models/page.model';
-import { SortEvent } from '../../shared/draggable';
+import { SortEvent } from '../../shared/components';
 import { BlockSchema, BlocksSchema } from 'src/app/modules/shared/models';
 
 export enum EditorActionTypes {
