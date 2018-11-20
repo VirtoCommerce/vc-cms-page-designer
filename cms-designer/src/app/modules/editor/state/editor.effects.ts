@@ -96,10 +96,13 @@ export class EditorEffects {
         ofType<editorActions.PreviewPageItemOfType>(editorActions.EditorActionTypes.PreviewPageItemOfType),
         map(action => action.payload),
         map(type => {
-            const result = <BlockValuesModel>{};
-            type.settings.forEach(x => result[x.id] = x['default'] || null);
-            result.type = type.type;
-            return result;
+            if (!!type) {
+                const result = <BlockValuesModel>{};
+                type.settings.forEach(x => result[x.id] = x['default'] || null);
+                result.type = type.type;
+                return result;
+            }
+            return null;
         }),
         mergeMap(item =>
             of(new editorActions.PreviewPageItem(item))
