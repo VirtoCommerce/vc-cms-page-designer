@@ -7,7 +7,7 @@ export const environment = {
     storeBaseUrl: 'http://localhost:2082',
     storePreviewPath: '/designer-preview',
     baseUrl: '/',
-    platformUrl: 'http://localhost/admin',
+    platformUrl: 'http://localhost/platform',
     apiBaseUrl: '/api/content',
     themeUrl: '/themes/'
 };

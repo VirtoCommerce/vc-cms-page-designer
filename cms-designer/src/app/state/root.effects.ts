@@ -96,7 +96,10 @@ export class RootEffects {
         debounceTime(500),
         distinctUntilChanged(),
         withLatestFrom(this.editorStore$),
-        tap(([action, store]) => this.preview.addOrUpdateBlock(action.payload, store.editor.primaryFrameId))
+        tap(([action, store]) => this.preview.addOrUpdateBlock(
+            { ...store.editor.currentSectionItem, ...action.payload },
+            store.editor.primaryFrameId
+        ))
     );
 
     @Effect({ dispatch: false })

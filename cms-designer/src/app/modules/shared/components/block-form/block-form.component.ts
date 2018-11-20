@@ -20,23 +20,25 @@ export class BlockFormComponent implements OnInit {
     constructor(private fb: FormBuilder) { }
 
     ngOnInit() {
-        this.form = this.fb.group({});
+        const formDescriptor = this.fillFormRecursively(this.model, {}, this.schema.settings);
+        this.form = this.fb.group(formDescriptor);
         this.form.valueChanges.subscribe(value => {
+            console.log('value changed form');
             this.modelChange.emit(value);
         });
-        this.fillFormRecursively(this.model, this.form, this.schema.settings);
     }
 
-    private fillFormRecursively(model: any, form: FormGroup, keys: ControlDescriptor[]): FormGroup {
+    private fillFormRecursively(model: any, form: any, keys: ControlDescriptor[]): FormGroup {
         keys.filter(x => !!x.id).forEach(descriptor => {
             const value = model[descriptor.id];
             if (descriptor.type === 'list') {
                 const arrayDescriptor = <CollectionControlDescriptor>descriptor;
                 // value is array here, so item is array element.
                 const groups = value.map(item => this.fillFormRecursively(item, this.fb.group({}), arrayDescriptor.element));
-                form.addControl(descriptor.id, this.fb.array(groups));
+                form[descriptor.id] = groups;
             } else {
-                form.addControl(descriptor.id, this.fb.control(value));
+                // there are validation rules may be here
+                form[descriptor.id] = [value];
             }
         });
         return form;

@@ -51,6 +51,6 @@ export class PageEditorComponent implements OnInit {
             }
         }
         const unknownBlock = <any>item;
-        return result || unknownBlock.name || unknownBlock.title || '<unnamed block>';
+        return result || unknownBlock.name || unknownBlock.title || unknownBlock.type || '<unnamed block>';
     }
 }
