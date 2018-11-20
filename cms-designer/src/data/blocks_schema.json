@@ -82,6 +82,11 @@
                         "label": "Content",
                         "type": "text"
                     }
+                ],
+                "default": [
+                    { "url": "http://dev-cms-vm.westeurope.cloudapp.azure.com/v2/admin/Assets/blogs/Galunggung.jpg" },
+                    { "url": "http://dev-cms-vm.westeurope.cloudapp.azure.com/v2/admin/Assets/blogs/Hopetoun_falls.jpg" },
+                    { "url": "http://dev-cms-vm.westeurope.cloudapp.azure.com/v2/admin/Assets/blogs/Bachalpsee_reflection.jpg" }
                 ]
             }
         ]

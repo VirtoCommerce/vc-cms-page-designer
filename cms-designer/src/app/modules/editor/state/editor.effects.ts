@@ -95,10 +95,11 @@ export class EditorEffects {
     convertPageTypeToPreviewSection$ = this.actions$.pipe(
         ofType<editorActions.PreviewPageItemOfType>(editorActions.EditorActionTypes.PreviewPageItemOfType),
         map(action => action.payload),
-        withLatestFrom(this.store$.select(state => state.editor.blocksSchema)),
-        map(([type, schema]) => {
-            console.log(type, schema);
-            return <BlockValuesModel>{};
+        map(type => {
+            const result = <BlockValuesModel>{};
+            type.settings.forEach(x => result[x.id] = x['default'] || null);
+            result.type = type.type;
+            return result;
         }),
         mergeMap(item =>
             of(new editorActions.PreviewPageItem(item))
