@@ -21,6 +21,7 @@ import { BlockSchema } from 'src/app/modules/shared/models';
 @Component({ selector: 'app-page-editor', template: '<div></div>' })
 class PageEditorStubComponent {
     @Input() model;
+    @Input() schema;
     @Output() selectEvent = new EventEmitter<any>();
     @Output() orderChangedEvent = new EventEmitter<any>();
     @Output() addNewBlockEvent = new EventEmitter<any>();
@@ -36,6 +37,7 @@ class ThemeEditorStubComponent {
 @Component({ selector: 'app-page-item-editor', template: '<div></div>' })
 class PageItemEditorStubComponent {
     @Input() model;
+    @Input() schema;
     @Output() valueChangedEvent = new EventEmitter<any>();
     @Output() removeBlockEvent = new EventEmitter<any>();
     @Output() backEvent = new EventEmitter<any>();
@@ -43,7 +45,7 @@ class PageItemEditorStubComponent {
 
 @Component({ selector: 'app-select-type', template: '<div></div>' })
 class SelectTypeStubComponent {
-    @Input() types;
+    @Input() schema;
     @Output() selectBlockEvent = new EventEmitter<any>();
     @Output() previewBlockEvent = new EventEmitter<any>();
     @Output() backEvent = new EventEmitter<any>();

@@ -1,6 +1,7 @@
 {
     "settings": {
         "name": "Settings",
+        "static": "top",
         "icon": "settings",
         "settings": [
             {
