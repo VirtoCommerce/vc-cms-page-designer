@@ -1,3 +1,6 @@
 import { BlockValuesModel } from '../../shared/models';
 
-export type PageModel = BlockValuesModel[];
+export interface PageModel {
+    settings: BlockValuesModel;
+    content: BlockValuesModel[];
+}

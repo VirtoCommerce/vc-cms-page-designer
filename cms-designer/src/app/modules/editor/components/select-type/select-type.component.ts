@@ -17,8 +17,7 @@ export class SelectTypeComponent implements OnInit {
 
     constructor() { }
 
-    ngOnInit() {
-    }
+    ngOnInit() { }
 
     back() {
         this.backEvent.emit();

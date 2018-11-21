@@ -8,8 +8,6 @@ import { BlockSchema, BlockValuesModel } from 'src/app/modules/shared/models';
 })
 export class PageItemEditorComponent implements OnInit {
 
-    schemaExists: boolean;
-
     @Input() model: BlockValuesModel;
     @Input() schema: BlockSchema;
 
@@ -19,7 +17,10 @@ export class PageItemEditorComponent implements OnInit {
 
     constructor() { }
 
-    ngOnInit() { }
+    ngOnInit() {
+        console.log(this.model);
+        console.log(this.schema);
+    }
 
     back() {
         // this value will be applyed onto current section in the editor.reducer
@@ -28,7 +29,11 @@ export class PageItemEditorComponent implements OnInit {
     }
 
     modelChanged() {
-        this.valueChangedEvent.emit(this.model);
+        const modelToPreview = (!this.schema.static) ? this.model : {
+            ...this.model,
+            type: 'settings'
+        };
+        this.valueChangedEvent.emit(modelToPreview);
     }
 
     removeBlock() {

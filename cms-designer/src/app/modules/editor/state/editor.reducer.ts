@@ -1,6 +1,7 @@
 import { EditorActionTypes, EditorActions } from './editor.actions';
 import { BlocksSchema, BlockValuesModel } from 'src/app/modules/shared/models';
 import { PageModel } from '../models';
+import { typeSourceSpan } from '@angular/compiler';
 
 export interface EditorState {
     showNewBlockSelector: boolean;
@@ -35,7 +36,7 @@ const initialState: EditorState = {
 export function reducer(state = initialState, action: EditorActions): EditorState {
     switch (action.type) {
         case EditorActionTypes.AddPageItem:
-            state.page.push(action.payload);
+            state.page.content.push(action.payload);
             return {
                 ...state,
                 showNewBlockSelector: false,
@@ -93,9 +94,9 @@ export function reducer(state = initialState, action: EditorActions): EditorStat
                 previewIsReady: true
             };
         case EditorActionTypes.RemovePageItem:
-            const index = state.page.indexOf(action.payload);
+            const index = state.page.content.indexOf(action.payload);
             if (index !== -1) {
-                state.page.splice(index, 1);
+                state.page.content.splice(index, 1);
             }
             return {
                 ...state,
@@ -139,6 +140,12 @@ export function reducer(state = initialState, action: EditorActions): EditorStat
             };
         case EditorActionTypes.UpdatePageItem:
             Object.assign(state.currentSectionItem, action.payload);
+            if (!!state.blocksSchema[state.currentSectionItem.type].static) {
+                state.page.settings = {
+                    ...state.currentSectionItem,
+                    type: 'settings'
+                };
+            }
             return {
                 ...state,
                 currentSectionItem: null,

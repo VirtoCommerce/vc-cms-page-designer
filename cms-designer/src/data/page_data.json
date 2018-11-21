@@ -8,7 +8,6 @@
     {
         "align": "left",
         "content": "This is a paragraph where you can describe your chosen product, collection, or blog posts. Add some text to make this block attractive to your customers",
-        "id": "newblock1",
         "imageSize": "medium",
         "name": "Image with text",
         "type": "image-with-text",

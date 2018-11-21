@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { BlockValuesModel } from 'src/app/modules/shared/models';
-import { PageModel } from '../modules/editor/models';
 
 @Injectable({
     providedIn: 'root'
@@ -10,7 +9,7 @@ export class PreviewService {
 
     constructor() { }
 
-    page(page: PageModel, frameId: string) {
+    page(page: BlockValuesModel[], frameId: string) {
         this.send('page', page, frameId);
     }
 

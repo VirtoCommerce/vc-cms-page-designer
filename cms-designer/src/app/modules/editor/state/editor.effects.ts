@@ -35,8 +35,12 @@ export class EditorEffects {
         switchMap(_ =>
             this.pages.downloadPage().pipe(
                 map(data => {
+                    const result = <PageModel>{
+                        settings: data.find(x => x.type === 'settings'),
+                        content: data.filter(x => x.type !== 'settings')
+                    };
                     data.forEach((x, index) => x.id = index + 1);
-                    return new editorActions.LoadPageSuccess(data);
+                    return new editorActions.LoadPageSuccess(result);
                 }),
                 catchError(err => of(new editorActions.LoadPageFail(err)))
             )
@@ -58,12 +62,13 @@ export class EditorEffects {
     uploadPage$: Observable<Action> = this.actions$.pipe(
         ofType<editorActions.SavePage>(editorActions.EditorActionTypes.SavePage),
         withLatestFrom(this.store$.select(state => state.editor.page)),
-        switchMap(([_, page]) =>
-            this.pages.uploadPage(page).pipe(
+        switchMap(([_, page]) => {
+            const data = [page.settings, ...page.content];
+            return this.pages.uploadPage(data).pipe(
                 map(() => new editorActions.SavePageSuccess()),
                 catchError(err => of(new editorActions.SavePageFail(err)))
-            )
-        )
+            );
+        })
     );
 
     @Effect()
@@ -81,10 +86,12 @@ export class EditorEffects {
     createPageItemModelByType$ = this.actions$.pipe(
         ofType(editorActions.EditorActionTypes.CreatePageItem),
         map((action: editorActions.CreatePageItem) => action.payload),
-        withLatestFrom(this.store$.select(state => state.editor.blocksSchema)),
-        map(([type, schema]) => {
-            console.log(type, schema);
-            return <BlockValuesModel>{};
+        // withLatestFrom(this.store$.select(state => state.editor.blocksSchema)),
+        // map(([blockSchema, schema]) => {
+        map(blockSchema => {
+            return <BlockValuesModel>{
+                type: blockSchema.type
+            };
         }),
         mergeMap(item =>
             of(new editorActions.AddPageItem(item))
@@ -95,11 +102,11 @@ export class EditorEffects {
     convertPageTypeToPreviewSection$ = this.actions$.pipe(
         ofType<editorActions.PreviewPageItemOfType>(editorActions.EditorActionTypes.PreviewPageItemOfType),
         map(action => action.payload),
-        map(type => {
-            if (!!type) {
+        map(blockSchema => {
+            if (!!blockSchema) {
                 const result = <BlockValuesModel>{};
-                type.settings.forEach(x => result[x.id] = x['default'] || null);
-                result.type = type.type;
+                blockSchema.settings.forEach(x => result[x.id] = x['default'] || null);
+                result.type = blockSchema.type;
                 return result;
             }
             return null;

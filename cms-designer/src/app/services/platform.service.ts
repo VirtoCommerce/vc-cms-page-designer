@@ -5,6 +5,7 @@ import { ApiUrlsService } from './api-url.service';
 import { PresetsModel } from './../modules/theme/models/presets.model';
 import { PageModel } from '../modules/editor/models';
 import { tap } from 'rxjs/operators';
+import { BlockValuesModel } from '../modules/shared/models';
 
 @Injectable({
     providedIn: 'root'
@@ -25,12 +26,12 @@ export class PlatformService {
         return this.uploadModel<PresetsModel>(model, 'themes', '/default/config/drafts', this.generateDraftPresetName());
     }
 
-    downloadPage(): Observable<PageModel> {
-        return this.downloadModel<PageModel>();
+    downloadPage(): Observable<BlockValuesModel[]> {
+        return this.downloadModel<BlockValuesModel[]>();
     }
 
-    uploadPage(model: PageModel): Observable<PageModel> {
-        return this.uploadModel<PageModel>(model);
+    uploadPage(model: BlockValuesModel[]): Observable<any> {
+        return this.uploadModel<BlockValuesModel[]>(model);
     }
 
     private downloadModel<T>(contentType: string = null, filepath: string = null): Observable<T> {

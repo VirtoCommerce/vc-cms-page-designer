@@ -14,6 +14,7 @@ import * as fromTheme from '../modules/theme/state';
 
 import * as editorActions from '../modules/editor/state/editor.actions';
 import * as fromEditor from '../modules/editor/state';
+import { BlockValuesModel } from '../modules/shared/models';
 
 @Injectable()
 export class RootEffects {
@@ -76,7 +77,7 @@ export class RootEffects {
         withLatestFrom(this.editorStore$),
         tap(([action, store]) => {
             if (!action.payload.id) {
-                action.payload.id = Math.max(...store.editor.page.map(v => <number>v.id || 0)) + 1;
+                action.payload.id = Math.max(...store.editor.page.content.map(v => <number>v.id || 0)) + 1;
             }
             this.preview.addOrUpdateBlock(action.payload, store.editor.primaryFrameId);
         })
@@ -92,14 +93,15 @@ export class RootEffects {
     @Effect({ dispatch: false })
     sendUpdatedBlockToStoreLoaded$ = this.actions$.pipe(
         ofType<editorActions.UpdateBlockPreview>(editorActions.EditorActionTypes.UpdateBlockPreview),
-        filter(action => action.payload.type !== 'settings'),
+        withLatestFrom(this.editorStore$),
+        map(([action, store]): [BlockValuesModel, string] => [
+            <BlockValuesModel>{ ...store.editor.currentSectionItem, ...action.payload },
+            store.editor.primaryFrameId
+        ]),
+        filter(([block, _]) => block.type !== 'settings'),
         debounceTime(500),
         distinctUntilChanged(),
-        withLatestFrom(this.editorStore$),
-        tap(([action, store]) => this.preview.addOrUpdateBlock(
-            { ...store.editor.currentSectionItem, ...action.payload },
-            store.editor.primaryFrameId
-        ))
+        tap(([block, frameId]) => this.preview.addOrUpdateBlock(block, frameId))
     );
 
     @Effect({ dispatch: false })
@@ -135,7 +137,7 @@ export class RootEffects {
         filter(([action, editorStore, themeStore]) =>
             editorStore.editor.previewIsReady && themeStore.theme.draftUploaded),
         switchMap(([_, editorStore, themeStore]) => {
-            this.preview.page(editorStore.editor.page, editorStore.editor.secondaryFrameId);
+            this.preview.page(editorStore.editor.page.content, editorStore.editor.secondaryFrameId);
             return of(new editorActions.ToggleFrames());
         })
     );

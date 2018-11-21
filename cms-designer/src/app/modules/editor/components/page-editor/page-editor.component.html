@@ -1,12 +1,22 @@
 <div class="pane-section __selected" *ngIf="model && schema">
+    <ul class="list" *ngIf="topItems">
+        <li class="list-item" *ngFor="let item of topItems">
+            <a class="list-link" (click)="selectItem(item)">
+                <i class="list-ico fa dragger" appSectionIcon="{{ item.icon }}"></i><span class="list-t">{{
+                    getBlockName(item) }}</span>
+            </a>
+        </li>
+    </ul>
     <ul appSortableList class="list" (sort)="sortItems($event)">
 
-        <li class="list-item" *ngFor="let item of model" appDraggable>
+        <li class="list-item" *ngFor="let item of model.content" appDraggable>
             <a class="list-link" (click)="selectItem(item)">
-                <i class="list-ico fa dragger" appSectionIcon="{{ item.type }}"></i><span class="list-t">{{ getBlockName(item) }}</span>
+                <i class="list-ico fa dragger" appSectionIcon="{{ item.icon }}"></i><span class="list-t">{{
+                    getBlockName(item) }}</span>
             </a>
             <div *appDraggableHelper class="list-dragger">
-                <i class="list-ico fa dragger" appSectionIcon="{{ item.type }}"></i><span class="list-t">{{ getBlockName(item) }}</span>
+                <i class="list-ico fa dragger" appSectionIcon="{{ item.icon }}"></i><span class="list-t">{{
+                    getBlockName(item) }}</span>
             </div>
         </li>
 
@@ -16,4 +26,12 @@
             <i class="list-ico fa fa-plus-square"></i><span class="list-t">Add block</span>
         </a>
     </div>
+    <ul class="list" *ngIf="topItems">
+        <li class="list-item" *ngFor="let item of bottomItems">
+            <a class="list-link" (click)="selectItem(item)">
+                <i class="list-ico fa dragger" appSectionIcon="{{ item.icon }}"></i><span class="list-t">{{
+                    getBlockName(item) }}</span>
+            </a>
+        </li>
+    </ul>
 </div>

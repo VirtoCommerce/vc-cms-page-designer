@@ -8,7 +8,7 @@
     <div class="pane-cnt" *ngIf="model && schema">
         <app-block-form [(model)]="model" [schema]="schema" (modelChange)="modelChanged($event)"></app-block-form>
         <div class="pane-settings">
-            <button *ngIf="model.type !== 'settings'" class="btn" (click)="removeBlock()">Remove block</button>
+            <button *ngIf="model.type !== 'settings' && !schema.static" class="btn" (click)="removeBlock()">Remove block</button>
         </div>
     </div>
     <div class="pane-cnt" *ngIf="!schema && model">

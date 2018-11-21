@@ -3,3 +3,8 @@
         color: #5c6ac4;
     }
 }
+
+.list .list-item:first-child {
+    border-top: 1px solid #dee9f0;
+    margin-top: 5px;
+}
