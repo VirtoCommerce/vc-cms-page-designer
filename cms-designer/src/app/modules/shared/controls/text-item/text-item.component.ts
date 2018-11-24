@@ -39,16 +39,16 @@ export class TextItemComponent extends BaseControlComponent<TextControlDescripto
 
     ngOnInit(): void { }
 
-    setValue(obj: any): void {
-        super.setValue(obj);
-        if (this.editor != null) {
-            this.editor.setText(this.value);
-        }
-    }
-
     onCreated(editor) {
         this.editor = editor;
         this.editor.root.innerHTML = this.value || '';
     }
 
+    registerOnChange(fn: any): void {
+        this.onChange = (event) => {
+            if (this.value !== event.html) {
+                fn(event.html);
+            }
+        };
+    }
 }

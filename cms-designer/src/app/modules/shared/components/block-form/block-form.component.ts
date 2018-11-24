@@ -1,5 +1,5 @@
 import { BlockSchema, BlockValuesModel, CollectionControlDescriptor } from 'src/app/modules/shared/models';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, FormControl, FormArray } from '@angular/forms';
 import { ControlDescriptor } from '../../models';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ControlsFactory } from '../../controls/controls.factory';
@@ -17,30 +17,30 @@ export class BlockFormComponent implements OnInit {
 
     form: FormGroup;
 
-    constructor(private fb: FormBuilder) { }
+    constructor() { }
 
     ngOnInit() {
-        const formDescriptor = this.fillFormRecursively(this.model, {}, this.schema.settings);
-        this.form = this.fb.group(formDescriptor);
+        this.form = this.createFormRecursively(this.model, this.schema.settings);
         this.form.valueChanges.subscribe(value => {
-            console.log('value changed form');
             this.modelChange.emit(value);
         });
     }
 
-    private fillFormRecursively(model: any, form: any, keys: ControlDescriptor[]): FormGroup {
+    private createFormRecursively(model: any, keys: ControlDescriptor[]): FormGroup {
+        const result = new FormGroup({});
         keys.filter(x => !!x.id).forEach(descriptor => {
             const value = model[descriptor.id];
             if (descriptor.type === 'list') {
                 const arrayDescriptor = <CollectionControlDescriptor>descriptor;
                 // value is array here, so item is array element.
-                const groups = value.map(item => this.fillFormRecursively(item, this.fb.group({}), arrayDescriptor.element));
-                form[descriptor.id] = groups;
+                // create group for each array item
+                const groups = value.map(item => this.createFormRecursively(item, arrayDescriptor.element));
+                result.addControl(descriptor.id, new FormArray(groups));
             } else {
                 // there are validation rules may be here
-                form[descriptor.id] = [value];
+                result.addControl(descriptor.id, new FormControl(value));
             }
         });
-        return form;
+        return result;
     }
 }
