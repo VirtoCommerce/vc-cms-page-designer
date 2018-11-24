@@ -1,8 +1,8 @@
 <ul class="list">
     <li class="list-item">
-        <a class="list-link" (click)="selectPresets()"><i class="list-ico fa fa-wrench"></i><span class="list-t"> Presets </span></a>
+        <a class="list-link" (click)="selectPresets()"><i class="list-ico fas fa-wrench"></i><span class="list-t"> Presets </span></a>
     </li>
     <li class="list-item" *ngFor="let item of schema">
-        <a class="list-link" (click)="selectItem(item)"><i class="list-ico fa" appSectionIcon="{{ item.icon }}"></i><span class="list-t"> {{ item.name }} </span></a>
+        <a class="list-link" (click)="selectItem(item)"><i class="list-ico fas" appSectionIcon="{{ item.icon }}"></i><span class="list-t"> {{ item.name }} </span></a>
     </li>
 </ul>
