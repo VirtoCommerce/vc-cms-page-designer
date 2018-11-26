@@ -8,7 +8,6 @@ import {
     StringItemComponent,
     TextItemComponent
 } from '.';
-import { ControlDescriptor } from '../models';
 
 @Injectable({
     providedIn: 'root'

@@ -32,7 +32,7 @@ const initialState: EditorState = {
     primaryFrameId: 'preview1',
     secondaryFrameId: 'preview2'
 };
-// todo: state should be immutable, in this case objects in state are mutable
+
 export function reducer(state = initialState, action: EditorActions): EditorState {
     switch (action.type) {
         case EditorActionTypes.AddPageItem:

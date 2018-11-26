@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup, AbstractControl, FormArray } from '@angular/forms';
-import { DisplayTextControlDescriptor, BlockSchema, ControlDescriptor, CollectionControlDescriptor } from '../../models';
-import { ControlsFactory } from '../../controls/controls.factory';
+import { DisplayTextControlDescriptor, ControlDescriptor, CollectionControlDescriptor } from '../../models';
+import { FormHelper } from './../../services/form.helper';
 import { SortEvent } from '..';
 
 @Component({
@@ -12,7 +12,7 @@ export class ElementsFormComponent implements OnInit {
     @Input() group: FormGroup;
     @Input() descriptors: ControlDescriptor[];
 
-    constructor(private factory: ControlsFactory) { }
+    constructor(private formHelper: FormHelper) { }
 
     ngOnInit(): void { }
 
@@ -35,20 +35,30 @@ export class ElementsFormComponent implements OnInit {
         return descriptor.type === 'list';
     }
 
-    sortItems(event: SortEvent) {
-        // todo
+    sortItems(control: CollectionControlDescriptor, event: SortEvent) {
+        if (!event.complete) {
+            const controls = this.getControls(control);
+            const current = controls[event.currentIndex];
+            const swapWith = controls[event.newIndex];
+
+            controls[event.newIndex] = current;
+            controls[event.currentIndex] = swapWith;
+        }
     }
 
     getTitle(item: FormGroup, control: CollectionControlDescriptor): string {
         return (control.displayField ? item.value[control.displayField] : null) || '<no title>';
     }
 
-    removeElement(index: number) {
-        // todo
+    removeElement(control: CollectionControlDescriptor, index: number) {
+        const formArray = this.getFormArray(control);
+        formArray.removeAt(index);
     }
 
-    addElement() {
-        // todo
+    addElement(control: CollectionControlDescriptor) {
+        const formArray = this.getFormArray(control);
+        const newElementGroup = this.formHelper.generateForm({}, control.element);
+        formArray.push(newElementGroup);
     }
 
     getRemoveButtonTitle(descriptor: CollectionControlDescriptor): string {
@@ -64,8 +74,12 @@ export class ElementsFormComponent implements OnInit {
     }
 
     getControls(descriptor: CollectionControlDescriptor): AbstractControl[] {
-        const formArray = this.group.get(descriptor.id) as FormArray;
-        return formArray.controls;
+        return this.getFormArray(descriptor).controls;
         // return this.group.get(name) as FormArray;
+    }
+
+    private getFormArray(descriptor: CollectionControlDescriptor): FormArray {
+        const formArray = this.group.get(descriptor.id) as FormArray;
+        return formArray;
     }
 }

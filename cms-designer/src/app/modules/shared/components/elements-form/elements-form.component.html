@@ -8,7 +8,7 @@
         <!-- complext control (collection) -->
         <div *ngIf="displayCollection(control)">
             <div [formArrayName]="control.id">
-                <app-accordeon appSortableList (sort)="sortItems($event)">
+                <app-accordeon appSortableList (sort)="sortItems(control, $event)">
                     <app-acc-item *ngFor="let item of getControls(control); let i = index;" [title]="getTitle(item, control)"
                         appDraggable>
                         <div [formGroupName]="i">
@@ -16,7 +16,7 @@
                             <app-elements-form [group]="item" [descriptors]="getElementDescriptors(control)"></app-elements-form>
 
                             <div class="pane-settings">
-                                <button class="btn" (click)="removeElement(i)">{{ getRemoveButtonTitle(control) }}</button>
+                                <button class="btn" (click)="removeElement(control, i)">{{ getRemoveButtonTitle(control) }}</button>
                             </div>
                         </div>
                         <div *appDraggableHelper>
@@ -28,7 +28,7 @@
                 </app-accordeon>
             </div>
             <div>
-                <button class="btn" (click)="addElement()">{{ getAddButtonTitle(control) }}</button>
+                <button class="btn" (click)="addElement(control)">{{ getAddButtonTitle(control) }}</button>
             </div>
         </div>
         <!-- Info -->
