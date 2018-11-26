@@ -11,7 +11,7 @@ export class BlocksService {
     constructor(private http: HttpClient) { }
 
     load(): Observable<BlocksSchema> {
-        return this.http.get<BlocksSchema>('/data/blocks_schema.json').pipe(
+        return this.http.get<BlocksSchema>('data/blocks_schema.json').pipe(
             tap(schema => {
                 Object.keys(schema).map(key => {
                     schema[key].type = key;

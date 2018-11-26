@@ -1,4 +1,4 @@
-import { environment } from 'src/environments/environment.local';
+import { environment } from 'src/environments/environment';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { PresetsModel } from '../../models';
