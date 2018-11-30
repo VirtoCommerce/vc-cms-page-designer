@@ -135,8 +135,8 @@ export class RootEffects {
         ofType<editorActions.PreviewReady>(editorActions.EditorActionTypes.PreviewReady),
         withLatestFrom(this.editorStore$, this.themeStore$),
         filter(([action, editorStore, themeStore]) =>
-            editorStore.editor.previewIsReady && themeStore.theme.draftUploaded),
-        switchMap(([_, editorStore, themeStore]) => {
+            editorStore.editor.previewIsReady && themeStore.theme.draftUploaded && editorStore.editor.page != null),
+        switchMap(([action, editorStore, themeStore]) => {
             this.preview.page(editorStore.editor.page.content, editorStore.editor.secondaryFrameId);
             return of(new editorActions.ToggleFrames());
         })

@@ -32,4 +32,9 @@ export class ImageItemComponent extends BaseControlComponent<ImageControlDescrip
             });
         };
     }
+
+    removeImage($event: MouseEvent) {
+        $event.preventDefault();
+        this.value = null;
+    }
 }

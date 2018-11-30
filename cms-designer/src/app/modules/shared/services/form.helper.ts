@@ -14,7 +14,7 @@ export class FormHelper {
                 const arrayDescriptor = <CollectionControlDescriptor>descriptor;
                 // value is array here, so item is array element.
                 // create group for each array item
-                const groups = value.map(item => this.generateForm(item, arrayDescriptor.element));
+                const groups = (value || []).map(item => this.generateForm(item, arrayDescriptor.element));
                 result.addControl(descriptor.id, new FormArray(groups));
             } else {
                 // there are validation rules may be here
