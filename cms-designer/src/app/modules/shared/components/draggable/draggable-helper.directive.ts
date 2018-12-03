@@ -6,6 +6,7 @@ import {
     EmbeddedViewRef
 } from '@angular/core';
 import { DraggableDirective } from './draggable.directive';
+import { SortableListDirective } from './sortable-list.directive';
 
 @Directive({
     selector: '[appDraggableHelper]',
@@ -20,6 +21,7 @@ export class DraggableHelperDirective implements OnInit {
     constructor(
         private draggable: DraggableDirective,
         private templateRef: TemplateRef<any>,
+        private containerElement: SortableListDirective,
         private viewContainerRef: ViewContainerRef
     ) { }
 
@@ -30,7 +32,8 @@ export class DraggableHelperDirective implements OnInit {
     }
 
     private onDragStart(event: PointerEvent): void {
-        this.startRect = this.draggable.element.nativeElement.getBoundingClientRect();
+        // this.startRect = this.draggable.element.nativeElement.getBoundingClientRect();
+        this.startRect = this.containerElement.element.nativeElement.getBoundingClientRect();
         // event.clientY - position relative window
         // startRect - relative window
         this.startPosition = event.clientY;
@@ -39,7 +42,8 @@ export class DraggableHelperDirective implements OnInit {
 
     private onDragMove(event: PointerEvent): void {
         console.log('drag move');
-        let top = event.clientY - this.startPosition;
+        const scrollDelta = this.containerElement.element.nativeElement.getBoundingClientRect().top - this.startRect.top;
+        let top = event.clientY - this.startPosition - scrollDelta;
         if (Math.abs(top) < 3 && !this.element) {
             return;
         }

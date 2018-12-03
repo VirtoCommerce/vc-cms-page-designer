@@ -1,5 +1,6 @@
 export class BlockValuesModel {
     type: string;
+    icon?: string;
     [key: string]: ValueType | ValueType[];
 }
 

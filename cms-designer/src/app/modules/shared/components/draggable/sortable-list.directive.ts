@@ -35,8 +35,9 @@ export class SortableListDirective implements AfterContentInit {
     private subscriptions: Subscription[] = [];
     private startIndex: number;
     private newIndex: number;
+    private startPosition: number;
 
-    constructor(private element: ElementRef) { }
+    constructor(public element: ElementRef) { }
 
     ngAfterContentInit(): void {
         this.sortables.changes.subscribe(() => {
@@ -54,6 +55,8 @@ export class SortableListDirective implements AfterContentInit {
         this.clientRects = this.sortables.map(x => x.element.nativeElement.getBoundingClientRect());
         this.startIndex = this.sortables.toArray().indexOf(draggable);
         this.newIndex = this.startIndex;
+        this.startPosition = this.element.nativeElement.getBoundingClientRect().top;
+
         // bound area
         const viewRect: ClientRect = this.element.nativeElement.getBoundingClientRect();
         const movableClientRect: ClientRect = draggable.element.nativeElement.getBoundingClientRect();
@@ -71,9 +74,9 @@ export class SortableListDirective implements AfterContentInit {
             .filter(rect => rect !== currentRect)
             .some(rect => {
                 const isBefore = rect.top < currentRect.top;
-
-                const moveBack = isBefore && event.clientY < rect.bottom;
-                const moveForward = !isBefore && event.clientY > rect.top;
+                const position = event.clientY + this.startPosition - this.element.nativeElement.getBoundingClientRect().top;
+                const moveBack = isBefore && position < rect.bottom;
+                const moveForward = !isBefore && position > rect.top;
 
                 if (moveBack || moveForward) {
                     this.newIndex = this.clientRects.indexOf(rect);
