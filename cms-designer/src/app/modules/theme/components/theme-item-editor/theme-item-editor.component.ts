@@ -9,8 +9,8 @@ import { BlockSchema, ValueType } from 'src/app/modules/shared/models';
 export class ThemeItemEditorComponent implements OnInit, AfterViewInit {
 
     @Input() schema: BlockSchema;
-    @Input() theme: {[key: string]: ValueType};
-    @Output() backEvent = new EventEmitter<{[key: string]: ValueType}>();
+    @Input() theme: { [key: string]: ValueType };
+    @Output() backEvent = new EventEmitter<{ [key: string]: ValueType }>();
     @Output() valueChangedEvent = new EventEmitter<any>();
 
     constructor() { }
@@ -21,5 +21,9 @@ export class ThemeItemEditorComponent implements OnInit, AfterViewInit {
 
     back() {
         this.backEvent.emit();
+    }
+
+    themeChanged() {
+        this.valueChangedEvent.emit(this.theme);
     }
 }

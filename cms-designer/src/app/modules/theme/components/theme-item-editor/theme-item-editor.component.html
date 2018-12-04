@@ -9,6 +9,6 @@
         </div>
     </div>
     <div class="pane-cnt">
-        <app-block-form [(model)]="theme" [schema]="schema"></app-block-form>
+        <app-block-form [(model)]="theme" [schema]="schema" (modelChange)="themeChanged($event)"></app-block-form>
     </div>
 </div>
