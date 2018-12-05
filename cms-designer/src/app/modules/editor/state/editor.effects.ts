@@ -1,5 +1,4 @@
 import { BlockValuesModel } from './../../shared/models/block-values.model';
-import { BlockSchema } from 'src/app/modules/shared/models';
 import { map } from 'rxjs/operators';
 // import { CatalogService } from './../services/catalog.service';
 import { Injectable } from '@angular/core';
@@ -18,7 +17,6 @@ import * as fromEditor from '.';
 
 import { PagesService } from '../services/pages.service';
 import { PageModel } from '../models/page.model';
-import { ControlsFactory } from '../../shared/controls/controls.factory';
 import { BlocksService } from '../services/blocks.service';
 // import { CategoryModel } from '../models';
 

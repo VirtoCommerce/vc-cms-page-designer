@@ -2,7 +2,7 @@ import { UpdateDraftSuccess } from './../modules/theme/state/theme.actions';
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Action, Store } from '@ngrx/store';
-import { Observable, of } from 'rxjs';
+import { Observable, of, fromEvent } from 'rxjs';
 import { switchMapTo, debounceTime, distinctUntilChanged, withLatestFrom, tap, filter, map, switchMap } from 'rxjs/operators';
 import { PreviewService } from '../services/preview.service';
 
@@ -149,4 +149,18 @@ export class RootEffects {
         tap(([_, store]) => this.preview.toggleFrames(store.editor.secondaryFrameId, store.editor.primaryFrameId))
     );
 
+    @Effect()
+    receivePreviewMessage$ = fromEvent(window, 'message').pipe(
+        map((event: MessageEvent) => event.data),
+        filter(data => data.type === 'open'),
+        withLatestFrom(this.themeStore$, this.editorStore$),
+        filter(([_, themeStore]) => !themeStore.theme.selectedSchemaItem && !themeStore.theme.showPresetsEditor),
+        map(([data, _, editorStore]) => {
+            const item = editorStore.editor.page.content.find(x => x.id === data.id);
+            if (item) {
+                return new editorActions.SelectPageItem(item);
+            }
+            return null;
+        }),
+    );
 }
