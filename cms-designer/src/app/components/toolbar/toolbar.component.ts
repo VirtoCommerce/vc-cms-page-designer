@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { environment } from 'src/environments/environment';
+import { AppSettings } from 'src/app/services/app.settings';
 
 @Component({
     selector: 'app-toolbar',
@@ -19,7 +19,7 @@ export class ToolbarComponent implements OnInit {
             window.close();
         } else {
             window.stop();
-            window.location.href = `${environment.platformUrl}#/workspace/content`;
+            window.location.href = `${AppSettings.platformUrl}#/workspace/content`;
         }
     }
 }

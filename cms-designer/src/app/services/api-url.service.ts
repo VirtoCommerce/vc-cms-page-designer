@@ -4,6 +4,8 @@ import { environment } from 'src/environments/environment';
 import { CookieService } from 'ngx-cookie-service';
 import { SafeUrl, DomSanitizer } from '@angular/platform-browser';
 
+import { AppSettings } from './app.settings';
+
 @Injectable({
     providedIn: 'root'
 })
@@ -27,7 +29,7 @@ export class ApiUrlsService {
 
     generateDownloadUrl(contentType: string, filepath: string): string {
         const path = encodeURIComponent(filepath || this.params.path);
-        const url = `${environment.platformUrl}${environment.apiBaseUrl}/${contentType || this.params.contentType}/${this.params.storeId}`
+        const url = `${AppSettings.platformUrl}${AppSettings.apiBaseUrl}/${contentType || this.params.contentType}/${this.params.storeId}`
             + `?relativeUrl=${path}`;
         return url;
     }
@@ -35,12 +37,12 @@ export class ApiUrlsService {
     generateUploadUrl(contentType: string = null, pathToUpload: string = null): string {
         const path = encodeURIComponent(pathToUpload || this.params.uploadPath);
         const type = contentType || this.params.contentType;
-        const url = `${environment.platformUrl}${environment.apiBaseUrl}/${type}/${this.params.storeId}?folderUrl=${path}`;
+        const url = `${AppSettings.platformUrl}${AppSettings.apiBaseUrl}/${type}/${this.params.storeId}?folderUrl=${path}`;
         return url;
     }
 
     getStoreUrl(safe = true): SafeUrl|string {
-        const url = `${environment.storeBaseUrl}${environment.storePreviewPath}?preview_mode=${this.getCurrentSessionId()}`;
+        const url = `${AppSettings.storeBaseUrl}${AppSettings.storePreviewPath}?preview_mode=${this.getCurrentSessionId()}`;
         return safe ? this.sanitizer.bypassSecurityTrustResourceUrl(url) : url;
     }
 
@@ -57,13 +59,13 @@ export class ApiUrlsService {
 
     getCategoriesEndPoint(): string {
         // /admin/api/catalog/listentries
-        const url = `${environment.platformUrl}/api/catalog/listentries`;
+        const url = `${AppSettings.platformUrl}/api/catalog/listentries`;
         return url;
     }
 
     getStoresEndPoint(): string {
         // /admin/api/stores/{Electronics}
-        const url = `${environment.platformUrl}/api/stores/${this.params.storeId}`;
+        const url = `${AppSettings.platformUrl}/api/stores/${this.params.storeId}`;
         return url;
     }
 

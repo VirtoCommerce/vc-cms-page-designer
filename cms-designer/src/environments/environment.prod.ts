@@ -1,8 +1,3 @@
 export const environment = {
-  production: true,
-  storeBaseUrl: 'http://dev-cms-vm.westeurope.cloudapp.azure.com/v2/store',
-  storePreviewPath: '/designer-preview',
-  baseUrl: '/v2/designer/',
-  platformUrl: 'http://dev-cms-vm.westeurope.cloudapp.azure.com/v2/admin',
-  apiBaseUrl: '/api/content'
+  production: true
 };

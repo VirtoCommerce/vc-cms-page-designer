@@ -1,5 +1,6 @@
+import { PlatformService } from 'src/app/services/platform.service';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { StoreModule, Action } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
@@ -59,6 +60,13 @@ import { AppHttpInterceptor } from './services/app-http.interceptor';
     providers: [
         CookieService,
         { provide: HTTP_INTERCEPTORS, useClass: AppHttpInterceptor, multi: true },
+        {
+            provide: APP_INITIALIZER,
+            useFactory: (platform: PlatformService) =>
+                () => platform.initSettings(),
+            deps: [PlatformService],
+            multi: true
+        }
     ],
     bootstrap: [AppComponent]
 })

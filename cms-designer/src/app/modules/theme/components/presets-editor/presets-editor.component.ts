@@ -1,7 +1,7 @@
-import { environment } from 'src/environments/environment';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { PresetsModel } from '../../models';
+import { AppSettings } from 'src/app/services/app.settings';
 
 @Component({
     selector: 'app-presets-editor',
@@ -32,7 +32,7 @@ export class PresetsEditorComponent implements OnInit {
 
     getThemeThumb(key: string): string {
         // /en-US/themes/assets/thumb_dark.png
-        return `url(${environment.storeBaseUrl}/themes/assets/thumb_${key.replace(' ', '_')}.png)`;
+        return `url(${AppSettings.storeBaseUrl}/themes/assets/thumb_${key.replace(' ', '_')}.png)`;
     }
 
     selectPreset(name: string) {

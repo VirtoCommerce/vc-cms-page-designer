@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { environment } from 'src/environments/environment';
 import { map } from 'rxjs/operators';
+import { AppSettings } from 'src/app/services/app.settings';
 
 @Injectable({
     providedIn: 'root'
@@ -13,7 +13,7 @@ export class FilesService {
 
     uploadFile(file: File, name: string): Observable<string> {
         const assetEndpoint = 'api/platform/assets';
-        const url = `${environment.platformUrl}/${assetEndpoint}?folderUrl=blogs&name=${name}`;
+        const url = `${AppSettings.platformUrl}/${assetEndpoint}?folderUrl=blogs&name=${name}`;
         const form = new FormData();
 
         form.append('uploadedFile', file, name);

@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { BlockValuesModel } from 'src/app/modules/shared/models';
 
+import { AppSettings } from './app.settings';
+
 @Injectable({
     providedIn: 'root'
 })
@@ -51,7 +53,7 @@ export class PreviewService {
             if (!!target) {
                 const message = { type: type, content: model };
                 try {
-                    target.postMessage(message, environment.storeBaseUrl + environment.storePreviewPath);
+                    target.postMessage(message, AppSettings.storeBaseUrl + AppSettings.storePreviewPath);
                 } catch (error) {
                     console.error('Preview unavailable. Reason: ', error);
                 }

@@ -3,9 +3,11 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ApiUrlsService } from './api-url.service';
 import { PresetsModel } from './../modules/theme/models/presets.model';
-import { PageModel } from '../modules/editor/models';
 import { tap } from 'rxjs/operators';
-import { BlockValuesModel } from '../modules/shared/models';
+import { BlockValuesModel, BlocksSchema } from '../modules/shared/models';
+import { EnvironmentSettings } from '../models/environment.settings';
+
+import { AppSettings } from './app.settings';
 
 @Injectable({
     providedIn: 'root'
@@ -32,6 +34,18 @@ export class PlatformService {
 
     uploadPage(model: BlockValuesModel[]): Observable<any> {
         return this.uploadModel<BlockValuesModel[]>(model);
+    }
+
+    donwloadBlocksSchema(): Observable<BlocksSchema> {
+        return this.http.get<BlocksSchema>('data/blocks_schema.json');
+    }
+
+    initSettings(): Promise<any> {
+        return this.http.get<EnvironmentSettings>('data/settings.json').pipe(
+            tap(x => {
+                Object.assign(AppSettings, x);
+            })
+        ).toPromise();
     }
 
     private downloadModel<T>(contentType: string = null, filepath: string = null): Observable<T> {
