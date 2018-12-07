@@ -37,7 +37,7 @@ export class PlatformService {
     }
 
     donwloadBlocksSchema(): Observable<BlocksSchema> {
-        return this.http.get<BlocksSchema>('data/blocks_schema.json');
+        return this.downloadModel<BlocksSchema>('themes', '/default/config/blocks_schema.json');
     }
 
     initSettings(): Promise<any> {

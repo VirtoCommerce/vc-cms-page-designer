@@ -43,7 +43,7 @@
                         "assets": [
                             "src/favicon.ico",
                             "src/assets",
-                            "src/data"
+                            "src/data/settings.json"
                         ],
                         "styles": [
                             "src/css/reset.css",
@@ -66,8 +66,8 @@
                                     "with": "src/environments/environment.prod.ts"
                                 },
                                 {
-                                    "replace": "src/data/settings.ts",
-                                    "with": "src/data/settings.prod.ts"
+                                    "replace": "src/data/settings.json",
+                                    "with": "src/data/settings.prod.json"
                                 }
                             ],
                             "optimization": true,
@@ -87,8 +87,8 @@
                                     "with": "src/environments/environment.local.ts"
                                 },
                                 {
-                                    "replace": "src/data/settings.ts",
-                                    "with": "src/data/settings.local.ts"
+                                    "replace": "src/data/settings.json",
+                                    "with": "src/data/settings.local.json"
                                 }
                             ],
                             "optimization": true,
@@ -108,8 +108,8 @@
                                     "with": "src/environments/environment.virto.ts"
                                 },
                                 {
-                                    "replace": "src/data/settings.ts",
-                                    "with": "src/data/settings.virto.ts"
+                                    "replace": "src/data/settings.json",
+                                    "with": "src/data/settings.virto.json"
                                 }
                             ],
                             "optimization": true,
