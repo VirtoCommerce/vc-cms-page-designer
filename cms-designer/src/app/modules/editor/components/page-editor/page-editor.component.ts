@@ -60,6 +60,11 @@ export class PageEditorComponent implements OnInit {
             this.model.content[event.currentIndex] = swapWith;
         }
     }
+
+    getBlockIcon(item): string {
+        return this.schema[item.type].icon;
+    }
+
     getBlockName(item): string {
         const schemaItem = this.schema[item.type];
         let result: string = null;

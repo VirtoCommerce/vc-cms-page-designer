@@ -8,7 +8,7 @@
     <div class="pane-cnt">
         <ul class="list">
             <li class="list-item" *ngFor="let item of schema | creatableBlocks">
-                <a class="list-link" (click)="previewItem(item.value)"><i class="list-ico fa fa-{{item.value.type}}"></i><span class="list-t"> {{ item.value.name }} </span></a>
+                <a class="list-link" (click)="previewItem(item.value)"><i class="list-ico" [appIcon]="item.value.icon"></i><span class="list-t"> {{ item.value.name }} </span></a>
                 <a class="list-button" *ngIf="selectedItem == item.value.type && !item.value.inactive"
                                        (click)="selectItem(item.value)">Add</a>
             </li>

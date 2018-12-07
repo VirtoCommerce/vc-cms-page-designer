@@ -4,16 +4,16 @@
             <img src="assets/images/loader.gif" alt="">
         </div>
     </div>
-    <div class="sidebar-main">
+    <div class="sidebar-main" *ngIf="page$ | async as currentPage">
         <!-- <div class="pane pane-index" [class.__disabled]="hideRoot$|async"> -->
         <div class="pane pane-index">
             <div class="pane-head">
-                <div class="pane-t">Boundless</div>
+                <div class="pane-t">{{ currentPage.settings.title }}</div>
             </div>
             <div class="pane-cnt">
                 <app-tabs>
                     <app-tab tabTitle="Sections" active="true">
-                        <app-page-editor [model]="page$ | async" [schema]="blocksSchema$ | async" (selectEvent)="selectPageItem($event)"
+                        <app-page-editor [model]="currentPage" [schema]="blocksSchema$ | async" (selectEvent)="selectPageItem($event)"
                             (orderChangedEvent)="onOrderChanged($event)" (addNewBlockEvent)="setNewBlockMode(true)"></app-page-editor>
                     </app-tab>
                     <app-tab *ngIf="themeSchema$ | async" tabTitle="Theme">

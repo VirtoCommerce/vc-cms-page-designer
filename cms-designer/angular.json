@@ -51,6 +51,7 @@
                             "src/css/project-modules.css",
                             "src/css/cosmetic.css",
                             "src/css/solid.css",
+                            "src/css/regular.css",
                             "src/css/fontawesome.min.css",
                             "src/css/main.css",
                             "src/css/colorpicker.css",
