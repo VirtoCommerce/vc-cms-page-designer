@@ -7,7 +7,8 @@ export enum RootActionTypes {
     SaveDataFail = '[Root] Save Data Fail',
     LoadData = '[Root] Load Data',
     LoadDataSuccess = '[Root] Load Data Success',
-    LoadDataFail = '[Root] Load Data Fail'
+    LoadDataFail = '[Root] Load Data Fail',
+    PreviewLoading = '[Root] Preview Loading'
 }
 
 export class ResetData implements Action {
@@ -42,6 +43,11 @@ export class LoadDataFail implements Action {
     constructor(public payload: string) { }
 }
 
+export class PreviewLoading implements Action {
+    readonly type = RootActionTypes.PreviewLoading;
+
+    constructor(public payload: boolean) { }
+}
 
 export type RootActions = ResetData
     | SaveData
@@ -49,4 +55,5 @@ export type RootActions = ResetData
     | SaveDataFail
     | LoadData
     | LoadDataSuccess
-    | LoadDataFail;
+    | LoadDataFail
+    | PreviewLoading;

@@ -36,6 +36,7 @@ export class SidebarComponent implements OnInit {
     showPresets$: Observable<boolean>;
 
     // combined states
+    isPreviewLoading: Observable<boolean>;
     isLoading$: Observable<boolean>;
     isEditMode$: Observable<boolean>;
     isDirty$: Observable<boolean>;
@@ -149,5 +150,9 @@ export class SidebarComponent implements OnInit {
 
     clearChanges() {
         this.store.dispatch(new rootActions.ResetData());
+    }
+
+    previewLoaded(name: string) {
+        this.store.dispatch(new editorActions.PreviewReady(name));
     }
 }

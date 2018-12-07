@@ -1,9 +1,10 @@
 import { Component, OnInit, Input, ElementRef, ViewChild, Output, EventEmitter } from '@angular/core';
 import { SafeUrl } from '@angular/platform-browser';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 
 import * as editorActions from '../../modules/editor/state/editor.actions';
 import * as fromEditor from '../../modules/editor/state';
+import { Observable } from 'rxjs';
 
 @Component({
     selector: 'app-preview',
@@ -14,23 +15,21 @@ export class PreviewComponent implements OnInit {
 
     @Input() storeUrl: SafeUrl;
     @Input() mode: string;
-    @Input() progress = 0;
-    // @ViewChild('wrapper') wrapperRef: ElementRef;
+    @Input() loading: boolean;
+    @Output() preivewLoaded = new EventEmitter<string>();
 
     isFullScreen = false;
 
-    constructor(private store: Store<fromEditor.State>) { }
+    constructor() { }
 
     ngOnInit() { }
 
     primaryPreviewLoaded() {
-        console.log('primary');
-        this.store.dispatch(new editorActions.PreviewReady('preview1'));
+        this.preivewLoaded.emit('preview1');
     }
 
     secondaryPreviewLoaded() {
-        console.log('secondary');
-        this.store.dispatch(new editorActions.PreviewReady('preview2'));
+        this.preivewLoaded.emit('preview2');
     }
 
     onChangeMode(mode) {

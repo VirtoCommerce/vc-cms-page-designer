@@ -17,10 +17,24 @@
     z-index: 1;
 }
 
+@keyframes loading {
+    from {left: 0;}
+    to {left: 90%;}
+}
+
 #loading-indicator {
     height: 4px;
     background-color: red;
-    width: 0;
+    width: 10%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    animation-name: loading;
+    animation-duration: 4s;
+    animation-direction: normal;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-out;
 }
 
 #preview1, #preview2 {

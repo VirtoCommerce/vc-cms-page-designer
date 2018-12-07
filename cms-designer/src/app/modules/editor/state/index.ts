@@ -43,29 +43,6 @@ export const getPageLoading = createSelector(
     state => state.pageLoading
 );
 
-// export const getCurrentProduct = createSelector(
-//     getEditorFeatureState,
-//     getCurrentProductId,
-//     (state, currentProductId) => {
-//         if (currentProductId === 0) {
-//             return {
-//                 id: 0,
-//                 productName: '',
-//                 productCode: 'New',
-//                 description: '',
-//                 starRating: 0
-//             };
-//         } else {
-//             return currentProductId ? state.products.find(p => p.id === currentProductId) : null;
-//         }
-//     }
-// );
-
-// export const getHideRoot = createSelector(
-//     getEditorFeatureState,
-//     state => state.currentSectionItem != null || state.currentThemeItem != null || state.showNewBlockSelector || state.showPresetsEditor
-// );
-
 export const getError = createSelector(
     getEditorFeatureState,
     state => state.error

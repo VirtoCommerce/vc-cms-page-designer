@@ -8,7 +8,7 @@ export interface State {
     root: fromRoot.RootState;
 }
 
-// const getRootFeatureState = createFeatureSelector<fromRoot.RootState>('root');
+const getRootFeatureState = createFeatureSelector<fromRoot.RootState>('root');
 
 export const getIsLoading = createSelector(
     fromEditor.getPageLoading,
@@ -30,4 +30,9 @@ export const getIsDirty = createSelector(
     fromTheme.getIsDirty,
     fromEditor.getIsDirty,
     (themeDirty, editorDirty) => themeDirty || editorDirty
+);
+
+export const getLoading = createSelector(
+    getRootFeatureState,
+    state => state.loading
 );

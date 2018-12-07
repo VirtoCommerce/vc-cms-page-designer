@@ -9,5 +9,12 @@ const initialState: RootState = {
 };
 
 export function reducer(state = initialState, action: RootActions): RootState {
+    switch (action.type) {
+        case RootActionTypes.PreviewLoading:
+            return {
+                ...state,
+                loading: action.payload
+            };
+    }
     return state;
 }

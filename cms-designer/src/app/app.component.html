@@ -3,7 +3,7 @@
         <app-toolbar></app-toolbar>
     </div>
     <article class="main">
-        <app-preview [storeUrl]="storeUrl" mode="desktop"></app-preview>
-        <app-sidebar></app-sidebar>
+        <app-preview [loading]="previewLoading$ | async" [storeUrl]="storeUrl" mode="desktop" (preivewLoaded)="editor.previewLoaded($event)"></app-preview>
+        <app-sidebar #editor></app-sidebar>
     </article>
 </div>
