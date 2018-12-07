@@ -130,15 +130,14 @@ export class RootEffects {
         switchMap(([_, store]) => of(new editorActions.PreviewReady(store.editor.secondaryFrameId)))
     );
 
-    @Effect()
+    @Effect({ dispatch: false })
     sendPageToStore$ = this.actions$.pipe(
         ofType<editorActions.PreviewReady>(editorActions.EditorActionTypes.PreviewReady),
         withLatestFrom(this.editorStore$, this.themeStore$),
         filter(([action, editorStore, themeStore]) =>
             editorStore.editor.previewIsReady && themeStore.theme.draftUploaded && editorStore.editor.page != null),
-        switchMap(([action, editorStore, themeStore]) => {
+        tap(([action, editorStore, themeStore]) => {
             this.preview.page(editorStore.editor.page.content, editorStore.editor.secondaryFrameId);
-            return of(new editorActions.ToggleFrames());
         })
     );
 
@@ -162,5 +161,12 @@ export class RootEffects {
             }
             return null;
         }),
+    );
+
+    @Effect()
+    receiveSwapMessage$ = fromEvent(window, 'message').pipe(
+        map((event: MessageEvent) => event.data),
+        filter(data => data.type === 'swap'),
+        map(x => new editorActions.ToggleFrames())
     );
 }
