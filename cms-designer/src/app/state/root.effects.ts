@@ -170,7 +170,7 @@ export class RootEffects {
     @Effect()
     receiveSwapMessage$ = fromEvent(window, 'message').pipe(
         map((event: MessageEvent) => event.data),
-        filter(data => data.type === 'swap'),
+        filter(data => data.type === 'render-complete'),
         switchMap(_ => [
             new editorActions.ToggleFrames(),
             new rootActions.PreviewLoading(false)

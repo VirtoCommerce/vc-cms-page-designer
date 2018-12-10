@@ -52,7 +52,7 @@ export class PlatformService {
         const url = this.urls.generateDownloadUrl(contentType, filepath);
         return this.http.get<T>(url).pipe(
             tap(x => {
-                console.log(url, x);
+                // console.log(url, x);
             })
         );
     }

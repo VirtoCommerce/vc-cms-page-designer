@@ -41,7 +41,6 @@ export class DraggableHelperDirective implements OnInit {
     }
 
     private onDragMove(event: PointerEvent): void {
-        console.log('drag move');
         const scrollDelta = this.containerElement.element.nativeElement.getBoundingClientRect().top - this.startRect.top;
         let top = event.clientY - this.startPosition - scrollDelta;
         if (Math.abs(top) < 3 && !this.element) {

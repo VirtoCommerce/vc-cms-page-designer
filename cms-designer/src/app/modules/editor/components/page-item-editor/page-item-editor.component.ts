@@ -17,10 +17,7 @@ export class PageItemEditorComponent implements OnInit {
 
     constructor() { }
 
-    ngOnInit() {
-        console.log(this.model);
-        console.log(this.schema);
-    }
+    ngOnInit() { }
 
     back() {
         // this value will be applyed onto current section in the editor.reducer

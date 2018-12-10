@@ -45,8 +45,6 @@ export class PreviewService {
     }
 
     private send(type: string, model: any, frameId: string) {
-        console.log(type);
-        // return;
         const element = document.getElementById(frameId);
         if (element != null) {
             const target = (<HTMLIFrameElement>element).contentWindow;
