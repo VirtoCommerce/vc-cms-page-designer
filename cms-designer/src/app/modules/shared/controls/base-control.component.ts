@@ -1,8 +1,8 @@
-import { Input } from '@angular/core';
+import { Input, OnInit, AfterContentInit, ElementRef } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { BaseDescriptor, BlockSchema } from '../models';
 
-export class BaseControlComponent<T extends BaseDescriptor> {
+export class BaseControlComponent<T extends BaseDescriptor> implements OnInit, AfterContentInit {
     @Input() descriptor: T;
     @Input() group: FormGroup;
 
@@ -17,4 +17,27 @@ export class BaseControlComponent<T extends BaseDescriptor> {
     setValue(value: any) {
         this.value = value;
     }
+
+    ngOnInit() {
+        this.initContent();
+    }
+
+    ngAfterContentInit(): void {
+        if (this.descriptor.autofocus) {
+            this.setFocus();
+        }
+    }
+
+    setFocus() {
+        const control = this.getFocusableControl();
+        if (control) {
+            control.nativeElement.focus();
+        }
+    }
+
+    getFocusableControl(): ElementRef {
+        return null;
+    }
+
+    initContent() { }
 }
