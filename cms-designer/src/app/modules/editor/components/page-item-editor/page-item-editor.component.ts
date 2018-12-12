@@ -14,6 +14,7 @@ export class PageItemEditorComponent implements OnInit {
     @Output() backEvent = new EventEmitter<BlockValuesModel>();
     @Output() valueChangedEvent = new EventEmitter<BlockValuesModel>();
     @Output() removeBlockEvent = new EventEmitter<BlockValuesModel>();
+    @Output() copyBlockEvent = new EventEmitter<BlockValuesModel>();
 
     constructor() { }
 
@@ -35,5 +36,9 @@ export class PageItemEditorComponent implements OnInit {
 
     removeBlock() {
         this.removeBlockEvent.emit(this.model);
+    }
+
+    copyBlock() {
+        this.copyBlockEvent.emit(this.model);
     }
 }

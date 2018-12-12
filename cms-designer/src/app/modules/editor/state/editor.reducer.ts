@@ -54,16 +54,6 @@ export function reducer(state = initialState, action: EditorActions): EditorStat
                 page: JSON.parse(state.initialPage),
                 dirty: false
             };
-        // case EditorActionTypes.LoadCategoriesFail:
-        //     return {
-        //         ...state,
-        //         error: action.payload
-        //     };
-        // case EditorActionTypes.LoadCategoriesSuccess:
-        //     return {
-        //         ...state,
-        //         categories: action.payload
-        //     };
         case EditorActionTypes.LoadPage:
             return {
                 ...state,

@@ -142,6 +142,11 @@ export class SidebarComponent implements OnInit {
     removeBlock(item: BlockValuesModel) {
         this.store.dispatch(new editorActions.RemovePageItem(item));
     }
+
+    copyBlock(item: BlockValuesModel) {
+        // this.store.dispatch(new editorActions.AddPageItem(item));
+    }
+
     //#endregion
 
     saveChanges() {
