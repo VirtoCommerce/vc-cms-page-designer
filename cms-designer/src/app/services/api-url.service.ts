@@ -41,9 +41,10 @@ export class ApiUrlsService {
         return url;
     }
 
-    getStoreUrl(safe = true): SafeUrl|string {
-        const url = `${AppSettings.storeBaseUrl}${AppSettings.storePreviewPath}?preview_mode=${this.getCurrentSessionId()}`;
-        return safe ? this.sanitizer.bypassSecurityTrustResourceUrl(url) : url;
+    getStoreUrl(layout: string): SafeUrl {
+        const url =
+            `${AppSettings.storeBaseUrl}${AppSettings.storePreviewPath}?preview_mode=${this.getCurrentSessionId()}&layout=${layout}`;
+        return this.sanitizer.bypassSecurityTrustResourceUrl(url);
     }
 
     getCurrentSessionId(): string {
