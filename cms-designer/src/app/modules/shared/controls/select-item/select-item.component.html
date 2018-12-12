@@ -1,6 +1,6 @@
 <label *ngIf="descriptor.label" class="form-label">{{descriptor.label}}</label>
 <div class="form-input __select" *ngIf="descriptor.options">
-    <select (change)="onChange($event.target.value)">
+    <select #control (change)="onChange($event.target.value)">
         <ng-container *ngIf="!groupItems">
             <option *ngFor="let option of descriptor.options; trackBy: getTrackValue" [value]="option.value" [selected]="value === option.value"
                 [innerHTML]="getDisplayValue(option)">

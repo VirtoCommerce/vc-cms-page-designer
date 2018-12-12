@@ -8,15 +8,13 @@ import { ImageControlDescriptor } from '../../models';
     templateUrl: './image-item.component.html',
     styleUrls: ['./image-item.component.scss']
 })
-export class ImageItemComponent extends BaseControlComponent<ImageControlDescriptor> implements OnInit {
+export class ImageItemComponent extends BaseControlComponent<ImageControlDescriptor> {
 
     @ViewChild('fileInput', { read: ElementRef }) fileInput: ElementRef;
 
     constructor(private files: FilesService) {
         super();
     }
-
-    ngOnInit() { }
 
     openFileDialog() {
         this.fileInput.nativeElement.click();

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { BaseControlComponent } from '../base-control.component';
 import { OptionModel, SelectControlDescriptor } from '../../models';
@@ -8,7 +8,9 @@ import { OptionModel, SelectControlDescriptor } from '../../models';
     templateUrl: './select-item.component.html',
     styleUrls: ['./select-item.component.scss']
 })
-export class SelectItemComponent extends BaseControlComponent<SelectControlDescriptor> implements OnInit {
+export class SelectItemComponent extends BaseControlComponent<SelectControlDescriptor> {
+
+    @ViewChild('control') control: ElementRef;
 
     groupItems = false;
     groups: { [key: string]: { label: string; value: string; }[] };
@@ -18,7 +20,7 @@ export class SelectItemComponent extends BaseControlComponent<SelectControlDescr
         super();
     }
 
-    ngOnInit() {
+    initContent() {
         this.groupItems = this.descriptor.options.some(x => !!x.group);
         if (this.groupItems) {
             this.groups = {};
@@ -37,5 +39,9 @@ export class SelectItemComponent extends BaseControlComponent<SelectControlDescr
 
     getTrackValue(option: OptionModel) {
         return option.value;
+    }
+
+    getFocusableControl(): ElementRef {
+        return this.control;
     }
 }

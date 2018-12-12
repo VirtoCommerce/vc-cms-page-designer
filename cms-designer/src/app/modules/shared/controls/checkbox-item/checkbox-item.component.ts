@@ -7,11 +7,9 @@ import { CheckboxControlDescriptor } from '../../models';
     templateUrl: './checkbox-item.component.html',
     styleUrls: ['./checkbox-item.component.scss']
 })
-export class CheckboxItemComponent extends BaseControlComponent<CheckboxControlDescriptor> implements OnInit {
+export class CheckboxItemComponent extends BaseControlComponent<CheckboxControlDescriptor> {
 
     constructor() {
         super();
     }
-
-    ngOnInit() { }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterContentInit, ElementRef } from '@angular/core';
 import { BaseControlComponent } from './../base-control.component';
 import { NumberControlDescriptor } from '../../models';
 
@@ -6,11 +6,15 @@ import { NumberControlDescriptor } from '../../models';
     selector: 'app-number-item',
     templateUrl: './number-item.component.html'
 })
-export class NumberItemComponent extends BaseControlComponent<NumberControlDescriptor> implements OnInit {
+export class NumberItemComponent extends BaseControlComponent<NumberControlDescriptor> {
+
+    @ViewChild('control') control: ElementRef<HTMLInputElement>;
 
     constructor() {
         super();
     }
 
-    ngOnInit() { }
+    getFocusableControl(): ElementRef {
+        return this.control;
+    }
 }

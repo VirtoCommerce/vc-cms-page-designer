@@ -6,7 +6,7 @@ import { TextControlDescriptor } from '../../models';
     selector: 'app-text-item',
     templateUrl: './text-item.component.html'
 })
-export class TextItemComponent extends BaseControlComponent<TextControlDescriptor> implements OnInit {
+export class TextItemComponent extends BaseControlComponent<TextControlDescriptor> {
 
     private editor: any;
 
@@ -37,11 +37,12 @@ export class TextItemComponent extends BaseControlComponent<TextControlDescripto
         super();
     }
 
-    ngOnInit(): void { }
-
     onCreated(editor) {
         this.editor = editor;
         this.editor.root.innerHTML = this.value || '';
+        if (this.descriptor.autofocus) {
+            this.editor.focus();
+        }
     }
 
     registerOnChange(fn: any): void {

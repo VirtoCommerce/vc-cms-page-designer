@@ -7,13 +7,11 @@ import { BaseControlComponent } from './../base-control.component';
     templateUrl: './color-item.component.html',
     styleUrls: ['./color-item.component.scss']
 })
-export class ColorItemComponent extends BaseControlComponent<ColorControlDescriptor> implements OnInit {
+export class ColorItemComponent extends BaseControlComponent<ColorControlDescriptor> {
 
     constructor() {
         super();
     }
-
-    ngOnInit() { }
 
     registerOnChange(fn: any): void {
         this.onChange = value => {

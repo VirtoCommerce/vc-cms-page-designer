@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { BaseControlComponent } from '../base-control.component';
 import { StringControlDescriptor } from '../../models';
 
@@ -7,11 +7,15 @@ import { StringControlDescriptor } from '../../models';
     templateUrl: './string-item.component.html',
     styleUrls: ['./string-item.component.scss']
 })
-export class StringItemComponent extends BaseControlComponent<StringControlDescriptor> implements OnInit {
+export class StringItemComponent extends BaseControlComponent<StringControlDescriptor> {
+
+    @ViewChild('control') control: ElementRef;
 
     constructor() {
         super();
     }
 
-    ngOnInit() { }
+    getFocusableControl(): ElementRef {
+        return this.control;
+    }
 }

@@ -1,6 +1,8 @@
 <label class="form-label">{{descriptor.label}}</label>
 <div class="form-input">
-    <input type="number"
+    <input
+        #control
+        type="number"
         [min]="descriptor.min"
         [max]="descriptor.max"
         [value]="value"

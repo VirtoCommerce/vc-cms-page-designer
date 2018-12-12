@@ -1,6 +1,6 @@
 <label class="form-label">{{descriptor.label}}</label>
 <div class="form-input">
-    <input type="text"
+    <input #control type="text"
         [value]="value"
         (keyup)="onChange($event.target.value)"
         (change)="onChange($event.target.value)"
