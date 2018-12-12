@@ -29,7 +29,7 @@ export class ApiUrlsService {
 
     generateDownloadUrl(contentType: string, filepath: string): string {
         const path = encodeURIComponent(filepath || this.params.path);
-        const url = `${AppSettings.platformUrl}${AppSettings.apiBaseUrl}/${contentType || this.params.contentType}/${this.params.storeId}`
+        const url = `${AppSettings.platformUrl}/api/content/${contentType || this.params.contentType}/${this.params.storeId}`
             + `?relativeUrl=${path}`;
         return url;
     }
@@ -37,7 +37,7 @@ export class ApiUrlsService {
     generateUploadUrl(contentType: string = null, pathToUpload: string = null): string {
         const path = encodeURIComponent(pathToUpload || this.params.uploadPath);
         const type = contentType || this.params.contentType;
-        const url = `${AppSettings.platformUrl}${AppSettings.apiBaseUrl}/${type}/${this.params.storeId}?folderUrl=${path}`;
+        const url = `${AppSettings.platformUrl}/api/content/${type}/${this.params.storeId}?folderUrl=${path}`;
         return url;
     }
 

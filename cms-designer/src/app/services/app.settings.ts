@@ -4,7 +4,5 @@ export let AppSettings: EnvironmentSettings = {
     storeBaseUrl: null,
     storePreviewPath: null,
     baseUrl: null,
-    platformUrl: null,
-    apiBaseUrl: null,
-    themeUrl: null
+    platformUrl: null
 };
