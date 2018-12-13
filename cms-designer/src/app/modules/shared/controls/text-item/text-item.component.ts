@@ -47,9 +47,17 @@ export class TextItemComponent extends BaseControlComponent<TextControlDescripto
 
     registerOnChange(fn: any): void {
         this.onChange = (event) => {
-            if (this.value !== event.html) {
+            const text = this.getText(this.value);
+            if (text !== event.html.trim() && text !== event.text.trim()) {
                 fn(event.html);
             }
         };
+    }
+
+    private getText(value: string): string {
+        if (!!value) {
+            return value.trim();
+        }
+        return value;
     }
 }

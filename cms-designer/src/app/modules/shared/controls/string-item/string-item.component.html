@@ -2,7 +2,5 @@
 <div class="form-input">
     <input #control type="text"
         [value]="value"
-        (keyup)="onChange($event.target.value)"
-        (change)="onChange($event.target.value)"
-        (blur)="onTouched($event.target.value)">
+        (keyup)="onChange($event.target.value)">
 </div>

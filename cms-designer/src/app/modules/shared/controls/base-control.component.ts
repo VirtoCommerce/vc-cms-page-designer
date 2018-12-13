@@ -24,7 +24,12 @@ export class BaseControlComponent<T extends BaseDescriptor> implements OnInit, A
 
     ngAfterContentInit(): void {
         if (this.descriptor.autofocus) {
-            this.setFocus();
+            // child must not change the value of parent properties
+            // but focus change the parent form (un)touched property indirectly
+            // to avoid the ExpressionChangedAfterItHasBeenCheckedError focus should be changed outside the digest cycle
+            setTimeout(() => {
+                this.setFocus();
+            });
         }
     }
 

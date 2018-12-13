@@ -6,6 +6,7 @@ import { ControlDescriptor, CollectionControlDescriptor } from '../models';
     providedIn: 'root'
 })
 export class FormHelper {
+
     generateForm(model: any, keys: ControlDescriptor[]): FormGroup {
         const result = new FormGroup({});
         keys.filter(x => !!x.id).forEach(descriptor => {
@@ -22,6 +23,5 @@ export class FormHelper {
             }
         });
         return result;
-
     }
 }

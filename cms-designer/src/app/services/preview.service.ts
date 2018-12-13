@@ -27,8 +27,8 @@ export class PreviewService {
         this.send('move', { currentIndex, newIndex }, frameId);
     }
 
-    scrollTo(block: BlockValuesModel, selectOnly: boolean, frameId: string) {
-        this.send('scrollTo', { id: block.id, selectOnly }, frameId);
+    scrollTo(block: BlockValuesModel, frameId: string) {
+        this.send('scrollTo', { id: block.id }, frameId);
     }
 
     reload(frameId: string) {

@@ -89,8 +89,9 @@ export class RootEffects {
     @Effect({ dispatch: false })
     scrollPreviewToObject$ = this.actions$.pipe(
         ofType<editorActions.SelectPageItem>(editorActions.EditorActionTypes.SelectPageItem),
+        filter(x => x.scrollTo),
         withLatestFrom(this.editorStore$),
-        tap(([action, store]) => this.preview.scrollTo(action.payload, !action.scrollTo, store.editor.primaryFrameId))
+        tap(([action, store]) => this.preview.scrollTo(action.payload, store.editor.primaryFrameId))
     );
 
     @Effect({ dispatch: false })

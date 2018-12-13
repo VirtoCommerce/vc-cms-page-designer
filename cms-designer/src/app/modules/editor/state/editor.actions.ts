@@ -10,6 +10,7 @@ export enum EditorActionTypes {
     AddPageItem = '[Page] Add Page Item',
     BlockTypesLoaded = '[Page] Block Types Loaded',
     ClearPageChanges = '[Page] Clear Page Changes',
+    CompleteEditPageItem = '[Page] Complete Edit Page Item',
     CopyPageItem = '[Page] Copy Page Item',
     CreatePageItem = '[Page] Create Page Item',
     LoadBlockTypes = '[Page] Load Block Types',
@@ -48,6 +49,10 @@ export class BlockTypesLoaded implements Action {
 
 export class ClearPageChanges implements Action {
     readonly type = EditorActionTypes.ClearPageChanges;
+}
+
+export class CompleteEditPageItem implements Action {
+    readonly type = EditorActionTypes.CompleteEditPageItem;
 }
 
 export class CopyPageItem implements Action {
@@ -171,6 +176,7 @@ export type EditorActions = LoadPage
     | AddPageItem
     | BlockTypesLoaded
     | ClearPageChanges
+    | CompleteEditPageItem
     | CopyPageItem
     | CreatePageItem
     | LoadBlockTypes

@@ -16,6 +16,8 @@ export class PageItemEditorComponent implements OnInit {
     @Output() removeBlockEvent = new EventEmitter<BlockValuesModel>();
     @Output() copyBlockEvent = new EventEmitter<BlockValuesModel>();
 
+    private editedModel: BlockValuesModel;
+
     constructor() { }
 
     ngOnInit() { }
@@ -23,15 +25,15 @@ export class PageItemEditorComponent implements OnInit {
     back() {
         // this value will be applyed onto current section in the editor.reducer
         // therefore i should not apply the uneditable properties
-        this.backEvent.emit(this.model);
+        this.backEvent.emit(this.editedModel);
     }
 
-    modelChanged() {
-        const modelToPreview = (!this.schema.static) ? this.model : {
-            ...this.model,
+    modelChanged(model) {
+        this.editedModel = (!this.schema.static) ? model : {
+            ...model,
             type: 'settings'
         };
-        this.valueChangedEvent.emit(modelToPreview);
+        this.valueChangedEvent.emit(this.editedModel);
     }
 
     removeBlock() {

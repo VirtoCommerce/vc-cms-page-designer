@@ -119,8 +119,8 @@ export class SidebarComponent implements OnInit {
         }
     }
 
-    completeEditBlock(event: BlockValuesModel) {
-        this.store.dispatch(new editorActions.UpdatePageItem(event));
+    completeEditBlock() {
+        this.store.dispatch(new editorActions.CompleteEditPageItem());
     }
 
     previewBlockType(type: BlockSchema) {
@@ -128,6 +128,7 @@ export class SidebarComponent implements OnInit {
     }
 
     updateBlockPreview(item: BlockValuesModel) {
+        this.store.dispatch(new editorActions.UpdatePageItem(item));
         this.store.dispatch(new editorActions.UpdateBlockPreview(item));
     }
 

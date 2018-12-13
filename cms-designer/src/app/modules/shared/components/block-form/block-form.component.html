@@ -1,4 +1,4 @@
-<div>
+<div *ngIf="form">
     <form [formGroup]="form">
         <app-elements-form [group]="form" [descriptors]="schema.settings"></app-elements-form>
     </form>

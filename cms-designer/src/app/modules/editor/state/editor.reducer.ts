@@ -54,6 +54,11 @@ export function reducer(state = initialState, action: EditorActions): EditorStat
                 page: JSON.parse(state.initialPage),
                 dirty: false
             };
+        case EditorActionTypes.CompleteEditPageItem:
+            return {
+                ...state,
+                currentSectionItem: null
+            };
         case EditorActionTypes.LoadPage:
             return {
                 ...state,
@@ -138,7 +143,6 @@ export function reducer(state = initialState, action: EditorActions): EditorStat
             }
             return {
                 ...state,
-                currentSectionItem: null,
                 dirty: true
             };
     }
