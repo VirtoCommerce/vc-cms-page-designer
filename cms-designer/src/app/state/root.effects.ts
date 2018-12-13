@@ -90,7 +90,7 @@ export class RootEffects {
     scrollPreviewToObject$ = this.actions$.pipe(
         ofType<editorActions.SelectPageItem>(editorActions.EditorActionTypes.SelectPageItem),
         withLatestFrom(this.editorStore$),
-        tap(([action, store]) => this.preview.scrollTo(action.payload, store.editor.primaryFrameId))
+        tap(([action, store]) => this.preview.scrollTo(action.payload, !action.scrollTo, store.editor.primaryFrameId))
     );
 
     @Effect({ dispatch: false })
@@ -161,7 +161,7 @@ export class RootEffects {
         map(([data, _, editorStore]) => {
             const item = editorStore.editor.page.content.find(x => x.id === data.id);
             if (item) {
-                return new editorActions.SelectPageItem(item);
+                return new editorActions.SelectPageItem(item, false);
             }
             return null;
         }),

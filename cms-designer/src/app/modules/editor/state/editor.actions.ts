@@ -142,7 +142,7 @@ export class SavePageSuccess implements Action {
 export class SelectPageItem implements Action {
     readonly type = EditorActionTypes.SelectPageItem;
 
-    constructor(public payload: BlockValuesModel) { }
+    constructor(public payload: BlockValuesModel, public scrollTo: boolean = true) { }
 }
 
 export class ToggleFrames implements Action {
