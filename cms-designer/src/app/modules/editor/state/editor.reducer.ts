@@ -1,7 +1,6 @@
 import { EditorActionTypes, EditorActions } from './editor.actions';
 import { BlocksSchema, BlockValuesModel } from 'src/app/modules/shared/models';
 import { PageModel } from '../models';
-import { typeSourceSpan } from '@angular/compiler';
 
 export interface EditorState {
     showNewBlockSelector: boolean;
@@ -54,6 +53,15 @@ export function reducer(state = initialState, action: EditorActions): EditorStat
                 page: JSON.parse(state.initialPage),
                 dirty: false
             };
+        case EditorActionTypes.ClonePageItem: {
+            const page = state.page;
+            const index = page.content.indexOf(action.payload.oldBlock);
+            page.content.splice(index + 1, 0, action.payload.newBlock);
+            return {
+                ...state,
+                dirty: true
+            };
+        }
         case EditorActionTypes.CompleteEditPageItem:
             return {
                 ...state,
@@ -78,6 +86,15 @@ export function reducer(state = initialState, action: EditorActions): EditorStat
                 pageLoading: false,
                 dirty: false
             };
+        case EditorActionTypes.MoveBlock: {
+            const page = state.page;
+            const block = page.content.splice(action.payload.oldIndex, 1)[0];
+            const acc = action.payload.oldIndex >= action.payload.newIndex ? 0 : 1;
+            page.content.splice(action.payload.newIndex - acc, 0, block);
+            return {
+                ...state
+            };
+        }
         case EditorActionTypes.OrderChanged:
             return {
                 ...state,
@@ -88,7 +105,7 @@ export function reducer(state = initialState, action: EditorActions): EditorStat
                 ...state,
                 previewIsReady: true
             };
-        case EditorActionTypes.RemovePageItem:
+        case EditorActionTypes.RemovePageItem: {
             const index = state.page.content.indexOf(action.payload);
             if (index !== -1) {
                 state.page.content.splice(index, 1);
@@ -98,6 +115,7 @@ export function reducer(state = initialState, action: EditorActions): EditorStat
                 currentSectionItem: null,
                 dirty: true
             };
+        }
         case EditorActionTypes.SavePage:
             return {
                 ...state,

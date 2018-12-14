@@ -11,28 +11,36 @@ export class PreviewService {
 
     constructor() { }
 
-    page(page: BlockValuesModel[], frameId: string) {
-        this.send('page', page, frameId);
-    }
-
     addOrUpdateBlock(block: BlockValuesModel, frameId: string) {
         this.send('addOrUpdate', block, frameId);
-    }
-
-    removeBlock(block: BlockValuesModel, frameId: string) {
-        this.send('remove', block.id, frameId);
     }
 
     changeOrder(currentIndex: number, newIndex: number, frameId: string) {
         this.send('move', { currentIndex, newIndex }, frameId);
     }
 
-    scrollTo(block: BlockValuesModel, frameId: string) {
-        this.send('scrollTo', { id: block.id }, frameId);
+    cloneBlock(source: number, destination: number, frameId: string) {
+        this.send('clone', { source, destination }, frameId);
+    }
+
+    page(page: BlockValuesModel[], frameId: string) {
+        this.send('page', page, frameId);
     }
 
     reload(frameId: string) {
         this.send('settings', {}, frameId);
+    }
+
+    removeBlock(block: BlockValuesModel, frameId: string) {
+        this.send('remove', block.id, frameId);
+    }
+
+    selectBlock(blockId: number, frameId: string) {
+        this.send('select', { id: blockId }, frameId);
+    }
+
+    scrollTo(block: BlockValuesModel, frameId: string) {
+        this.send('scrollTo', { id: block.id }, frameId);
     }
 
     toggleFrames(primaryId: string, secondaryId: string) {

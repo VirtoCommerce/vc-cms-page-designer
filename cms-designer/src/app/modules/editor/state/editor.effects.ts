@@ -1,5 +1,5 @@
 import { BlockValuesModel } from './../../shared/models/block-values.model';
-import { map } from 'rxjs/operators';
+import { map, tap, flatMap } from 'rxjs/operators';
 // import { CatalogService } from './../services/catalog.service';
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
@@ -28,6 +28,63 @@ export class EditorEffects {
         private actions$: Actions, private store$: Store<fromEditor.State>) { }
 
     @Effect()
+    convertPageTypeToPreviewSection$ = this.actions$.pipe(
+        ofType<editorActions.PreviewPageItemOfType>(editorActions.EditorActionTypes.PreviewPageItemOfType),
+        map(action => action.payload),
+        map(blockSchema => {
+            if (!!blockSchema) {
+                const result = <BlockValuesModel>{};
+                blockSchema.settings.forEach(x => result[x.id] = x['default'] || null);
+                result.type = blockSchema.type;
+                return result;
+            }
+            return null;
+        }),
+        mergeMap(item =>
+            of(new editorActions.PreviewPageItem(item))
+        )
+    );
+
+    @Effect()
+    copyBlock$ = this.actions$.pipe(
+        ofType<editorActions.CopyPageItem>(editorActions.EditorActionTypes.CopyPageItem),
+        withLatestFrom(this.store$.select(state => state.editor.page)),
+        flatMap(([action, page]) => {
+            const block = { ...action.payload };
+            block.id = page.content.reduce((v: number, b: BlockValuesModel) => Math.max(<number>b.id, v), 0) + 1;
+            return [
+                new editorActions.ClonePageItem({ oldBlock: action.payload, newBlock: block }),
+                new editorActions.SelectPageItem(block, true)
+            ];
+        })
+    );
+
+    @Effect()
+    createPageItemModelByType$ = this.actions$.pipe(
+        ofType(editorActions.EditorActionTypes.CreatePageItem),
+        map((action: editorActions.CreatePageItem) => action.payload),
+        map(blockSchema => {
+            return <BlockValuesModel>{
+                type: blockSchema.type
+            };
+        }),
+        mergeMap(item =>
+            of(new editorActions.AddPageItem(item))
+        )
+    );
+
+    @Effect()
+    loadBlockTypes$: Observable<Action> = this.actions$.pipe(
+        ofType(editorActions.EditorActionTypes.LoadBlockTypes),
+        switchMap(_ =>
+            this.blocks.load().pipe(
+                map(result => new editorActions.BlockTypesLoaded(result)),
+                catchError(err => of(new editorActions.LoadPageFail(err)))
+            )
+        )
+    );
+
+    @Effect()
     loadPage$: Observable<Action> = this.actions$.pipe(
         ofType<editorActions.LoadPage>(editorActions.EditorActionTypes.LoadPage),
         switchMap(_ =>
@@ -45,17 +102,6 @@ export class EditorEffects {
         )
     );
 
-    // @Effect()
-    // loadCategories$: Observable<Action> = this.actions$.pipe(
-    //     ofType<editorActions.LoadCategories>(editorActions.EditorActionTypes.LoadCategories),
-    //     switchMap(_ =>
-    //         this.catalog.getCategories().pipe(
-    //             map(x => new editorActions.LoadCategoriesSuccess(x)),
-    //             catchError(err => of(new editorActions.LoadPageFail(err)))
-    //         )
-    //     )
-    // );
-
     @Effect()
     uploadPage$: Observable<Action> = this.actions$.pipe(
         ofType<editorActions.SavePage>(editorActions.EditorActionTypes.SavePage),
@@ -69,48 +115,14 @@ export class EditorEffects {
         })
     );
 
-    @Effect()
-    loadBlockTypes$: Observable<Action> = this.actions$.pipe(
-        ofType(editorActions.EditorActionTypes.LoadBlockTypes),
-        switchMap(_ =>
-            this.blocks.load().pipe(
-                map(result => new editorActions.BlockTypesLoaded(result)),
-                catchError(err => of(new editorActions.LoadPageFail(err)))
-            )
-        )
-    );
-
-    @Effect()
-    createPageItemModelByType$ = this.actions$.pipe(
-        ofType(editorActions.EditorActionTypes.CreatePageItem),
-        map((action: editorActions.CreatePageItem) => action.payload),
-        // withLatestFrom(this.store$.select(state => state.editor.blocksSchema)),
-        // map(([blockSchema, schema]) => {
-        map(blockSchema => {
-            return <BlockValuesModel>{
-                type: blockSchema.type
-            };
-        }),
-        mergeMap(item =>
-            of(new editorActions.AddPageItem(item))
-        )
-    );
-
-    @Effect()
-    convertPageTypeToPreviewSection$ = this.actions$.pipe(
-        ofType<editorActions.PreviewPageItemOfType>(editorActions.EditorActionTypes.PreviewPageItemOfType),
-        map(action => action.payload),
-        map(blockSchema => {
-            if (!!blockSchema) {
-                const result = <BlockValuesModel>{};
-                blockSchema.settings.forEach(x => result[x.id] = x['default'] || null);
-                result.type = blockSchema.type;
-                return result;
-            }
-            return null;
-        }),
-        mergeMap(item =>
-            of(new editorActions.PreviewPageItem(item))
-        )
-    );
+    // @Effect()
+    // loadCategories$: Observable<Action> = this.actions$.pipe(
+    //     ofType<editorActions.LoadCategories>(editorActions.EditorActionTypes.LoadCategories),
+    //     switchMap(_ =>
+    //         this.catalog.getCategories().pipe(
+    //             map(x => new editorActions.LoadCategoriesSuccess(x)),
+    //             catchError(err => of(new editorActions.LoadPageFail(err)))
+    //         )
+    //     )
+    // );
 }

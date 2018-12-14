@@ -10,6 +10,7 @@ export enum EditorActionTypes {
     AddPageItem = '[Page] Add Page Item',
     BlockTypesLoaded = '[Page] Block Types Loaded',
     ClearPageChanges = '[Page] Clear Page Changes',
+    ClonePageItem = '[Page] Clone Page Item',
     CompleteEditPageItem = '[Page] Complete Edit Page Item',
     CopyPageItem = '[Page] Copy Page Item',
     CreatePageItem = '[Page] Create Page Item',
@@ -20,6 +21,7 @@ export enum EditorActionTypes {
     LoadPage = '[Page] Load Page',
     LoadPageFail = '[Page] Load Page Fail',
     LoadPageSuccess = '[Page] Load Page Success',
+    MoveBlock = '[Page] Move Block',
     OrderChanged = '[Page] Order Changed',
     PreviewPageItem = '[Page] Preview Page Item',
     PreviewPageItemOfType = '[Page] Preview Page Item Of Type',
@@ -49,6 +51,12 @@ export class BlockTypesLoaded implements Action {
 
 export class ClearPageChanges implements Action {
     readonly type = EditorActionTypes.ClearPageChanges;
+}
+
+export class ClonePageItem implements Action {
+    readonly type = EditorActionTypes.ClonePageItem;
+
+    constructor(public payload: { oldBlock: BlockValuesModel, newBlock: BlockValuesModel }) { }
 }
 
 export class CompleteEditPageItem implements Action {
@@ -98,6 +106,11 @@ export class LoadPageFail implements Action {
 export class LoadPageSuccess implements Action {
     readonly type = EditorActionTypes.LoadPageSuccess;
     constructor(public payload: PageModel) { }
+}
+
+export class MoveBlock implements Action {
+    readonly type = EditorActionTypes.MoveBlock;
+    constructor(public payload: { oldIndex: number, newIndex: number }) { }
 }
 
 export class OrderChanged implements Action {
@@ -176,6 +189,7 @@ export type EditorActions = LoadPage
     | AddPageItem
     | BlockTypesLoaded
     | ClearPageChanges
+    | ClonePageItem
     | CompleteEditPageItem
     | CopyPageItem
     | CreatePageItem
@@ -186,6 +200,7 @@ export type EditorActions = LoadPage
     | LoadPage
     | LoadPageSuccess
     | LoadPageFail
+    | MoveBlock
     | OrderChanged
     | PreviewPageItem
     | PreviewPageItemOfType

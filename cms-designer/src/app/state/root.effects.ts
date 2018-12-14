@@ -89,9 +89,22 @@ export class RootEffects {
     @Effect({ dispatch: false })
     scrollPreviewToObject$ = this.actions$.pipe(
         ofType<editorActions.SelectPageItem>(editorActions.EditorActionTypes.SelectPageItem),
-        filter(x => x.scrollTo),
         withLatestFrom(this.editorStore$),
-        tap(([action, store]) => this.preview.scrollTo(action.payload, store.editor.primaryFrameId))
+        tap(([action, store]) => {
+            this.preview.selectBlock(<number>action.payload.id, store.editor.primaryFrameId);
+            if (action.scrollTo) {
+                this.preview.scrollTo(action.payload, store.editor.primaryFrameId);
+            }
+        })
+    );
+
+    @Effect({ dispatch: false })
+    deselectObject$ = this.actions$.pipe(
+        ofType<editorActions.CompleteEditPageItem>(editorActions.EditorActionTypes.CompleteEditPageItem),
+        withLatestFrom(this.editorStore$),
+        tap(([action, store]) => {
+            this.preview.selectBlock(0, store.editor.primaryFrameId);
+        })
     );
 
     @Effect({ dispatch: false })
@@ -161,10 +174,16 @@ export class RootEffects {
         filter(([_, themeStore]) => !themeStore.theme.selectedSchemaItem && !themeStore.theme.showPresetsEditor),
         map(([data, _, editorStore]) => {
             const item = editorStore.editor.page.content.find(x => x.id === data.id);
-            if (item) {
-                return new editorActions.SelectPageItem(item, false);
-            }
-            return null;
+            return new editorActions.SelectPageItem(item, false);
+        }),
+    );
+
+    @Effect()
+    reorderBlocksMessage$ = fromEvent(window, 'message').pipe(
+        map((event: MessageEvent) => event.data),
+        filter(data => data.type === 'move'),
+        map(data => {
+            return new editorActions.MoveBlock({ oldIndex: data.oldIndex, newIndex: data.newIndex });
         }),
     );
 
@@ -176,5 +195,14 @@ export class RootEffects {
             new editorActions.ToggleFrames(),
             new rootActions.PreviewLoading(false)
         ])
+    );
+
+    @Effect({ dispatch: false })
+    sendCloneToPreview$ = this.actions$.pipe(
+        ofType<editorActions.ClonePageItem>(editorActions.EditorActionTypes.ClonePageItem),
+        withLatestFrom(this.editorStore$),
+        tap(([action, store]) => {
+            this.preview.cloneBlock(<number>action.payload.oldBlock.id, <number>action.payload.newBlock.id, store.editor.primaryFrameId);
+        })
     );
 }

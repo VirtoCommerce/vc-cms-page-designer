@@ -145,7 +145,7 @@ export class SidebarComponent implements OnInit {
     }
 
     copyBlock(item: BlockValuesModel) {
-        // this.store.dispatch(new editorActions.AddPageItem(item));
+        this.store.dispatch(new editorActions.CopyPageItem(item));
     }
 
     //#endregion
