@@ -165,6 +165,9 @@ export class SelectPageItem implements Action {
 
 export class ToggleFrames implements Action {
     readonly type = EditorActionTypes.ToggleFrames;
+
+    // payload is an id of frame which was loaded and should be displayed
+    constructor (public payload: string) { }
 }
 
 export class ToggleNewBlockPane implements Action {

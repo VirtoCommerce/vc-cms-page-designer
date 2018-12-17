@@ -44,12 +44,16 @@ export class PreviewService {
     }
 
     toggleFrames(primaryId: string, secondaryId: string) {
-        const primary = document.getElementById(primaryId);
-        const secondary = document.getElementById(secondaryId);
-        secondary.style.zIndex = '1';
-        secondary.style.display = 'block';
-        primary.style.zIndex = '0';
-        primary.style.display = 'none';
+        if (!!primaryId) {
+            const primary = document.getElementById(primaryId);
+            primary.style.zIndex = '0';
+            primary.style.display = 'none';
+        }
+        if (!!secondaryId) {
+            const secondary = document.getElementById(secondaryId);
+            secondary.style.zIndex = '1';
+            secondary.style.display = 'block';
+        }
     }
 
     private send(type: string, model: any, frameId: string) {

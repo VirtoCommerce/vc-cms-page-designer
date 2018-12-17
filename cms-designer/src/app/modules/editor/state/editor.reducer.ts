@@ -10,11 +10,12 @@ export interface EditorState {
     initialPage: string;
     page: PageModel;
     blocksSchema: BlocksSchema;
-    previewIsReady: boolean;
     // categories: CategoryModel[];
     dirty: boolean;
     primaryFrameId: string;
     secondaryFrameId: string;
+    primaryLoaded: boolean;
+    secondaryLoaded: boolean;
 }
 
 const initialState: EditorState = {
@@ -25,11 +26,12 @@ const initialState: EditorState = {
     initialPage: null,
     page: null,
     blocksSchema: null,
-    previewIsReady: false,
     // categories: [],
     dirty: true,
-    primaryFrameId: 'preview1',
-    secondaryFrameId: 'preview2'
+    primaryFrameId: null,
+    secondaryFrameId: null,
+    primaryLoaded: false,
+    secondaryLoaded: false
 };
 
 export function reducer(state = initialState, action: EditorActions): EditorState {
@@ -100,11 +102,21 @@ export function reducer(state = initialState, action: EditorActions): EditorStat
                 ...state,
                 dirty: true
             };
-        case EditorActionTypes.PreviewReady:
+        case EditorActionTypes.PreviewReady: {
+            // occurs when each iframe is loaded
+            const newValues: Partial<EditorState> = {};
+            if (!state.primaryFrameId) {
+                newValues.primaryFrameId = action.payload;
+                newValues.primaryLoaded = true;
+            } else if (!state.secondaryFrameId) {
+                newValues.secondaryFrameId = action.payload;
+                newValues.secondaryLoaded = true;
+            }
             return {
                 ...state,
-                previewIsReady: true
+                ...newValues
             };
+        }
         case EditorActionTypes.RemovePageItem: {
             const index = state.page.content.indexOf(action.payload);
             if (index !== -1) {
@@ -140,12 +152,16 @@ export function reducer(state = initialState, action: EditorActions): EditorStat
                 showNewBlockSelector: action.payload ? false : state.showNewBlockSelector,
                 currentSectionItem: action.payload
             };
-        case EditorActionTypes.ToggleFrames:
+        case EditorActionTypes.ToggleFrames: {
+            // occurs when page in preview rendered
+            const newValues: Partial<EditorState> = {};
+            newValues.primaryFrameId = state.secondaryFrameId;
+            newValues.secondaryFrameId = state.primaryFrameId;
             return {
                 ...state,
-                primaryFrameId: state.secondaryFrameId,
-                secondaryFrameId: state.primaryFrameId
+                ...newValues
             };
+        }
         case EditorActionTypes.ToggleNewBlockPane:
             return {
                 ...state,

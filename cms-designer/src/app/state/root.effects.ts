@@ -152,9 +152,12 @@ export class RootEffects {
         ofType<editorActions.PreviewReady>(editorActions.EditorActionTypes.PreviewReady),
         withLatestFrom(this.editorStore$, this.themeStore$),
         filter(([action, editorStore, themeStore]) =>
-            editorStore.editor.previewIsReady && themeStore.theme.draftUploaded && editorStore.editor.page != null),
+            editorStore.editor.primaryLoaded
+            && editorStore.editor.secondaryLoaded
+            && themeStore.theme.draftUploaded
+            && editorStore.editor.page != null),
         switchMap(([action, editorStore, themeStore]) => {
-            this.preview.page(editorStore.editor.page.content, editorStore.editor.secondaryFrameId);
+            this.preview.page(editorStore.editor.page.content, action.payload);
             return of(new rootActions.PreviewLoading(true));
         })
     );
@@ -163,7 +166,11 @@ export class RootEffects {
     toggleFrames$ = this.actions$.pipe(
         ofType(editorActions.EditorActionTypes.ToggleFrames),
         withLatestFrom(this.editorStore$),
-        tap(([_, store]) => this.preview.toggleFrames(store.editor.secondaryFrameId, store.editor.primaryFrameId))
+        map(([_, store]): [string, string] => [
+            store.editor.secondaryFrameId || store.editor.primaryFrameId,
+            store.editor.primaryFrameId
+        ]),
+        tap(([primary, secondary]) => this.preview.toggleFrames(primary, secondary))
     );
 
     @Effect()
@@ -189,10 +196,16 @@ export class RootEffects {
 
     @Effect()
     receiveSwapMessage$ = fromEvent(window, 'message').pipe(
-        map((event: MessageEvent) => event.data),
-        filter(data => data.type === 'render-complete'),
-        switchMap(_ => [
-            new editorActions.ToggleFrames(),
+        filter((event: MessageEvent) => event.data.type === 'render-complete'),
+        withLatestFrom(this.editorStore$),
+        map(([event, editorStore]): [Window, Window, fromEditor.State] => [
+            (<HTMLIFrameElement>document.getElementById(editorStore.editor.primaryFrameId)).contentWindow,
+            <Window>event.source,
+            editorStore
+        ]),
+        map(([primary, source, state]) => primary === source ? state.editor.primaryFrameId : state.editor.secondaryFrameId),
+        switchMap(loadedFrameId => [
+            new editorActions.ToggleFrames(loadedFrameId),
             new rootActions.PreviewLoading(false)
         ])
     );
