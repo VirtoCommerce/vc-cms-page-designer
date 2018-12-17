@@ -44,6 +44,7 @@ export class PreviewService {
     }
 
     toggleFrames(primaryId: string, secondaryId: string) {
+        console.log('toggle', primaryId, secondaryId);
         if (!!primaryId) {
             const primary = document.getElementById(primaryId);
             primary.style.zIndex = '0';
@@ -63,6 +64,7 @@ export class PreviewService {
             if (!!target) {
                 const message = { type: type, content: model };
                 try {
+                    console.log(frameId, message);
                     target.postMessage(message, AppSettings.storeBaseUrl + AppSettings.storePreviewPath);
                 } catch (error) {
                     console.error('Preview unavailable. Reason: ', error);

@@ -1,4 +1,3 @@
-import { UpdateDraftSuccess } from './../modules/theme/state/theme.actions';
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Action, Store } from '@ngrx/store';
@@ -79,9 +78,6 @@ export class RootEffects {
         ofType<editorActions.AddPageItem>(editorActions.EditorActionTypes.AddPageItem),
         withLatestFrom(this.editorStore$),
         tap(([action, store]) => {
-            if (!action.payload.id) {
-                action.payload.id = Math.max(...store.editor.page.content.map(v => <number>v.id || 0)) + 1;
-            }
             this.preview.addOrUpdateBlock(action.payload, store.editor.primaryFrameId);
         })
     );
@@ -89,6 +85,7 @@ export class RootEffects {
     @Effect({ dispatch: false })
     scrollPreviewToObject$ = this.actions$.pipe(
         ofType<editorActions.SelectPageItem>(editorActions.EditorActionTypes.SelectPageItem),
+        filter(action => !!action.payload),
         withLatestFrom(this.editorStore$),
         tap(([action, store]) => {
             this.preview.selectBlock(<number>action.payload.id, store.editor.primaryFrameId);

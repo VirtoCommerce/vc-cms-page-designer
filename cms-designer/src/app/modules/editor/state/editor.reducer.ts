@@ -36,14 +36,19 @@ const initialState: EditorState = {
 
 export function reducer(state = initialState, action: EditorActions): EditorState {
     switch (action.type) {
-        case EditorActionTypes.AddPageItem:
-            state.page.content.push(action.payload);
+        case EditorActionTypes.AddPageItem: {
+            const block = action.payload;
+            if (!block.id) {
+                block.id = Math.max(...state.page.content.map(v => <number>v.id || 0)) + 1;
+            }
+            state.page.content.push(block);
             return {
                 ...state,
                 showNewBlockSelector: false,
-                currentSectionItem: action.payload,
+                currentSectionItem: block,
                 dirty: true
             };
+        }
         case EditorActionTypes.BlockTypesLoaded:
             return {
                 ...state,

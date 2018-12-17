@@ -41,13 +41,13 @@ export class TextItemComponent extends BaseControlComponent<TextControlDescripto
     onCreated(editor) {
         this.editor = editor;
         this.editor.root.innerHTML = this.value || '';
+        this.lastValue = this.value || '';
         if (this.descriptor.autofocus) {
             // get text out of current context, because of editor need time to process html of current value
             setTimeout(() => {
                 const position = this.editor.getText().length;
                 this.editor.setSelection(position, 0, 'silent');
                 this.editor.focus();
-                this.lastValue = this.editor.getText();
             });
         }
     }
