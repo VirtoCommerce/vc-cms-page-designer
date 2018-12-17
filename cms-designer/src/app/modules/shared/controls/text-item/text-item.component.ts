@@ -9,6 +9,7 @@ import { TextControlDescriptor } from '../../models';
 export class TextItemComponent extends BaseControlComponent<TextControlDescriptor> {
 
     private editor: any;
+    private lastValue: string;
 
     editorConfig = {
         toolbar: [
@@ -46,17 +47,23 @@ export class TextItemComponent extends BaseControlComponent<TextControlDescripto
                 const position = this.editor.getText().length;
                 this.editor.setSelection(position, 0, 'silent');
                 this.editor.focus();
+                this.lastValue = this.editor.getText();
             });
         }
     }
 
     registerOnChange(fn: any): void {
         this.onChange = (event) => {
-            const text = this.getText(this.value);
-            if (text !== event.html.trim() && text !== event.text.trim()) {
+            if (this.isTextChanged(event)) {
+                this.lastValue = event.html;
                 fn(event.html);
             }
         };
+    }
+
+    private isTextChanged(event: any): boolean {
+        const text = this.getText(this.lastValue);
+        return text !== this.getText(event.html) && text !== this.getText(event.text);
     }
 
     private getText(value: string): string {
