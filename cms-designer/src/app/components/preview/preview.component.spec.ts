@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import { PreviewComponent } from './preview.component';
 import { PreviewModeButtonComponent } from './preview-mode-button/preview-mode-button.component';
 
-import * as editorActions from '../../modules/editor/state/editor.actions';
+import * as rootActions from '../../state/root.actions';
 
 describe('PreviewComponent', () => {
     let fixture: ComponentFixture<PreviewComponent>;
@@ -50,7 +50,7 @@ describe('PreviewComponent', () => {
         // fixture.componentInstance.previewLoaded();
         expect(store.dispatch).toHaveBeenCalled();
         expect(store.dispatch).toHaveBeenCalledTimes(1);
-        expect(store.dispatch.calls.argsFor(0)[0] instanceof editorActions.PreviewReady).toBeTruthy();
+        expect(store.dispatch.calls.argsFor(0)[0] instanceof rootActions.PreviewReady).toBeTruthy();
     });
 
     it('should set correct preview class when mode button clicked', () => {

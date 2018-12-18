@@ -8,7 +8,7 @@
         <!-- <div class="pane pane-index" [class.__disabled]="hideRoot$|async"> -->
         <div class="pane pane-index">
             <div class="pane-head">
-                <div class="pane-t">Edit {{ currentPage.settings.title || 'page' }}</div>
+                <div class="pane-t">Edit {{ currentPage.settings?.title || 'page' }}</div>
             </div>
             <div class="pane-cnt">
                 <app-tabs>

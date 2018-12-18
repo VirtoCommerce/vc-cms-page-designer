@@ -1,5 +1,4 @@
-import { getShowPresetsEditor } from './../modules/theme/state/index';
-import { createFeatureSelector, createSelector, ActionReducerMap } from '@ngrx/store';
+import { createFeatureSelector, createSelector } from '@ngrx/store';
 import * as fromRoot from './root.reducer';
 import * as fromTheme from 'src/app/modules/theme/state';
 import * as fromEditor from 'src/app/modules/editor/state';
