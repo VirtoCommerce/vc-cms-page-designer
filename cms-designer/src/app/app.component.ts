@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { SafeUrl } from '@angular/platform-browser';
 import { Observable } from 'rxjs';
 import { Store, select } from '@ngrx/store';
-import { filter } from 'rxjs/operators';
+import { filter, distinctUntilChanged } from 'rxjs/operators';
 import * as fromRoot from './state';
 import * as fromEditor from './modules/editor/state';
 
@@ -22,7 +22,8 @@ export class AppComponent implements OnInit {
 
     ngOnInit(): void {
         this.editorStore.pipe(select(fromEditor.getPage)).pipe(
-            filter(x => !!x)
+            filter(x => !!x),
+            distinctUntilChanged((x, y) => x.settings['layout'] === y.settings['layout'])
         ).subscribe(x => {
             this.storeUrl = this.urls.getStoreUrl(<string>x.settings['layout']);
         });
