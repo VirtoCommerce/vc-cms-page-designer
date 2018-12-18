@@ -141,7 +141,7 @@ export function reducer(state = initialState, action: ThemeActions): ThemeState 
                 presets: newPresets,
                 editableTheme: { ...newPresets.current },
                 dirty: false,
-                // draftUploaded: false
+                draftUploaded: false
             };
         }
         case ThemeActionTypes.RemovePreset: {
