@@ -1,3 +1,4 @@
+import { BlockSchema, ColorControlDescriptor } from 'src/app/modules/shared/models';
 import * as fromTheme from './theme.reducer';
 import * as themeActions from './theme.actions';
 
@@ -26,12 +27,12 @@ describe('Theme reducer', () => {
 
     describe('LoadSchemaSuccess action', () => {
         // arrange
-        const schema = [
+        const schema = <BlockSchema[]>[
             {
                 name: 'Colors',
                 icon: 'colors',
                 settings: [
-                    {
+                    <ColorControlDescriptor>{
                         type: 'color',
                         id: 'text-color',
                         value: 'black'

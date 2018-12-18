@@ -44,7 +44,7 @@ export class PreviewService {
     }
 
     toggleFrames(primaryId: string, secondaryId: string) {
-        console.log('toggle', primaryId, secondaryId);
+        console.log('toggle', secondaryId, 'is primary now');
         if (!!primaryId) {
             const primary = document.getElementById(primaryId);
             primary.style.zIndex = '0';
