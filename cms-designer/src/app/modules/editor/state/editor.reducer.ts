@@ -37,15 +37,11 @@ const initialState: EditorState = {
 export function reducer(state = initialState, action: EditorActions): EditorState {
     switch (action.type) {
         case EditorActionTypes.AddPageItem: {
-            const block = action.payload;
-            if (!block.id) {
-                block.id = Math.max(...state.page.content.map(v => <number>v.id || 0)) + 1;
-            }
-            state.page.content.push(block);
+            state.page.content.push(action.payload); // ?? should it be a new page object?
             return {
                 ...state,
                 showNewBlockSelector: false,
-                currentSectionItem: block,
+                currentSectionItem: action.payload,
                 dirty: true
             };
         }

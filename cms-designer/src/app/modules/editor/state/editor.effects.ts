@@ -63,10 +63,13 @@ export class EditorEffects {
     createPageItemModelByType$ = this.actions$.pipe(
         ofType(editorActions.EditorActionTypes.CreatePageItem),
         map((action: editorActions.CreatePageItem) => action.payload),
-        map(blockSchema => {
-            return <BlockValuesModel>{
+        withLatestFrom(this.store$.select(state => state.editor.page)),
+        map(([blockSchema, page]) => {
+            const block = <BlockValuesModel>{
+                id: Math.max(...page.content.map(v => <number>v.id || 0)) + 1,
                 type: blockSchema.type
             };
+            return block;
         }),
         mergeMap(item =>
             of(new editorActions.AddPageItem(item))
