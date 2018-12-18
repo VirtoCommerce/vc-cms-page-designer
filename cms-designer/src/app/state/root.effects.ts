@@ -56,9 +56,9 @@ export class RootEffects {
     @Effect()
     uploadPreviewPreset$ = this.actions$.pipe(
         ofType(themeActions.ThemeActionTypes.UpdateDraftSuccess),
-        withLatestFrom(this.editorStore$),
+        withLatestFrom(this.rootStore$.select(store => store.root)),
         switchMap(([_, store]) => {
-            this.preview.reload(store.editor.secondaryFrameId);
+            this.preview.reload(store.secondaryFrameId);
             return of(new rootActions.PreviewLoading(true));
         })
     );
@@ -69,16 +69,16 @@ export class RootEffects {
     sendPreviewPageItem$ = this.actions$.pipe(
         ofType<editorActions.PreviewPageItem>(editorActions.EditorActionTypes.PreviewPageItem),
         map(action => action.payload),
-        withLatestFrom(this.editorStore$),
-        tap(([item, store]) => this.preview.addOrUpdateBlock(item, store.editor.primaryFrameId))
+        withLatestFrom(this.rootStore$.select(store => store.root)),
+        tap(([item, store]) => this.preview.addOrUpdateBlock(item, store.primaryFrameId))
     );
 
     @Effect({ dispatch: false })
     sendNewBlockToStoreLoaded$ = this.actions$.pipe(
         ofType<editorActions.AddPageItem>(editorActions.EditorActionTypes.AddPageItem),
-        withLatestFrom(this.editorStore$),
+        withLatestFrom(this.rootStore$.select(store => store.root)),
         tap(([action, store]) => {
-            this.preview.addOrUpdateBlock(action.payload, store.editor.primaryFrameId);
+            this.preview.addOrUpdateBlock(action.payload, store.primaryFrameId);
         })
     );
 
@@ -86,11 +86,11 @@ export class RootEffects {
     scrollPreviewToObject$ = this.actions$.pipe(
         ofType<editorActions.SelectPageItem>(editorActions.EditorActionTypes.SelectPageItem),
         filter(action => !!action.payload),
-        withLatestFrom(this.editorStore$),
+        withLatestFrom(this.rootStore$.select(store => store.root)),
         tap(([action, store]) => {
-            this.preview.selectBlock(<number>action.payload.id, store.editor.primaryFrameId);
+            this.preview.selectBlock(<number>action.payload.id, store.primaryFrameId);
             if (action.scrollTo) {
-                this.preview.scrollTo(action.payload, store.editor.primaryFrameId);
+                this.preview.scrollTo(action.payload, store.primaryFrameId);
             }
         })
     );
@@ -98,19 +98,19 @@ export class RootEffects {
     @Effect({ dispatch: false })
     deselectObject$ = this.actions$.pipe(
         ofType<editorActions.CompleteEditPageItem>(editorActions.EditorActionTypes.CompleteEditPageItem),
-        withLatestFrom(this.editorStore$),
+        withLatestFrom(this.rootStore$.select(store => store.root)),
         tap(([action, store]) => {
-            this.preview.selectBlock(0, store.editor.primaryFrameId);
+            this.preview.selectBlock(0, store.primaryFrameId);
         })
     );
 
     @Effect({ dispatch: false })
     sendUpdatedBlockToStoreLoaded$ = this.actions$.pipe(
         ofType<editorActions.UpdateBlockPreview>(editorActions.EditorActionTypes.UpdateBlockPreview),
-        withLatestFrom(this.editorStore$),
-        map(([action, store]): [BlockValuesModel, string] => [
-            <BlockValuesModel>{ ...store.editor.currentSectionItem, ...action.payload },
-            store.editor.primaryFrameId
+        withLatestFrom(this.rootStore$.select(store => store.root), this.editorStore$.select(store => store.editor)),
+        map(([action, store, editor]): [BlockValuesModel, string] => [
+            <BlockValuesModel>{ ...editor.currentSectionItem, ...action.payload },
+            store.primaryFrameId
         ]),
         filter(([block, _]) => block.type !== 'settings'),
         debounceTime(500),
@@ -121,39 +121,38 @@ export class RootEffects {
     @Effect({ dispatch: false })
     sendBlocksOrderChanged$ = this.actions$.pipe(
         ofType<editorActions.OrderChanged>(editorActions.EditorActionTypes.OrderChanged),
-        withLatestFrom(this.editorStore$),
+        withLatestFrom(this.rootStore$.select(store => store.root)),
         tap(([action, store]) =>
-            this.preview.changeOrder(action.payload.currentIndex, action.payload.newIndex, store.editor.primaryFrameId))
+            this.preview.changeOrder(action.payload.currentIndex, action.payload.newIndex, store.primaryFrameId))
     );
 
     @Effect({ dispatch: false })
     sendRemoveBlockToStoreLoaded$ = this.actions$.pipe(
         ofType<editorActions.RemovePageItem>(editorActions.EditorActionTypes.RemovePageItem),
         filter(action => action.payload.type !== 'settings'),
-        withLatestFrom(this.editorStore$),
-        tap(([action, store]) => this.preview.removeBlock(action.payload, store.editor.primaryFrameId))
+        withLatestFrom(this.rootStore$.select(store => store.root)),
+        tap(([action, store]) => this.preview.removeBlock(action.payload, store.primaryFrameId))
     );
 
     @Effect()
     reloadPageInBackground$ = this.actions$.pipe(
-        ofType(
-            editorActions.EditorActionTypes.LoadPageSuccess,
-            editorActions.EditorActionTypes.ClearPageChanges
-        ),
-        withLatestFrom(this.editorStore$),
-        switchMap(([_, store]) => of(new editorActions.PreviewReady(store.editor.secondaryFrameId)))
+        ofType(editorActions.EditorActionTypes.LoadPageSuccess),
+        withLatestFrom(this.rootStore$.select(store => store.root)),
+        switchMap(([_, store]) => of(new rootActions.PreviewReady(store.secondaryFrameId)))
     );
 
     @Effect()
     sendPageToStore$ = this.actions$.pipe(
-        ofType<editorActions.PreviewReady>(editorActions.EditorActionTypes.PreviewReady),
-        withLatestFrom(this.editorStore$, this.themeStore$),
-        filter(([action, editorStore, themeStore]) =>
-            editorStore.editor.primaryLoaded
-            && editorStore.editor.secondaryLoaded
+        ofType<rootActions.PreviewReady>(rootActions.RootActionTypes.PreviewReady),
+        withLatestFrom(this.rootStore$, this.editorStore$, this.themeStore$),
+        filter(([action, rootStore, editorStore, themeStore]) =>
+            rootStore.root.primaryLoaded
+            && rootStore.root.secondaryLoaded
+            && action.payload === rootStore.root.secondaryFrameId
+            && rootStore.root.secondaryLoaded
             && themeStore.theme.draftUploaded
             && editorStore.editor.page != null),
-        switchMap(([action, editorStore, themeStore]) => {
+        switchMap(([action, rootStore, editorStore, themeStore]) => {
             this.preview.page(editorStore.editor.page.content, action.payload);
             return of(new rootActions.PreviewLoading(true));
         })
@@ -161,11 +160,11 @@ export class RootEffects {
 
     @Effect({ dispatch: false })
     toggleFrames$ = this.actions$.pipe(
-        ofType(editorActions.EditorActionTypes.ToggleFrames),
-        withLatestFrom(this.editorStore$),
+        ofType(rootActions.RootActionTypes.ToggleFrames),
+        withLatestFrom(this.rootStore$.select(store => store.root)),
         map(([_, store]): [string, string] => [
-            store.editor.secondaryFrameId || store.editor.primaryFrameId,
-            store.editor.primaryFrameId
+            store.secondaryFrameId || store.primaryFrameId,
+            store.primaryFrameId
         ]),
         tap(([primary, secondary]) => this.preview.toggleFrames(primary, secondary))
     );
@@ -194,15 +193,15 @@ export class RootEffects {
     @Effect()
     receiveSwapMessage$ = fromEvent(window, 'message').pipe(
         filter((event: MessageEvent) => event.data.type === 'render-complete'),
-        withLatestFrom(this.editorStore$),
-        map(([event, editorStore]): [Window, Window, fromEditor.State] => [
-            (<HTMLIFrameElement>document.getElementById(editorStore.editor.primaryFrameId)).contentWindow,
+        withLatestFrom(this.rootStore$),
+        map(([event, store]): [Window, Window, fromRoot.State] => [
+            (<HTMLIFrameElement>document.getElementById(store.root.primaryFrameId)).contentWindow,
             <Window>event.source,
-            editorStore
+            store
         ]),
-        map(([primary, source, state]) => primary === source ? state.editor.primaryFrameId : state.editor.secondaryFrameId),
+        map(([primary, source, state]) => primary === source ? state.root.primaryFrameId : state.root.secondaryFrameId),
         switchMap(loadedFrameId => [
-            new editorActions.ToggleFrames(loadedFrameId),
+            new rootActions.ToggleFrames(loadedFrameId),
             new rootActions.PreviewLoading(false)
         ])
     );
@@ -210,9 +209,9 @@ export class RootEffects {
     @Effect({ dispatch: false })
     sendCloneToPreview$ = this.actions$.pipe(
         ofType<editorActions.ClonePageItem>(editorActions.EditorActionTypes.ClonePageItem),
-        withLatestFrom(this.editorStore$),
+        withLatestFrom(this.rootStore$.select(store => store.root)),
         tap(([action, store]) => {
-            this.preview.cloneBlock(<number>action.payload.oldBlock.id, <number>action.payload.newBlock.id, store.editor.primaryFrameId);
+            this.preview.cloneBlock(<number>action.payload.oldBlock.id, <number>action.payload.newBlock.id, store.primaryFrameId);
         })
     );
 }

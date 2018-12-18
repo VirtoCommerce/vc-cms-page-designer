@@ -8,7 +8,9 @@ export enum RootActionTypes {
     LoadData = '[Root] Load Data',
     LoadDataSuccess = '[Root] Load Data Success',
     LoadDataFail = '[Root] Load Data Fail',
-    PreviewLoading = '[Root] Preview Loading'
+    PreviewLoading = '[Root] Preview Loading',
+    PreviewReady = '[Root] Preview is Ready',
+    ToggleFrames = '[Root] Toggle Frames'
 }
 
 export class ResetData implements Action {
@@ -49,6 +51,19 @@ export class PreviewLoading implements Action {
     constructor(public payload: boolean) { }
 }
 
+export class PreviewReady implements Action {
+    readonly type = RootActionTypes.PreviewReady;
+
+    constructor(public payload: string) { }
+}
+
+export class ToggleFrames implements Action {
+    readonly type = RootActionTypes.ToggleFrames;
+
+    // payload is an id of frame which was loaded and should be displayed
+    constructor (public payload: string) { }
+}
+
 export type RootActions = ResetData
     | SaveData
     | SaveDataSuccess
@@ -56,4 +71,6 @@ export type RootActions = ResetData
     | LoadData
     | LoadDataSuccess
     | LoadDataFail
-    | PreviewLoading;
+    | PreviewLoading
+    | PreviewReady
+    | ToggleFrames;

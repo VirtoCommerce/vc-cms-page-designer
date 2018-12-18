@@ -25,13 +25,11 @@ export enum EditorActionTypes {
     OrderChanged = '[Page] Order Changed',
     PreviewPageItem = '[Page] Preview Page Item',
     PreviewPageItemOfType = '[Page] Preview Page Item Of Type',
-    PreviewReady = '[Page] Preview is ready',
     RemovePageItem = '[Page] Remove Page Item',
     SavePage = '[Page] Save Page',
     SavePageFail = '[Page] Save Page Fail',
     SavePageSuccess = '[Page] Save Page Success',
     SelectPageItem = '[Page] Select Page Item',
-    ToggleFrames = '[Page] Toggle Frames',
     ToggleNewBlockPane = '[Page] Toggle New Block Pane',
     UpdateBlockPreview = '[Page] Update Block Preview',
     UpdatePageItem = '[Page] Update Page Item'
@@ -131,12 +129,6 @@ export class PreviewPageItemOfType implements Action {
     constructor(public payload: BlockSchema) { }
 }
 
-export class PreviewReady implements Action {
-    readonly type = EditorActionTypes.PreviewReady;
-
-    constructor(public payload: string) { }
-}
-
 export class RemovePageItem implements Action {
     readonly type = EditorActionTypes.RemovePageItem;
 
@@ -161,13 +153,6 @@ export class SelectPageItem implements Action {
     readonly type = EditorActionTypes.SelectPageItem;
 
     constructor(public payload: BlockValuesModel, public scrollTo: boolean = true) { }
-}
-
-export class ToggleFrames implements Action {
-    readonly type = EditorActionTypes.ToggleFrames;
-
-    // payload is an id of frame which was loaded and should be displayed
-    constructor (public payload: string) { }
 }
 
 export class ToggleNewBlockPane implements Action {
@@ -207,13 +192,11 @@ export type EditorActions = LoadPage
     | OrderChanged
     | PreviewPageItem
     | PreviewPageItemOfType
-    | PreviewReady
     | RemovePageItem
     | SavePage
     | SavePageFail
     | SavePageSuccess
     | SelectPageItem
-    | ToggleFrames
     | ToggleNewBlockPane
     | UpdateBlockPreview
     | UpdatePageItem;

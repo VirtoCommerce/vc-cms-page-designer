@@ -159,6 +159,6 @@ export class SidebarComponent implements OnInit {
     }
 
     previewLoaded(name: string) {
-        this.store.dispatch(new editorActions.PreviewReady(name));
+        this.store.dispatch(new rootActions.PreviewReady(name));
     }
 }

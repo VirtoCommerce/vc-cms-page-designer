@@ -12,10 +12,6 @@ export interface EditorState {
     blocksSchema: BlocksSchema;
     // categories: CategoryModel[];
     dirty: boolean;
-    primaryFrameId: string;
-    secondaryFrameId: string;
-    primaryLoaded: boolean;
-    secondaryLoaded: boolean;
 }
 
 const initialState: EditorState = {
@@ -27,11 +23,7 @@ const initialState: EditorState = {
     page: null,
     blocksSchema: null,
     // categories: [],
-    dirty: true,
-    primaryFrameId: null,
-    secondaryFrameId: null,
-    primaryLoaded: false,
-    secondaryLoaded: false
+    dirty: true
 };
 
 export function reducer(state = initialState, action: EditorActions): EditorState {
@@ -103,21 +95,6 @@ export function reducer(state = initialState, action: EditorActions): EditorStat
                 ...state,
                 dirty: true
             };
-        case EditorActionTypes.PreviewReady: {
-            // occurs when each iframe is loaded
-            const newValues: Partial<EditorState> = {};
-            if (!state.primaryFrameId) {
-                newValues.primaryFrameId = action.payload;
-                newValues.primaryLoaded = true;
-            } else if (!state.secondaryFrameId) {
-                newValues.secondaryFrameId = action.payload;
-                newValues.secondaryLoaded = true;
-            }
-            return {
-                ...state,
-                ...newValues
-            };
-        }
         case EditorActionTypes.RemovePageItem: {
             const index = state.page.content.indexOf(action.payload);
             if (index !== -1) {
@@ -153,16 +130,6 @@ export function reducer(state = initialState, action: EditorActions): EditorStat
                 showNewBlockSelector: action.payload ? false : state.showNewBlockSelector,
                 currentSectionItem: action.payload
             };
-        case EditorActionTypes.ToggleFrames: {
-            // occurs when page in preview rendered
-            const newValues: Partial<EditorState> = {};
-            newValues.primaryFrameId = state.secondaryFrameId;
-            newValues.secondaryFrameId = state.primaryFrameId;
-            return {
-                ...state,
-                ...newValues
-            };
-        }
         case EditorActionTypes.ToggleNewBlockPane:
             return {
                 ...state,
