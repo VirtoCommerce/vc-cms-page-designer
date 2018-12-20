@@ -22,9 +22,13 @@ import { BlockSchema } from 'src/app/modules/shared/models';
 class PageEditorStubComponent {
     @Input() model;
     @Input() schema;
+    @Input() noSchema;
+    @Input() noPage;
     @Output() selectEvent = new EventEmitter<any>();
     @Output() orderChangedEvent = new EventEmitter<any>();
     @Output() addNewBlockEvent = new EventEmitter<any>();
+    @Output() reloadPage = new EventEmitter<any>();
+    @Output() reloadSchema = new EventEmitter<any>();
 }
 
 @Component({ selector: 'app-theme-editor', template: '<div></div>' })

@@ -87,8 +87,7 @@ export class SidebarComponent implements OnInit {
     }
 
     reloadEditorData() {
-        this.store.dispatch(new editorActions.LoadPage());
-        this.store.dispatch(new editorActions.LoadBlockTypes());
+        this.store.dispatch(new rootActions.LoadData());
     }
 
     //#endregion

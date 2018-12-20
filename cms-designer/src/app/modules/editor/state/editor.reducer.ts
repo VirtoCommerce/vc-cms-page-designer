@@ -43,6 +43,11 @@ export function reducer(state = initialState, action: EditorActions): EditorStat
                 dirty: true
             };
         }
+        case EditorActionTypes.LoadBlocksSchema:
+            return {
+                ...state,
+                schemaLoading: true
+            };
         case EditorActionTypes.BlocksSchemaLoaded:
             return {
                 ...state,
@@ -93,7 +98,7 @@ export function reducer(state = initialState, action: EditorActions): EditorStat
                 page: action.payload,
                 initialPage: JSON.stringify(action.payload),
                 pageLoading: false,
-                pageNotLoaded: true,
+                pageNotLoaded: false,
                 dirty: false
             };
         case EditorActionTypes.MoveBlock: {

@@ -1,5 +1,5 @@
 import { BlockValuesModel } from './../../shared/models/block-values.model';
-import { map, flatMap } from 'rxjs/operators';
+import { map, flatMap, filter } from 'rxjs/operators';
 // import { CatalogService } from './../services/catalog.service';
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';

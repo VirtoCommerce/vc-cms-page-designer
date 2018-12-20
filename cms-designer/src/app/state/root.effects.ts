@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Action, Store } from '@ngrx/store';
 import { Observable, of, fromEvent } from 'rxjs';
-import { switchMapTo, debounceTime, distinctUntilChanged, withLatestFrom, tap, filter, map, switchMap } from 'rxjs/operators';
+import { switchMapTo, debounceTime, distinctUntilChanged, withLatestFrom, tap, filter, map, switchMap, mapTo } from 'rxjs/operators';
 import { PreviewService } from '../services/preview.service';
 
 import * as rootActions from './root.actions';
@@ -35,14 +35,35 @@ export class RootEffects {
     );
 
     @Effect()
-    loadData$: Observable<Action> = this.actions$.pipe(
+    switchToLoadPage$: Observable<Action> = this.actions$.pipe(
         ofType<rootActions.LoadData>(rootActions.RootActionTypes.LoadData),
-        switchMapTo([
-            new editorActions.LoadPage(),
-            new editorActions.LoadBlockTypes(),
-            new themeActions.LoadThemes(),
-            new themeActions.LoadSchema()
-        ])
+        withLatestFrom(this.editorStore$.select(store => store.editor)),
+        filter(([, state]) => !state.page || state.pageNotLoaded),
+        mapTo(new editorActions.LoadPage())
+    );
+
+    @Effect()
+    switchToLoadBlocks$: Observable<Action> = this.actions$.pipe(
+        ofType<rootActions.LoadData>(rootActions.RootActionTypes.LoadData),
+        withLatestFrom(this.editorStore$.select(store => store.editor)),
+        filter(([, state]) => !state.blocksSchema || state.schemaNotLoaded),
+        mapTo(new editorActions.LoadBlockTypes())
+    );
+
+    @Effect()
+    switchToLoadThemes$: Observable<Action> = this.actions$.pipe(
+        ofType<rootActions.LoadData>(rootActions.RootActionTypes.LoadData),
+        withLatestFrom(this.themeStore$.select(store => store.theme)),
+        filter(([, state]) => !state.presets || state.presetsNotLoaded),
+        mapTo(new themeActions.LoadThemes())
+    );
+
+    @Effect()
+    switchToLoadThemeSchema$: Observable<Action> = this.actions$.pipe(
+        ofType<rootActions.LoadData>(rootActions.RootActionTypes.LoadData),
+        withLatestFrom(this.themeStore$.select(store => store.theme)),
+        filter(([, state]) => !state.schema || state.schemaNotLoaded),
+        mapTo(new themeActions.LoadSchema())
     );
 
     @Effect()

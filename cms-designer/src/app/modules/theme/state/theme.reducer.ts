@@ -4,9 +4,9 @@ import { BlockSchema, ValueType } from '../../shared/models';
 
 export interface ThemeState {
     schemaLoading: boolean;
-    schemaLoaded: boolean;
+    schemaNotLoaded: boolean;
     presetsLoading: boolean;
-    presetsLoaded: boolean;
+    presetsNotLoaded: boolean;
     draftUploaded: boolean;
     uploadDraftFail: boolean;
 
@@ -21,9 +21,9 @@ export interface ThemeState {
 
 export const initialState: ThemeState = {
     schemaLoading: false,
-    schemaLoaded: false,
+    schemaNotLoaded: false,
     presetsLoading: false,
-    presetsLoaded: false,
+    presetsNotLoaded: false,
     draftUploaded: false,
     uploadDraftFail: false,
 
@@ -47,12 +47,14 @@ export function reducer(state = initialState, action: ThemeActions): ThemeState 
             return {
                 ...state,
                 schema: action.payload,
-                schemaLoading: false
+                schemaLoading: false,
+                schemaNotLoaded: false
             };
         case ThemeActionTypes.LoadSchemaFail:
             return {
                 ...state,
-                schemaLoading: false
+                schemaLoading: false,
+                schemaNotLoaded: true
             };
         case ThemeActionTypes.SaveTheme: {
             const newPreset = { ...state.presets };
@@ -85,13 +87,15 @@ export function reducer(state = initialState, action: ThemeActions): ThemeState 
                 editableTheme: { ...<any>newPresets.current },
                 initialPresets: JSON.stringify(action.payload),
                 presets: newPresets,
-                presetsLoading: false
+                presetsLoading: false,
+                presetsNotLoaded: false
             };
         }
         case ThemeActionTypes.LoadThemesFail:
             return {
                 ...state,
-                presetsLoading: false
+                presetsLoading: false,
+                presetsNotLoaded: true
             };
         case ThemeActionTypes.SelectSchemaItem:
             return {
