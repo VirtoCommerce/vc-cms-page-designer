@@ -34,3 +34,11 @@
         </li>
     </ul>
 </div>
+<div *ngIf="noSchema" class="pane-section __selected">
+    <div style="padding: 20px;">Blocks Schema was not loaded</div>
+    <div style="text-align: center;"><button class="btn" (click)="onReloadSchema()">Try again</button></div>
+</div>
+<div *ngIf="noPage" class="pane-section __selected">
+    <div style="padding: 20px;">Page was not loaded</div>
+    <div style="text-align: center;"><button class="btn" (click)="onReloadPage()">Try again</button></div>
+</div>

@@ -5,6 +5,6 @@ import { Injectable } from '@angular/core';
 })
 export class ErrorsService {
     displayMessage(message: string) {
-        console.error(message);
+        console.warn(message);
     }
 }

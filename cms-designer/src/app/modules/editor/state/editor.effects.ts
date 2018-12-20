@@ -81,8 +81,8 @@ export class EditorEffects {
         ofType(editorActions.EditorActionTypes.LoadBlocksSchema),
         switchMap(() =>
             this.blocks.load().pipe(
-                map(result => new editorActions.BlockTypesLoaded(result)),
-                catchError(err => of(new editorActions.LoadPageFail(err)))
+                map(result => new editorActions.BlocksSchemaLoaded(result)),
+                catchError(error => of(new editorActions.BlocksSchemaFail(error)))
             )
         )
     );
@@ -94,13 +94,13 @@ export class EditorEffects {
             this.pages.downloadPage().pipe(
                 map(data => {
                     const result = <PageModel>{
-                        settings: data.find(x => x.type === 'settings'),
+                        settings: data.find(x => x.type === 'settings') || { },
                         content: data.filter(x => x.type !== 'settings')
                     };
                     data.forEach((x, index) => x.id = index + 1);
                     return new editorActions.LoadPageSuccess(result);
                 }),
-                catchError(err => of(new editorActions.LoadPageFail(err)))
+                catchError(error => of(new editorActions.LoadPageFail(error)))
             )
         )
     );

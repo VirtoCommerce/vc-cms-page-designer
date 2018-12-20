@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { PageDescriptor } from '../models/page.descriptor';
-import { environment } from 'src/environments/environment';
+import { PageDescriptor } from '../modules/shared/models/page.descriptor';
 import { CookieService } from 'ngx-cookie-service';
 import { SafeUrl, DomSanitizer } from '@angular/platform-browser';
 

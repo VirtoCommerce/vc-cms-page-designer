@@ -47,3 +47,13 @@ export const getSchemaLoading = createSelector(
     getEditorFeatureState,
     state => state.schemaLoading
 );
+
+export const getSchemaNotLoaded = createSelector(
+    getEditorFeatureState,
+    state => state.schemaNotLoaded
+);
+
+export const getPageNotLoaded = createSelector(
+    getEditorFeatureState,
+    state => !state.schemaNotLoaded && state.pageNotLoaded
+);

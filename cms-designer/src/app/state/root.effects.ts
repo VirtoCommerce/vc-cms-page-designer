@@ -14,11 +14,13 @@ import * as fromTheme from '../modules/theme/state';
 import * as editorActions from '../modules/editor/state/editor.actions';
 import * as fromEditor from '../modules/editor/state';
 import { BlockValuesModel } from '../modules/shared/models';
+import { ErrorsService } from '../modules/shared/services/errors.service';
 
 @Injectable()
 export class RootEffects {
     constructor(private actions$: Actions,
         private preview: PreviewService,
+        private errors: ErrorsService,
         private rootStore$: Store<fromRoot.State>,
         private themeStore$: Store<fromTheme.State>,
         private editorStore$: Store<fromEditor.State>) { }
@@ -223,5 +225,17 @@ export class RootEffects {
         tap(([action, store]) => {
             this.preview.cloneBlock(<number>action.payload.oldBlock.id, <number>action.payload.newBlock.id, store.primaryFrameId);
         })
+    );
+
+    @Effect({ dispatch: false })
+    loadBlocksSchemaFail$ = this.actions$.pipe(
+        ofType<editorActions.BlocksSchemaFail>(editorActions.EditorActionTypes.BlocksSchemaFail),
+        tap(action => this.errors.displayMessage(action.payload))
+    );
+
+    @Effect({ dispatch: false })
+    loadPageFail$ = this.actions$.pipe(
+        ofType<editorActions.LoadPageFail>(editorActions.EditorActionTypes.LoadPageFail),
+        tap(action => this.errors.displayMessage(action.payload))
     );
 }

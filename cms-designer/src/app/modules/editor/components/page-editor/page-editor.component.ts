@@ -32,9 +32,14 @@ export class PageEditorComponent implements OnInit {
         return this._schema;
     }
 
+    @Input() noSchema: boolean;
+    @Input() noPage: boolean;
+
     @Output() selectEvent = new EventEmitter<BlockValuesModel>();
     @Output() addNewBlockEvent = new EventEmitter<any>();
     @Output() orderChangedEvent = new EventEmitter<SortEvent>();
+    @Output() reloadSchema = new EventEmitter();
+    @Output() reloadPage = new EventEmitter();
 
     constructor() { }
 
@@ -80,6 +85,14 @@ export class PageEditorComponent implements OnInit {
         }
         const unknownBlock = <any>item;
         return result || unknownBlock.name || unknownBlock.title || unknownBlock.type || '<unnamed block>';
+    }
+
+    onReloadSchema() {
+        this.reloadSchema.emit();
+    }
+
+    onReloadPage() {
+        this.reloadPage.emit();
     }
 
     private updateLItems() {

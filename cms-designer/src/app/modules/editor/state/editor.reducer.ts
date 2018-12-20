@@ -5,8 +5,8 @@ import { PageModel } from '../models';
 export interface EditorState {
     pageLoading: boolean;
     schemaLoading: boolean;
-    pageLoaded: boolean;
-    schemaLoaded: boolean;
+    pageNotLoaded: boolean;
+    schemaNotLoaded: boolean;
 
     showNewBlockSelector: boolean;
     currentSectionItem: BlockValuesModel;
@@ -20,8 +20,8 @@ export interface EditorState {
 const initialState: EditorState = {
     pageLoading: false,
     schemaLoading: false,
-    pageLoaded: false,
-    schemaLoaded: false,
+    pageNotLoaded: false,
+    schemaNotLoaded: false,
 
     showNewBlockSelector: false,
     currentSectionItem: null,
@@ -46,7 +46,15 @@ export function reducer(state = initialState, action: EditorActions): EditorStat
         case EditorActionTypes.BlocksSchemaLoaded:
             return {
                 ...state,
-                blocksSchema: action.payload
+                blocksSchema: action.payload,
+                schemaLoading: false,
+                schemaNotLoaded: false
+            };
+        case EditorActionTypes.BlocksSchemaFail:
+            return {
+                ...state,
+                schemaLoading: false,
+                schemaNotLoaded: true
             };
         case EditorActionTypes.ClearPageChanges:
             return {
@@ -76,7 +84,7 @@ export function reducer(state = initialState, action: EditorActions): EditorStat
         case EditorActionTypes.LoadPageFail:
             return {
                 ...state,
-                pageLoaded: false,
+                pageNotLoaded: true,
                 pageLoading: false
             };
         case EditorActionTypes.LoadPageSuccess:
@@ -85,7 +93,7 @@ export function reducer(state = initialState, action: EditorActions): EditorStat
                 page: action.payload,
                 initialPage: JSON.stringify(action.payload),
                 pageLoading: false,
-                pageLoaded: true,
+                pageNotLoaded: true,
                 dirty: false
             };
         case EditorActionTypes.MoveBlock: {

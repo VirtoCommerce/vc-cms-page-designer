@@ -27,6 +27,8 @@ export class SidebarComponent implements OnInit {
     addNewSectionMode$ = this.store.pipe(select(fromEditor.getAddNewSectionMode));
     blocksSchema$ = this.store.pipe(select(fromEditor.getBlocksSchema));
     page$ = this.store.pipe(select(fromEditor.getPage));
+    schemaNotLoaded$ = this.store.pipe(select(fromEditor.getSchemaNotLoaded));
+    pageNotLoaded$ = this.store.pipe(select(fromEditor.getPageNotLoaded));
 
     // theme editor states
     presets$ = this.store.pipe(select(fromTheme.getPresets));
@@ -82,6 +84,11 @@ export class SidebarComponent implements OnInit {
 
     applyPresetAsTheme(name: string) {
         this.store.dispatch(new themeActions.ApplyPreset(name));
+    }
+
+    reloadEditorData() {
+        this.store.dispatch(new editorActions.LoadPage());
+        this.store.dispatch(new editorActions.LoadBlockTypes());
     }
 
     //#endregion

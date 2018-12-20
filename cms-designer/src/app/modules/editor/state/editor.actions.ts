@@ -42,7 +42,13 @@ export class AddPageItem implements Action {
     constructor(public payload: BlockValuesModel) { }
 }
 
-export class BlockTypesLoaded implements Action {
+export class BlocksSchemaFail implements Action {
+    readonly type = EditorActionTypes.BlocksSchemaFail;
+
+    constructor(public payload: any /* todo: set type */) { }
+}
+
+export class BlocksSchemaLoaded implements Action {
     readonly type = EditorActionTypes.BlocksSchemaLoaded;
 
     constructor(public payload: BlocksSchema) { }
@@ -176,7 +182,8 @@ export class UpdatePageItem implements Action {
 
 export type EditorActions = LoadPage
     | AddPageItem
-    | BlockTypesLoaded
+    | BlocksSchemaFail
+    | BlocksSchemaLoaded
     | ClearPageChanges
     | ClonePageItem
     | CompleteEditPageItem
