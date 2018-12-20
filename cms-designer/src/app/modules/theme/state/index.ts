@@ -43,11 +43,6 @@ export const getSchema = createSelector(
     state => state.schema
 );
 
-export const getError = createSelector(
-    getThemeFeatureState,
-    state => state.error
-);
-
 export const getEditableTheme = createSelector(
     getThemeFeatureState,
     state => state.editableTheme

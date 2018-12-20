@@ -1,7 +1,7 @@
 import { RootActionTypes, RootActions, ResetData } from './root.actions';
 
 export interface RootState {
-    loading: boolean;
+    previewLoading: boolean;
     primaryFrameId: string;
     secondaryFrameId: string;
     primaryLoaded: boolean;
@@ -9,7 +9,7 @@ export interface RootState {
 }
 
 const initialState: RootState = {
-    loading: false,
+    previewLoading: false,
     primaryFrameId: null,
     secondaryFrameId: null,
     primaryLoaded: false,
@@ -21,7 +21,7 @@ export function reducer(state = initialState, action: RootActions): RootState {
         case RootActionTypes.PreviewLoading:
             return {
                 ...state,
-                loading: action.payload
+                previewLoading: action.payload
             };
         case RootActionTypes.PreviewReady: {
             // occurs when each iframe is loaded

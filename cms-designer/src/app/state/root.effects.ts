@@ -37,6 +37,7 @@ export class RootEffects {
         ofType<rootActions.LoadData>(rootActions.RootActionTypes.LoadData),
         switchMapTo([
             new editorActions.LoadPage(),
+            new editorActions.LoadBlockTypes(),
             new themeActions.LoadThemes(),
             new themeActions.LoadSchema()
         ])
@@ -57,7 +58,7 @@ export class RootEffects {
     uploadPreviewPreset$ = this.actions$.pipe(
         ofType(themeActions.ThemeActionTypes.UpdateDraftSuccess),
         withLatestFrom(this.rootStore$.select(store => store.root)),
-        switchMap(([_, store]) => {
+        switchMap(([, store]) => {
             this.preview.reload(store.secondaryFrameId);
             return of(new rootActions.PreviewLoading(true));
         })
@@ -99,7 +100,7 @@ export class RootEffects {
     deselectObject$ = this.actions$.pipe(
         ofType<editorActions.CompleteEditPageItem>(editorActions.EditorActionTypes.CompleteEditPageItem),
         withLatestFrom(this.rootStore$.select(store => store.root)),
-        tap(([action, store]) => {
+        tap(([, store]) => {
             this.preview.selectBlock(0, store.primaryFrameId);
         })
     );
@@ -112,7 +113,7 @@ export class RootEffects {
             <BlockValuesModel>{ ...editor.currentSectionItem, ...action.payload },
             store.primaryFrameId
         ]),
-        filter(([block, _]) => block.type !== 'settings'),
+        filter(([block]) => block.type !== 'settings'),
         debounceTime(500),
         distinctUntilChanged(),
         tap(([block, frameId]) => this.preview.addOrUpdateBlock(block, frameId))
@@ -138,7 +139,7 @@ export class RootEffects {
     reloadPageInBackground$ = this.actions$.pipe(
         ofType(editorActions.EditorActionTypes.LoadPageSuccess),
         withLatestFrom(this.rootStore$.select(store => store.root)),
-        switchMap(([_, store]) => of(new rootActions.PreviewReady(store.secondaryFrameId)))
+        switchMap(([, store]) => of(new rootActions.PreviewReady(store.secondaryFrameId)))
     );
 
     @Effect()
@@ -162,7 +163,7 @@ export class RootEffects {
     toggleFrames$ = this.actions$.pipe(
         ofType(rootActions.RootActionTypes.ToggleFrames),
         withLatestFrom(this.rootStore$.select(store => store.root)),
-        map(([_, store]): [string, string] => [
+        map(([, store]): [string, string] => [
             store.secondaryFrameId || store.primaryFrameId,
             store.primaryFrameId
         ]),
@@ -170,15 +171,24 @@ export class RootEffects {
     );
 
     @Effect()
-    receivePreviewMessage$ = fromEvent(window, 'message').pipe(
+    openBlockEditorForPreview$ = fromEvent(window, 'message').pipe(
         map((event: MessageEvent) => event.data),
         filter(data => data.type === 'open'),
         withLatestFrom(this.themeStore$, this.editorStore$),
-        filter(([_, themeStore]) => !themeStore.theme.selectedSchemaItem && !themeStore.theme.showPresetsEditor),
-        map(([data, _, editorStore]) => {
+        filter(([, themeStore]) => !themeStore.theme.selectedSchemaItem && !themeStore.theme.showPresetsEditor),
+        map(([data, , editorStore]) => {
             const item = editorStore.editor.page.content.find(x => x.id === data.id);
             return new editorActions.SelectPageItem(item, false);
         }),
+    );
+
+    @Effect({ dispatch: false })
+    deselectBlockInPreview$ = fromEvent(window, 'message').pipe(
+        map((event: MessageEvent) => event.data),
+        filter(data => data.type === 'open'),
+        withLatestFrom(this.themeStore$, this.rootStore$.select(x => x.root)),
+        filter(([, themeStore]) => !!themeStore.theme.selectedSchemaItem || !!themeStore.theme.showPresetsEditor),
+        map(([, , store]) => this.preview.selectBlock(0, store.primaryFrameId))
     );
 
     @Effect()

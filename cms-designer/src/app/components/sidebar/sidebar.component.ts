@@ -23,47 +23,27 @@ import { BlockSchema, BlockValuesModel, ValueType } from 'src/app/modules/shared
 export class SidebarComponent implements OnInit {
 
     // page editor states
-    currentSectionItem$: Observable<BlockValuesModel>;
-    addNewSectionMode$: Observable<boolean>;
-    blocksSchema$: Observable<BlocksSchema>;
-    page$: Observable<PageModel>;
+    currentSectionItem$ = this.store.pipe(select(fromEditor.getCurrentSectionItem));
+    addNewSectionMode$ = this.store.pipe(select(fromEditor.getAddNewSectionMode));
+    blocksSchema$ = this.store.pipe(select(fromEditor.getBlocksSchema));
+    page$ = this.store.pipe(select(fromEditor.getPage));
 
     // theme editor states
-    presets$: Observable<PresetsModel>;
-    themeSchema$: Observable<BlockSchema[]>;
-    theme$: Observable<{ [key: string]: ValueType }>;
-    currentThemeSchemaItem$: Observable<BlockSchema>;
-    showPresets$: Observable<boolean>;
+    presets$ = this.store.pipe(select(fromTheme.getPresets));
+    themeSchema$ = this.store.pipe(select(fromTheme.getSchema));
+    theme$ = this.store.pipe(select(fromTheme.getEditableTheme));
+    currentThemeSchemaItem$ = this.store.pipe(select(fromTheme.getCurrentThemeSchemaItem));
+    showPresets$ = this.store.pipe(select(fromTheme.getShowPresetsEditor));
 
     // combined states
-    isPreviewLoading: Observable<boolean>;
-    isLoading$: Observable<boolean>;
-    isEditMode$: Observable<boolean>;
-    isDirty$: Observable<boolean>;
+    isLoading$ = this.store.pipe(select(fromRoot.getIsLoading));
+    isEditMode$ = this.store.pipe(select(fromRoot.getIsEditMode));
+    isDirty$ = this.store.pipe(select(fromRoot.getIsDirty));
 
     constructor(private store: Store<fromRoot.State>) { }
 
     ngOnInit() {
         this.store.dispatch(new rootActions.LoadData());
-        this.store.dispatch(new editorActions.LoadBlockTypes());
-
-        this.currentSectionItem$ = this.store.pipe(select(fromEditor.getCurrentSectionItem));
-        this.addNewSectionMode$ = this.store.pipe(select(fromEditor.getAddNewSectionMode));
-        this.blocksSchema$ = this.store.pipe(select(fromEditor.getBlocksSchema));
-        this.page$ = this.store.pipe(select(fromEditor.getPage));
-
-        this.presets$ = this.store.pipe(select(fromTheme.getPresets));
-        this.themeSchema$ = this.store.pipe(select(fromTheme.getSchema));
-        this.theme$ = this.store.pipe(select(fromTheme.getEditableTheme));
-        this.currentThemeSchemaItem$ = this.store.pipe(select(fromTheme.getCurrentThemeSchemaItem));
-        this.showPresets$ = this.store.pipe(select(fromTheme.getShowPresetsEditor));
-
-        // combined states
-
-        this.isLoading$ = this.store.pipe(select(fromRoot.getIsLoading));
-        this.isEditMode$ = this.store.pipe(select(fromRoot.getIsEditMode));
-        this.isDirty$ = this.store.pipe(select(fromRoot.getIsDirty));
-
     }
 
     //#region theme editor actions

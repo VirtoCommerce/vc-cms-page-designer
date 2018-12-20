@@ -105,14 +105,6 @@ describe('SidebarComponent', () => {
 
     });
 
-    it('ngOnInit request list of block types', () => {
-
-        expect(store.dispatch).toHaveBeenCalled();
-        const action = store.dispatch.calls.argsFor(1)[0];
-        expect(action instanceof editorActions.LoadBlockTypes).toBeTruthy();
-
-    });
-
     it('selectSchemaItem dispatches the SelectSchemaItem action with correct parameters', () => {
         fixture.componentInstance.themeSchema$ = of([]);
         fixture.detectChanges();

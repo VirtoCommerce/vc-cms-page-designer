@@ -8,13 +8,14 @@ import { BlockSchema, BlocksSchema } from 'src/app/modules/shared/models';
 
 export enum EditorActionTypes {
     AddPageItem = '[Page] Add Page Item',
-    BlockTypesLoaded = '[Page] Block Types Loaded',
+    BlocksSchemaFail = '[Page] Blocks Schema Fail',
+    BlocksSchemaLoaded = '[Page] Blocks Schema Loaded',
     ClearPageChanges = '[Page] Clear Page Changes',
     ClonePageItem = '[Page] Clone Page Item',
     CompleteEditPageItem = '[Page] Complete Edit Page Item',
     CopyPageItem = '[Page] Copy Page Item',
     CreatePageItem = '[Page] Create Page Item',
-    LoadBlockTypes = '[Page] Load Block Types',
+    LoadBlocksSchema = '[Page] Load Blocks Schema',
     // LoadCategories = '[Page] Load Categories',
     // LoadCategoriesFail = '[Page] Load Categories Fail',
     // LoadCategoriesSuccess = '[Page] Load Categories Success',
@@ -42,7 +43,7 @@ export class AddPageItem implements Action {
 }
 
 export class BlockTypesLoaded implements Action {
-    readonly type = EditorActionTypes.BlockTypesLoaded;
+    readonly type = EditorActionTypes.BlocksSchemaLoaded;
 
     constructor(public payload: BlocksSchema) { }
 }
@@ -74,7 +75,7 @@ export class CreatePageItem implements Action {
 }
 
 export class LoadBlockTypes implements Action {
-    readonly type = EditorActionTypes.LoadBlockTypes;
+    readonly type = EditorActionTypes.LoadBlocksSchema;
 }
 
 // export class LoadCategories implements Action {

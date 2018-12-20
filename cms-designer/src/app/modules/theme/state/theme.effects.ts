@@ -5,7 +5,6 @@ import { Observable, of } from 'rxjs';
 import { mergeMap, map, catchError, withLatestFrom, tap, switchMap, debounceTime, distinctUntilChanged, switchMapTo } from 'rxjs/operators';
 
 import { ThemeService } from '../services/theme.service';
-import { PreviewService } from 'src/app/services/preview.service';
 import * as themeActions from './theme.actions';
 import * as fromTheme from '.';
 
@@ -18,7 +17,7 @@ export class ThemeEffects {
     @Effect()
     loadPresets$: Observable<Action> = this.actions$.pipe(
         ofType<themeActions.LoadThemes>(themeActions.ThemeActionTypes.LoadThemes),
-        mergeMap(_ =>
+        mergeMap(() =>
             this.themeService.loadPresets().pipe(
                 map(data => new themeActions.LoadThemesSuccess(data)),
                 catchError(err => of(new themeActions.LoadThemesFail(err)))
@@ -29,7 +28,7 @@ export class ThemeEffects {
     @Effect()
     loadSchema$: Observable<Action> = this.actions$.pipe(
         ofType<themeActions.LoadSchema>(themeActions.ThemeActionTypes.LoadSchema),
-        mergeMap(_ =>
+        mergeMap(() =>
             this.themeService.loadSchema().pipe(
                 map(data => new themeActions.LoadSchemaSuccess(data)),
                 catchError(err => of(new themeActions.LoadSchemaFail(err)))
@@ -41,7 +40,7 @@ export class ThemeEffects {
     uploadPresets$: Observable<Action> = this.actions$.pipe(
         ofType<themeActions.SaveTheme>(themeActions.ThemeActionTypes.SaveTheme),
         withLatestFrom(this.store$.select(state => state.theme.presets)),
-        switchMap(([_, theme]) =>
+        switchMap(([, theme]) =>
             this.themeService.uploadPresets(theme).pipe(
                 map(() => new themeActions.SaveThemeSuccess()),
                 catchError(err => of(new themeActions.SaveThemeFail(err)))
@@ -67,7 +66,7 @@ export class ThemeEffects {
     updateDraft$: Observable<Action> = this.actions$.pipe(
         ofType(themeActions.ThemeActionTypes.UpdateDraft),
         withLatestFrom(this.store$.select(state => state.theme.presets)),
-        switchMap(([_, theme]) =>
+        switchMap(([, theme]) =>
             this.themeService.uploadDraft(theme).pipe(
                 map(() => new themeActions.UpdateDraftSuccess()),
                 catchError(() => of(new themeActions.UpdateDraftFail()))

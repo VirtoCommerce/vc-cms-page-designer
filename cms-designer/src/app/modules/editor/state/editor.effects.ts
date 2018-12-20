@@ -1,5 +1,5 @@
 import { BlockValuesModel } from './../../shared/models/block-values.model';
-import { map, tap, flatMap } from 'rxjs/operators';
+import { map, flatMap } from 'rxjs/operators';
 // import { CatalogService } from './../services/catalog.service';
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
@@ -78,8 +78,8 @@ export class EditorEffects {
 
     @Effect()
     loadBlockTypes$: Observable<Action> = this.actions$.pipe(
-        ofType(editorActions.EditorActionTypes.LoadBlockTypes),
-        switchMap(_ =>
+        ofType(editorActions.EditorActionTypes.LoadBlocksSchema),
+        switchMap(() =>
             this.blocks.load().pipe(
                 map(result => new editorActions.BlockTypesLoaded(result)),
                 catchError(err => of(new editorActions.LoadPageFail(err)))
@@ -90,7 +90,7 @@ export class EditorEffects {
     @Effect()
     loadPage$: Observable<Action> = this.actions$.pipe(
         ofType<editorActions.LoadPage>(editorActions.EditorActionTypes.LoadPage),
-        switchMap(_ =>
+        switchMap(() =>
             this.pages.downloadPage().pipe(
                 map(data => {
                     const result = <PageModel>{
@@ -109,7 +109,7 @@ export class EditorEffects {
     uploadPage$: Observable<Action> = this.actions$.pipe(
         ofType<editorActions.SavePage>(editorActions.EditorActionTypes.SavePage),
         withLatestFrom(this.store$.select(state => state.editor.page)),
-        switchMap(([_, page]) => {
+        switchMap(([, page]) => {
             const data = [page.settings, ...page.content];
             return this.pages.uploadPage(data).pipe(
                 map(() => new editorActions.SavePageSuccess()),

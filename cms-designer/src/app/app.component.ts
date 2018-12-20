@@ -16,7 +16,7 @@ export class AppComponent implements OnInit {
     title = 'cms-designer';
     storeUrl: SafeUrl;
 
-    previewLoading$: Observable<boolean>;
+    previewLoading$ = this.store.pipe(select(fromRoot.getPreviewLoading));
 
     constructor(private store: Store<fromRoot.State>, private editorStore: Store<fromEditor.State>, private urls: ApiUrlsService) { }
 
@@ -27,10 +27,5 @@ export class AppComponent implements OnInit {
         ).subscribe(x => {
             this.storeUrl = this.urls.getStoreUrl(<string>x.settings['layout']);
         });
-
-        this.previewLoading$ = this.store.pipe(select(fromRoot.getLoading));
     }
-
-    // this.store.dispatch(new editorActions.PreviewReady('preview2'));
-
 }

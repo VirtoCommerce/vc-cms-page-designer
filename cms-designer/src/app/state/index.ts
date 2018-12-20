@@ -11,9 +11,10 @@ const getRootFeatureState = createFeatureSelector<fromRoot.RootState>('root');
 
 export const getIsLoading = createSelector(
     fromEditor.getPageLoading,
-    fromTheme.getSchemaLoading,
+    fromEditor.getSchemaLoading,
     fromTheme.getPresetsLoading,
-    (page, schema, presets) => page || schema || presets
+    fromTheme.getSchemaLoading,
+    (page, blocks, presets, schema) => page || blocks || schema || presets
 );
 
 export const getIsEditMode = createSelector(
@@ -31,7 +32,7 @@ export const getIsDirty = createSelector(
     (themeDirty, editorDirty) => themeDirty || editorDirty
 );
 
-export const getLoading = createSelector(
+export const getPreviewLoading = createSelector(
     getRootFeatureState,
-    state => state.loading
+    state => state.previewLoading
 );
