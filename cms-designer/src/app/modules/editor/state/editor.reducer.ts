@@ -3,10 +3,13 @@ import { BlocksSchema, BlockValuesModel } from 'src/app/modules/shared/models';
 import { PageModel } from '../models';
 
 export interface EditorState {
+    pageLoading: boolean;
+    schemaLoading: boolean;
+    pageLoaded: boolean;
+    schemaLoaded: boolean;
+
     showNewBlockSelector: boolean;
     currentSectionItem: BlockValuesModel;
-    error: string;
-    pageLoading: boolean;
     initialPage: string;
     page: PageModel;
     blocksSchema: BlocksSchema;
@@ -15,10 +18,13 @@ export interface EditorState {
 }
 
 const initialState: EditorState = {
+    pageLoading: false,
+    schemaLoading: false,
+    pageLoaded: false,
+    schemaLoaded: false,
+
     showNewBlockSelector: false,
     currentSectionItem: null,
-    error: '',
-    pageLoading: false,
     initialPage: null,
     page: null,
     blocksSchema: null,
@@ -37,7 +43,7 @@ export function reducer(state = initialState, action: EditorActions): EditorStat
                 dirty: true
             };
         }
-        case EditorActionTypes.BlockTypesLoaded:
+        case EditorActionTypes.BlocksSchemaLoaded:
             return {
                 ...state,
                 blocksSchema: action.payload
@@ -70,7 +76,7 @@ export function reducer(state = initialState, action: EditorActions): EditorStat
         case EditorActionTypes.LoadPageFail:
             return {
                 ...state,
-                error: action.payload,
+                pageLoaded: false,
                 pageLoading: false
             };
         case EditorActionTypes.LoadPageSuccess:
@@ -79,6 +85,7 @@ export function reducer(state = initialState, action: EditorActions): EditorStat
                 page: action.payload,
                 initialPage: JSON.stringify(action.payload),
                 pageLoading: false,
+                pageLoaded: true,
                 dirty: false
             };
         case EditorActionTypes.MoveBlock: {
@@ -114,8 +121,7 @@ export function reducer(state = initialState, action: EditorActions): EditorStat
         case EditorActionTypes.SavePageFail:
             return {
                 ...state,
-                pageLoading: false,
-                error: action.payload
+                pageLoading: false
             };
         case EditorActionTypes.SavePageSuccess:
             return {

@@ -43,8 +43,7 @@ export const getPageLoading = createSelector(
     state => state.pageLoading
 );
 
-export const getError = createSelector(
+export const getSchemaLoading = createSelector(
     getEditorFeatureState,
-    state => state.error
+    state => state.schemaLoading
 );
-

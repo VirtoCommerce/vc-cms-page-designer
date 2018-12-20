@@ -74,7 +74,6 @@ describe('Theme reducer', () => {
 
         it('should set the given error message', () => {
             expect(state.schema).toEqual([]);
-            expect(state.error).toEqual(message);
         });
 
         it('should reset loading flag to false', () => {
@@ -234,7 +233,6 @@ describe('Theme reducer', () => {
         const state = fromTheme.reducer(currentState, action);
         it('should reset loading flag and set correct error value', () => {
             expect(state.presetsLoading).toEqual(false);
-            expect(state.error).toEqual(message);
         });
     });
     describe('SelectSchemaItem action', () => {

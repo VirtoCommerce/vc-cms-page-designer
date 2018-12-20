@@ -3,31 +3,37 @@ import { PresetsModel } from '../models/presets.model';
 import { BlockSchema, ValueType } from '../../shared/models';
 
 export interface ThemeState {
-    showPresetsEditor: boolean;
-    error: string;
     schemaLoading: boolean;
+    schemaLoaded: boolean;
     presetsLoading: boolean;
+    presetsLoaded: boolean;
+    draftUploaded: boolean;
+    uploadDraftFail: boolean;
+
+    showPresetsEditor: boolean;
     selectedSchemaItem: BlockSchema; // this section corresponds to section from schema
     editableTheme: { [key: string]: ValueType }; // the current theme
     presets: PresetsModel; // the whole presets file which used as transport for preview
     initialPresets: string; // initial file with presets and theme as string
     schema: BlockSchema[]; // the settings schema
     dirty: boolean;
-    draftUploaded: boolean;
 }
 
 export const initialState: ThemeState = {
+    schemaLoading: false,
+    schemaLoaded: false,
+    presetsLoading: false,
+    presetsLoaded: false,
+    draftUploaded: false,
+    uploadDraftFail: false,
+
     showPresetsEditor: false,
     selectedSchemaItem: null,
-    error: '',
-    schemaLoading: false,
-    presetsLoading: false,
     editableTheme: {},
     presets: null,
     initialPresets: null,
     schema: [],
-    dirty: false,
-    draftUploaded: false
+    dirty: false
 };
 
 export function reducer(state = initialState, action: ThemeActions): ThemeState {
@@ -46,7 +52,6 @@ export function reducer(state = initialState, action: ThemeActions): ThemeState 
         case ThemeActionTypes.LoadSchemaFail:
             return {
                 ...state,
-                error: action.payload,
                 schemaLoading: false
             };
         case ThemeActionTypes.SaveTheme: {
@@ -86,7 +91,6 @@ export function reducer(state = initialState, action: ThemeActions): ThemeState 
         case ThemeActionTypes.LoadThemesFail:
             return {
                 ...state,
-                error: action.payload,
                 presetsLoading: false
             };
         case ThemeActionTypes.SelectSchemaItem:
