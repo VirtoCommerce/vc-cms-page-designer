@@ -29,10 +29,10 @@ export const initialState: ThemeState = {
 
     showPresetsEditor: false,
     selectedSchemaItem: null,
-    editableTheme: {},
+    editableTheme: null,
     presets: null,
     initialPresets: null,
-    schema: [],
+    schema: null,
     dirty: false
 };
 

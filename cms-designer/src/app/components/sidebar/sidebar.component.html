@@ -14,7 +14,7 @@
                 <app-tabs>
                     <app-tab tabTitle="Sections" active="true">
                         <app-page-editor [model]="page$ | async" [schema]="blocksSchema$ | async" (selectEvent)="selectPageItem($event)"
-                            [noSchema]="schemaNotLoaded$ | async" [noPage]="pageNotLoaded$ | async" (reloadPage)="reloadEditorData()" (reloadSchema)="reloadEditorData()"
+                            [noSchema]="schemaNotLoaded$ | async" [noPage]="pageNotLoaded$ | async" (reloadData)="reloadEditorData()"
                             (orderChangedEvent)="onOrderChanged($event)" (addNewBlockEvent)="setNewBlockMode(true)"></app-page-editor>
                     </app-tab>
                     <app-tab *ngIf="themeSchema$ | async" tabTitle="Theme">
