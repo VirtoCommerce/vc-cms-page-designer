@@ -1,6 +1,7 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import { tap } from 'rxjs/operators';
+import { tap, filter, map } from 'rxjs/operators';
 
 import { ErrorsService } from './../modules/shared/services/errors.service';
 
@@ -13,25 +14,14 @@ export class ErrorsEffects {
 
     @Effect({ dispatch: false })
     loadBlocksSchemaFail$ = this.actions$.pipe(
-        ofType<editorActions.BlocksSchemaFail>(editorActions.EditorActionTypes.BlocksSchemaFail),
-        tap(action => this.errors.displayMessage(action.payload))
-    );
-
-    @Effect({ dispatch: false })
-    loadPageFail$ = this.actions$.pipe(
-        ofType<editorActions.LoadPageFail>(editorActions.EditorActionTypes.LoadPageFail),
-        tap(action => this.errors.displayMessage(action.payload))
-    );
-
-    @Effect({ dispatch: false })
-    loadThemeFail$ = this.actions$.pipe(
-        ofType<themeActions.LoadThemesFail>(themeActions.ThemeActionTypes.LoadThemesFail),
-        tap(action => this.errors.displayMessage(action.payload))
-    );
-
-    @Effect({ dispatch: false })
-    loadThemeSchemaFail$ = this.actions$.pipe(
-        ofType<themeActions.LoadSchemaFail>(themeActions.ThemeActionTypes.LoadSchemaFail),
-        tap(action => this.errors.displayMessage(action.payload))
+        ofType(
+            editorActions.EditorActionTypes.BlocksSchemaFail,
+            editorActions.EditorActionTypes.LoadPageFail,
+            themeActions.ThemeActionTypes.LoadThemesFail,
+            themeActions.ThemeActionTypes.LoadSchemaFail
+        ),
+        map((action: any) => <HttpErrorResponse>action.payload),
+        filter(response => response.status >= 400), // server or request error
+        tap(response => this.errors.displayMessage(response.error.error.message, response))
     );
 }

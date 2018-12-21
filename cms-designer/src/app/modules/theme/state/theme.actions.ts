@@ -2,6 +2,7 @@ import { Action } from '@ngrx/store';
 
 import { PresetsModel } from '../models/presets.model';
 import { BlockSchema } from '../../shared/models';
+import { HttpErrorResponse } from '@angular/common/http';
 
 export enum ThemeActionTypes {
     LoadThemes = '[Theme] Load Themes',
@@ -40,7 +41,7 @@ export class LoadThemesSuccess implements Action {
 export class LoadThemesFail implements Action {
     readonly type = ThemeActionTypes.LoadThemesFail;
 
-    constructor(public payload: string) { }
+    constructor(public payload: HttpErrorResponse) { }
 }
 
 export class SaveTheme implements Action {
@@ -70,7 +71,7 @@ export class LoadSchemaSuccess implements Action {
 export class LoadSchemaFail implements Action {
     readonly type = ThemeActionTypes.LoadSchemaFail;
 
-    constructor(public payload: string) { }
+    constructor(public payload: HttpErrorResponse) { }
 }
 
 export class SelectSchemaItem implements Action {

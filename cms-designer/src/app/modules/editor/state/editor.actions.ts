@@ -5,6 +5,7 @@ import { Action } from '@ngrx/store';
 import { PageModel } from '../models/page.model';
 import { SortEvent } from '../../shared/components';
 import { BlockSchema, BlocksSchema } from 'src/app/modules/shared/models';
+import { HttpErrorResponse } from '@angular/common/http';
 
 export enum EditorActionTypes {
     AddPageItem = '[Page] Add Page Item',
@@ -45,7 +46,7 @@ export class AddPageItem implements Action {
 export class BlocksSchemaFail implements Action {
     readonly type = EditorActionTypes.BlocksSchemaFail;
 
-    constructor(public payload: any /* todo: set type */) { }
+    constructor(public payload: HttpErrorResponse) { }
 }
 
 export class BlocksSchemaLoaded implements Action {
@@ -105,7 +106,7 @@ export class LoadPage implements Action {
 
 export class LoadPageFail implements Action {
     readonly type = EditorActionTypes.LoadPageFail;
-    constructor(public payload: string) { }
+    constructor(public payload: HttpErrorResponse) { }
 }
 
 export class LoadPageSuccess implements Action {
