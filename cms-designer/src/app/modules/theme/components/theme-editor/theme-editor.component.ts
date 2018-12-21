@@ -1,4 +1,5 @@
 import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
+import { BlockSchema } from 'src/app/modules/shared/models';
 
 @Component({
     selector: 'app-theme-editor',
@@ -7,10 +8,13 @@ import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
 })
 export class ThemeEditorComponent implements OnInit {
 
-    @Input() schema;
+    @Input() schema: BlockSchema[];
+    @Input() noSchema: boolean;
+    @Input() noPresets: boolean;
 
     @Output() selectItemEvent = new EventEmitter<any>();
     @Output() selectPresetEvent = new EventEmitter<any>();
+    @Output() reloadData = new EventEmitter<any>();
 
     constructor() { }
 
@@ -22,5 +26,9 @@ export class ThemeEditorComponent implements OnInit {
 
     selectItem(item: any) {
         this.selectItemEvent.emit(item);
+    }
+
+    onReloadData() {
+        this.reloadData.emit();
     }
 }

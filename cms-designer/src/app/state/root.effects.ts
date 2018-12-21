@@ -247,16 +247,4 @@ export class RootEffects {
             this.preview.cloneBlock(<number>action.payload.oldBlock.id, <number>action.payload.newBlock.id, store.primaryFrameId);
         })
     );
-
-    @Effect({ dispatch: false })
-    loadBlocksSchemaFail$ = this.actions$.pipe(
-        ofType<editorActions.BlocksSchemaFail>(editorActions.EditorActionTypes.BlocksSchemaFail),
-        tap(action => this.errors.displayMessage(action.payload))
-    );
-
-    @Effect({ dispatch: false })
-    loadPageFail$ = this.actions$.pipe(
-        ofType<editorActions.LoadPageFail>(editorActions.EditorActionTypes.LoadPageFail),
-        tap(action => this.errors.displayMessage(action.payload))
-    );
 }

@@ -1,3 +1,4 @@
+import { ErrorsEffects } from './state/errors.effects';
 import { PlatformService } from 'src/app/services/platform.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, APP_INITIALIZER } from '@angular/core';
@@ -51,7 +52,7 @@ import { AppHttpInterceptor } from './services/app-http.interceptor';
             // stateSanitizer: (state: any, id: number): any => {
             // }
         }),
-        EffectsModule.forRoot([RootEffects]),
+        EffectsModule.forRoot([RootEffects, ErrorsEffects]),
 
         EditorModule,
         SharedModule,

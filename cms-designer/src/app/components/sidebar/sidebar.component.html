@@ -17,8 +17,9 @@
                             [noSchema]="schemaNotLoaded$ | async" [noPage]="pageNotLoaded$ | async" (reloadData)="reloadEditorData()"
                             (orderChangedEvent)="onOrderChanged($event)" (addNewBlockEvent)="setNewBlockMode(true)"></app-page-editor>
                     </app-tab>
-                    <app-tab *ngIf="themeSchema$ | async" tabTitle="Theme">
+                    <app-tab tabTitle="Theme">
                         <app-theme-editor [schema]="themeSchema$ | async" (selectPresetEvent)="turnOnPresets()"
+                            [noSchema]="themeSchemaNotLoaded$ | async" [noPresets]="presetsNotLoaded$ | async" (reloadData)="reloadThemeData()"
                             (selectItemEvent)="selectSchemaItem($event)"></app-theme-editor>
                     </app-tab>
                 </app-tabs>

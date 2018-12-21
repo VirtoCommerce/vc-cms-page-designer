@@ -20,7 +20,7 @@ export class ThemeEffects {
         mergeMap(() =>
             this.themeService.loadPresets().pipe(
                 map(data => new themeActions.LoadThemesSuccess(data)),
-                catchError(err => of(new themeActions.LoadThemesFail(err)))
+                catchError(error => of(new themeActions.LoadThemesFail(error)))
             )
         )
     );
@@ -31,7 +31,7 @@ export class ThemeEffects {
         mergeMap(() =>
             this.themeService.loadSchema().pipe(
                 map(data => new themeActions.LoadSchemaSuccess(data)),
-                catchError(err => of(new themeActions.LoadSchemaFail(err)))
+                catchError(error => of(new themeActions.LoadSchemaFail(error)))
             )
         )
     );

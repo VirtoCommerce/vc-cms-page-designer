@@ -1,8 +1,18 @@
 <ul class="list">
-    <li class="list-item">
-        <a class="list-link" (click)="selectPresets()"><i class="list-ico fas fa-wrench"></i><span class="list-t"> Presets </span></a>
+    <li class="list-item" *ngIf="!noPresets">
+        <a class="list-link" (click)="selectPresets()"><i class="list-ico fas fa-wrench"></i><span class="list-t">Presets</span></a>
     </li>
-    <li class="list-item" *ngFor="let item of schema">
-        <a class="list-link" (click)="selectItem(item)"><i class="list-ico" [appIcon]="item.icon"></i><span class="list-t"> {{ item.name }} </span></a>
+    <ng-container *ngIf="!noSchema && !noPresets">
+        <li class="list-item" *ngFor="let item of schema">
+            <a class="list-link" (click)="selectItem(item)"><i class="list-ico" [appIcon]="item.icon"></i><span class="list-t">{{ item.name }}</span></a>
+        </li>
+    </ng-container>
+    <li class="list-item" *ngIf="noPresets">
+        <div style="padding: 20px;">Theme settings was not loaded</div>
+        <div style="text-align: center;"><button class="btn" (click)="onReloadData()">Try again</button></div>
+    </li>
+    <li class="list-item" *ngIf="!noPresets && noSchema">
+        <div style="padding: 20px;">Theme schema was not loaded</div>
+        <div style="text-align: center;"><button class="btn" (click)="onReloadData()">Try again</button></div>
     </li>
 </ul>

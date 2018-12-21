@@ -36,6 +36,8 @@ export class SidebarComponent implements OnInit {
     theme$ = this.store.pipe(select(fromTheme.getEditableTheme));
     currentThemeSchemaItem$ = this.store.pipe(select(fromTheme.getCurrentThemeSchemaItem));
     showPresets$ = this.store.pipe(select(fromTheme.getShowPresetsEditor));
+    presetsNotLoaded$ = this.store.pipe(select(fromTheme.getPresetsNotLoaded));
+    themeSchemaNotLoaded$ = this.store.pipe(select(fromTheme.getSchemaNotLoaded));
 
     // combined states
     isLoading$ = this.store.pipe(select(fromRoot.getIsLoading));
@@ -78,7 +80,7 @@ export class SidebarComponent implements OnInit {
         this.store.dispatch(new themeActions.CancelPreset());
     }
 
-    liveUpdateTheme(themeValues: {[key: string]: string|number|boolean}) {
+    liveUpdateTheme(themeValues: { [key: string]: string | number | boolean }) {
         this.store.dispatch(new themeActions.UpdateTheme(themeValues));
     }
 
@@ -86,13 +88,17 @@ export class SidebarComponent implements OnInit {
         this.store.dispatch(new themeActions.ApplyPreset(name));
     }
 
-    reloadEditorData() {
+    reloadThemeData() {
         this.store.dispatch(new rootActions.LoadData());
     }
 
     //#endregion
 
     //#region page editor actions
+
+    reloadEditorData() {
+        this.store.dispatch(new rootActions.LoadData());
+    }
 
     selectPageItem(item: BlockValuesModel) {
         this.store.dispatch(new editorActions.SelectPageItem(item));

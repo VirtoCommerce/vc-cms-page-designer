@@ -47,3 +47,13 @@ export const getEditableTheme = createSelector(
     getThemeFeatureState,
     state => state.editableTheme
 );
+
+export const getPresetsNotLoaded = createSelector(
+    getThemeFeatureState,
+    state => state.presetsNotLoaded
+);
+
+export const getSchemaNotLoaded = createSelector(
+    getThemeFeatureState,
+    state => state.schemaNotLoaded
+);
