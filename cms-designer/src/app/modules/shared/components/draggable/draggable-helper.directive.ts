@@ -1,9 +1,11 @@
+import { Subscription } from 'rxjs';
 import {
     Directive,
     OnInit,
     TemplateRef,
     ViewContainerRef,
-    EmbeddedViewRef
+    EmbeddedViewRef,
+    OnDestroy
 } from '@angular/core';
 import { DraggableDirective } from './draggable.directive';
 import { SortableListDirective } from './sortable-list.directive';
@@ -12,11 +14,12 @@ import { SortableListDirective } from './sortable-list.directive';
     selector: '[appDraggableHelper]',
     exportAs: 'appDraggableHelper'
 })
-export class DraggableHelperDirective implements OnInit {
+export class DraggableHelperDirective implements OnInit, OnDestroy {
 
     private startPosition = 0;
     private startRect: ClientRect;
     private element: HTMLElement;
+    private subscriptions: Subscription[] = [];
 
     constructor(
         private draggable: DraggableDirective,
@@ -26,9 +29,14 @@ export class DraggableHelperDirective implements OnInit {
     ) { }
 
     ngOnInit(): void {
-        this.draggable.dragStart.subscribe(event => this.onDragStart(event));
-        this.draggable.dragMove.subscribe(event => this.onDragMove(event));
-        this.draggable.dragEnd.subscribe(() => this.onDragEnd());
+        this.subscriptions.push(this.draggable.dragStart.subscribe(event => this.onDragStart(event)));
+        this.subscriptions.push(this.draggable.dragMove.subscribe(event => this.onDragMove(event)));
+        this.subscriptions.push(this.draggable.dragEnd.subscribe(() => this.onDragEnd()));
+    }
+
+    ngOnDestroy(): void {
+        this.subscriptions.forEach(x => x.unsubscribe());
+        this.subscriptions = [];
     }
 
     private onDragStart(event: PointerEvent): void {

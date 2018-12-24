@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import { FilesService } from '../../services/files.service';
 import { BaseControlComponent } from '../base-control.component';
 import { ImageControlDescriptor } from '../../models';

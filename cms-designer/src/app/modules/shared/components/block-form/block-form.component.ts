@@ -1,13 +1,14 @@
-import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectorRef, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { BlockSchema, BlockValuesModel } from 'src/app/modules/shared/models';
 import { FormHelper } from '../../services/form.helper';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'app-block-form',
     templateUrl: './block-form.component.html'
 })
-export class BlockFormComponent implements OnInit {
+export class BlockFormComponent implements OnInit, OnDestroy {
 
     private _model: BlockValuesModel;
     private _schema: BlockSchema;
@@ -37,20 +38,29 @@ export class BlockFormComponent implements OnInit {
 
     form: FormGroup;
 
+    private subscription: Subscription = null;
+
     constructor(private formHelper: FormHelper, private changeDetector: ChangeDetectorRef) { }
 
     ngOnInit() {
         this.createForm();
     }
 
+    ngOnDestroy() {
+        if (this.subscription != null) {
+            this.subscription.unsubscribe();
+            this.subscription = null;
+        }
+    }
+
     private createForm() {
         if (this.model && this.schema && this.model.type === this.schema.type) {
             this.form = this.formHelper.generateForm(this.model, this.schema.settings);
-            this.form.valueChanges.subscribe(value => {
+            this.subscription = this.form.valueChanges.subscribe(value => {
                 this.modelChange.emit(value);
             });
-            this.changeDetector.markForCheck();
-            this.changeDetector.detectChanges();
+            // this.changeDetector.markForCheck();
+            // this.changeDetector.detectChanges();
         }
     }
 

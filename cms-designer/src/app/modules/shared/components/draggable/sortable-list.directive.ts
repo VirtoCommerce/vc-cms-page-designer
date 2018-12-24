@@ -1,4 +1,4 @@
-import { AfterContentInit, ContentChildren, Directive, EventEmitter, Output, QueryList, ElementRef } from '@angular/core';
+import { AfterContentInit, ContentChildren, Directive, EventEmitter, Output, QueryList, ElementRef, OnDestroy } from '@angular/core';
 import { DraggableDirective } from './draggable.directive';
 import { Subscription } from 'rxjs';
 
@@ -26,13 +26,14 @@ const vCenter = (rect: ClientRect): number => {
 @Directive({
     selector: '[appSortableList]'
 })
-export class SortableListDirective implements AfterContentInit {
+export class SortableListDirective implements AfterContentInit, OnDestroy {
     @ContentChildren(DraggableDirective) sortables: QueryList<DraggableDirective>;
 
     @Output() sort = new EventEmitter<SortEvent>();
 
     private clientRects: ClientRect[];
     private subscriptions: Subscription[] = [];
+    private subscription: Subscription = null;
     private startIndex: number;
     private newIndex: number;
     private startPosition: number;
@@ -40,7 +41,7 @@ export class SortableListDirective implements AfterContentInit {
     constructor(public element: ElementRef) { }
 
     ngAfterContentInit(): void {
-        this.sortables.changes.subscribe(() => {
+        this.subscription = this.sortables.changes.subscribe(() => {
             this.subscriptions.forEach(x => x.unsubscribe());
             this.sortables.forEach(x => {
                 this.subscriptions.push(x.dragStart.subscribe(() => this.measureElement(x)));
@@ -49,6 +50,13 @@ export class SortableListDirective implements AfterContentInit {
             });
         });
         this.sortables.notifyOnChanges();
+    }
+
+    ngOnDestroy() {
+        if (this.subscription !== null) {
+            this.subscription.unsubscribe();
+            this.subscription = null;
+        }
     }
 
     private measureElement(draggable: DraggableDirective) {
