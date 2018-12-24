@@ -1673,7 +1673,7 @@ fieldset + fieldset
                 content: '\f00d';
                 font-family: 'Font Awesome 5 Free';
                 font-size: 12px;
-                font-weight: normal;
+                font-weight: bold;
                 line-height: 20px;
                 position: absolute;
                 right: 0;
