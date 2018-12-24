@@ -78,6 +78,10 @@ export class ElementsFormComponent implements OnInit {
         // return this.group.get(name) as FormArray;
     }
 
+    trackByFn(index, item) {
+        return item.id;
+    }
+
     private getFormArray(descriptor: CollectionControlDescriptor): FormArray {
         const formArray = this.group.get(descriptor.id) as FormArray;
         return formArray;

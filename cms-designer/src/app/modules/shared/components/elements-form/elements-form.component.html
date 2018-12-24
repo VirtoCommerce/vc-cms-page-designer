@@ -9,7 +9,7 @@
         <div *ngIf="displayCollection(control)">
             <div [formArrayName]="control.id">
                 <app-accordeon appSortableList (sort)="sortItems(control, $event)">
-                    <app-acc-item *ngFor="let item of getControls(control); let i = index;" [title]="getTitle(item, control)"
+                    <app-acc-item *ngFor="let item of getControls(control); let i = index; trackBy: trackByFn" [title]="getTitle(item, control)"
                         appDraggable>
                         <div [formGroupName]="i">
 

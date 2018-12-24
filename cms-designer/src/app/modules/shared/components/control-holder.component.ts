@@ -1,4 +1,4 @@
-import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormGroup, FormControlName } from '@angular/forms';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormGroup } from '@angular/forms';
 
 import { BaseControlComponent } from '../controls/base-control.component';
 import { ControlsFactory } from '../controls/controls.factory';
@@ -8,7 +8,8 @@ import {
     Input,
     OnInit,
     ViewChild,
-    forwardRef
+    forwardRef,
+    ChangeDetectionStrategy
 } from '@angular/core';
 import { ControlHostDirective } from './control-host.directive';
 import { ControlDescriptor, BaseDescriptor } from '../models';
@@ -20,7 +21,8 @@ import { ControlDescriptor, BaseDescriptor } from '../models';
         provide: NG_VALUE_ACCESSOR,
         useExisting: forwardRef(() => ControlHolderComponent),
         multi: true,
-    }]
+    }],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ControlHolderComponent implements OnInit, ControlValueAccessor {
 
@@ -67,4 +69,8 @@ export class ControlHolderComponent implements OnInit, ControlValueAccessor {
         }
     }
 
+    get changeDetection() {
+        console.log(1);
+        return true;
+    }
 }
