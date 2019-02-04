@@ -1,0 +1,17 @@
+{
+    "name": "preview-store",
+    "version": "0.2.0",
+    "description": "",
+    "private": true,
+    "main": "src/main.ts",
+    "scripts": {
+        "build": "webpack --config webpack.config.js"
+    },
+    "dependencies": {
+        "ts-loader": "^5.3.3",
+        "tslint": "^5.12.1",
+        "typescript": "^3.3.1",
+        "webpack": "^4.29.0",
+        "webpack-cli": "^3.2.1"
+    }
+}
