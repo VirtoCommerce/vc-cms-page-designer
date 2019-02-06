@@ -1,7 +1,9 @@
-import { Environment } from './../environment';
 import { BlockModel } from '../models';
 
 export class HttpService {
+
+    constructor(private endpoint: string) { }
+
     get() {
 
     }
@@ -10,7 +12,7 @@ export class HttpService {
         // https://gist.github.com/codecorsair/e14ec90cee91fa8f56054afaa0a39f13
         return new Promise<string>((resolve, reject) => {
             const xhr = new XMLHttpRequest();
-            xhr.open('post', Environment.RenderBlockApiUrl);
+            xhr.open('post', this.endpoint);
 
             xhr.setRequestHeader('Accept', 'application/json, text/javascript, text/plain')
             xhr.setRequestHeader('Cache-Control', 'no-cache');

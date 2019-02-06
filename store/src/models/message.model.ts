@@ -1,14 +1,16 @@
 export interface MessageModel {
     type?: string;
-    content?: {
-        id?: number;
-        source?: number;
-        destination?: number;
-        currentIndex?: number;
-        newIndex?: number;
-    };
+    content?: any;
 }
 
 export interface MessagePageModel {
     content: any[];
+}
+
+interface tmpMOdel {
+    id?: number;
+    source?: number;
+    destination?: number;
+    currentIndex?: number;
+    newIndex?: number;
 }
