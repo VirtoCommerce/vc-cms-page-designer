@@ -4,13 +4,28 @@ import { BlockModel } from './models';
 import { View } from './view';
 
 export class BlockViewModel {
-    index: number = null;
+    private _model: BlockModel;
     html: string;
     element: HTMLElement;
 
+    get model() {
+        return this._model;
+    }
+
+    set model(value: BlockModel) {
+        if (this._model != value) {
+            this._model = value;
+            this.html = null
+        }
+    }
+
     eventListener: BlockEventListener;
 
-    constructor(public model: BlockModel, private http: HttpService) { }
+    private hoverListener = () => this.eventListener.elementHover(this);
+
+    constructor(model: BlockModel, private http: HttpService) {
+        this.model = model;
+    }
 
     fromHtml(html: string) {
         this.html = html;
@@ -32,24 +47,34 @@ export class BlockViewModel {
         }
     }
 
+    highlight() {
+    }
+
+    unlight() {
+
+    }
+
     render(view: View, index: number, force: boolean = false): Promise<BlockViewModel> {
         // TODO: add element to view
-        return new Promise<BlockViewModel>((reject, resolve) => {
-            if (force || !this.element) {
-                return this.http.post(this.model).then(html => {
-                    this.fromHtml(html);
-                    view.setElement(index, this.element);
-                    return this;
-                });
-            }
-            resolve(this);
-        });
+        if (force || !this.element) {
+            return this.http.post(this.model).then(html => {
+                this.fromHtml(html);
+                view.setElement(index, this.element);
+                return this;
+            });
+        }
+        return Promise.resolve(this);
     }
 
     private createElement() {
+        if (this.element) {
+            this.element.removeEventListener('mouseover', this.hoverListener);
+            this.element.remove();
+        }
         const div = document.createElement('div');
         div.innerHTML = this.html;
         const result = <HTMLElement>div.firstChild;
+        result.addEventListener('mouseover', this.hoverListener);
         // TODO: add events
         //      hover
         //      mouse up
@@ -57,4 +82,5 @@ export class BlockViewModel {
         //      mouse move
         this.element = result;
     }
+
 }

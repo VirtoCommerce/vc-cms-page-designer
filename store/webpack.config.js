@@ -29,15 +29,15 @@ module.exports = {
                 test: /\.ts$/,
                 use: 'ts-loader',
                 exclude: /node_modules/
-            }
+            },
             // /****************
             // * PRE-LOADERS
             // *****************/
-            // {
-            //     enforce: 'pre',
-            //     test: /\.js$/,
-            //     use: 'source-map-loader'
-            // },
+            {
+                enforce: 'pre',
+                test: /\.js$/,
+                use: 'source-map-loader'
+            }
             // {
             //     enforce: 'pre',
             //     test: /\.ts$/,
@@ -56,6 +56,6 @@ module.exports = {
         ]
     },
 
-    devtool: 'cheap-module-source-map',
+    devtool: 'source-map',
     devServer: {}
 };

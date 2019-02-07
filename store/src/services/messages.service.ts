@@ -15,6 +15,6 @@ export class MessagesService {
     }
 
     private send(message: string) {
-
+        window.parent.postMessage({ type: message }, this.parentOrigin);
     }
 }

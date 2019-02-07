@@ -4,6 +4,12 @@
         "outDir": "./dist/",
         "sourceMap": true,
         "module": "commonjs",
-        "target": "es2015"
-    }
+        "target": "es6"
+    },
+    "include": [
+        "src/**/*"
+    ],
+    "exclude": [
+        "node_modules"
+    ]
 }

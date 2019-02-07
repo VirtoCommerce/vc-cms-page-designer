@@ -16,6 +16,7 @@ export class Controller {
             this.messageSerice.renderComplete();
         };
         this.vm.elementHover = (block: BlockViewModel) => {
+            this.vm.highlightBlock(block);
             this.messageSerice.blockHover(block.model);
         };
         this.vm.elementClick = (block: BlockViewModel) => {

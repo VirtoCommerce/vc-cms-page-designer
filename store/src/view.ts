@@ -1,8 +1,12 @@
 export class View {
-    constructor(private container: HTMLElement) { }
+
+    private shadowContainer: HTMLElement;
+
+    constructor(private container: HTMLElement) {
+        console.log(container);
+    }
 
     setElement(index: number, element: HTMLElement) {
-        console.log(1);
         if (this.container.children.length > index) {
             const currentElement = this.container.children.item(index);
             if (currentElement != element) {

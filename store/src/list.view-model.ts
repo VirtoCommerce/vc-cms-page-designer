@@ -9,8 +9,9 @@ export class ListViewModel implements BlockEventListener {
 
     private blocks: BlockViewModel[] = [];
     private selectedBlock: BlockViewModel;
+    private highlightedBlock: BlockViewModel;
 
-    renderComplete = () => {};
+    renderComplete = () => { };
 
     elementHover = (source: BlockViewModel) => { };
     elementClick = (source: BlockViewModel) => { };
@@ -20,14 +21,28 @@ export class ListViewModel implements BlockEventListener {
     // public
 
     addOrUpdate(message: MessageModel) {
-        const key = this.asKey(message.content.id);
-        const vm = this.getBlock(key) || this.createBlockViewModel(message.content);
-        const index = this.setBlock(key, vm);
-        vm.render(this.view, index, true);
+        this.removeBlockById(null);
+        if (!!message.content) {
+            const key = this.asKey(message.content.id);
+            const vm = this.getBlock(key) || this.createBlockViewModel(message.content);
+            const index = this.setBlock(key, vm);
+            vm.render(this.view, index, true);
+        }
     }
 
     scrollTo(message: MessageModel) {
         // TODO:
+    }
+
+    highlightBlock(vm: BlockViewModel) {
+        if (!!this.highlightedBlock) {
+            this.highlightedBlock.unlight();
+            this.highlightedBlock = null;
+        }
+        if (this.selectedBlock !== vm) {
+            this.highlightedBlock = vm;
+            vm.highlight();
+        }
     }
 
     selectBlock(message: MessageModel) {
@@ -40,15 +55,7 @@ export class ListViewModel implements BlockEventListener {
     }
 
     removeBlock(message: MessageModel) {
-        const key = this.asKey(message.content.id)
-        const vm = this.getBlock(key);
-        const index = this.blocks.indexOf(vm);
-        if (this.selectedBlock == vm) {
-            this.selectedBlock = null;
-        }
-        vm.remove();
-        this.blocks.splice(index, 1);
-        delete this.blocks[key];
+        this.removeBlockById(message.content.id);
     }
 
     cloneBlock(message: MessageModel) {
@@ -82,6 +89,20 @@ export class ListViewModel implements BlockEventListener {
 
     private raiseRenderComplete() {
         this.renderComplete();
+    }
+
+    private removeBlockById(id: number) {
+        const key = this.asKey(id);
+        const vm = this.getBlock(key);
+        if (!!vm) {
+            const index = this.blocks.indexOf(vm);
+            if (this.selectedBlock == vm) {
+                this.selectedBlock = null;
+            }
+            vm.remove();
+            this.blocks.splice(index, 1);
+            delete this.blocks[key];
+        }
     }
 
     private addBlock(block: BlockViewModel, index: number = null) {
@@ -118,7 +139,9 @@ export class ListViewModel implements BlockEventListener {
     }
 
     private asKey(id: number): string {
-        return `instanse${id}`;
+        if (!!id || id == 0)
+            return `instanse${id}`;
+        return 'preview-instance';
     }
 
     private createBlockViewModel(model: BlockModel) {
