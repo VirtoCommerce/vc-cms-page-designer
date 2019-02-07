@@ -1,5 +1,4 @@
 import { HttpService } from './services/http.service';
-import { BlocksViewModelFactory } from './block-vm.factory';
 import { MessagesService } from './services/messages.service';
 import { App } from './app';
 import { View } from './view';
@@ -13,8 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const messages = new MessagesService(Environment.DesignerUrl);
 
     const view = new View(targetElement);
-    const blocksFactory = new BlocksViewModelFactory(http);
-    const listViewModel = new ListViewModel(view, blocksFactory);
+    const listViewModel = new ListViewModel(view, http);
     const controller = new Controller(listViewModel, messages);
     const app = new App(controller);
     app.run();

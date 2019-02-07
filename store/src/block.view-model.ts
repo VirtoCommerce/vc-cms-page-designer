@@ -1,7 +1,5 @@
 import { BlockEventListener } from './block.event-listener';
-import { HttpService } from './services/http.service';
 import { BlockModel } from './models';
-import { View } from './view';
 
 export class BlockViewModel {
     private _model: BlockModel;
@@ -23,7 +21,7 @@ export class BlockViewModel {
 
     private hoverListener = () => this.eventListener.elementHover(this);
 
-    constructor(model: BlockModel, private http: HttpService) {
+    constructor(model: BlockModel) {
         this.model = model;
     }
 
@@ -32,38 +30,11 @@ export class BlockViewModel {
         this.createElement();
     }
 
-    select() {
-        // TODO: set element properties
-    }
-
-    deselect() {
-        // TODO: set element properties
-    }
-
     remove() {
         if (!!this.element) {
             this.eventListener = null;
             this.element.remove();
         }
-    }
-
-    highlight() {
-    }
-
-    unlight() {
-
-    }
-
-    render(view: View, index: number, force: boolean = false): Promise<BlockViewModel> {
-        // TODO: add element to view
-        if (force || !this.element) {
-            return this.http.post(this.model).then(html => {
-                this.fromHtml(html);
-                view.setElement(index, this.element);
-                return this;
-            });
-        }
-        return Promise.resolve(this);
     }
 
     private createElement() {

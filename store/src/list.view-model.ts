@@ -3,7 +3,7 @@ import { MessageModel, MessagePageModel } from './models/message.model';
 import { View } from './view';
 import { BlockViewModel } from './block.view-model';
 import { BlockModel } from './models';
-import { BlocksViewModelFactory } from './block-vm.factory';
+import { HttpService } from './services/http.service';
 
 export class ListViewModel implements BlockEventListener {
 
@@ -16,7 +16,7 @@ export class ListViewModel implements BlockEventListener {
     elementHover = (source: BlockViewModel) => { };
     elementClick = (source: BlockViewModel) => { };
 
-    constructor(private view: View, private factory: BlocksViewModelFactory) { }
+    constructor(private view: View, private http: HttpService) { }
 
     // public
 
@@ -26,7 +26,7 @@ export class ListViewModel implements BlockEventListener {
             const key = this.asKey(message.content.id);
             const vm = this.getBlock(key) || this.createBlockViewModel(message.content);
             const index = this.setBlock(key, vm);
-            vm.render(this.view, index, true);
+            this.view.setElement(index, vm);
         }
     }
 
@@ -36,20 +36,20 @@ export class ListViewModel implements BlockEventListener {
 
     highlightBlock(vm: BlockViewModel) {
         if (!!this.highlightedBlock) {
-            this.highlightedBlock.unlight();
+            this.view.unlight(this.highlightedBlock);
             this.highlightedBlock = null;
         }
         if (this.selectedBlock !== vm) {
             this.highlightedBlock = vm;
-            vm.highlight();
+            this.view.highlight(vm);
         }
     }
 
     selectBlock(message: MessageModel) {
         const vm = this.getBlockById(message.content.id);
-        vm.select();
+        this.view.select(vm);
         if (!!this.selectedBlock) {
-            this.selectedBlock.deselect();
+            this.view.deselect(this.selectedBlock);
         }
         this.selectedBlock = vm;
     }
@@ -83,8 +83,19 @@ export class ListViewModel implements BlockEventListener {
     // private
 
     private render() {
-        const promises = this.blocks.map((x, index) => x.render(this.view, index));
+        const promises = this.blocks.map((x, index) => this.generateElement(x, index));
         Promise.all(promises).then(() => this.raiseRenderComplete());
+    }
+
+    private generateElement(vm: BlockViewModel, index: number, force: boolean = false): Promise<BlockViewModel> {
+        if (force || !vm.element) {
+            return this.http.post(vm.model).then(html => {
+                vm.fromHtml(html);
+                this.view.setElement(index, vm);
+                return vm;
+            });
+        }
+        return Promise.resolve(vm);
     }
 
     private raiseRenderComplete() {
@@ -145,7 +156,7 @@ export class ListViewModel implements BlockEventListener {
     }
 
     private createBlockViewModel(model: BlockModel) {
-        const result = this.factory.getBlockViewModel(model);
+        const result = new BlockViewModel(model);
         result.eventListener = this;
         return result;
     }
