@@ -1,10 +1,8 @@
-import { MessagesService } from './services/messages.service';
-import { BlockModel } from './models';
-import { Controller } from './controller';
+import { ListController } from './list.controller';
 
 export class App {
 
-    constructor(private controller: Controller) { }
+    constructor(private controller: ListController) { }
 
     run() {
         this.init();

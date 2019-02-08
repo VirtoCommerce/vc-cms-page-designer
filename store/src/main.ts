@@ -2,8 +2,7 @@ import { HttpService } from './services/http.service';
 import { MessagesService } from './services/messages.service';
 import { App } from './app';
 import { View } from './view';
-import { Controller } from './controller';
-import { ListViewModel } from './list.view-model';
+import { ListController } from './list.controller';
 import { Environment } from './environment';
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -12,8 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const messages = new MessagesService(Environment.DesignerUrl);
 
     const view = new View(targetElement);
-    const listViewModel = new ListViewModel(view, http);
-    const controller = new Controller(listViewModel, messages);
-    const app = new App(controller);
+    const listController = new ListController(view, http, messages);
+    const app = new App(listController);
     app.run();
 });

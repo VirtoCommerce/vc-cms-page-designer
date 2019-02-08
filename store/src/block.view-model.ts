@@ -13,7 +13,6 @@ export class BlockViewModel {
     set model(value: BlockModel) {
         if (this._model != value) {
             this._model = value;
-            this.html = null
         }
     }
 
@@ -40,7 +39,7 @@ export class BlockViewModel {
     private createElement() {
         if (this.element) {
             this.element.removeEventListener('mouseover', this.hoverListener);
-            this.element.remove();
+            // this.element.remove();
         }
         const div = document.createElement('div');
         div.innerHTML = this.html;

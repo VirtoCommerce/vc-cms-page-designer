@@ -4,52 +4,106 @@ import { View } from './view';
 import { BlockViewModel } from './block.view-model';
 import { BlockModel } from './models';
 import { HttpService } from './services/http.service';
+import { MessagesService } from './services/messages.service';
 
-export class ListViewModel implements BlockEventListener {
+export class ListController implements BlockEventListener {
 
     private blocks: BlockViewModel[] = [];
     private selectedBlock: BlockViewModel;
     private highlightedBlock: BlockViewModel;
 
-    renderComplete = () => { };
+    constructor(private view: View, private http: HttpService, private messageSerice: MessagesService) {
+        view.eventListener = this;
+    }
 
-    elementHover = (source: BlockViewModel) => { };
-    elementClick = (source: BlockViewModel) => { };
+    // #region events
 
-    constructor(private view: View, private http: HttpService) { }
+    private renderComplete() {
+        this.messageSerice.renderComplete();
+    };
 
-    // public
+    messageReceived(message: MessageModel) {
+        switch (message.type) {
+            case 'addOrUpdate':
+                this.addOrUpdate(message);
+                break;
+            case 'settings':
+                document.location.reload();
+                break;
+            case 'scrollTo':
+                this.scrollTo(message);
+                break;
+            case 'select':
+                this.selectBlock(message);
+                break;
+            case 'remove':
+                this.removeBlock(message);
+                break;
+            case 'clone':
+                this.cloneBlock(message);
+                break;
+            case 'page':
+                this.reloadPage(<MessagePageModel>message);
+                break;
+            case 'move':
+                this.moveBlock(message);
+                break;
+            default:
+                console.log(message.type, message);
+                break;
+        }
+    }
+
+    elementHover(source: BlockViewModel) {
+        if (!!this.highlightedBlock) {
+            this.view.unlight();
+            this.highlightedBlock = null;
+        }
+        if (this.selectedBlock !== source && !!source) {
+            this.highlightedBlock = source;
+            this.view.highlight(source);
+        }
+        this.messageSerice.blockHover(source.model);
+
+    };
+
+    elementClick() {
+        const vm = (!this.selectedBlock || this.selectedBlock !== this.highlightedBlock) ? this.highlightedBlock : null;
+        this.selectedBlock = vm;
+        this.messageSerice.selectBlock(vm ? vm.model: null);
+    };
+
+    // #endregion
+
+    // #region public
 
     addOrUpdate(message: MessageModel) {
         this.removeBlockById(null);
         if (!!message.content) {
             const key = this.asKey(message.content.id);
             const vm = this.getBlock(key) || this.createBlockViewModel(message.content);
+            vm.model = message.content;
             const index = this.setBlock(key, vm);
-            this.view.setElement(index, vm);
+            this.generateElement(vm, true).then(x => {
+                this.view.setElement(index, vm);
+            });
         }
     }
 
+    /** */
     scrollTo(message: MessageModel) {
-        // TODO:
-    }
-
-    highlightBlock(vm: BlockViewModel) {
-        if (!!this.highlightedBlock) {
-            this.view.unlight(this.highlightedBlock);
-            this.highlightedBlock = null;
-        }
-        if (this.selectedBlock !== vm) {
-            this.highlightedBlock = vm;
-            this.view.highlight(vm);
-        }
-    }
-
-    selectBlock(message: MessageModel) {
         const vm = this.getBlockById(message.content.id);
-        this.view.select(vm);
+        this.view.scrollTo(vm);
+    }
+
+    /** */
+    selectBlock(message: MessageModel) {
         if (!!this.selectedBlock) {
-            this.view.deselect(this.selectedBlock);
+            this.view.deselect();
+        }
+        const vm = this.getBlockById(message.content.id);
+        if (vm) {
+            this.view.select(vm);
         }
         this.selectedBlock = vm;
     }
@@ -80,18 +134,22 @@ export class ListViewModel implements BlockEventListener {
         this.scrollTo({ content: { id: current.model.id } });
     }
 
-    // private
+    // #endregion
+
+    // #region private
 
     private render() {
-        const promises = this.blocks.map((x, index) => this.generateElement(x, index));
-        Promise.all(promises).then(() => this.raiseRenderComplete());
+        const promises = this.blocks.map((x) => this.generateElement(x));
+        Promise.all(promises).then(() => {
+            this.view.setList(this.blocks);
+            this.raiseRenderComplete();
+        });
     }
 
-    private generateElement(vm: BlockViewModel, index: number, force: boolean = false): Promise<BlockViewModel> {
+    private generateElement(vm: BlockViewModel, force: boolean = false): Promise<BlockViewModel> {
         if (force || !vm.element) {
             return this.http.post(vm.model).then(html => {
                 vm.fromHtml(html);
-                this.view.setElement(index, vm);
                 return vm;
             });
         }
@@ -160,4 +218,6 @@ export class ListViewModel implements BlockEventListener {
         result.eventListener = this;
         return result;
     }
+
+    // #endregion
 }

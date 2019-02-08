@@ -1,38 +1,65 @@
 import { BlockViewModel } from './block.view-model';
+import { BlockEventListener } from './block.event-listener';
 
 export class View {
 
     private highlightDiv: HTMLElement;
     private selectDiv: HTMLElement;
 
+    eventListener: BlockEventListener;
+
     constructor(private container: HTMLElement) {
         this.highlightDiv = this.createShadowElement();
         this.selectDiv = this.createShadowElement();
         document.body.appendChild(this.highlightDiv);
         document.body.appendChild(this.selectDiv);
+
+        this.highlightDiv.style.border = '3px dotted #33ada9';
+        this.selectDiv.style.border = '3px solid #33ada9';
+        this.highlightDiv.addEventListener('mouseleave', () => {
+            this.highlightDiv.style.display = 'none';
+        })
+        this.highlightDiv.addEventListener('click', (event) => {
+            this.eventListener.elementClick();
+            this.placeElementHover(this.highlightDiv, this.selectDiv);
+            this.unlight();
+        })
+        this.selectDiv.addEventListener('click', (event) => {
+            this.eventListener.elementClick();
+            this.placeElementHover(this.selectDiv, this.highlightDiv);
+            this.deselect();
+        })
     }
 
     highlight(model: BlockViewModel) {
-        const rect = this.measureElement(model.element);
-        this.highlightDiv.style.top = rect.top + 'px';
-        this.highlightDiv.style.left = rect.left + 'px';
-        this.highlightDiv.style.height = rect.height + 'px';
-        this.highlightDiv.style.width = rect.width + 'px';
-        this.highlightDiv.style.display = 'block';
-        this.highlightDiv.style.backgroundColor = 'red';
-        console.dir(rect);
+        this.placeElementHover(model.element, this.highlightDiv);
     }
 
-    unlight(model: BlockViewModel) {
+    unlight() {
         this.highlightDiv.style.display = 'none';
     }
 
     select(model: BlockViewModel) {
-        // TODO: set element properties
+        this.placeElementHover(model.element, this.selectDiv);
     }
 
-    deselect(model: BlockViewModel) {
-        // TODO: set element properties
+    deselect() {
+        this.selectDiv.style.display = 'none';
+    }
+
+    scrollTo(model: BlockViewModel) {
+        debugger;
+        const rect = this.measureElement(model.element);
+        const targetPosition = rect.top - window.innerHeight / 10;
+        window.scroll({
+            top: targetPosition,
+            behavior: 'smooth'
+        });
+    }
+
+    setList(list: BlockViewModel[]) {
+        this.container.innerHTML = '';
+        list.forEach(x => this.container.appendChild(x.element));
     }
 
     setElement(index: number, model: BlockViewModel) {
@@ -40,29 +67,39 @@ export class View {
         if (this.container.children.length > index) {
             const currentElement = this.container.children.item(index);
             if (currentElement != element) {
-                currentElement.replaceWith(element);
+                this.container.replaceChild(element, currentElement);
+                this.select(model);
             }
         } else {
             this.container.appendChild(element);
         }
     }
 
+    private placeElementHover(source: HTMLElement, target: HTMLElement) {
+        const rect = this.measureElement(source);
+        target.style.top = rect.top + 'px';
+        target.style.left = rect.left + 'px';
+        target.style.height = rect.height + 'px';
+        target.style.width = rect.width + 'px';
+        target.style.display = 'block';
+
+    }
+
     private createShadowElement() {
         const result = document.createElement('div');
         result.style.position = 'absolute';
         result.style.display = 'none';
+        result.style.zIndex = '10000';
         return result;
     }
 
     private measureElement(element): { top?: number, left?: number, height?: number, width?: number } {
-        var target = element,
-            target_width = target.offsetWidth,
-            target_height = target.offsetHeight,
-            target_left = target.offsetLeft,
-            target_top = target.offsetTop,
-            gleft = 0,
-            gtop = 0,
-            rect = {};
+        const target = element;
+        const target_width = target.offsetWidth;
+        const target_height = target.offsetHeight;
+        let rect = {};
+        let gleft = 0;
+        let gtop = 0;
 
         var moonwalk = function (_parent) {
             if (!!_parent) {
