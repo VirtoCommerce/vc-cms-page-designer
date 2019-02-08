@@ -48,7 +48,6 @@ export class View {
     }
 
     scrollTo(model: BlockViewModel) {
-        debugger;
         const rect = this.measureElement(model.element);
         const targetPosition = rect.top - window.innerHeight / 10;
         window.scroll({
@@ -60,6 +59,11 @@ export class View {
     setList(list: BlockViewModel[]) {
         this.container.innerHTML = '';
         list.forEach(x => this.container.appendChild(x.element));
+    }
+
+    insertElement(index: number, model: BlockViewModel) {
+        const currentElement = this.container.children.item(index);
+        this.container.insertBefore(model.element, currentElement);
     }
 
     setElement(index: number, model: BlockViewModel) {

@@ -115,8 +115,10 @@ export class ListController implements BlockEventListener {
     cloneBlock(message: MessageModel) {
         const block = this.getBlockById(message.content.source);
         const index = this.blocks.indexOf(block);
-        const newBlock = this.createBlockViewModel(block.model);
+        const newBlock = this.createBlockViewModel({...block.model});
+        newBlock.model.id = message.content.destination;
         newBlock.fromHtml(block.html);
+        this.view.insertElement(index, newBlock);
         this.addBlock(newBlock, index + 1);
         this.selectBlock({ content: { id: message.content.destination } });
     }
