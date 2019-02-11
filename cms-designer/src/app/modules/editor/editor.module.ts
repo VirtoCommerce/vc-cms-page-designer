@@ -14,8 +14,8 @@ import {
 } from './components';
 import { CreatableBlocksPipe } from './services/creatable-blocks.pipe';
 
-import { reducer } from './state/editor.reducer';
-import { EditorEffects } from './state/editor.effects';
+import { reducer } from './store/editor.reducer';
+import { EditorEffects } from './store/editor.effects';
 
 const COMPONENTS = [
     PageEditorComponent,

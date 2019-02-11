@@ -1,5 +1,3 @@
-import { ErrorsEffects } from './state/errors.effects';
-import { PlatformService } from 'src/app/services/platform.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { StoreModule, Action } from '@ngrx/store';
@@ -15,12 +13,12 @@ import { ThemeModule } from './modules/theme/theme.module';
 import { AppComponent } from './app.component';
 import { PreviewComponent } from './components/preview/preview.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
-import { SidebarComponent } from './components/sidebar/sidebar.component';
-import { PreviewModeButtonComponent } from './components/preview/preview-mode-button/preview-mode-button.component';
-import { ToolbarButtonComponent } from './components/toolbar/toolbar-button/toolbar-button.component';
 
-import { RootEffects } from './state/root.effects';
-import { reducer } from './state/root.reducer';
+import { PlatformService } from 'src/app/services/platform.service';
+
+import { ErrorsEffects } from './store/errors.effects';
+import { RootEffects } from './store/root.effects';
+import { reducer } from './store/root.reducer';
 import { environment } from '../environments/environment';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppHttpInterceptor } from './services/app-http.interceptor';
@@ -29,10 +27,7 @@ import { AppHttpInterceptor } from './services/app-http.interceptor';
     declarations: [
         AppComponent,
         PreviewComponent,
-        ToolbarComponent,
-        SidebarComponent,
-        PreviewModeButtonComponent,
-        ToolbarButtonComponent
+        ToolbarComponent
     ],
     imports: [
         BrowserModule,

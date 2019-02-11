@@ -1,9 +1,77 @@
 <div id="layout">
-    <div class="top">
-        <app-toolbar></app-toolbar>
-    </div>
-    <article class="main">
-        <app-preview [loading]="previewLoading$ | async" [storeUrl]="storeUrl" mode="desktop" (preivewLoaded)="editor.previewLoaded($event)"></app-preview>
-        <app-sidebar #editor></app-sidebar>
-    </article>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="header-aside">
+            <div class="header-icon">
+                <img src="/assets/i/logo.svg" alt="">
+            </div>
+            <h1 class="header-text">Pagename</h1>
+        </div>
+        <div class="header-nav">
+            <!-- TODO: move active button to state -->
+            <app-toolbar [buttons]="['desktop', 'mobile', 'tablet', 'full']" [activeButton]="viewMode"
+                (buttonClick)="viewMode = $event"></app-toolbar>
+            <div class="header-actions">
+                <button class="btn btn--outline">
+                    <span class="btn__text">Publish</span>
+                </button>
+                <button class="btn btn--blue">
+                    <span class="btn__text">Save</span>
+                </button>
+            </div>
+        </div>
+    </header>
+    <!-- End Header -->
+
+    <!-- Main -->
+    <main class="main" [attr.data-view]="viewMode">
+
+        <!-- Left panel -->
+        <div class="left-panel">
+
+            <!-- Tabs -->
+            <app-tabs>
+                <app-tab tabTitle="Sections" active="true">
+                    <app-page-editor [model]="page$ | async" [schema]="blocksSchema$ | async"
+                        (selectEvent)="selectPageItem($event)" [noSchema]="schemaNotLoaded$ | async"
+                        [noPage]="pageNotLoaded$ | async" (reloadData)="reloadEditorData()"
+                        (orderChangedEvent)="onOrderChanged($event)" (addNewBlockEvent)="setNewBlockMode(true)">
+                    </app-page-editor>
+                </app-tab>
+                <app-tab tabTitle="Theme">
+                    <app-theme-editor [schema]="themeSchema$ | async" (selectPresetEvent)="turnOnPresets()"
+                        [noSchema]="themeSchemaNotLoaded$ | async" [noPresets]="presetsNotLoaded$ | async"
+                        (reloadData)="reloadThemeData()" (selectItemEvent)="selectSchemaItem($event)">
+                    </app-theme-editor>
+                </app-tab>
+            </app-tabs>
+
+            <!-- End Tabs -->
+
+            <app-page-item-editor *ngIf="currentSectionItem$|async as currentSectionItem"
+                [model]="currentSectionItem" [schema]="(blocksSchema$ | async)[currentSectionItem.type]"
+                (valueChangedEvent)="updateBlockPreview($event)" (backEvent)="completeEditBlock($event)"
+                (removeBlockEvent)="removeBlock($event)" (copyBlockEvent)="copyBlock($event)"></app-page-item-editor>
+            <app-select-type *ngIf="addNewSectionMode$ | async" [schema]="blocksSchema$ | async"
+                (backEvent)="setNewBlockMode(false)" (previewBlockEvent)="previewBlockType($event)"
+                (selectBlockEvent)="selectBlockType($event)"></app-select-type>
+            <app-presets-editor *ngIf="showPresets$|async" [data]="presets$|async"
+                (savePresetEvent)="onSavePreset($event)" (selectPresetEvent)="onSelectPreset($event)"
+                (backEvent)="turnOffPresets()" (applyThemeEvent)="applyPresetAsTheme($event)"
+                (removePresetEvent)="onRemovePreset($event)"></app-presets-editor>
+            <app-theme-item-editor *ngIf="currentThemeSchemaItem$|async as currentSchemaItem"
+                [schema]="currentSchemaItem" [theme]="theme$|async" (valueChangedEvent)="liveUpdateTheme($event)"
+                (backEvent)="closeThemeItemEditor()"></app-theme-item-editor>
+        </div>
+        <!-- End Left panel -->
+
+        <!-- Content -->
+        <app-preview [loading]="previewLoading$ | async" [storeUrl]="storeUrl$" mode="desktop"
+            (preivewLoaded)="onPreviewLoaded($event)"></app-preview>
+        <!-- End Content -->
+
+    </main>
+    <!-- End Main -->
+
 </div>

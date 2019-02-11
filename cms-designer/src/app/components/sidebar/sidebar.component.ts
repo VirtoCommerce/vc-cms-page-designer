@@ -3,23 +3,18 @@ import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
-import * as fromRoot from '../../state';
-import * as rootActions from '../../state/root.actions';
-import * as fromEditor from '../../modules/editor/state';
-import * as editorActions from '../../modules/editor/state/editor.actions';
-import * as fromTheme from '../../modules/theme/state';
-import * as themeActions from '../../modules/theme/state/theme.actions';
+import * as fromRoot from '../../store';
+import * as rootActions from '../../store/root.actions';
+import * as fromEditor from '../../modules/editor/store';
+import * as editorActions from '../../modules/editor/store/editor.actions';
+import * as fromTheme from '../../modules/theme/store';
+import * as themeActions from '../../modules/theme/store/theme.actions';
 
 import { SortEvent } from '../../modules/shared/components';
 import { PageModel } from '../../modules/editor/models/';
 import { PresetsModel } from '../../modules/theme/models/';
 import { BlockSchema, BlockValuesModel, ValueType } from 'src/app/modules/shared/models';
 
-@Component({
-    selector: 'app-sidebar',
-    templateUrl: './sidebar.component.html',
-    styleUrls: ['./sidebar.component.scss']
-})
 export class SidebarComponent implements OnInit {
 
     // page editor states
@@ -52,93 +47,93 @@ export class SidebarComponent implements OnInit {
 
     //#region theme editor actions
 
-    selectSchemaItem(item: BlockSchema) {
-        this.store.dispatch(new themeActions.SelectSchemaItem(item));
-    }
+    // selectSchemaItem(item: BlockSchema) {
+    //     this.store.dispatch(new themeActions.SelectSchemaItem(item));
+    // }
 
-    closeThemeItemEditor() {
-        this.store.dispatch(new themeActions.SelectSchemaItem(null));
-    }
+    // closeThemeItemEditor() {
+    //     this.store.dispatch(new themeActions.SelectSchemaItem(null));
+    // }
 
-    onRemovePreset(name: string) {
-        this.store.dispatch(new themeActions.RemovePreset(name));
-    }
+    // onRemovePreset(name: string) {
+    //     this.store.dispatch(new themeActions.RemovePreset(name));
+    // }
 
-    onSelectPreset(name: string) {
-        this.store.dispatch(new themeActions.SelectPreset(name));
-    }
+    // onSelectPreset(name: string) {
+    //     this.store.dispatch(new themeActions.SelectPreset(name));
+    // }
 
-    onSavePreset(name: string) {
-        this.store.dispatch(new themeActions.CreatePreset(name));
-    }
+    // onSavePreset(name: string) {
+    //     this.store.dispatch(new themeActions.CreatePreset(name));
+    // }
 
-    turnOnPresets() {
-        this.store.dispatch(new themeActions.ShowPresetsPane());
-    }
+    // turnOnPresets() {
+    //     this.store.dispatch(new themeActions.ShowPresetsPane());
+    // }
 
-    turnOffPresets() {
-        this.store.dispatch(new themeActions.CancelPreset());
-    }
+    // turnOffPresets() {
+    //     this.store.dispatch(new themeActions.CancelPreset());
+    // }
 
-    liveUpdateTheme(themeValues: { [key: string]: string | number | boolean }) {
-        this.store.dispatch(new themeActions.UpdateTheme(themeValues));
-    }
+    // liveUpdateTheme(themeValues: { [key: string]: string | number | boolean }) {
+    //     this.store.dispatch(new themeActions.UpdateTheme(themeValues));
+    // }
 
-    applyPresetAsTheme(name: string) {
-        this.store.dispatch(new themeActions.ApplyPreset(name));
-    }
+    // applyPresetAsTheme(name: string) {
+    //     this.store.dispatch(new themeActions.ApplyPreset(name));
+    // }
 
-    reloadThemeData() {
-        this.store.dispatch(new rootActions.LoadData());
-    }
+    // reloadThemeData() {
+    //     this.store.dispatch(new rootActions.LoadData());
+    // }
 
     //#endregion
 
     //#region page editor actions
 
-    reloadEditorData() {
-        this.store.dispatch(new rootActions.LoadData());
-    }
+    // selectPageItem(item: BlockValuesModel) {
+    //     this.store.dispatch(new editorActions.SelectPageItem(item));
+    // }
 
-    selectPageItem(item: BlockValuesModel) {
-        this.store.dispatch(new editorActions.SelectPageItem(item));
-    }
+    // reloadEditorData() {
+    //     this.store.dispatch(new rootActions.LoadData());
+    // }
 
-    setNewBlockMode(visible) {
-        this.store.dispatch(new editorActions.ToggleNewBlockPane(visible));
-        if (!visible) {
-            this.store.dispatch(new editorActions.PreviewPageItemOfType(null));
-        }
-    }
+    // onOrderChanged(event: SortEvent) {
+    //     this.store.dispatch(new editorActions.OrderChanged(event));
+    // }
 
-    completeEditBlock() {
-        this.store.dispatch(new editorActions.CompleteEditPageItem());
-    }
+    // setNewBlockMode(visible) {
+    //     this.store.dispatch(new editorActions.ToggleNewBlockPane(visible));
+    //     if (!visible) {
+    //         this.store.dispatch(new editorActions.PreviewPageItemOfType(null));
+    //     }
+    // }
 
-    previewBlockType(type: BlockSchema) {
-        this.store.dispatch(new editorActions.PreviewPageItemOfType(type));
-    }
+    // completeEditBlock() {
+    //     this.store.dispatch(new editorActions.CompleteEditPageItem());
+    // }
 
-    updateBlockPreview(item: BlockValuesModel) {
-        this.store.dispatch(new editorActions.UpdatePageItem(item));
-        this.store.dispatch(new editorActions.UpdateBlockPreview(item));
-    }
+    // previewBlockType(type: BlockSchema) {
+    //     this.store.dispatch(new editorActions.PreviewPageItemOfType(type));
+    // }
 
-    selectBlockType(item: BlockSchema) {
-        this.store.dispatch(new editorActions.CreatePageItem(item));
-    }
+    // updateBlockPreview(item: BlockValuesModel) {
+    //     this.store.dispatch(new editorActions.UpdatePageItem(item));
+    //     this.store.dispatch(new editorActions.UpdateBlockPreview(item));
+    // }
 
-    onOrderChanged(event: SortEvent) {
-        this.store.dispatch(new editorActions.OrderChanged(event));
-    }
+    // selectBlockType(item: BlockSchema) {
+    //     this.store.dispatch(new editorActions.CreatePageItem(item));
+    // }
 
-    removeBlock(item: BlockValuesModel) {
-        this.store.dispatch(new editorActions.RemovePageItem(item));
-    }
+    // removeBlock(item: BlockValuesModel) {
+    //     this.store.dispatch(new editorActions.RemovePageItem(item));
+    // }
 
-    copyBlock(item: BlockValuesModel) {
-        this.store.dispatch(new editorActions.CopyPageItem(item));
-    }
+    // copyBlock(item: BlockValuesModel) {
+    //     this.store.dispatch(new editorActions.CopyPageItem(item));
+    // }
 
     //#endregion
 

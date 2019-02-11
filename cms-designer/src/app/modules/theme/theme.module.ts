@@ -13,8 +13,8 @@ import {
     PresetsEditorComponent
 } from './components';
 
-import { reducer } from './state/theme.reducer';
-import { ThemeEffects } from './state/theme.effects';
+import { reducer } from './store/theme.reducer';
+import { ThemeEffects } from './store/theme.effects';
 
 const COMPONENTS = [
     ThemeEditorComponent,

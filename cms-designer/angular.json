@@ -46,18 +46,14 @@
                             "src/data/settings.json"
                         ],
                         "styles": [
-                            "src/css/reset.css",
-                            "src/css/base-modules.css",
-                            "src/css/project-modules.css",
-                            "src/css/cosmetic.css",
-                            "src/css/solid.css",
-                            "src/css/regular.css",
-                            "src/css/fontawesome.min.css",
-                            "src/css/main.css",
-                            "src/css/colorpicker.css",
+                            "src/assets/css/style.min.css",
                             "node_modules/quill/dist/quill.snow.css"
                         ],
-                        "scripts": []
+                        "scripts": [
+                            "src/assets/js/jquery.min.js",
+                            "src/assets/js/jquery-ui.js",
+                            "src/assets/js/main.js"
+                        ]
                     },
                     "configurations": {
                         "production": {

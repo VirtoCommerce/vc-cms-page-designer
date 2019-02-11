@@ -1,14 +1,7 @@
-<div #wrapper class="theme-cnt" [class.fullscreen]="isFullScreen">
-    <div *ngIf="loading" id="loading-indicator"></div>
-    <div class="theme-preview" [ngClass]="mode">
-        <iframe id="preview1" [src]="storeUrl" scrolling="yes" (load)="primaryPreviewLoaded()"></iframe>
-        <iframe id="preview2" [src]="storeUrl" scrolling="yes" (load)="secondaryPreviewLoaded()"></iframe>
+<div class="content">
+    <div class="content__iframe">
+        <iframe frameborder="0" id="preview1" [src]="storeUrl" scrolling="yes" (load)="primaryPreviewLoaded()"></iframe>
+        <iframe frameborder="0" id="preview2" [src]="storeUrl" scrolling="yes"
+            (load)="secondaryPreviewLoaded()"></iframe>
     </div>
-    <a class="theme-toggle js-toggle" (click)="toggleFullscreen()"></a>
-    <ul class="list __nav">
-        <li class="list-item" *ngFor="let modeItem of ['desktop', 'tablet', 'mobile']">
-            <app-preview-mode-button (change)="onChangeMode($event)" [selected]="mode == modeItem" [type]="modeItem"
-                title="{{ modeItem | titlecase }}"></app-preview-mode-button>
-        </li>
-    </ul>
 </div>

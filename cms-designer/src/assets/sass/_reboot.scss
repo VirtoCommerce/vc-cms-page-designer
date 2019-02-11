@@ -1,0 +1,51 @@
+*
+{
+    outline: none;
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body
+{
+    height: 100%;
+}
+
+html
+{
+    font-size: 1rem;
+}
+
+body
+{
+    background: $gray-light;
+    color: $primary-color;
+    font-family: 'Roboto';
+    line-height: 1.4;
+    min-width: 64rem;
+    overflow: hidden;
+}
+
+h1,
+h2
+{
+    font-size: 1.125rem;
+    font-weight: bold;
+}
+
+h2
+{
+    padding-bottom: 1.25rem;
+}
+
+p
+{
+    font-size: .8125rem;
+    margin: 1.25rem 0;
+}
+
+a
+{
+    color: $blue;
+    text-decoration: none;
+}

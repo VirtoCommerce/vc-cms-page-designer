@@ -1,15 +1,9 @@
-import { Component, OnInit, Input, ElementRef, ViewChild, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { SafeUrl } from '@angular/platform-browser';
-import { Store, select } from '@ngrx/store';
-
-import * as editorActions from '../../modules/editor/state/editor.actions';
-import * as fromEditor from '../../modules/editor/state';
-import { Observable } from 'rxjs';
 
 @Component({
     selector: 'app-preview',
-    templateUrl: './preview.component.html',
-    styleUrls: ['./preview.component.scss']
+    templateUrl: './preview.component.html'
 })
 export class PreviewComponent implements OnInit {
 
@@ -30,10 +24,6 @@ export class PreviewComponent implements OnInit {
 
     secondaryPreviewLoaded() {
         this.preivewLoaded.emit('preview2');
-    }
-
-    onChangeMode(mode) {
-        this.mode = mode;
     }
 
     toggleFullscreen() {

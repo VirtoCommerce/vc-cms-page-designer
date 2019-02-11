@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { AppSettings } from 'src/app/services/app.settings';
 
 @Component({
@@ -8,18 +8,16 @@ import { AppSettings } from 'src/app/services/app.settings';
 })
 export class ToolbarComponent implements OnInit {
 
+    @Input() buttons = [];
+    @Input() activeButton: string;
+
+    @Output() buttonClick = new EventEmitter<string>();
+
     constructor() { }
 
     ngOnInit() { }
 
-    closeEditor() {
-        // todo: need to check the changes
-        if (window.opener && !window.opener.closed) {
-            window.opener.focus();
-            window.close();
-        } else {
-            window.stop();
-            window.location.href = `${AppSettings.platformUrl}#/workspace/content`;
-        }
+    onButtonClick(name: string) {
+        this.buttonClick.emit(name);
     }
 }

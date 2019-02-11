@@ -1,14 +1,5 @@
-<ul class="menu">
-    <li class="menu-item">
-        <app-toolbar-button icon="home" title="Back" (buttonClick)="closeEditor()"></app-toolbar-button>
-    </li>
-    <li class="menu-item">
-        <app-toolbar-button icon="code" title="Edit HTML/CSS"></app-toolbar-button>
-    </li>
-    <li class="menu-item">
-        <app-toolbar-button icon="globe" title="Edit languages"></app-toolbar-button>
-    </li>
-    <li class="menu-item">
-        <app-toolbar-button icon="map" title="Edit navigation"></app-toolbar-button>
-    </li>
-</ul>
+<div class="tabs tabs--large">
+    <a *ngFor="let btn of buttons" class="tabs__item" [class.tabs__item--active]="btn === activeButton" (click)="onButtonClick(btn)">
+        <div class="tabs__icon tabs__icon--{{ btn }}"></div>
+    </a>
+</div>

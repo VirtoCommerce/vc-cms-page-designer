@@ -1,0 +1,50 @@
+.content
+{
+    display: flex;
+    flex: 1 0 0;
+    justify-content: center;
+    max-width: 100%;
+    position: relative;
+
+    iframe
+    {
+        border: none;
+        height: 100%;
+        width: 100%;
+    }
+}
+
+.content__iframe
+{
+    background: #fff;
+    border: 1px solid $border-color;
+    box-sizing: border-box;
+    height: 100%;
+    width: 100%;
+}
+
+[data-view="desktop"],
+[data-view="mobile"],
+[data-view="tablet"]
+{
+    .content
+    {
+        padding: 1.25rem;
+    }
+}
+
+[data-view="tablet"]
+{
+    .content__iframe
+    {
+        width: 48rem;
+    }
+}
+
+[data-view="mobile"]
+{
+    .content__iframe
+    {
+        width: 30rem;
+    }
+}
