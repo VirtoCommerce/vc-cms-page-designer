@@ -42,7 +42,7 @@ export class BlockViewModel {
             // this.element.remove();
         }
         const div = document.createElement('div');
-        div.innerHTML = this.html;
+        div.innerHTML = `<div>${this._model.id}${this.html}</div>`;
         const result = <HTMLElement>div.firstChild;
         result.addEventListener('mouseover', this.hoverListener);
         // TODO: add events
