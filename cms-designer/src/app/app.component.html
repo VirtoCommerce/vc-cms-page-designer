@@ -31,15 +31,16 @@
         <div class="left-panel">
 
             <!-- Tabs -->
-            <app-tabs>
-                <app-tab tabTitle="Sections" active="true">
-                    <app-page-editor [model]="page$ | async" [schema]="blocksSchema$ | async"
+            <app-tabs class="tabs tabs--full tabs--shadow">
+                <app-tab class="tabs__content" [class.tabs__content--active]="true" tabTitle="Sections" active="true">
+                    <app-page-editor class="left-panel-content" [model]="page$ | async" [schema]="blocksSchema$ | async"
                         (selectEvent)="selectPageItem($event)" [noSchema]="schemaNotLoaded$ | async"
                         [noPage]="pageNotLoaded$ | async" (reloadData)="reloadEditorData()"
                         (orderChangedEvent)="onOrderChanged($event)" (addNewBlockEvent)="setNewBlockMode(true)">
                     </app-page-editor>
+                    <div class="left-panel-footer">footer</div>
                 </app-tab>
-                <app-tab tabTitle="Theme">
+                <app-tab class="tabs__content" tabTitle="Theme">
                     <app-theme-editor [schema]="themeSchema$ | async" (selectPresetEvent)="turnOnPresets()"
                         [noSchema]="themeSchemaNotLoaded$ | async" [noPresets]="presetsNotLoaded$ | async"
                         (reloadData)="reloadThemeData()" (selectItemEvent)="selectSchemaItem($event)">
@@ -49,8 +50,8 @@
 
             <!-- End Tabs -->
 
-            <app-page-item-editor *ngIf="currentSectionItem$|async as currentSectionItem"
-                [model]="currentSectionItem" [schema]="(blocksSchema$ | async)[currentSectionItem.type]"
+            <app-page-item-editor *ngIf="currentSectionItem$|async as currentSectionItem" [model]="currentSectionItem"
+                [schema]="(blocksSchema$ | async)[currentSectionItem.type]"
                 (valueChangedEvent)="updateBlockPreview($event)" (backEvent)="completeEditBlock($event)"
                 (removeBlockEvent)="removeBlock($event)" (copyBlockEvent)="copyBlock($event)"></app-page-item-editor>
             <app-select-type *ngIf="addNewSectionMode$ | async" [schema]="blocksSchema$ | async"

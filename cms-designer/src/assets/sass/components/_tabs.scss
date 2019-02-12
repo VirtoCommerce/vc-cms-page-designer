@@ -2,9 +2,17 @@
 {
     display: flex;
     flex-wrap: wrap;
-    height: 3.125rem;
     position: relative;
     z-index: 5;
+    flex: 1 0 0;
+    flex-direction: column;
+
+    &__buttons
+    {
+        width: 100%;
+        display: flex;
+        height: 3.125rem;
+    }
 
     &__item
     {
@@ -84,8 +92,10 @@
 
     &--large
     {
-        height: 4.375rem;
-
+        .tabs__buttons
+        {
+            height: 4.375rem;
+        }
         .tabs__item
         {
             width: 4.375rem;

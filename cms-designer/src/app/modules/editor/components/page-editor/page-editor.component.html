@@ -1,3 +1,26 @@
+<div class="list-group" data-name="sortable" *ngIf="model && schema">
+    <a class="list-group-item list-group-item-header" *ngFor="let item of topItems">
+        <div class="list-group-icon" [attr.data-name]="getBlockIcon(item)"></div>
+        <div class="list-group-text">{{ getBlockName(item) }}</div>
+    </a>
+    <a class="list-group-item" *ngFor="let item of model.content" (click)="selectItem(item)">
+        <div class="list-group-icon" [attr.data-name]="getBlockIcon(item)"></div>
+        <div class="list-group-text">{{ getBlockName(item) }}</div>
+        <div class="list-group-actions">
+            <div class="list-group-visible"></div>
+            <div class="list-group-drag"></div>
+        </div>
+    </a>
+    <a class="list-group-item add" (click)="addNewBlock()">
+        <div class="list-group-icon" data-name="add"></div>
+        <div class="list-group-text">Add block</div>
+    </a>
+    <a class="list-group-item list-group-item-header" (click)="selectItem(item)" *ngFor="let item of bottomItems">
+        <div class="list-group-icon" [attr.data-name]="getBlockIcon(item)"></div>
+        <div class="list-group-text">{{ getBlockName(item) }}</div>
+    </a>
+</div>
+<!-- 
 <div class="pane-section __selected" *ngIf="model && schema">
     <ul class="list" *ngIf="topItems">
         <li class="list-item" *ngFor="let item of topItems">
@@ -29,7 +52,8 @@
     <ul class="list" *ngIf="bottomItems">
         <li class="list-item" *ngFor="let item of bottomItems">
             <a class="list-link" (click)="selectItem(item)">
-                <i class="list-ico dragger" [appIcon]="getBlockIcon(item)"></i><span class="list-t">{{ getBlockName(item) }}</span>
+                <i class="list-ico dragger" [appIcon]="getBlockIcon(item)"></i><span
+                    class="list-t">{{ getBlockName(item) }}</span>
             </a>
         </li>
     </ul>
@@ -41,4 +65,4 @@
 <div *ngIf="noPage" class="pane-section __selected">
     <div style="padding: 20px;">Page was not loaded</div>
     <div style="text-align: center;"><button class="btn" (click)="onReloadData()">Try again</button></div>
-</div>
+</div> -->

@@ -1,5 +1,6 @@
-<div class="tabs tabs--full tabs--shadow">
-    <a class="tabs__item" *ngFor="let tab of tabs" (click)="selectTab($event, tab)" [class.tabs__item--active]="tab.active">
+<div class="tabs__buttons">
+    <a class="tabs__item" *ngFor="let tab of tabs" (click)="selectTab($event, tab)"
+        [class.tabs__item--active]="tab.active">
         <span class="tabs__text">{{ tab.tabTitle }}</span>
     </a>
 </div>

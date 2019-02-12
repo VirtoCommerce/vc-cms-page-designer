@@ -46,7 +46,7 @@
                             "src/data/settings.json"
                         ],
                         "styles": [
-                            "src/assets/css/style.min.css",
+                            "src/assets/sass/main.scss",
                             "node_modules/quill/dist/quill.snow.css"
                         ],
                         "scripts": [

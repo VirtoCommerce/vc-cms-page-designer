@@ -14,29 +14,6 @@
         "url": "http://download.seaicons.com/icons/sora-meliae/matrilineare/1024/Places-folder-pictures-icon.png"
     },
     {
-        "type": "text",
-        "content": "Type something hello!",
-        "name": "Text3333"        
-    },
-    {
-        "type": "text",
-        "content": "Lorem ipsum",
-        "name": "Text"        
-    },
-    {
-        "type": "image",
-        "name": "Image",
-        "url": "http://dev-cms-vm.westeurope.cloudapp.azure.com/admin/Assets/blogs/7047371_original.jpg",
-        "imageSize": "medium"        
-    },
-    {
-        "type": "text",
-        "content": "Type somethin wetr dfsg sdfg g",
-        "name": "Text",
-        "anchorName": "345345",
-        "title": "fgdfgdf"
-    },
-    {
         "type": "image-carousel",
         "name": "Image carousel",
         "images": [
