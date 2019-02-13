@@ -1,14 +1,10 @@
-<div class="pane-section __selected">
-    <div class="pane-head">
-        <div class="pane-t">Add block</div>
-    </div>
-    <div class="pane-cnt">
-        <ul class="list">
-            <li class="list-item" *ngFor="let item of schema | creatableBlocks">
-                <a class="list-link" (click)="previewItem(item.value)"><i class="list-ico" [appIcon]="item.value.icon"></i><span class="list-t"> {{ item.value.name }} </span></a>
-                <a class="list-button" *ngIf="selectedItem == item.value.type && !item.value.inactive"
-                                       (click)="selectItem(item.value)">Add</a>
-            </li>
-        </ul>
+<div class="left-panel-content">
+    <!-- TODO: design, there is no the 'selected' state (under preview) -->
+    <div class="list-group">
+        <a class="list-group-item list-group-item--first" *ngFor="let item of schema | creatableBlocks" (click)="previewItem(item.value)">
+            <div class="list-group-icon" [attr.data-name]="item.value.icon"></div>
+            <div class="list-group-text">{{ item.value.name }}</div>
+            <span class="list-group-add" (click)="selectItem(item.value)"></span>
+        </a>
     </div>
 </div>

@@ -1,21 +1,21 @@
-<div class="pane-section __selected">
-    <div class="pane-head">
-        <a class="pane-back" (click)="back()">
-            <i class="pane-ico fa fa-chevron-left"></i>
-        </a>
-        <div class="pane-t">Edit block</div>
-    </div>
-    <div class="pane-cnt" *ngIf="model && schema">
-        <app-block-form [model]="model" [schema]="schema" (modelChange)="modelChanged($event)"></app-block-form>
-        <div class="pane-settings">
-            <button *ngIf="model.type !== 'settings' && !schema.static" class="btn" (click)="copyBlock()">Copy block</button>
-            <button *ngIf="model.type !== 'settings' && !schema.static" class="btn" (click)="removeBlock()">Remove block</button>
+<div class="left-panel-content">
+    <div class="form">
+        <h2 class="form-t">Edit block (?)</h2>
+        <app-block-form *ngIf="model && schema" [model]="model" [schema]="schema" (modelChange)="modelChanged($event)"></app-block-form>
+        <div class="pane-cnt" *ngIf="!schema && model">
+            <p>There are no descriptors for this block type: {{ model.type }}</p>
+        </div>
+        <div class="pane-cnt" *ngIf="!model">
+            <p>No model provided</p>
         </div>
     </div>
-    <div class="pane-cnt" *ngIf="!schema && model">
-        <p>There are no descriptors for this block type: {{ model.type }}</p>
-    </div>
-    <div class="pane-cnt" *ngIf="!model">
-        <p>No model provided</p>
-    </div>
+</div>
+<div class="left-panel-footer" *ngIf="model.type !== 'settings' && !schema.static" >
+    <button class="btn btn--outline btn--block">
+        <span class="btn__icon btn__icon--remove"></span>
+        <span class="btn__text">Remove section</span>
+    </button>
+    <button class="btn btn--outline btn--small">
+        <span class="btn__icon btn__icon--copy"></span>
+    </button>
 </div>

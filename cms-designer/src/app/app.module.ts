@@ -11,8 +11,9 @@ import { EditorModule } from './modules/editor/editor.module';
 import { ThemeModule } from './modules/theme/theme.module';
 
 import { AppComponent } from './app.component';
-import { PreviewComponent } from './components/preview/preview.component';
-import { ToolbarComponent } from './components/toolbar/toolbar.component';
+import { COMPONENTS } from './components';
+// import { PreviewComponent } from './components/preview/preview.component';
+// import { ToolbarComponent } from './components/toolbar/toolbar.component';
 
 import { PlatformService } from 'src/app/services/platform.service';
 
@@ -26,8 +27,7 @@ import { AppHttpInterceptor } from './services/app-http.interceptor';
 @NgModule({
     declarations: [
         AppComponent,
-        PreviewComponent,
-        ToolbarComponent
+        ...COMPONENTS
     ],
     imports: [
         BrowserModule,

@@ -4,7 +4,7 @@
     </li>
     <ng-container *ngIf="!noSchema && !noPresets">
         <li class="list-item" *ngFor="let item of schema">
-            <a class="list-link" (click)="selectItem(item)"><i class="list-ico" [appIcon]="item.icon"></i><span class="list-t">{{ item.name }}</span></a>
+            <a class="list-link" (click)="selectItem(item)"><i class="list-ico" [attr.appIcon]="item.icon"></i><span class="list-t">{{ item.name }}</span></a>
         </li>
     </ng-container>
     <li class="list-item" *ngIf="noPresets">

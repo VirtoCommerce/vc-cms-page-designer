@@ -22,12 +22,6 @@ export class PageItemEditorComponent implements OnInit {
 
     ngOnInit() { }
 
-    back() {
-        // this value will be applyed onto current section in the editor.reducer
-        // therefore i should not apply the uneditable properties
-        this.backEvent.emit(this.editedModel);
-    }
-
     modelChanged(model) {
         this.editedModel = (!this.schema.static) ? model : {
             ...model,

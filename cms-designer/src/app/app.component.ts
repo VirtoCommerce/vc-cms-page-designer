@@ -41,6 +41,8 @@ export class AppComponent implements OnInit, OnDestroy {
     themeSchemaNotLoaded$ = this.store.pipe(select(fromTheme.getSchemaNotLoaded));
 
     // combined states
+    headerActive$ = this.store.pipe(select(fromRoot.getHeaderIsActive));
+    headerIcon$ = this.store.pipe(select(fromRoot.getHeaderIcon));
     tabsVisible$ = this.store.pipe(select(fromRoot.getIsTabVisible));
     isLoading$ = this.store.pipe(select(fromRoot.getIsLoading));
     isEditMode$ = this.store.pipe(select(fromRoot.getIsEditMode));

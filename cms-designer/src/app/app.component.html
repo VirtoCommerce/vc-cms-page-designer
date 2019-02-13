@@ -3,20 +3,8 @@
     <!-- Header -->
     <header class="header">
         <div class="header-aside">
-            <ng-container *ngIf="tabsVisible$|async">
-                <div class="header-icon">
-                    <img src="/assets/i/logo.svg" alt="">
-                </div>
-                <h1 class="header-text">Pagename</h1>
-            </ng-container>
-            <ng-container *ngIf="!(tabsVisible$|async)">
-                <a class="header-link" (click)="back()">
-                    <div class="header-icon">
-                        <img src="/assets/i/back.svg" alt="">
-                    </div>
-                    <h2 class="header-text">/current item header/</h2>
-                </a>
-            </ng-container>
+            <app-header-aside [active]="headerActive$|async" [icon]="headerIcon$|async" title="Pagename (?)"
+                (buttonClick)="back()"></app-header-aside>
         </div>
         <div class="header-nav">
             <!-- TODO: move active button to state -->
@@ -38,10 +26,10 @@
     <main class="main" [attr.data-view]="viewMode">
 
         <!-- Left panel -->
-        <div class="left-panel">
+        <div class="left-panel" *ngIf="tabsVisible$|async">
 
             <!-- Tabs -->
-            <app-tabs class="tabs tabs--full tabs--shadow" *ngIf="tabsVisible$|async">
+            <app-tabs class="tabs tabs--full tabs--shadow">
                 <app-tab class="tabs__content" tabTitle="Sections" active="true">
                     <app-page-editor class="left-panel-content" [model]="page$ | async" [schema]="blocksSchema$ | async"
                         (selectEvent)="selectPageItem($event)" [noSchema]="schemaNotLoaded$ | async"
@@ -59,22 +47,22 @@
             </app-tabs>
 
             <!-- End Tabs -->
-
-            <app-page-item-editor *ngIf="currentSectionItem$|async as currentSectionItem" [model]="currentSectionItem"
-                [schema]="(blocksSchema$ | async)[currentSectionItem.type]"
-                (valueChangedEvent)="updateBlockPreview($event)" (removeBlockEvent)="removeBlock($event)"
-                (copyBlockEvent)="copyBlock($event)"></app-page-item-editor>
-            <app-select-type *ngIf="addNewSectionMode$ | async" [schema]="blocksSchema$ | async"
-                (previewBlockEvent)="previewBlockType($event)" (selectBlockEvent)="selectBlockType($event)">
-            </app-select-type>
-            <app-presets-editor *ngIf="showPresets$|async" [data]="presets$|async"
-                (savePresetEvent)="onSavePreset($event)" (selectPresetEvent)="onSelectPreset($event)"
-                (applyThemeEvent)="applyPresetAsTheme($event)" (removePresetEvent)="onRemovePreset($event)">
-            </app-presets-editor>
-            <app-theme-item-editor *ngIf="currentThemeSchemaItem$|async as currentSchemaItem"
-                [schema]="currentSchemaItem" [theme]="theme$|async" (valueChangedEvent)="liveUpdateTheme($event)">
-            </app-theme-item-editor>
         </div>
+
+        <app-page-item-editor class="left-panel" *ngIf="currentSectionItem$|async as currentSectionItem"
+            [model]="currentSectionItem" [schema]="(blocksSchema$ | async)[currentSectionItem.type]"
+            (valueChangedEvent)="updateBlockPreview($event)" (removeBlockEvent)="removeBlock($event)"
+            (copyBlockEvent)="copyBlock($event)"></app-page-item-editor>
+        <app-select-type *ngIf="addNewSectionMode$ | async" [schema]="blocksSchema$ | async"
+            (previewBlockEvent)="previewBlockType($event)" (selectBlockEvent)="selectBlockType($event)">
+        </app-select-type>
+        <app-presets-editor *ngIf="showPresets$|async" [data]="presets$|async" (savePresetEvent)="onSavePreset($event)"
+            (selectPresetEvent)="onSelectPreset($event)" (applyThemeEvent)="applyPresetAsTheme($event)"
+            (removePresetEvent)="onRemovePreset($event)">
+        </app-presets-editor>
+        <app-theme-item-editor *ngIf="currentThemeSchemaItem$|async as currentSchemaItem" [schema]="currentSchemaItem"
+            [theme]="theme$|async" (valueChangedEvent)="liveUpdateTheme($event)">
+        </app-theme-item-editor>
         <!-- End Left panel -->
 
         <!-- Content -->

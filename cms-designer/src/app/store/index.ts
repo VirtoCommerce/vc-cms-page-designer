@@ -34,6 +34,17 @@ export const getIsEditMode = createSelector(
         !!sectionItem || !!addSection || !!schemaItem || !!presetsEditor
 );
 
+export const getHeaderIsActive = createSelector(
+    getIsEditMode,
+    mode => mode
+);
+
+export const getHeaderIcon = createSelector(
+    getIsEditMode,
+    fromEditor.getAddNewSectionMode,
+    (isEdit, isAdd) => isAdd ? 'close' : isEdit ? 'back' : 'logo'
+);
+
 export const getIsDirty = createSelector(
     fromTheme.getIsDirty,
     fromEditor.getIsDirty,
