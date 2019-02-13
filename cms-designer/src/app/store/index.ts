@@ -17,6 +17,14 @@ export const getIsLoading = createSelector(
     (page, blocks, presets, schema) => page || blocks || schema || presets
 );
 
+export const getIsTabVisible = createSelector(
+    fromEditor.getCurrentSectionItem,
+    fromEditor.getAddNewSectionMode,
+    fromTheme.getShowPresetsEditor,
+    fromTheme.getCurrentThemeSchemaItem,
+    (section, isAddMode, presets, theme) => !section && !isAddMode && !presets && !theme
+);
+
 export const getIsEditMode = createSelector(
     fromEditor.getCurrentSectionItem,
     fromEditor.getAddNewSectionMode,

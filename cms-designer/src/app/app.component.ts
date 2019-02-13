@@ -41,6 +41,7 @@ export class AppComponent implements OnInit, OnDestroy {
     themeSchemaNotLoaded$ = this.store.pipe(select(fromTheme.getSchemaNotLoaded));
 
     // combined states
+    tabsVisible$ = this.store.pipe(select(fromRoot.getIsTabVisible));
     isLoading$ = this.store.pipe(select(fromRoot.getIsLoading));
     isEditMode$ = this.store.pipe(select(fromRoot.getIsEditMode));
     isDirty$ = this.store.pipe(select(fromRoot.getIsDirty));
@@ -71,6 +72,10 @@ export class AppComponent implements OnInit, OnDestroy {
         this.store.dispatch(new rootActions.PreviewReady(source));
     }
 
+    back() {
+        this.store.dispatch(new rootActions.CloseEditors());
+    }
+
     // editor tab events
 
     selectPageItem(item: BlockValuesModel) {
@@ -92,10 +97,6 @@ export class AppComponent implements OnInit, OnDestroy {
         this.store.dispatch(new editorActions.UpdateBlockPreview(item));
     }
 
-    completeEditBlock() {
-        this.store.dispatch(new editorActions.CompleteEditPageItem());
-    }
-
     removeBlock(item: BlockValuesModel) {
         this.store.dispatch(new editorActions.RemovePageItem(item));
     }
@@ -106,11 +107,8 @@ export class AppComponent implements OnInit, OnDestroy {
 
     // add new block pane events
 
-    setNewBlockMode(visible) {
-        this.store.dispatch(new editorActions.ToggleNewBlockPane(visible));
-        if (!visible) { // TODO: remove `if` and merge actions into single
-            this.store.dispatch(new editorActions.PreviewPageItemOfType(null));
-        }
+    setNewBlockMode() {
+        this.store.dispatch(new editorActions.ToggleNewBlockPane(true));
     }
 
     previewBlockType(type: BlockSchema) {
@@ -145,10 +143,6 @@ export class AppComponent implements OnInit, OnDestroy {
         this.store.dispatch(new themeActions.SelectPreset(name));
     }
 
-    turnOffPresets() {
-        this.store.dispatch(new themeActions.CancelPreset());
-    }
-
     applyPresetAsTheme(name: string) {
         this.store.dispatch(new themeActions.ApplyPreset(name));
     }
@@ -161,9 +155,5 @@ export class AppComponent implements OnInit, OnDestroy {
 
     liveUpdateTheme(themeValues: { [key: string]: string | number | boolean }) {
         this.store.dispatch(new themeActions.UpdateTheme(themeValues));
-    }
-
-    closeThemeItemEditor() {
-        this.store.dispatch(new themeActions.SelectSchemaItem(null));
     }
 }

@@ -12,7 +12,6 @@ export class PresetsEditorComponent implements OnInit {
 
     current: string = null;
     @Input() data: PresetsModel;
-    @Output() backEvent = new EventEmitter<any>();
     @Output() removePresetEvent = new EventEmitter<string>();
     @Output() savePresetEvent = new EventEmitter<string>();
     @Output() selectPresetEvent = new EventEmitter<string>();
@@ -49,10 +48,6 @@ export class PresetsEditorComponent implements OnInit {
 
     removePreset(name: string) {
         this.removePresetEvent.emit(name);
-    }
-
-    back() {
-        this.backEvent.emit(null);
     }
 
     applyPreset() {

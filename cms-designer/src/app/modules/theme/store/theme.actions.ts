@@ -25,7 +25,8 @@ export enum ThemeActionTypes {
     SelectPreset = '[Theme] Select Preset',
     UpdateDraft = '[Theme] Update Draft',
     UpdateDraftSuccess = '[Theme] Update Draft Success',
-    UpdateDraftFail = '[Theme] Update Draft Fail'
+    UpdateDraftFail = '[Theme] Update Draft Fail',
+    CloseEditors = '[Theme] Close Editors'
 }
 
 export class LoadThemes implements Action {
@@ -134,6 +135,10 @@ export class UpdateDraftFail implements Action {
     readonly type = ThemeActionTypes.UpdateDraftFail;
 }
 
+export class CloseEditors implements Action {
+    readonly type = ThemeActionTypes.CloseEditors;
+}
+
 
 export type ThemeActions = LoadThemes
     | LoadThemesSuccess
@@ -155,4 +160,5 @@ export type ThemeActions = LoadThemes
     | SelectPreset
     | UpdateDraft
     | UpdateDraftSuccess
-    | UpdateDraftFail;
+    | UpdateDraftFail
+    | CloseEditors;

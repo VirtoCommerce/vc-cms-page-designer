@@ -9,7 +9,6 @@ import { BlockSchema, BlocksSchema } from 'src/app/modules/shared/models';
 export class SelectTypeComponent implements OnInit {
 
     @Input() schema: BlocksSchema;
-    @Output() backEvent = new EventEmitter<any>();
     @Output() previewBlockEvent = new EventEmitter<BlockSchema>();
     @Output() selectBlockEvent = new EventEmitter<BlockSchema>();
 
@@ -18,10 +17,6 @@ export class SelectTypeComponent implements OnInit {
     constructor() { }
 
     ngOnInit() { }
-
-    back() {
-        this.backEvent.emit();
-    }
 
     previewItem(item: BlockSchema) {
         this.selectedItem = item.type;

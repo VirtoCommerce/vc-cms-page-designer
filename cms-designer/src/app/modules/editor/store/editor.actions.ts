@@ -13,6 +13,7 @@ export enum EditorActionTypes {
     BlocksSchemaLoaded = '[Page] Blocks Schema Loaded',
     ClearPageChanges = '[Page] Clear Page Changes',
     ClonePageItem = '[Page] Clone Page Item',
+    CloseEditors = '[Page] Close Editors',
     CompleteEditPageItem = '[Page] Complete Edit Page Item',
     CopyPageItem = '[Page] Copy Page Item',
     CreatePageItem = '[Page] Create Page Item',
@@ -63,6 +64,10 @@ export class ClonePageItem implements Action {
     readonly type = EditorActionTypes.ClonePageItem;
 
     constructor(public payload: { oldBlock: BlockValuesModel, newBlock: BlockValuesModel }) { }
+}
+
+export class CloseEditors implements Action {
+    readonly type = EditorActionTypes.CloseEditors;
 }
 
 export class CompleteEditPageItem implements Action {
@@ -187,6 +192,7 @@ export type EditorActions = LoadPage
     | BlocksSchemaLoaded
     | ClearPageChanges
     | ClonePageItem
+    | CloseEditors
     | CompleteEditPageItem
     | CopyPageItem
     | CreatePageItem

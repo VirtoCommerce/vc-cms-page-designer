@@ -35,6 +35,15 @@ export class RootEffects {
     );
 
     @Effect()
+    closeEditors$: Observable<Action> = this.actions$.pipe(
+        ofType(rootActions.RootActionTypes.CloseEditors),
+        switchMapTo([
+            new editorActions.CloseEditors(),
+            new themeActions.CloseEditors()
+        ])
+    );
+
+    @Effect()
     switchToLoadPage$: Observable<Action> = this.actions$.pipe(
         ofType<rootActions.LoadData>(rootActions.RootActionTypes.LoadData),
         withLatestFrom(this.editorStore$.select(store => store.editor)),

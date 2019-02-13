@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, HostBinding } from '@angular/core';
 
 @Component({
     selector: 'app-tab',
@@ -7,7 +7,7 @@ import { Component, OnInit, Input } from '@angular/core';
 export class TabComponent implements OnInit {
 
     @Input() tabTitle: string;
-    @Input() active = false;
+    @HostBinding('class.tabs__content--active') active = false;
 
     constructor() { }
 

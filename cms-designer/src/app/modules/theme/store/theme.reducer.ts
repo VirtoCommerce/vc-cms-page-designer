@@ -1,3 +1,4 @@
+import { RootActions } from './../../../store/root.actions';
 import { ThemeActionTypes, ThemeActions, CreatePreset, SaveThemeSuccess, LoadSchema } from './theme.actions';
 import { PresetsModel } from '../models/presets.model';
 import { BlockSchema, ValueType } from '../../shared/models';
@@ -107,13 +108,15 @@ export function reducer(state = initialState, action: ThemeActions): ThemeState 
                 ...state,
                 showPresetsEditor: true
             };
+        case ThemeActionTypes.CloseEditors:
         case ThemeActionTypes.CancelPreset: {
             const newPresets = { ...state.presets };
             newPresets.current = { ...state.editableTheme };
             return {
                 ...state,
                 presets: newPresets,
-                showPresetsEditor: false
+                showPresetsEditor: false,
+                selectedSchemaItem: null
             };
         }
         case ThemeActionTypes.ApplyPreset: {

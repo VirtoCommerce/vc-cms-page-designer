@@ -1,8 +1,5 @@
 <div class="pane-section __selected" *ngIf="data">
     <div class="pane-head">
-        <a class="pane-back" (click)="back()">
-            <i class="pane-ico fa fa-chevron-left"></i>
-        </a>
         <div class="pane-t">
             <i class="pane-ico fa fa-wrench"></i>
             Presets
@@ -54,7 +51,7 @@
         <p class="pane-settings">Some settings will be lost when you change your style, but you will not lose any content from your store.</p>
 
         <div class="sidebar-foot" *ngIf="!savingPreset">
-            <button class="btn" (click)="back()">Cancel</button>
+            <button class="btn">Cancel</button>
             <button class="btn" [disabled]="!current" (click)="applyPreset()">Apply preset</button>
         </div>
     </div>

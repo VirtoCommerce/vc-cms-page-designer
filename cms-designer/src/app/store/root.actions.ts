@@ -6,7 +6,8 @@ export enum RootActionTypes {
     LoadData = '[Root] Load Data',
     PreviewLoading = '[Root] Preview Loading',
     PreviewReady = '[Root] Preview is Ready',
-    ToggleFrames = '[Root] Toggle Frames'
+    ToggleFrames = '[Root] Toggle Frames',
+    CloseEditors = '[Root] Close editors'
 }
 
 export class ResetData implements Action {
@@ -40,9 +41,14 @@ export class ToggleFrames implements Action {
     constructor (public payload: string) { }
 }
 
+export class CloseEditors implements Action {
+    readonly type = RootActionTypes.CloseEditors;
+}
+
 export type RootActions = ResetData
     | SaveData
     | LoadData
     | PreviewLoading
     | PreviewReady
-    | ToggleFrames;
+    | ToggleFrames
+    | CloseEditors;
