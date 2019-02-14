@@ -1,7 +1,7 @@
 import { ApiUrlsService } from './services/api-url.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { SafeUrl } from '@angular/platform-browser';
-import { Observable, Subscription } from 'rxjs';
+import { Observable, Subscription, of } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 import { filter, distinctUntilChanged } from 'rxjs/operators';
 import * as fromRoot from './store';
@@ -22,6 +22,12 @@ export class AppComponent implements OnInit, OnDestroy {
     title = 'cms-designer';
     storeUrl$: SafeUrl; // TODO: get via selector
     viewMode = 'desktop';
+
+    themeActions = [
+        { title: 'Edit HTML/CSS', icon: 'html', type: 'html' },
+        { title: 'Edit languages', icon: 'lang', type: 'lang' },
+        { title: 'Edit navigation', icon: 'nav', type: 'nav' }
+    ];
 
     // page editor states
     currentSectionItem$ = this.store.pipe(select(fromEditor.getCurrentSectionItem));
@@ -48,6 +54,8 @@ export class AppComponent implements OnInit, OnDestroy {
     isEditMode$ = this.store.pipe(select(fromRoot.getIsEditMode));
     isDirty$ = this.store.pipe(select(fromRoot.getIsDirty));
     previewLoading$ = this.store.pipe(select(fromRoot.getPreviewLoading));
+    hasUndo$ = of(true);
+    hasRedo$ = of(false);
 
     private subscription: Subscription;
 
@@ -76,6 +84,19 @@ export class AppComponent implements OnInit, OnDestroy {
 
     back() {
         this.store.dispatch(new rootActions.CloseEditors());
+    }
+
+    onThemeActionSelected(type: string) {
+        // TODO:
+        console.log(type);
+    }
+
+    undo() {
+        console.log('undo')
+    }
+
+    redo() {
+        console.log('redo')
     }
 
     // editor tab events

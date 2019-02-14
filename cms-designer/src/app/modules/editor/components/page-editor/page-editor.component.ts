@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input, HostBinding } from '@angular/core';
 import { BlockValuesModel, BlocksSchema, BlockSchema } from 'src/app/modules/shared/models';
 import { PageModel } from '../../models/page.model';
 import { SortEvent } from '../../../shared/components';

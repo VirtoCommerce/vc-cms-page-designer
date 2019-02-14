@@ -36,7 +36,16 @@
                         [noPage]="pageNotLoaded$ | async" (reloadData)="reloadEditorData()"
                         (orderChangedEvent)="onOrderChanged($event)" (addNewBlockEvent)="setNewBlockMode()">
                     </app-page-editor>
-                    <div class="left-panel-footer">footer</div>
+                    <app-footer-aside class="left-panel-footer">
+                        <app-actions-dropdown title="Theme actions" [items]="themeActions"
+                            (actionSelected)="onThemeActionSelected($event)"></app-actions-dropdown>
+                        <app-history-walker
+                            [hasUndo]="hasUndo$|async"
+                            [hasRedo]="hasRedo$|async"
+                            (undoClicked)="undo()"
+                            (redoClicked)="redo()"
+                            ></app-history-walker>
+                    </app-footer-aside>
                 </app-tab>
                 <app-tab class="tabs__content" tabTitle="Theme">
                     <app-theme-editor [schema]="themeSchema$ | async" (selectPresetEvent)="turnOnPresets()"

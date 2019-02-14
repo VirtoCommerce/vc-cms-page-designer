@@ -2,10 +2,10 @@
     <div class="form">
         <h2 class="form-t">Edit block (?)</h2>
         <app-block-form *ngIf="model && schema" [model]="model" [schema]="schema" (modelChange)="modelChanged($event)"></app-block-form>
-        <div class="pane-cnt" *ngIf="!schema && model">
+        <div *ngIf="!schema && model">
             <p>There are no descriptors for this block type: {{ model.type }}</p>
         </div>
-        <div class="pane-cnt" *ngIf="!model">
+        <div *ngIf="!model">
             <p>No model provided</p>
         </div>
     </div>

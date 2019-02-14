@@ -1,5 +1,5 @@
 <div [formGroup]="group">
-    <div class="pane-settings" *ngFor="let control of descriptors" [class.pane-t]="control.type === 'header'">
+    <div class="form-group" *ngFor="let control of descriptors">
         <!-- Header or Paragraph -->
         {{ getContent(control) }}
         <!-- Simple control -->

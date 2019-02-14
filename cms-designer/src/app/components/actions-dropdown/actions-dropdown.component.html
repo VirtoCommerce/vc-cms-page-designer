@@ -1,0 +1,9 @@
+<div class="dropdown dropdown--up" dropdown [dropup]="true">
+    <div class="dropdown__toggle dropdown-toggle" dropdownToggle>{{ title }}</div>
+    <div class="dropdown__menu dropdown-menu" *dropdownMenu>
+        <a class="dropdown__menu-item dropdown-item" *ngFor="let item of items" (click)="onActionSelected(item.type)">
+            <span class="dropdown__menu-item-icon dropdown__menu-item-icon--{{ item.icon }}"></span>
+            <span class="dropdown__menu-item-text">{{ item.title }}</span>
+        </a>
+    </div>
+</div>

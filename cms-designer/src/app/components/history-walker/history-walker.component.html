@@ -1,0 +1,10 @@
+<div class="btn-group">
+    <button class="btn btn--outline btn--small" [class.btn--disabled]="!hasUndo" [disabled]="!hasUndo"
+        (click)="onUndoClicked()">
+        <span class="btn__icon btn__icon--undo"></span>
+    </button>
+    <button class="btn btn--outline btn--small" [class.btn--disabled]="!hasRedo" [disabled]="!hasRedo"
+        (click)="onRedoClicked()">
+        <span class="btn__icon btn__icon--redo"></span>
+    </button>
+</div>

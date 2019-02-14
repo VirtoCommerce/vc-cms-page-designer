@@ -1,18 +1,21 @@
-<ul class="list">
-    <li class="list-item" *ngIf="!noPresets">
-        <a class="list-link" (click)="selectPresets()"><i class="list-ico fas fa-wrench"></i><span class="list-t">Presets</span></a>
-    </li>
+<div class="list-group" data-name="sortable">
+    <a class="list-group-item" *ngIf="!noPresets" (click)="selectPresets()">
+        <div class="list-group-icon" data-name="presets"></div>
+        <div class="list-group-text">Presets</div>
+    </a>
     <ng-container *ngIf="!noSchema && !noPresets">
-        <li class="list-item" *ngFor="let item of schema">
-            <a class="list-link" (click)="selectItem(item)"><i class="list-ico" [attr.appIcon]="item.icon"></i><span class="list-t">{{ item.name }}</span></a>
-        </li>
+        <a class="list-group-item" *ngFor="let item of schema" (click)="selectItem(item)">
+            <div class="list-group-icon" [attr.data-name]="item.icon"></div>
+            <div class="list-group-text">{{ item.name }}</div>
+        </a>
     </ng-container>
-    <li class="list-item" *ngIf="noPresets">
-        <div style="padding: 20px;">Theme settings was not loaded</div>
-        <div style="text-align: center;"><button class="btn" (click)="onReloadData()">Try again</button></div>
-    </li>
-    <li class="list-item" *ngIf="!noPresets && noSchema">
-        <div style="padding: 20px;">Theme schema was not loaded</div>
-        <div style="text-align: center;"><button class="btn" (click)="onReloadData()">Try again</button></div>
-    </li>
-</ul>
+
+    <div class="list-group-item" *ngIf="noPresets">
+        <div>Theme settings was not loaded</div>
+        <div><button (click)="onReloadData()">Try again</button></div>
+    </div>
+    <div class="list-group-item" *ngIf="!noPresets && noSchema">
+        <div>Theme schema was not loaded</div>
+        <div><button (click)="onReloadData()">Try again</button></div>
+    </div>
+</div>

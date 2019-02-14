@@ -92,7 +92,9 @@
             }
         }
     }
-
+    &.open &__menu {
+        display: block;
+    }
     &--show
     {
         .dropdown__toggle

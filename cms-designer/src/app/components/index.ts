@@ -1,9 +1,15 @@
 import { PreviewComponent } from './preview/preview.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
-import { HeaderAsideComponent } from './toolbar/header-aside.component';
+import { HeaderAsideComponent } from './header-aside/header-aside.component';
+import { FooterAsideComponent } from './footer-aside/footer-aside.component';
+import { ActionsDropdownComponent } from './actions-dropdown/actions-dropdown.component';
+import { HistoryWalkerComponent } from './history-walker/history-walker.component';
 
 export const COMPONENTS = [
     PreviewComponent,
     HeaderAsideComponent,
-    ToolbarComponent
+    FooterAsideComponent,
+    ToolbarComponent,
+    ActionsDropdownComponent,
+    HistoryWalkerComponent
 ];

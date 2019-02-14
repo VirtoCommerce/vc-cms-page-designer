@@ -1,17 +1,23 @@
-<label *ngIf="descriptor.label" class="form-label">{{descriptor.label}}</label>
-<div class="form-input __select" *ngIf="descriptor.options">
-    <select #control (change)="onChange($event.target.value)">
-        <ng-container *ngIf="!groupItems">
-            <option *ngFor="let option of descriptor.options; trackBy: getTrackValue" [value]="option.value" [selected]="value === option.value"
-                [innerHTML]="getDisplayValue(option)">
+<label *ngIf="descriptor.label">{{descriptor.label}}</label>
+<mat-form-field>
+    <mat-select placeholder="Favorite food">
+        <mat-option *ngFor="let food of foods" [value]="food.value">
+            {{food.viewValue}}
+        </mat-option>
+    </mat-select>
+</mat-form-field>
+<select #control (change)="onChange($event.target.value)">
+    <ng-container *ngIf="!groupItems">
+        <option *ngFor="let option of descriptor.options; trackBy: getTrackValue" [value]="option.value"
+            [selected]="value === option.value" [innerHTML]="getDisplayValue(option)">
+        </option>
+    </ng-container>
+    <ng-container *ngIf="groupItems">
+        <optgroup *ngFor="let g of groups | keyvalue" [label]="g.key">
+            <option *ngFor="let option of g.value; trackBy: getTrackValue" [value]="option.value"
+                [selected]="value === option.value">
+                {{option.label}}
             </option>
-        </ng-container>
-        <ng-container *ngIf="groupItems">
-            <optgroup *ngFor="let g of groups | keyvalue" [label]="g.key">
-                <option *ngFor="let option of g.value; trackBy: getTrackValue" [value]="option.value" [selected]="value === option.value">
-                    {{option.label}}
-                </option>
-            </optgroup>
-        </ng-container>
-    </select>
-</div>
+        </optgroup>
+    </ng-container>
+</select>
