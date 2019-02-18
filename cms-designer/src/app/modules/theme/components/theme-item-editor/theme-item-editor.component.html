@@ -1,11 +1,5 @@
-<div class="pane-section __selected" *ngIf="schema">
-    <div class="pane-head">
-        <div class="pane-t">
-            <i class="pane-ico fa fa-{{ schema.icon }}"></i>
-            {{ schema.name }}
-        </div>
-    </div>
-    <div class="pane-cnt">
+<div class="left-panel-content">
+    <div class="list-group">
         <app-block-form [(model)]="theme" [schema]="schema" (modelChange)="themeChanged($event)"></app-block-form>
     </div>
 </div>

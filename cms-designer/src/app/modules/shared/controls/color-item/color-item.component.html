@@ -1,12 +1,9 @@
-<div class="pane-row">
-    <div class="pane-col pane-color" 
+<div class="list-group-item">
+    <div class="list-group-color bg--dark"
         [colorPicker]="value"
         (colorPickerChange)="onChange($event)" 
         [cpOKButton]="true"
         [cpOKButtonClass]="'btn'"
-        [style.backgroundColor]="value">
-
-        <div class='bg'></div>
-    </div>
-    <div class="pane-col pane-name">{{ descriptor.label }}</div>
+        [style.backgroundColor]="value"></div>
+    <div class="list-group-text">{{ descriptor.label }}</div>
 </div>

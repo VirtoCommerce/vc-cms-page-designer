@@ -69,7 +69,7 @@
             (selectPresetEvent)="onSelectPreset($event)" (applyThemeEvent)="applyPresetAsTheme($event)"
             (removePresetEvent)="onRemovePreset($event)">
         </app-presets-editor>
-        <app-theme-item-editor *ngIf="currentThemeSchemaItem$|async as currentSchemaItem" [schema]="currentSchemaItem"
+        <app-theme-item-editor class="left-panel" *ngIf="currentThemeSchemaItem$|async as currentSchemaItem" [schema]="currentSchemaItem"
             [theme]="theme$|async" (valueChangedEvent)="liveUpdateTheme($event)">
         </app-theme-item-editor>
         <!-- End Left panel -->

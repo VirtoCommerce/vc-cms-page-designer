@@ -6,7 +6,7 @@
         <app-control-holder *ngIf="displaySimpleControl(control)" [descriptor]="control" [group]="group"
             [formControlName]="control.id"></app-control-holder>
         <!-- complext control (collection) -->
-        <div *ngIf="displayCollection(control)">
+        <!-- <div *ngIf="displayCollection(control)">
             <div [formArrayName]="control.id">
                 <app-accordeon appSortableList (sort)="sortItems(control, $event)">
                     <app-acc-item *ngFor="let item of getControls(control); let i = index; trackBy: trackByFn" [title]="getTitle(item, control)"
@@ -30,7 +30,7 @@
             <div>
                 <button class="btn" (click)="addElement(control)">{{ getAddButtonTitle(control) }}</button>
             </div>
-        </div>
+        </div> -->
         <!-- Info -->
         <p *ngIf="control.type !== 'image' && getInfo(control) !== undefined" class="form-help">{{getInfo(control)}}</p>
     </div>

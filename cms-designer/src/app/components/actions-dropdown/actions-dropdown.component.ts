@@ -7,6 +7,7 @@ import { OnInit, Input, Output, EventEmitter, Component } from '@angular/core';
 })
 export class ActionsDropdownComponent implements OnInit {
 
+    isOpen = false;
     @Input() title: string;
     @Input() items: ActionDescriptor[];
     @Output() actionSelected = new EventEmitter<string>();
@@ -15,5 +16,9 @@ export class ActionsDropdownComponent implements OnInit {
 
     onActionSelected(type: string) {
         this.actionSelected.emit(type);
+    }
+
+    toggle() {
+        this.isOpen = !this.isOpen;
     }
 }

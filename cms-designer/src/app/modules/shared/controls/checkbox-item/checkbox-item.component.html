@@ -1,9 +1,4 @@
-<div class="pane-row">
-    <div class="form-input">
-        <label class="form-label __switch">
-            <input type="checkbox" [checked]="value" (change)="onChange($event.target.checked)">
-            <span class="switch"></span>
-        </label>
-    </div>
-    <div class="pane-name">{{ descriptor.label }}</div>
+<div class="form-checkbox" (click)="toggle()">
+    <input type="checkbox" class="form-checkbox__input" [checked]="value" (change)="onChange($event.target.checked)">
+    <label class="form-checkbox__label">{{ descriptor.label }}</label>
 </div>
