@@ -1,34 +1,19 @@
 <label *ngIf="descriptor.label">{{descriptor.label}}</label>
-<!-- <mat-form-field>
-    <mat-select [placeholder]="descriptor.placeholder" *ngIf="!groupItems">
-        <mat-option 
-            *ngFor="let option of descriptor.options; trackBy: getTrackValue"
-            [value]="option.value">
-            {{ getDisplayValue(option) }}
-        </mat-option>
-    </mat-select>
-    <mat-select [placeholder]="descriptor.placeholder" *ngIf="groupItems">
-        <mat-optgroup
-            *ngFor="let g of groups | keyvalue; trackBy: getTrackValue"
-            [label]="g.key">
-            <mat-option *ngFor="let option of g.value; trackBy: getTrackValue" [value]="option.value">
-                {{option.label}}
-            </mat-option>
-        </mat-optgroup>
-    </mat-select>
-</mat-form-field> -->
-<select #control (change)="onChange($event.target.value)">
-    <ng-container *ngIf="!groupItems">
-        <option *ngFor="let option of descriptor.options; trackBy: getTrackValue" [value]="option.value"
-            [selected]="value === option.value" [innerHTML]="getDisplayValue(option)">
-        </option>
-    </ng-container>
-    <ng-container *ngIf="groupItems">
-        <optgroup *ngFor="let g of groups | keyvalue" [label]="g.key">
-            <option *ngFor="let option of g.value; trackBy: getTrackValue" [value]="option.value"
-                [selected]="value === option.value">
-                {{option.label}}
-            </option>
-        </optgroup>
-    </ng-container>
-</select>
+<div class="dropdown" [class.dropdown--show]="isOpen">
+    <div class="dropdown__toggle" (click)="toggle()">{{ getTitle() }}</div>
+    <div class="dropdown__menu" *ngIf="!groupItems">
+        <a class="dropdown__menu-item" *ngFor="let option of descriptor.options; trackBy: getTrackValue"
+            [class.dropdown__menu-item--selected]="option == value" (click)="selectValue(option)">
+            <span class="dropdown__menu-item-text" [innerHTML]="getDisplayValue(option)"></span>
+        </a>
+    </div>
+    <div class="dropdown__menu" *ngIf="groupItems">
+        <ng-container *ngFor="let g of groups | keyvalue">
+            <span class="dropdown__menu_group">{{ g.key }}</span>
+            <a class="dropdown__menu-item" *ngFor="let option of g.value; trackBy: getTrackValue"
+                [class.dropdown__menu-item--selected]="option == value" (click)="selectValue(option)">
+                <span class="dropdown__menu-item-text" [innerHTML]="getDisplayValue(option)"></span>
+            </a>
+        </ng-container>
+    </div>
+</div>

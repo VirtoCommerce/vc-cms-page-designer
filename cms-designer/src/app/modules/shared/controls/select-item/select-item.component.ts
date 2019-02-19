@@ -10,11 +10,10 @@ import { OptionModel, SelectControlDescriptor } from '../../models';
 })
 export class SelectItemComponent extends BaseControlComponent<SelectControlDescriptor> {
 
-    @ViewChild('control') control: ElementRef;
-
     groupItems = false;
     groups: { [key: string]: { label: string; value: string; }[] };
-    value: any;
+    value: OptionModel;
+    isOpen: boolean;
 
     constructor(private sanitizer: DomSanitizer) {
         super();
@@ -33,6 +32,14 @@ export class SelectItemComponent extends BaseControlComponent<SelectControlDescr
         }
     }
 
+    setValue(value: any) {
+        this.value = this.descriptor.options.find(x => x.value === value);
+    }
+
+    getTitle(): string {
+        return !!this.value ? this.value.label : this.descriptor.placeholder;
+    }
+
     getDisplayValue(option: OptionModel) {
         return this.sanitizer.bypassSecurityTrustHtml(option.label);
     }
@@ -41,7 +48,13 @@ export class SelectItemComponent extends BaseControlComponent<SelectControlDescr
         return option.value;
     }
 
-    getFocusableControl(): ElementRef {
-        return this.control;
+    selectValue(option: OptionModel) {
+        this.value = option;
+        this.isOpen = false;
+        this.onChange(option.value);
+    }
+
+    toggle() {
+        this.isOpen = !this.isOpen;
     }
 }
