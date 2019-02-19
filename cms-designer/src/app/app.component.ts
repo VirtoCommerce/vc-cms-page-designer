@@ -30,30 +30,31 @@ export class AppComponent implements OnInit, OnDestroy {
     ];
 
     // page editor states
-    currentSectionItem$ = this.store.pipe(select(fromEditor.getCurrentSectionItem));
-    addNewSectionMode$ = this.store.pipe(select(fromEditor.getAddNewSectionMode));
-    blocksSchema$ = this.store.pipe(select(fromEditor.getBlocksSchema));
-    page$ = this.store.pipe(select(fromEditor.getPage));
-    schemaNotLoaded$ = this.store.pipe(select(fromEditor.getSchemaNotLoaded));
-    pageNotLoaded$ = this.store.pipe(select(fromEditor.getPageNotLoaded));
+    currentSectionItem$ = this.store.select(fromEditor.getCurrentSectionItem);
+    addNewSectionMode$ = this.store.select(fromEditor.getAddNewSectionMode);
+    blocksSchema$ = this.store.select(fromEditor.getBlocksSchema);
+    page$ = this.store.select(fromEditor.getPage);
+    schemaNotLoaded$ = this.store.select(fromEditor.getSchemaNotLoaded);
+    pageNotLoaded$ = this.store.select(fromEditor.getPageNotLoaded);
 
     // theme editor states
-    presets$ = this.store.pipe(select(fromTheme.getPresets));
-    themeSchema$ = this.store.pipe(select(fromTheme.getSchema));
-    theme$ = this.store.pipe(select(fromTheme.getEditableTheme));
-    currentThemeSchemaItem$ = this.store.pipe(select(fromTheme.getCurrentThemeSchemaItem));
-    showPresets$ = this.store.pipe(select(fromTheme.getShowPresetsEditor));
-    presetsNotLoaded$ = this.store.pipe(select(fromTheme.getPresetsNotLoaded));
-    themeSchemaNotLoaded$ = this.store.pipe(select(fromTheme.getSchemaNotLoaded));
+    presets$ = this.store.select(fromTheme.getPresets);
+    themeSchema$ = this.store.select(fromTheme.getSchema);
+    theme$ = this.store.select(fromTheme.getEditableTheme);
+    currentThemeSchemaItem$ = this.store.select(fromTheme.getCurrentThemeSchemaItem);
+    showPresets$ = this.store.select(fromTheme.getShowPresetsEditor);
+    presetsNotLoaded$ = this.store.select(fromTheme.getPresetsNotLoaded);
+    themeSchemaNotLoaded$ = this.store.select(fromTheme.getSchemaNotLoaded);
 
     // combined states
-    headerActive$ = this.store.pipe(select(fromRoot.getHeaderIsActive));
-    headerIcon$ = this.store.pipe(select(fromRoot.getHeaderIcon));
-    tabsVisible$ = this.store.pipe(select(fromRoot.getIsTabVisible));
-    isLoading$ = this.store.pipe(select(fromRoot.getIsLoading));
-    isEditMode$ = this.store.pipe(select(fromRoot.getIsEditMode));
-    isDirty$ = this.store.pipe(select(fromRoot.getIsDirty));
-    previewLoading$ = this.store.pipe(select(fromRoot.getPreviewLoading));
+    headerActive$ = this.store.select(fromRoot.getHeaderIsActive);
+    headerIcon$ = this.store.select(fromRoot.getHeaderIcon);
+    tabsVisible$ = this.store.select(fromRoot.getIsTabVisible);
+    isLoading$ = this.store.select(fromRoot.getIsLoading);
+    isEditMode$ = this.store.select(fromRoot.getIsEditMode);
+    isDirty$ = this.store.select(fromRoot.getIsDirty);
+    previewLoading$ = this.store.select(fromRoot.getPreviewLoading);
+    activeTabIndex$ = this.store.select(fromRoot.getActiveTabIndex);
     hasUndo$ = of(true);
     hasRedo$ = of(false);
 
@@ -91,12 +92,16 @@ export class AppComponent implements OnInit, OnDestroy {
         console.log(type);
     }
 
+    onTabChanged(index) {
+        this.store.dispatch(new rootActions.TabIndexChanged(index));
+    }
+
     undo() {
-        console.log('undo')
+        console.log('undo');
     }
 
     redo() {
-        console.log('redo')
+        console.log('redo');
     }
 
     // editor tab events

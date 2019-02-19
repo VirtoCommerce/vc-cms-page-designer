@@ -25,6 +25,11 @@ export const getIsTabVisible = createSelector(
     (section, isAddMode, presets, theme) => !section && !isAddMode && !presets && !theme
 );
 
+export const getActiveTabIndex = createSelector(
+    getRootFeatureState,
+    state => state.activeTabIndex
+);
+
 export const getIsEditMode = createSelector(
     fromEditor.getCurrentSectionItem,
     fromEditor.getAddNewSectionMode,

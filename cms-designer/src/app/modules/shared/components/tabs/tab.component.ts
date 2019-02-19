@@ -7,7 +7,7 @@ import { Component, OnInit, Input, HostBinding } from '@angular/core';
 export class TabComponent implements OnInit {
 
     @Input() tabTitle: string;
-    @HostBinding('class.tabs__content--active') active = false;
+    @HostBinding('class.tabs__content--active') @Input() active = false;
 
     constructor() { }
 

@@ -6,6 +6,7 @@ export interface RootState {
     secondaryFrameId: string;
     primaryLoaded: boolean;
     secondaryLoaded: boolean;
+    activeTabIndex: number;
 }
 
 const initialState: RootState = {
@@ -13,7 +14,8 @@ const initialState: RootState = {
     primaryFrameId: null,
     secondaryFrameId: null,
     primaryLoaded: false,
-    secondaryLoaded: false
+    secondaryLoaded: false,
+    activeTabIndex: 0
 };
 
 export function reducer(state = initialState, action: RootActions): RootState {
@@ -48,7 +50,12 @@ export function reducer(state = initialState, action: RootActions): RootState {
                 ...newValues
             };
         }
-
+        case RootActionTypes.TabIndexChanged: {
+            return {
+                ...state,
+                activeTabIndex: action.payload
+            };
+        }
     }
     return state;
 }
