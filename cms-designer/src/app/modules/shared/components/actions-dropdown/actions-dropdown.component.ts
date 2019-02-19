@@ -10,6 +10,7 @@ export class ActionsDropdownComponent implements OnInit {
     isOpen = false;
     @Input() title: string;
     @Input() items: ActionDescriptor[];
+    @Input() up: boolean;
     @Output() actionSelected = new EventEmitter<string>();
 
     ngOnInit(): void { }

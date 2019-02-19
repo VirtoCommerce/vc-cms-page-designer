@@ -1,4 +1,4 @@
-<div class="dropdown dropdown--up" [class.dropdown--show]="isOpen">
+<div class="dropdown" [class.dropdown--show]="isOpen" [class.dropdown--up]="up">
     <div class="dropdown__toggle" (click)="toggle()">{{ title }}</div>
     <div class="dropdown__menu">
         <a class="dropdown__menu-item" *ngFor="let item of items" (click)="onActionSelected(item.type)">
