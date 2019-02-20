@@ -3,7 +3,6 @@ import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
-import { MatFormFieldModule, MatSelectModule } from '@angular/material';
 import { BsDropdownModule } from 'ngx-bootstrap';
 
 import { CookieService } from 'ngx-cookie-service';
@@ -50,8 +49,6 @@ import { AppHttpInterceptor } from './services/app-http.interceptor';
             // }
         }),
         EffectsModule.forRoot([RootEffects, ErrorsEffects]),
-        MatFormFieldModule,
-        MatSelectModule,
         BsDropdownModule.forRoot(),
 
         EditorModule,

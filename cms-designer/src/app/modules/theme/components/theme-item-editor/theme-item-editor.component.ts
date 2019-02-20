@@ -18,7 +18,7 @@ export class ThemeItemEditorComponent implements OnInit, AfterViewInit {
 
     ngOnInit() { }
 
-    themeChanged() {
-        this.valueChangedEvent.emit(this.theme);
+    themeChanged(model) {
+        this.valueChangedEvent.emit(model);
     }
 }

@@ -7,8 +7,6 @@ import { QuillModule } from 'ngx-quill';
 
 import { COMPONENTS } from './components';
 import { CONTROLS } from './controls';
-import { MatSelectModule } from '@angular/material';
-
 @NgModule({
     declarations: [
         ...COMPONENTS,
@@ -20,7 +18,6 @@ import { MatSelectModule } from '@angular/material';
         BrowserAnimationsModule,
         ReactiveFormsModule,
         ColorPickerModule,
-        MatSelectModule,
         QuillModule
     ],
     exports: COMPONENTS
