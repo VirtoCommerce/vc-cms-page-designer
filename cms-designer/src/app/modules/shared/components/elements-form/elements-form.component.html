@@ -1,7 +1,7 @@
 <div [formGroup]="group">
     <div class="form-group" *ngFor="let control of descriptors">
         <!-- Header or Paragraph -->
-        {{ getContent(control) }}
+        <p>{{ getContent(control) }}</p>
         <!-- Simple control -->
         <app-control-holder *ngIf="displaySimpleControl(control)" [descriptor]="control" [group]="group"
             [formControlName]="control.id"></app-control-holder>
