@@ -12,11 +12,6 @@
     padding: 0 .9375rem;
     transition: all .35s;
 
-    & ~ .btn
-    {
-        margin-top: .625rem;
-    }
-
     &__text
     {
         font-size: .8125rem;

@@ -65,7 +65,7 @@
         <app-select-type class="left-panel" *ngIf="addNewSectionMode$ | async" [schema]="blocksSchema$ | async"
             (previewBlockEvent)="previewBlockType($event)" (selectBlockEvent)="selectBlockType($event)">
         </app-select-type>
-        <app-presets-editor *ngIf="showPresets$|async" [data]="presets$|async" (savePresetEvent)="onSavePreset($event)"
+        <app-presets-editor class="left-panel" *ngIf="showPresets$|async" [data]="presets$|async" (savePresetEvent)="onSavePreset($event)"
             (selectPresetEvent)="onSelectPreset($event)" (applyThemeEvent)="applyPresetAsTheme($event)"
             (removePresetEvent)="onRemovePreset($event)">
         </app-presets-editor>
