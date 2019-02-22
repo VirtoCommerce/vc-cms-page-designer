@@ -1,6 +1,6 @@
 {
-    "storeBaseUrl": "http://localhost:2082",
+    "storeBaseUrl": "http://dev-cms-vm.westeurope.cloudapp.azure.com/v2/store",
     "storePreviewPath": "/designer-preview",
     "baseUrl": "/",
-    "platformUrl": "http://localhost/admin"
+    "platformUrl": "http://dev-cms-vm.westeurope.cloudapp.azure.com/v2/admin"
 }
