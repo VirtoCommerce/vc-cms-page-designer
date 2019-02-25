@@ -168,6 +168,13 @@ export function reducer(state = initialState, action: EditorActions): EditorStat
                 ...state,
                 dirty: true
             };
+        case EditorActionTypes.ToggleItemVisibility: {
+            action.payload.hidden = !action.payload.hidden;
+            return {
+                ...state,
+                dirty: true
+            };
+        }
     }
     return state;
 }

@@ -58,7 +58,7 @@ export class EditorEffects {
     @Effect()
     copyBlock$ = this.actions$.pipe(
         ofType<editorActions.CopyPageItem>(editorActions.EditorActionTypes.CopyPageItem),
-        withLatestFrom(this.store$.select(state => state.editor.page)),
+        withLatestFrom(this.store$.select(fromEditor.getPage)),
         flatMap(([action, page]) => {
             const block = { ...action.payload };
             block.id = page.content.reduce((v: number, b: BlockValuesModel) => Math.max(<number>b.id, v), 0) + 1;
@@ -73,7 +73,7 @@ export class EditorEffects {
     createPageItemModelByType$ = this.actions$.pipe(
         ofType(editorActions.EditorActionTypes.CreatePageItem),
         map((action: editorActions.CreatePageItem) => action.payload),
-        withLatestFrom(this.store$.select(state => state.editor.page)),
+        withLatestFrom(this.store$.select(fromEditor.getPage)),
         map(([blockSchema, page]) => {
             const block = <BlockValuesModel>{
                 id: Math.max(...page.content.map(v => <number>v.id || 0)) + 1,
@@ -118,7 +118,7 @@ export class EditorEffects {
     @Effect()
     uploadPage$: Observable<Action> = this.actions$.pipe(
         ofType<editorActions.SavePage>(editorActions.EditorActionTypes.SavePage),
-        withLatestFrom(this.store$.select(state => state.editor.page)),
+        withLatestFrom(this.store$.select(fromEditor.getPage)),
         switchMap(([, page]) => {
             const data = [page.settings, ...page.content];
             return this.pages.uploadPage(data).pipe(

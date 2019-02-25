@@ -35,7 +35,8 @@ export enum EditorActionTypes {
     SelectPageItem = '[Page] Select Page Item',
     ToggleNewBlockPane = '[Page] Toggle New Block Pane',
     UpdateBlockPreview = '[Page] Update Block Preview',
-    UpdatePageItem = '[Page] Update Page Item'
+    UpdatePageItem = '[Page] Update Page Item',
+    ToggleItemVisibility = '[Page] Toggle Item Visibility'
 }
 
 export class AddPageItem implements Action {
@@ -186,6 +187,12 @@ export class UpdatePageItem implements Action {
     constructor(public payload: BlockValuesModel) { }
 }
 
+export class ToggleItemVisibility implements Action {
+    readonly type = EditorActionTypes.ToggleItemVisibility;
+
+    constructor(public payload: BlockValuesModel) { }
+}
+
 export type EditorActions = LoadPage
     | AddPageItem
     | BlocksSchemaFail
@@ -214,4 +221,5 @@ export type EditorActions = LoadPage
     | SelectPageItem
     | ToggleNewBlockPane
     | UpdateBlockPreview
-    | UpdatePageItem;
+    | UpdatePageItem
+    | ToggleItemVisibility;

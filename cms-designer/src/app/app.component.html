@@ -34,6 +34,7 @@
                     <app-page-editor class="left-panel-content" [model]="page$ | async" [schema]="blocksSchema$ | async"
                         (selectEvent)="selectPageItem($event)" [noSchema]="schemaNotLoaded$ | async"
                         [noPage]="pageNotLoaded$ | async" (reloadData)="reloadEditorData()"
+                        (visibilityChanged)="toggleVisibility($event)"
                         (orderChangedEvent)="onOrderChanged($event)" (addNewBlockEvent)="setNewBlockMode()">
                     </app-page-editor>
                     <app-footer-aside class="left-panel-footer">

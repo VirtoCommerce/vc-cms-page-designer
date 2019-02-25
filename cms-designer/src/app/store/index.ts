@@ -39,6 +39,16 @@ export const getIsEditMode = createSelector(
         !!sectionItem || !!addSection || !!schemaItem || !!presetsEditor
 );
 
+export const getPrimaryFrameId = createSelector(
+    getRootFeatureState,
+    state => state.primaryFrameId
+);
+
+export const getSecondaryFrameId = createSelector(
+    getRootFeatureState,
+    state => state.secondaryFrameId
+);
+
 export const getHeaderIsActive = createSelector(
     getIsEditMode,
     mode => mode

@@ -3,11 +3,11 @@
         <div class="list-group-icon" [attr.data-name]="getBlockIcon(item)"></div>
         <div class="list-group-text">{{ getBlockName(item) }}</div>
     </a>
-    <a class="list-group-item" *ngFor="let item of model.content" (click)="selectItem(item)">
+    <a class="list-group-item" *ngFor="let item of model.content" (click)="selectItem(item)" [class.disabled]="item.hidden">
         <div class="list-group-icon" [attr.data-name]="getBlockIcon(item)"></div>
         <div class="list-group-text">{{ getBlockName(item) }}</div>
         <div class="list-group-actions">
-            <div class="list-group-visible"></div>
+            <a class="list-group-visible" (click)="toggleItemVisibility($event, item)" [class.hidden]="item.hidden"></a>
             <div class="list-group-drag"></div>
         </div>
     </a>

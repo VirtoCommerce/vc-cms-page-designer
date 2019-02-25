@@ -38,6 +38,7 @@ export class PageEditorComponent implements OnInit {
     @Output() selectEvent = new EventEmitter<BlockValuesModel>();
     @Output() addNewBlockEvent = new EventEmitter<any>();
     @Output() orderChangedEvent = new EventEmitter<SortEvent>();
+    @Output() visibilityChanged = new EventEmitter<BlockValuesModel>();
     @Output() reloadData = new EventEmitter();
 
     constructor() { }
@@ -88,6 +89,12 @@ export class PageEditorComponent implements OnInit {
 
     onReloadData() {
         this.reloadData.emit();
+    }
+
+    toggleItemVisibility(event: MouseEvent, item: BlockValuesModel) {
+        event.stopPropagation();
+        event.preventDefault();
+        this.visibilityChanged.emit(item);
     }
 
     private updateLItems() {

@@ -89,9 +89,9 @@ export class RootEffects {
     @Effect()
     uploadPreviewPreset$ = this.actions$.pipe(
         ofType(themeActions.ThemeActionTypes.UpdateDraftSuccess),
-        withLatestFrom(this.rootStore$.select(store => store.root)),
-        switchMap(([, store]) => {
-            this.preview.reload(store.secondaryFrameId);
+        withLatestFrom(this.rootStore$.select(fromRoot.getSecondaryFrameId)),
+        switchMap(([, frameId]) => {
+            this.preview.reload(frameId);
             return of(new rootActions.PreviewLoading(true));
         })
     );
@@ -102,16 +102,15 @@ export class RootEffects {
     sendPreviewPageItem$ = this.actions$.pipe(
         ofType<editorActions.PreviewPageItem>(editorActions.EditorActionTypes.PreviewPageItem),
         map(action => action.payload),
-        withLatestFrom(this.rootStore$.select(store => store.root)),
-        tap(([item, store]) => this.preview.addOrUpdateBlock(item, store.primaryFrameId))
-    );
+        withLatestFrom(this.rootStore$.select(fromRoot.getPrimaryFrameId)),
+        tap(([item, frameId]) => this.preview.addOrUpdateBlock(item, frameId)));
 
     @Effect({ dispatch: false })
     sendNewBlockToStoreLoaded$ = this.actions$.pipe(
         ofType<editorActions.AddPageItem>(editorActions.EditorActionTypes.AddPageItem),
-        withLatestFrom(this.rootStore$.select(store => store.root)),
-        tap(([action, store]) => {
-            this.preview.addOrUpdateBlock(action.payload, store.primaryFrameId);
+        withLatestFrom(this.rootStore$.select(fromRoot.getPrimaryFrameId)),
+        tap(([action, frameId]) => {
+            this.preview.addOrUpdateBlock(action.payload, frameId);
         })
     );
 
@@ -119,11 +118,11 @@ export class RootEffects {
     scrollPreviewToObject$ = this.actions$.pipe(
         ofType<editorActions.SelectPageItem>(editorActions.EditorActionTypes.SelectPageItem),
         filter(action => !!action.payload),
-        withLatestFrom(this.rootStore$.select(store => store.root)),
-        tap(([action, store]) => {
-            this.preview.selectBlock(<number>action.payload.id, store.primaryFrameId);
+        withLatestFrom(this.rootStore$.select(fromRoot.getPrimaryFrameId)),
+        tap(([action, frameId]) => {
+            this.preview.selectBlock(<number>action.payload.id, frameId);
             if (action.scrollTo) {
-                this.preview.scrollTo(action.payload, store.primaryFrameId);
+                this.preview.scrollTo(action.payload, frameId);
             }
         })
     );
@@ -131,19 +130,22 @@ export class RootEffects {
     @Effect({ dispatch: false })
     deselectObject$ = this.actions$.pipe(
         ofType<editorActions.CompleteEditPageItem>(editorActions.EditorActionTypes.CompleteEditPageItem),
-        withLatestFrom(this.rootStore$.select(store => store.root)),
-        tap(([, store]) => {
-            this.preview.selectBlock(0, store.primaryFrameId);
+        withLatestFrom(this.rootStore$.select(fromRoot.getPrimaryFrameId)),
+        tap(([, frameId]) => {
+            this.preview.selectBlock(0, frameId);
         })
     );
 
     @Effect({ dispatch: false })
     sendUpdatedBlockToStoreLoaded$ = this.actions$.pipe(
         ofType<editorActions.UpdateBlockPreview>(editorActions.EditorActionTypes.UpdateBlockPreview),
-        withLatestFrom(this.rootStore$.select(store => store.root), this.editorStore$.select(store => store.editor)),
-        map(([action, store, editor]): [BlockValuesModel, string] => [
-            <BlockValuesModel>{ ...editor.currentSectionItem, ...action.payload },
-            store.primaryFrameId
+        withLatestFrom(
+            this.rootStore$.select(fromRoot.getPrimaryFrameId),
+            this.editorStore$.select(fromEditor.getCurrentSectionItem)
+        ),
+        map(([action, frameId, currentItem]): [BlockValuesModel, string] => [
+            <BlockValuesModel>{ ...currentItem, ...action.payload },
+            frameId
         ]),
         filter(([block]) => block.type !== 'settings'),
         debounceTime(500),
@@ -154,24 +156,37 @@ export class RootEffects {
     @Effect({ dispatch: false })
     sendBlocksOrderChanged$ = this.actions$.pipe(
         ofType<editorActions.OrderChanged>(editorActions.EditorActionTypes.OrderChanged),
-        withLatestFrom(this.rootStore$.select(store => store.root)),
-        tap(([action, store]) =>
-            this.preview.changeOrder(action.payload.currentIndex, action.payload.newIndex, store.primaryFrameId))
+        withLatestFrom(this.rootStore$.select(fromRoot.getPrimaryFrameId)),
+        tap(([action, frameId]) =>
+            this.preview.changeOrder(action.payload.currentIndex, action.payload.newIndex, frameId))
     );
 
     @Effect({ dispatch: false })
     sendRemoveBlockToStoreLoaded$ = this.actions$.pipe(
         ofType<editorActions.RemovePageItem>(editorActions.EditorActionTypes.RemovePageItem),
         filter(action => action.payload.type !== 'settings'),
-        withLatestFrom(this.rootStore$.select(store => store.root)),
-        tap(([action, store]) => this.preview.removeBlock(action.payload, store.primaryFrameId))
+        withLatestFrom(this.rootStore$.select(fromRoot.getPrimaryFrameId)),
+        tap(([action, frameId]) => this.preview.removeBlock(action.payload, frameId))
+    );
+
+    @Effect({ dispatch: false })
+    toggleItemVisibility$ = this.actions$.pipe(
+        ofType<editorActions.ToggleItemVisibility>(editorActions.EditorActionTypes.ToggleItemVisibility),
+        withLatestFrom(this.rootStore$.select(fromRoot.getPrimaryFrameId)),
+        tap(([action, frameId]) => {
+            if (action.payload.hidden) {
+                this.preview.removeBlock(action.payload, frameId);
+            } else {
+                this.preview.addOrUpdateBlock(action.payload, frameId);
+            }
+        })
     );
 
     @Effect()
     reloadPageInBackground$ = this.actions$.pipe(
         ofType(editorActions.EditorActionTypes.LoadPageSuccess),
-        withLatestFrom(this.rootStore$.select(store => store.root)),
-        switchMap(([, store]) => of(new rootActions.PreviewReady(store.secondaryFrameId)))
+        withLatestFrom(this.rootStore$.select(fromRoot.getSecondaryFrameId)),
+        switchMap(([, frameId]) => of(new rootActions.PreviewReady(frameId)))
     );
 
     @Effect()

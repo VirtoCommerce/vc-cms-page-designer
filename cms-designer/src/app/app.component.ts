@@ -133,6 +133,10 @@ export class AppComponent implements OnInit, OnDestroy {
         this.store.dispatch(new editorActions.CopyPageItem(item));
     }
 
+    toggleVisibility(item: BlockValuesModel) {
+        this.store.dispatch(new editorActions.ToggleItemVisibility(item));
+    }
+
     // add new block pane events
 
     setNewBlockMode() {
