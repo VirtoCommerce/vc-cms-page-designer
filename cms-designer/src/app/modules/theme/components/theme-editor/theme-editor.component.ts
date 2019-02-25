@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
-import { BlockSchema } from 'src/app/modules/shared/models';
+import { BlockSchema } from '@shared/models';
 
 @Component({
     selector: 'app-theme-editor',

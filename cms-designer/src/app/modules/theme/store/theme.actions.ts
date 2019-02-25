@@ -1,8 +1,8 @@
 import { Action } from '@ngrx/store';
-
-import { PresetsModel } from '../models/presets.model';
-import { BlockSchema } from '../../shared/models';
 import { HttpErrorResponse } from '@angular/common/http';
+
+import { PresetsModel } from '@themes/models';
+import { BlockSchema } from '@shared/models';
 
 export enum ThemeActionTypes {
     LoadThemes = '[Theme] Load Themes',

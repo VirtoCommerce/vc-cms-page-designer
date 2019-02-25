@@ -1,8 +1,8 @@
-import { PlatformService } from './../../../services/platform.service';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { BlocksSchema } from 'src/app/modules/shared/models/';
 import { tap } from 'rxjs/operators';
+import { PlatformService } from '@app/services';
+import { BlocksSchema } from '@shared/models';
 
 @Injectable({
     providedIn: 'root'

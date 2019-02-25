@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { environment } from '../../environments/environment';
-import { BlockValuesModel } from 'src/app/modules/shared/models';
+import { BlockValuesModel } from '@shared/models';
 
 import { AppSettings } from './app.settings';
 

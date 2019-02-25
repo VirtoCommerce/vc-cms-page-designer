@@ -1,4 +1,4 @@
-import { RootActionTypes, RootActions, ResetData } from './root.actions';
+import { RootActionTypes, RootActions } from './root.actions';
 
 export interface RootState {
     previewLoading: boolean;

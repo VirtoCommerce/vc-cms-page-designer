@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ColorControlDescriptor } from './../../models/color-control.descriptor';
+import { ColorControlDescriptor } from '@shared/models';
 import { BaseControlComponent } from './../base-control.component';
 
 @Component({

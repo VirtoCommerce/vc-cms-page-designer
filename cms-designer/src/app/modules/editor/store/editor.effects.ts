@@ -1,23 +1,23 @@
-import { BlockValuesModel } from './../../shared/models/block-values.model';
-import { map, flatMap, filter, switchMapTo } from 'rxjs/operators';
-// import { CatalogService } from './../services/catalog.service';
 import { Injectable } from '@angular/core';
-import { Actions, Effect, ofType } from '@ngrx/effects';
-import { Action, Store } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
+import { map, flatMap, switchMapTo } from 'rxjs/operators';
+// import { CatalogService } from './../services/catalog.service';
 import {
     catchError,
     mergeMap,
     switchMap,
     withLatestFrom
 } from 'rxjs/operators';
+import { Action, Store } from '@ngrx/store';
+import { Actions, Effect, ofType } from '@ngrx/effects';
+
+import { BlockValuesModel } from '@shared/models';
+import { PageModel } from '@editor/models';
+import { BlocksService, PagesService } from '@editor/services';
 
 import * as editorActions from './editor.actions';
 import * as fromEditor from '.';
 
-import { PagesService } from '../services/pages.service';
-import { PageModel } from '../models/page.model';
-import { BlocksService } from '../services/blocks.service';
 // import { CategoryModel } from '../models';
 
 @Injectable()

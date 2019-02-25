@@ -1,17 +1,21 @@
 import { ApiUrlsService } from './services/api-url.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { SafeUrl } from '@angular/platform-browser';
-import { Observable, Subscription, of } from 'rxjs';
-import { Store, select } from '@ngrx/store';
-import { filter, distinctUntilChanged } from 'rxjs/operators';
-import * as fromRoot from './store';
-import * as fromEditor from './modules/editor/store';
-import * as fromTheme from './modules/theme/store';
-import * as rootActions from './store/root.actions';
-import * as editorActions from './modules/editor/store/editor.actions';
-import * as themeActions from './modules/theme/store/theme.actions';
-import { BlockValuesModel, BlockSchema } from './modules/shared/models';
+import { Subscription, of } from 'rxjs';
+import { Store } from '@ngrx/store';
+
 import { CdkDragSortEvent } from '@angular/cdk/drag-drop';
+
+import * as fromRoot from '@app/store';
+import * as rootActions from '@app/store/root.actions';
+
+import * as fromEditor from '@editor/store';
+import * as editorActions from '@editor/store/editor.actions';
+
+import * as fromTheme from '@themes/store';
+import * as themeActions from '@themes/store/theme.actions';
+
+import { BlockValuesModel, BlockSchema } from '@shared/models';
 
 @Component({
     selector: 'app-root',

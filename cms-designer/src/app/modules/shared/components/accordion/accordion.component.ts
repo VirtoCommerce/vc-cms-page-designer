@@ -1,4 +1,4 @@
-import { Component, ContentChildren, QueryList, AfterContentInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AccItemComponent } from './acc-item.component';
 
 @Component({

@@ -1,7 +1,7 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { BaseControlComponent } from '../base-control.component';
-import { OptionModel, SelectControlDescriptor } from '../../models';
+import { OptionModel, SelectControlDescriptor } from '@shared/models';
 
 @Component({
     selector: 'app-select-item',

@@ -1,7 +1,7 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import * as fromRoot from './root.reducer';
-import * as fromTheme from 'src/app/modules/theme/store';
-import * as fromEditor from 'src/app/modules/editor/store';
+import * as fromTheme from '@themes/store';
+import * as fromEditor from '@editor/store';
 
 export interface State {
     root: fromRoot.RootState;

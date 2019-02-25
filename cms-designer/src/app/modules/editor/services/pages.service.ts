@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { PlatformService } from 'src/app/services/platform.service';
-import { PageModel } from './../models/page.model';
-import { BlockValuesModel } from '../../shared/models';
+import { Observable } from 'rxjs';
+import { PlatformService } from '@app/services';
+import { BlockValuesModel } from '@shared/models';
 
 @Injectable({
     providedIn: 'root'

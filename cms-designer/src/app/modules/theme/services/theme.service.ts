@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { PresetsModel } from '../models/';
-import { PlatformService } from 'src/app/services/platform.service';
-import { BlockSchema } from '../../shared/models';
+import { PresetsModel } from '@themes/models';
+import { PlatformService } from '@app/services';
+import { BlockSchema } from '@shared/models';
 
 @Injectable({
     providedIn: 'root'

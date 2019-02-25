@@ -1,4 +1,4 @@
-import { BlockValuesModel } from '../../shared/models';
+import { BlockValuesModel } from '@shared/models';
 
 export interface PageModel {
     settings: BlockValuesModel;

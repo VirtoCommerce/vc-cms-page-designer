@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BaseControlComponent } from '../base-control.component';
-import { TextControlDescriptor } from '../../models';
+import { TextControlDescriptor } from '@shared/models';
 
 @Component({
     selector: 'app-text-item',

@@ -1,5 +1,5 @@
-import { AccordeonComponent } from './accordion.component';
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
+import { AccordeonComponent } from './accordion.component';
 
 @Component({
     selector: 'app-acc-item',

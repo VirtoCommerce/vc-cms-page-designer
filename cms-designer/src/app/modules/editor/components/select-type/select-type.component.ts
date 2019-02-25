@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
-import { BlockSchema, BlocksSchema } from 'src/app/modules/shared/models';
+import { BlockSchema, BlocksSchema } from '@shared/models';
 
 @Component({
     selector: 'app-select-type',

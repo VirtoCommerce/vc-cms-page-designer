@@ -1,7 +1,6 @@
-import { RootActions } from './../../../store/root.actions';
-import { ThemeActionTypes, ThemeActions, CreatePreset, SaveThemeSuccess, LoadSchema } from './theme.actions';
-import { PresetsModel } from '../models/presets.model';
-import { BlockSchema, ValueType } from '../../shared/models';
+import { ThemeActionTypes, ThemeActions } from './theme.actions';
+import { PresetsModel } from '@themes/models';
+import { BlockSchema, ValueType } from '@shared/models';
 
 export interface ThemeState {
     schemaLoading: boolean;

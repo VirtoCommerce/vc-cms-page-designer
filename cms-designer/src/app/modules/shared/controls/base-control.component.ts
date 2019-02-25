@@ -1,6 +1,6 @@
 import { Input, OnInit, AfterContentInit, ElementRef } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { BaseDescriptor, BlockSchema } from '../models';
+import { BaseDescriptor, BlockSchema } from '@shared/models';
 
 export class BaseControlComponent<T extends BaseDescriptor> implements OnInit, AfterContentInit {
     @Input() descriptor: T;

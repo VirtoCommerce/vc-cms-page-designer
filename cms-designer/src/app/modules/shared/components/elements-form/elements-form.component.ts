@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup, AbstractControl, FormArray } from '@angular/forms';
-import { DisplayTextControlDescriptor, ControlDescriptor, CollectionControlDescriptor } from '../../models';
-import { FormHelper } from './../../services/form.helper';
 import { CdkDragSortEvent } from '@angular/cdk/drag-drop';
+import { DisplayTextControlDescriptor, ControlDescriptor, CollectionControlDescriptor } from '@shared/models';
+import { FormHelper } from '@shared/services';
 
 @Component({
     selector: 'app-elements-form',

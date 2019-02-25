@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { FormGroup, FormArray, FormControl } from '@angular/forms';
-import { ControlDescriptor, CollectionControlDescriptor } from '../models';
+import { ControlDescriptor, CollectionControlDescriptor } from '@shared/models';
 
 @Injectable({
     providedIn: 'root'

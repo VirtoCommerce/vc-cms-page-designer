@@ -1,5 +1,4 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { AppSettings } from 'src/app/services/app.settings';
 
 @Component({
     selector: 'app-toolbar',

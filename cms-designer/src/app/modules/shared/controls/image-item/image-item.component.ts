@@ -1,7 +1,7 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { FilesService } from '../../services/files.service';
+import { FilesService } from '@shared/services';
 import { BaseControlComponent } from '../base-control.component';
-import { ImageControlDescriptor } from '../../models';
+import { ImageControlDescriptor } from '@shared/models';
 
 @Component({
     selector: 'app-image-item',

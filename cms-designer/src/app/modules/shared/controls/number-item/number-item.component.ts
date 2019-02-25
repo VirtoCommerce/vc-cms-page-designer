@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, AfterContentInit, ElementRef } from '@angular/core';
 import { BaseControlComponent } from './../base-control.component';
-import { NumberControlDescriptor } from '../../models';
+import { NumberControlDescriptor } from '@shared/models';
 
 @Component({
     selector: 'app-number-item',

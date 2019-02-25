@@ -1,8 +1,8 @@
-import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectorRef, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { BlockSchema, BlockValuesModel } from 'src/app/modules/shared/models';
-import { FormHelper } from '../../services/form.helper';
 import { Subscription } from 'rxjs';
+import { BlockSchema, BlockValuesModel } from '@shared/models';
+import { FormHelper } from '@shared/services';
 
 @Component({
     selector: 'app-block-form',

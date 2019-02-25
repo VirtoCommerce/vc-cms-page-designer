@@ -7,9 +7,9 @@ import { BsDropdownModule } from 'ngx-bootstrap';
 
 import { CookieService } from 'ngx-cookie-service';
 
-import { SharedModule } from './modules/shared/shared.module';
-import { EditorModule } from './modules/editor/editor.module';
-import { ThemeModule } from './modules/theme/theme.module';
+import { SharedModule } from '@shared/shared.module';
+import { EditorModule } from '@editor/editor.module';
+import { ThemeModule } from '@themes/theme.module';
 
 import { AppComponent } from './app.component';
 import { COMPONENTS } from './components';
@@ -23,7 +23,7 @@ import { RootEffects } from './store/root.effects';
 import { reducer } from './store/root.reducer';
 import { environment } from '../environments/environment';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { AppHttpInterceptor } from './services/app-http.interceptor';
+import { AppHttpInterceptor } from '@app/services';
 
 @NgModule({
     declarations: [

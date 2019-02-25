@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { PageDescriptor } from '../modules/shared/models/page.descriptor';
-import { CookieService } from 'ngx-cookie-service';
 import { SafeUrl, DomSanitizer } from '@angular/platform-browser';
+import { CookieService } from 'ngx-cookie-service';
 
+import { PageDescriptor } from '@shared/models';
 import { AppSettings } from './app.settings';
 
 @Injectable({

@@ -1,10 +1,19 @@
 import { Injectable } from '@angular/core';
-import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Action, Store } from '@ngrx/store';
+import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Observable, of } from 'rxjs';
-import { mergeMap, map, catchError, withLatestFrom, tap, switchMap, debounceTime, distinctUntilChanged, switchMapTo } from 'rxjs/operators';
+import {
+    mergeMap,
+    map,
+    catchError,
+    withLatestFrom,
+    switchMap,
+    debounceTime,
+    distinctUntilChanged,
+    switchMapTo
+} from 'rxjs/operators';
 
-import { ThemeService } from '../services/theme.service';
+import { ThemeService } from '@themes/services';
 import * as themeActions from './theme.actions';
 import * as fromTheme from '.';
 

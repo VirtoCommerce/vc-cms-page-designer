@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BaseControlComponent } from '../base-control.component';
-import { CheckboxControlDescriptor } from '../../models';
+import { CheckboxControlDescriptor } from '@shared/models';
 
 @Component({
     selector: 'app-checkbox-item',

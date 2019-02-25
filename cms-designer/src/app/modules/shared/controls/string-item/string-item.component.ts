@@ -1,6 +1,6 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import { BaseControlComponent } from '../base-control.component';
-import { StringControlDescriptor } from '../../models';
+import { StringControlDescriptor } from '@shared/models';
 
 @Component({
     selector: 'app-string-item',

@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { ApiUrlsService } from './api-url.service';
-import { PresetsModel } from './../modules/theme/models/presets.model';
 import { tap } from 'rxjs/operators';
-import { BlockValuesModel, BlocksSchema } from '../modules/shared/models';
-import { EnvironmentSettings } from '../models/environment.settings';
+import { ApiUrlsService } from './api-url.service';
+import { PresetsModel } from '@themes/models';
+import { BlockValuesModel, BlocksSchema } from '@shared/models';
+import { EnvironmentSettings } from '@app/models';
 
 import { AppSettings } from './app.settings';
 

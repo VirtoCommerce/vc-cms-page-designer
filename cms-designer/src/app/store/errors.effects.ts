@@ -3,10 +3,10 @@ import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { tap, filter, map } from 'rxjs/operators';
 
-import { ErrorsService } from './../modules/shared/services/errors.service';
+import { ErrorsService } from '@shared/services';
 
-import * as themeActions from '../modules/theme/store/theme.actions';
-import * as editorActions from '../modules/editor/store/editor.actions';
+import * as themeActions from '@themes/store/theme.actions';
+import * as editorActions from '@editor/store/editor.actions';
 
 @Injectable()
 export class ErrorsEffects {

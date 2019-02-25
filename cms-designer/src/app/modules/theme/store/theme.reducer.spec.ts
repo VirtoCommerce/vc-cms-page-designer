@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { BlockSchema, ColorControlDescriptor } from 'src/app/modules/shared/models';
+import { BlockSchema, ColorControlDescriptor } from '@shared/models';
 import * as fromTheme from './theme.reducer';
 import * as themeActions from './theme.actions';
 

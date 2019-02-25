@@ -7,6 +7,7 @@ import { QuillModule } from 'ngx-quill';
 
 import { COMPONENTS } from './components';
 import { CONTROLS } from './controls';
+
 @NgModule({
     declarations: [
         ...COMPONENTS,

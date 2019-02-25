@@ -1,5 +1,5 @@
-import { Component, OnInit, Output, EventEmitter, Input, HostBinding } from '@angular/core';
-import { BlockValuesModel, BlocksSchema } from 'src/app/modules/shared/models';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { BlockValuesModel, BlocksSchema } from '@shared/models';
 import { PageModel } from '@editor/models';
 import { CdkDragSortEvent } from '@angular/cdk/drag-drop';
 

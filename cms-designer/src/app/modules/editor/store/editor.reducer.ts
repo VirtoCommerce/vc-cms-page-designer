@@ -1,6 +1,6 @@
 import { EditorActionTypes, EditorActions } from './editor.actions';
-import { BlocksSchema, BlockValuesModel } from 'src/app/modules/shared/models';
-import { PageModel } from '../models';
+import { BlocksSchema, BlockValuesModel } from '@shared/models';
+import { PageModel } from '@editor/models';
 
 export interface EditorState {
     pageLoading: boolean;

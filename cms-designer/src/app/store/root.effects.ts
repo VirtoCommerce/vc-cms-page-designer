@@ -3,18 +3,18 @@ import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Action, Store } from '@ngrx/store';
 import { Observable, of, fromEvent } from 'rxjs';
 import { switchMapTo, debounceTime, distinctUntilChanged, withLatestFrom, tap, filter, map, switchMap, mapTo } from 'rxjs/operators';
-import { PreviewService } from '../services/preview.service';
+import { PreviewService } from '@app/services';
 
 import * as rootActions from './root.actions';
 import * as fromRoot from '.';
 
-import * as themeActions from '../modules/theme/store/theme.actions';
-import * as fromTheme from '../modules/theme/store';
+import * as themeActions from '@themes/store/theme.actions';
+import * as fromTheme from '@themes/store';
 
-import * as editorActions from '../modules/editor/store/editor.actions';
-import * as fromEditor from '../modules/editor/store';
-import { BlockValuesModel } from '../modules/shared/models';
-import { ErrorsService } from '../modules/shared/services/errors.service';
+import * as editorActions from '@editor/store/editor.actions';
+import * as fromEditor from '@editor/store';
+import { BlockValuesModel } from '@shared/models';
+import { ErrorsService } from '@shared/services/errors.service';
 
 @Injectable()
 export class RootEffects {

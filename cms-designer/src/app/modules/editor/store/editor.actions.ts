@@ -1,4 +1,4 @@
-import { BlockValuesModel } from './../../shared/models/block-values.model';
+import { BlockValuesModel } from '@shared/models';
 // import { CategoryModel } from './../models/category.model';
 import { Action } from '@ngrx/store';
 

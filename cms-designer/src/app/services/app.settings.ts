@@ -1,4 +1,4 @@
-import { EnvironmentSettings } from './../models/environment.settings';
+import { EnvironmentSettings } from '@app/models';
 
 export let AppSettings: EnvironmentSettings = {
     storeBaseUrl: null,

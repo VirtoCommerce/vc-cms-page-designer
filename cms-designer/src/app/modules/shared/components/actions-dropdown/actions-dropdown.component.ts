@@ -1,5 +1,5 @@
-import { ActionDescriptor } from 'src/app/models/action-descriptor.model';
 import { OnInit, Input, Output, EventEmitter, Component } from '@angular/core';
+import { ActionDescriptor } from '@app/models';
 
 @Component({
     selector: 'app-actions-dropdown',

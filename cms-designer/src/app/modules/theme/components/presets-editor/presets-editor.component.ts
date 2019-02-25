@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { PresetsModel } from '../../models';
-import { AppSettings } from 'src/app/services/app.settings';
+import { PresetsModel } from '@themes/models';
+import { AppSettings } from '@app/services';
 
 @Component({
     selector: 'app-presets-editor',
