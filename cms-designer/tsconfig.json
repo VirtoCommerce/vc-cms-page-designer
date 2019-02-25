@@ -2,6 +2,12 @@
     "compileOnSave": false,
     "compilerOptions": {
         "baseUrl": "./",
+        "paths": {
+            "@shared/*": ["src/app/modules/shared/*"],
+            "@editor/*": ["src/app/modules/editor/*"],
+            "@themes/*": ["src/app/modules/theme/*"],
+            "@store/*": ["src/app/store/*"]
+        },
         "outDir": "./dist/out-tsc",
         "sourceMap": true,
         "declaration": false,

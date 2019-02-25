@@ -3,14 +3,18 @@
         <div class="list-group-icon" [attr.data-name]="getBlockIcon(item)"></div>
         <div class="list-group-text">{{ getBlockName(item) }}</div>
     </a>
-    <a class="list-group-item" *ngFor="let item of model.content" (click)="selectItem(item)" [class.disabled]="item.hidden">
-        <div class="list-group-icon" [attr.data-name]="getBlockIcon(item)"></div>
-        <div class="list-group-text">{{ getBlockName(item) }}</div>
-        <div class="list-group-actions">
-            <a class="list-group-visible" (click)="toggleItemVisibility($event, item)" [class.hidden]="item.hidden"></a>
-            <div class="list-group-drag"></div>
-        </div>
-    </a>
+    <div cdkDropList class="list-container" (cdkDropListDropped)="reorder($event)">
+        <a cdkDragBoundary=".list-container" cdkDragLockAxis="y" cdkDrag class="list-group-item"
+            *ngFor="let item of model.content" (click)="selectItem(item)" [class.disabled]="item.hidden">
+            <div class="list-group-icon" [attr.data-name]="getBlockIcon(item)"></div>
+            <div class="list-group-text">{{ getBlockName(item) }}</div>
+            <div class="list-group-actions">
+                <a class="list-group-visible" (click)="toggleItemVisibility($event, item)"
+                    [class.hidden]="item.hidden"></a>
+                <div class="list-group-drag" cdkDragHandle></div>
+            </div>
+        </a>
+    </div>
     <a class="list-group-item add" (click)="addNewBlock()">
         <div class="list-group-icon" data-name="add"></div>
         <div class="list-group-text">Add block</div>

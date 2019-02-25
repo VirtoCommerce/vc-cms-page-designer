@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, EventEmitter, Input, HostBinding } from '@angular/core';
-import { BlockValuesModel, BlocksSchema, BlockSchema } from 'src/app/modules/shared/models';
-import { PageModel } from '../../models/page.model';
-import { SortEvent } from '../../../shared/components';
+import { BlockValuesModel, BlocksSchema } from 'src/app/modules/shared/models';
+import { PageModel } from '@editor/models';
+import { CdkDragSortEvent } from '@angular/cdk/drag-drop';
 
 @Component({
     selector: 'app-page-editor',
@@ -37,7 +37,7 @@ export class PageEditorComponent implements OnInit {
 
     @Output() selectEvent = new EventEmitter<BlockValuesModel>();
     @Output() addNewBlockEvent = new EventEmitter<any>();
-    @Output() orderChangedEvent = new EventEmitter<SortEvent>();
+    @Output() orderChangedEvent = new EventEmitter<CdkDragSortEvent<BlockValuesModel>>();
     @Output() visibilityChanged = new EventEmitter<BlockValuesModel>();
     @Output() reloadData = new EventEmitter();
 
@@ -51,19 +51,6 @@ export class PageEditorComponent implements OnInit {
 
     addNewBlock() {
         this.addNewBlockEvent.emit();
-    }
-
-    sortItems(event: SortEvent) {
-        // todo: подумать, может стоит отправлять событие не в конце d-n-d, а синхронно?
-        if (event.complete) {
-            this.orderChangedEvent.emit(event);
-        } else {
-            const current = this.model.content[event.currentIndex];
-            const swapWith = this.model.content[event.newIndex];
-
-            this.model.content[event.newIndex] = current;
-            this.model.content[event.currentIndex] = swapWith;
-        }
     }
 
     getBlockIcon(item): string {
@@ -95,6 +82,12 @@ export class PageEditorComponent implements OnInit {
         event.stopPropagation();
         event.preventDefault();
         this.visibilityChanged.emit(item);
+    }
+
+    reorder(event: CdkDragSortEvent<BlockValuesModel>) {
+        const element = this.model.content.splice(event.previousIndex, 1);
+        this.model.content.splice(event.currentIndex, 0, ...element);
+        this.orderChangedEvent.emit(event);
     }
 
     private updateLItems() {

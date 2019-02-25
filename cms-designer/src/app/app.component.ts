@@ -11,7 +11,7 @@ import * as rootActions from './store/root.actions';
 import * as editorActions from './modules/editor/store/editor.actions';
 import * as themeActions from './modules/theme/store/theme.actions';
 import { BlockValuesModel, BlockSchema } from './modules/shared/models';
-import { SortEvent } from './modules/shared/components';
+import { CdkDragSortEvent } from '@angular/cdk/drag-drop';
 
 @Component({
     selector: 'app-root',
@@ -114,7 +114,7 @@ export class AppComponent implements OnInit, OnDestroy {
         this.store.dispatch(new rootActions.LoadData());
     }
 
-    onOrderChanged(event: SortEvent) {
+    onOrderChanged(event: CdkDragSortEvent<BlockValuesModel>) {
         this.store.dispatch(new editorActions.OrderChanged(event));
     }
 

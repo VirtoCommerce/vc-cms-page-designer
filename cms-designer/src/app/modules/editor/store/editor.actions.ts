@@ -3,9 +3,9 @@ import { BlockValuesModel } from './../../shared/models/block-values.model';
 import { Action } from '@ngrx/store';
 
 import { PageModel } from '../models/page.model';
-import { SortEvent } from '../../shared/components';
 import { BlockSchema, BlocksSchema } from 'src/app/modules/shared/models';
 import { HttpErrorResponse } from '@angular/common/http';
+import { CdkDragSortEvent } from '@angular/cdk/drag-drop';
 
 export enum EditorActionTypes {
     AddPageItem = '[Page] Add Page Item',
@@ -128,7 +128,7 @@ export class MoveBlock implements Action {
 export class OrderChanged implements Action {
     readonly type = EditorActionTypes.OrderChanged;
 
-    constructor(public payload: SortEvent) { }
+    constructor(public payload: CdkDragSortEvent<BlockValuesModel>) { }
 }
 
 export class PreviewPageItem implements Action {

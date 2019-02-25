@@ -10,7 +10,6 @@ import * as editorActions from '../../modules/editor/store/editor.actions';
 import * as fromTheme from '../../modules/theme/store';
 import * as themeActions from '../../modules/theme/store/theme.actions';
 
-import { SortEvent } from '../../modules/shared/components';
 import { PageModel } from '../../modules/editor/models/';
 import { PresetsModel } from '../../modules/theme/models/';
 import { BlockSchema, BlockValuesModel, ValueType } from 'src/app/modules/shared/models';

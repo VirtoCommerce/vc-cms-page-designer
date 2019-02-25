@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup, AbstractControl, FormArray } from '@angular/forms';
 import { DisplayTextControlDescriptor, ControlDescriptor, CollectionControlDescriptor } from '../../models';
 import { FormHelper } from './../../services/form.helper';
-import { SortEvent } from '..';
+import { CdkDragSortEvent } from '@angular/cdk/drag-drop';
 
 @Component({
     selector: 'app-elements-form',
@@ -35,15 +35,13 @@ export class ElementsFormComponent implements OnInit {
         return descriptor.type === 'list';
     }
 
-    sortItems(control: CollectionControlDescriptor, event: SortEvent) {
-        if (!event.complete) {
-            const controls = this.getControls(control);
-            const current = controls[event.currentIndex];
-            const swapWith = controls[event.newIndex];
+    sortItems(control: CollectionControlDescriptor, event: CdkDragSortEvent<any>) {
+        const controls = this.getControls(control);
+        const current = controls[event.previousIndex];
+        const swapWith = controls[event.currentIndex];
 
-            controls[event.newIndex] = current;
-            controls[event.currentIndex] = swapWith;
-        }
+        controls[event.currentIndex] = current;
+        controls[event.previousIndex] = swapWith;
     }
 
     getTitle(item: FormGroup, control: CollectionControlDescriptor): string {

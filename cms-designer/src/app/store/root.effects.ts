@@ -158,7 +158,7 @@ export class RootEffects {
         ofType<editorActions.OrderChanged>(editorActions.EditorActionTypes.OrderChanged),
         withLatestFrom(this.rootStore$.select(fromRoot.getPrimaryFrameId)),
         tap(([action, frameId]) =>
-            this.preview.changeOrder(action.payload.currentIndex, action.payload.newIndex, frameId))
+            this.preview.changeOrder(action.payload.previousIndex, action.payload.currentIndex, frameId))
     );
 
     @Effect({ dispatch: false })
