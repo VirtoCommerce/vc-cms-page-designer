@@ -7,6 +7,7 @@ export interface RootState {
     primaryLoaded: boolean;
     secondaryLoaded: boolean;
     activeTabIndex: number;
+    previewUrl: string;
 }
 
 const initialState: RootState = {
@@ -15,7 +16,8 @@ const initialState: RootState = {
     secondaryFrameId: null,
     primaryLoaded: false,
     secondaryLoaded: false,
-    activeTabIndex: 0
+    activeTabIndex: 0,
+    previewUrl: null
 };
 
 export function reducer(state = initialState, action: RootActions): RootState {
@@ -54,6 +56,12 @@ export function reducer(state = initialState, action: RootActions): RootState {
             return {
                 ...state,
                 activeTabIndex: action.payload
+            };
+        }
+        case RootActionTypes.SetPreviewUrl: {
+            return {
+                ...state,
+                previewUrl: action.payload
             };
         }
     }

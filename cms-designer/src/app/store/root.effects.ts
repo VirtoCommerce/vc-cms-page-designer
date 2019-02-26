@@ -3,7 +3,9 @@ import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Action, Store } from '@ngrx/store';
 import { Observable, of, fromEvent } from 'rxjs';
 import { switchMapTo, debounceTime, distinctUntilChanged, withLatestFrom, tap, filter, map, switchMap, mapTo } from 'rxjs/operators';
-import { PreviewService } from '@app/services';
+import { PreviewService, ApiUrlsService } from '@app/services';
+import { ErrorsService } from '@shared/services';
+import { BlockValuesModel } from '@shared/models';
 
 import * as rootActions from './root.actions';
 import * as fromRoot from '.';
@@ -13,14 +15,13 @@ import * as fromTheme from '@themes/store';
 
 import * as editorActions from '@editor/store/editor.actions';
 import * as fromEditor from '@editor/store';
-import { BlockValuesModel } from '@shared/models';
-import { ErrorsService } from '@shared/services/errors.service';
 
 @Injectable()
 export class RootEffects {
     constructor(private actions$: Actions,
         private preview: PreviewService,
         private errors: ErrorsService,
+        private urls: ApiUrlsService,
         private rootStore$: Store<fromRoot.State>,
         private themeStore$: Store<fromTheme.State>,
         private editorStore$: Store<fromEditor.State>) { }
@@ -82,6 +83,18 @@ export class RootEffects {
             new editorActions.SavePage(),
             new themeActions.SaveTheme()
         ])
+    );
+
+    @Effect()
+    setPreviewUrl = this.actions$.pipe(
+        ofType<editorActions.LoadPageSuccess>(editorActions.EditorActionTypes.LoadPageSuccess),
+        map(action => {
+            if (!!action.payload.settings) {
+                const result = this.urls.getStoreUrl(<string>action.payload.settings['layout']);
+                return new rootActions.SetPreviewUrl(result);
+            }
+            return new rootActions.SetPreviewUrl(null);
+        })
     );
 
     // themes

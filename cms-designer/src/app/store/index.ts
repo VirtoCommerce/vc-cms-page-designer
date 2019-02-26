@@ -1,4 +1,6 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { AppSettings } from '@app/services';
+
 import * as fromRoot from './root.reducer';
 import * as fromTheme from '@themes/store';
 import * as fromEditor from '@editor/store';
@@ -69,4 +71,9 @@ export const getIsDirty = createSelector(
 export const getPreviewLoading = createSelector(
     getRootFeatureState,
     state => state.previewLoading
+);
+
+export const getPreviewUrl = createSelector(
+    getRootFeatureState,
+    state => state.previewUrl
 );

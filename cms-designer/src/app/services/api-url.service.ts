@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { SafeUrl, DomSanitizer } from '@angular/platform-browser';
 import { CookieService } from 'ngx-cookie-service';
 
 import { PageDescriptor } from '@shared/models';
 import { AppSettings } from './app.settings';
+import { WindowRef } from './window-ref';
 
 @Injectable({
     providedIn: 'root'
@@ -11,20 +11,9 @@ import { AppSettings } from './app.settings';
 export class ApiUrlsService {
 
     private readonly SESSION_ID = 'sessionId';
-    private params: PageDescriptor;
+    private _params: PageDescriptor = null;
 
-    constructor(private sanitizer: DomSanitizer, private cookies: CookieService) {
-        const urlParams = new URLSearchParams(window.location.search);
-
-        this.params = {
-            storeId: urlParams.get('storeId'),
-            path: urlParams.get('path'),
-            contentType: urlParams.get('contentType'),
-        };
-        const index = this.params.path.lastIndexOf('/');
-        this.params.filename = index !== -1 ? this.params.path.substr(index + 1) : this.params.path;
-        this.params.uploadPath = index === -1 ? '' : this.params.path.substr(0, index - 1);
-    }
+    constructor(private cookies: CookieService, private windowRef: WindowRef) { }
 
     generateDownloadUrl(contentType: string, filepath: string): string {
         const path = encodeURIComponent(filepath || this.params.path);
@@ -40,10 +29,10 @@ export class ApiUrlsService {
         return url;
     }
 
-    getStoreUrl(layout: string): SafeUrl {
+    getStoreUrl(layout: string): string {
         const query = `?preview_mode=${this.getCurrentSessionId()}${!!layout ? '&layout=' + layout : ''}`;
         const url = `${AppSettings.storeBaseUrl}${AppSettings.storePreviewPath}${query}`;
-        return this.sanitizer.bypassSecurityTrustResourceUrl(url);
+        return url;
     }
 
     getCurrentSessionId(): string {
@@ -75,5 +64,22 @@ export class ApiUrlsService {
         const result = Array.from({ length: 10 }, randomChar).join('');
         this.cookies.set(this.SESSION_ID, result);
         return result;
+    }
+
+    private get params(): PageDescriptor {
+        if (!this._params) {
+            const win = this.windowRef.nativeWindow;
+            const urlParams = new URLSearchParams(win.location.search);
+
+            this._params = {
+                storeId: urlParams.get('storeId'),
+                path: urlParams.get('path'),
+                contentType: urlParams.get('contentType'),
+            };
+            const index = this._params.path.lastIndexOf('/');
+            this._params.filename = index !== -1 ? this._params.path.substr(index + 1) : this._params.path;
+            this._params.uploadPath = index === -1 ? '' : this._params.path.substr(0, index - 1);
+        }
+        return this._params;
     }
 }

@@ -1,6 +1,5 @@
-import { ApiUrlsService } from './services/api-url.service';
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { SafeUrl } from '@angular/platform-browser';
+import { Component, OnInit } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { Subscription, of } from 'rxjs';
 import { Store } from '@ngrx/store';
 
@@ -16,15 +15,15 @@ import * as fromTheme from '@themes/store';
 import * as themeActions from '@themes/store/theme.actions';
 
 import { BlockValuesModel, BlockSchema } from '@shared/models';
+import { map } from 'rxjs/operators';
 
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit, OnDestroy {
+export class AppComponent implements OnInit {
     title = 'cms-designer';
-    storeUrl$: SafeUrl; // TODO: get via selector
     viewMode = 'desktop';
 
     themeActions = [
@@ -32,6 +31,10 @@ export class AppComponent implements OnInit, OnDestroy {
         { title: 'Edit languages', icon: 'lang', type: 'lang' },
         { title: 'Edit navigation', icon: 'nav', type: 'nav' }
     ];
+
+    storeUrl$ = this.store.select(fromRoot.getPreviewUrl).pipe(
+        map(x => !!x ? this.sanitizer.bypassSecurityTrustResourceUrl(x) : null)
+    );
 
     // page editor states
     currentSectionItem$ = this.store.select(fromEditor.getCurrentSectionItem);
@@ -64,23 +67,12 @@ export class AppComponent implements OnInit, OnDestroy {
 
     private subscription: Subscription;
 
-    constructor(private store: Store<fromRoot.State>, private editorStore: Store<fromEditor.State>, private urls: ApiUrlsService) { }
+    constructor(private store: Store<fromRoot.State>,
+        private editorStore: Store<fromEditor.State>,
+        private sanitizer: DomSanitizer) { }
 
     ngOnInit(): void {
         this.store.dispatch(new rootActions.LoadData());
-        // this.subscription = this.editorStore.pipe(select(fromEditor.getPage)).pipe(
-        //     filter(x => !!x),
-        //     distinctUntilChanged((x, y) => x.settings['layout'] === y.settings['layout'])
-        // ).subscribe(x => {
-        //     this.storeUrl = this.urls.getStoreUrl(<string>x.settings['layout']);
-        // });
-    }
-
-    ngOnDestroy() {
-        // if (this.subscription !== null) {
-        //     this.subscription.unsubscribe();
-        //     this.subscription = null;
-        // }
     }
 
     onPreviewLoaded(source: string) {

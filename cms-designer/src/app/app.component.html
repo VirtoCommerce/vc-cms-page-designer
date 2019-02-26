@@ -76,7 +76,7 @@
         <!-- End Left panel -->
 
         <!-- Content -->
-        <app-preview [loading]="previewLoading$ | async" [storeUrl]="storeUrl$" mode="desktop"
+        <app-preview class="content" [loading]="previewLoading$ | async" [storeUrl]="storeUrl$ | async" mode="desktop"
             (preivewLoaded)="onPreviewLoaded($event)"></app-preview>
         <!-- End Content -->
 
