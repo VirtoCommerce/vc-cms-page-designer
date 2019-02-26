@@ -77,3 +77,13 @@ export const getPreviewUrl = createSelector(
     getRootFeatureState,
     state => state.previewUrl
 );
+
+export const getPrimaryIsLoaded = createSelector(
+    getRootFeatureState,
+    state => state.primaryLoaded
+);
+
+export const getSecondaryIsLoaded = createSelector(
+    getRootFeatureState,
+    state => state.secondaryLoaded
+);

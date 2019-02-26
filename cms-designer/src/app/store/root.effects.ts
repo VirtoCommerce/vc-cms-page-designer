@@ -102,9 +102,14 @@ export class RootEffects {
     @Effect()
     uploadPreviewPreset$ = this.actions$.pipe(
         ofType(themeActions.ThemeActionTypes.UpdateDraftSuccess),
-        withLatestFrom(this.rootStore$.select(fromRoot.getSecondaryFrameId)),
-        switchMap(([, frameId]) => {
-            this.preview.reload(frameId);
+        withLatestFrom(
+            this.rootStore$.select(fromRoot.getSecondaryFrameId),
+            this.rootStore$.select(fromRoot.getSecondaryIsLoaded)
+        ),
+        switchMap(([, frameId, previewReady]) => {
+            if (previewReady) {
+                this.preview.reload(frameId);
+            }
             return of(new rootActions.PreviewLoading(true));
         })
     );
@@ -115,16 +120,20 @@ export class RootEffects {
     sendPreviewPageItem$ = this.actions$.pipe(
         ofType<editorActions.PreviewPageItem>(editorActions.EditorActionTypes.PreviewPageItem),
         map(action => action.payload),
-        withLatestFrom(this.rootStore$.select(fromRoot.getPrimaryFrameId)),
-        tap(([item, frameId]) => this.preview.addOrUpdateBlock(item, frameId)));
+        withLatestFrom(
+            this.rootStore$.select(fromRoot.getPrimaryFrameId),
+            this.rootStore$.select(fromRoot.getPrimaryIsLoaded)
+        ),
+        tap(([item, frameId, previewReady]) => previewReady && this.preview.addOrUpdateBlock(item, frameId)));
 
     @Effect({ dispatch: false })
     sendNewBlockToStoreLoaded$ = this.actions$.pipe(
         ofType<editorActions.AddPageItem>(editorActions.EditorActionTypes.AddPageItem),
-        withLatestFrom(this.rootStore$.select(fromRoot.getPrimaryFrameId)),
-        tap(([action, frameId]) => {
-            this.preview.addOrUpdateBlock(action.payload, frameId);
-        })
+        withLatestFrom(
+            this.rootStore$.select(fromRoot.getPrimaryFrameId),
+            this.rootStore$.select(fromRoot.getPrimaryIsLoaded)
+        ),
+        tap(([action, frameId, previewReady]) => previewReady && this.preview.addOrUpdateBlock(action.payload, frameId))
     );
 
     @Effect({ dispatch: false })
@@ -154,9 +163,11 @@ export class RootEffects {
         ofType<editorActions.UpdateBlockPreview>(editorActions.EditorActionTypes.UpdateBlockPreview),
         withLatestFrom(
             this.rootStore$.select(fromRoot.getPrimaryFrameId),
+            this.rootStore$.select(fromRoot.getPrimaryIsLoaded),
             this.editorStore$.select(fromEditor.getCurrentSectionItem)
         ),
-        map(([action, frameId, currentItem]): [BlockValuesModel, string] => [
+        filter(([,, previewReady]) => previewReady),
+        map(([action, frameId, previewReady, currentItem]): [BlockValuesModel, string] => [
             <BlockValuesModel>{ ...currentItem, ...action.payload },
             frameId
         ]),
