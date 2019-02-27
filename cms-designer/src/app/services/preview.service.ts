@@ -23,6 +23,10 @@ export class PreviewService {
     }
 
     page(page: BlockValuesModel[], frameId: string) {
+        const settings = page.find(x => x.type === 'settings');
+        if (!!settings) {
+            settings.url = window.location.protocol + '//' + window.location.hostname;
+        }
         this.send('page', page, frameId);
     }
 
