@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build  --prod --base-href /v2/designer/",
+    "build": "ng build  --prod --base-href /v2/designer/ --resourcesOutputPath=assets",
     "virto": "ng build  -c virto --base-href /virto/designer/ --resourcesOutputPath=assets",
     "localbuild": "ng build  -c local --base-href /admin/cms-designer/",
     "test": "ng test",
