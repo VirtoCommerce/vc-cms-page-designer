@@ -1,6 +1,6 @@
 {
-    "storeBaseUrl": "http://dev-cms-vm.westeurope.cloudapp.azure.com/virto/store",
+    "storeBaseUrl": "http://vc-public-test.azurewebsites.net",
     "storePreviewPath": "/designer-preview",
-    "baseUrl": "/virto/designer/",
-    "platformUrl": "http://dev-cms-vm.westeurope.cloudapp.azure.com/virto/admin"
+    "baseUrl": "/designer/",
+    "platformUrl": "http://vc-admin-test.azurewebsites.net"
 }

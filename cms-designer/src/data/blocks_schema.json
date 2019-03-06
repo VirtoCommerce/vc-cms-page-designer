@@ -1,0 +1,599 @@
+{
+    "settings": {
+        "name": "Settings",
+        "static": true,
+        "icon": "settings",
+        "settings": [
+            {
+                "id": "title",
+                "label": "Title",
+                "type": "string"
+            },
+            {
+                "id": "permalink",
+                "label": "Permalink",
+                "type": "string"
+            },
+			{
+				"id": "layout",
+				"label": "Layout name",
+				"type": "select",
+				"default": "theme",
+				"options": [
+					{
+						"label": "Theme",
+						"value": "theme"
+					},
+					{
+						"label": "Empty",
+						"value": "empty"
+					},
+					{
+						"label": "Landing",
+						"value": "landing"
+					}
+				]
+			}
+        ]
+    },
+    "header": {
+        "name": "Header",
+        "static": "top",
+        "icon": "header",
+        "settings": [
+            {
+                "type": "header",
+                "content": "Header"
+            },
+            {
+                "id": "header_text_color",
+                "label": "Text color",
+                "type": "color"
+            }
+        ]
+    },
+    "footer": {
+        "name": "Footer",
+        "static": "bottom",
+        "icon": "footer",
+        "settings": [
+            {
+                "type": "header",
+                "content": "Footer"
+            },
+            {
+                "id": "header_text_color",
+                "label": "Text color",
+                "type": "color"
+            }
+        ]
+    },
+    "image-carousel": {
+        "name": "Image carousel",
+        "icon": "image-carousel",
+        "displayField": "name",
+        "settings": [
+            {
+                "id": "name",
+                "label": "Block name",
+                "type": "string",
+                "default": "Image carousel",
+				"autofocus": true
+            },
+            {
+                "id": "width",
+                "label": "Block width",
+                "type": "select",
+                "default": "screen",
+                "options": [
+                    {
+                        "label": "Screen",
+                        "value": "screen"
+                    },
+                    {
+                        "label": "Container",
+                        "value": "container"
+                    },
+                    {
+                        "label": "Small",
+                        "value": "small"
+                    }
+                ]
+            },
+            {
+                "id": "rotate",
+                "label": "Auto-rotate images",
+                "type": "checkbox",
+                "default": true
+            },
+            {
+                "id": "frequency",
+                "label": "Rotation frequency",
+                "type": "select",
+                "default": "5000",
+                "options": [
+                    {
+                        "label": "5000",
+                        "value": "5 seconds"
+                    },
+                    {
+                        "label": "6000",
+                        "value": "6 seconds"
+                    },
+                    {
+                        "label": "7000",
+                        "value": "7 seconds"
+                    },
+                    {
+                        "label": "8000",
+                        "value": "8 seconds"
+                    },
+                    {
+                        "label": "9000",
+                        "value": "9 seconds"
+                    }
+                ]
+            },
+            {
+                "id": "images",
+                "label": "Images",
+                "type": "list",
+                "addText": "Add image",
+                "removeText": "Remove image",
+                "displayField": "title",
+                "element": [
+                    {
+                        "id": "title",
+                        "label": "Title",
+                        "type": "string"
+                    },
+                    {
+                        "id": "url",
+                        "label": "Upload picture",
+                        "type": "image",
+                        "previewWidth": 120,
+                        "previewHeight": 80
+                    },
+                    {
+                        "id": "content",
+                        "label": "Content",
+                        "type": "text"
+                    }
+                ],
+                "default": [
+                    {
+                        "title": "Galunggung",
+                        "url": "http://dev-cms-vm.westeurope.cloudapp.azure.com/v2/admin/Assets/blogs/Galunggung.jpg",
+                        "content": "Mount Galunggung is an active stratovolcano in West Java, Indonesia. <a href='https://en.wikipedia.org/wiki/Galunggung'>See more on Wiki</a>"
+                    },
+                    {
+                        "title": "Hopetoun falls",
+                        "url": "http://dev-cms-vm.westeurope.cloudapp.azure.com/v2/admin/Assets/blogs/Hopetoun_falls.jpg",
+                        "content": "The Hopetoun Falls is a waterfall across the Aire River that is located in The Otways region of Victoria, Australia. <a href='https://en.wikipedia.org/wiki/Hopetoun_Falls'>See more on Wiki</a>"
+                    },
+                    {
+                        "title": "Bachalpsee reflection",
+                        "url": "http://dev-cms-vm.westeurope.cloudapp.azure.com/v2/admin/Assets/blogs/Bachalpsee_reflection.jpg",
+                        "content": "Bachalpsee is a lake close to the First above Grindelwald in the Bernese Oberland, Switzerland. <a href='https://en.wikipedia.org/wiki/Bachalpsee'>See more on Wiki</a>"
+                    }
+                ]
+            }
+        ]
+    },
+    "image-with-text": {
+        "name": "Image with text",
+        "icon": "image-text",
+        "displayField": "name",
+        "settings": [
+            {
+                "id": "name",
+                "label": "Block name",
+                "type": "string",
+                "default": "Image with text"
+            },
+            {
+                "id": "title",
+                "label": "Title",
+                "type": "string",
+                "default": "Yellowstone National Park",
+				"autofocus": true
+            },
+            {
+                "id": "url",
+                "label": "Upload picture",
+                "type": "image",
+                "default": "http://dev-cms-vm.westeurope.cloudapp.azure.com/v2/admin/Assets/blogs/yellowstone.jpg",
+                "previewWith": 120,
+                "previewHeight": 80
+            },
+            {
+                "id": "size",
+                "label": "Choose image size",
+                "type": "select",
+                "default": "small",
+                "options": [
+                    {
+                        "label": "Small",
+                        "value": "small"
+                    },
+                    {
+                        "label": "Medium",
+                        "value": "medium"
+                    },
+                    {
+                        "label": "Large",
+                        "value": "large"
+                    },
+                    {
+                        "label": "Extra-Large",
+                        "value": "xlarge"
+                    }
+                ]
+            },
+            {
+                "id": "align",
+                "label": "Choose image alignment",
+                "type": "select",
+                "default": "left",
+                "options": [
+                    {
+                        "label": "Left",
+                        "value": "left"
+                    },
+                    {
+                        "label": "Right",
+                        "value": "right"
+                    },
+                    {
+                        "label": "Top",
+                        "value": "top"
+                    },
+                    {
+                        "label": "Bottom",
+                        "value": "bottom"
+                    }
+                ]
+            },
+            {
+                "id": "content",
+                "label": "Content",
+                "type": "text",
+                "default": "Yellowstone National Park is an American national park located in Wyoming, Montana, and Idaho.  <a href='https://en.wikipedia.org/wiki/Yellowstone_National_Park'>See more on Wiki</a>"
+            }
+        ]
+    },
+    "image-with-text-overlay": {
+        "name": "Image with text overlay",
+        "icon": "fas fa-file-contract",
+        "settings": [
+            {
+                "id": "name",
+                "label": "Block name",
+                "type": "string",
+                "default": "Image with text overlay",
+				"autofocus": true
+            },
+            {
+                "id": "textColor",
+                "label": "Text color",
+                "type": "color",
+                "default": "black"
+            },
+            {
+                "id": "textOpacity",
+                "label": "Text opacity",
+                "type": "number",
+                "default": "opacity"
+            },
+            {
+                "id": "url",
+                "label": "Upload picture",
+                "type": "image",
+                "previewWith": 120,
+                "previewHeight": 80,
+                "default": "http://dev-cms-vm.westeurope.cloudapp.azure.com/v2/admin/Assets/blogs/Grand_Canyon.jpg"
+            },
+            {
+                "id": "align",
+                "label": "Choose text alignment",
+                "type": "select",
+                "default": "center",
+                "options": [
+                    {
+                        "label": "Left",
+                        "value": "left"
+                    },
+                    {
+                        "label": "Center",
+                        "value": "center"
+                    },
+                    {
+                        "label": "Right",
+                        "value": "right"
+                    }
+                ]
+            },
+            {
+                "id": "width",
+                "label": "Block width",
+                "type": "select",
+                "default": "screen",
+                "options": [
+                    {
+                        "label": "Screen",
+                        "value": "screen"
+                    },
+                    {
+                        "label": "Container",
+                        "value": "container"
+                    },
+                    {
+                        "label": "Small",
+                        "value": "small"
+                    }
+                ]
+            },
+            {
+                "id": "content",
+                "label": "Content",
+                "type": "text",
+                "default": "The Grand Canyon is a steep-sided canyon carved by the Colorado River in Arizona, United States.  <a href='https://en.wikipedia.org/wiki/Grand_Canyon'>See more on Wiki</a>"
+            }
+        ]
+    },
+    "images-layout": {
+        "name": "Images layout",
+        "icon": "far fa-file-image",
+        "settings": [
+            {
+                "id": "name",
+                "label": "Block name",
+                "type": "string",
+                "default": "Image carousel",
+				"autofocus": true
+            },
+            {
+                "id": "layout",
+                "label": "Layout",
+                "type": "select",
+                "default": "one-two",
+                "options": [
+                    {
+                        "label": "One left, two right",
+                        "value": "one-two"
+                    },
+                    {
+                        "label": "Two left, one right",
+                        "value": "two-one"
+                    },
+                    {
+                        "label": "One left, one right",
+                        "value": "one-one"
+                    }
+                ]
+            },
+            {
+                "id": "images",
+                "label": "Images",
+                "type": "list",
+                "addText": "Add image",
+                "removeText": "Remove image",
+                "displayField": "title",
+                "element": [
+                    {
+                        "id": "title",
+                        "label": "Title",
+                        "type": "string"
+                    },
+                    {
+                        "id": "url",
+                        "label": "Upload picture",
+                        "type": "image",
+                        "previewWidth": 120,
+                        "previewHeight": 80
+                    }
+                ],
+                "default": [
+                    {
+                        "title": "Tower of Pisa",
+                        "url": "http://dev-cms-vm.westeurope.cloudapp.azure.com/v2/admin/Assets/blogs/pisa_tower.jpeg"
+                    },
+                    {
+                        "title": "Sagrada Família",
+                        "url": "http://dev-cms-vm.westeurope.cloudapp.azure.com/v2/admin/Assets/blogs/barcelona.jpeg"
+                    },
+                    {
+                        "title": "Paris Opera",
+                        "url": "http://dev-cms-vm.westeurope.cloudapp.azure.com/v2/admin/Assets/blogs/Paris_Opera.jpeg"
+                    }
+                ]
+            }
+        ]
+    },
+    "image": {
+        "name": "Simple image",
+        "icon": "image",
+        "settings": [
+            {
+                "id": "name",
+                "label": "Block name",
+                "type": "string",
+                "default": "Simple image",
+				"autofocus": true
+            },
+            {
+                "id": "size",
+                "label": "Choose size",
+                "type": "select",
+                "default": "medium",
+                "options": [
+                    {
+                        "label": "Small",
+                        "value": "small"
+                    },
+                    {
+                        "label": "Medium",
+                        "value": "medium"
+                    },
+                    {
+                        "label": "Large",
+                        "value": "large"
+                    },
+                    {
+                        "label": "Extra Large",
+                        "value": "xlarge"
+                    }
+                ]
+            },
+            {
+                "id": "url",
+                "label": "Upload picture",
+                "type": "image",
+                "previewWidth": 120,
+                "previewHeight": 80,
+                "default": "http://dev-cms-vm.westeurope.cloudapp.azure.com/v2/admin/Assets/blogs/Bajkał_lake.jpg"
+            }
+        ]
+    },
+    "text": {
+        "name": "Simple text",
+        "icon": "text",
+        "displayField": "name",
+        "settings": [
+            {
+                "id": "name",
+                "label": "Block name",
+                "type": "string",
+                "default": "Text"
+            },
+            {
+                "id": "content",
+                "label": "Content",
+                "type": "text",
+                "default": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+				"autofocus": true
+            }
+        ]
+    },
+    "textcolumns-with-images": {
+        "name": "Text columns with images",
+        "icon": "text-columns",
+        "settings": [
+            {
+                "id": "name",
+                "label": "Block name",
+                "type": "string",
+                "default": "Text columns with images",
+				"autofocus": true
+            },
+            {
+                "id": "align",
+                "label": "Image alignment",
+                "type": "select",
+                "default": "top",
+                "options": [
+                    {
+                        "label": "Top",
+                        "value": "top"
+                    },
+                    {
+                        "label": "Bottom",
+                        "value": "bottom"
+                    }
+                ]
+            },
+            {
+                "id": "size",
+                "label": "Image size",
+                "type": "select",
+                "default": "medium",
+                "options": [
+                    {
+                        "label": "Small",
+                        "value": "small"
+                    },
+                    {
+                        "label": "Medium",
+                        "value": "medium"
+                    },
+                    {
+                        "label": "Large",
+                        "value": "large"
+                    }
+                ]
+            },
+            {
+                "id": "columns",
+                "label": "Columns",
+                "type": "list",
+                "addText": "Add column",
+                "removeText": "Remove column",
+                "displayField": "title",
+                "element": [
+                    {
+                        "id": "title",
+                        "label": "Title",
+                        "type": "string"
+                    },
+                    {
+                        "id": "url",
+                        "label": "Upload picture",
+                        "type": "image",
+                        "previewWidth": 120,
+                        "previewHeight": 80
+                    },
+                    {
+                        "id": "content",
+                        "label": "Content",
+                        "type": "text"
+                    },
+                    {
+                        "id": "width",
+                        "label": "Flex width",
+                        "type": "number"
+                    }
+                ],
+                "default": [
+                    {
+                        "title": "Left column",
+                        "url": "http://dev-cms-vm.westeurope.cloudapp.azure.com/v2/admin/Assets/blogs/Bachalpsee_reflection.jpg",
+                        "content": "Bachalpsee is a lake close to the First above Grindelwald in the Bernese Oberland, Switzerland. <a href='https://en.wikipedia.org/wiki/Bachalpsee'>See more on Wiki</a>",
+                        "width": 2
+                    },
+                    {
+                        "title": "Right column",
+                        "url": "http://dev-cms-vm.westeurope.cloudapp.azure.com/v2/admin/Assets/blogs/Galunggung.jpg",
+                        "content": "Mount Galunggung is an active stratovolcano in West Java, Indonesia. <a href='https://en.wikipedia.org/wiki/Galunggung'>See more on Wiki</a>",
+                        "width": 1
+                    }
+                ]
+            }
+        ]
+    },
+    "category": {
+        "name": "Category",
+        "icon": "category",
+        "settings": [
+            {
+                "id": "name",
+                "label": "Block name",
+                "type": "string",
+                "default": "Category",
+				"autofocus": true
+            },
+            {
+                "id": "title",
+                "label": "Title",
+                "type": "string",
+                "default":  "Headphones"
+            },
+            {
+                "id": "categoryId",
+                "label": "Category id",
+                "type": "string",
+                "default": "",
+                "placeholder": "Enter category id"
+            }
+        ]
+    }
+}

@@ -4,8 +4,9 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build  --prod --base-href /v2/designer/ --resourcesOutputPath=assets",
-    "virto": "ng build  -c virto --base-href /virto/designer/ --resourcesOutputPath=assets",
+    "build": "ng build --prod --base-href /v2/designer/ --resourcesOutputPath=assets",
+    "virto": "ng build -c virto --base-href /designer/ --resourcesOutputPath=assets",
+    "serve": "ng build -c virto --base-href /designer/ --resourcesOutputPath=assets --watch=true",
     "localbuild": "ng build  -c local --base-href /admin/cms-designer/",
     "test": "ng test",
     "lint": "ng lint",
