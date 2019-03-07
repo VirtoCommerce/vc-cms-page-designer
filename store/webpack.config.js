@@ -11,7 +11,7 @@ module.exports = {
     },
 
     output: {
-        filename: '[name].bundle.js',
+        filename: 'designer.bundle.js',
         path: DESTINATION
     },
 

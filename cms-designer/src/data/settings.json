@@ -1,6 +1,6 @@
 {
     "storeBaseUrl": "http://localhost:2082",
     "storePreviewPath": "/designer-preview",
-    "baseUrl": "/admin/cms-designer/",
+    "baseUrl": "/admin/designer/",
     "platformUrl": "http://localhost/admin"
 }

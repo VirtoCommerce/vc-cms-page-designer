@@ -83,8 +83,8 @@ export class View {
         const rect = this.measureElement(source);
         target.style.top = rect.top + 'px';
         target.style.left = rect.left + 'px';
-        target.style.height = rect.height + 'px';
-        target.style.width = rect.width + 'px';
+        target.style.height = (rect.height - 6) + 'px';
+        target.style.width = (rect.width - 6) + 'px';
         target.style.display = 'block';
 
     }
