@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostBinding, ViewContainerRef } from '@angular/core';
 import { ColorControlDescriptor } from '@shared/models';
 import { BaseControlComponent } from './../base-control.component';
 
@@ -9,9 +9,9 @@ import { BaseControlComponent } from './../base-control.component';
 })
 export class ColorItemComponent extends BaseControlComponent<ColorControlDescriptor> {
 
-    constructor() {
-        super();
-    }
+    @HostBinding('class') css = 'form-color';
+
+    constructor() { super(); }
 
     registerOnChange(fn: any): void {
         this.onChange = value => {

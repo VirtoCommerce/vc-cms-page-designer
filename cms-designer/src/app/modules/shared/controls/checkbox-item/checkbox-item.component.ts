@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener, HostBinding } from '@angular/core';
 import { BaseControlComponent } from '../base-control.component';
 import { CheckboxControlDescriptor } from '@shared/models';
 
@@ -8,6 +8,9 @@ import { CheckboxControlDescriptor } from '@shared/models';
     styleUrls: ['./checkbox-item.component.scss']
 })
 export class CheckboxItemComponent extends BaseControlComponent<CheckboxControlDescriptor> {
+
+    @HostBinding('class') css = 'form-checkbox';
+    @HostListener('click', ['$event']) onClick = () => this.toggle();
 
     constructor() {
         super();

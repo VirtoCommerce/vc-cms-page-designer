@@ -38,7 +38,7 @@
                         (orderChangedEvent)="onOrderChanged($event)" (addNewBlockEvent)="setNewBlockMode()">
                     </app-page-editor>
                     <app-footer-aside class="left-panel-footer">
-                        <app-actions-dropdown [up]="true" title="Theme actions" [items]="themeActions"
+                        <app-actions-dropdown class="fill-row" [up]="true" title="Theme actions" [items]="themeActions"
                             (actionSelected)="onThemeActionSelected($event)"></app-actions-dropdown>
                         <app-history-walker
                             [hasUndo]="hasUndo$|async"

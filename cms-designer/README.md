@@ -96,3 +96,9 @@
 * `json-<block_type>.liquid` — для каждого из типа блоков свой шаблон, который уже знает как надо показывать и что
 
 ![schema](docs/cms-designer-explain.png)
+
+## 3rd party components
+
+Сейчас используется вот этот [color-picker](https://github.com/zefoy/ngx-color-picker)
+
+Тут есть обзоры на другие, можно повыбирать [раз](https://medium.com/@dancornilov/angular-5-color-picker-component-be-colorfully-7e8b12c27ac0) и [два](http://angularjs.bestjquery.com/demo/color-picker/)

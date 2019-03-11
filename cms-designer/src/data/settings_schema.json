@@ -359,6 +359,12 @@
         ]
       },
       {
+        "type": "color",
+        "id": "color_body_bg",
+        "label": "Background",
+        "default": "#ffffff"
+      },
+      {
         "type": "select",
         "id": "type_header_base_size",
         "label": "Base size",

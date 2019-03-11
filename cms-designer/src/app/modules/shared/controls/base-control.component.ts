@@ -6,6 +6,7 @@ export class BaseControlComponent<T extends BaseDescriptor> implements OnInit, A
     @Input() descriptor: T;
     @Input() group: FormGroup;
 
+    parentClass = 'form-group';
     value: any;
     onChange = (_: any) => { };
     onTouched = (_: any) => { };

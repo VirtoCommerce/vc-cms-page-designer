@@ -166,7 +166,7 @@ export class RootEffects {
             this.rootStore$.select(fromRoot.getPrimaryIsLoaded),
             this.editorStore$.select(fromEditor.getCurrentSectionItem)
         ),
-        filter(([,, previewReady]) => previewReady),
+        filter(([, , previewReady]) => previewReady),
         map(([action, frameId, previewReady, currentItem]): [BlockValuesModel, string] => [
             <BlockValuesModel>{ ...currentItem, ...action.payload },
             frameId

@@ -1,4 +1,2 @@
-<div class="form-checkbox" (click)="toggle()">
-    <input type="checkbox" class="form-checkbox__input" [checked]="value" (change)="onChange($event.target.checked)">
-    <label class="form-checkbox__label">{{ descriptor.label }}</label>
-</div>
+<input type="checkbox" class="form-checkbox__input" [checked]="value" (change)="onChange($event.target.checked)">
+<label class="form-checkbox__label">{{ descriptor.label }}</label>

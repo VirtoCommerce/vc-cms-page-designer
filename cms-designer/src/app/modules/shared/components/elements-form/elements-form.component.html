@@ -1,7 +1,7 @@
 <div [formGroup]="group">
-    <div class="form-group" *ngFor="let control of descriptors">
+    <ng-container *ngFor="let control of descriptors">
         <!-- Header or Paragraph -->
-        <p>{{ getContent(control) }}</p>
+        <h2 class="form-t" *ngIf="control.type === 'header'">{{ getContent(control) }}</h2>
         <!-- Simple control -->
         <app-control-holder *ngIf="displaySimpleControl(control)" [descriptor]="control" [group]="group"
             [formControlName]="control.id"></app-control-holder>
@@ -33,5 +33,5 @@
         </div> -->
         <!-- Info -->
         <p *ngIf="control.type !== 'image' && getInfo(control) !== undefined" class="form-help">{{getInfo(control)}}</p>
-    </div>
+    </ng-container>
 </div>

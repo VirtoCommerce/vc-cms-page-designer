@@ -34,6 +34,7 @@ select
 .form-group
 {
     margin-bottom: 1.25rem;
+    display: block;
 
     &:last-child
     {
@@ -330,5 +331,28 @@ label
     .btn ~ .btn
     {
         margin: 0 0 0 .625rem;
+    }
+}
+
+// Form Color
+
+.form-color {
+
+    display: flex;
+    align-items: center;
+
+    &__bg
+    {
+        border: 2px solid rgba(0,0,0,.1);
+        border-radius: 3px;
+        box-sizing: border-box;
+        height: 1.5rem;
+        margin-right: .625rem;
+        width: 1.5rem;
+    }
+
+    &__text
+    {
+        font-size: .8125rem;
     }
 }

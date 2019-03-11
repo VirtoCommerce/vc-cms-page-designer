@@ -1,11 +1,13 @@
 <label>{{ descriptor.label }}</label>
 <div class="form-file" data-name="file-input">
     <div class="form-file__control">
-        <input type="file" #fileInput class="form-file__input" (change)="onChange($event)" [accept]="descriptor.acceptTypes">
+        <input type="file" #fileInput class="form-file__input" (change)="onChange($event)"
+            [accept]="descriptor.acceptTypes">
         <label class="form-file__label">Choose file</label>
     </div>
     <div class="form-text">{{ descriptor.info }}</div>
-    <div *ngIf="value" class="form-file__uploaded"><img class="form-file__pic" [src]="value" alt="" /><span class="form-file__remove"></span></div>
+    <div *ngIf="value" class="form-file__uploaded"><img class="form-file__pic" [src]="value" alt="" /><span
+            class="form-file__remove"></span></div>
 </div>
 
 

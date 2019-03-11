@@ -9,7 +9,9 @@ import {
     OnInit,
     ViewChild,
     forwardRef,
-    ChangeDetectionStrategy
+    ChangeDetectionStrategy,
+    ViewContainerRef,
+    HostBinding
 } from '@angular/core';
 import { ControlHostDirective } from './control-host.directive';
 import { ControlDescriptor, BaseDescriptor } from '../models';
@@ -31,8 +33,12 @@ export class ControlHolderComponent implements OnInit, ControlValueAccessor {
     @ViewChild(ControlHostDirective) host: ControlHostDirective;
     @Input() descriptor: ControlDescriptor;
     @Input() group: FormGroup;
+    @HostBinding('class') css: string;
 
-    constructor(private componentFactoryResolver: ComponentFactoryResolver, private controlsFactory: ControlsFactory) { }
+    constructor(
+        private componentFactoryResolver: ComponentFactoryResolver,
+        private controlsFactory: ControlsFactory
+    ) { }
 
     ngOnInit(): void {
         const type = this.controlsFactory.resolve(this.descriptor.type);
@@ -46,6 +52,7 @@ export class ControlHolderComponent implements OnInit, ControlValueAccessor {
             this.component = container.createComponent(factory).instance;
             this.component.descriptor = this.descriptor;
             this.component.group = this.group;
+            this.css = this.component.parentClass;
         }
     }
 
