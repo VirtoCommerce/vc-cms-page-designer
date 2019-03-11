@@ -76,7 +76,7 @@ export class EditorEffects {
         withLatestFrom(this.store$.select(fromEditor.getPage)),
         map(([blockSchema, page]) => {
             const block = <BlockValuesModel>{
-                id: Math.max(...page.content.map(v => <number>v.id || 0)) + 1,
+                id: page.content.length ? Math.max(...page.content.map(v => <number>v.id || 0)) + 1 : 1,
                 type: blockSchema.type
             };
             return block;

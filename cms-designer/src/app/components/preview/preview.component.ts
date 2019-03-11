@@ -23,6 +23,8 @@ export class PreviewComponent implements OnInit {
     }
 
     secondaryPreviewLoaded() {
+        // TODO: MUST BE preview2
+        // For preview may be used preview1
         this.preivewLoaded.emit('preview2');
     }
 

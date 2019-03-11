@@ -88,7 +88,7 @@
                                     "with": "src/data/settings.local.json"
                                 }
                             ],
-                            "optimization": true,
+                            "optimization": false,
                             "outputHashing": "all",
                             "sourceMap": true,
                             "extractCss": true,
@@ -96,7 +96,10 @@
                             "aot": false,
                             "extractLicenses": true,
                             "vendorChunk": false,
-                            "buildOptimizer": false
+                            "buildOptimizer": false,
+                            "baseHref": "/admin/designer/",
+                            "resourcesOutputPath": "assets",
+                            "watch": true
                         },
                         "virto": {
                             "fileReplacements": [
@@ -117,7 +120,9 @@
                             "aot": true,
                             "extractLicenses": true,
                             "vendorChunk": false,
-                            "buildOptimizer": true
+                            "buildOptimizer": true,
+                            "baseHref": "/designer/",
+                            "resourcesOutputPath": "assets"
                         }
                     }
                 },
@@ -145,7 +150,7 @@
                         "polyfills": "src/polyfills.ts",
                         "tsConfig": "src/tsconfig.spec.json",
                         "karmaConfig": "src/karma.conf.js",
-                        "styles": [ ],
+                        "styles": [],
                         "scripts": [],
                         "assets": [
                             "src/favicon.ico",
