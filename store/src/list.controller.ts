@@ -28,6 +28,7 @@ export class ListController implements BlockEventListener {
                 this.addOrUpdate(message);
                 break;
             case 'settings':
+                // test
                 document.location.reload();
                 break;
             case 'scrollTo':
@@ -37,16 +38,24 @@ export class ListController implements BlockEventListener {
                 this.selectBlock(message);
                 break;
             case 'remove':
+                // test
                 this.removeBlock(message);
                 break;
             case 'clone':
+                // test
                 this.cloneBlock(message);
                 break;
             case 'page':
+                // test
                 this.reloadPage(<MessagePageModel>message);
                 break;
             case 'move':
+                // test
                 this.moveBlock(message);
+                break;
+            case 'setVisibility':
+                // test
+                // this.setVisibility(message);
                 break;
             default:
                 console.log(message.type, message);
@@ -133,6 +142,7 @@ export class ListController implements BlockEventListener {
         const current = this.blocks[message.content.currentIndex];
         this.blocks.splice(message.content.currentIndex, 1);
         this.blocks.splice(message.content.newIndex, 0, current);
+        // view is not synchronized
         this.scrollTo({ content: { id: current.model.id } });
     }
 
@@ -211,7 +221,7 @@ export class ListController implements BlockEventListener {
 
     private asKey(id: number): string {
         if (!!id || id == 0)
-            return `instanse${id}`;
+            return `instance${id}`;
         return 'preview-instance';
     }
 
