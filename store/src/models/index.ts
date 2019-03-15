@@ -1,2 +1,1 @@
-export * from './block.model';
-export * from './message.model';
+export * from './base.message';

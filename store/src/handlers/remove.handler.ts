@@ -1,0 +1,11 @@
+import { BaseHandler } from "./base.handler";
+import { BaseMessage } from "../models";
+import { BlockViewModel } from "../block.view-model";
+
+export class RemoveHandler extends BaseHandler {
+    readonly key = 'remove';
+
+    // execute(msg: BaseMessage, list: BlockViewModel[]) {
+    executeInternal() {        
+    }
+}
