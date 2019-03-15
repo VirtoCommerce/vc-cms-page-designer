@@ -92,6 +92,10 @@ export class AppComponent implements OnInit {
         this.store.dispatch(new rootActions.TabIndexChanged(index));
     }
 
+    onSave() {
+        this.store.dispatch(new rootActions.SaveData());
+    }
+
     undo() {
         console.log('undo');
     }

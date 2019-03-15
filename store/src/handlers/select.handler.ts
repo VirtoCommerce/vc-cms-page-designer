@@ -5,8 +5,18 @@ import { BlockViewModel } from "../block.view-model";
 export class SelectHandler extends BaseHandler {
     readonly key = 'select';
 
-    // execute(msg: BaseMessage, list: BlockViewModel[]) {
-    executeInternal() {
+    execute(msg: BaseMessage, list: BlockViewModel[]) {
+        this.deselectAll(list);
+        const content = msg.content;
+        if (content.id === 0) {
+            this.renderer.select();
+        } else {
+            super.execute(msg, list);
+        }
+    }
 
+    protected executeInternal(msg: BaseMessage, list: BlockViewModel[], vm: BlockViewModel) {
+        vm.selected = true;
+        this.renderer.select(vm);
     }
 }

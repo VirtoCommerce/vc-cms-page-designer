@@ -11,10 +11,10 @@
             <app-toolbar [buttons]="['desktop', 'mobile', 'tablet', 'full']" [activeButton]="viewMode"
                 (buttonClick)="viewMode = $event"></app-toolbar>
             <div class="header-actions">
-                <button class="btn btn--outline">
+                <button class="btn btn--outline" [disabled]="true">
                     <span class="btn__text">Publish</span>
                 </button>
-                <button class="btn btn--blue">
+                <button class="btn btn--blue" (click)="onSave()">
                     <span class="btn__text">Save</span>
                 </button>
             </div>

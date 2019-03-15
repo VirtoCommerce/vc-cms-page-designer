@@ -5,8 +5,8 @@ import { BlockViewModel } from "../block.view-model";
 export class ShowHandler extends BaseHandler {
     readonly key = 'show';
 
-    // execute(msg: BaseMessage, list: BlockViewModel[]) {
-    executeInternal() {
-
+    protected executeInternal(msg: BaseMessage, list: BlockViewModel[], vm: BlockViewModel) {
+        vm.hidden = false;
+        vm.element.style.display = 'block';
     }
 }

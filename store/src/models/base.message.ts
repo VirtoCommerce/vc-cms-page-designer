@@ -1,5 +1,19 @@
-export class BaseMessage {
+export interface BaseMessage {
     type: string;
+    content: MessageContent;
+}
 
-    id?: string;
+export interface MessageContent {
+    id?: number;
+
+    // clone
+    source?: number;
+    destination?: number;
+
+    // swap
+    currentIndex?: number;
+    newIndex?: number;
+
+    // page
+    blocks?: MessageContent[];
 }

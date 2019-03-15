@@ -8,6 +8,6 @@ export class CreatableBlocksPipe implements PipeTransform {
         return Object.keys(value).map(x => <any>{
             key: x,
             value: value[x]
-        }).filter(x => !x.value.static);
+        }).filter(x => !x.value.static && !x.value.hide);
     }
 }

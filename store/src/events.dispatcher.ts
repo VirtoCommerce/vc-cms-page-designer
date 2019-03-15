@@ -3,7 +3,6 @@ import { MessageHandler } from "./handlers";
 import { BaseMessage } from "./models";
 
 export class EventsDispatcher {
-
     handleMessage: (handler: MessageHandler, msg: BaseMessage) => void = () => {};
 
     constructor(private factory: HandlersFactory) { }

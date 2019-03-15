@@ -5,8 +5,12 @@ import { BlockViewModel } from "../block.view-model";
 export class UpdateHandler extends BaseHandler {
     readonly key = 'update';
 
-    // execute(msg: BaseMessage, list: BlockViewModel[]) {
-    executeInternal() {
-
+    protected executeInternal(msg: BaseMessage, list: BlockViewModel[], vm: BlockViewModel) {
+        vm.source = msg.content;
+        this.reloadBlock(vm.source).then((result: string) => {
+            vm.htmlString = result;
+            this.renderer.update(vm);
+            this.renderer.select(vm);
+        });
     }
 }

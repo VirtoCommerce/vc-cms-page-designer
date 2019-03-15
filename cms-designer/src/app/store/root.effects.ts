@@ -124,7 +124,7 @@ export class RootEffects {
             this.rootStore$.select(fromRoot.getPrimaryFrameId),
             this.rootStore$.select(fromRoot.getPrimaryIsLoaded)
         ),
-        tap(([item, frameId, previewReady]) => previewReady && this.preview.addOrUpdateBlock(item, frameId)));
+        tap(([item, frameId, previewReady]) => previewReady && this.preview.preview(item, frameId)));
 
     @Effect({ dispatch: false })
     sendNewBlockToStoreLoaded$ = this.actions$.pipe(
@@ -133,7 +133,7 @@ export class RootEffects {
             this.rootStore$.select(fromRoot.getPrimaryFrameId),
             this.rootStore$.select(fromRoot.getPrimaryIsLoaded)
         ),
-        tap(([action, frameId, previewReady]) => previewReady && this.preview.addOrUpdateBlock(action.payload, frameId))
+        tap(([action, frameId, previewReady]) => previewReady && this.preview.add(action.payload, frameId))
     );
 
     @Effect({ dispatch: false })
@@ -167,14 +167,14 @@ export class RootEffects {
             this.editorStore$.select(fromEditor.getCurrentSectionItem)
         ),
         filter(([, , previewReady]) => previewReady),
-        map(([action, frameId, previewReady, currentItem]): [BlockValuesModel, string] => [
+        map(([action, frameId, , currentItem]): [BlockValuesModel, string] => [
             <BlockValuesModel>{ ...currentItem, ...action.payload },
             frameId
         ]),
         filter(([block]) => block.type !== 'settings'),
         debounceTime(500),
         distinctUntilChanged(),
-        tap(([block, frameId]) => this.preview.addOrUpdateBlock(block, frameId))
+        tap(([block, frameId]) => this.preview.update(block, frameId))
     );
 
     @Effect({ dispatch: false })
@@ -199,9 +199,9 @@ export class RootEffects {
         withLatestFrom(this.rootStore$.select(fromRoot.getPrimaryFrameId)),
         tap(([action, frameId]) => {
             if (action.payload.hidden) {
-                this.preview.removeBlock(action.payload, frameId);
+                this.preview.hide(action.payload, frameId);
             } else {
-                this.preview.addOrUpdateBlock(action.payload, frameId);
+                this.preview.show(action.payload, frameId);
             }
         })
     );

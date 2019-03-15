@@ -10,16 +10,36 @@ export class PreviewService {
 
     constructor() { }
 
-    addOrUpdateBlock(block: BlockValuesModel, frameId: string) {
-        this.send('addOrUpdate', block, frameId);
+    add(block: BlockValuesModel, frameId: string) {
+        this.send('add', block, frameId);
     }
 
-    changeOrder(currentIndex: number, newIndex: number, frameId: string) {
-        this.send('move', { currentIndex, newIndex }, frameId);
+    update(block: BlockValuesModel, frameId: string) {
+        this.send('update', block, frameId);
     }
 
     cloneBlock(source: number, destination: number, frameId: string) {
         this.send('clone', { source, destination }, frameId);
+    }
+
+    hide(block: BlockValuesModel, frameId: string) {
+        this.send('hide', block, frameId);
+    }
+
+    show(block: BlockValuesModel, frameId: string) {
+        this.send('show', block, frameId);
+    }
+
+    removeBlock(block: BlockValuesModel, frameId: string) {
+        this.send('remove', { id: block.id }, frameId);
+    }
+
+    preview(block: BlockValuesModel, frameId: string) {
+        this.send('preview', block, frameId);
+    }
+
+    changeOrder(currentIndex: number, newIndex: number, frameId: string) {
+        this.send('swap', { currentIndex, newIndex }, frameId);
     }
 
     page(page: BlockValuesModel[], frameId: string) {
@@ -27,15 +47,11 @@ export class PreviewService {
         if (!!settings) {
             settings.url = window.location.protocol + '//' + window.location.hostname;
         }
-        this.send('page', page, frameId);
+        this.send('page', { blocks: page}, frameId);
     }
 
     reload(frameId: string) {
-        this.send('settings', {}, frameId);
-    }
-
-    removeBlock(block: BlockValuesModel, frameId: string) {
-        this.send('remove', block.id, frameId);
+        this.send('reload', {}, frameId);
     }
 
     selectBlock(blockId: number, frameId: string) {

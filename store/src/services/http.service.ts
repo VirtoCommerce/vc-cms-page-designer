@@ -1,5 +1,3 @@
-import { BlockModel } from '../models';
-
 export class HttpService {
 
     constructor(private endpoint: string) { }

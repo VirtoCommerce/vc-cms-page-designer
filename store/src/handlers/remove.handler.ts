@@ -5,7 +5,10 @@ import { BlockViewModel } from "../block.view-model";
 export class RemoveHandler extends BaseHandler {
     readonly key = 'remove';
 
-    // execute(msg: BaseMessage, list: BlockViewModel[]) {
-    executeInternal() {        
+    protected executeInternal(msg: BaseMessage, list: BlockViewModel[], vm: BlockViewModel) {
+        const index = list.indexOf(vm);
+        list.splice(index, 1);
+        vm.element.remove();
+        this.renderer.select();
     }
 }
