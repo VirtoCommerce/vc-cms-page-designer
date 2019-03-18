@@ -8,17 +8,12 @@ export class CloneHandler extends BaseHandler {
     execute(msg: BaseMessage, list: BlockViewModel[]) {
         this.deselectAll(list);
         const source = this.getViewModel(msg.content.source, list);
-        const clone: BlockViewModel = {
-            id: this.generateId(msg.content.destination),
-            source: {
-                ...source.source,
-                id: msg.content.destination
-            },
-            htmlString: source.htmlString,
-            hidden: source.hidden,
-            element: null,
-            selected: true
-        };
+
+        const model = { ...source.source, id: msg.content.destination };
+        const clone = this.createViewModel(model);
+        clone.htmlString = source.htmlString;
+        clone.hidden = source.hidden;
+        clone.selected = true;
 
         const index = list.indexOf(source);
         list.splice(index + 1, 0, clone);

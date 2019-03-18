@@ -8,7 +8,6 @@ export abstract class BaseHandler implements MessageHandler {
 
     abstract readonly key: string;
     protected get renderer(): Renderer {
-        // TODO: renderer must be in App!!
         return ServiceLocator.getRenderer();
     }
 
@@ -34,14 +33,16 @@ export abstract class BaseHandler implements MessageHandler {
     }
 
     protected createViewModel(content: MessageContent): BlockViewModel {
-        return {
+        const result = new BlockViewModel();
+        Object.assign(result, {
             id: this.generateId(content.id),
             source: content,
             element: null,
             htmlString: null,
             selected: false,
             hidden: false
-        };
+        });
+        return result;
     }
 
     protected getViewModel(id: number, list: BlockViewModel[]): BlockViewModel {
@@ -55,7 +56,7 @@ export abstract class BaseHandler implements MessageHandler {
 
     protected clearPreview(list: BlockViewModel[]) {
         const previewId = this.generateId(null);
-        const listToRemove = list.filter(x => x.id === previewId).map((item, index) => <any>{ item, index });
+        const listToRemove = list.map((item, index) => <any>{ item, index }).filter(x => x.item.id === previewId);
         listToRemove.forEach(x => {
             list.splice(x.index, 1);
             x.item.element.remove();

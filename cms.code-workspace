@@ -1,10 +1,13 @@
 {
 	"folders": [
-		{
-			"path": "cms-designer"
-		},
-		{
-			"path": "store"
-		}
-	]
+        {
+            "path": "cms-designer"
+        },
+        {
+            "path": "store"
+        },
+        {
+            "path": "store-test"
+        }
+    ]
 }

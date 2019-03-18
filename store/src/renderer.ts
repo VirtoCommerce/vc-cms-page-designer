@@ -12,21 +12,20 @@ export class Renderer {
     }
 
     add(vm: BlockViewModel) {
-        vm.element = this.createElement(vm.htmlString);
+        vm.element = this.createElement(vm);
         this.container.append(vm.element);
     }
 
     update(vm: BlockViewModel) {
         const element = vm.element;
-        vm.element = this.createElement(vm.htmlString);
+        vm.element = this.createElement(vm);
         this.container.replaceChild(vm.element, element);
     }
 
     insert(vm: BlockViewModel, index: number) {
-        vm.element = this.createElement(vm.htmlString);
+        vm.element = this.createElement(vm);
         const beforeElement = this.container.children.item(index);
         this.container.insertBefore(vm.element, beforeElement);
-        // TODO: workaround! should be fixed! (renderer must be in app)
         if (vm.hidden) {
             vm.element.style.display = 'none';
         }
@@ -41,11 +40,12 @@ export class Renderer {
         }
     }
 
-    private createElement(source: string) {
+    private createElement(vm: BlockViewModel) {
         const div = document.createElement('div');
-        div.innerHTML = `<div>${source}</div>`;
+        div.innerHTML = `<div>${vm.htmlString}</div>`;
         const result = <HTMLElement>div.firstChild;
-        // result.addEventListener('mouseover', this.hoverListener);
+        result.addEventListener('mouseover', () => vm.onHover());
+        result.addEventListener('click', () => vm.onClick());
         // TODO: add events
         //      hover
         //      mouse up

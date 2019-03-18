@@ -10,7 +10,6 @@ export class SwapHandler extends BaseHandler {
         list.splice(msg.content.currentIndex, 1);
         list.splice(msg.content.newIndex, 0, vm);
         vm.element.remove();
-        // TODO: workaround! should be fixed! (renderer must be in app)
         this.renderer.insert(vm, msg.content.newIndex);
     }
 }

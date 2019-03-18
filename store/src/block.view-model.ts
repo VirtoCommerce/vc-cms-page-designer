@@ -1,10 +1,13 @@
 import { MessageContent } from './models';
 
-export interface BlockViewModel {
+export class BlockViewModel {
     id: string;
     source: MessageContent;
-    element: HTMLElement; // TODO: it should be in render logic
+    element: HTMLElement;
     htmlString: string;
-    selected: boolean;
+    selected: boolean; // is this field really necessary?
     hidden: boolean;
+
+    onClick: () => void = () => { };
+    onHover: () => void = () => { };
 }

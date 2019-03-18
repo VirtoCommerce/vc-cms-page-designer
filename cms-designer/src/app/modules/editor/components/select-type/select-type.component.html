@@ -1,7 +1,8 @@
 <div class="left-panel-content">
     <!-- TODO: design, there is no the 'selected' state (under preview) -->
     <div class="list-group">
-        <a class="list-group-item list-group-item--first" *ngFor="let item of schema | creatableBlocks" (click)="previewItem(item.value)">
+        <a class="list-group-item list-group-item--first" [class.under-preview]="item.value.type == selectedItem"
+            *ngFor="let item of schema | creatableBlocks" (click)="previewItem(item.value)">
             <div class="list-group-icon" [attr.data-name]="item.value.icon"></div>
             <div class="list-group-text">{{ item.value.name }}</div>
             <span class="list-group-add" (click)="selectItem(item.value)"></span>

@@ -28,7 +28,7 @@
         width: 2px;
     }
 
-    &:hover
+    &:hover, &.under-preview
     {
         .list-group-add
         {
