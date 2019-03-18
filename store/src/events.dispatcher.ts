@@ -1,6 +1,6 @@
 import { HandlersFactory } from "./handlers.factory";
 import { MessageHandler } from "./handlers";
-import { BaseMessage } from "./models";
+import { BaseMessage, BlockViewModel } from "./models";
 
 export class EventsDispatcher {
     handleMessage: (handler: MessageHandler, msg: BaseMessage) => void = () => {};
@@ -13,6 +13,18 @@ export class EventsDispatcher {
                 this.handleEvent(event.data)
             }
         });
+    }
+
+    selectBlock(vm: BlockViewModel) {
+
+    }
+
+    highlightBlock(vm: BlockViewModel) {
+
+    }
+
+    swapBlock() {
+
     }
 
     private handleEvent(msg: BaseMessage) {

@@ -1,3 +1,5 @@
+import { ServiceLocator } from './service-locator';
+import { EventsDispatcher } from './events.dispatcher';
 import { MessageContent } from './models';
 
 export class BlockViewModel {
@@ -8,6 +10,15 @@ export class BlockViewModel {
     selected: boolean; // is this field really necessary?
     hidden: boolean;
 
-    onClick: () => void = () => { };
-    onHover: () => void = () => { };
+    onClick: () => void = () => {
+        this.eventsDispatcher.selectBlock(this);
+    };
+    onHover: () => void = () => {
+        this.eventsDispatcher.highlightBlock(this);
+    };
+
+    private get eventsDispatcher(): EventsDispatcher {
+        // TODO: ??
+        return ServiceLocator.getDispatcher();
+    }
 }
