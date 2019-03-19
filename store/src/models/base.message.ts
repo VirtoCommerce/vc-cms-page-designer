@@ -14,6 +14,9 @@ export interface MessageContent {
     currentIndex?: number;
     newIndex?: number;
 
+    // block
+    hidden?: boolean;
+
     // page
     blocks?: MessageContent[];
 }

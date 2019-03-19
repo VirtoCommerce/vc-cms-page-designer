@@ -18,13 +18,11 @@ export class PreviewComponent implements OnInit {
 
     ngOnInit() { }
 
-    primaryPreviewLoaded() {
+    preview1Loaded() {
         this.preivewLoaded.emit('preview1');
     }
 
-    secondaryPreviewLoaded() {
-        // TODO: MUST BE preview2
-        // For preview may be used preview1
+    preview2Loaded() {
         this.preivewLoaded.emit('preview2');
     }
 

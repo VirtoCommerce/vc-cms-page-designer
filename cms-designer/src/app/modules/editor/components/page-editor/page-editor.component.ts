@@ -16,6 +16,7 @@ export class PageEditorComponent implements OnInit {
     topItems: BlockValuesModel[];
     bottomItems: BlockValuesModel[];
 
+    @Input() hoveredId: number;
     @Input() set model(value: PageModel) {
         this._model = value;
         this.updateLItems();
@@ -40,6 +41,7 @@ export class PageEditorComponent implements OnInit {
     @Output() orderChangedEvent = new EventEmitter<CdkDragSortEvent<BlockValuesModel>>();
     @Output() visibilityChanged = new EventEmitter<BlockValuesModel>();
     @Output() reloadData = new EventEmitter();
+    @Output() mouseOver = new EventEmitter<BlockValuesModel>();
 
     constructor() { }
 
@@ -88,6 +90,10 @@ export class PageEditorComponent implements OnInit {
         const element = this.model.content.splice(event.previousIndex, 1);
         this.model.content.splice(event.currentIndex, 0, ...element);
         this.orderChangedEvent.emit(event);
+    }
+
+    onMouseOver(item: BlockValuesModel) {
+        this.mouseOver.emit(item);
     }
 
     private updateLItems() {

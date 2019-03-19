@@ -8,6 +8,11 @@ export interface State extends fromRoot.State {
 
 const getThemeFeatureState = createFeatureSelector<fromTheme.ThemeState>('theme');
 
+export const getDraftUploaded = createSelector(
+    getThemeFeatureState,
+    state => state.draftUploaded
+);
+
 export const getIsDirty = createSelector(
     getThemeFeatureState,
     state => state.dirty

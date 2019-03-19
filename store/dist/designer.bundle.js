@@ -153,12 +153,14 @@ class BlockViewModel {
         this.onSelect = () => {
             this.eventsDispatcher.selectBlock(this);
         };
+        this.onLeave = () => {
+            this.eventsDispatcher.unlightBlock();
+        };
         this.onHover = () => {
             this.eventsDispatcher.highlightBlock(this);
         };
     }
     get eventsDispatcher() {
-        // TODO: ??
         return service_locator_1.ServiceLocator.getDispatcher();
     }
 }
@@ -224,6 +226,10 @@ class EventsDispatcher {
         }
     }
     highlightBlock(vm) {
+        this.messages.blockHover(vm.source);
+    }
+    unlightBlock() {
+        this.messages.blockHover({ id: 0 });
     }
     swapBlock() {
     }
@@ -348,7 +354,7 @@ class BaseHandler {
             isPreview: isPreview,
             htmlString: null,
             selected: false,
-            hidden: false
+            hidden: !!content.hidden
         });
         return result;
     }
@@ -449,7 +455,18 @@ class HoverHandler extends base_handler_1.BaseHandler {
         super(...arguments);
         this.key = 'hover';
     }
+    execute(msg, list) {
+        this.deselectAll(list);
+        const content = msg.content;
+        if (!content.id) {
+            this.renderer.hover();
+        }
+        else {
+            super.execute(msg, list);
+        }
+    }
     executeInternal(msg, list, vm) {
+        this.renderer.hover(vm);
     }
 }
 exports.HoverHandler = HoverHandler;
@@ -776,9 +793,15 @@ class PreviewInteractor {
         this.createSelectElement();
     }
     hover(vm) {
-        this.hoveredViewModel = vm;
-        this.hoverElement.style.display = 'block';
-        this.placeElementHover(vm.element, this.hoverElement);
+        if (vm == null || this.selectedViewModel == vm) {
+            this.hoveredViewModel = null;
+            this.hoverElement.style.display = 'none';
+        }
+        else {
+            this.hoveredViewModel = vm;
+            this.hoverElement.style.display = 'block';
+            this.placeElementHover(vm.element, this.hoverElement);
+        }
     }
     select(vm) {
         this.selectedViewModel = vm;
@@ -800,6 +823,7 @@ class PreviewInteractor {
         result.style.border = `${this.borderWidth}px dotted #33ada9`;
         result.addEventListener('mouseleave', () => {
             this.hideHoverElement();
+            this.hoveredViewModel.onLeave();
             this.hoveredViewModel = null;
         });
         result.addEventListener('click', (event) => {
@@ -887,6 +911,9 @@ class Renderer {
     add(vm) {
         vm.element = this.createElement(vm);
         this.container.append(vm.element);
+        if (vm.hidden) {
+            vm.element.style.display = 'none';
+        }
     }
     update(vm) {
         const element = vm.element;
@@ -909,6 +936,14 @@ class Renderer {
             this.interactor.select(vm);
         }
     }
+    hover(vm = null) {
+        if (vm === null || vm.hidden || vm.selected) {
+            this.interactor.hover(null);
+        }
+        else {
+            this.interactor.hover(vm);
+        }
+    }
     createElement(vm) {
         const div = document.createElement('div');
         div.innerHTML = `<div>${vm.htmlString}</div>`;
@@ -920,11 +955,6 @@ class Renderer {
             });
             result.addEventListener('click', () => vm.onSelect());
         }
-        // TODO: add events
-        //      hover
-        //      mouse up
-        //      mouse down
-        //      mouse move
         return result;
     }
 }
@@ -1051,7 +1081,9 @@ class MessagesService {
     }
     send(message, model) {
         const msg = Object.assign({ type: message }, model);
-        console.log(msg);
+        if (message !== 'hover') {
+            console.log(msg);
+        }
         window.parent.postMessage(msg, this.parentOrigin);
     }
 }

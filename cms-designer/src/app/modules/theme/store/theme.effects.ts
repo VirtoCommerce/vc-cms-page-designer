@@ -48,7 +48,7 @@ export class ThemeEffects {
     @Effect()
     uploadPresets$: Observable<Action> = this.actions$.pipe(
         ofType<themeActions.SaveTheme>(themeActions.ThemeActionTypes.SaveTheme),
-        withLatestFrom(this.store$.select(state => state.theme.presets)),
+        withLatestFrom(this.store$.select(fromTheme.getPresets)),
         switchMap(([, theme]) =>
             this.themeService.uploadPresets(theme).pipe(
                 map(() => new themeActions.SaveThemeSuccess()),
@@ -74,7 +74,7 @@ export class ThemeEffects {
     @Effect()
     updateDraft$: Observable<Action> = this.actions$.pipe(
         ofType(themeActions.ThemeActionTypes.UpdateDraft),
-        withLatestFrom(this.store$.select(state => state.theme.presets)),
+        withLatestFrom(this.store$.select(fromTheme.getPresets)),
         switchMap(([, theme]) =>
             this.themeService.uploadDraft(theme).pipe(
                 map(() => new themeActions.UpdateDraftSuccess()),

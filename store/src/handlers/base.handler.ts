@@ -41,7 +41,7 @@ export abstract class BaseHandler implements MessageHandler {
             isPreview: isPreview,
             htmlString: null,
             selected: false,
-            hidden: false
+            hidden: !!content.hidden
         });
         return result;
     }

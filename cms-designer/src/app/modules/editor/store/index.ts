@@ -58,3 +58,8 @@ export const getPageNotLoaded = createSelector(
     getEditorFeatureState,
     state => !state.schemaNotLoaded && state.pageNotLoaded
 );
+
+export const getHoveredId = createSelector(
+    getEditorFeatureState,
+    state => state.hoveredInPreviewId
+);

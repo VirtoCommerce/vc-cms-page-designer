@@ -15,6 +15,7 @@ export interface EditorState {
     blocksSchema: BlocksSchema;
     // categories: CategoryModel[];
     dirty: boolean;
+    hoveredInPreviewId: number;
 }
 
 const initialState: EditorState = {
@@ -29,7 +30,8 @@ const initialState: EditorState = {
     page: null,
     blocksSchema: null,
     // categories: [],
-    dirty: true
+    dirty: true,
+    hoveredInPreviewId: 0
 };
 
 export function reducer(state = initialState, action: EditorActions): EditorState {
@@ -173,6 +175,12 @@ export function reducer(state = initialState, action: EditorActions): EditorStat
             return {
                 ...state,
                 dirty: true
+            };
+        }
+        case EditorActionTypes.MarkSectionHoveredInPreview: {
+            return {
+                ...state,
+                hoveredInPreviewId: action.payload
             };
         }
     }

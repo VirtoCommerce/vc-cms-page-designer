@@ -33,6 +33,7 @@
                 <app-tab class="tabs__content" tabTitle="Sections" [active]="(activeTabIndex$|async) === 0">
                     <app-page-editor class="left-panel-content" [model]="page$ | async" [schema]="blocksSchema$ | async"
                         (selectEvent)="selectPageItem($event)" [noSchema]="schemaNotLoaded$ | async"
+                        [hoveredId]="hoveredId$|async" (mouseOver)="mouseOverItem($event)"
                         [noPage]="pageNotLoaded$ | async" (reloadData)="reloadEditorData()"
                         (visibilityChanged)="toggleVisibility($event)"
                         (orderChangedEvent)="onOrderChanged($event)" (addNewBlockEvent)="setNewBlockMode()">

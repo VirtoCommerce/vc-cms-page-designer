@@ -1,4 +1,9 @@
-<div class="content__iframe">
-    <iframe *ngIf="storeUrl" frameborder="0" id="preview1" [src]="storeUrl" scrolling="yes" (load)="primaryPreviewLoaded()"></iframe>
-    <iframe *ngIf="storeUrl" frameborder="0" id="preview2" [src]="storeUrl" scrolling="yes" (load)="secondaryPreviewLoaded()"></iframe>
+<div class="content__iframe" [ngStyle]="{ opacity: loading ? 0 : 1 }">
+    <iframe *ngIf="storeUrl" frameborder="0" id="preview1" [src]="storeUrl" scrolling="yes" style="display: none;"
+        (load)="preview1Loaded()"></iframe>
+    <iframe *ngIf="storeUrl" frameborder="0" id="preview2" [src]="storeUrl" scrolling="yes" style="display: none;"
+        (load)="preview2Loaded()"></iframe>
+</div>
+<div *ngIf="loading" class="content__iframe">
+    <div>Loader</div>
 </div>

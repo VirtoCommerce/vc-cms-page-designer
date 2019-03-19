@@ -11,6 +11,9 @@ export class Renderer {
     add(vm: BlockViewModel) {
         vm.element = this.createElement(vm);
         this.container.append(vm.element);
+        if (vm.hidden) {
+            vm.element.style.display = 'none';
+        }
     }
 
     update(vm: BlockViewModel) {
@@ -36,6 +39,14 @@ export class Renderer {
         }
     }
 
+    hover(vm: BlockViewModel = null) {
+        if (vm === null || vm.hidden || vm.selected) {
+            this.interactor.hover(null);
+        } else {
+            this.interactor.hover(vm);
+        }
+    }
+
     private createElement(vm: BlockViewModel) {
         const div = document.createElement('div');
         div.innerHTML = `<div>${vm.htmlString}</div>`;
@@ -47,11 +58,6 @@ export class Renderer {
             });
             result.addEventListener('click', () => vm.onSelect());
         }
-        // TODO: add events
-        //      hover
-        //      mouse up
-        //      mouse down
-        //      mouse move
         return result;
     }
 }

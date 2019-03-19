@@ -43,6 +43,7 @@ export class AppComponent implements OnInit {
     page$ = this.store.select(fromEditor.getPage);
     schemaNotLoaded$ = this.store.select(fromEditor.getSchemaNotLoaded);
     pageNotLoaded$ = this.store.select(fromEditor.getPageNotLoaded);
+    hoveredId$ = this.store.select(fromEditor.getHoveredId);
 
     // theme editor states
     presets$ = this.store.select(fromTheme.getPresets);
@@ -53,7 +54,8 @@ export class AppComponent implements OnInit {
     presetsNotLoaded$ = this.store.select(fromTheme.getPresetsNotLoaded);
     themeSchemaNotLoaded$ = this.store.select(fromTheme.getSchemaNotLoaded);
 
-    // combined states
+    // combined & common states
+    primaryId$ = this.store.select(fromRoot.getPrimaryFrameId);
     headerActive$ = this.store.select(fromRoot.getHeaderIsActive);
     headerIcon$ = this.store.select(fromRoot.getHeaderIcon);
     tabsVisible$ = this.store.select(fromRoot.getIsTabVisible);
@@ -105,6 +107,10 @@ export class AppComponent implements OnInit {
     }
 
     // editor tab events
+
+    mouseOverItem(item) {
+        this.store.dispatch(new editorActions.HighlightInPreview(item));
+    }
 
     selectPageItem(item: BlockValuesModel) {
         this.store.dispatch(new editorActions.SelectPageItem(item));

@@ -47,32 +47,44 @@ export class RootEffects {
     @Effect()
     switchToLoadPage$: Observable<Action> = this.actions$.pipe(
         ofType<rootActions.LoadData>(rootActions.RootActionTypes.LoadData),
-        withLatestFrom(this.editorStore$.select(store => store.editor)),
-        filter(([, state]) => !state.page || state.pageNotLoaded),
+        withLatestFrom(
+            this.editorStore$.select(fromEditor.getPage),
+            this.editorStore$.select(fromEditor.getPageNotLoaded)
+        ),
+        filter(([, page, pageNotLoaded]) => !page || pageNotLoaded),
         mapTo(new editorActions.LoadPage())
     );
 
     @Effect()
     switchToLoadBlocks$: Observable<Action> = this.actions$.pipe(
         ofType<rootActions.LoadData>(rootActions.RootActionTypes.LoadData),
-        withLatestFrom(this.editorStore$.select(store => store.editor)),
-        filter(([, state]) => !state.blocksSchema || state.schemaNotLoaded),
+        withLatestFrom(
+            this.editorStore$.select(fromEditor.getBlocksSchema),
+            this.editorStore$.select(fromEditor.getSchemaNotLoaded)
+        ),
+        filter(([, blocksSchema, schemaNotLoaded]) => !blocksSchema || schemaNotLoaded),
         mapTo(new editorActions.LoadBlockTypes())
     );
 
     @Effect()
     switchToLoadThemes$: Observable<Action> = this.actions$.pipe(
         ofType<rootActions.LoadData>(rootActions.RootActionTypes.LoadData),
-        withLatestFrom(this.themeStore$.select(store => store.theme)),
-        filter(([, state]) => !state.presets || state.presetsNotLoaded),
+        withLatestFrom(
+            this.themeStore$.select(fromTheme.getPresets),
+            this.themeStore$.select(fromTheme.getPresetsNotLoaded)
+        ),
+        filter(([, presets, presetsNotLoaded]) => !presets || presetsNotLoaded),
         mapTo(new themeActions.LoadThemes())
     );
 
     @Effect()
     switchToLoadThemeSchema$: Observable<Action> = this.actions$.pipe(
         ofType<rootActions.LoadData>(rootActions.RootActionTypes.LoadData),
-        withLatestFrom(this.themeStore$.select(store => store.theme)),
-        filter(([, state]) => !state.schema || state.schemaNotLoaded),
+        withLatestFrom(
+            this.themeStore$.select(fromTheme.getSchema),
+            this.themeStore$.select(fromTheme.getSchemaNotLoaded)
+        ),
+        filter(([, schema, schemaNotLoaded]) => !schema || schemaNotLoaded),
         mapTo(new themeActions.LoadSchema())
     );
 
@@ -115,6 +127,16 @@ export class RootEffects {
     );
 
     // editor
+
+    @Effect({ dispatch: false})
+    sendHoverToPreview$ = this.actions$.pipe(
+        ofType<editorActions.HighlightInPreview>(editorActions.EditorActionTypes.HighlightInPreview),
+        withLatestFrom(
+            this.rootStore$.select(fromRoot.getPrimaryFrameId),
+            this.rootStore$.select(fromRoot.getPrimaryIsLoaded)
+        ),
+        tap(([action, frameId, previewReady]) => previewReady && this.preview.hover(action.payload, frameId))
+    );
 
     @Effect({ dispatch: false })
     sendPreviewPageItem$ = this.actions$.pipe(
@@ -216,16 +238,19 @@ export class RootEffects {
     @Effect()
     sendPageToStore$ = this.actions$.pipe(
         ofType<rootActions.PreviewReady>(rootActions.RootActionTypes.PreviewReady),
-        withLatestFrom(this.rootStore$, this.editorStore$, this.themeStore$),
-        filter(([action, rootStore, editorStore, themeStore]) =>
-            rootStore.root.primaryLoaded
-            && rootStore.root.secondaryLoaded
-            && action.payload === rootStore.root.secondaryFrameId
-            && rootStore.root.secondaryLoaded
-            && themeStore.theme.draftUploaded
-            && editorStore.editor.page != null),
-        switchMap(([action, rootStore, editorStore, themeStore]) => {
-            this.preview.page(editorStore.editor.page.content, action.payload);
+        withLatestFrom(
+            this.editorStore$.select(fromEditor.getPage),
+            this.rootStore$.select(fromRoot.getPrimaryIsLoaded),
+            this.rootStore$.select(fromRoot.getSecondaryIsLoaded),
+            this.rootStore$.select(fromRoot.getSecondaryFrameId),
+            this.themeStore$.select(fromTheme.getDraftUploaded)
+        ),
+        filter(([action, page, primaryLoaded, secondaryLoaded, secondaryFrameId, draftUploaded]) =>
+            primaryLoaded && secondaryLoaded
+            && action.payload === secondaryFrameId
+            && draftUploaded && page != null),
+        switchMap(([action, page]) => {
+            this.preview.page(page.content, action.payload);
             return of(new rootActions.PreviewLoading(true));
         })
     );
@@ -233,10 +258,13 @@ export class RootEffects {
     @Effect({ dispatch: false })
     toggleFrames$ = this.actions$.pipe(
         ofType(rootActions.RootActionTypes.ToggleFrames),
-        withLatestFrom(this.rootStore$.select(store => store.root)),
-        map(([, store]): [string, string] => [
-            store.secondaryFrameId || store.primaryFrameId,
-            store.primaryFrameId
+        withLatestFrom(
+            this.rootStore$.select(fromRoot.getPrimaryFrameId),
+            this.rootStore$.select(fromRoot.getSecondaryFrameId),
+        ),
+        map(([, primaryFrameId, secondaryFrameId]): [string, string] => [
+            secondaryFrameId || primaryFrameId,
+            primaryFrameId
         ]),
         tap(([primary, secondary]) => this.preview.toggleFrames(primary, secondary))
     );
@@ -280,27 +308,36 @@ export class RootEffects {
     );
 
     @Effect()
-    receiveSwapMessage$ = fromEvent(window, 'message').pipe(
+    receiveSwapFrameMessage$ = fromEvent(window, 'message').pipe(
         filter((event: MessageEvent) => event.data.type === 'render-complete'),
-        withLatestFrom(this.rootStore$),
-        map(([event, store]): [Window, Window, fromRoot.State] => [
-            (<HTMLIFrameElement>document.getElementById(store.root.primaryFrameId)).contentWindow,
+        withLatestFrom(
+            this.rootStore$.select(fromRoot.getPrimaryFrameId),
+            this.rootStore$.select(fromRoot.getSecondaryFrameId)
+        ),
+        map(([event, primaryFrameId, secondaryFrameId]): [Window, Window, string, string] => [
+            (<HTMLIFrameElement>document.getElementById(primaryFrameId)).contentWindow,
             <Window>event.source,
-            store
+            primaryFrameId, secondaryFrameId
         ]),
-        map(([primary, source, state]) => primary === source ? state.root.primaryFrameId : state.root.secondaryFrameId),
+        map(([primary, source, primaryFrameId, secondaryFrameId]) => primary === source ? primaryFrameId : secondaryFrameId),
         switchMap(loadedFrameId => [
             new rootActions.ToggleFrames(loadedFrameId),
             new rootActions.PreviewLoading(false)
         ])
     );
 
+    @Effect()
+    receiveHoverElementMessage$ = fromEvent(window, 'message').pipe(
+        filter((event: MessageEvent) => event.data.type === 'hover'),
+        map(event => new editorActions.MarkSectionHoveredInPreview(event.data.id))
+    );
+
     @Effect({ dispatch: false })
     sendCloneToPreview$ = this.actions$.pipe(
         ofType<editorActions.ClonePageItem>(editorActions.EditorActionTypes.ClonePageItem),
-        withLatestFrom(this.rootStore$.select(store => store.root)),
-        tap(([action, store]) => {
-            this.preview.cloneBlock(<number>action.payload.oldBlock.id, <number>action.payload.newBlock.id, store.primaryFrameId);
+        withLatestFrom(this.rootStore$.select(fromRoot.getPrimaryFrameId)),
+        tap(([action, primaryFrameId]) => {
+            this.preview.cloneBlock(<number>action.payload.oldBlock.id, <number>action.payload.newBlock.id, primaryFrameId);
         })
     );
 }

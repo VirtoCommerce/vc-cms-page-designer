@@ -31,7 +31,11 @@ export class EventsDispatcher {
     }
 
     highlightBlock(vm: BlockViewModel) {
-        
+        this.messages.blockHover(vm.source);
+    }
+
+    unlightBlock() {
+        this.messages.blockHover({ id: 0 });
     }
 
     swapBlock() {

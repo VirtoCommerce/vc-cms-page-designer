@@ -16,9 +16,14 @@ export class PreviewInteractor {
     }
 
     hover(vm: BlockViewModel) {
-        this.hoveredViewModel = vm;
-        this.hoverElement.style.display = 'block';
-        this.placeElementHover(vm.element, this.hoverElement);
+        if (vm == null || this.selectedViewModel == vm) {
+            this.hoveredViewModel = null;
+            this.hoverElement.style.display = 'none';
+        } else {
+            this.hoveredViewModel = vm;
+            this.hoverElement.style.display = 'block';
+            this.placeElementHover(vm.element, this.hoverElement);
+        }
     }
 
     select(vm: BlockViewModel) {
@@ -45,6 +50,7 @@ export class PreviewInteractor {
         result.style.border = `${this.borderWidth}px dotted #33ada9`;
         result.addEventListener('mouseleave', () => {
             this.hideHoverElement();
+            this.hoveredViewModel.onLeave();
             this.hoveredViewModel = null;
         });
         result.addEventListener('click', (event) => {

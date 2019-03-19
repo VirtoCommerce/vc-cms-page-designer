@@ -18,7 +18,9 @@ export class MessagesService {
 
     private send(message: string, model) {
         const msg = { type: message, ...model };
-        console.log(msg);
+        if (message !== 'hover') {
+            console.log(msg);
+        }
         window.parent.postMessage(msg, this.parentOrigin);
     }
 }

@@ -47,6 +47,7 @@ export function reducer(state = initialState, action: RootActions): RootState {
             const newValues: Partial<RootState> = {};
             newValues.primaryFrameId = state.secondaryFrameId;
             newValues.secondaryFrameId = state.primaryFrameId;
+            console.log('toggle', newValues.primaryFrameId, 'is primary now');
             return {
                 ...state,
                 ...newValues

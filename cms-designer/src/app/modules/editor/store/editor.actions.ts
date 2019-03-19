@@ -36,7 +36,9 @@ export enum EditorActionTypes {
     ToggleNewBlockPane = '[Page] Toggle New Block Pane',
     UpdateBlockPreview = '[Page] Update Block Preview',
     UpdatePageItem = '[Page] Update Page Item',
-    ToggleItemVisibility = '[Page] Toggle Item Visibility'
+    ToggleItemVisibility = '[Page] Toggle Item Visibility',
+    MarkSectionHoveredInPreview = '[Page] Mark Section Hovered In Preview',
+    HighlightInPreview = '[Page] Highlight In Preview'
 }
 
 export class AddPageItem implements Action {
@@ -193,6 +195,17 @@ export class ToggleItemVisibility implements Action {
     constructor(public payload: BlockValuesModel) { }
 }
 
+export class MarkSectionHoveredInPreview implements Action {
+    readonly type = EditorActionTypes.MarkSectionHoveredInPreview;
+
+    constructor(public payload: number) { }
+}
+export class HighlightInPreview implements Action  {
+    readonly type = EditorActionTypes.HighlightInPreview;
+
+    constructor(public payload: BlockValuesModel) { }
+}
+
 export type EditorActions = LoadPage
     | AddPageItem
     | BlocksSchemaFail
@@ -222,4 +235,6 @@ export type EditorActions = LoadPage
     | ToggleNewBlockPane
     | UpdateBlockPreview
     | UpdatePageItem
-    | ToggleItemVisibility;
+    | ToggleItemVisibility
+    | MarkSectionHoveredInPreview
+    | HighlightInPreview;

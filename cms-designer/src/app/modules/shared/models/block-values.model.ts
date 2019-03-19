@@ -1,4 +1,5 @@
 export class BlockValuesModel {
+    id?: number;
     type: string;
     icon?: string;
     title?: string;

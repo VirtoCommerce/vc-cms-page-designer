@@ -47,7 +47,7 @@ export class PreviewService {
         if (!!settings) {
             settings.url = window.location.protocol + '//' + window.location.hostname;
         }
-        this.send('page', { blocks: page}, frameId);
+        this.send('page', { blocks: page }, frameId);
     }
 
     reload(frameId: string) {
@@ -58,10 +58,19 @@ export class PreviewService {
         this.send('select', { id: blockId }, frameId);
     }
 
+    hover(block: BlockValuesModel, frameId: string) {
+        this.send('hover', { id: block.id }, frameId);
+    }
+
     scrollTo(block: BlockValuesModel, frameId: string) {
         this.send('scrollTo', { id: block.id }, frameId);
     }
 
+    /**
+     * while frame is not rendered it will not execute own scripts
+     * @param primaryId
+     * @param secondaryId
+     */
     toggleFrames(primaryId: string, secondaryId: string) {
         console.log('toggle', secondaryId, 'is primary now');
         if (!!primaryId) {
@@ -83,7 +92,9 @@ export class PreviewService {
             if (!!target) {
                 const message = { type: type, content: model };
                 try {
-                    console.log(frameId, message);
+                    if (type !== 'hover') {
+                        console.log(frameId, message);
+                    }
                     target.postMessage(message, AppSettings.storeBaseUrl + AppSettings.storePreviewPath);
                 } catch (error) {
                     console.error('Preview unavailable. Reason: ', error);

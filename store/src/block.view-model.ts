@@ -14,12 +14,14 @@ export class BlockViewModel {
     onSelect: () => void = () => {
         this.eventsDispatcher.selectBlock(this);
     };
+    onLeave: () => void = () => {
+        this.eventsDispatcher.unlightBlock();
+    };
     onHover: () => void = () => {
         this.eventsDispatcher.highlightBlock(this);
     };
 
     private get eventsDispatcher(): EventsDispatcher {
-        // TODO: ??
         return ServiceLocator.getDispatcher();
     }
 }

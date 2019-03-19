@@ -5,7 +5,8 @@
     </a>
     <div cdkDropList class="list-container" (cdkDropListDropped)="reorder($event)">
         <a cdkDragBoundary=".list-container" cdkDragLockAxis="y" cdkDrag class="list-group-item"
-            *ngFor="let item of model.content" (click)="selectItem(item)" [class.disabled]="item.hidden">
+            (mouseover)="onMouseOver(item)"
+            *ngFor="let item of model.content" (click)="selectItem(item)" [class.disabled]="item.hidden" [class.hovered]="item.id == hoveredId">
             <div class="list-group-icon" [attr.data-name]="getBlockIcon(item)"></div>
             <div class="list-group-text">{{ getBlockName(item) }}</div>
             <div class="list-group-actions">
