@@ -38,6 +38,13 @@ export class TextItemComponent extends BaseControlComponent<TextControlDescripto
         super();
     }
 
+    setValue(value) {
+        super.setValue(value);
+        if (this.editor) {
+            this.editor.root.innerHTML = this.value || '';
+        }
+    }
+
     onCreated(editor) {
         this.editor = editor;
         this.editor.root.innerHTML = this.value || '';
