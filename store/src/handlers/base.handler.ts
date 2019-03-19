@@ -32,12 +32,13 @@ export abstract class BaseHandler implements MessageHandler {
         return 'preview-instance';
     }
 
-    protected createViewModel(content: MessageContent): BlockViewModel {
+    protected createViewModel(content: MessageContent, isPreview = false): BlockViewModel {
         const result = new BlockViewModel();
         Object.assign(result, {
             id: this.generateId(content.id),
             source: content,
             element: null,
+            isPreview: isPreview,
             htmlString: null,
             selected: false,
             hidden: false
@@ -55,8 +56,7 @@ export abstract class BaseHandler implements MessageHandler {
     }
 
     protected clearPreview(list: BlockViewModel[]) {
-        const previewId = this.generateId(null);
-        const listToRemove = list.map((item, index) => <any>{ item, index }).filter(x => x.item.id === previewId);
+        const listToRemove = list.map((item, index) => <any>{ item, index }).filter(x => x.item.isPreview);
         listToRemove.forEach(x => {
             list.splice(x.index, 1);
             x.item.element.remove();

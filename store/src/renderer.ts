@@ -44,8 +44,10 @@ export class Renderer {
         const div = document.createElement('div');
         div.innerHTML = `<div>${vm.htmlString}</div>`;
         const result = <HTMLElement>div.firstChild;
-        result.addEventListener('mouseover', () => vm.onHover());
-        result.addEventListener('click', () => vm.onClick());
+        if (!vm.isPreview) {
+            result.addEventListener('mouseover', () => vm.onHover());
+            result.addEventListener('click', () => vm.onClick());
+        }
         // TODO: add events
         //      hover
         //      mouse up

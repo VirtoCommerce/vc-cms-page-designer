@@ -9,6 +9,7 @@ export class BlockViewModel {
     htmlString: string;
     selected: boolean; // is this field really necessary?
     hidden: boolean;
+    isPreview: boolean;
 
     onClick: () => void = () => {
         this.eventsDispatcher.selectBlock(this);

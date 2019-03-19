@@ -16,11 +16,11 @@ export class EventsDispatcher {
     }
 
     selectBlock(vm: BlockViewModel) {
-
+        console.log('select', vm);
     }
 
     highlightBlock(vm: BlockViewModel) {
-
+        console.log('hover', vm);
     }
 
     swapBlock() {
