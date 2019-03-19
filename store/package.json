@@ -5,7 +5,7 @@
     "private": true,
     "main": "src/main.ts",
     "scripts": {
-        "build": "webpack --config webpack.config.js"
+        "build": "webpack --config webpack.config.js --mode development"
     },
     "dependencies": {
         "ts-loader": "^5.3.3",

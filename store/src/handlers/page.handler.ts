@@ -1,3 +1,4 @@
+import { ServiceLocator } from './../service-locator';
 import { Environment } from './../environment';
 import { BaseHandler } from "./base.handler";
 import { BaseMessage, MessageContent } from "../models";
@@ -23,7 +24,7 @@ export class PageHandler extends BaseHandler {
             list.forEach(x => {
                 this.renderer.add(x);
             });
-            window.parent.postMessage({ type: 'render-complete' }, Environment.DesignerUrl);
+            ServiceLocator.getMessages().renderComplete();
         });
     }
 }

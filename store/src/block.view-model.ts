@@ -11,7 +11,7 @@ export class BlockViewModel {
     hidden: boolean;
     isPreview: boolean;
 
-    onClick: () => void = () => {
+    onSelect: () => void = () => {
         this.eventsDispatcher.selectBlock(this);
     };
     onHover: () => void = () => {

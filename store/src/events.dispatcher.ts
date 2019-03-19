@@ -1,3 +1,4 @@
+import { MessagesService } from './services/messages.service';
 import { HandlersFactory } from "./handlers.factory";
 import { MessageHandler } from "./handlers";
 import { BaseMessage, BlockViewModel } from "./models";
@@ -5,7 +6,7 @@ import { BaseMessage, BlockViewModel } from "./models";
 export class EventsDispatcher {
     handleMessage: (handler: MessageHandler, msg: BaseMessage) => void = () => {};
 
-    constructor(private factory: HandlersFactory) { }
+    constructor(private factory: HandlersFactory, private messages: MessagesService) { }
 
     run() {
         window.addEventListener('message', (event: MessageEvent) => {
@@ -16,11 +17,21 @@ export class EventsDispatcher {
     }
 
     selectBlock(vm: BlockViewModel) {
-        console.log('select', vm);
+        if (!!vm && vm.source) {
+            this.handleEvent({ type: 'select', content: vm.source });
+            this.messages.selectBlock(vm.source);
+            vm.selected = false;
+        } else {
+            this.handleEvent({ type: 'select', content: { id: 0 } });
+            this.messages.selectBlock(null);
+            if (!!vm) {
+                vm.selected = true;
+            }
+        }
     }
 
     highlightBlock(vm: BlockViewModel) {
-        console.log('hover', vm);
+        
     }
 
     swapBlock() {

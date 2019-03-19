@@ -1,3 +1,5 @@
+import { MessageContent } from '../models';
+
 export class MessagesService {
 
     constructor(private parentOrigin: string) { }
@@ -10,8 +12,8 @@ export class MessagesService {
         this.send('hover', { id: model.id });
     }
 
-    selectBlock(model) {
-        this.send('open', model ? { id: model.id } : null);
+    selectBlock(model: MessageContent) {
+        this.send('select', model ? { id: model.id } : null);
     }
 
     private send(message: string, model) {

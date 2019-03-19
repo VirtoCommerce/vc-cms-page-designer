@@ -244,11 +244,15 @@ export class RootEffects {
     @Effect()
     openBlockEditorForPreview$ = fromEvent(window, 'message').pipe(
         map((event: MessageEvent) => event.data),
-        filter(data => data.type === 'open'),
-        withLatestFrom(this.themeStore$, this.editorStore$),
-        filter(([, themeStore]) => !themeStore.theme.selectedSchemaItem && !themeStore.theme.showPresetsEditor),
-        map(([data, , editorStore]) => {
-            const item = editorStore.editor.page.content.find(x => x.id === data.id);
+        filter(data => data.type === 'select'),
+        withLatestFrom(
+            this.editorStore$.select(fromEditor.getPage),
+            this.themeStore$.select(fromTheme.getCurrentThemeSchemaItem),
+            this.themeStore$.select(fromTheme.getShowPresetsEditor)
+        ),
+        filter(([, , schemaItem, showPresets]) => !schemaItem && !showPresets),
+        map(([data, page]) => {
+            const item = page.content.find(x => x.id === data.id);
             return new editorActions.SelectPageItem(item, false);
         }),
     );
@@ -256,10 +260,14 @@ export class RootEffects {
     @Effect({ dispatch: false })
     deselectBlockInPreview$ = fromEvent(window, 'message').pipe(
         map((event: MessageEvent) => event.data),
-        filter(data => data.type === 'open'),
-        withLatestFrom(this.themeStore$, this.rootStore$.select(x => x.root)),
-        filter(([, themeStore]) => !!themeStore.theme.selectedSchemaItem || !!themeStore.theme.showPresetsEditor),
-        map(([, , store]) => this.preview.selectBlock(0, store.primaryFrameId))
+        filter(data => data.type === 'select'),
+        withLatestFrom(
+            this.rootStore$.select(fromRoot.getPrimaryFrameId),
+            this.themeStore$.select(fromTheme.getCurrentThemeSchemaItem),
+            this.themeStore$.select(fromTheme.getShowPresetsEditor)
+        ),
+        filter(([, , schemaItem, showPresets]) => !!schemaItem || !!showPresets),
+        tap(([, frameId]) => this.preview.selectBlock(0, frameId))
     );
 
     @Effect()
