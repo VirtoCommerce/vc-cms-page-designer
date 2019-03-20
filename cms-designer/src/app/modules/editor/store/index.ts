@@ -63,3 +63,23 @@ export const getHoveredId = createSelector(
     getEditorFeatureState,
     state => state.hoveredInPreviewId
 );
+
+export const getPageTitle = createSelector(
+    getPage,
+    page => {
+        if (page != null && page.settings) {
+            return page.settings.header || 'CMS Editor';
+        }
+        return 'CMS Editor';
+    }
+);
+
+export const getCurrentBlockName = createSelector(
+    getCurrentSectionItem,
+    section => {
+        if (section) {
+            return section.name || 'block';
+        }
+        return null;
+    }
+);

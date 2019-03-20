@@ -10,6 +10,7 @@ export class PageItemEditorComponent implements OnInit {
 
     @Input() model: BlockValuesModel;
     @Input() schema: BlockSchema;
+    @Input() blockName: string;
 
     @Output() backEvent = new EventEmitter<BlockValuesModel>();
     @Output() valueChangedEvent = new EventEmitter<BlockValuesModel>();

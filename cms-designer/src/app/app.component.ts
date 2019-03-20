@@ -44,6 +44,7 @@ export class AppComponent implements OnInit {
     schemaNotLoaded$ = this.store.select(fromEditor.getSchemaNotLoaded);
     pageNotLoaded$ = this.store.select(fromEditor.getPageNotLoaded);
     hoveredId$ = this.store.select(fromEditor.getHoveredId);
+    currentBlockName$ = this.store.select(fromEditor.getCurrentBlockName);
 
     // theme editor states
     presets$ = this.store.select(fromTheme.getPresets);
@@ -64,6 +65,7 @@ export class AppComponent implements OnInit {
     isDirty$ = this.store.select(fromRoot.getIsDirty);
     previewLoading$ = this.store.select(fromRoot.getPreviewLoading);
     activeTabIndex$ = this.store.select(fromRoot.getActiveTabIndex);
+    pageTitle$ = this.store.select(fromEditor.getPageTitle);
     hasUndo$ = of(true);
     hasRedo$ = of(false);
 

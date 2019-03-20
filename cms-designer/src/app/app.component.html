@@ -3,7 +3,7 @@
     <!-- Header -->
     <header class="header">
         <div class="header-aside">
-            <app-header-aside [active]="headerActive$|async" [icon]="headerIcon$|async" title="Pagename (?)"
+            <app-header-aside [active]="headerActive$|async" [icon]="headerIcon$|async" [title]="pageTitle$|async"
                 (buttonClick)="back()"></app-header-aside>
         </div>
         <div class="header-nav">
@@ -62,6 +62,7 @@
 
         <app-page-item-editor class="left-panel" *ngIf="currentSectionItem$|async as currentSectionItem"
             [model]="currentSectionItem" [schema]="(blocksSchema$ | async)[currentSectionItem.type]"
+            [blockName]="currentBlockName$|async"
             (valueChangedEvent)="updateBlockPreview($event)" (removeBlockEvent)="removeBlock($event)"
             (copyBlockEvent)="copyBlock($event)"></app-page-item-editor>
         <app-select-type class="left-panel" *ngIf="addNewSectionMode$ | async" [schema]="blocksSchema$ | async"
