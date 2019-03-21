@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { map, flatMap, switchMapTo } from 'rxjs/operators';
+import { map, switchMapTo, tap } from 'rxjs/operators';
 // import { CatalogService } from './../services/catalog.service';
 import {
     catchError,
@@ -10,6 +10,7 @@ import {
 } from 'rxjs/operators';
 import { Action, Store } from '@ngrx/store';
 import { Actions, Effect, ofType } from '@ngrx/effects';
+import { ToastrService } from 'ngx-toastr';
 
 import { BlockValuesModel } from '@shared/models';
 import { PageModel } from '@editor/models';
@@ -25,6 +26,7 @@ export class EditorEffects {
     constructor(private pages: PagesService,
         // private catalog: CatalogService,
         private blocks: BlocksService,
+        private toastr: ToastrService,
         private actions$: Actions, private store$: Store<fromEditor.State>) { }
 
     @Effect()
@@ -122,6 +124,22 @@ export class EditorEffects {
                 map(() => new editorActions.SavePageSuccess()),
                 catchError(err => of(new editorActions.SavePageFail(err)))
             );
+        })
+    );
+
+    @Effect({ dispatch: false })
+    pageSaved$ = this.actions$.pipe(
+        ofType<editorActions.SavePageSuccess>(editorActions.EditorActionTypes.SavePageSuccess),
+        tap(() => {
+            this.toastr.success('Page saved successful!');
+        })
+    );
+
+    @Effect({ dispatch: false })
+    pageSaveFailed$ = this.actions$.pipe(
+        ofType<editorActions.SavePageFail>(editorActions.EditorActionTypes.SavePageFail),
+        tap((action) => {
+            this.toastr.error(action.payload);
         })
     );
 

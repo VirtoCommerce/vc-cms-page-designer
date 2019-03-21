@@ -51,7 +51,8 @@
                         ],
                         "styles": [
                             "src/assets/sass/main.scss",
-                            "node_modules/quill/dist/quill.snow.css"
+                            "node_modules/quill/dist/quill.snow.css",
+                            "node_modules/ngx-toastr/toastr.css"
                         ],
                         "scripts": [
                             "src/assets/js/jquery.min.js",

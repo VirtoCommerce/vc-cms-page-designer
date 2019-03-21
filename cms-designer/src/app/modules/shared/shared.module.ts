@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ColorPickerModule } from 'ngx-color-picker';
 import { QuillModule } from 'ngx-quill';
+import { ToastrModule } from 'ngx-toastr';
 
 import { COMPONENTS } from './components';
 import { CONTROLS } from './controls';
@@ -23,7 +24,8 @@ import { LAYOUT_COMPONENTS } from './layouts';
         BrowserAnimationsModule,
         ReactiveFormsModule,
         ColorPickerModule,
-        QuillModule
+        QuillModule,
+        ToastrModule.forRoot()
     ],
     exports: [...COMPONENTS, ...LAYOUT_COMPONENTS]
 })
