@@ -18,5 +18,6 @@ export class SelectHandler extends BaseHandler {
     protected executeInternal(msg: BaseMessage, list: BlockViewModel[], vm: BlockViewModel) {
         vm.selected = true;
         this.renderer.select(vm);
+        this.renderer.scrollTo(vm);
     }
 }

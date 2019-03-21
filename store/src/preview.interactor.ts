@@ -37,6 +37,15 @@ export class PreviewInteractor {
         this.selectedViewModel = null;
     }
 
+    scrollTo(vm: BlockViewModel) {
+        const rect = this.measureElement(vm.element);
+        const targetPosition = rect.top - window.innerHeight / 10;
+        window.scroll({
+            top: targetPosition,
+            behavior: 'smooth'
+        });
+    }
+
     private hideSelectElement() {
         this.selectElement.style.display = 'none';
     }

@@ -39,6 +39,12 @@ export class Renderer {
         }
     }
 
+    scrollTo(vm: BlockViewModel) {
+        if (vm && vm.element && !vm.hidden) {
+            this.interactor.scrollTo(vm)
+        }
+    }
+
     hover(vm: BlockViewModel = null) {
         if (vm === null || vm.hidden || vm.selected) {
             this.interactor.hover(null);

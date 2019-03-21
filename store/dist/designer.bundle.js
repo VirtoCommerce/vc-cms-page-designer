@@ -273,7 +273,7 @@ HandlersFactory.handlers = [
     new handlers.SwapHandler(),
     new handlers.ReloadHandler(),
     new handlers.PageHandler(),
-    new handlers.HoverHandler() // -
+    new handlers.HoverHandler()
 ];
 exports.HandlersFactory = HandlersFactory;
 
@@ -570,6 +570,7 @@ class PreviewHandler extends base_handler_1.BaseHandler {
             this.reloadBlock(vm.source).then(result => {
                 vm.htmlString = result;
                 this.renderer.add(vm);
+                this.renderer.scrollTo(vm);
             });
         }
     }
@@ -661,6 +662,7 @@ class SelectHandler extends base_handler_1.BaseHandler {
     executeInternal(msg, list, vm) {
         vm.selected = true;
         this.renderer.select(vm);
+        this.renderer.scrollTo(vm);
     }
 }
 exports.SelectHandler = SelectHandler;
@@ -687,6 +689,7 @@ class ShowHandler extends base_handler_1.BaseHandler {
     executeInternal(msg, list, vm) {
         vm.hidden = false;
         vm.element.style.display = 'block';
+        this.renderer.scrollTo(vm);
     }
 }
 exports.ShowHandler = ShowHandler;
@@ -812,6 +815,14 @@ class PreviewInteractor {
         this.hideSelectElement();
         this.selectedViewModel = null;
     }
+    scrollTo(vm) {
+        const rect = this.measureElement(vm.element);
+        const targetPosition = rect.top - window.innerHeight / 10;
+        window.scroll({
+            top: targetPosition,
+            behavior: 'smooth'
+        });
+    }
     hideSelectElement() {
         this.selectElement.style.display = 'none';
     }
@@ -934,6 +945,11 @@ class Renderer {
         }
         else {
             this.interactor.select(vm);
+        }
+    }
+    scrollTo(vm) {
+        if (vm && vm.element && !vm.hidden) {
+            this.interactor.scrollTo(vm);
         }
     }
     hover(vm = null) {

@@ -13,6 +13,7 @@ export class PreviewHandler extends BaseHandler {
             this.reloadBlock(vm.source).then(result => {
                 vm.htmlString = result;
                 this.renderer.add(vm);
+                this.renderer.scrollTo(vm);
             });
         }
     }
