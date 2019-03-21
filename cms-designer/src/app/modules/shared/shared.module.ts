@@ -8,10 +8,14 @@ import { QuillModule } from 'ngx-quill';
 import { COMPONENTS } from './components';
 import { CONTROLS } from './controls';
 
+import { LAYOUT_COMPONENTS } from './layouts';
+
 @NgModule({
     declarations: [
         ...COMPONENTS,
-        ...CONTROLS
+        ...CONTROLS,
+
+        ...LAYOUT_COMPONENTS
     ],
     entryComponents: [...CONTROLS],
     imports: [
@@ -21,6 +25,6 @@ import { CONTROLS } from './controls';
         ColorPickerModule,
         QuillModule
     ],
-    exports: COMPONENTS
+    exports: [...COMPONENTS, ...LAYOUT_COMPONENTS]
 })
 export class SharedModule { }

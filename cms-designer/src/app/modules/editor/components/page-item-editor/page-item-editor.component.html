@@ -8,6 +8,10 @@
         <div *ngIf="!model">
             <p>No model provided</p>
         </div>
+        <div>
+            <app-collection-item></app-collection-item>
+            <app-collection-list></app-collection-list>
+        </div>
     </div>
 </div>
 <div class="left-panel-footer" *ngIf="model.type !== 'settings' && !schema.static" >
