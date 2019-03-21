@@ -33,7 +33,7 @@
                 <app-tab class="tabs__content" tabTitle="Sections" [active]="(activeTabIndex$|async) === 0">
 
                     <!-- Error page -->
-                    <div class="error-page">
+                    <div class="error-page" *ngIf="false">
                       <img class="error-page__pic" src="/assets/i/bg-error-sidebar.png" alt="">
                       <div class="error-page__t">Произошла ошибка <br>загрузки контента</div>
                       <button class="btn btn--blue">
@@ -42,14 +42,14 @@
                     </div>
                     <!-- End Error page -->
 
-                    <app-page-editor *ngIf="false" class="left-panel-content" [model]="page$ | async" [schema]="blocksSchema$ | async"
+                    <app-page-editor class="left-panel-content" [model]="page$ | async" [schema]="blocksSchema$ | async"
                         (selectEvent)="selectPageItem($event)" [noSchema]="schemaNotLoaded$ | async"
                         [hoveredId]="hoveredId$|async" (mouseOver)="mouseOverItem($event)"
                         [noPage]="pageNotLoaded$ | async" (reloadData)="reloadEditorData()"
                         (visibilityChanged)="toggleVisibility($event)"
                         (orderChangedEvent)="onOrderChanged($event)" (addNewBlockEvent)="setNewBlockMode()">
                     </app-page-editor>
-                    <app-footer-aside *ngIf="false" class="left-panel-footer">
+                    <app-footer-aside class="left-panel-footer">
                         <app-actions-dropdown class="fill-row" [up]="true" title="Theme actions" [items]="themeActions"
                             (actionSelected)="onThemeActionSelected($event)"></app-actions-dropdown>
                         <app-history-walker
