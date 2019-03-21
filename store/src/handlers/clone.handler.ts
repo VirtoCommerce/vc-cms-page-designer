@@ -19,6 +19,8 @@ export class CloneHandler extends BaseHandler {
         list.splice(index + 1, 0, clone);
         this.renderer.insert(clone, index + 1);
         this.renderer.select(clone);
-        this.renderer.scrollTo(clone);
+        setTimeout(() => {
+            this.renderer.scrollTo(clone);
+        }, 300);
     }
 }

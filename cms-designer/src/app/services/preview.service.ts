@@ -62,10 +62,6 @@ export class PreviewService {
         this.send('hover', { id: block.id }, frameId);
     }
 
-    scrollTo(block: BlockValuesModel, frameId: string) {
-        this.send('scrollTo', { id: block.id }, frameId);
-    }
-
     /**
      * while frame is not rendered it will not execute own scripts
      * @param primaryId

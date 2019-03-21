@@ -4,6 +4,7 @@
 
 export const environment = {
     production: false,
+    useLocalData: true,
     settings: '/data/settings.json'
 };
 

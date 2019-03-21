@@ -9,9 +9,7 @@ import { EnvironmentSettings } from '@app/models';
 
 import { AppSettings } from './app.settings';
 
-@Injectable({
-    providedIn: 'root'
-})
+@Injectable()
 export class PlatformService {
 
     constructor(private http: HttpClient, private urls: ApiUrlsService) { }
@@ -50,11 +48,7 @@ export class PlatformService {
 
     private downloadModel<T>(contentType: string = null, filepath: string = null): Observable<T> {
         const url = this.urls.generateDownloadUrl(contentType, filepath);
-        return this.http.get<T>(url).pipe(
-            tap(x => {
-                // console.log(url, x);
-            })
-        );
+        return this.http.get<T>(url);
     }
 
     private uploadModel<T>(model: T, contentType: string = null, pathToUpload: string = null, filename: string = null): Observable<any> {

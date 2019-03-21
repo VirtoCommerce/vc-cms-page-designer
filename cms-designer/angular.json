@@ -43,7 +43,11 @@
                         "assets": [
                             "src/favicon.ico",
                             "src/assets",
-                            "src/data/settings.json"
+                            "src/data/settings.json",
+                            "src/data/page_data.page",
+                            "src/data/settings_data.json",
+                            "src/data/settings_schema.json",
+                            "src/data/blocks_schema.json"
                         ],
                         "styles": [
                             "src/assets/sass/main.scss",
@@ -77,15 +81,15 @@
                             "vendorChunk": false,
                             "buildOptimizer": true
                         },
-                        "local": {
+                        "dev": {
                             "fileReplacements": [
                                 {
                                     "replace": "src/environments/environment.ts",
-                                    "with": "src/environments/environment.local.ts"
+                                    "with": "src/environments/environment.dev.ts"
                                 },
                                 {
                                     "replace": "src/data/settings.json",
-                                    "with": "src/data/settings.local.json"
+                                    "with": "src/data/settings.dev.json"
                                 }
                             ],
                             "optimization": false,

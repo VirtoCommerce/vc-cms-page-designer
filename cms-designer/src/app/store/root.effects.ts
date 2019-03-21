@@ -165,9 +165,6 @@ export class RootEffects {
         withLatestFrom(this.rootStore$.select(fromRoot.getPrimaryFrameId)),
         tap(([action, frameId]) => {
             this.preview.selectBlock(<number>action.payload.id, frameId);
-            if (action.scrollTo) {
-                this.preview.scrollTo(action.payload, frameId);
-            }
         })
     );
 
@@ -281,7 +278,7 @@ export class RootEffects {
         filter(([, , schemaItem, showPresets]) => !schemaItem && !showPresets),
         map(([data, page]) => {
             const item = page.content.find(x => x.id === data.id);
-            return new editorActions.SelectPageItem(item, false);
+            return new editorActions.SelectPageItem(item);
         }),
     );
 

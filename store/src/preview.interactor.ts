@@ -92,6 +92,9 @@ export class PreviewInteractor {
     }
 
     private placeElementHover(source: HTMLElement, target: HTMLElement) {
+        if (!source) {
+            return;
+        }
         const rect = this.measureElement(source);
         const doubleWidth = this.borderWidth * 2;
         target.style.top = rect.top + 'px';

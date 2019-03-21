@@ -1,3 +1,5 @@
+import { MockPreviewService } from './services/preview-mock.service';
+import { MockPlatformService } from './services/platform-mock.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { StoreModule } from '@ngrx/store';
@@ -22,8 +24,8 @@ import { ErrorsEffects } from './store/errors.effects';
 import { RootEffects } from './store/root.effects';
 import { reducer } from './store/root.reducer';
 import { environment } from '../environments/environment';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { AppHttpInterceptor } from '@app/services';
+import { HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
+import { AppHttpInterceptor, ApiUrlsService, PreviewService } from '@app/services';
 
 @NgModule({
     declarations: [
@@ -64,6 +66,28 @@ import { AppHttpInterceptor } from '@app/services';
                 () => platform.initSettings(),
             deps: [PlatformService],
             multi: true
+        },
+        {
+            provide: PlatformService,
+            useFactory: (http: HttpClient, urls: ApiUrlsService) => {
+                if (environment.useLocalData) {
+                    return new MockPlatformService(http);
+                } else {
+                    return new PlatformService(http, urls);
+                }
+            },
+            deps: [ HttpClient, ApiUrlsService ]
+        },
+        {
+            provide: PreviewService,
+            useFactory: () => {
+                if (environment.useLocalData) {
+                    return new MockPreviewService();
+                } else {
+                    return new PreviewService();
+                }
+            },
+            deps: [ ]
         }
     ],
     bootstrap: [AppComponent]

@@ -59,13 +59,10 @@ export class EditorEffects {
     copyBlock$ = this.actions$.pipe(
         ofType<editorActions.CopyPageItem>(editorActions.EditorActionTypes.CopyPageItem),
         withLatestFrom(this.store$.select(fromEditor.getPage)),
-        flatMap(([action, page]) => {
+        map(([action, page]) => {
             const block = { ...action.payload };
             block.id = page.content.reduce((v: number, b: BlockValuesModel) => Math.max(<number>b.id, v), 0) + 1;
-            return [
-                new editorActions.ClonePageItem({ oldBlock: action.payload, newBlock: block }),
-                new editorActions.SelectPageItem(block, true)
-            ];
+            return new editorActions.ClonePageItem({ oldBlock: action.payload, newBlock: block });
         })
     );
 

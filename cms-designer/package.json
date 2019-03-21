@@ -6,7 +6,7 @@
     "start": "ng serve",
     "build": "ng build --prod --base-href /v2/designer/ --resourcesOutputPath=assets",
     "virto": "ng build -c virto",
-    "serve": "ng build -c local",
+    "serve": "ng build -c dev",
     "test": "ng test",
     "lint": "ng lint",
     "pree2e": "webdriver-manager update",

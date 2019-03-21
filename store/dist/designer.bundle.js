@@ -406,6 +406,9 @@ class CloneHandler extends base_handler_1.BaseHandler {
         list.splice(index + 1, 0, clone);
         this.renderer.insert(clone, index + 1);
         this.renderer.select(clone);
+        setTimeout(() => {
+            this.renderer.scrollTo(clone);
+        }, 300);
     }
 }
 exports.CloneHandler = CloneHandler;
@@ -864,6 +867,9 @@ class PreviewInteractor {
         return result;
     }
     placeElementHover(source, target) {
+        if (!source) {
+            return;
+        }
         const rect = this.measureElement(source);
         const doubleWidth = this.borderWidth * 2;
         target.style.top = rect.top + 'px';
