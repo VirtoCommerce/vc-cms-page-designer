@@ -1,9 +1,20 @@
-<div class="content__iframe" [ngStyle]="{ opacity: loading ? 0 : 1 }">
+<div class="content__iframe">
+    <!-- Loader -->
+    <div class="loader">
+      <div class="loader__text">Загрузка ...</div>
+      <div class="loader__progress"></div>
+    </div>
+    <!-- End Loader -->
+
     <iframe *ngIf="storeUrl" frameborder="0" id="preview1" [src]="storeUrl" scrolling="yes" style="display: none;"
         (load)="preview1Loaded()"></iframe>
     <iframe *ngIf="storeUrl" frameborder="0" id="preview2" [src]="storeUrl" scrolling="yes" style="display: none;"
         (load)="preview2Loaded()"></iframe>
-</div>
-<div *ngIf="loading" class="content__iframe">
-    <div>Loader</div>
+
+    <!-- Error page -->
+    <div class="error-page">
+      <img class="error-page__pic" src="/assets/i/bg-error-content.png" alt="">
+      <div class="error-page__t">Произошла ошибка <br>загрузки контента</div>
+    </div>
+    <!-- End Error page -->
 </div>
