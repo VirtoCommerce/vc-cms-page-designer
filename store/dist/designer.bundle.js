@@ -654,6 +654,7 @@ class SelectHandler extends base_handler_1.BaseHandler {
     }
     execute(msg, list) {
         this.deselectAll(list);
+        this.clearPreview(list);
         const content = msg.content;
         if (content.id === 0) {
             this.renderer.select();

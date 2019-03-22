@@ -45,6 +45,7 @@ export class AppComponent implements OnInit {
     pageNotLoaded$ = this.store.select(fromEditor.getPageNotLoaded);
     hoveredId$ = this.store.select(fromEditor.getHoveredId);
     currentBlockName$ = this.store.select(fromEditor.getCurrentBlockName);
+    editorLoading$ = this.store.select(fromEditor.getIsLoading);
 
     // theme editor states
     presets$ = this.store.select(fromTheme.getPresets);

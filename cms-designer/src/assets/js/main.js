@@ -54,18 +54,6 @@ $(function() {
     });
 
     // Upload file input preview
-    $('[data-name="file-input"] .form-file__input').each(function () {
-        var input = $(this);
-
-        input.change(function() {
-            readURL(this, input);
-        });
-    });
-
-    $('body').delegate('.form-file__remove', 'click', function() {
-        $(this).parents('.form-file__uploaded').remove();
-    });
-
     // Closest dropdown
     $(document).on('click', function(e) {
         if (!$(e.target).closest('.dropdown').length) {
@@ -89,15 +77,3 @@ $(function() {
     // pane.jScrollPane(settings);
 });
 
-function readURL(el, input) {
-
-    if (el.files && el.files[0]) {
-        var reader = new FileReader();
-
-        reader.onload = function (e) {
-            input.parents('.form-file').append('<div class="form-file__uploaded"><img class="form-file__pic" src="' + e.target.result + '" alt="" /><span class="form-file__remove"></span></div>');
-        };
-
-        reader.readAsDataURL(el.files[0]);
-    }
-}

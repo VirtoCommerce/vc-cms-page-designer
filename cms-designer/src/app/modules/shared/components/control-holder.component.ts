@@ -10,8 +10,8 @@ import {
     ViewChild,
     forwardRef,
     ChangeDetectionStrategy,
-    ViewContainerRef,
-    HostBinding
+    HostBinding,
+    ChangeDetectorRef
 } from '@angular/core';
 import { ControlHostDirective } from './control-host.directive';
 import { ControlDescriptor, BaseDescriptor } from '../models';
@@ -37,7 +37,8 @@ export class ControlHolderComponent implements OnInit, ControlValueAccessor {
 
     constructor(
         private componentFactoryResolver: ComponentFactoryResolver,
-        private controlsFactory: ControlsFactory
+        private controlsFactory: ControlsFactory,
+        private cdr: ChangeDetectorRef
     ) { }
 
     ngOnInit(): void {
@@ -66,7 +67,10 @@ export class ControlHolderComponent implements OnInit, ControlValueAccessor {
 
     registerOnChange(fn: any): void {
         if (this.component) {
-            this.component.registerOnChange(fn);
+            this.component.registerOnChange((event) => {
+                fn(event);
+                this.cdr.detectChanges();
+            });
         }
     }
 

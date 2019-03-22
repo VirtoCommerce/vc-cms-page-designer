@@ -26,11 +26,13 @@ import { reducer } from './store/root.reducer';
 import { environment } from '../environments/environment';
 import { HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
 import { AppHttpInterceptor, ApiUrlsService, PreviewService } from '@app/services';
+import { LoadingComponent } from './components/loading/loading.component';
 
 @NgModule({
     declarations: [
         AppComponent,
-        ...COMPONENTS
+        ...COMPONENTS,
+        LoadingComponent
     ],
     imports: [
         BrowserModule,

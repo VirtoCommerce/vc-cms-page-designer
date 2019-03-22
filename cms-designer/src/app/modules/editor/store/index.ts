@@ -39,6 +39,11 @@ export const getPage = createSelector(
     state => state.page
 );
 
+export const getIsLoading = createSelector(
+    getEditorFeatureState,
+    state => state.pageLoading || state.schemaLoading
+);
+
 export const getPageLoading = createSelector(
     getEditorFeatureState,
     state => state.pageLoading

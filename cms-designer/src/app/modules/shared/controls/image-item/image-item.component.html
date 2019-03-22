@@ -5,22 +5,8 @@
             [accept]="descriptor.acceptTypes">
         <label class="form-file__label">Choose file</label>
     </div>
+    <div class="form-text">{{ value }}</div>
+    <div *ngIf="value" class="form-file__uploaded"><img class="form-file__pic" [src]="value" alt="" />
+        <span (click)="removeImage($event)" class="form-file__remove"></span></div>
     <div class="form-text">{{ descriptor.info }}</div>
-    <div *ngIf="value" class="form-file__uploaded"><img class="form-file__pic" [src]="value" alt="" /><span
-            class="form-file__remove"></span></div>
 </div>
-
-
-<!-- 
-<label class="form-label">{{ descriptor.label }}</label>
-<div class="form-file">
-    <div class='form-file'>
-        <input type='file' #fileInput (change)="onChange($event)" accept=".png,.gif,.jpg,.jpeg">
-        <button class='btn' (click)="openFileDialog()">Choose file</button>
-    </div>
-</div>
-<p *ngIf="descriptor?.info" class="form-help">{{descriptor.info}}</p>
-<div *ngIf="value" class="form-img">
-    <a class="remove-image" href="#" (click)="removeImage($event)">X</a>
-    <img [src]="value" />
-</div> -->

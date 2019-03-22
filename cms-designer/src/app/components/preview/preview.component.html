@@ -1,9 +1,6 @@
 <div class="content__iframe">
     <!-- Loader -->
-    <div class="loader">
-      <div class="loader__text">Загрузка ...</div>
-      <div class="loader__progress"></div>
-    </div>
+    <app-loading *ngIf="loading"></app-loading>
     <!-- End Loader -->
 
     <iframe *ngIf="storeUrl" frameborder="0" id="preview1" [src]="storeUrl" scrolling="yes" style="display: none;"
@@ -12,9 +9,9 @@
         (load)="preview2Loaded()"></iframe>
 
     <!-- Error page -->
-    <div class="error-page">
-      <img class="error-page__pic" src="/assets/i/bg-error-content.png" alt="">
-      <div class="error-page__t">Произошла ошибка <br>загрузки контента</div>
+    <div class="error-page" *ngIf="error">
+      <img class="error-page__pic" src="assets/i/bg-error-content.png" alt="">
+      <div class="error-page__t">Content Loading Error<br>{{ error }}</div>
     </div>
     <!-- End Error page -->
 </div>

@@ -22,17 +22,22 @@ export class ImageItemComponent extends BaseControlComponent<ImageControlDescrip
 
     registerOnChange(fn: any): void {
         this.onChange = (event) => {
-            const file = event.target.files[0];
-            const subscription = this.files.uploadFile(file, file.name).subscribe(x => {
-                subscription.unsubscribe();
-                this.value = x;
-                fn(x);
-            });
+            if (!event) {
+                fn(null);
+            } else {
+                const file = event.target.files[0];
+                const subscription = this.files.uploadFile(file, file.name).subscribe(x => {
+                    subscription.unsubscribe();
+                    this.setValue(x);
+                    console.log(this.value);
+                    fn(x);
+                });
+            }
         };
     }
 
     removeImage($event: MouseEvent) {
-        $event.preventDefault();
-        this.value = null;
+        this.setValue(null);
+        this.onChange(this.value);
     }
 }

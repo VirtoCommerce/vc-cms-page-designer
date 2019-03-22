@@ -38,7 +38,7 @@
     },
     "header": {
         "name": "Header",
-        "static": "top",
+        "static": "-top",
         "icon": "header",
         "settings": [
             {
@@ -54,7 +54,7 @@
     },
     "footer": {
         "name": "Footer",
-        "static": "bottom",
+        "static": "-bottom",
         "icon": "footer",
         "settings": [
             {

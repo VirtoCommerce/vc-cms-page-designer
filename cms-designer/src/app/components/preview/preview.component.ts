@@ -10,6 +10,7 @@ export class PreviewComponent implements OnInit {
     @Input() storeUrl: SafeUrl;
     @Input() mode: string;
     @Input() loading: boolean;
+    @Input() error: string;
     @Output() preivewLoaded = new EventEmitter<string>();
 
     isFullScreen = false;

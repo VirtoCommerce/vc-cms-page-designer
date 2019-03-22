@@ -32,6 +32,7 @@
             <app-tabs class="tabs tabs--full tabs--shadow" (tabSelected)="onTabChanged($event)">
                 <app-tab class="tabs__content" tabTitle="Sections" [active]="(activeTabIndex$|async) === 0">
 
+                    <app-loading *ngIf="editorLoading$|async"></app-loading>
                     <!-- Error page -->
                     <div class="error-page" *ngIf="false">
                       <img class="error-page__pic" src="/assets/i/bg-error-sidebar.png" alt="">
