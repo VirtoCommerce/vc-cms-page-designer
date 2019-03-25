@@ -116,7 +116,7 @@ export class AppComponent implements OnInit {
     }
 
     selectPageItem(item: BlockValuesModel) {
-        this.store.dispatch(new editorActions.SelectPageItem(item));
+        this.store.dispatch(new editorActions.SelectPageItem(item.id));
     }
 
     reloadEditorData() {

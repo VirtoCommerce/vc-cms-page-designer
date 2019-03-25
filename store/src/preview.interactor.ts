@@ -77,6 +77,10 @@ export class PreviewInteractor {
         result.addEventListener('click', () => {
             const dispatcher = ServiceLocator.getDispatcher();
             dispatcher.selectBlock(null);
+            console.log('click');
+        });
+        result.addEventListener('mousedown', () => {
+            console.log('mousedown');
         });
         this.selectElement = result;
         return result;

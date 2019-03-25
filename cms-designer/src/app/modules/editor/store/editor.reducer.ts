@@ -9,7 +9,7 @@ export interface EditorState {
     schemaNotLoaded: boolean;
 
     showNewBlockSelector: boolean;
-    currentSectionItem: BlockValuesModel;
+    currentSectionItem: number;
     initialPage: string;
     page: PageModel;
     blocksSchema: BlocksSchema;
@@ -41,7 +41,7 @@ export function reducer(state = initialState, action: EditorActions): EditorStat
             return {
                 ...state,
                 showNewBlockSelector: false,
-                currentSectionItem: action.payload,
+                currentSectionItem: action.payload.id,
                 dirty: true
             };
         }
@@ -156,13 +156,14 @@ export function reducer(state = initialState, action: EditorActions): EditorStat
                 ...state,
                 showNewBlockSelector: action.payload
             };
-        case EditorActionTypes.UpdatePageItem:
-            const type = state.currentSectionItem.type;
+        case EditorActionTypes.UpdatePageItem: {
+            const item = state.page.content.find(x => x.Id === state.currentSectionItem);
+            const type = item.type;
             Object.assign(state.currentSectionItem, action.payload);
-            state.currentSectionItem.type = type;
-            if (!!state.blocksSchema[state.currentSectionItem.type].static) {
+            item.type = type;
+            if (!!state.blocksSchema[type].static) {
                 state.page.settings = {
-                    ...state.currentSectionItem,
+                    ...item,
                     type: 'settings'
                 };
             }
@@ -170,6 +171,7 @@ export function reducer(state = initialState, action: EditorActions): EditorStat
                 ...state,
                 dirty: true
             };
+        }
         case EditorActionTypes.ToggleItemVisibility: {
             action.payload.hidden = !action.payload.hidden;
             return {

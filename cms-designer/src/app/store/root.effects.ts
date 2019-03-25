@@ -164,7 +164,7 @@ export class RootEffects {
         filter(action => !!action.payload),
         withLatestFrom(this.rootStore$.select(fromRoot.getPrimaryFrameId)),
         tap(([action, frameId]) => {
-            this.preview.selectBlock(<number>action.payload.id, frameId);
+            this.preview.selectBlock(<number>action.payload, frameId);
         })
     );
 
@@ -271,14 +271,12 @@ export class RootEffects {
         map((event: MessageEvent) => event.data),
         filter(data => data.type === 'select'),
         withLatestFrom(
-            this.editorStore$.select(fromEditor.getPage),
             this.themeStore$.select(fromTheme.getCurrentThemeSchemaItem),
             this.themeStore$.select(fromTheme.getShowPresetsEditor)
         ),
-        filter(([, , schemaItem, showPresets]) => !schemaItem && !showPresets),
-        map(([data, page]) => {
-            const item = page.content.find(x => x.id === data.id);
-            return new editorActions.SelectPageItem(item);
+        filter(([, schemaItem, showPresets]) => !schemaItem && !showPresets),
+        map(([data]) => {
+            return new editorActions.SelectPageItem(data.id);
         }),
     );
 

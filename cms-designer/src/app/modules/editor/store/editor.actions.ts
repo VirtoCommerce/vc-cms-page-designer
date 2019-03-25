@@ -168,7 +168,7 @@ export class SavePageSuccess implements Action {
 export class SelectPageItem implements Action {
     readonly type = EditorActionTypes.SelectPageItem;
 
-    constructor(public payload: BlockValuesModel) { }
+    constructor(public payload: number) { }
 }
 
 export class ToggleNewBlockPane implements Action {

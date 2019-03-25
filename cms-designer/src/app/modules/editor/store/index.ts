@@ -19,11 +19,6 @@ export const getIsDirty = createSelector(
 //     state => state.categories
 // );
 
-export const getCurrentSectionItem = createSelector(
-    getEditorFeatureState,
-    state => state.currentSectionItem
-);
-
 export const getAddNewSectionMode = createSelector(
     getEditorFeatureState,
     state => state.showNewBlockSelector
@@ -37,6 +32,12 @@ export const getBlocksSchema = createSelector(
 export const getPage = createSelector(
     getEditorFeatureState,
     state => state.page
+);
+
+export const getCurrentSectionItem = createSelector(
+    getEditorFeatureState,
+    getPage,
+    (state, page) => page && page.content.find(x => x.id === state.currentSectionItem)
 );
 
 export const getIsLoading = createSelector(

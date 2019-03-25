@@ -181,8 +181,8 @@ exports.BlockViewModel = BlockViewModel;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Environment = {
     RenderBlockApiUrl: '/designer-preview/block',
-    // DesignerUrl: 'http://localhost/'
-    DesignerUrl: 'http://vc-admin-test.azurewebsites.net/designer'
+    DesignerUrl: 'http://localhost/'
+    // DesignerUrl: 'http://vc-admin-test.azurewebsites.net/designer'
 };
 
 
@@ -855,6 +855,10 @@ class PreviewInteractor {
         result.addEventListener('click', () => {
             const dispatcher = service_locator_1.ServiceLocator.getDispatcher();
             dispatcher.selectBlock(null);
+            console.log('click');
+        });
+        result.addEventListener('mousedown', () => {
+            console.log('mousedown');
         });
         this.selectElement = result;
         return result;
