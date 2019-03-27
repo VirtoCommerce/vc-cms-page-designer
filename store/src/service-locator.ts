@@ -1,3 +1,4 @@
+import { EventsBus } from './root/events.bus';
 import { HttpService } from './services/http.service';
 import { EventsDispatcher } from './events.dispatcher';
 import { Renderer } from './renderer';
@@ -13,9 +14,14 @@ export class ServiceLocator {
     private static _renderer;
     private static _factory;
     private static _dispatcher;
+    private static _eventBus;
 
     static createApp(): any {
         return new App(this.getDispatcher());
+    }
+
+    static getEventBus(): EventsBus {
+        return this._eventBus || (this._eventBus = new EventsBus());
     }
 
     static getHttp(): HttpService {

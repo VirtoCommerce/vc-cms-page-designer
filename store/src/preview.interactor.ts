@@ -1,3 +1,4 @@
+import { DndInteractor } from './dnd.interactor';
 import { BlockViewModel } from './models';
 import { ServiceLocator } from './service-locator';
 
@@ -10,15 +11,14 @@ export class PreviewInteractor {
     private hoveredViewModel: BlockViewModel = null;
     private selectedViewModel: BlockViewModel = null;
 
-    constructor() {
+    constructor(private dnd: DndInteractor) {
         this.createHoverElement();
         this.createSelectElement();
     }
 
     hover(vm: BlockViewModel) {
         if (vm == null || this.selectedViewModel == vm) {
-            this.hoveredViewModel = null;
-            this.hoverElement.style.display = 'none';
+            this.hideHoverElement();
         } else {
             this.hoveredViewModel = vm;
             this.hoverElement.style.display = 'block';
@@ -34,7 +34,6 @@ export class PreviewInteractor {
 
     deselect() {
         this.hideSelectElement();
-        this.selectedViewModel = null;
     }
 
     scrollTo(vm: BlockViewModel) {
@@ -47,10 +46,12 @@ export class PreviewInteractor {
     }
 
     private hideSelectElement() {
+        this.selectedViewModel = null;
         this.selectElement.style.display = 'none';
     }
 
     private hideHoverElement() {
+        this.hoveredViewModel = null;
         this.hoverElement.style.display = 'none';
     }
 
@@ -58,15 +59,20 @@ export class PreviewInteractor {
         const result = this.createShadowElement();
         result.style.border = `${this.borderWidth}px dotted #33ada9`;
         result.addEventListener('mouseleave', () => {
+            if (this.hoveredViewModel != null) {
+                this.hoveredViewModel.onLeave();
+            }
             this.hideHoverElement();
-            this.hoveredViewModel.onLeave();
-            this.hoveredViewModel = null;
         });
         result.addEventListener('click', (event) => {
-            this.hideHoverElement();
             this.select(this.hoveredViewModel);
             this.hoveredViewModel.onSelect();
-        })
+            this.hideHoverElement();
+            this.dnd.mouseUp();
+        });
+        result.addEventListener('mousedown', (event) => {
+            this.dnd.mouseDown(this.hoveredViewModel);
+        });
         this.hoverElement = result;
         return result;
     }
@@ -77,10 +83,10 @@ export class PreviewInteractor {
         result.addEventListener('click', () => {
             const dispatcher = ServiceLocator.getDispatcher();
             dispatcher.selectBlock(null);
-            console.log('click');
+            this.dnd.mouseUp();
         });
         result.addEventListener('mousedown', () => {
-            console.log('mousedown');
+            this.dnd.mouseDown(this.selectedViewModel);
         });
         this.selectElement = result;
         return result;

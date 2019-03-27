@@ -1,12 +1,14 @@
-import { ServiceLocator } from './service-locator';
 import { BlockViewModel } from './block.view-model';
 import { PreviewInteractor } from './preview.interactor';
+import { DndInteractor } from './dnd.interactor';
 
 export class Renderer {
 
-    private interactor = new PreviewInteractor();
+    private interactor: PreviewInteractor;
 
-    constructor(private container: HTMLElement) { }
+    constructor(private container: HTMLElement) {
+        this.interactor = new PreviewInteractor(new DndInteractor(container));
+    }
 
     add(vm: BlockViewModel) {
         vm.element = this.createElement(vm);
@@ -58,7 +60,7 @@ export class Renderer {
         div.innerHTML = `<div>${vm.htmlString}</div>`;
         const result = <HTMLElement>div.firstChild;
         if (!vm.isPreview) {
-            result.addEventListener('mouseover', () => {
+            result.addEventListener('mouseover', ($event: MouseEvent) => {
                 this.interactor.hover(vm);
                 vm.onHover();
             });

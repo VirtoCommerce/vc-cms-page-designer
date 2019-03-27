@@ -169,6 +169,38 @@ exports.BlockViewModel = BlockViewModel;
 
 /***/ }),
 
+/***/ "./dnd.interactor.ts":
+/*!***************************!*\
+  !*** ./dnd.interactor.ts ***!
+  \***************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+class DndInteractor {
+    constructor(container) {
+        this.container = container;
+        window.addEventListener('mousemove', () => {
+            // if (container)
+            if (this.isPressed) {
+                console.log('drag');
+            }
+        });
+    }
+    mouseDown(element) {
+        this.isPressed = true;
+    }
+    mouseUp() {
+        this.isPressed = false;
+    }
+}
+exports.DndInteractor = DndInteractor;
+
+
+/***/ }),
+
 /***/ "./environment.ts":
 /*!************************!*\
   !*** ./environment.ts ***!
@@ -792,7 +824,8 @@ document.addEventListener('DOMContentLoaded', () => {
 Object.defineProperty(exports, "__esModule", { value: true });
 const service_locator_1 = __webpack_require__(/*! ./service-locator */ "./service-locator.ts");
 class PreviewInteractor {
-    constructor() {
+    constructor(dnd) {
+        this.dnd = dnd;
         this.borderWidth = 3;
         this.hoveredViewModel = null;
         this.selectedViewModel = null;
@@ -801,8 +834,7 @@ class PreviewInteractor {
     }
     hover(vm) {
         if (vm == null || this.selectedViewModel == vm) {
-            this.hoveredViewModel = null;
-            this.hoverElement.style.display = 'none';
+            this.hideHoverElement();
         }
         else {
             this.hoveredViewModel = vm;
@@ -817,7 +849,6 @@ class PreviewInteractor {
     }
     deselect() {
         this.hideSelectElement();
-        this.selectedViewModel = null;
     }
     scrollTo(vm) {
         const rect = this.measureElement(vm.element);
@@ -828,23 +859,30 @@ class PreviewInteractor {
         });
     }
     hideSelectElement() {
+        this.selectedViewModel = null;
         this.selectElement.style.display = 'none';
     }
     hideHoverElement() {
+        this.hoveredViewModel = null;
         this.hoverElement.style.display = 'none';
     }
     createHoverElement() {
         const result = this.createShadowElement();
         result.style.border = `${this.borderWidth}px dotted #33ada9`;
         result.addEventListener('mouseleave', () => {
+            if (this.hoveredViewModel != null) {
+                this.hoveredViewModel.onLeave();
+            }
             this.hideHoverElement();
-            this.hoveredViewModel.onLeave();
-            this.hoveredViewModel = null;
         });
         result.addEventListener('click', (event) => {
-            this.hideHoverElement();
             this.select(this.hoveredViewModel);
             this.hoveredViewModel.onSelect();
+            this.hideHoverElement();
+            this.dnd.mouseUp();
+        });
+        result.addEventListener('mousedown', (event) => {
+            this.dnd.mouseDown(this.hoveredViewModel);
         });
         this.hoverElement = result;
         return result;
@@ -855,10 +893,10 @@ class PreviewInteractor {
         result.addEventListener('click', () => {
             const dispatcher = service_locator_1.ServiceLocator.getDispatcher();
             dispatcher.selectBlock(null);
-            console.log('click');
+            this.dnd.mouseUp();
         });
         result.addEventListener('mousedown', () => {
-            console.log('mousedown');
+            this.dnd.mouseDown(this.selectedViewModel);
         });
         this.selectElement = result;
         return result;
@@ -925,10 +963,11 @@ exports.PreviewInteractor = PreviewInteractor;
 
 Object.defineProperty(exports, "__esModule", { value: true });
 const preview_interactor_1 = __webpack_require__(/*! ./preview.interactor */ "./preview.interactor.ts");
+const dnd_interactor_1 = __webpack_require__(/*! ./dnd.interactor */ "./dnd.interactor.ts");
 class Renderer {
     constructor(container) {
         this.container = container;
-        this.interactor = new preview_interactor_1.PreviewInteractor();
+        this.interactor = new preview_interactor_1.PreviewInteractor(new dnd_interactor_1.DndInteractor(container));
     }
     add(vm) {
         vm.element = this.createElement(vm);
@@ -976,7 +1015,7 @@ class Renderer {
         div.innerHTML = `<div>${vm.htmlString}</div>`;
         const result = div.firstChild;
         if (!vm.isPreview) {
-            result.addEventListener('mouseover', () => {
+            result.addEventListener('mouseover', ($event) => {
                 this.interactor.hover(vm);
                 vm.onHover();
             });
@@ -986,6 +1025,45 @@ class Renderer {
     }
 }
 exports.Renderer = Renderer;
+
+
+/***/ }),
+
+/***/ "./root/events.bus.ts":
+/*!****************************!*\
+  !*** ./root/events.bus.ts ***!
+  \****************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+class EventsBus {
+    constructor() {
+        this.subscribers = {};
+    }
+    publish(type, args, source) {
+        if (this.subscribers[type]) {
+            this.subscribers[type].forEach(handler => {
+                handler(args, source);
+            });
+        }
+    }
+    subscribe(type, handler) {
+        if (!this.subscribers[type]) {
+            this.subscribers[type] = [];
+        }
+        this.subscribers[type].push(handler);
+        return () => {
+            const index = this.subscribers[type].indexOf(handler);
+            if (index !== -1) {
+                this.subscribers[type].splice(index, 1);
+            }
+        };
+    }
+}
+exports.EventsBus = EventsBus;
 
 
 /***/ }),
@@ -1000,6 +1078,7 @@ exports.Renderer = Renderer;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
+const events_bus_1 = __webpack_require__(/*! ./root/events.bus */ "./root/events.bus.ts");
 const http_service_1 = __webpack_require__(/*! ./services/http.service */ "./services/http.service.ts");
 const events_dispatcher_1 = __webpack_require__(/*! ./events.dispatcher */ "./events.dispatcher.ts");
 const renderer_1 = __webpack_require__(/*! ./renderer */ "./renderer.ts");
@@ -1010,6 +1089,9 @@ const messages_service_1 = __webpack_require__(/*! ./services/messages.service *
 class ServiceLocator {
     static createApp() {
         return new app_1.App(this.getDispatcher());
+    }
+    static getEventBus() {
+        return this._eventBus || (this._eventBus = new events_bus_1.EventsBus());
     }
     static getHttp() {
         return this._http || (this._http = new http_service_1.HttpService(environment_1.Environment.RenderBlockApiUrl));
