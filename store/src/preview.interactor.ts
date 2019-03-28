@@ -1,6 +1,7 @@
 import { DndInteractor } from './dnd.interactor';
 import { BlockViewModel } from './models';
 import { ServiceLocator } from './service-locator';
+import { measureElement } from './helpers';
 
 export class PreviewInteractor {
     private readonly borderWidth: number = 3;
@@ -11,12 +12,24 @@ export class PreviewInteractor {
     private hoveredViewModel: BlockViewModel = null;
     private selectedViewModel: BlockViewModel = null;
 
+    private inactive = false; // use with dnd
+
     constructor(private dnd: DndInteractor) {
         this.createHoverElement();
         this.createSelectElement();
+        this.dnd.onDragStarted = () => {
+            this.inactive = true;
+            this.hideHoverElement();
+            this.hideSelectElement();
+        };
+        this.dnd.onDragFinished = (draggedModel: BlockViewModel) => {
+            this.inactive = false;
+            // this.select(draggedModel);
+        };
     }
 
     hover(vm: BlockViewModel) {
+        if (this.inactive) return;
         if (vm == null || this.selectedViewModel == vm) {
             this.hideHoverElement();
         } else {
@@ -27,6 +40,7 @@ export class PreviewInteractor {
     }
 
     select(vm: BlockViewModel) {
+        if (this.inactive) return;
         this.selectedViewModel = vm;
         this.selectElement.style.display = 'block';
         this.placeElementHover(vm.element, this.selectElement);
@@ -37,7 +51,8 @@ export class PreviewInteractor {
     }
 
     scrollTo(vm: BlockViewModel) {
-        const rect = this.measureElement(vm.element);
+        if (this.inactive) return;
+        const rect = measureElement(vm.element);
         const targetPosition = rect.top - window.innerHeight / 10;
         window.scroll({
             top: targetPosition,
@@ -68,10 +83,9 @@ export class PreviewInteractor {
             this.select(this.hoveredViewModel);
             this.hoveredViewModel.onSelect();
             this.hideHoverElement();
-            this.dnd.mouseUp();
         });
-        result.addEventListener('mousedown', (event) => {
-            this.dnd.mouseDown(this.hoveredViewModel);
+        result.addEventListener('mousedown', (event: MouseEvent) => {
+            this.dnd.mouseDown(event, this.hoveredViewModel);
         });
         this.hoverElement = result;
         return result;
@@ -80,13 +94,12 @@ export class PreviewInteractor {
     private createSelectElement(): HTMLElement {
         const result = this.createShadowElement();
         result.style.border = `${this.borderWidth}px solid #33ada9`;
-        result.addEventListener('click', () => {
+        result.addEventListener('click', (event) => {
             const dispatcher = ServiceLocator.getDispatcher();
             dispatcher.selectBlock(null);
-            this.dnd.mouseUp();
         });
-        result.addEventListener('mousedown', () => {
-            this.dnd.mouseDown(this.selectedViewModel);
+        result.addEventListener('mousedown', (event: MouseEvent) => {
+            this.dnd.mouseDown(event, this.selectedViewModel);
         });
         this.selectElement = result;
         return result;
@@ -105,7 +118,7 @@ export class PreviewInteractor {
         if (!source) {
             return;
         }
-        const rect = this.measureElement(source);
+        const rect = measureElement(source);
         const doubleWidth = this.borderWidth * 2;
         target.style.top = rect.top + 'px';
         target.style.left = rect.left + 'px';
@@ -113,31 +126,4 @@ export class PreviewInteractor {
         target.style.width = (rect.width - doubleWidth) + 'px';
         target.style.display = 'block';
     }
-
-    private measureElement(element): { top?: number, left?: number, height?: number, width?: number } {
-        const target = element;
-        const target_width = target.offsetWidth;
-        const target_height = target.offsetHeight;
-        let rect = {};
-        let gleft = 0;
-        let gtop = 0;
-
-        var moonwalk = function (_parent) {
-            if (!!_parent) {
-                gleft += _parent.offsetLeft;
-                gtop += _parent.offsetTop;
-                moonwalk(_parent.offsetParent);
-            } else {
-                return rect = {
-                    top: target.offsetTop + gtop,
-                    left: target.offsetLeft + gleft,
-                    height: target_height,
-                    width: target_width
-                };
-            }
-        };
-        moonwalk(target.offsetParent);
-        return rect;
-    }
-
 }

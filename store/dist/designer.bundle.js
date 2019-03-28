@@ -179,21 +179,98 @@ exports.BlockViewModel = BlockViewModel;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
+const helpers_1 = __webpack_require__(/*! ./helpers */ "./helpers.ts");
 class DndInteractor {
     constructor(container) {
         this.container = container;
-        window.addEventListener('mousemove', () => {
-            // if (container)
+        this.delta = 10;
+        this.startMouseY = null;
+        this.oldStyle = {};
+        this.onDragStarted = () => { };
+        this.onDragFinished = (draggedModel) => { };
+        this.placeholder = document.createElement('div');
+        this.placeholder.style.backgroundColor = '#eeeeee';
+        window.addEventListener('mousemove', ($event) => {
             if (this.isPressed) {
-                console.log('drag');
+                if (!this.dragStarted) {
+                    this.startDrag($event);
+                }
+                else {
+                    this.drag($event);
+                }
             }
         });
+        window.addEventListener('mouseup', ($event) => {
+            if (this.dragStarted) {
+                this.releaseDrag();
+            }
+            this.isPressed = false;
+        });
     }
-    mouseDown(element) {
+    mouseDown($event, vm) {
+        console.log('mouse down', vm);
         this.isPressed = true;
+        this.model = vm;
+        this.startMouseY = $event.pageY;
+        this.elementRect = helpers_1.measureElement(vm.element);
+        this.placeholder.style.height = this.elementRect.height + 'px';
     }
-    mouseUp() {
+    mouseUp($event) {
+        this.releaseDrag();
+    }
+    startDrag($event) {
+        if (Math.abs($event.pageY - this.startMouseY) >= this.delta) {
+            this.dragStarted = true;
+            this.onDragStarted();
+            this.container.replaceChild(this.placeholder, this.model.element);
+            document.body.appendChild(this.model.element);
+            this.oldStyle.left = this.model.element.style.left;
+            this.oldStyle.top = this.model.element.style.top;
+            this.oldStyle.width = this.model.element.style.width;
+            this.oldStyle.height = this.model.element.style.height;
+            this.oldStyle.postion = this.model.element.style.position;
+            this.oldStyle.backgroundColor = this.model.element.style.backgroundColor;
+            this.oldStyle.border = this.model.element.style.border;
+            this.model.element.style.left = this.elementRect.left + 'px';
+            this.model.element.style.top = this.elementRect.top + 'px';
+            this.model.element.style.width = this.elementRect.width + 'px';
+            // this.model.element.style.height = this.elementRect.height + 'px';
+            this.model.element.style.position = 'absolute';
+            this.model.element.style.backgroundColor = '#fefefe';
+            this.model.element.style.border = '3px solid #33ada9';
+        }
+    }
+    drag(event) {
+        this.model.element.style.top = (event.pageY - this.startMouseY + this.elementRect.top) + 'px';
+        // get new coords
+        // search element under mouse
+        // if above a half of element change up (send message to designer)
+        // if below a half of element change down (send message to designer)
+    }
+    releaseDrag() {
+        // if drag happens
+        // replace placeholder with source element
+        // restore height of other elements
+        // 'select' should be occured automatically
+        if (this.dragStarted) {
+            console.log('release drag', this.model);
+            document.body.removeChild(this.model.element);
+            this.model.element.style.position = this.oldStyle.position || 'static';
+            this.model.element.style.left = this.oldStyle.left;
+            this.model.element.style.top = this.oldStyle.top;
+            this.model.element.style.width = this.oldStyle.width;
+            this.model.element.style.height = this.oldStyle.height;
+            this.model.element.style.backgroundColor = this.oldStyle.backgroundColor;
+            this.model.element.style.border = this.oldStyle.border;
+            this.container.replaceChild(this.model.element, this.placeholder);
+            this.elementRect = null;
+            this.startMouseY = null;
+            this.onDragFinished(this.model);
+            this.oldStyle = {};
+        }
+        this.dragStarted = false;
         this.isPressed = false;
+        this.model = null;
     }
 }
 exports.DndInteractor = DndInteractor;
@@ -792,6 +869,46 @@ exports.UpdateHandler = UpdateHandler;
 
 /***/ }),
 
+/***/ "./helpers.ts":
+/*!********************!*\
+  !*** ./helpers.ts ***!
+  \********************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+function measureElement(element) {
+    const target = element;
+    const target_width = target.offsetWidth;
+    const target_height = target.offsetHeight;
+    let rect = {};
+    let gleft = 0;
+    let gtop = 0;
+    var moonwalk = function (_parent) {
+        if (!!_parent) {
+            gleft += _parent.offsetLeft;
+            gtop += _parent.offsetTop;
+            moonwalk(_parent.offsetParent);
+        }
+        else {
+            return rect = {
+                top: target.offsetTop + gtop,
+                left: target.offsetLeft + gleft,
+                height: target_height,
+                width: target_width
+            };
+        }
+    };
+    moonwalk(target.offsetParent);
+    return rect;
+}
+exports.measureElement = measureElement;
+
+
+/***/ }),
+
 /***/ "./main.ts":
 /*!*****************!*\
   !*** ./main.ts ***!
@@ -823,16 +940,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
 Object.defineProperty(exports, "__esModule", { value: true });
 const service_locator_1 = __webpack_require__(/*! ./service-locator */ "./service-locator.ts");
+const helpers_1 = __webpack_require__(/*! ./helpers */ "./helpers.ts");
 class PreviewInteractor {
     constructor(dnd) {
         this.dnd = dnd;
         this.borderWidth = 3;
         this.hoveredViewModel = null;
         this.selectedViewModel = null;
+        this.inactive = false; // use with dnd
         this.createHoverElement();
         this.createSelectElement();
+        this.dnd.onDragStarted = () => {
+            this.inactive = true;
+            this.hideHoverElement();
+            this.hideSelectElement();
+        };
+        this.dnd.onDragFinished = (draggedModel) => {
+            this.inactive = false;
+            // this.select(draggedModel);
+        };
     }
     hover(vm) {
+        if (this.inactive)
+            return;
         if (vm == null || this.selectedViewModel == vm) {
             this.hideHoverElement();
         }
@@ -843,6 +973,8 @@ class PreviewInteractor {
         }
     }
     select(vm) {
+        if (this.inactive)
+            return;
         this.selectedViewModel = vm;
         this.selectElement.style.display = 'block';
         this.placeElementHover(vm.element, this.selectElement);
@@ -851,7 +983,9 @@ class PreviewInteractor {
         this.hideSelectElement();
     }
     scrollTo(vm) {
-        const rect = this.measureElement(vm.element);
+        if (this.inactive)
+            return;
+        const rect = helpers_1.measureElement(vm.element);
         const targetPosition = rect.top - window.innerHeight / 10;
         window.scroll({
             top: targetPosition,
@@ -879,10 +1013,9 @@ class PreviewInteractor {
             this.select(this.hoveredViewModel);
             this.hoveredViewModel.onSelect();
             this.hideHoverElement();
-            this.dnd.mouseUp();
         });
         result.addEventListener('mousedown', (event) => {
-            this.dnd.mouseDown(this.hoveredViewModel);
+            this.dnd.mouseDown(event, this.hoveredViewModel);
         });
         this.hoverElement = result;
         return result;
@@ -890,13 +1023,12 @@ class PreviewInteractor {
     createSelectElement() {
         const result = this.createShadowElement();
         result.style.border = `${this.borderWidth}px solid #33ada9`;
-        result.addEventListener('click', () => {
+        result.addEventListener('click', (event) => {
             const dispatcher = service_locator_1.ServiceLocator.getDispatcher();
             dispatcher.selectBlock(null);
-            this.dnd.mouseUp();
         });
-        result.addEventListener('mousedown', () => {
-            this.dnd.mouseDown(this.selectedViewModel);
+        result.addEventListener('mousedown', (event) => {
+            this.dnd.mouseDown(event, this.selectedViewModel);
         });
         this.selectElement = result;
         return result;
@@ -913,38 +1045,13 @@ class PreviewInteractor {
         if (!source) {
             return;
         }
-        const rect = this.measureElement(source);
+        const rect = helpers_1.measureElement(source);
         const doubleWidth = this.borderWidth * 2;
         target.style.top = rect.top + 'px';
         target.style.left = rect.left + 'px';
         target.style.height = (rect.height - doubleWidth) + 'px';
         target.style.width = (rect.width - doubleWidth) + 'px';
         target.style.display = 'block';
-    }
-    measureElement(element) {
-        const target = element;
-        const target_width = target.offsetWidth;
-        const target_height = target.offsetHeight;
-        let rect = {};
-        let gleft = 0;
-        let gtop = 0;
-        var moonwalk = function (_parent) {
-            if (!!_parent) {
-                gleft += _parent.offsetLeft;
-                gtop += _parent.offsetTop;
-                moonwalk(_parent.offsetParent);
-            }
-            else {
-                return rect = {
-                    top: target.offsetTop + gtop,
-                    left: target.offsetLeft + gleft,
-                    height: target_height,
-                    width: target_width
-                };
-            }
-        };
-        moonwalk(target.offsetParent);
-        return rect;
     }
 }
 exports.PreviewInteractor = PreviewInteractor;
@@ -1014,6 +1121,7 @@ class Renderer {
         const div = document.createElement('div');
         div.innerHTML = `<div>${vm.htmlString}</div>`;
         const result = div.firstChild;
+        result.style.userSelect = 'none';
         if (!vm.isPreview) {
             result.addEventListener('mouseover', ($event) => {
                 this.interactor.hover(vm);

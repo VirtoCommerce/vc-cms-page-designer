@@ -59,6 +59,7 @@ export class Renderer {
         const div = document.createElement('div');
         div.innerHTML = `<div>${vm.htmlString}</div>`;
         const result = <HTMLElement>div.firstChild;
+        result.style.userSelect = 'none';
         if (!vm.isPreview) {
             result.addEventListener('mouseover', ($event: MouseEvent) => {
                 this.interactor.hover(vm);

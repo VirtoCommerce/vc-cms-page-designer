@@ -1,36 +1,82 @@
+import { BlockViewModel } from './block.view-model';
+import { measureElement } from './helpers';
+
 export class DndInteractor {
 
+    private delta = 10;
+
+    private placeholder: HTMLElement;
+
     private isPressed: boolean;
-    private pressedModel: any;
+    private dragStarted: boolean;
+    private model: BlockViewModel;
+
+    private startMouseY: number = null;
+    private elementRect: any;
+    private oldStyle: any = {};
+
+    onDragStarted = () => { };
+    onDragFinished = (draggedModel: BlockViewModel) => { };
 
     constructor(private container: HTMLElement) {
+        this.placeholder = document.createElement('div');
+        this.placeholder.style.backgroundColor = '#eeeeee';
         window.addEventListener('mousemove', ($event) => {
             if (this.isPressed) {
-                // if !dragStarged
-                this.startDrag($event);
+                if (!this.dragStarted) {
+                    this.startDrag($event);
+                } else {
+                    this.drag($event);
+                }
             }
-
+        });
+        window.addEventListener('mouseup', ($event) => {
+            if (this.dragStarted) {
+                this.releaseDrag();
+            }
+            this.isPressed = false;
         });
     }
 
-    mouseDown(vm: any) {
+    mouseDown($event: MouseEvent, vm: BlockViewModel) {
+        console.log('mouse down', vm)
         this.isPressed = true;
-        this.pressedModel = vm;
-        // store mouse coords relative document
+        this.model = vm;
+        this.startMouseY = $event.pageY;
+        this.elementRect = measureElement(vm.element);
+        this.placeholder.style.height = this.elementRect.height + 'px';
+
     }
 
-    mouseUp() {
+    private mouseUp($event: MouseEvent) {
         this.releaseDrag();
     }
 
-    private startDrag(event) {
-        // depends on move, for instance mouse move by y-coord should be more 10px or mouse leave source element
-        // replace target element with placeholder
-        // hide select and hover
-        // shrink blocks
+    private startDrag($event: MouseEvent) {
+        if (Math.abs($event.pageY - this.startMouseY) >= this.delta) {
+            this.dragStarted = true;
+            this.onDragStarted();
+            this.container.replaceChild(this.placeholder, this.model.element);
+            document.body.appendChild(this.model.element);
+            this.oldStyle.left = this.model.element.style.left;
+            this.oldStyle.top = this.model.element.style.top;
+            this.oldStyle.width = this.model.element.style.width;
+            this.oldStyle.height = this.model.element.style.height;
+            this.oldStyle.postion = this.model.element.style.position;
+            this.oldStyle.backgroundColor = this.model.element.style.backgroundColor;
+            this.oldStyle.border = this.model.element.style.border;
+            this.model.element.style.left = this.elementRect.left + 'px';
+            this.model.element.style.top = this.elementRect.top + 'px';
+            this.model.element.style.width = this.elementRect.width + 'px';
+            // this.model.element.style.height = this.elementRect.height + 'px';
+            this.model.element.style.position = 'absolute';
+            this.model.element.style.backgroundColor = '#fefefe';
+            this.model.element.style.border = '3px solid #33ada9';
+        }
     }
 
-    private drag(event) {
+    private drag(event: MouseEvent) {
+        this.model.element.style.top = (event.pageY - this.startMouseY + this.elementRect.top) + 'px';
         // get new coords
         // search element under mouse
         // if above a half of element change up (send message to designer)
@@ -43,8 +89,25 @@ export class DndInteractor {
         // restore height of other elements
         // 'select' should be occured automatically
 
-        // reset mouse coords
+        if (this.dragStarted) {
+            console.log('release drag', this.model);
+            document.body.removeChild(this.model.element);
+            this.model.element.style.position = this.oldStyle.position || 'static';
+            this.model.element.style.left = this.oldStyle.left;
+            this.model.element.style.top = this.oldStyle.top;
+            this.model.element.style.width = this.oldStyle.width;
+            this.model.element.style.height = this.oldStyle.height;
+            this.model.element.style.backgroundColor = this.oldStyle.backgroundColor;
+            this.model.element.style.border = this.oldStyle.border;
+            this.container.replaceChild(this.model.element, this.placeholder);
+            this.elementRect = null;
+            this.startMouseY = null;
+            this.onDragFinished(this.model);
+            this.oldStyle = {};
+        }
+
+        this.dragStarted = false;
         this.isPressed = false;
-        this.pressedModel = null;
+        this.model = null;
     }
 }
