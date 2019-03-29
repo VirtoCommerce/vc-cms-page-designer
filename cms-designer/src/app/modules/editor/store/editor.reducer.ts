@@ -78,6 +78,13 @@ export function reducer(state = initialState, action: EditorActions): EditorStat
                 dirty: true
             };
         }
+        case EditorActionTypes.SwapBlocks: {
+            const element = state.page.content.splice(action.payload.previousIndex, 1);
+            state.page.content.splice(action.payload.currentIndex, 0, ...element);
+            return {
+                ...state
+            };
+        }
         case EditorActionTypes.CompleteEditPageItem:
             return {
                 ...state,

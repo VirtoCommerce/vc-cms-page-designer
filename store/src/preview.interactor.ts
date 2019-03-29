@@ -1,3 +1,4 @@
+import { EventsBus } from './root/events.bus';
 import { DndInteractor } from './dnd.interactor';
 import { BlockViewModel } from './models';
 import { ServiceLocator } from './service-locator';
@@ -22,10 +23,9 @@ export class PreviewInteractor {
             this.hideHoverElement();
             this.hideSelectElement();
         };
-        this.dnd.onDragFinished = (draggedModel: BlockViewModel) => {
+        this.dnd.onDragFinished = () => {
             this.inactive = false;
-            // this.select(draggedModel);
-        };
+        }
     }
 
     hover(vm: BlockViewModel) {

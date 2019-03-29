@@ -12,6 +12,10 @@ export class MessagesService {
         this.send('hover', { id: model.id });
     }
 
+    swapBlocks(args) {
+        this.send('swap', { type: 'swap', ...args });
+    }
+
     selectBlock(model: MessageContent) {
         this.send('select', model ? { id: model.id } : null);
     }

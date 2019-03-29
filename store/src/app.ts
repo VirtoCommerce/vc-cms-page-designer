@@ -15,6 +15,10 @@ export class App {
         this.reloadResources();
     }
 
+    public getList(): BlockViewModel[] {
+        return this.list;
+    }
+
     private reloadResources() {
         var urlParams = new URLSearchParams(window.location.search);
         var prefix = urlParams.get('preview_mode');

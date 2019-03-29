@@ -109,6 +109,9 @@ class App {
         this.dispatcher.run();
         this.reloadResources();
     }
+    getList() {
+        return this.list;
+    }
     reloadResources() {
         var urlParams = new URLSearchParams(window.location.search);
         var prefix = urlParams.get('preview_mode');
@@ -180,14 +183,17 @@ exports.BlockViewModel = BlockViewModel;
 
 Object.defineProperty(exports, "__esModule", { value: true });
 const helpers_1 = __webpack_require__(/*! ./helpers */ "./helpers.ts");
+const events_bus_1 = __webpack_require__(/*! ./root/events.bus */ "./root/events.bus.ts");
 class DndInteractor {
-    constructor(container) {
+    constructor(container, listAccessor) {
         this.container = container;
+        this.listAccessor = listAccessor;
         this.delta = 10;
         this.startMouseY = null;
         this.oldStyle = {};
         this.onDragStarted = () => { };
         this.onDragFinished = (draggedModel) => { };
+        this.onSwapBlocks = (first, second) => { };
         this.placeholder = document.createElement('div');
         this.placeholder.style.backgroundColor = '#eeeeee';
         window.addEventListener('mousemove', ($event) => {
@@ -208,15 +214,16 @@ class DndInteractor {
         });
     }
     mouseDown($event, vm) {
-        console.log('mouse down', vm);
         this.isPressed = true;
         this.model = vm;
         this.startMouseY = $event.pageY;
         this.elementRect = helpers_1.measureElement(vm.element);
         this.placeholder.style.height = this.elementRect.height + 'px';
-    }
-    mouseUp($event) {
-        this.releaseDrag();
+        this.list = this.listAccessor();
+        const targetRect = helpers_1.measureElement(this.container);
+        this.minY = targetRect.top;
+        this.maxY = targetRect.top + targetRect.height;
+        this.rects = this.list.map(x => helpers_1.measureElement(x.element));
     }
     startDrag($event) {
         if (Math.abs($event.pageY - this.startMouseY) >= this.delta) {
@@ -224,24 +231,30 @@ class DndInteractor {
             this.onDragStarted();
             this.container.replaceChild(this.placeholder, this.model.element);
             document.body.appendChild(this.model.element);
-            this.oldStyle.left = this.model.element.style.left;
-            this.oldStyle.top = this.model.element.style.top;
-            this.oldStyle.width = this.model.element.style.width;
-            this.oldStyle.height = this.model.element.style.height;
-            this.oldStyle.postion = this.model.element.style.position;
-            this.oldStyle.backgroundColor = this.model.element.style.backgroundColor;
-            this.oldStyle.border = this.model.element.style.border;
-            this.model.element.style.left = this.elementRect.left + 'px';
-            this.model.element.style.top = this.elementRect.top + 'px';
-            this.model.element.style.width = this.elementRect.width + 'px';
-            // this.model.element.style.height = this.elementRect.height + 'px';
-            this.model.element.style.position = 'absolute';
-            this.model.element.style.backgroundColor = '#fefefe';
-            this.model.element.style.border = '3px solid #33ada9';
+            this.saveStyle();
+            this.styleDraggedBlock();
+            this.container.style.height = helpers_1.measureElement(this.container).height + 'px';
         }
     }
     drag(event) {
-        this.model.element.style.top = (event.pageY - this.startMouseY + this.elementRect.top) + 'px';
+        const mouseY = Math.max(Math.min(event.pageY, this.maxY), this.minY);
+        this.model.element.style.top = mouseY - this.startMouseY + this.elementRect.top + 'px';
+        const to = this.rects.findIndex(x => x !== this.model && x.top < mouseY && (x.top + x.height) > mouseY);
+        const from = this.list.indexOf(this.model);
+        if (from === -1 || to === -1 || from === to)
+            return;
+        const middleY = (this.rects[to].top + this.rects[to].height / 2);
+        const needSwap = (from > to && mouseY <= middleY) || (from <= to && mouseY > middleY);
+        if (needSwap) {
+            console.log(from, to, mouseY, this.rects[to]);
+            this.container.removeChild(this.placeholder);
+            const beforeElement = this.container.children.item(to);
+            this.container.insertBefore(this.placeholder, beforeElement);
+            const msg = { content: { id: this.model.id, currentIndex: from, newIndex: to } };
+            events_bus_1.EventsBus.Current.publish('dnd.swap-blocks', msg, this);
+            console.log('swapped');
+            // debugger;
+        }
         // get new coords
         // search element under mouse
         // if above a half of element change up (send message to designer)
@@ -255,22 +268,48 @@ class DndInteractor {
         if (this.dragStarted) {
             console.log('release drag', this.model);
             document.body.removeChild(this.model.element);
-            this.model.element.style.position = this.oldStyle.position || 'static';
-            this.model.element.style.left = this.oldStyle.left;
-            this.model.element.style.top = this.oldStyle.top;
-            this.model.element.style.width = this.oldStyle.width;
-            this.model.element.style.height = this.oldStyle.height;
-            this.model.element.style.backgroundColor = this.oldStyle.backgroundColor;
-            this.model.element.style.border = this.oldStyle.border;
+            this.restoreStyles();
             this.container.replaceChild(this.model.element, this.placeholder);
             this.elementRect = null;
             this.startMouseY = null;
             this.onDragFinished(this.model);
             this.oldStyle = {};
+            this.container.style.height = '';
         }
         this.dragStarted = false;
         this.isPressed = false;
         this.model = null;
+    }
+    saveStyle() {
+        this.oldStyle.left = this.model.element.style.left;
+        this.oldStyle.top = this.model.element.style.top;
+        this.oldStyle.width = this.model.element.style.width;
+        this.oldStyle.height = this.model.element.style.height;
+        this.oldStyle.postion = this.model.element.style.position;
+        this.oldStyle.backgroundColor = this.model.element.style.backgroundColor;
+        this.oldStyle.border = this.model.element.style.border;
+        this.oldStyle.opacity = this.model.element.style.opacity;
+    }
+    restoreStyles() {
+        this.model.element.style.position = this.oldStyle.position || 'static';
+        this.model.element.style.left = this.oldStyle.left;
+        this.model.element.style.top = this.oldStyle.top;
+        this.model.element.style.width = this.oldStyle.width;
+        this.model.element.style.height = this.oldStyle.height;
+        this.model.element.style.backgroundColor = this.oldStyle.backgroundColor;
+        this.model.element.style.border = this.oldStyle.border;
+        this.model.element.style.opacity = this.oldStyle.opacity;
+    }
+    styleDraggedBlock() {
+        this.model.element.style.left = this.elementRect.left + 'px';
+        this.model.element.style.top = this.elementRect.top + 'px';
+        this.model.element.style.width = this.elementRect.width + 'px';
+        this.model.element.style.height = this.elementRect.height + 'px';
+        this.model.element.style.overflow = 'hidden';
+        this.model.element.style.position = 'absolute';
+        this.model.element.style.backgroundColor = '#fefefe';
+        this.model.element.style.border = '3px solid #33ada9';
+        this.model.element.style.opacity = "0.5";
     }
 }
 exports.DndInteractor = DndInteractor;
@@ -307,11 +346,17 @@ exports.Environment = {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
+const events_bus_1 = __webpack_require__(/*! ./root/events.bus */ "./root/events.bus.ts");
 class EventsDispatcher {
     constructor(factory, messages) {
         this.factory = factory;
         this.messages = messages;
         this.handleMessage = () => { };
+        events_bus_1.EventsBus.Current.subscribe('dnd.swap-blocks', (args, _source) => {
+            this.handleMessage(this.factory.get('swap'), args);
+            this.swapBlock(args);
+            return null;
+        });
     }
     run() {
         window.addEventListener('message', (event) => {
@@ -340,7 +385,8 @@ class EventsDispatcher {
     unlightBlock() {
         this.messages.blockHover({ id: 0 });
     }
-    swapBlock() {
+    swapBlock(args) {
+        this.messages.swapBlocks(args);
     }
     handleEvent(msg) {
         const handler = this.factory.get(msg.type);
@@ -830,8 +876,10 @@ class SwapHandler extends base_handler_1.BaseHandler {
         const vm = list[msg.content.currentIndex];
         list.splice(msg.content.currentIndex, 1);
         list.splice(msg.content.newIndex, 0, vm);
-        vm.element.remove();
-        this.renderer.insert(vm, msg.content.newIndex);
+        if (list[msg.content.currentIndex].element.parentElement === list[msg.content.newIndex].element.parentElement) {
+            vm.element.remove();
+            this.renderer.insert(vm, msg.content.newIndex);
+        }
     }
 }
 exports.SwapHandler = SwapHandler;
@@ -955,9 +1003,8 @@ class PreviewInteractor {
             this.hideHoverElement();
             this.hideSelectElement();
         };
-        this.dnd.onDragFinished = (draggedModel) => {
+        this.dnd.onDragFinished = () => {
             this.inactive = false;
-            // this.select(draggedModel);
         };
     }
     hover(vm) {
@@ -1069,12 +1116,11 @@ exports.PreviewInteractor = PreviewInteractor;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const preview_interactor_1 = __webpack_require__(/*! ./preview.interactor */ "./preview.interactor.ts");
-const dnd_interactor_1 = __webpack_require__(/*! ./dnd.interactor */ "./dnd.interactor.ts");
+const service_locator_1 = __webpack_require__(/*! ./service-locator */ "./service-locator.ts");
 class Renderer {
     constructor(container) {
         this.container = container;
-        this.interactor = new preview_interactor_1.PreviewInteractor(new dnd_interactor_1.DndInteractor(container));
+        this.interactor = service_locator_1.ServiceLocator.getPreviewInteractor();
     }
     add(vm) {
         vm.element = this.createElement(vm);
@@ -1171,6 +1217,7 @@ class EventsBus {
         };
     }
 }
+EventsBus.Current = new EventsBus();
 exports.EventsBus = EventsBus;
 
 
@@ -1186,6 +1233,8 @@ exports.EventsBus = EventsBus;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
+const dnd_interactor_1 = __webpack_require__(/*! ./dnd.interactor */ "./dnd.interactor.ts");
+const preview_interactor_1 = __webpack_require__(/*! ./preview.interactor */ "./preview.interactor.ts");
 const events_bus_1 = __webpack_require__(/*! ./root/events.bus */ "./root/events.bus.ts");
 const http_service_1 = __webpack_require__(/*! ./services/http.service */ "./services/http.service.ts");
 const events_dispatcher_1 = __webpack_require__(/*! ./events.dispatcher */ "./events.dispatcher.ts");
@@ -1196,7 +1245,17 @@ const app_1 = __webpack_require__(/*! ./app */ "./app.ts");
 const messages_service_1 = __webpack_require__(/*! ./services/messages.service */ "./services/messages.service.ts");
 class ServiceLocator {
     static createApp() {
-        return new app_1.App(this.getDispatcher());
+        this._container = document.getElementById("designer-preview");
+        return this._app || (this._app = new app_1.App(this.getDispatcher()));
+    }
+    static getPreviewInteractor() {
+        if (!this._interactor) {
+            this._interactor = new preview_interactor_1.PreviewInteractor(this.getDndInteractor());
+        }
+        return this._interactor;
+    }
+    static getDndInteractor() {
+        return this._dnd || (this._dnd = new dnd_interactor_1.DndInteractor(this._container, () => this._app.getList()));
     }
     static getEventBus() {
         return this._eventBus || (this._eventBus = new events_bus_1.EventsBus());
@@ -1208,7 +1267,7 @@ class ServiceLocator {
         return this._messages || (this._messages = new messages_service_1.MessagesService(environment_1.Environment.DesignerUrl));
     }
     static getRenderer() {
-        return this._renderer || (this._renderer = new renderer_1.Renderer(document.getElementById("designer-preview")));
+        return this._renderer || (this._renderer = new renderer_1.Renderer(this._container));
     }
     static getFactory() {
         return this._factory || (this._factory = new handlers_factory_1.HandlersFactory());
@@ -1292,6 +1351,9 @@ class MessagesService {
     }
     blockHover(model) {
         this.send('hover', { id: model.id });
+    }
+    swapBlocks(args) {
+        this.send('swap', Object.assign({ type: 'swap' }, args));
     }
     selectBlock(model) {
         this.send('select', model ? { id: model.id } : null);

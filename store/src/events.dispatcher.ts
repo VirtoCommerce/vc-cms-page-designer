@@ -2,11 +2,18 @@ import { MessagesService } from './services/messages.service';
 import { HandlersFactory } from "./handlers.factory";
 import { MessageHandler } from "./handlers";
 import { BaseMessage, BlockViewModel } from "./models";
+import { EventsBus } from './root/events.bus';
 
 export class EventsDispatcher {
     handleMessage: (handler: MessageHandler, msg: BaseMessage) => void = () => {};
 
-    constructor(private factory: HandlersFactory, private messages: MessagesService) { }
+    constructor(private factory: HandlersFactory, private messages: MessagesService) {
+        EventsBus.Current.subscribe('dnd.swap-blocks', (args, _source) => {
+            this.handleMessage(this.factory.get('swap'), args);
+            this.swapBlock(args);
+            return null;
+        });
+    }
 
     run() {
         window.addEventListener('message', (event: MessageEvent) => {
@@ -38,8 +45,8 @@ export class EventsDispatcher {
         this.messages.blockHover({ id: 0 });
     }
 
-    swapBlock() {
-
+    swapBlock(args: any) {
+        this.messages.swapBlocks(args);
     }
 
     private handleEvent(msg: BaseMessage) {

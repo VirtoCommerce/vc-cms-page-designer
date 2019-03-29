@@ -9,7 +9,9 @@ export class SwapHandler extends BaseHandler {
         const vm = list[msg.content.currentIndex];
         list.splice(msg.content.currentIndex, 1);
         list.splice(msg.content.newIndex, 0, vm);
-        vm.element.remove();
-        this.renderer.insert(vm, msg.content.newIndex);
+        if (list[msg.content.currentIndex].element.parentElement === list[msg.content.newIndex].element.parentElement) {
+            vm.element.remove();
+            this.renderer.insert(vm, msg.content.newIndex);
+        }
     }
 }

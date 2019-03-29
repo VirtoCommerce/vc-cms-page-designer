@@ -1,5 +1,7 @@
 export class EventsBus {
 
+    static Current = new EventsBus();
+
     private subscribers = {};
 
     publish(type: string, args: any, source: any) {
@@ -10,7 +12,7 @@ export class EventsBus {
         }
     }
 
-    subscribe(type: string, handler: (args: any, source: any) => {}) {
+    subscribe(type: string, handler: (args: any, source: any) => {}): () => void {
         if (!this.subscribers[type]) {
             this.subscribers[type] = [];
         }

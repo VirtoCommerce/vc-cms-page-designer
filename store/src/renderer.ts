@@ -1,3 +1,5 @@
+import { EventsBus } from './root/events.bus';
+import { ServiceLocator } from './service-locator';
 import { BlockViewModel } from './block.view-model';
 import { PreviewInteractor } from './preview.interactor';
 import { DndInteractor } from './dnd.interactor';
@@ -6,8 +8,8 @@ export class Renderer {
 
     private interactor: PreviewInteractor;
 
-    constructor(private container: HTMLElement) {
-        this.interactor = new PreviewInteractor(new DndInteractor(container));
+    constructor(public container: HTMLElement) {
+        this.interactor = ServiceLocator.getPreviewInteractor();
     }
 
     add(vm: BlockViewModel) {

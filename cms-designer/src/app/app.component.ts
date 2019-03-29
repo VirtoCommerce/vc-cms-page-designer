@@ -124,6 +124,7 @@ export class AppComponent implements OnInit {
     }
 
     onOrderChanged(event: CdkDragSortEvent<BlockValuesModel>) {
+        this.store.dispatch(new editorActions.SwapBlocks(event));
         this.store.dispatch(new editorActions.OrderChanged(event));
     }
 

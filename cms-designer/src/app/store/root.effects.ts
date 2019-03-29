@@ -322,6 +322,15 @@ export class RootEffects {
     );
 
     @Effect()
+    receiveSwapBlocksMessage$ = fromEvent(window, 'message').pipe(
+        filter((event: MessageEvent) => event.data.type === 'swap'),
+        map(event => new editorActions.SwapBlocks({
+            currentIndex: event.data.content.newIndex,
+            previousIndex: event.data.content.currentIndex
+        }))
+    );
+
+    @Effect()
     receiveHoverElementMessage$ = fromEvent(window, 'message').pipe(
         filter((event: MessageEvent) => event.data.type === 'hover'),
         map(event => new editorActions.MarkSectionHoveredInPreview(event.data.id))

@@ -87,8 +87,6 @@ export class PageEditorComponent implements OnInit {
     }
 
     reorder(event: CdkDragSortEvent<BlockValuesModel>) {
-        const element = this.model.content.splice(event.previousIndex, 1);
-        this.model.content.splice(event.currentIndex, 0, ...element);
         this.orderChangedEvent.emit(event);
     }
 

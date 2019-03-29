@@ -18,6 +18,7 @@ export enum EditorActionTypes {
     CopyPageItem = '[Page] Copy Page Item',
     CreatePageItem = '[Page] Create Page Item',
     LoadBlocksSchema = '[Page] Load Blocks Schema',
+    SwapBlocks = '[Page] Swap Blocks',
     // LoadCategories = '[Page] Load Categories',
     // LoadCategoriesFail = '[Page] Load Categories Fail',
     // LoadCategoriesSuccess = '[Page] Load Categories Success',
@@ -51,6 +52,12 @@ export class BlocksSchemaFail implements Action {
     readonly type = EditorActionTypes.BlocksSchemaFail;
 
     constructor(public payload: HttpErrorResponse) { }
+}
+
+export class SwapBlocks implements Action {
+    readonly type = EditorActionTypes.SwapBlocks;
+
+    constructor(public payload: any) { }
 }
 
 export class BlocksSchemaLoaded implements Action {
@@ -237,4 +244,5 @@ export type EditorActions = LoadPage
     | UpdatePageItem
     | ToggleItemVisibility
     | MarkSectionHoveredInPreview
-    | HighlightInPreview;
+    | HighlightInPreview
+    | SwapBlocks;
