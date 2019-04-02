@@ -44,18 +44,19 @@
 }
 
 // Collections list
-.list--collection
+.list__item
 {
-    .list__item
-    {
-        align-items: center;
-        background: $gray-light;
-        border: 1px solid $border-color;
-        border-radius: .25rem;
-        display: flex;
-        height: 2.5rem;
-        margin-bottom: .3125rem;
-        padding: 0 .75rem;
+    align-items: center;
+    background: $gray-light;
+    border: 1px solid $border-color;
+    border-radius: .25rem;
+    display: flex;
+    height: 2.5rem;
+    margin-bottom: .3125rem;
+    padding: 0 .75rem;
+
+    &.cdk-drag-placeholder {
+        background-color: $gray-dark;
     }
 
     .list__name

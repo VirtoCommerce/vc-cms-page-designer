@@ -1,7 +1,6 @@
 import { ServiceLocator } from './../service-locator';
-import { Environment } from './../environment';
 import { BaseHandler } from "./base.handler";
-import { BaseMessage, MessageContent } from "../models";
+import { BaseMessage } from "../models";
 import { BlockViewModel } from "../block.view-model";
 
 export class PageHandler extends BaseHandler {

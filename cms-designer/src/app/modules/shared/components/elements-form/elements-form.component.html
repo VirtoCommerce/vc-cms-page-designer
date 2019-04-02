@@ -7,8 +7,22 @@
             [formControlName]="control.id"></app-control-holder>
         <!-- complext control (collection) -->
         <div *ngIf="displayCollection(control)">
-            <div [formArrayName]="control.id">
-                <app-accordeon appSortableList (sort)="sortItems(control, $event)">
+            <div *ngIf="!editableItem">
+                <div cdkDropList (cdkDropListDropped)="sortItems(control, $event)"
+                    class="list list--collection">
+                    <div class="list__item" cdkDragBoundary=".list--collection" cdkDragLockAxis="y" cdkDrag
+                        *ngFor="let item of getControls(control); let i = index; trackBy: trackByFn">
+                        <div class="list__name">{{ getTitle(item, control, i + 1) }}</div>
+                        <div class="list__actions">
+                            <a class="list__actions-item list__actions-item--edit"
+                                (click)="editCollectionItem(item)"></a>
+                            <a class="list__actions-item list__actions-item--remove"
+                                (click)="removeElement(control, i)"></a>
+                            <div cdkDragHandle class="list__actions-item list__actions-item--drag"></div>
+                        </div>
+                    </div>
+
+                    <!-- <app-accordeon appSortableList (sort)="sortItems(control, $event)">
                     <app-acc-item *ngFor="let item of getControls(control); let i = index; trackBy: trackByFn" [title]="getTitle(item, control)"
                         appDraggable>
                         <div [formGroupName]="i">
@@ -25,10 +39,29 @@
                             </h4>
                         </div>
                     </app-acc-item>
-                </app-accordeon>
+                </app-accordeon> -->
+                    <div>
+                        <button class="btn btn--blue btn--block"
+                            (click)="addElement(control)">{{ getAddButtonTitle(control) }}</button>
+                    </div>
+                </div>
             </div>
-            <div>
-                <button class="btn" (click)="addElement(control)">{{ getAddButtonTitle(control) }}</button>
+            <div *ngIf="editableItem" class="collection-item" [formGroup]="editableItem">
+                <div class="collection-item__header">
+                    <div class="collection-item__t">New slide</div>
+                </div>
+                <div class="collection-item__body">
+                    <app-elements-form [group]="editableItem" [descriptors]="getElementDescriptors(control)">
+                    </app-elements-form>
+                </div>
+                <div class="collection-item__footer">
+                    <button class="btn btn--blue btn--block" (click)="saveEditCollectionItem()">
+                        <span class="btn__text">Save</span>
+                    </button>
+                    <button class="btn btn--outline btn--block" (click)="cancelEditCollectionItem()">
+                        <span class="btn__text">Cancel</span>
+                    </button>
+                </div>
             </div>
         </div>
         <!-- Info -->

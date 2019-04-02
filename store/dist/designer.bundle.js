@@ -1131,6 +1131,9 @@ class Renderer {
     }
     update(vm) {
         const element = vm.element;
+        if (!element) {
+            return;
+        }
         vm.element = this.createElement(vm);
         this.container.replaceChild(vm.element, element);
     }

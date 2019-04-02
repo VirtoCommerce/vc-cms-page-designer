@@ -55,6 +55,9 @@ label
     color: $gray;
     font-size: .8125rem;
     margin-top: .625rem;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 // Input files

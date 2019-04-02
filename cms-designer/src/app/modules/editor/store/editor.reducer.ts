@@ -164,9 +164,9 @@ export function reducer(state = initialState, action: EditorActions): EditorStat
                 showNewBlockSelector: action.payload
             };
         case EditorActionTypes.UpdatePageItem: {
-            const item = state.page.content.find(x => x.Id === state.currentSectionItem);
+            const item = state.page.content.find(x => x.id === state.currentSectionItem);
             const type = item.type;
-            Object.assign(state.currentSectionItem, action.payload);
+            Object.assign(item, action.payload);
             item.type = type;
             if (!!state.blocksSchema[type].static) {
                 state.page.settings = {

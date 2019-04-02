@@ -22,6 +22,9 @@ export class Renderer {
 
     update(vm: BlockViewModel) {
         const element = vm.element;
+        if (!element) {
+            return;
+        }
         vm.element = this.createElement(vm);
         this.container.replaceChild(vm.element, element);
     }

@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup, AbstractControl, FormArray } from '@angular/forms';
 import { CdkDragSortEvent } from '@angular/cdk/drag-drop';
-import { DisplayTextControlDescriptor, ControlDescriptor, CollectionControlDescriptor } from '@shared/models';
+import { DisplayTextControlDescriptor, ControlDescriptor, CollectionControlDescriptor, BlockValuesModel } from '@shared/models';
 import { FormHelper } from '@shared/services';
 
 @Component({
@@ -11,6 +11,9 @@ import { FormHelper } from '@shared/services';
 export class ElementsFormComponent implements OnInit {
     @Input() group: FormGroup;
     @Input() descriptors: ControlDescriptor[];
+
+    private savedItem: any;
+    editableItem: FormGroup;
 
     constructor(private formHelper: FormHelper) { }
 
@@ -28,7 +31,7 @@ export class ElementsFormComponent implements OnInit {
     }
 
     displaySimpleControl(descriptor: ControlDescriptor): boolean {
-        return descriptor.type !== 'header' && descriptor.type !== 'paragraph' && descriptor.type !== 'list';
+        return ['header', 'paragraph', 'list'].indexOf(descriptor.type) === -1;
     }
 
     displayCollection(descriptor: ControlDescriptor): boolean {
@@ -37,15 +40,15 @@ export class ElementsFormComponent implements OnInit {
 
     sortItems(control: CollectionControlDescriptor, event: CdkDragSortEvent<any>) {
         const controls = this.getControls(control);
-        const current = controls[event.previousIndex];
-        const swapWith = controls[event.currentIndex];
-
-        controls[event.currentIndex] = current;
-        controls[event.previousIndex] = swapWith;
+        const current = controls.splice(event.previousIndex, 1);
+        controls.splice(event.currentIndex, 0, ...current);
+        this.group.updateValueAndValidity({ emitEvent: true });
     }
 
-    getTitle(item: FormGroup, control: CollectionControlDescriptor): string {
-        return (control.displayField ? item.value[control.displayField] : null) || '<no title>';
+    getTitle(item: FormGroup, control: CollectionControlDescriptor, index: number): string {
+        const el: any = item;
+        return (control.displayField ? item.value[control.displayField] : null)
+            || `${el._index || (el._index = index)}. <no title>`;
     }
 
     removeElement(control: CollectionControlDescriptor, index: number) {
@@ -78,6 +81,22 @@ export class ElementsFormComponent implements OnInit {
 
     trackByFn(index, item) {
         return item.id;
+    }
+
+    editCollectionItem(item) {
+        this.editableItem = item;
+        this.savedItem = item.value;
+    }
+
+    cancelEditCollectionItem() {
+        this.editableItem.reset(this.savedItem);
+        this.editableItem = null;
+        this.savedItem = null;
+    }
+
+    saveEditCollectionItem() {
+        this.editableItem = null;
+        this.savedItem = null;
     }
 
     private getFormArray(descriptor: CollectionControlDescriptor): FormArray {

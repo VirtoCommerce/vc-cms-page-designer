@@ -41,6 +41,7 @@ export class PlatformService {
     initSettings(): Promise<any> {
         return this.http.get<EnvironmentSettings>('data/settings.json').pipe(
             tap(x => {
+                console.log(x);
                 Object.assign(AppSettings, x);
             })
         ).toPromise();

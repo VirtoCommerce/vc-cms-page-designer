@@ -5,4 +5,5 @@ export interface CollectionControlDescriptor extends BaseControlDescriptor {
     removeText?: string;
     displayField?: string;
     element: ControlDescriptor[];
+    _index?: number;
 }
