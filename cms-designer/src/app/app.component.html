@@ -33,33 +33,31 @@
                 <app-tab class="tabs__content" tabTitle="Sections" [active]="(activeTabIndex$|async) === 0">
 
                     <app-loading *ngIf="editorLoading$|async"></app-loading>
-                    <!-- Error page -->
-                    <div class="error-page" *ngIf="false">
-                      <img class="error-page__pic" src="/assets/i/bg-error-sidebar.png" alt="">
-                      <div class="error-page__t">Произошла ошибка <br>загрузки контента</div>
-                      <button class="btn btn--blue">
-                        <span class="btn__text">Повторить</span>
-                      </button>
-                    </div>
-                    <!-- End Error page -->
 
-                    <app-page-editor class="left-panel-content" [model]="page$ | async" [schema]="blocksSchema$ | async"
-                        (selectEvent)="selectPageItem($event)" [noSchema]="schemaNotLoaded$ | async"
-                        [hoveredId]="hoveredId$|async" (mouseOver)="mouseOverItem($event)"
-                        [noPage]="pageNotLoaded$ | async" (reloadData)="reloadEditorData()"
-                        (visibilityChanged)="toggleVisibility($event)"
-                        (orderChangedEvent)="onOrderChanged($event)" (addNewBlockEvent)="setNewBlockMode()">
-                    </app-page-editor>
-                    <app-footer-aside class="left-panel-footer">
-                        <app-actions-dropdown class="fill-row" [up]="true" title="Theme actions" [items]="themeActions"
-                            (actionSelected)="onThemeActionSelected($event)"></app-actions-dropdown>
-                        <app-history-walker
-                            [hasUndo]="hasUndo$|async"
-                            [hasRedo]="hasRedo$|async"
-                            (undoClicked)="undo()"
-                            (redoClicked)="redo()"
-                            ></app-history-walker>
-                    </app-footer-aside>
+                    <div class="error-page" *ngIf="(schemaNotLoaded$ | async) || (pageNotLoaded$ | async)">
+                        <img class="error-page__pic" src="assets/i/bg-error-sidebar.png" alt="">
+                        <div *ngIf="schemaNotLoaded$|async" class="error-page__t">Blocks Schema was not loaded</div>
+                        <div *ngIf="pageNotLoaded$|async" class="error-page__t">Page was not loaded</div>
+                        <button class="btn btn--blue" (click)="reloadEditorData()">
+                            <span class="btn__text">Try again</span>
+                        </button>
+                    </div>
+
+                    <ng-container *ngIf="(page$|async) && (blocksSchema$|async)">
+                        <app-page-editor class="left-panel-content" [model]="page$ | async"
+                            [schema]="blocksSchema$ | async" (selectEvent)="selectPageItem($event)"
+                            [hoveredId]="hoveredId$|async" (mouseOver)="mouseOverItem($event)"
+                            (visibilityChanged)="toggleVisibility($event)" (orderChangedEvent)="onOrderChanged($event)"
+                            (addNewBlockEvent)="setNewBlockMode()">
+                        </app-page-editor>
+                        <app-footer-aside class="left-panel-footer">
+                            <app-actions-dropdown class="fill-row" [up]="true" title="Theme actions"
+                                [items]="themeActions" (actionSelected)="onThemeActionSelected($event)">
+                            </app-actions-dropdown>
+                            <app-history-walker [hasUndo]="hasUndo$|async" [hasRedo]="hasRedo$|async"
+                                (undoClicked)="undo()" (redoClicked)="redo()"></app-history-walker>
+                        </app-footer-aside>
+                    </ng-container>
                 </app-tab>
                 <app-tab class="tabs__content" tabTitle="Theme" [active]="(activeTabIndex$|async) === 1">
                     <app-theme-editor [schema]="themeSchema$ | async" (selectPresetEvent)="turnOnPresets()"
@@ -74,24 +72,23 @@
 
         <app-page-item-editor class="left-panel" *ngIf="currentSectionItem$|async as currentSectionItem"
             [model]="currentSectionItem" [schema]="(blocksSchema$ | async)[currentSectionItem.type]"
-            [blockName]="currentBlockName$|async"
-            (valueChangedEvent)="updateBlockPreview($event)" (removeBlockEvent)="removeBlock($event)"
-            (copyBlockEvent)="copyBlock($event)"></app-page-item-editor>
+            [blockName]="currentBlockName$|async" (valueChangedEvent)="updateBlockPreview($event)"
+            (removeBlockEvent)="removeBlock($event)" (copyBlockEvent)="copyBlock($event)"></app-page-item-editor>
         <app-select-type class="left-panel" *ngIf="addNewSectionMode$ | async" [schema]="blocksSchema$ | async"
             (previewBlockEvent)="previewBlockType($event)" (selectBlockEvent)="selectBlockType($event)">
         </app-select-type>
-        <app-presets-editor class="left-panel" *ngIf="showPresets$|async" [data]="presets$|async" (savePresetEvent)="onSavePreset($event)"
-            (selectPresetEvent)="onSelectPreset($event)" (applyThemeEvent)="applyPresetAsTheme($event)"
-            (removePresetEvent)="onRemovePreset($event)">
+        <app-presets-editor class="left-panel" *ngIf="showPresets$|async" [data]="presets$|async"
+            (savePresetEvent)="onSavePreset($event)" (selectPresetEvent)="onSelectPreset($event)"
+            (applyThemeEvent)="applyPresetAsTheme($event)" (removePresetEvent)="onRemovePreset($event)">
         </app-presets-editor>
-        <app-theme-item-editor class="left-panel" *ngIf="currentThemeSchemaItem$|async as currentSchemaItem" [schema]="currentSchemaItem"
-            [theme]="theme$|async" (valueChangedEvent)="liveUpdateTheme($event)">
+        <app-theme-item-editor class="left-panel" *ngIf="currentThemeSchemaItem$|async as currentSchemaItem"
+            [schema]="currentSchemaItem" [theme]="theme$|async" (valueChangedEvent)="liveUpdateTheme($event)">
         </app-theme-item-editor>
         <!-- End Left panel -->
 
         <!-- Content -->
         <app-preview class="content" [loading]="previewLoading$ | async" [storeUrl]="storeUrl$ | async" mode="desktop"
-            (preivewLoaded)="onPreviewLoaded($event)"></app-preview>
+            (preivewLoadingError)="onPreviewError()" (preivewLoaded)="onPreviewLoaded($event)"></app-preview>
         <!-- End Content -->
 
     </main>

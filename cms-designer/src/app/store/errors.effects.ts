@@ -22,6 +22,6 @@ export class ErrorsEffects {
         ),
         map((action: any) => <HttpErrorResponse>action.payload),
         filter(response => response.status >= 400), // server or request error
-        tap(response => this.errors.displayMessage(response.error.error.message, response))
+        tap(response => this.errors.displayMessage(response.error.exceptionMessage, response))
     );
 }

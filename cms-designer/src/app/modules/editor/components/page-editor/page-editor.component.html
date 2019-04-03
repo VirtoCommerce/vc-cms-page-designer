@@ -1,4 +1,4 @@
-<div class="list-group" data-name="sortable" *ngIf="model && schema">
+<div class="list-group" data-name="sortable">
     <a class="list-group-item list-group-item-header" *ngFor="let item of topItems">
         <div class="list-group-icon" [attr.data-name]="getBlockIcon(item)"></div>
         <div class="list-group-text">{{ getBlockName(item) }}</div>
@@ -25,49 +25,3 @@
         <div class="list-group-text">{{ getBlockName(item) }}</div>
     </a>
 </div>
-<!-- 
-<div class="pane-section __selected" *ngIf="model && schema">
-    <ul class="list" *ngIf="topItems">
-        <li class="list-item" *ngFor="let item of topItems">
-            <a class="list-link" (click)="selectItem(item)">
-                <i class="list-ico dragger" [appIcon]="getBlockIcon(item)"></i><span class="list-t">{{
-                    getBlockName(item) }}</span>
-            </a>
-        </li>
-    </ul>
-    <ul appSortableList class="list" (sort)="sortItems($event)">
-
-        <li class="list-item" *ngFor="let item of model.content" appDraggable>
-            <a class="list-link" (click)="selectItem(item)">
-                <i class="list-ico dragger" [appIcon]="getBlockIcon(item)"></i><span class="list-t">{{
-                    getBlockName(item) }}</span>
-            </a>
-            <div *appDraggableHelper class="list-dragger">
-                <i class="list-ico dragger" [appIcon]="getBlockIcon(item)"></i><span class="list-t">{{
-                    getBlockName(item) }}</span>
-            </div>
-        </li>
-
-    </ul>
-    <div class="list-item create">
-        <a class="list-link" (click)="addNewBlock()">
-            <i class="list-ico fas fa-plus-square"></i><span class="list-t">Add block</span>
-        </a>
-    </div>
-    <ul class="list" *ngIf="bottomItems">
-        <li class="list-item" *ngFor="let item of bottomItems">
-            <a class="list-link" (click)="selectItem(item)">
-                <i class="list-ico dragger" [appIcon]="getBlockIcon(item)"></i><span
-                    class="list-t">{{ getBlockName(item) }}</span>
-            </a>
-        </li>
-    </ul>
-</div>
-<div *ngIf="noSchema" class="pane-section __selected">
-    <div style="padding: 20px;">Blocks Schema was not loaded</div>
-    <div style="text-align: center;"><button class="btn" (click)="onReloadData()">Try again</button></div>
-</div>
-<div *ngIf="noPage" class="pane-section __selected">
-    <div style="padding: 20px;">Page was not loaded</div>
-    <div style="text-align: center;"><button class="btn" (click)="onReloadData()">Try again</button></div>
-</div> -->

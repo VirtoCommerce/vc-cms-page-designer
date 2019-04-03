@@ -33,14 +33,10 @@ export class PageEditorComponent implements OnInit {
         return this._schema;
     }
 
-    @Input() noSchema: boolean;
-    @Input() noPage: boolean;
-
     @Output() selectEvent = new EventEmitter<BlockValuesModel>();
     @Output() addNewBlockEvent = new EventEmitter<any>();
     @Output() orderChangedEvent = new EventEmitter<CdkDragSortEvent<BlockValuesModel>>();
     @Output() visibilityChanged = new EventEmitter<BlockValuesModel>();
-    @Output() reloadData = new EventEmitter();
     @Output() mouseOver = new EventEmitter<BlockValuesModel>();
 
     constructor() { }
@@ -74,10 +70,6 @@ export class PageEditorComponent implements OnInit {
         }
         const unknownBlock = <any>item;
         return result || unknownBlock.name || unknownBlock.title || unknownBlock.type || '<unnamed block>';
-    }
-
-    onReloadData() {
-        this.reloadData.emit();
     }
 
     toggleItemVisibility(event: MouseEvent, item: BlockValuesModel) {

@@ -84,6 +84,10 @@ export class AppComponent implements OnInit {
         this.store.dispatch(new rootActions.PreviewReady(source));
     }
 
+    onPreviewError() {
+        this.store.dispatch(new rootActions.PreviewError());
+    }
+
     back() {
         this.store.dispatch(new rootActions.CloseEditors());
     }

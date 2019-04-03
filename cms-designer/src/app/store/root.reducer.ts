@@ -27,8 +27,18 @@ export function reducer(state = initialState, action: RootActions): RootState {
                 ...state,
                 previewLoading: action.payload
             };
+        case RootActionTypes.PreviewError: {
+            return {
+                ...state,
+                primaryLoaded: false,
+                secondaryLoaded: false
+            };
+        }
         case RootActionTypes.PreviewReady: {
             // occurs when each iframe is loaded
+            if (!action.payload) {
+                return state;
+            }
             const newValues: Partial<RootState> = {};
             if (!state.primaryFrameId) {
                 newValues.primaryFrameId = action.payload;
