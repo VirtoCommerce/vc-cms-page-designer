@@ -18,5 +18,6 @@ export class CheckboxItemComponent extends BaseControlComponent<CheckboxControlD
 
     toggle() {
         this.value = !this.value;
+        this.onChange(this.value);
     }
 }

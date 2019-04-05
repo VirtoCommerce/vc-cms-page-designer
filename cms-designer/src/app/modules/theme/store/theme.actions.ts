@@ -56,7 +56,7 @@ export class SaveThemeSuccess implements Action {
 export class SaveThemeFail implements Action {
     readonly type = ThemeActionTypes.SaveThemeFail;
 
-    constructor(public payload: string) { }
+    constructor(public payload: any) { }
 }
 
 export class LoadSchema implements Action {
@@ -133,6 +133,8 @@ export class UpdateDraftSuccess implements Action {
 
 export class UpdateDraftFail implements Action {
     readonly type = ThemeActionTypes.UpdateDraftFail;
+
+    constructor(public payload: any) { }
 }
 
 export class CloseEditors implements Action {

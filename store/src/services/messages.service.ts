@@ -20,11 +20,12 @@ export class MessagesService {
         this.send('select', model ? { id: model.id } : null);
     }
 
+    ping() {
+        this.send('ping', null);
+    }
+
     private send(message: string, model) {
         const msg = { type: message, ...model };
-        if (message !== 'hover') {
-            console.log(msg);
-        }
         window.parent.postMessage(msg, this.parentOrigin);
     }
 }

@@ -10,9 +10,11 @@ import {
     switchMap,
     debounceTime,
     distinctUntilChanged,
-    switchMapTo
+    switchMapTo,
+    tap
 } from 'rxjs/operators';
 
+import { MessageService } from '@shared/services';
 import { ThemeService } from '@themes/services';
 import * as themeActions from './theme.actions';
 import * as fromTheme from '.';
@@ -21,6 +23,7 @@ import * as fromTheme from '.';
 export class ThemeEffects {
     constructor(private themeService: ThemeService,
         private actions$: Actions,
+        private messages: MessageService,
         private store$: Store<fromTheme.State>) { }
 
     @Effect()
@@ -78,8 +81,32 @@ export class ThemeEffects {
         switchMap(([, theme]) =>
             this.themeService.uploadDraft(theme).pipe(
                 map(() => new themeActions.UpdateDraftSuccess()),
-                catchError(() => of(new themeActions.UpdateDraftFail()))
+                catchError(error => of(new themeActions.UpdateDraftFail(error)))
             )
         )
+    );
+
+    @Effect({dispatch: false})
+    uploadError$: Observable<Action> = this.actions$.pipe(
+        ofType<themeActions.SaveThemeFail>(themeActions.ThemeActionTypes.SaveThemeFail),
+        tap((action: themeActions.SaveThemeFail) => {
+            this.messages.displayError('Couldn\'t save theme', action.payload);
+        })
+    );
+
+    @Effect({dispatch: false})
+    uploadDraftError$: Observable<Action> = this.actions$.pipe(
+        ofType<themeActions.UpdateDraftFail>(themeActions.ThemeActionTypes.UpdateDraftFail),
+        tap((action: themeActions.UpdateDraftFail) => {
+            this.messages.displayError('Couldn\'t connect server', action.payload);
+        })
+    );
+
+    @Effect({ dispatch: false })
+    uploadDraftSuccess$: Observable<Action> = this.actions$.pipe(
+        ofType<themeActions.UpdateDraftSuccess>(themeActions.ThemeActionTypes.SaveThemeSuccess),
+        tap((action: themeActions.UpdateDraftSuccess) => {
+            this.messages.displayMessage('Theme saved successfully');
+        })
     );
 }

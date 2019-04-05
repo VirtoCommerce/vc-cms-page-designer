@@ -3,14 +3,14 @@ import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { tap, filter, map } from 'rxjs/operators';
 
-import { ErrorsService } from '@shared/services';
+import { MessageService } from '@shared/services';
 
 import * as themeActions from '@themes/store/theme.actions';
 import * as editorActions from '@editor/store/editor.actions';
 
 @Injectable()
 export class ErrorsEffects {
-    constructor(private actions$: Actions, private errors: ErrorsService) { }
+    constructor(private actions$: Actions, private errors: MessageService) { }
 
     @Effect({ dispatch: false })
     loadBlocksSchemaFail$ = this.actions$.pipe(
@@ -22,6 +22,6 @@ export class ErrorsEffects {
         ),
         map((action: any) => <HttpErrorResponse>action.payload),
         filter(response => response.status >= 400), // server or request error
-        tap(response => this.errors.displayMessage(response.error.exceptionMessage, response))
+        tap(response => this.errors.displayError(response.error.exceptionMessage, response))
     );
 }

@@ -1,3 +1,4 @@
+import { ServiceLocator } from './service-locator';
 import { EventsDispatcher } from './events.dispatcher';
 import { BlockViewModel } from './block.view-model';
 

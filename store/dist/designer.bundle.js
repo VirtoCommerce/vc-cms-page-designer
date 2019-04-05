@@ -96,6 +96,7 @@
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
+const service_locator_1 = __webpack_require__(/*! ./service-locator */ "./service-locator.ts");
 class App {
     constructor(dispatcher) {
         this.dispatcher = dispatcher;
@@ -133,6 +134,9 @@ class App {
                 head.replaceChild(newlink, styleSheet);
             }
         }
+        window.addEventListener('load', () => {
+            service_locator_1.ServiceLocator.getMessages().scriptLoaded();
+        });
     }
 }
 exports.App = App;
@@ -1361,11 +1365,11 @@ class MessagesService {
     selectBlock(model) {
         this.send('select', model ? { id: model.id } : null);
     }
+    scriptLoaded() {
+        this.send('scriptLoaded', null);
+    }
     send(message, model) {
         const msg = Object.assign({ type: message }, model);
-        if (message !== 'hover') {
-            console.log(msg);
-        }
         window.parent.postMessage(msg, this.parentOrigin);
     }
 }

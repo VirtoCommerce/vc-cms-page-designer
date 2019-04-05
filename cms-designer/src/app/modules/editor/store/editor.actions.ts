@@ -165,7 +165,7 @@ export class SavePage implements Action {
 export class SavePageFail implements Action {
     readonly type = EditorActionTypes.SavePageFail;
 
-    constructor(public payload: string) { }
+    constructor(public payload: any) { }
 }
 
 export class SavePageSuccess implements Action {

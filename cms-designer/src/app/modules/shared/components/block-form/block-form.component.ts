@@ -57,6 +57,7 @@ export class BlockFormComponent implements OnInit, OnDestroy {
         if (this.model && this.schema && this.model.type === this.schema.type) {
             this.form = this.formHelper.generateForm(this.model, this.schema.settings);
             this.subscription = this.form.valueChanges.subscribe(value => {
+                console.log(this.form);
                 this.modelChange.emit(value);
             });
             // this.changeDetector.markForCheck();

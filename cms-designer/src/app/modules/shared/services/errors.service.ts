@@ -1,20 +1,19 @@
 import { ToastrService } from 'ngx-toastr';
 import { Injectable } from '@angular/core';
-import { HttpErrorResponse } from '@angular/common/http';
 
 @Injectable({
     providedIn: 'root'
 })
-export class ErrorsService {
+export class MessageService {
 
     constructor(private toastr: ToastrService) { }
 
-    displayMessage(message: any, error: HttpErrorResponse = null) {
+    displayMessage(message: any) {
+        this.toastr.success(message);
+    }
+
+    displayError(message, error) {
         console.warn(message, error);
-        if (error) {
-            this.toastr.error(message);
-        } else {
-            this.toastr.success(message);
-        }
+        this.toastr.error(message);
     }
 }

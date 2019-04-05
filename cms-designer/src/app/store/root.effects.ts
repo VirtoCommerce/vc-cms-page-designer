@@ -4,7 +4,7 @@ import { Action, Store } from '@ngrx/store';
 import { Observable, of, fromEvent } from 'rxjs';
 import { switchMapTo, debounceTime, distinctUntilChanged, withLatestFrom, tap, filter, map, switchMap, mapTo } from 'rxjs/operators';
 import { PreviewService, ApiUrlsService } from '@app/services';
-import { ErrorsService } from '@shared/services';
+import { MessageService } from '@shared/services';
 import { BlockValuesModel } from '@shared/models';
 
 import * as rootActions from './root.actions';
@@ -20,7 +20,7 @@ import * as fromEditor from '@editor/store';
 export class RootEffects {
     constructor(private actions$: Actions,
         private preview: PreviewService,
-        private errors: ErrorsService,
+        private errors: MessageService,
         private urls: ApiUrlsService,
         private rootStore$: Store<fromRoot.State>,
         private themeStore$: Store<fromTheme.State>,
@@ -301,6 +301,14 @@ export class RootEffects {
             return new editorActions.MoveBlock({ oldIndex: data.oldIndex, newIndex: data.newIndex });
         }),
     );
+
+    // @Effect()
+    // scriptInPreviewLoaded$ = fromEvent(window, 'message').pipe(
+    //     filter((event: MessageEvent) => event.data.type === 'scriptLoaded'),
+    //     map(event => {
+    //         return new rootActions.PreviewReady(event.srcElement.id);
+    //     }),
+    // );
 
     @Effect()
     receiveSwapFrameMessage$ = fromEvent(window, 'message').pipe(
