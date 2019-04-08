@@ -5,3 +5,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const app = ServiceLocator.createApp();
     app.run();
 });
+
+window.addEventListener('click', (event) => {
+    console.log(event);
+    event.preventDefault();
+});
