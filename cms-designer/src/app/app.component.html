@@ -60,10 +60,10 @@
                     </ng-container>
                 </app-tab>
                 <app-tab class="tabs__content" tabTitle="Theme" [active]="(activeTabIndex$|async) === 1">
-                    <app-theme-editor [schema]="themeSchema$ | async" (selectPresetEvent)="turnOnPresets()"
+                    <!-- <app-theme-editor [schema]="themeSchema$ | async" (selectPresetEvent)="turnOnPresets()"
                         [noSchema]="themeSchemaNotLoaded$ | async" [noPresets]="presetsNotLoaded$ | async"
                         (reloadData)="reloadThemeData()" (selectItemEvent)="selectSchemaItem($event)">
-                    </app-theme-editor>
+                    </app-theme-editor> -->
                 </app-tab>
             </app-tabs>
 
@@ -77,13 +77,13 @@
         <app-select-type class="left-panel" *ngIf="addNewSectionMode$ | async" [schema]="blocksSchema$ | async"
             (previewBlockEvent)="previewBlockType($event)" (selectBlockEvent)="selectBlockType($event)">
         </app-select-type>
-        <app-presets-editor class="left-panel" *ngIf="showPresets$|async" [data]="presets$|async"
+        <!-- <app-presets-editor class="left-panel" *ngIf="showPresets$|async" [data]="presets$|async"
             (savePresetEvent)="onSavePreset($event)" (selectPresetEvent)="onSelectPreset($event)"
             (applyThemeEvent)="applyPresetAsTheme($event)" (removePresetEvent)="onRemovePreset($event)">
         </app-presets-editor>
         <app-theme-item-editor class="left-panel" *ngIf="currentThemeSchemaItem$|async as currentSchemaItem"
             [schema]="currentSchemaItem" [theme]="theme$|async" (valueChangedEvent)="liveUpdateTheme($event)">
-        </app-theme-item-editor>
+        </app-theme-item-editor> -->
         <!-- End Left panel -->
 
         <!-- Content -->

@@ -31,7 +31,7 @@ export class RootEffects {
         ofType(rootActions.RootActionTypes.ResetData),
         switchMapTo([
             new editorActions.ClearPageChanges(),
-            new themeActions.ClearThemeChanges()
+            // new themeActions.ClearThemeChanges()
         ])
     );
 
@@ -93,7 +93,7 @@ export class RootEffects {
         ofType<rootActions.SaveData>(rootActions.RootActionTypes.SaveData),
         switchMapTo([
             new editorActions.SavePage(),
-            new themeActions.SaveTheme()
+            // new themeActions.SaveTheme()
         ])
     );
 
