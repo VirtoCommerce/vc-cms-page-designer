@@ -23,6 +23,7 @@ export class PageHandler extends BaseHandler {
             list.forEach(x => {
                 this.renderer.add(x);
             });
+            (<any>$('.fotorama')).fotorama();
             ServiceLocator.getMessages().renderComplete();
         });
     }

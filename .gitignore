@@ -267,3 +267,7 @@ __pycache__/
 # Cake - Uncomment if you are using it
 # tools/
 /VirtoCommerce.Storefront/wwwroot/cms-content
+
+store/package-lock\.json
+
+store/dist/designer\.bundle\.js\.map

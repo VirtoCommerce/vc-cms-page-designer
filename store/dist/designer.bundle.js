@@ -96,7 +96,6 @@
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const service_locator_1 = __webpack_require__(/*! ./service-locator */ "./service-locator.ts");
 class App {
     constructor(dispatcher) {
         this.dispatcher = dispatcher;
@@ -134,9 +133,6 @@ class App {
                 head.replaceChild(newlink, styleSheet);
             }
         }
-        window.addEventListener('load', () => {
-            service_locator_1.ServiceLocator.getMessages().scriptLoaded();
-        });
     }
 }
 exports.App = App;
@@ -699,6 +695,7 @@ class PageHandler extends base_handler_1.BaseHandler {
             list.forEach(x => {
                 this.renderer.add(x);
             });
+            $('.fotorama').fotorama();
             service_locator_1.ServiceLocator.getMessages().renderComplete();
         });
     }
@@ -913,6 +910,8 @@ class UpdateHandler extends base_handler_1.BaseHandler {
             vm.htmlString = result;
             this.renderer.update(vm);
             this.renderer.select(vm);
+            const c = $('.fotorama');
+            c.fotorama();
         });
     }
 }
@@ -976,6 +975,10 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log('run preview window');
     const app = service_locator_1.ServiceLocator.createApp();
     app.run();
+});
+window.addEventListener('click', (event) => {
+    console.log(event);
+    event.preventDefault();
 });
 
 
@@ -1365,8 +1368,8 @@ class MessagesService {
     selectBlock(model) {
         this.send('select', model ? { id: model.id } : null);
     }
-    scriptLoaded() {
-        this.send('scriptLoaded', null);
+    ping() {
+        this.send('ping', null);
     }
     send(message, model) {
         const msg = Object.assign({ type: message }, model);

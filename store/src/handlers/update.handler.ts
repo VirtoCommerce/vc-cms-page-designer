@@ -11,6 +11,8 @@ export class UpdateHandler extends BaseHandler {
             vm.htmlString = result;
             this.renderer.update(vm);
             this.renderer.select(vm);
+            const c: any = $('.fotorama');
+            c.fotorama();
         });
     }
 }
