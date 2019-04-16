@@ -1,0 +1,6 @@
+{
+    "storeBaseUrl": "https://vc-com-new-initial-storefront-core.azurewebsites.net",
+    "storePreviewPath": "/designer-preview",
+    "baseUrl": "/designer/",
+    "platformUrl": "https://vc-com-new-initial-platform.azurewebsites.net"
+}

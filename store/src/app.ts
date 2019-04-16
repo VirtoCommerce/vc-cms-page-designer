@@ -8,12 +8,13 @@ export class App {
     constructor(private dispatcher: EventsDispatcher) { }
 
     run() {
+        this.reloadResources();
         this.dispatcher.handleMessage =
             (handler, msg) => {
                 handler.execute(msg, this.list);
             };
         this.dispatcher.run();
-        this.reloadResources();
+        // ServiceLocator.getMessages().ping();
     }
 
     public getList(): BlockViewModel[] {
@@ -26,7 +27,6 @@ export class App {
         var suffix = "?preview_mode=" + prefix + "&v=" + (new Date().getTime());
 
         var nodes = document.getElementsByTagName("link");
-        var head = document.getElementsByTagName("head").item(0);
 
         function generateLinkNode(url) {
             var result = document.createElement("link");
@@ -41,7 +41,10 @@ export class App {
             if (styleSheet.href && styleSheet.href.startsWith(document.location.origin) && styleSheet.href.endsWith(".css")) {
                 var url = styleSheet.href + suffix;
                 var newlink = generateLinkNode(url);
-                head.replaceChild(newlink, styleSheet);
+                const parent = styleSheet.parentNode;
+                if (!!parent) {
+                    parent.replaceChild(newlink, styleSheet);
+                }
             }
         }
     }

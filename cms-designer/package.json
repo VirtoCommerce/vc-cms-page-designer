@@ -6,6 +6,7 @@
     "start": "ng serve",
     "build": "ng build --prod --base-href /v2/designer/ --resourcesOutputPath=assets",
     "virto": "ng build -c virto",
+    "prev": "ng build -c prev",
     "serve": "ng build -c dev",
     "test": "ng test",
     "lint": "ng lint",

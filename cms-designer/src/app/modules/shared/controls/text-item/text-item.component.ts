@@ -29,8 +29,6 @@ export class TextItemComponent extends BaseControlComponent<TextControlDescripto
 
             // [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
             // [{ 'font': [] }],
-
-
         ]
     };
 

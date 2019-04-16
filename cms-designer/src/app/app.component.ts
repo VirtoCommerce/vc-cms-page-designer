@@ -65,15 +65,13 @@ export class AppComponent implements OnInit {
     isEditMode$ = this.store.select(fromRoot.getIsEditMode);
     isDirty$ = this.store.select(fromRoot.getIsDirty);
     previewLoading$ = this.store.select(fromRoot.getPreviewLoading);
+    previewError$ = this.store.select(fromRoot.getPreviewError);
     activeTabIndex$ = this.store.select(fromRoot.getActiveTabIndex);
     pageTitle$ = this.store.select(fromEditor.getPageTitle);
     hasUndo$ = of(true);
     hasRedo$ = of(false);
 
-    private subscription: Subscription;
-
     constructor(private store: Store<fromRoot.State>,
-        private editorStore: Store<fromEditor.State>,
         private sanitizer: DomSanitizer) { }
 
     ngOnInit(): void {
@@ -84,8 +82,12 @@ export class AppComponent implements OnInit {
         this.store.dispatch(new rootActions.PreviewReady(source));
     }
 
-    onPreviewError() {
-        this.store.dispatch(new rootActions.PreviewError());
+    onPreviewError(error) {
+        this.store.dispatch(new rootActions.PreviewError(error));
+    }
+
+    reloadPreview() {
+        this.store.dispatch(new rootActions.ReloadPreview());
     }
 
     back() {

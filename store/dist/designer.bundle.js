@@ -102,12 +102,13 @@ class App {
         this.list = [];
     }
     run() {
+        this.reloadResources();
         this.dispatcher.handleMessage =
             (handler, msg) => {
                 handler.execute(msg, this.list);
             };
         this.dispatcher.run();
-        this.reloadResources();
+        // ServiceLocator.getMessages().ping();
     }
     getList() {
         return this.list;
@@ -117,7 +118,6 @@ class App {
         var prefix = urlParams.get('preview_mode');
         var suffix = "?preview_mode=" + prefix + "&v=" + (new Date().getTime());
         var nodes = document.getElementsByTagName("link");
-        var head = document.getElementsByTagName("head").item(0);
         function generateLinkNode(url) {
             var result = document.createElement("link");
             result.setAttribute("rel", "stylesheet");
@@ -130,7 +130,10 @@ class App {
             if (styleSheet.href && styleSheet.href.startsWith(document.location.origin) && styleSheet.href.endsWith(".css")) {
                 var url = styleSheet.href + suffix;
                 var newlink = generateLinkNode(url);
-                head.replaceChild(newlink, styleSheet);
+                const parent = styleSheet.parentNode;
+                if (!!parent) {
+                    parent.replaceChild(newlink, styleSheet);
+                }
             }
         }
     }
@@ -331,6 +334,7 @@ exports.Environment = {
     RenderBlockApiUrl: '/designer-preview/block',
     DesignerUrl: 'http://localhost/'
     // DesignerUrl: 'http://vc-admin-test.azurewebsites.net/designer'
+    // DesignerUrl: 'https://vc-com-new-initial-platform.azurewebsites.net/designer'
 };
 
 
@@ -1373,6 +1377,7 @@ class MessagesService {
     }
     send(message, model) {
         const msg = Object.assign({ type: message }, model);
+        console.log('send to designer', msg);
         window.parent.postMessage(msg, this.parentOrigin);
     }
 }

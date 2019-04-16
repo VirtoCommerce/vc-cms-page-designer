@@ -8,6 +8,7 @@ export interface RootState {
     secondaryLoaded: boolean;
     activeTabIndex: number;
     previewUrl: string;
+    previewError: boolean;
 }
 
 const initialState: RootState = {
@@ -17,7 +18,8 @@ const initialState: RootState = {
     primaryLoaded: false,
     secondaryLoaded: false,
     activeTabIndex: 0,
-    previewUrl: null
+    previewUrl: null,
+    previewError: false
 };
 
 export function reducer(state = initialState, action: RootActions): RootState {
@@ -25,13 +27,28 @@ export function reducer(state = initialState, action: RootActions): RootState {
         case RootActionTypes.PreviewLoading:
             return {
                 ...state,
-                previewLoading: action.payload
+                previewLoading: action.payload,
+                previewError: false
             };
         case RootActionTypes.PreviewError: {
             return {
                 ...state,
                 primaryLoaded: false,
-                secondaryLoaded: false
+                secondaryLoaded: false,
+                previewError: true,
+                primaryFrameId: null,
+                secondaryFrameId: null
+            };
+        }
+        case RootActionTypes.ReloadPreview: {
+            return {
+                ...state,
+                primaryLoaded: false,
+                secondaryLoaded: false,
+                previewError: false,
+                previewLoading: true,
+                primaryFrameId: null,
+                secondaryFrameId: null
             };
         }
         case RootActionTypes.PreviewReady: {
@@ -49,7 +66,8 @@ export function reducer(state = initialState, action: RootActions): RootState {
             }
             return {
                 ...state,
-                ...newValues
+                ...newValues,
+                previewError: false
             };
         }
         case RootActionTypes.ToggleFrames: {
