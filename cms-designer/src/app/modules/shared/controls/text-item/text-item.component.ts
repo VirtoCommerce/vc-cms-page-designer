@@ -21,7 +21,7 @@ export class TextItemComponent extends BaseControlComponent<TextControlDescripto
             ['link', 'image', 'video'],                       // link and image, video
             ['clean'],                                         // remove formatting button
             // [{ 'indent': '-1' }, { 'indent': '+1' }],         // outdent/indent
-            // ['blockquote', 'code-block'],
+            ['blockquote', 'code-block'],
             // [{ 'header': 1 }, { 'header': 2 }],               // custom button values
             // [{ 'script': 'sub' }, { 'script': 'super' }],     // superscript/subscript
             // [{ 'direction': 'rtl' }],                         // text direction
