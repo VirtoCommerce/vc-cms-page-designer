@@ -163,6 +163,22 @@
                 ]
             },
             {
+                "id": "decorator",
+                "label": "Block decorator",
+                "type": "select",
+                "default": "none",
+                "options": [
+                  {
+                    "value": "none",
+                    "label": "None"
+                  },
+                  {
+                    "value": "section--pattern",
+                    "label": "Pattern 1"
+                  }
+                ]
+            },
+            {
                 "id": "content",
                 "label": "Content",
                 "type": "text",
@@ -193,15 +209,15 @@
                 "type": "select",
                 "default": "light",
                 "options": [
-                    {
-                        "value": "light",
-                        "label": "Light"
-                    },
-                    {
-                        "value": "dark",
-                        "label": "Dark"
-                    }
-                ]
+                {
+                  "value": "light",
+                  "label": "Light"
+                },
+                {
+                  "value": "dark",
+                  "label": "Dark"
+                }
+              ]
             },
             {
                 "id": "content",
@@ -268,6 +284,41 @@
                 "label": "Show frame",
                 "type": "checkbox",
                 "default": false
+            },
+            {
+                "id": "columnsWidth",
+                "label": "Columns width",
+                "type": "select",
+                "default": "auto",
+                "options": [
+                    { "value": "auto", "label": "auto" },
+                    { "value": "columns-2", "label": "2 per row" },
+                    { "value": "columns-3", "label": "3 per row" },
+                    { "value": "columns-4", "label": "4 per row" },
+                    { "value": "columns-5", "label": "5 per row" }
+                ]
+            },
+            {
+                "id": "imageAlignment",
+                "label": "Image alignment",
+                "type": "select",
+                "default": "left",
+                "options": [
+                    { "value": "left", "label": "Left" },
+                    { "value": "center", "label": "Center" },
+                    { "value": "right", "label": "Right" }
+                ]
+            },
+            {
+                "id": "titleAlignment",
+                "label": "Title alignment",
+                "type": "select",
+                "default": "left",
+                "options": [
+                    { "value": "left", "label": "Left" },
+                    { "value": "center", "label": "Center" },
+                    { "value": "right", "label": "Right" }
+                ]
             }
         ]
     },

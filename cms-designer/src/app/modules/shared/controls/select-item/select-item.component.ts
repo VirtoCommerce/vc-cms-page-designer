@@ -33,7 +33,8 @@ export class SelectItemComponent extends BaseControlComponent<SelectControlDescr
     }
 
     setValue(value: any) {
-        this.value = this.descriptor.options.find(x => x.value === value);
+        const v = !value && this.descriptor.default ? this.descriptor.default : value;
+        this.value = this.descriptor.options.find(x => x.value === v);
     }
 
     getTitle(): string {
