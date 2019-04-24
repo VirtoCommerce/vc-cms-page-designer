@@ -286,6 +286,12 @@
                 "default": false
             },
             {
+                "id": "nowrap",
+                "label": "No wrap",
+                "type": "checkbox",
+                "default": false
+            },
+            {
                 "id": "columnsWidth",
                 "label": "Columns width",
                 "type": "select",
@@ -299,25 +305,37 @@
                 ]
             },
             {
+                "id": "columnsAlignment",
+                "label": "Columns alignment",
+                "type": "select",
+                "default": "align-columns-center",
+                "options": [
+                    { "value": "align-columns-left", "label": "Left" },
+                    { "value": "align-columns-center", "label": "Center" },
+                    { "value": "align-columns-right", "label": "Right" },
+                    { "value": "align-columns-stretch", "label": "Stretch" }
+                ]
+            },
+            {
                 "id": "imageAlignment",
                 "label": "Image alignment",
                 "type": "select",
-                "default": "left",
+                "default": "align-left",
                 "options": [
-                    { "value": "left", "label": "Left" },
-                    { "value": "center", "label": "Center" },
-                    { "value": "right", "label": "Right" }
+                    { "value": "align-left", "label": "Left" },
+                    { "value": "align-center", "label": "Center" },
+                    { "value": "align-right", "label": "Right" }
                 ]
             },
             {
                 "id": "titleAlignment",
                 "label": "Title alignment",
                 "type": "select",
-                "default": "left",
+                "default": "align-left",
                 "options": [
-                    { "value": "left", "label": "Left" },
-                    { "value": "center", "label": "Center" },
-                    { "value": "right", "label": "Right" }
+                    { "value": "align-left", "label": "Left" },
+                    { "value": "align-center", "label": "Center" },
+                    { "value": "align-right", "label": "Right" }
                 ]
             }
         ]
