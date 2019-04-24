@@ -68,78 +68,169 @@
             }
         ]
     },
-    "image-carousel": {
-        "name": "Image carousel",
-        "icon": "image-carousel",
+    "image-with-text": {
+        "name": "Image with text",
+        "icon": "image-text",
         "displayField": "name",
         "settings": [
             {
                 "id": "name",
                 "label": "Block name",
                 "type": "string",
-                "default": "Image carousel",
-				"autofocus": true
+                "default": "Image with text"
             },
             {
-                "id": "width",
-                "label": "Block width",
+                "id": "title",
+                "label": "Title",
+                "type": "string",
+                "default": "Yellowstone National Park",
+                "autofocus": true
+            },
+            {
+                "id": "style",
+                "label": "Block style",
                 "type": "select",
-                "default": "screen",
+                "default": "light",
                 "options": [
                     {
-                        "label": "Screen",
-                        "value": "screen"
+                        "value": "light",
+                        "label": "Light"
                     },
                     {
-                        "label": "Container",
-                        "value": "container"
-                    },
-                    {
-                        "label": "Small",
-                        "value": "small"
+                        "value": "dark",
+                        "label": "Dark"
                     }
                 ]
             },
             {
-                "id": "rotate",
-                "label": "Auto-rotate images",
-                "type": "checkbox",
-                "default": true
+                "id": "align",
+                "label": "Image position",
+                "type": "select",
+                "default": "right",
+                "options": [
+                    { "value": "right", "label": "Right" },
+                    { "value": "left", "label": "Left" }
+                ]
             },
             {
-                "id": "frequency",
-                "label": "Rotation frequency",
+                "id": "url",
+                "label": "Upload picture",
+                "type": "image",
+                "default": "http://dev-cms-vm.westeurope.cloudapp.azure.com/v2/admin/Assets/blogs/yellowstone.jpg",
+                "previewWith": 120,
+                "previewHeight": 80
+            },
+            {
+                "id": "content",
+                "label": "Content",
+                "type": "text",
+                "default": "Yellowstone National Park is an American national park located in Wyoming, Montana, and Idaho.  <a href='https://en.wikipedia.org/wiki/Yellowstone_National_Park'>See more on Wiki</a>"
+            }
+        ]
+    },
+    "text": {
+        "name": "Simple text",
+        "icon": "text",
+        "displayField": "name",
+        "settings": [
+            {
+                "id": "name",
+                "label": "Block name",
+                "type": "string",
+                "default": "Text"
+            },
+            {
+                "id": "title",
+                "label": "Title",
+                "type": "string",
+                "default": "Yellowstone National Park",
+                "autofocus": true
+            },
+            {
+                "id": "style",
+                "label": "Block style",
                 "type": "select",
-                "default": "5000",
+                "default": "light",
                 "options": [
                     {
-                        "label": "5000",
-                        "value": "5 seconds"
+                        "value": "light",
+                        "label": "Light"
                     },
                     {
-                        "label": "6000",
-                        "value": "6 seconds"
-                    },
-                    {
-                        "label": "7000",
-                        "value": "7 seconds"
-                    },
-                    {
-                        "label": "8000",
-                        "value": "8 seconds"
-                    },
-                    {
-                        "label": "9000",
-                        "value": "9 seconds"
+                        "value": "dark",
+                        "label": "Dark"
                     }
                 ]
             },
             {
-                "id": "images",
-                "label": "Images",
+                "id": "decorator",
+                "label": "Block decorator",
+                "type": "select",
+                "default": "none",
+                "options": [
+                  {
+                    "value": "none",
+                    "label": "None"
+                  },
+                  {
+                    "value": "section--pattern",
+                    "label": "Pattern 1"
+                  }
+                ]
+            },
+            {
+                "id": "content",
+                "label": "Content",
+                "type": "text",
+                "default": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+            }
+        ]
+    },
+    "textcolumns-with-images": {
+        "name": "Text columns with images",
+        "icon": "text-columns",
+        "settings": [
+            {
+                "id": "name",
+                "label": "Block name",
+                "type": "string",
+                "default": "Text columns with images"
+            },
+            {
+                "id": "title",
+                "label": "Title",
+                "type": "string",
+                "default": "All you need in one place",
+                "autofocus": true
+            },
+            {
+                "id": "style",
+                "label": "Block style",
+                "type": "select",
+                "default": "light",
+                "options": [
+                {
+                  "value": "light",
+                  "label": "Light"
+                },
+                {
+                  "value": "dark",
+                  "label": "Dark"
+                }
+              ]
+            },
+            {
+                "id": "content",
+                "label": "Content",
+                "type": "text",
+                "default": ""
+            },
+            {
+                "id": "columns",
+                "label": "Columns",
                 "type": "list",
-                "addText": "Add image",
-                "removeText": "Remove image",
+                "addText": "Add column",
+                "removeText": "Remove column",
                 "displayField": "title",
                 "element": [
                     {
@@ -162,107 +253,155 @@
                 ],
                 "default": [
                     {
-                        "title": "Galunggung",
-                        "url": "http://dev-cms-vm.westeurope.cloudapp.azure.com/v2/admin/Assets/blogs/Galunggung.jpg",
-                        "content": "Mount Galunggung is an active stratovolcano in West Java, Indonesia. <a href='https://en.wikipedia.org/wiki/Galunggung'>See more on Wiki</a>"
-                    },
-                    {
-                        "title": "Hopetoun falls",
-                        "url": "http://dev-cms-vm.westeurope.cloudapp.azure.com/v2/admin/Assets/blogs/Hopetoun_falls.jpg",
-                        "content": "The Hopetoun Falls is a waterfall across the Aire River that is located in The Otways region of Victoria, Australia. <a href='https://en.wikipedia.org/wiki/Hopetoun_Falls'>See more on Wiki</a>"
-                    },
-                    {
-                        "title": "Bachalpsee reflection",
+                        "title": "Left column",
                         "url": "http://dev-cms-vm.westeurope.cloudapp.azure.com/v2/admin/Assets/blogs/Bachalpsee_reflection.jpg",
-                        "content": "Bachalpsee is a lake close to the First above Grindelwald in the Bernese Oberland, Switzerland. <a href='https://en.wikipedia.org/wiki/Bachalpsee'>See more on Wiki</a>"
+                        "content": "Bachalpsee is a lake close to the First above Grindelwald in the Bernese Oberland, Switzerland. <a href='https://en.wikipedia.org/wiki/Bachalpsee'>See more on Wiki</a>",
+                        "width": "auto"
+                    },
+                    {
+                        "title": "Right column",
+                        "url": "http://dev-cms-vm.westeurope.cloudapp.azure.com/v2/admin/Assets/blogs/Galunggung.jpg",
+                        "content": "Mount Galunggung is an active stratovolcano in West Java, Indonesia. <a href='https://en.wikipedia.org/wiki/Galunggung'>See more on Wiki</a>",
+                        "width": "auto"
                     }
+                ]
+            },
+            {
+                "id": "frame",
+                "label": "Show frame",
+                "type": "checkbox",
+                "default": false
+            },
+            {
+                "id": "columnsWidth",
+                "label": "Columns width",
+                "type": "select",
+                "default": "auto",
+                "options": [
+                    { "value": "auto", "label": "auto" },
+                    { "value": "columns-2", "label": "2 per row" },
+                    { "value": "columns-3", "label": "3 per row" },
+                    { "value": "columns-4", "label": "4 per row" },
+                    { "value": "columns-5", "label": "5 per row" }
+                ]
+            },
+            {
+                "id": "imageAlignment",
+                "label": "Image alignment",
+                "type": "select",
+                "default": "left",
+                "options": [
+                    { "value": "left", "label": "Left" },
+                    { "value": "center", "label": "Center" },
+                    { "value": "right", "label": "Right" }
+                ]
+            },
+            {
+                "id": "titleAlignment",
+                "label": "Title alignment",
+                "type": "select",
+                "default": "left",
+                "options": [
+                    { "value": "left", "label": "Left" },
+                    { "value": "center", "label": "Center" },
+                    { "value": "right", "label": "Right" }
                 ]
             }
         ]
     },
-    "image-with-text": {
-        "name": "Image with text",
-        "icon": "image-text",
+    "image-carousel": {
+        "name": "Image carousel",
+        "icon": "image-carousel",
         "displayField": "name",
         "settings": [
             {
                 "id": "name",
                 "label": "Block name",
                 "type": "string",
-                "default": "Image with text"
+                "default": "Image carousel"
             },
             {
                 "id": "title",
                 "label": "Title",
                 "type": "string",
-                "default": "Yellowstone National Park",
-				"autofocus": true
+                "autofocus": true
             },
             {
-                "id": "url",
-                "label": "Upload picture",
-                "type": "image",
-                "default": "http://dev-cms-vm.westeurope.cloudapp.azure.com/v2/admin/Assets/blogs/yellowstone.jpg",
-                "previewWith": 120,
-                "previewHeight": 80
-            },
-            {
-                "id": "size",
-                "label": "Choose image size",
+                "id": "style",
+                "label": "Block style",
                 "type": "select",
-                "default": "small",
+                "default": "light",
                 "options": [
                     {
-                        "label": "Small",
-                        "value": "small"
+                        "value": "light",
+                        "label": "Light"
                     },
                     {
-                        "label": "Medium",
-                        "value": "medium"
-                    },
-                    {
-                        "label": "Large",
-                        "value": "large"
-                    },
-                    {
-                        "label": "Extra-Large",
-                        "value": "xlarge"
+                        "value": "dark",
+                        "label": "Dark"
                     }
                 ]
             },
             {
-                "id": "align",
-                "label": "Choose image alignment",
+                "id": "rotate",
+                "label": "Auto-rotate images",
+                "type": "checkbox",
+                "default": true
+            },
+            {
+                "id": "frequency",
+                "label": "Rotation frequency",
                 "type": "select",
-                "default": "left",
+                "default": "5000",
                 "options": [
                     {
-                        "label": "Left",
-                        "value": "left"
+                        "value": "5000",
+                        "label": "5 seconds"
                     },
                     {
-                        "label": "Right",
-                        "value": "right"
+                        "value": "6000",
+                        "label": "6 seconds"
                     },
                     {
-                        "label": "Top",
-                        "value": "top"
+                        "value": "7000",
+                        "label": "7 seconds"
                     },
                     {
-                        "label": "Bottom",
-                        "value": "bottom"
+                        "value": "8000",
+                        "label": "8 seconds"
+                    },
+                    {
+                        "value": "9000",
+                        "label": "9 seconds"
                     }
                 ]
             },
             {
-                "id": "content",
-                "label": "Content",
-                "type": "text",
-                "default": "Yellowstone National Park is an American national park located in Wyoming, Montana, and Idaho.  <a href='https://en.wikipedia.org/wiki/Yellowstone_National_Park'>See more on Wiki</a>"
+                "id": "images",
+                "label": "Images",
+                "type": "list",
+                "addText": "Add image",
+                "removeText": "Remove image",
+                "displayField": "title",
+                "element": [
+                    {
+                        "id": "url",
+                        "label": "Upload picture",
+                        "type": "image",
+                        "previewWidth": 120,
+                        "previewHeight": 80
+                    }
+                ],
+                "default": [
+                    { "url": "http://dev-cms-vm.westeurope.cloudapp.azure.com/v2/admin/Assets/blogs/Galunggung.jpg" },
+                    { "url": "http://dev-cms-vm.westeurope.cloudapp.azure.com/v2/admin/Assets/blogs/Hopetoun_falls.jpg" },
+                    { "url": "http://dev-cms-vm.westeurope.cloudapp.azure.com/v2/admin/Assets/blogs/Bachalpsee_reflection.jpg" }
+                ]
             }
         ]
     },
     "image-with-text-overlay": {
+        "hide": true,
         "name": "Image with text overlay",
         "icon": "fas fa-file-contract",
         "settings": [
@@ -342,6 +481,7 @@
         ]
     },
     "images-layout": {
+        "hide": true,
         "name": "Images layout",
         "icon": "far fa-file-image",
         "settings": [
@@ -411,6 +551,7 @@
         ]
     },
     "image": {
+        "hide": true,
         "name": "Simple image",
         "icon": "image",
         "settings": [
@@ -419,7 +560,30 @@
                 "label": "Block name",
                 "type": "string",
                 "default": "Simple image",
-				"autofocus": true
+                "autofocus": true
+            },
+            {
+                "id": "title",
+                "label": "Title",
+                "type": "string",
+                "default": "Yellowstone National Park",
+                "autofocus": true
+            },
+            {
+                "id": "style",
+                "label": "Block style",
+                "type": "select",
+                "default": "light",
+                "options": [
+                    {
+                        "value": "light",
+                        "label": "Light"
+                    },
+                    {
+                        "value": "dark",
+                        "label": "Dark"
+                    }
+                ]
             },
             {
                 "id": "size",
@@ -452,121 +616,6 @@
                 "previewWidth": 120,
                 "previewHeight": 80,
                 "default": "http://dev-cms-vm.westeurope.cloudapp.azure.com/v2/admin/Assets/blogs/Bajkał_lake.jpg"
-            }
-        ]
-    },
-    "text": {
-        "name": "Simple text",
-        "icon": "text",
-        "displayField": "name",
-        "settings": [
-            {
-                "id": "name",
-                "label": "Block name",
-                "type": "string",
-                "default": "Text"
-            },
-            {
-                "id": "content",
-                "label": "Content",
-                "type": "text",
-                "default": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-				"autofocus": true
-            }
-        ]
-    },
-    "textcolumns-with-images": {
-        "name": "Text columns with images",
-        "icon": "text-columns",
-        "settings": [
-            {
-                "id": "name",
-                "label": "Block name",
-                "type": "string",
-                "default": "Text columns with images",
-				"autofocus": true
-            },
-            {
-                "id": "align",
-                "label": "Image alignment",
-                "type": "select",
-                "default": "top",
-                "options": [
-                    {
-                        "label": "Top",
-                        "value": "top"
-                    },
-                    {
-                        "label": "Bottom",
-                        "value": "bottom"
-                    }
-                ]
-            },
-            {
-                "id": "size",
-                "label": "Image size",
-                "type": "select",
-                "default": "medium",
-                "options": [
-                    {
-                        "label": "Small",
-                        "value": "small"
-                    },
-                    {
-                        "label": "Medium",
-                        "value": "medium"
-                    },
-                    {
-                        "label": "Large",
-                        "value": "large"
-                    }
-                ]
-            },
-            {
-                "id": "columns",
-                "label": "Columns",
-                "type": "list",
-                "addText": "Add column",
-                "removeText": "Remove column",
-                "displayField": "title",
-                "element": [
-                    {
-                        "id": "title",
-                        "label": "Title",
-                        "type": "string"
-                    },
-                    {
-                        "id": "url",
-                        "label": "Upload picture",
-                        "type": "image",
-                        "previewWidth": 120,
-                        "previewHeight": 80
-                    },
-                    {
-                        "id": "content",
-                        "label": "Content",
-                        "type": "text"
-                    },
-                    {
-                        "id": "width",
-                        "label": "Flex width",
-                        "type": "number"
-                    }
-                ],
-                "default": [
-                    {
-                        "title": "Left column",
-                        "url": "http://dev-cms-vm.westeurope.cloudapp.azure.com/v2/admin/Assets/blogs/Bachalpsee_reflection.jpg",
-                        "content": "Bachalpsee is a lake close to the First above Grindelwald in the Bernese Oberland, Switzerland. <a href='https://en.wikipedia.org/wiki/Bachalpsee'>See more on Wiki</a>",
-                        "width": 2
-                    },
-                    {
-                        "title": "Right column",
-                        "url": "http://dev-cms-vm.westeurope.cloudapp.azure.com/v2/admin/Assets/blogs/Galunggung.jpg",
-                        "content": "Mount Galunggung is an active stratovolcano in West Java, Indonesia. <a href='https://en.wikipedia.org/wiki/Galunggung'>See more on Wiki</a>",
-                        "width": 1
-                    }
-                ]
             }
         ]
     },

@@ -6,7 +6,7 @@
         <app-control-holder *ngIf="displaySimpleControl(control)" [descriptor]="control" [group]="group"
             [formControlName]="control.id"></app-control-holder>
         <!-- complext control (collection) -->
-        <div *ngIf="displayCollection(control)">
+        <div *ngIf="displayCollection(control)" class="form-group">
             <div *ngIf="!editableItem">
                 <div cdkDropList (cdkDropListDropped)="sortItems(control, $event)"
                     class="list list--collection">
@@ -21,25 +21,6 @@
                             <div cdkDragHandle class="list__actions-item list__actions-item--drag"></div>
                         </div>
                     </div>
-
-                    <!-- <app-accordeon appSortableList (sort)="sortItems(control, $event)">
-                    <app-acc-item *ngFor="let item of getControls(control); let i = index; trackBy: trackByFn" [title]="getTitle(item, control)"
-                        appDraggable>
-                        <div [formGroupName]="i">
-
-                            <app-elements-form [group]="item" [descriptors]="getElementDescriptors(control)"></app-elements-form>
-
-                            <div class="pane-settings">
-                                <button class="btn" (click)="removeElement(control, i)">{{ getRemoveButtonTitle(control) }}</button>
-                            </div>
-                        </div>
-                        <div *appDraggableHelper>
-                            <h4 class="panel-title">
-                                <a href tabindex="0"><span>{{ getTitle(item, control) }}</span></a>
-                            </h4>
-                        </div>
-                    </app-acc-item>
-                </app-accordeon> -->
                     <div>
                         <button class="btn btn--blue btn--block"
                             (click)="addElement(control)">{{ getAddButtonTitle(control) }}</button>
