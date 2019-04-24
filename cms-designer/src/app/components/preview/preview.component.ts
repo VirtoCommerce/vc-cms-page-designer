@@ -7,22 +7,16 @@ import { SafeUrl, DomSanitizer } from '@angular/platform-browser';
 })
 export class PreviewComponent implements OnInit {
 
-    private _originalUrl: SafeUrl;
-
-    @Input() get storeUrl(): SafeUrl {
-        return this.hideUrl ? null : this._originalUrl;
-    }
-    set storeUrl(value: SafeUrl) {
-        this._originalUrl = value;
-    }
+    @Input() storeUrl: SafeUrl;
+    @Input() error: boolean;
     @Input() mode: string;
     @Input() loading: boolean;
     @Output() preivewLoaded = new EventEmitter<string>();
     @Output() preivewLoadingError = new EventEmitter<any>();
+    @Output() reloadClick = new EventEmitter<any>();
     @ViewChild('preview1') preview1: ElementRef<any>;
     @ViewChild('preview2') preview2: ElementRef<any>;
 
-    error = false;
     hideUrl = false;
     isFullScreen = false;
 
@@ -40,8 +34,8 @@ export class PreviewComponent implements OnInit {
             if (this.preview1.nativeElement.src === url) {
                 this.preivewLoaded.emit('preview1');
             }
-        } catch {
-            this.handleError();
+        } catch (error) {
+            this.onErrorOccured(error);
         }
     }
 
@@ -55,25 +49,26 @@ export class PreviewComponent implements OnInit {
             if (this.preview2.nativeElement.src === url) {
                 this.preivewLoaded.emit('preview2');
             }
-        } catch {
-            this.handleError();
+        } catch (error) {
+            this.onErrorOccured(error);
         }
     }
 
     reloadIFrames() {
-        this.error = false;
-        this.hideUrl = false;
-        this.loading = true;
+        this.reloadClick.emit();
+        // this.error = false;
+        // this.hideUrl = false;
+        // this.loading = true;
     }
 
     toggleFullscreen() {
         this.isFullScreen = !this.isFullScreen;
     }
 
-    handleError() {
-        this.error = true;
-        this.loading = false;
-        this.hideUrl = true;
-        this.preivewLoadingError.emit();
+    onErrorOccured(error) {
+        // this.error = true;
+        // this.loading = false;
+        // this.hideUrl = true;
+        this.preivewLoadingError.emit(error);
     }
 }

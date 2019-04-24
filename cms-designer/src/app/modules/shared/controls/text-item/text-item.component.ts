@@ -19,7 +19,7 @@ export class TextItemComponent extends BaseControlComponent<TextControlDescripto
             [{ 'list': 'ordered' }, { 'list': 'bullet' }],
             [{ 'align': [] }],
             ['link', 'image', 'video'],                       // link and image, video
-            ['clean']                                         // remove formatting button
+            ['clean'],                                         // remove formatting button
             // [{ 'indent': '-1' }, { 'indent': '+1' }],         // outdent/indent
             // ['blockquote', 'code-block'],
             // [{ 'header': 1 }, { 'header': 2 }],               // custom button values
@@ -27,10 +27,8 @@ export class TextItemComponent extends BaseControlComponent<TextControlDescripto
             // [{ 'direction': 'rtl' }],                         // text direction
 
 
-            // [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
+            [{ 'color': [ '#0c1015', '#b3b7d0' ] }, { 'background': [] }],          // dropdown with defaults from theme
             // [{ 'font': [] }],
-
-
         ]
     };
 

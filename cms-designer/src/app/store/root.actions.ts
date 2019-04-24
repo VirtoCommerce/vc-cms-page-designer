@@ -7,6 +7,8 @@ export enum RootActionTypes {
     PreviewLoading = '[Root] Preview Loading',
     PreviewReady = '[Root] Preview is Ready',
     PreviewError = '[Root] Preview in Error mode',
+    ReloadPreview = '[Root] Reload Preview',
+    CheckPreviewLoadedOrError = '[Root] Check Preview Loaded Or Error',
     ToggleFrames = '[Root] Toggle Frames',
     CloseEditors = '[Root] Close editors',
     TabIndexChanged = '[Root] Tab Index Changed',
@@ -39,6 +41,16 @@ export class PreviewReady implements Action {
 
 export class PreviewError implements Action {
     readonly type = RootActionTypes.PreviewError;
+
+    constructor (public payload: any) { }
+}
+
+export class ReloadPreview implements Action {
+    readonly type = RootActionTypes.ReloadPreview;
+}
+
+export class CheckPreviewLoadedOrError implements Action {
+    readonly type = RootActionTypes.CheckPreviewLoadedOrError;
 }
 
 export class ToggleFrames implements Action {
@@ -70,6 +82,8 @@ export type RootActions = ResetData
     | PreviewLoading
     | PreviewReady
     | PreviewError
+    | ReloadPreview
+    | CheckPreviewLoadedOrError
     | ToggleFrames
     | CloseEditors
     | TabIndexChanged

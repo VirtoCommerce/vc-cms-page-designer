@@ -4,5 +4,6 @@ export let AppSettings: EnvironmentSettings = {
     storeBaseUrl: null,
     storePreviewPath: null,
     baseUrl: null,
-    platformUrl: null
+    platformUrl: null,
+    previewTimeout: 60000
 };

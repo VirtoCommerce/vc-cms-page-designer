@@ -78,6 +78,11 @@ export const getPreviewUrl = createSelector(
     state => state.previewUrl
 );
 
+export const getPreviewError = createSelector(
+    getRootFeatureState,
+    state => state.previewError
+);
+
 export const getPrimaryIsLoaded = createSelector(
     getRootFeatureState,
     state => state.primaryLoaded

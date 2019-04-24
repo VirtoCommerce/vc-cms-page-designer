@@ -1,8 +1,12 @@
+import { AppSettings } from './../services/app.settings';
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Action, Store } from '@ngrx/store';
-import { Observable, of, fromEvent } from 'rxjs';
-import { switchMapTo, debounceTime, distinctUntilChanged, withLatestFrom, tap, filter, map, switchMap, mapTo } from 'rxjs/operators';
+import { Observable, of, fromEvent, timer } from 'rxjs';
+import {
+    switchMapTo, debounceTime, distinctUntilChanged,
+    withLatestFrom, tap, filter, map, switchMap, mapTo, timeout, catchError
+} from 'rxjs/operators';
 import { PreviewService, ApiUrlsService } from '@app/services';
 import { MessageService } from '@shared/services';
 import { BlockValuesModel } from '@shared/models';
@@ -100,13 +104,33 @@ export class RootEffects {
     @Effect()
     setPreviewUrl = this.actions$.pipe(
         ofType<editorActions.LoadPageSuccess>(editorActions.EditorActionTypes.LoadPageSuccess),
-        map(action => {
+        switchMap(action => {
             if (!!action.payload.settings) {
                 const result = this.urls.getStoreUrl(<string>action.payload.settings['layout']);
-                return new rootActions.SetPreviewUrl(result);
+                return [new rootActions.SetPreviewUrl(result), new rootActions.ReloadPreview()];
             }
-            return new rootActions.SetPreviewUrl(null);
+            return [new rootActions.SetPreviewUrl(null)];
         })
+    );
+
+    @Effect({ dispatch: false })
+    previewFailed = this.actions$.pipe(
+        ofType<rootActions.PreviewError>(rootActions.RootActionTypes.PreviewError),
+        tap(action => {
+            console.log(action.payload);
+        })
+    );
+
+    @Effect()
+    previewFailedByTimeout$ = this.actions$.pipe(
+        ofType(rootActions.RootActionTypes.CheckPreviewLoadedOrError),
+        withLatestFrom(
+            this.rootStore$.select(fromRoot.getPrimaryIsLoaded),
+            this.rootStore$.select(fromRoot.getSecondaryIsLoaded),
+            this.rootStore$.select(fromRoot.getPreviewLoading)
+        ),
+        filter(([, primaryLoaded, secondaryLoaded, isLoadingStill]) => (!primaryLoaded && !secondaryLoaded) || isLoadingStill),
+        map(() => new rootActions.PreviewError('timeoutError'))
     );
 
     // themes
@@ -128,7 +152,7 @@ export class RootEffects {
 
     // editor
 
-    @Effect({ dispatch: false})
+    @Effect({ dispatch: false })
     sendHoverToPreview$ = this.actions$.pipe(
         ofType<editorActions.HighlightInPreview>(editorActions.EditorActionTypes.HighlightInPreview),
         withLatestFrom(
@@ -233,6 +257,17 @@ export class RootEffects {
     );
 
     @Effect()
+    timeoutToError$ = this.actions$.pipe(
+        ofType(rootActions.RootActionTypes.ReloadPreview),
+        switchMap(() => timer(AppSettings.previewTimeout).pipe(
+            map(() => new rootActions.CheckPreviewLoadedOrError())
+        )),
+        // timeout(AppSettings.previewTimeout),
+        // map(() => of(new rootActions.)),
+        // catchError(() => of(new rootActions.CheckPreviewLoadedOrError()))
+    );
+
+    @Effect()
     sendPageToStore$ = this.actions$.pipe(
         ofType<rootActions.PreviewReady>(rootActions.RootActionTypes.PreviewReady),
         withLatestFrom(
@@ -304,7 +339,7 @@ export class RootEffects {
 
     // @Effect()
     // scriptInPreviewLoaded$ = fromEvent(window, 'message').pipe(
-    //     filter((event: MessageEvent) => event.data.type === 'scriptLoaded'),
+    //     filter((event: MessageEvent) => event.data.type === 'ping'), // first event
     //     map(event => {
     //         return new rootActions.PreviewReady(event.srcElement.id);
     //     }),

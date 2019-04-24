@@ -26,6 +26,7 @@ export class MessagesService {
 
     private send(message: string, model) {
         const msg = { type: message, ...model };
+        console.log('send to designer', msg);
         window.parent.postMessage(msg, this.parentOrigin);
     }
 }
