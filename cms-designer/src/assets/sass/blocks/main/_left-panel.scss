@@ -4,10 +4,24 @@
     border-right: 1px solid $border-color;
     box-sizing: border-box;
     display: flex;
+    position: relative;
     flex-direction: column;
     flex: 0 0 $left-aside;
     max-width: $left-aside;
 
+    &-toggable {
+        z-index: 1;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        background: #fff;
+        transition: width .5s;
+        &.opened {
+            position: absolute;
+            box-shadow: 0 0 20px #999;
+        }
+    }
     .error-page
     {
         &__pic

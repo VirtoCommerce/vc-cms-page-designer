@@ -1,21 +1,25 @@
-<div class="left-panel-content">
-    <div class="form">
-        <h2 class="form-t">Edit {{ blockName }}</h2>
-        <app-block-form *ngIf="model && schema" [model]="model" [schema]="schema" (modelChange)="modelChanged($event)"></app-block-form>
-        <div *ngIf="!schema && model">
-            <p>There are no descriptors for this block type: {{ model.type }}</p>
-        </div>
-        <div *ngIf="!model">
-            <p>No model provided</p>
+<div class="left-panel-toggable" [class.opened]="opened" [ngStyle]="{ 'width.px': openedWidthStyle }">
+    <div (click)="togglePanel()" style="cursor: pointer; position: absolute; top: 2px; right: 2px; padding: 3px; border: 1px solid black; background: white; z-index: 1;">toggle</div>
+    <div class="left-panel-content">
+        <div class="form">
+            <h2 class="form-t">Edit {{ blockName }}</h2>
+            <app-block-form *ngIf="model && schema" [model]="model" [schema]="schema"
+                (modelChange)="modelChanged($event)"></app-block-form>
+            <div *ngIf="!schema && model">
+                <p>There are no descriptors for this block type: {{ model.type }}</p>
+            </div>
+            <div *ngIf="!model">
+                <p>No model provided</p>
+            </div>
         </div>
     </div>
-</div>
-<div class="left-panel-footer" *ngIf="model.type !== 'settings' && !schema.static" >
-    <button class="btn btn--outline btn--block" (click)="removeBlock()">
-        <span class="btn__icon btn__icon--remove"></span>
-        <span class="btn__text">Remove section</span>
-    </button>
-    <button class="btn btn--outline btn--small" (click)="copyBlock()">
-        <span class="btn__icon btn__icon--copy"></span>
-    </button>
+    <div class="left-panel-footer" *ngIf="model.type !== 'settings' && !schema.static">
+        <button class="btn btn--outline btn--block" (click)="removeBlock()">
+            <span class="btn__icon btn__icon--remove"></span>
+            <span class="btn__text">Remove section</span>
+        </button>
+        <button class="btn btn--outline btn--small" (click)="copyBlock()">
+            <span class="btn__icon btn__icon--copy"></span>
+        </button>
+    </div>
 </div>

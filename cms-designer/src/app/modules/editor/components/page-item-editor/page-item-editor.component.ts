@@ -1,5 +1,7 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, AfterContentInit, OnDestroy } from '@angular/core';
 import { BlockSchema, BlockValuesModel } from '@shared/models';
+import { Subject, combineLatest, Observable, fromEvent, Subscription } from 'rxjs';
+import { map, withLatestFrom } from 'rxjs/operators';
 
 @Component({
     selector: 'app-page-item-editor',
@@ -17,11 +19,25 @@ export class PageItemEditorComponent implements OnInit {
     @Output() removeBlockEvent = new EventEmitter<BlockValuesModel>();
     @Output() copyBlockEvent = new EventEmitter<BlockValuesModel>();
 
+    opened = false;
+    openedWidthStyle: number;
+
     private editedModel: BlockValuesModel;
 
     constructor() { }
 
-    ngOnInit() { }
+    ngOnInit() {
+        window.addEventListener('resize', () => this.adjustPanelWidth());
+    }
+
+    togglePanel() {
+        this.opened = !this.opened;
+        this.adjustPanelWidth();
+    }
+
+    private adjustPanelWidth() {
+        this.openedWidthStyle = this.opened ? window.innerWidth / 2 : null;
+    }
 
     modelChanged(model) {
         this.editedModel = (!this.schema.static) ? model : {
