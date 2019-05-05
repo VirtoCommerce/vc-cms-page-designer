@@ -39,7 +39,8 @@ export enum EditorActionTypes {
     UpdatePageItem = '[Page] Update Page Item',
     ToggleItemVisibility = '[Page] Toggle Item Visibility',
     MarkSectionHoveredInPreview = '[Page] Mark Section Hovered In Preview',
-    HighlightInPreview = '[Page] Highlight In Preview'
+    HighlightInPreview = '[Page] Highlight In Preview',
+    SetEditorMode = '[Page] Set Editor Mode'
 }
 
 export class AddPageItem implements Action {
@@ -207,10 +208,16 @@ export class MarkSectionHoveredInPreview implements Action {
 
     constructor(public payload: number) { }
 }
-export class HighlightInPreview implements Action  {
+export class HighlightInPreview implements Action {
     readonly type = EditorActionTypes.HighlightInPreview;
 
     constructor(public payload: BlockValuesModel) { }
+}
+
+export class SetEditorMode implements Action {
+    readonly type = EditorActionTypes.SetEditorMode;
+
+    constructor(public payload: string) { }
 }
 
 export type EditorActions = LoadPage
@@ -245,4 +252,5 @@ export type EditorActions = LoadPage
     | ToggleItemVisibility
     | MarkSectionHoveredInPreview
     | HighlightInPreview
-    | SwapBlocks;
+    | SwapBlocks
+    | SetEditorMode;

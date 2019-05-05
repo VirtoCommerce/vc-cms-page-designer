@@ -89,3 +89,8 @@ export const getCurrentBlockName = createSelector(
         return null;
     }
 );
+
+export const getEditorMode = createSelector(
+    getEditorFeatureState,
+    state => state.editorMode
+);

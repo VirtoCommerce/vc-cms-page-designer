@@ -77,7 +77,8 @@
                 "id": "name",
                 "label": "Block name",
                 "type": "string",
-                "default": "Image with text"
+                "default": "Image with text",
+                "tab": "Settings"
             },
             {
                 "id": "title",
@@ -100,7 +101,8 @@
                         "value": "dark",
                         "label": "Dark"
                     }
-                ]
+                ],
+                "tab": "Settings"
             },
             {
                 "id": "align",
@@ -110,7 +112,8 @@
                 "options": [
                     { "value": "right", "label": "Right" },
                     { "value": "left", "label": "Left" }
-                ]
+                ],
+                "tab": "Settings"
             },
             {
                 "id": "url",
@@ -137,7 +140,8 @@
                 "id": "name",
                 "label": "Block name",
                 "type": "string",
-                "default": "Text"
+                "default": "Text",
+                "tab": "Settings"
             },
             {
                 "id": "title",
@@ -160,7 +164,8 @@
                         "value": "dark",
                         "label": "Dark"
                     }
-                ]
+                ],
+                "tab": "Settings"
             },
             {
                 "id": "decorator",
@@ -176,7 +181,8 @@
                     "value": "section--pattern",
                     "label": "Pattern 1"
                   }
-                ]
+                ],
+                "tab": "Settings"
             },
             {
                 "id": "content",
@@ -194,7 +200,8 @@
                 "id": "name",
                 "label": "Block name",
                 "type": "string",
-                "default": "Text columns with images"
+                "default": "Text columns with images",
+                "tab": "Settings"
             },
             {
                 "id": "title",
@@ -209,15 +216,16 @@
                 "type": "select",
                 "default": "light",
                 "options": [
-                {
-                  "value": "light",
-                  "label": "Light"
-                },
-                {
-                  "value": "dark",
-                  "label": "Dark"
-                }
-              ]
+                    {
+                    "value": "light",
+                    "label": "Light"
+                    },
+                    {
+                    "value": "dark",
+                    "label": "Dark"
+                    }
+                ],
+                "tab": "Settings"
             },
             {
                 "id": "content",
@@ -283,13 +291,15 @@
                 "id": "frame",
                 "label": "Show frame",
                 "type": "checkbox",
-                "default": false
+                "default": false,
+                "tab": "Settings"
             },
             {
                 "id": "nowrap",
                 "label": "No wrap",
                 "type": "checkbox",
-                "default": false
+                "default": false,
+                "tab": "Settings"
             },
             {
                 "id": "columnsWidth",
@@ -302,7 +312,8 @@
                     { "value": "columns-3", "label": "3 per row" },
                     { "value": "columns-4", "label": "4 per row" },
                     { "value": "columns-5", "label": "5 per row" }
-                ]
+                ],
+                "tab": "Settings"
             },
             {
                 "id": "columnsAlignment",
@@ -314,7 +325,8 @@
                     { "value": "align-columns-center", "label": "Center" },
                     { "value": "align-columns-right", "label": "Right" },
                     { "value": "align-columns-stretch", "label": "Stretch" }
-                ]
+                ],
+                "tab": "Settings"
             },
             {
                 "id": "imageAlignment",
@@ -325,7 +337,8 @@
                     { "value": "align-left", "label": "Left" },
                     { "value": "align-center", "label": "Center" },
                     { "value": "align-right", "label": "Right" }
-                ]
+                ],
+                "tab": "Settings"
             },
             {
                 "id": "titleAlignment",
@@ -336,7 +349,8 @@
                     { "value": "align-left", "label": "Left" },
                     { "value": "align-center", "label": "Center" },
                     { "value": "align-right", "label": "Right" }
-                ]
+                ],
+                "tab": "Settings"
             }
         ]
     },
@@ -349,7 +363,8 @@
                 "id": "name",
                 "label": "Block name",
                 "type": "string",
-                "default": "Image carousel"
+                "default": "Image carousel",
+                "tab": "Settings"
             },
             {
                 "id": "title",
@@ -371,13 +386,15 @@
                         "value": "dark",
                         "label": "Dark"
                     }
-                ]
+                ],
+                "tab": "Settings"
             },
             {
                 "id": "rotate",
                 "label": "Auto-rotate images",
                 "type": "checkbox",
-                "default": true
+                "default": true,
+                "tab": "Settings"
             },
             {
                 "id": "frequency",
@@ -405,7 +422,8 @@
                         "value": "9000",
                         "label": "9 seconds"
                     }
-                ]
+                ],
+                "tab": "Settings"
             },
             {
                 "id": "images",
@@ -653,6 +671,7 @@
     "category": {
         "name": "Category",
         "icon": "category",
+        "hide": true,
         "settings": [
             {
                 "id": "name",

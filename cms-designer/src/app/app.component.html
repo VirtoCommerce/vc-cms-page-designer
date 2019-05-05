@@ -50,13 +50,13 @@
                             (visibilityChanged)="toggleVisibility($event)" (orderChangedEvent)="onOrderChanged($event)"
                             (addNewBlockEvent)="setNewBlockMode()">
                         </app-page-editor>
-                        <app-footer-aside class="left-panel-footer">
+                        <!-- <app-footer-aside class="left-panel-footer">
                             <app-actions-dropdown class="fill-row" [up]="true" title="Theme actions"
                                 [items]="themeActions" (actionSelected)="onThemeActionSelected($event)">
                             </app-actions-dropdown>
                             <app-history-walker [hasUndo]="hasUndo$|async" [hasRedo]="hasRedo$|async"
                                 (undoClicked)="undo()" (redoClicked)="redo()"></app-history-walker>
-                        </app-footer-aside>
+                        </app-footer-aside> -->
                     </ng-container>
                 </app-tab>
                 <app-tab class="tabs__content" tabTitle="Theme" [active]="(activeTabIndex$|async) === 1">
@@ -72,8 +72,10 @@
 
         <app-page-item-editor class="left-panel" *ngIf="currentSectionItem$|async as currentSectionItem"
             [model]="currentSectionItem" [schema]="(blocksSchema$ | async)[currentSectionItem.type]"
-            [blockName]="currentBlockName$|async" (valueChangedEvent)="updateBlockPreview($event)"
-            (removeBlockEvent)="removeBlock($event)" (copyBlockEvent)="copyBlock($event)"></app-page-item-editor>
+            [mode]="editorMode$|async" [blockName]="currentBlockName$|async"
+            (changeEditorModeEvent)="changeEditorMode($event)"
+            (valueChangedEvent)="updateBlockPreview($event)" (removeBlockEvent)="removeBlock($event)"
+            (copyBlockEvent)="copyBlock($event)"></app-page-item-editor>
         <app-select-type class="left-panel" *ngIf="addNewSectionMode$ | async" [schema]="blocksSchema$ | async"
             (previewBlockEvent)="previewBlockType($event)" (selectBlockEvent)="selectBlockType($event)">
         </app-select-type>
@@ -87,9 +89,10 @@
         <!-- End Left panel -->
 
         <!-- Content -->
-        <app-preview class="content" [error]="(pageNotLoaded$|async) || (previewError$|async)" 
+        <app-preview class="content" [error]="(pageNotLoaded$|async) || (previewError$|async)"
             [loading]="previewLoading$ | async" [storeUrl]="storeUrl$ | async" mode="desktop"
-            (preivewLoadingError)="onPreviewError($event)" (reloadClick)="reloadPreview()" (preivewLoaded)="onPreviewLoaded($event)"></app-preview>
+            (preivewLoadingError)="onPreviewError($event)" (reloadClick)="reloadPreview()"
+            (preivewLoaded)="onPreviewLoaded($event)"></app-preview>
         <!-- End Content -->
 
     </main>

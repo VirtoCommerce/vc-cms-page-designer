@@ -5,15 +5,19 @@
     </app-tab>
 </app-tabs> -->
 
-<div class="left-panel-toggable" [class.opened]="opened" [ngStyle]="{ 'width.px': openedWidthStyle }">
+<div class="left-panel-toggable" [class.opened]="mode == 'wide'" [ngStyle]="{ 'width.px': openedWidthStyle }">
     <div class="left-panel-toolbar">
+        <ng-container *ngIf="tabs.length > 1">
+            <button *ngFor="let tab of tabs" class="btn btn--outline" [class.active]="activeTab == tab"
+                (click)="setActiveTab(tab)"><span class="btn-text">{{tab}}</span></button>
+        </ng-container>
         <button class="btn btn--outline" (click)="togglePanel()"><span class="btn-text">Toggle</span></button>
     </div>
     <div class="left-panel-content">
         <div class="form">
             <h2 class="form-t">Edit {{ blockName }}</h2>
             <app-block-form *ngIf="model && schema" [model]="model" [schema]="schema"
-                (modelChange)="modelChanged($event)"></app-block-form>
+                [context]="{ filter: activeTab, mode: mode }" (modelChange)="modelChanged($event)"></app-block-form>
             <div *ngIf="!schema && model">
                 <p>There are no descriptors for this block type: {{ model.type }}</p>
             </div>

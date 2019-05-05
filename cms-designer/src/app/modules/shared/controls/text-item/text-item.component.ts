@@ -12,7 +12,8 @@ export class TextItemComponent extends BaseControlComponent<TextControlDescripto
     private lastValue: string;
 
     get mode(): string {
-        return this.context != null ? (this.context.mode || 'snow') : 'snow';
+        // return this.context != null && this.context.mode === 'wide' ? 'snow' : 'bubble';
+        return 'snow';
     }
 
     editorConfig = {

@@ -3,6 +3,7 @@ import { FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { BlockSchema, BlockValuesModel } from '@shared/models';
 import { FormHelper } from '@shared/services';
+import { ReturnStatement } from '@angular/compiler';
 
 @Component({
     selector: 'app-block-form',
@@ -13,6 +14,7 @@ export class BlockFormComponent implements OnInit, OnDestroy {
     private _model: BlockValuesModel;
     private _schema: BlockSchema;
 
+    @Input() context: any;
 
     @Input() get model(): BlockValuesModel { // модель используется при создании формы, для получения значений
         return this._model;

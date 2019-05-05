@@ -3,4 +3,5 @@ export interface BaseDescriptor {
     type: string;
     placeholder?: string;
     autofocus?: boolean;
+    tab?: string;
 }

@@ -1,15 +1,14 @@
 <div [formGroup]="group">
     <ng-container *ngFor="let control of descriptors">
         <!-- Header or Paragraph -->
-        <h2 class="form-t" *ngIf="control.type === 'header'">{{ getContent(control) }}</h2>
+        <h2 class="form-t" *ngIf="control.type === 'header' && inTab(control)">{{ getContent(control) }}</h2>
         <!-- Simple control -->
-        <app-control-holder *ngIf="displaySimpleControl(control)" [descriptor]="control" [group]="group"
-            [formControlName]="control.id"></app-control-holder>
+        <app-control-holder *ngIf="displaySimpleControl(control) && inTab(control)" [descriptor]="control"
+            [group]="group" [context]="context" [formControlName]="control.id"></app-control-holder>
         <!-- complext control (collection) -->
-        <div *ngIf="displayCollection(control)" class="form-group">
+        <div *ngIf="displayCollection(control) && inTab(control)" class="form-group">
             <div *ngIf="!editableItem">
-                <div cdkDropList (cdkDropListDropped)="sortItems(control, $event)"
-                    class="list list--collection">
+                <div cdkDropList (cdkDropListDropped)="sortItems(control, $event)" class="list list--collection">
                     <div class="list__item" cdkDragBoundary=".list--collection" cdkDragLockAxis="y" cdkDrag
                         *ngFor="let item of getControls(control); let i = index; trackBy: trackByFn">
                         <div class="list__name">{{ getTitle(item, control, i + 1) }}</div>
@@ -46,6 +45,7 @@
             </div>
         </div>
         <!-- Info -->
-        <p *ngIf="control.type !== 'image' && getInfo(control) !== undefined" class="form-help">{{getInfo(control)}}</p>
+        <p *ngIf="control.type !== 'image' && getInfo(control) !== undefined && inTab(control)" class="form-help">
+            {{getInfo(control)}}</p>
     </ng-container>
 </div>

@@ -46,6 +46,7 @@ export class AppComponent implements OnInit {
     hoveredId$ = this.store.select(fromEditor.getHoveredId);
     currentBlockName$ = this.store.select(fromEditor.getCurrentBlockName);
     editorLoading$ = this.store.select(fromEditor.getIsLoading);
+    editorMode$ = this.store.select(fromEditor.getEditorMode);
 
     // theme editor states
     presets$ = this.store.select(fromTheme.getPresets);
@@ -94,10 +95,10 @@ export class AppComponent implements OnInit {
         this.store.dispatch(new rootActions.CloseEditors());
     }
 
-    onThemeActionSelected(type: string) {
-        // TODO:
-        console.log(type);
-    }
+    // onThemeActionSelected(type: string) {
+    //     // TODO:
+    //     console.log(type);
+    // }
 
     onTabChanged(index) {
         this.store.dispatch(new rootActions.TabIndexChanged(index));
@@ -107,13 +108,13 @@ export class AppComponent implements OnInit {
         this.store.dispatch(new rootActions.SaveData());
     }
 
-    undo() {
-        console.log('undo');
-    }
+    // undo() {
+    //     console.log('undo');
+    // }
 
-    redo() {
-        console.log('redo');
-    }
+    // redo() {
+    //     console.log('redo');
+    // }
 
     // editor tab events
 
@@ -139,6 +140,10 @@ export class AppComponent implements OnInit {
     updateBlockPreview(item: BlockValuesModel) {
         this.store.dispatch(new editorActions.UpdatePageItem(item));
         this.store.dispatch(new editorActions.UpdateBlockPreview(item));
+    }
+
+    changeEditorMode(mode: string) {
+        this.store.dispatch(new editorActions.SetEditorMode(mode));
     }
 
     removeBlock(item: BlockValuesModel) {

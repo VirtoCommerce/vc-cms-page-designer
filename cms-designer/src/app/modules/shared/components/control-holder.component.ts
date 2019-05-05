@@ -29,10 +29,21 @@ import { ControlDescriptor, BaseDescriptor } from '../models';
 export class ControlHolderComponent implements OnInit, ControlValueAccessor {
 
     private component: BaseControlComponent<BaseDescriptor>;
+    private _context: any;
 
     @ViewChild(ControlHostDirective) host: ControlHostDirective;
     @Input() descriptor: ControlDescriptor;
     @Input() group: FormGroup;
+    @Input() get context(): any {
+        return this._context;
+    }
+    set context(value: any) {
+        this._context = value;
+        if (this.component) {
+            this.component.context = value;
+            this.cdr.detectChanges();
+        }
+    }
     @HostBinding('class') css: string;
 
     constructor(
@@ -53,6 +64,7 @@ export class ControlHolderComponent implements OnInit, ControlValueAccessor {
             this.component = container.createComponent(factory).instance;
             this.component.descriptor = this.descriptor;
             this.component.group = this.group;
+            this.component.context = this.context;
             this.css = this.component.parentClass;
         }
     }

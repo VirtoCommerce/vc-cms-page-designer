@@ -11,6 +11,7 @@ import { FormHelper } from '@shared/services';
 export class ElementsFormComponent implements OnInit {
     @Input() group: FormGroup;
     @Input() descriptors: ControlDescriptor[];
+    @Input() context: any;
 
     private savedItem: any;
     editableItem: FormGroup;
@@ -36,6 +37,10 @@ export class ElementsFormComponent implements OnInit {
 
     displayCollection(descriptor: ControlDescriptor): boolean {
         return descriptor.type === 'list';
+    }
+
+    inTab(descriptor: ControlDescriptor): boolean {
+        return descriptor.tab === this.context.filter || (!descriptor.tab && (this.context.filter === 'General' || !this.context.filter));
     }
 
     sortItems(control: CollectionControlDescriptor, event: CdkDragSortEvent<any>) {

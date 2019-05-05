@@ -10,17 +10,42 @@ import { map, withLatestFrom } from 'rxjs/operators';
 })
 export class PageItemEditorComponent implements OnInit {
 
+    private _mode: string;
+    private _schema: BlockSchema;
+
     @Input() model: BlockValuesModel;
-    @Input() schema: BlockSchema;
+    @Input() get schema(): BlockSchema {
+        return this._schema;
+    }
+    set schema(value: BlockSchema) {
+        this._schema = value;
+        this.tabs = this.schema.settings.reduce(
+            (result, list) => result.indexOf(list.tab || 'General') === -1
+                ? result.concat(list.tab || 'General')
+                : result,
+            []
+        ).sort();
+        this.activeTab = this.tabs[0];
+    }
+
     @Input() blockName: string;
+    @Input() get mode(): string {
+        return this._mode;
+    }
+    set mode(value: string) {
+        this._mode = value;
+        this.adjustPanelWidth();
+    }
 
     @Output() backEvent = new EventEmitter<BlockValuesModel>();
     @Output() valueChangedEvent = new EventEmitter<BlockValuesModel>();
     @Output() removeBlockEvent = new EventEmitter<BlockValuesModel>();
     @Output() copyBlockEvent = new EventEmitter<BlockValuesModel>();
+    @Output() changeEditorModeEvent = new EventEmitter<string>();
 
-    opened = false;
+    tabs: string[];
     openedWidthStyle: number;
+    activeTab: string;
 
     private editedModel: BlockValuesModel;
 
@@ -31,12 +56,15 @@ export class PageItemEditorComponent implements OnInit {
     }
 
     togglePanel() {
-        this.opened = !this.opened;
-        this.adjustPanelWidth();
+        this.changeEditorModeEvent.emit(this.mode === 'wide' ? 'normal' : 'wide');
     }
 
     private adjustPanelWidth() {
-        this.openedWidthStyle = this.opened ? window.innerWidth / 2 : null;
+        this.openedWidthStyle = this.mode === 'wide' ? window.innerWidth / 2 : null;
+    }
+
+    setActiveTab(tabName: string) {
+        this.activeTab = tabName;
     }
 
     modelChanged(model) {

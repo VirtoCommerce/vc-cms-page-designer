@@ -16,6 +16,7 @@ export interface EditorState {
     // categories: CategoryModel[];
     dirty: boolean;
     hoveredInPreviewId: number;
+    editorMode: string;
 }
 
 const initialState: EditorState = {
@@ -31,7 +32,8 @@ const initialState: EditorState = {
     blocksSchema: null,
     // categories: [],
     dirty: true,
-    hoveredInPreviewId: 0
+    hoveredInPreviewId: 0,
+    editorMode: 'normal'
 };
 
 export function reducer(state = initialState, action: EditorActions): EditorState {
@@ -190,6 +192,12 @@ export function reducer(state = initialState, action: EditorActions): EditorStat
             return {
                 ...state,
                 hoveredInPreviewId: action.payload
+            };
+        }
+        case EditorActionTypes.SetEditorMode: {
+            return {
+                ...state,
+                editorMode: action.payload
             };
         }
     }
