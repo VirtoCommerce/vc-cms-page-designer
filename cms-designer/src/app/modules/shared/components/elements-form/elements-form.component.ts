@@ -40,7 +40,9 @@ export class ElementsFormComponent implements OnInit {
     }
 
     inTab(descriptor: ControlDescriptor): boolean {
-        return descriptor.tab === this.context.filter || (!descriptor.tab && (this.context.filter === 'General' || !this.context.filter));
+        return !this.context ||
+            descriptor.tab === this.context.filter ||
+            (!descriptor.tab && (this.context.filter === 'General' || !this.context.filter));
     }
 
     sortItems(control: CollectionControlDescriptor, event: CdkDragSortEvent<any>) {
