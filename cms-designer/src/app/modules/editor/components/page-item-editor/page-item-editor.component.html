@@ -1,5 +1,14 @@
+<!-- <app-tabs class="tabs tabs--full tabs--shadow">
+    <app-tab class="tabs__content" tabTitle="Content">
+    </app-tab>
+    <app-tab class="tabs__content" tabTitle="Settings">
+    </app-tab>
+</app-tabs> -->
+
 <div class="left-panel-toggable" [class.opened]="opened" [ngStyle]="{ 'width.px': openedWidthStyle }">
-    <div (click)="togglePanel()" style="cursor: pointer; position: absolute; top: 2px; right: 2px; padding: 3px; border: 1px solid black; background: white; z-index: 1;">toggle</div>
+    <div class="left-panel-toolbar">
+        <button class="btn btn--outline" (click)="togglePanel()"><span class="btn-text">Toggle</span></button>
+    </div>
     <div class="left-panel-content">
         <div class="form">
             <h2 class="form-t">Edit {{ blockName }}</h2>

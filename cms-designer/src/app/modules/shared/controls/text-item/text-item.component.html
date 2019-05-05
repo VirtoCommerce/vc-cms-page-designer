@@ -1,6 +1,6 @@
 <label class="form-label">{{ descriptor.label }}</label>
 <div class="form-input">
-    <quill-editor [style]="{ height: '400px' }" (onContentChanged)="onChange($event)" [modules]="editorConfig"
+    <quill-editor [theme]="mode" [style]="{ height: '400px' }" (onContentChanged)="onChange($event)" [modules]="editorConfig"
         (onEditorCreated)="onCreated($event)">
     </quill-editor>
 </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { BaseControlComponent } from '../base-control.component';
 import { TextControlDescriptor } from '@shared/models';
 
@@ -10,6 +10,10 @@ export class TextItemComponent extends BaseControlComponent<TextControlDescripto
 
     private editor: any;
     private lastValue: string;
+
+    get mode(): string {
+        return this.context != null ? (this.context.mode || 'snow') : 'snow';
+    }
 
     editorConfig = {
         toolbar: [

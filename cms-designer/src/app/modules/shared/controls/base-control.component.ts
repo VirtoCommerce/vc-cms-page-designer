@@ -5,6 +5,7 @@ import { BaseDescriptor, BlockSchema } from '@shared/models';
 export class BaseControlComponent<T extends BaseDescriptor> implements OnInit, AfterContentInit {
     @Input() descriptor: T;
     @Input() group: FormGroup;
+    @Input() context: any;
 
     parentClass = 'form-group';
     value: any;
