@@ -5,8 +5,17 @@
             [accept]="descriptor.acceptTypes">
         <label class="form-file__label">Choose file</label>
     </div>
-    <div class="form-text">{{ value }}</div>
-    <div *ngIf="value" class="form-file__uploaded"><img class="form-file__pic" [src]="value" alt="" />
+    <div class="form-text">{{ value.url }}</div>
+    <div *ngIf="value" class="form-file__uploaded"><img class="form-file__pic" [src]="value.url" alt="" />
         <span (click)="removeImage($event)" class="form-file__remove"></span></div>
+    <div>
+        <label>Sizes</label>
+        <div class="sizes">
+            <span>W:</span>
+            <input class="form-row-control" placeholder="auto" type="number" min="0" [value]="value.width" (change)="changeWidth($event.target.valueAsNumber)" />
+            <span>H:</span>
+            <input class="form-row-control" placeholder="auto" type="number" min="0" [value]="value.height" (change)="changeHeight($event.target.valueAsNumber)" />
+        </div>
+    </div>
     <div class="form-text">{{ descriptor.info }}</div>
 </div>

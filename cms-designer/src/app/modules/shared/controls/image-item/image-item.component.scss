@@ -5,3 +5,27 @@
     background: white;
     color: red;
 }
+
+.sizes {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: baseline;
+
+    span {
+        display: block;
+        margin-right: 5px;
+    }
+
+    .form-row-control {
+        flex-grow: 1;
+        background: #fbfbfd;
+        border-radius: .25rem;
+        border: 1px solid #eaedf3;
+        box-sizing: border-box;
+        font-size: .8125rem;
+        height: 2.375rem;
+        width: 100%;
+    }
+}
+

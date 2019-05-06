@@ -699,7 +699,6 @@ class PageHandler extends base_handler_1.BaseHandler {
             list.forEach(x => {
                 this.renderer.add(x);
             });
-            $('.fotorama').fotorama();
             service_locator_1.ServiceLocator.getMessages().renderComplete();
         });
     }
@@ -914,8 +913,6 @@ class UpdateHandler extends base_handler_1.BaseHandler {
             vm.htmlString = result;
             this.renderer.update(vm);
             this.renderer.select(vm);
-            const c = $('.fotorama');
-            c.fotorama();
         });
     }
 }

@@ -14,26 +14,26 @@
                 "label": "Permalink",
                 "type": "string"
             },
-			{
-				"id": "layout",
-				"label": "Layout name",
-				"type": "select",
-				"default": "theme",
-				"options": [
-					{
-						"label": "Theme",
-						"value": "theme"
-					},
-					{
-						"label": "Empty",
-						"value": "empty"
-					},
-					{
-						"label": "Landing",
-						"value": "landing"
-					}
-				]
-			}
+            {
+                "id": "layout",
+                "label": "Layout name",
+                "type": "select",
+                "default": "theme",
+                "options": [
+                    {
+                        "label": "Theme",
+                        "value": "theme"
+                    },
+                    {
+                        "label": "Empty",
+                        "value": "empty"
+                    },
+                    {
+                        "label": "Landing",
+                        "value": "landing"
+                    }
+                ]
+            }
         ]
     },
     "header": {
@@ -110,17 +110,23 @@
                 "type": "select",
                 "default": "right",
                 "options": [
-                    { "value": "right", "label": "Right" },
-                    { "value": "left", "label": "Left" }
+                    {
+                        "value": "right",
+                        "label": "Right"
+                    },
+                    {
+                        "value": "left",
+                        "label": "Left"
+                    }
                 ],
                 "tab": "Settings"
             },
             {
-                "id": "url",
+                "id": "image",
                 "label": "Upload picture",
                 "type": "image",
                 "default": "http://dev-cms-vm.westeurope.cloudapp.azure.com/v2/admin/Assets/blogs/yellowstone.jpg",
-                "previewWith": 120,
+                "previewWidth": 120,
                 "previewHeight": 80
             },
             {
@@ -173,14 +179,14 @@
                 "type": "select",
                 "default": "none",
                 "options": [
-                  {
-                    "value": "none",
-                    "label": "None"
-                  },
-                  {
-                    "value": "section--pattern",
-                    "label": "Pattern 1"
-                  }
+                    {
+                        "value": "none",
+                        "label": "None"
+                    },
+                    {
+                        "value": "section--pattern",
+                        "label": "Pattern 1"
+                    }
                 ],
                 "tab": "Settings"
             },
@@ -217,12 +223,12 @@
                 "default": "light",
                 "options": [
                     {
-                    "value": "light",
-                    "label": "Light"
+                        "value": "light",
+                        "label": "Light"
                     },
                     {
-                    "value": "dark",
-                    "label": "Dark"
+                        "value": "dark",
+                        "label": "Dark"
                     }
                 ],
                 "tab": "Settings"
@@ -247,7 +253,7 @@
                         "type": "string"
                     },
                     {
-                        "id": "url",
+                        "id": "image",
                         "label": "Upload picture",
                         "type": "image",
                         "previewWidth": 120,
@@ -264,24 +270,39 @@
                         "type": "select",
                         "default": "auto",
                         "options": [
-                            { "value": "auto", "label": "auto" },
-                            { "value": "20%", "label": "20%" },
-                            { "value": "25%", "label": "25%" },
-                            { "value": "33%", "label": "33%" },
-                            { "value": "50%", "label": "50%" }
+                            {
+                                "value": "auto",
+                                "label": "auto"
+                            },
+                            {
+                                "value": "20%",
+                                "label": "20%"
+                            },
+                            {
+                                "value": "25%",
+                                "label": "25%"
+                            },
+                            {
+                                "value": "33%",
+                                "label": "33%"
+                            },
+                            {
+                                "value": "50%",
+                                "label": "50%"
+                            }
                         ]
                     }
                 ],
                 "default": [
                     {
                         "title": "Left column",
-                        "url": "http://dev-cms-vm.westeurope.cloudapp.azure.com/v2/admin/Assets/blogs/Bachalpsee_reflection.jpg",
+                        "image": "http://dev-cms-vm.westeurope.cloudapp.azure.com/v2/admin/Assets/blogs/Bachalpsee_reflection.jpg",
                         "content": "Bachalpsee is a lake close to the First above Grindelwald in the Bernese Oberland, Switzerland. <a href='https://en.wikipedia.org/wiki/Bachalpsee'>See more on Wiki</a>",
                         "width": "auto"
                     },
                     {
                         "title": "Right column",
-                        "url": "http://dev-cms-vm.westeurope.cloudapp.azure.com/v2/admin/Assets/blogs/Galunggung.jpg",
+                        "image": "http://dev-cms-vm.westeurope.cloudapp.azure.com/v2/admin/Assets/blogs/Galunggung.jpg",
                         "content": "Mount Galunggung is an active stratovolcano in West Java, Indonesia. <a href='https://en.wikipedia.org/wiki/Galunggung'>See more on Wiki</a>",
                         "width": "auto"
                     }
@@ -307,11 +328,26 @@
                 "type": "select",
                 "default": "auto",
                 "options": [
-                    { "value": "auto", "label": "auto" },
-                    { "value": "columns-2", "label": "2 per row" },
-                    { "value": "columns-3", "label": "3 per row" },
-                    { "value": "columns-4", "label": "4 per row" },
-                    { "value": "columns-5", "label": "5 per row" }
+                    {
+                        "value": "auto",
+                        "label": "auto"
+                    },
+                    {
+                        "value": "columns-2",
+                        "label": "2 per row"
+                    },
+                    {
+                        "value": "columns-3",
+                        "label": "3 per row"
+                    },
+                    {
+                        "value": "columns-4",
+                        "label": "4 per row"
+                    },
+                    {
+                        "value": "columns-5",
+                        "label": "5 per row"
+                    }
                 ],
                 "tab": "Settings"
             },
@@ -321,10 +357,22 @@
                 "type": "select",
                 "default": "align-columns-center",
                 "options": [
-                    { "value": "align-columns-left", "label": "Left" },
-                    { "value": "align-columns-center", "label": "Center" },
-                    { "value": "align-columns-right", "label": "Right" },
-                    { "value": "align-columns-stretch", "label": "Stretch" }
+                    {
+                        "value": "align-columns-left",
+                        "label": "Left"
+                    },
+                    {
+                        "value": "align-columns-center",
+                        "label": "Center"
+                    },
+                    {
+                        "value": "align-columns-right",
+                        "label": "Right"
+                    },
+                    {
+                        "value": "align-columns-stretch",
+                        "label": "Stretch"
+                    }
                 ],
                 "tab": "Settings"
             },
@@ -334,9 +382,18 @@
                 "type": "select",
                 "default": "align-left",
                 "options": [
-                    { "value": "align-left", "label": "Left" },
-                    { "value": "align-center", "label": "Center" },
-                    { "value": "align-right", "label": "Right" }
+                    {
+                        "value": "align-left",
+                        "label": "Left"
+                    },
+                    {
+                        "value": "align-center",
+                        "label": "Center"
+                    },
+                    {
+                        "value": "align-right",
+                        "label": "Right"
+                    }
                 ],
                 "tab": "Settings"
             },
@@ -346,9 +403,18 @@
                 "type": "select",
                 "default": "align-left",
                 "options": [
-                    { "value": "align-left", "label": "Left" },
-                    { "value": "align-center", "label": "Center" },
-                    { "value": "align-right", "label": "Right" }
+                    {
+                        "value": "align-left",
+                        "label": "Left"
+                    },
+                    {
+                        "value": "align-center",
+                        "label": "Center"
+                    },
+                    {
+                        "value": "align-right",
+                        "label": "Right"
+                    }
                 ],
                 "tab": "Settings"
             }
@@ -390,42 +456,6 @@
                 "tab": "Settings"
             },
             {
-                "id": "rotate",
-                "label": "Auto-rotate images",
-                "type": "checkbox",
-                "default": true,
-                "tab": "Settings"
-            },
-            {
-                "id": "frequency",
-                "label": "Rotation frequency",
-                "type": "select",
-                "default": "5000",
-                "options": [
-                    {
-                        "value": "5000",
-                        "label": "5 seconds"
-                    },
-                    {
-                        "value": "6000",
-                        "label": "6 seconds"
-                    },
-                    {
-                        "value": "7000",
-                        "label": "7 seconds"
-                    },
-                    {
-                        "value": "8000",
-                        "label": "8 seconds"
-                    },
-                    {
-                        "value": "9000",
-                        "label": "9 seconds"
-                    }
-                ],
-                "tab": "Settings"
-            },
-            {
                 "id": "images",
                 "label": "Images",
                 "type": "list",
@@ -434,7 +464,7 @@
                 "displayField": "title",
                 "element": [
                     {
-                        "id": "url",
+                        "id": "image",
                         "label": "Upload picture",
                         "type": "image",
                         "previewWidth": 120,
@@ -442,9 +472,15 @@
                     }
                 ],
                 "default": [
-                    { "url": "http://dev-cms-vm.westeurope.cloudapp.azure.com/v2/admin/Assets/blogs/Galunggung.jpg" },
-                    { "url": "http://dev-cms-vm.westeurope.cloudapp.azure.com/v2/admin/Assets/blogs/Hopetoun_falls.jpg" },
-                    { "url": "http://dev-cms-vm.westeurope.cloudapp.azure.com/v2/admin/Assets/blogs/Bachalpsee_reflection.jpg" }
+                    {
+                        "image": "http://dev-cms-vm.westeurope.cloudapp.azure.com/v2/admin/Assets/blogs/Galunggung.jpg"
+                    },
+                    {
+                        "image": "http://dev-cms-vm.westeurope.cloudapp.azure.com/v2/admin/Assets/blogs/Hopetoun_falls.jpg"
+                    },
+                    {
+                        "image": "http://dev-cms-vm.westeurope.cloudapp.azure.com/v2/admin/Assets/blogs/Bachalpsee_reflection.jpg"
+                    }
                 ]
             }
         ]
@@ -459,7 +495,7 @@
                 "label": "Block name",
                 "type": "string",
                 "default": "Image with text overlay",
-				"autofocus": true
+                "autofocus": true
             },
             {
                 "id": "textColor",
@@ -474,10 +510,10 @@
                 "default": "opacity"
             },
             {
-                "id": "url",
+                "id": "image",
                 "label": "Upload picture",
                 "type": "image",
-                "previewWith": 120,
+                "previewWidth": 120,
                 "previewHeight": 80,
                 "default": "http://dev-cms-vm.westeurope.cloudapp.azure.com/v2/admin/Assets/blogs/Grand_Canyon.jpg"
             },
@@ -539,7 +575,7 @@
                 "label": "Block name",
                 "type": "string",
                 "default": "Image carousel",
-				"autofocus": true
+                "autofocus": true
             },
             {
                 "id": "layout",
@@ -575,7 +611,7 @@
                         "type": "string"
                     },
                     {
-                        "id": "url",
+                        "id": "image",
                         "label": "Upload picture",
                         "type": "image",
                         "previewWidth": 120,
@@ -585,15 +621,15 @@
                 "default": [
                     {
                         "title": "Tower of Pisa",
-                        "url": "http://dev-cms-vm.westeurope.cloudapp.azure.com/v2/admin/Assets/blogs/pisa_tower.jpeg"
+                        "image": "http://dev-cms-vm.westeurope.cloudapp.azure.com/v2/admin/Assets/blogs/pisa_tower.jpeg"
                     },
                     {
                         "title": "Sagrada Família",
-                        "url": "http://dev-cms-vm.westeurope.cloudapp.azure.com/v2/admin/Assets/blogs/barcelona.jpeg"
+                        "image": "http://dev-cms-vm.westeurope.cloudapp.azure.com/v2/admin/Assets/blogs/barcelona.jpeg"
                     },
                     {
                         "title": "Paris Opera",
-                        "url": "http://dev-cms-vm.westeurope.cloudapp.azure.com/v2/admin/Assets/blogs/Paris_Opera.jpeg"
+                        "image": "http://dev-cms-vm.westeurope.cloudapp.azure.com/v2/admin/Assets/blogs/Paris_Opera.jpeg"
                     }
                 ]
             }
@@ -659,7 +695,7 @@
                 ]
             },
             {
-                "id": "url",
+                "id": "image",
                 "label": "Upload picture",
                 "type": "image",
                 "previewWidth": 120,
@@ -678,13 +714,13 @@
                 "label": "Block name",
                 "type": "string",
                 "default": "Category",
-				"autofocus": true
+                "autofocus": true
             },
             {
                 "id": "title",
                 "label": "Title",
                 "type": "string",
-                "default":  "Headphones"
+                "default": "Headphones"
             },
             {
                 "id": "categoryId",

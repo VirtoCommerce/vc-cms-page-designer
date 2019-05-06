@@ -22,22 +22,47 @@ export class ImageItemComponent extends BaseControlComponent<ImageControlDescrip
 
     registerOnChange(fn: any): void {
         this.onChange = (event) => {
-            if (!event) {
-                fn(null);
+            if (!event || !event.target) {
+                console.log(this.value);
+                fn(this.value);
             } else {
                 const file = event.target.files[0];
                 const subscription = this.files.uploadFile(file, file.name).subscribe(x => {
                     subscription.unsubscribe();
-                    this.setValue(x);
-                    console.log(this.value);
-                    fn(x);
+                    this.setValue({ url: x });
+                    fn(this.value);
                 });
             }
         };
     }
 
-    removeImage($event: MouseEvent) {
-        this.setValue(null);
+    changeWidth(value: number) {
+        this.setValue({ width: (value || undefined) });
         this.onChange(this.value);
     }
+
+    changeHeight(value: number) {
+        this.setValue({ height: (value || undefined) });
+        this.onChange(this.value);
+    }
+
+    removeImage($event: MouseEvent) {
+        this.setValue({ url: null });
+        this.onChange(this.value);
+    }
+
+    setValue(value: ImageDescriptor|string) {
+        // TODO: remove before relese. used for backward compatibility when develop
+        if (typeof value === 'string') {
+            value = { url: value };
+        }
+        const result = { ...this.value, ...value };
+        super.setValue(result);
+    }
+}
+
+interface ImageDescriptor {
+    url?: string;
+    width?: number;
+    height?: number;
 }
