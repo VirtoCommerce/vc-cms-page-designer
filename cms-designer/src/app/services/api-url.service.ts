@@ -78,7 +78,7 @@ export class ApiUrlsService {
             };
             const index = this._params.path.lastIndexOf('/');
             this._params.filename = index !== -1 ? this._params.path.substr(index + 1) : this._params.path;
-            this._params.uploadPath = index === -1 ? '' : this._params.path.substr(0, index - 1);
+            this._params.uploadPath = index === -1 ? '' : this._params.path.substr(0, index);
         }
         return this._params;
     }
