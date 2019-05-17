@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ColorPickerModule } from 'ngx-color-picker';
-import { QuillModule } from 'ngx-quill';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { ToastrModule } from 'ngx-toastr';
 
 import { COMPONENTS } from './components';
@@ -26,7 +26,7 @@ import { LAYOUT_COMPONENTS } from './layouts';
         ReactiveFormsModule,
         DragDropModule,
         ColorPickerModule,
-        QuillModule,
+        CKEditorModule,
         ToastrModule.forRoot()
     ],
     exports: [...COMPONENTS, ...LAYOUT_COMPONENTS]
