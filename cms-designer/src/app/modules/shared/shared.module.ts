@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ColorPickerModule } from 'ngx-color-picker';
-import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { CKEditorModule } from 'ckeditor4-angular';
 import { ToastrModule } from 'ngx-toastr';
 
 import { COMPONENTS } from './components';

@@ -1,16 +1,21 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { BaseControlComponent } from '../base-control.component';
 import { TextControlDescriptor } from '@shared/models';
-import { ChangeEvent } from '@ckeditor/ckeditor5-angular/ckeditor.component';
-import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 @Component({
     selector: 'app-text-item',
-    templateUrl: './text-item.component.html'
+    templateUrl: './text-item.component.html',
+    styleUrls: ['./text-item.component.scss']
 })
 export class TextItemComponent extends BaseControlComponent<TextControlDescriptor> {
 
-    editor = ClassicEditor;
+    config = {
+        // plugins: [ Alignment ],
+        // alignment: { options: ['left', 'right', 'center', 'justify'] },
+        // toolbar: [
+        //     'heading', '|', 'bulletedList', 'numberedList', 'alignment', 'undo', 'redo'
+        // ]
+    };
     // private lastValue: string;
 
     // get mode(): string {
@@ -65,9 +70,14 @@ export class TextItemComponent extends BaseControlComponent<TextControlDescripto
     // }
 
     registerOnChange(fn: any): void {
-        this.onChange = ({editor}: ChangeEvent) => {
-            fn(editor.getData());
+        this.onChange = (event) => {
+            console.log(event);
+            // fn(editor.getData());
         };
+    }
+
+    onReady(event) {
+        // event.ui.view.height = '300px';
     }
 
     // private isTextChanged(event: any): boolean {
