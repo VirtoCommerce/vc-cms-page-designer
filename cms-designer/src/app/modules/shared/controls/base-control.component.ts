@@ -8,7 +8,7 @@ export class BaseControlComponent<T extends BaseDescriptor> implements OnInit, A
     @Input() context: any;
 
     parentClass = 'form-group';
-    value: any;
+    @Input() value: any;
     onChange = (_: any) => { };
     onTouched = (_: any) => { };
 
@@ -17,6 +17,9 @@ export class BaseControlComponent<T extends BaseDescriptor> implements OnInit, A
     }
 
     setValue(value: any) {
+        if (!value) {
+            value = null;
+        }
         this.value = value;
     }
 

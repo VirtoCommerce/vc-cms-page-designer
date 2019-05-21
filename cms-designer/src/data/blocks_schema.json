@@ -138,6 +138,19 @@
                 "label": "Content",
                 "type": "text",
                 "default": "Yellowstone National Park is an American national park located in Wyoming, Montana, and Idaho.  <a href='https://en.wikipedia.org/wiki/Yellowstone_National_Park'>See more on Wiki</a>"
+            },
+            {
+                "id": "url",
+                "label": "Link",
+                "type": "url",
+                "textLabel": "Text",
+                "flagLabel": "Button round corners",
+                "styleLabel": "Link style",
+                "styles": [
+                    { "value": "normal", "label": "Normal" },
+                    { "value": "yellow", "label": "Yellow button" },
+                    { "value": "gray", "label": "Gray button" }
+                ]
             }
         ]
     },

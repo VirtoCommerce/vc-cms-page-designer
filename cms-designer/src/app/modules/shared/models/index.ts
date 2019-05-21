@@ -14,3 +14,4 @@ export * from './text-control.descriptor';
 export * from './control.descriptor';
 export * from './page.descriptor';
 export * from './block-values.model';
+export * from './url-control.descriptor';

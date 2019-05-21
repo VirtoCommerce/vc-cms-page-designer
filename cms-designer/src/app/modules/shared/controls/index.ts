@@ -5,6 +5,7 @@ export * from './select-item/select-item.component';
 export * from './text-item/text-item.component';
 export * from './string-item/string-item.component';
 export * from './number-item/number-item.component';
+export * from './url-item/url-item.component';
 
 import { CheckboxItemComponent } from './checkbox-item/checkbox-item.component';
 import { ColorItemComponent } from './color-item/color-item.component';
@@ -13,6 +14,7 @@ import { SelectItemComponent } from './select-item/select-item.component';
 import { TextItemComponent } from './text-item/text-item.component';
 import { StringItemComponent } from './string-item/string-item.component';
 import { NumberItemComponent } from './number-item/number-item.component';
+import { UrlItemComponent } from './url-item/url-item.component';
 
 export const CONTROLS = [
     CheckboxItemComponent,
@@ -21,5 +23,6 @@ export const CONTROLS = [
     SelectItemComponent,
     TextItemComponent,
     StringItemComponent,
-    NumberItemComponent
+    NumberItemComponent,
+    UrlItemComponent
 ];

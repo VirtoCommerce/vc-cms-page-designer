@@ -6,7 +6,8 @@ import {
     NumberItemComponent,
     SelectItemComponent,
     StringItemComponent,
-    TextItemComponent
+    TextItemComponent,
+    UrlItemComponent
 } from '.';
 
 @Injectable({
@@ -23,6 +24,7 @@ export class ControlsFactory {
         this.controls['select'] = SelectItemComponent;
         this.controls['string'] = StringItemComponent;
         this.controls['text'] = TextItemComponent;
+        this.controls['url'] = UrlItemComponent;
     }
 
     resolve(type: string): Type<any> {
