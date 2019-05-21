@@ -502,6 +502,66 @@
             }
         ]
     },
+    "contacts-form": {
+        "name": "Contacts form",
+        "icon": "image-carousel",
+        "displayField": "name",
+        "settings": [
+            {
+                "id": "name",
+                "label": "Block name",
+                "type": "string",
+                "default": "Contacts form",
+                "tab": "Settings"
+            },
+            {
+                "id": "title",
+                "label": "Title",
+                "type": "string",
+                "autofocus": true
+            },
+            {
+                "id": "style",
+                "label": "Block style",
+                "type": "select",
+                "default": "light",
+                "options": [
+                    {
+                        "value": "light",
+                        "label": "Light"
+                    },
+                    {
+                        "value": "dark",
+                        "label": "Dark"
+                    }
+                ],
+                "tab": "Settings"
+            },
+            {
+                "id": "items",
+                "label": "Items",
+                "type": "list",
+                "addText": "Add item",
+                "removeText": "Remove item",
+                "displayField": "text",
+                "element": [
+                    {
+                        "id": "image",
+                        "label": "Upload picture",
+                        "type": "image",
+                        "previewWidth": 120,
+                        "previewHeight": 80
+                    },
+                    {
+                        "id": "text",
+                        "label": "Text",
+                        "type": "string"
+                    }
+                ],
+                "default": [ ]
+            }
+        ]
+    },
     "image-with-text-overlay": {
         "hide": true,
         "name": "Image with text overlay",
