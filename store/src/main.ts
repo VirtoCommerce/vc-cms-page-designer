@@ -7,6 +7,5 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 window.addEventListener('click', (event) => {
-    console.log(event);
     event.preventDefault();
 });

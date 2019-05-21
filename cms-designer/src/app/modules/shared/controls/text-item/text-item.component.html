@@ -1,4 +1,5 @@
 <label class="form-label">{{ descriptor.label }}</label>
 <div class="form-input">
+    {{mode}}
     <ckeditor [config]="config" [data]="value" (change)="onChange($event)" (ready)="onReady($event)"></ckeditor>
 </div>

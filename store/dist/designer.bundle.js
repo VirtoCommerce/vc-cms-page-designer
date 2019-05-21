@@ -699,6 +699,8 @@ class PageHandler extends base_handler_1.BaseHandler {
             list.forEach(x => {
                 this.renderer.add(x);
             });
+            var $ = window['jQuery'];
+            $(".carousel-block").carousel();
             service_locator_1.ServiceLocator.getMessages().renderComplete();
         });
     }
@@ -913,6 +915,8 @@ class UpdateHandler extends base_handler_1.BaseHandler {
             vm.htmlString = result;
             this.renderer.update(vm);
             this.renderer.select(vm);
+            var $ = window['jQuery'];
+            $(".carousel-block").carousel();
         });
     }
 }
@@ -978,7 +982,6 @@ document.addEventListener('DOMContentLoaded', () => {
     app.run();
 });
 window.addEventListener('click', (event) => {
-    console.log(event);
     event.preventDefault();
 });
 

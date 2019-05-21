@@ -11,6 +11,8 @@ export class UpdateHandler extends BaseHandler {
             vm.htmlString = result;
             this.renderer.update(vm);
             this.renderer.select(vm);
+            var $: any = window['jQuery'];
+            $(".carousel-block").carousel();
         });
     }
 }
