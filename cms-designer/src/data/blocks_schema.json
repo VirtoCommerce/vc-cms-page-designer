@@ -140,16 +140,31 @@
                 "default": "Yellowstone National Park is an American national park located in Wyoming, Montana, and Idaho.  <a href='https://en.wikipedia.org/wiki/Yellowstone_National_Park'>See more on Wiki</a>"
             },
             {
-                "id": "url",
+                "id": "url1",
                 "label": "Link",
                 "type": "url",
                 "textLabel": "Text",
-                "flagLabel": "Button round corners",
                 "styleLabel": "Link style",
                 "styles": [
-                    { "value": "normal", "label": "Normal" },
-                    { "value": "yellow", "label": "Yellow button" },
-                    { "value": "gray", "label": "Gray button" }
+                    { "value": "btn", "label": "Button" },
+                    { "value": "btn btn--orange btn--lg", "label": "Orange button" },
+                    { "value": "btn btn--lg", "label": "Gray button" },
+                    { "value": "benefits__link", "label": "Link"},
+                    { "value": "btn btn--orange btn--round", "label": "Round orange"}
+                ]
+            },
+            {
+                "id": "url2",
+                "label": "Second Link",
+                "type": "url",
+                "textLabel": "Text",
+                "styleLabel": "Link style",
+                "styles": [
+                    { "value": "btn", "label": "Button" },
+                    { "value": "btn btn--orange btn--lg", "label": "Orange button" },
+                    { "value": "btn btn--lg", "label": "Gray button" },
+                    { "value": "benefits__link", "label": "Link"},
+                    { "value": "btn btn--orange btn--round", "label": "Round orange"}
                 ]
             }
         ]
@@ -212,6 +227,20 @@
                 "label": "Content",
                 "type": "text",
                 "default": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+            },
+            {
+                "id": "url",
+                "label": "Link",
+                "type": "url",
+                "textLabel": "Text",
+                "styleLabel": "Link style",
+                "styles": [
+                    { "value": "btn", "label": "Button" },
+                    { "value": "btn btn--orange btn--lg", "label": "Orange button" },
+                    { "value": "btn btn--lg", "label": "Gray button" },
+                    { "value": "benefits__link", "label": "Link"},
+                    { "value": "btn btn--orange btn--round", "label": "Round orange"}
+                ]
             }
         ]
     },
@@ -308,7 +337,21 @@
                                 "label": "50%"
                             }
                         ]
-                    }
+                    },
+                    {
+                        "id": "url",
+                        "label": "Link",
+                        "type": "url",
+                        "textLabel": "Text",
+                        "styleLabel": "Link style",
+                        "styles": [
+                            { "value": "btn", "label": "Button" },
+                            { "value": "btn btn--orange btn--lg", "label": "Orange button" },
+                            { "value": "btn btn--lg", "label": "Gray button" },
+                            { "value": "benefits__link", "label": "Link"},
+                            { "value": "btn btn--orange btn--round", "label": "Round orange"}
+                        ]
+                    }       
                 ],
                 "default": [
                     {
@@ -556,6 +599,71 @@
                         "id": "text",
                         "label": "Text",
                         "type": "string"
+                    }
+                ],
+                "default": [ ]
+            }
+        ]
+    },
+    "list-with-images": {
+        "name": "List with images",
+        "icon": "text-columns",
+        "settings": [
+            {
+                "id": "name",
+                "label": "Block name",
+                "type": "string",
+                "default": "List with images",
+                "tab": "Settings"
+            },
+            {
+                "id": "title",
+                "label": "Title",
+                "type": "string",
+                "default": "All you need in one place",
+                "autofocus": true
+            },
+            {
+                "id": "style",
+                "label": "Block style",
+                "type": "select",
+                "default": "light",
+                "options": [
+                    {
+                        "value": "light",
+                        "label": "Light"
+                    },
+                    {
+                        "value": "dark",
+                        "label": "Dark"
+                    }
+                ],
+                "tab": "Settings"
+            },
+            {
+                "id": "items",
+                "label": "Items",
+                "type": "list",
+                "addText": "Add item",
+                "removeText": "Remove item",
+                "displayField": "title",
+                "element": [
+                    {
+                        "id": "image",
+                        "label": "Upload picture",
+                        "type": "image",
+                        "previewWidth": 120,
+                        "previewHeight": 80
+                    },
+                    {
+                        "id": "title",
+                        "label": "Title",
+                        "type": "string"
+                    },
+                    {
+                        "id": "text",
+                        "label": "Text",
+                        "type": "text"
                     }
                 ],
                 "default": [ ]

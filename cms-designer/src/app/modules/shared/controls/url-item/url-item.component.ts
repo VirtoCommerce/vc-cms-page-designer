@@ -9,6 +9,7 @@ import { DomSanitizer } from '@angular/platform-browser';
     styleUrls: ['./url-item.component.scss']
 })
 export class UrlItemComponent extends BaseControlComponent<UrlControlDescriptor> {
+    isOpenSelect: boolean;
     isOpen: boolean;
     valueInSelect: OptionModel;
 
@@ -30,7 +31,7 @@ export class UrlItemComponent extends BaseControlComponent<UrlControlDescriptor>
 
     selectValue(option: OptionModel) {
         this.valueInSelect = option;
-        this.isOpen = false;
+        this.isOpenSelect = false;
         this.onValueChange({ style: option.value });
     }
 
@@ -43,20 +44,22 @@ export class UrlItemComponent extends BaseControlComponent<UrlControlDescriptor>
     }
 
     toggleSelect() {
+        this.isOpenSelect = !this.isOpenSelect;
+    }
+
+    toggleControl(event) {
+        event.preventDefault();
         this.isOpen = !this.isOpen;
     }
 
     setValue(value: any) {
-        // TODO: remove before relese. used for backward compatibility when develop
         if (!value) {
-            value = { url: null, urlText: null, style: null, flag: false };
+            value = { url: null, urlText: null, style: null };
         }
         const result = { ...this.value, ...value };
+        this.valueInSelect = this.descriptor.styles && this.descriptor.styles.length
+            ? this.descriptor.styles.find(x => x.value === value.style)
+            : null;
         super.setValue(result);
-    }
-
-    toggleCheckbox() {
-        const v = !this.value.flag;
-        this.onValueChange({ flag: v });
     }
 }

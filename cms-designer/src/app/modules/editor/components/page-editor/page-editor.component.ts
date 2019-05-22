@@ -69,7 +69,11 @@ export class PageEditorComponent implements OnInit {
             }
         }
         const unknownBlock = <any>item;
-        return result || unknownBlock.name || unknownBlock.title || unknownBlock.type || '<unnamed block>';
+        result = result || unknownBlock.name || unknownBlock.title || unknownBlock.type || '<unnamed block>';
+        if (result.length > 15) {
+            result = result.substring(0, 15) + '…';
+        }
+        return result;
     }
 
     toggleItemVisibility(event: MouseEvent, item: BlockValuesModel) {

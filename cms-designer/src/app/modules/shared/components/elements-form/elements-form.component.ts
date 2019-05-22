@@ -56,8 +56,12 @@ export class ElementsFormComponent implements OnInit {
 
     getTitle(item: FormGroup, control: CollectionControlDescriptor, index: number): string {
         const el: any = item;
-        return (control.displayField ? item.value[control.displayField] : null)
+        let result = (control.displayField ? item.value[control.displayField] : null)
             || `${el._index || (el._index = index)}. <no title>`;
+        if (result.length > 15) {
+            result = result.substring(0, 14) + '…';
+        }
+        return result;
     }
 
     removeElement(control: CollectionControlDescriptor, index: number) {

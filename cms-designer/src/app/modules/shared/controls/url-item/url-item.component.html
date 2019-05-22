@@ -1,26 +1,29 @@
-<div class="form-group">
-    <label>{{descriptor.label}}</label>
-    <input #control type="text" class="form-control" [value]="value.url"
-        (keyup)="onValueChange({url: $event.target.value })">
-</div>
-<div class="form-group">
-    <label>{{descriptor.textLabel}}</label>
-    <input #control type="textLabel" class="form-control" [value]="value.urlText"
-        (keyup)="onValueChange({urlText: $event.target.value })">
-</div>
-<div class="form-group">
-    <label *ngIf="descriptor.styleLabel">{{descriptor.styleLabel}}</label>
-    <div class="dropdown" [class.dropdown--show]="isOpen">
-        <div class="dropdown__toggle" (click)="toggleSelect()">{{ getTitle() }}</div>
-        <div class="dropdown__menu">
-            <a class="dropdown__menu-item" *ngFor="let option of descriptor.styles; trackBy: getTrackValue"
-                [class.dropdown__menu-item--selected]="option == value" (click)="selectValue(option)">
-                <span class="dropdown__menu-item-text" [innerHTML]="getDisplayValue(option)"></span>
-            </a>
+<div class="list list--collection">
+    <div class="list__item">
+        <a href="#" (click)="toggleControl($event)" class="list__name">{{ descriptor.label }}</a>
+    </div>
+    <div class="collection-item__body" *ngIf="isOpen">
+        <div class="form-group">
+            <label>{{descriptor.label}}</label>
+            <input #control type="text" class="form-control" [value]="value.url"
+                (keyup)="onValueChange({url: $event.target.value })">
+        </div>
+        <div class="form-group">
+            <label>{{descriptor.textLabel}}</label>
+            <input #control type="textLabel" class="form-control" [value]="value.urlText"
+                (keyup)="onValueChange({urlText: $event.target.value })">
+        </div>
+        <div class="form-group">
+            <label *ngIf="descriptor.styleLabel">{{descriptor.styleLabel}}</label>
+            <div class="dropdown" [class.dropdown--show]="isOpenSelect">
+                <div class="dropdown__toggle" (click)="toggleSelect()">{{ getTitle() }}</div>
+                <div class="dropdown__menu">
+                    <a class="dropdown__menu-item" *ngFor="let option of descriptor.styles; trackBy: getTrackValue"
+                        [class.dropdown__menu-item--selected]="option == value" (click)="selectValue(option)">
+                        <span class="dropdown__menu-item-text" [innerHTML]="getDisplayValue(option)"></span>
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
-</div>
-<div class="form-group form-checkbox" (click)="toggleCheckbox()">
-    <input type="checkbox" class="form-checkbox__input" [checked]="value.flag" (change)="onValueChange({flag: $event.target.checked })">
-    <label class="form-checkbox__label">{{ descriptor.flagLabel }}</label>
 </div>

@@ -27,9 +27,9 @@
                 </div>
             </div>
             <div *ngIf="editableItem" class="collection-item" [formGroup]="editableItem">
-                <div class="collection-item__header">
+                <!-- <div class="collection-item__header">
                     <div class="collection-item__t">New slide</div>
-                </div>
+                </div> -->
                 <div class="collection-item__body">
                     <app-elements-form [group]="editableItem" [descriptors]="getElementDescriptors(control)">
                     </app-elements-form>
