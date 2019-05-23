@@ -117,13 +117,72 @@
                     {
                         "value": "left",
                         "label": "Left"
-                    },
-                    {
-                        "value": "background",
-                        "label": "Background"
                     }
                 ],
                 "tab": "Settings"
+            },
+            {
+                "id": "image",
+                "label": "Upload picture",
+                "type": "image",
+                "default": "http://dev-cms-vm.westeurope.cloudapp.azure.com/v2/admin/Assets/blogs/yellowstone.jpg",
+                "previewWidth": 120,
+                "previewHeight": 80
+            },
+            {
+                "id": "content",
+                "label": "Content",
+                "type": "text",
+                "default": "Yellowstone National Park is an American national park located in Wyoming, Montana, and Idaho.  <a href='https://en.wikipedia.org/wiki/Yellowstone_National_Park'>See more on Wiki</a>"
+            },
+            {
+                "id": "url1",
+                "label": "Link",
+                "type": "url",
+                "textLabel": "Text",
+                "styleLabel": "Link style",
+                "styles": [
+                    { "value": "btn", "label": "Button" },
+                    { "value": "btn btn--orange btn--lg", "label": "Orange button" },
+                    { "value": "btn btn--lg", "label": "Gray button" },
+                    { "value": "benefits__link", "label": "Link"},
+                    { "value": "btn btn--orange btn--round", "label": "Round orange"}
+                ]
+            },
+            {
+                "id": "url2",
+                "label": "Second Link",
+                "type": "url",
+                "textLabel": "Text",
+                "styleLabel": "Link style",
+                "styles": [
+                    { "value": "btn", "label": "Button" },
+                    { "value": "btn btn--orange btn--lg", "label": "Orange button" },
+                    { "value": "btn btn--lg", "label": "Gray button" },
+                    { "value": "benefits__link", "label": "Link"},
+                    { "value": "btn btn--orange btn--round", "label": "Round orange"}
+                ]
+            }
+        ]
+    },
+    "text-over-image": {
+        "name": "Text over image",
+        "icon": "text-over-image",
+        "displayField": "name",
+        "settings": [
+            {
+                "id": "name",
+                "label": "Block name",
+                "type": "string",
+                "default": "Text over image",
+                "tab": "Settings"
+            },
+            {
+                "id": "title",
+                "label": "Title",
+                "type": "string",
+                "default": "Yellowstone National Park",
+                "autofocus": true
             },
             {
                 "id": "image",
@@ -547,7 +606,7 @@
     },
     "contacts-form": {
         "name": "Contacts form",
-        "icon": "image-carousel",
+        "icon": "contacts-form",
         "displayField": "name",
         "settings": [
             {
@@ -602,6 +661,49 @@
                     }
                 ],
                 "default": [ ]
+            }
+        ]
+    },
+    "text-with-form": {
+        "name": "Text with form",
+        "icon": "text-with-form",
+        "displayField": "name",
+        "settings": [
+            {
+                "id": "name",
+                "label": "Block name",
+                "type": "string",
+                "default": "Text with form",
+                "tab": "Settings"
+            },
+            {
+                "id": "image",
+                "label": "Upload picture",
+                "type": "image",
+                "previewWidth": 120,
+                "previewHeight": 80
+            },
+            {
+                "id": "content",
+                "label": "Content",
+                "type": "text"
+            },
+            {
+                "id": "style",
+                "label": "Block style",
+                "type": "select",
+                "default": "light",
+                "options": [
+                    {
+                        "value": "light",
+                        "label": "Light"
+                    },
+                    {
+                        "value": "dark",
+                        "label": "Dark"
+                    }
+                ],
+                "tab": "Settings"
             }
         ]
     },

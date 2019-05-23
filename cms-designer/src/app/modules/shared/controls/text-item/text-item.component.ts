@@ -16,7 +16,6 @@ export class TextItemComponent extends BaseControlComponent<TextControlDescripto
                 items: ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript']
             },
             { name: 'align', items: ['JustifyLeft', 'JustifyCenter', 'JustifyRight'] },
-            { name: 'clipboard', items: ['PasteText', 'PasteFromWord'] },
             { name: 'lists', items: ['NumberedList', 'BulletedList', 'Outdent', 'Indent'] },
             { name: 'insert', items: ['Image', 'Table', 'Anchor'] },
             { name: 'link', items: ['Link', 'Unlink'] },
