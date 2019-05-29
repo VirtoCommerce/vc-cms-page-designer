@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { BaseControlComponent } from '../base-control.component';
 import { TextControlDescriptor } from '@shared/models';
+import { AppSettings } from '@app/services';
 
 @Component({
     selector: 'app-text-item',
@@ -19,13 +20,17 @@ export class TextItemComponent extends BaseControlComponent<TextControlDescripto
             { name: 'lists', items: ['NumberedList', 'BulletedList', 'Outdent', 'Indent'] },
             { name: 'insert', items: ['Image', 'Table', 'Anchor'] },
             { name: 'link', items: ['Link', 'Unlink'] },
-            { name: 'styles', items: ['Format', 'FontSize'] },
+            { name: 'styles', items: ['Styles'] },
             { name: 'tools', items: ['Maximize'] },
             { name: 'document', items: ['Source'] }
         ],
-        extraPlugins: 'font',
-        removeButtons: ''
-
+        extraPlugins: 'stylescombo',
+        removeButtons: '',
+        stylesSet: [
+            { name: 'Normal', element: 'p', attributes: [ ] },
+            { name: 'Medium size text', element: 'p', attributes: { class: 'section__descr--medium' } },
+            { name: 'Gray color text', element: 'p', attributes: { class: 'section__descr--gray' } }
+        ]
         // [
         //     { name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ] },
         //     { name: 'colors', groups: [ 'colors' ] },

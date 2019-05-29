@@ -47,7 +47,8 @@
                             "src/data/page_data.page",
                             "src/data/settings_data.json",
                             "src/data/settings_schema.json",
-                            "src/data/blocks_schema.json"
+                            "src/data/blocks_schema.json",
+                            "src/data/ckeditor_config.js"
                         ],
                         "styles": [
                             "src/assets/sass/main.scss",
