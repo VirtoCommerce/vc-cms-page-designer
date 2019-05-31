@@ -4,7 +4,7 @@
 
 export const environment = {
     production: false,
-    useLocalData: true
+    version: '0.0.1'
 };
 
 /*

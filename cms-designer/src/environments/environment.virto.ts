@@ -1,4 +1,4 @@
 export const environment = {
     production: true,
-    useLocalData: false
+    version: '0.0.1'
 };
