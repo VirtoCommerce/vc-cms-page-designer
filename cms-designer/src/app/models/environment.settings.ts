@@ -3,5 +3,6 @@ export interface EnvironmentSettings {
     storePreviewPath: string;
     baseUrl: string;
     platformUrl: string;
+    tokenUrl: string;
     previewTimeout: number;
 }

@@ -58,6 +58,11 @@ export class ApiUrlsService {
         return url;
     }
 
+    getTokenUrl(): string {
+        const url = `${AppSettings.platformUrl}${AppSettings.tokenUrl}`;
+        return url;
+    }
+
     private generatePrefixAndSetCookie(): string {
         const characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVabcdefghijklmnopqrstuv_-';
         const randomChar = () => characters[Math.floor(Math.random() * characters.length)];

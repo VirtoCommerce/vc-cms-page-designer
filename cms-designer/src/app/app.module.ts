@@ -27,6 +27,7 @@ import { environment } from '../environments/environment';
 import { HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
 import { AppHttpInterceptor, ApiUrlsService, PreviewService } from '@app/services';
 import { LoadingComponent } from './components/loading/loading.component';
+import { RefreshTokenInterceptor } from './services/refresh-token.interceptor';
 
 @NgModule({
     declarations: [
@@ -61,7 +62,8 @@ import { LoadingComponent } from './components/loading/loading.component';
     ],
     providers: [
         CookieService,
-        { provide: HTTP_INTERCEPTORS, useClass: AppHttpInterceptor, multi: true },
+        // { provide: HTTP_INTERCEPTORS, useClass: AppHttpInterceptor, multi: true },
+        { provide: HTTP_INTERCEPTORS, useClass: RefreshTokenInterceptor, multi: true },
         {
             provide: APP_INITIALIZER,
             useFactory: (platform: PlatformService) =>
@@ -72,22 +74,14 @@ import { LoadingComponent } from './components/loading/loading.component';
         {
             provide: PlatformService,
             useFactory: (http: HttpClient, urls: ApiUrlsService) => {
-                if (environment.useLocalData) {
-                    return new MockPlatformService(http);
-                } else {
-                    return new PlatformService(http, urls);
-                }
+                return new PlatformService(http, urls);
             },
             deps: [ HttpClient, ApiUrlsService ]
         },
         {
             provide: PreviewService,
             useFactory: () => {
-                if (environment.useLocalData) {
-                    return new MockPreviewService();
-                } else {
-                    return new PreviewService();
-                }
+                return new PreviewService();
             },
             deps: [ ]
         }

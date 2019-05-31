@@ -8,7 +8,7 @@
     <div class="form-text">{{ value.url }}</div>
     <div *ngIf="value.url" class="form-file__uploaded"><img class="form-file__pic" [src]="value.url" alt="" />
         <span (click)="removeImage($event)" class="form-file__remove"></span></div>
-    <div>
+    <div *ngIf="descriptor.allowSetSize">
         <label>Sizes</label>
         <div class="sizes">
             <span>W:</span>

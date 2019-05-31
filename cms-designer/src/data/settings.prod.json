@@ -2,5 +2,6 @@
     "storeBaseUrl": "http://dev-cms-vm.westeurope.cloudapp.azure.com/v2/store",
     "storePreviewPath": "/designer-preview",
     "baseUrl": "/v2/designer/",
-    "platformUrl": "http://dev-cms-vm.westeurope.cloudapp.azure.com/v2/admin"
+    "platformUrl": "http://dev-cms-vm.westeurope.cloudapp.azure.com/v2/admin",
+    "tokenUrl": "/token"
 }

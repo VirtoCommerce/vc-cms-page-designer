@@ -5,5 +5,6 @@ export interface ImageControlDescriptor extends BaseControlDescriptor {
     previewHeight?: number;
     maxWidth?: number;
     maxHeight?: number;
+    allowSetSize?: boolean;
     acceptTypes?: string;
 }

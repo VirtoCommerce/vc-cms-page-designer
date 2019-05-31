@@ -2,5 +2,6 @@
     "storeBaseUrl": "http://vc-public-test.azurewebsites.net",
     "storePreviewPath": "/designer-preview",
     "baseUrl": "/designer/",
-    "platformUrl": "http://vc-admin-test.azurewebsites.net"
+    "platformUrl": "http://vc-admin-test.azurewebsites.net",
+    "tokenUrl": "/token"
 }
