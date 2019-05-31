@@ -26,7 +26,7 @@
             </div>
         </div>
     </div>
-    <div class="left-panel-footer" *ngIf="model.type !== 'settings' && !schema.static">
+    <div class="left-panel-footer" *ngIf="model.type !== 'settings' && !schema[model.type].static">
         <button class="btn btn--outline btn--block" (click)="removeBlock()">
             <span class="btn__icon btn__icon--remove"></span>
             <span class="btn__text">Remove section</span>

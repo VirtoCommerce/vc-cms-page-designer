@@ -57,8 +57,11 @@ export class TextItemComponent extends BaseControlComponent<TextControlDescripto
     }
 
     registerOnChange(fn: any): void {
-        this.onChange = (event) => {
-            fn(event.editor.getData());
+        this.onChange = (newValue) => {
+            if (this.value !== newValue) {
+                console.log(this.value, newValue);
+                fn(newValue);
+            }
         };
     }
 

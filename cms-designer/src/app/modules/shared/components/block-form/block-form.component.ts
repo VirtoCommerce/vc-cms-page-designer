@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectorRef, OnDestroy, AfterViewChecked } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { BlockSchema, BlockValuesModel } from '@shared/models';
+import { BlockSchema, BlockValuesModel, BlocksSchema } from '@shared/models';
 import { FormHelper } from '@shared/services';
 import { ReturnStatement } from '@angular/compiler';
 
@@ -11,7 +11,7 @@ import { ReturnStatement } from '@angular/compiler';
 })
 export class BlockFormComponent implements OnInit, OnDestroy {
     private _model: BlockValuesModel;
-    private _schema: BlockSchema;
+    private _schema: BlocksSchema;
 
     @Input() context: any;
 
@@ -26,10 +26,17 @@ export class BlockFormComponent implements OnInit, OnDestroy {
         }
     }
 
-    @Input() get schema(): BlockSchema { // схема редактируемого блока
+    get settings() {
+        if (this.model && this.schema) {
+            return this.schema[this.model.type].settings;
+        }
+        return null;
+    }
+
+    @Input() get schema(): BlocksSchema { // схема редактируемого блока
         return this._schema;
     }
-    set schema(value: BlockSchema) {
+    set schema(value: BlocksSchema) {
         if (this._schema !== value) {
             this._schema = value;
             console.log('schema');
@@ -58,20 +65,22 @@ export class BlockFormComponent implements OnInit, OnDestroy {
 
     private createForm() {
         const m = this.model;
-        const s = this.schema;
-        if (m && s && m.type === s.type) {
-            console.log('create form');
-            if (this.subscription != null) {
-                this.subscription.unsubscribe();
-                this.subscription = null;
+        if (m && this.schema) {
+            const s = this.schema[m.type];
+            if (s && m.type === s.type) {
+                if (this.subscription != null) {
+                    this.subscription.unsubscribe();
+                    this.subscription = null;
+                }
+                this.form = this.formHelper.generateForm(m, s.settings);
+                console.log(this.form);
+                this.subscription = this.form.valueChanges.subscribe(value => {
+                    console.log('form', this.form);
+                    this.modelChange.emit(value);
+                });
+                // this.changeDetector.markForCheck();
+                this.changeDetector.detectChanges();
             }
-            this.form = this.formHelper.generateForm(m, s.settings);
-            this.subscription = this.form.valueChanges.subscribe(value => {
-                console.log('form');
-                this.modelChange.emit(value);
-            });
-            // this.changeDetector.markForCheck();
-            this.changeDetector.detectChanges();
         }
     }
 }

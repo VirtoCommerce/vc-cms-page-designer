@@ -1,7 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter, AfterContentInit, OnDestroy } from '@angular/core';
-import { BlockSchema, BlockValuesModel } from '@shared/models';
+import { BlockSchema, BlockValuesModel, BlocksSchema } from '@shared/models';
 import { Subject, combineLatest, Observable, fromEvent, Subscription } from 'rxjs';
 import { map, withLatestFrom } from 'rxjs/operators';
+import { WindowRef } from '@app/services';
 
 @Component({
     selector: 'app-page-item-editor',
@@ -11,21 +12,24 @@ import { map, withLatestFrom } from 'rxjs/operators';
 export class PageItemEditorComponent implements OnInit {
 
     private _mode: string;
-    private _schema: BlockSchema;
+    private _model: BlockValuesModel;
+    private _schema: BlocksSchema;
 
-    @Input() model: BlockValuesModel;
-    @Input() get schema(): BlockSchema {
+    @Input() get model(): BlockValuesModel {
+        return this._model;
+    }
+
+    set model(value: BlockValuesModel) {
+        this._model = value;
+        this.updateTabs();
+    }
+
+    @Input() get schema(): BlocksSchema {
         return this._schema;
     }
-    set schema(value: BlockSchema) {
+    set schema(value: BlocksSchema) {
         this._schema = value;
-        this.tabs = this.schema.settings.reduce(
-            (result, list) => result.indexOf(list.tab || 'General') === -1
-                ? result.concat(list.tab || 'General')
-                : result,
-            []
-        ).sort();
-        this.activeTab = this.tabs[0];
+        this.updateTabs();
     }
 
     @Input() blockName: string;
@@ -49,18 +53,14 @@ export class PageItemEditorComponent implements OnInit {
 
     private editedModel: BlockValuesModel;
 
-    constructor() { }
+    constructor(private windowRef: WindowRef) { }
 
     ngOnInit() {
-        window.addEventListener('resize', () => this.adjustPanelWidth());
+        this.windowRef.nativeWindow.addEventListener('resize', () => this.adjustPanelWidth());
     }
 
     togglePanel() {
         this.changeEditorModeEvent.emit(this.mode === 'wide' ? 'normal' : 'wide');
-    }
-
-    private adjustPanelWidth() {
-        this.openedWidthStyle = this.mode === 'wide' ? window.innerWidth / 2 : null;
     }
 
     setActiveTab(tabName: string) {
@@ -81,5 +81,21 @@ export class PageItemEditorComponent implements OnInit {
 
     copyBlock() {
         this.copyBlockEvent.emit(this.model);
+    }
+
+    private updateTabs() {
+        if (this.model && this.schema) {
+            this.tabs = this.schema[this.model.type].settings.reduce(
+                (result, list) => result.indexOf(list.tab || 'General') === -1
+                    ? result.concat(list.tab || 'General')
+                    : result,
+                []
+            ).sort();
+            this.activeTab = this.tabs[0];
+        }
+    }
+
+    private adjustPanelWidth() {
+        this.openedWidthStyle = this.mode === 'wide' ? this.windowRef.nativeWindow.innerWidth / 2 : null;
     }
 }

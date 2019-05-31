@@ -71,7 +71,7 @@
         </div>
 
         <app-page-item-editor class="left-panel" *ngIf="currentSectionItem$|async as currentSectionItem"
-            [model]="currentSectionItem" [schema]="(blocksSchema$ | async)[currentSectionItem.type]"
+            [model]="currentSectionItem" [schema]="blocksSchema$ | async"
             [mode]="editorMode$|async" [blockName]="currentBlockName$|async"
             (changeEditorModeEvent)="changeEditorMode($event)"
             (valueChangedEvent)="updateBlockPreview($event)" (removeBlockEvent)="removeBlock($event)"

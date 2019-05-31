@@ -301,7 +301,7 @@ export class RootEffects {
         tap(([primary, secondary]) => this.preview.toggleFrames(primary, secondary))
     );
 
-    // @Effect()
+    @Effect()
     openBlockEditorForPreview$ = fromEvent(window, 'message').pipe(
         map((event: MessageEvent) => event.data),
         filter(data => data.type === 'select'),
@@ -310,12 +310,12 @@ export class RootEffects {
             this.themeStore$.select(fromTheme.getShowPresetsEditor)
         ),
         filter(([, schemaItem, showPresets]) => !schemaItem && !showPresets),
-        map(([data]) => {
-            return new editorActions.SelectPageItem(data.id);
+        switchMap(([data]) => {
+            return [new editorActions.CompleteEditPageItem(), new editorActions.SelectPageItem(data.id)];
         }),
     );
 
-    // @Effect({ dispatch: false })
+    @Effect({ dispatch: false })
     deselectBlockInPreview$ = fromEvent(window, 'message').pipe(
         map((event: MessageEvent) => event.data),
         filter(data => data.type === 'select'),
