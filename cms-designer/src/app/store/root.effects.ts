@@ -301,7 +301,7 @@ export class RootEffects {
         tap(([primary, secondary]) => this.preview.toggleFrames(primary, secondary))
     );
 
-    @Effect()
+    // @Effect()
     openBlockEditorForPreview$ = fromEvent(window, 'message').pipe(
         map((event: MessageEvent) => event.data),
         filter(data => data.type === 'select'),
@@ -315,7 +315,7 @@ export class RootEffects {
         }),
     );
 
-    @Effect({ dispatch: false })
+    // @Effect({ dispatch: false })
     deselectBlockInPreview$ = fromEvent(window, 'message').pipe(
         map((event: MessageEvent) => event.data),
         filter(data => data.type === 'select'),

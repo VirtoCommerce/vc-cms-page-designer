@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectorRef, OnDestroy } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectorRef, OnDestroy, AfterViewChecked } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { BlockSchema, BlockValuesModel } from '@shared/models';
@@ -10,7 +10,6 @@ import { ReturnStatement } from '@angular/compiler';
     templateUrl: './block-form.component.html'
 })
 export class BlockFormComponent implements OnInit, OnDestroy {
-
     private _model: BlockValuesModel;
     private _schema: BlockSchema;
 
@@ -22,6 +21,7 @@ export class BlockFormComponent implements OnInit, OnDestroy {
     set model(value: BlockValuesModel) {
         if (this._model !== value) {
             this._model = value;
+            console.log('model');
             this.createForm();
         }
     }
@@ -32,6 +32,7 @@ export class BlockFormComponent implements OnInit, OnDestroy {
     set schema(value: BlockSchema) {
         if (this._schema !== value) {
             this._schema = value;
+            console.log('schema');
             this.createForm();
         }
     }
@@ -56,15 +57,21 @@ export class BlockFormComponent implements OnInit, OnDestroy {
     }
 
     private createForm() {
-        if (this.model && this.schema && this.model.type === this.schema.type) {
-            this.form = this.formHelper.generateForm(this.model, this.schema.settings);
+        const m = this.model;
+        const s = this.schema;
+        if (m && s && m.type === s.type) {
+            console.log('create form');
+            if (this.subscription != null) {
+                this.subscription.unsubscribe();
+                this.subscription = null;
+            }
+            this.form = this.formHelper.generateForm(m, s.settings);
             this.subscription = this.form.valueChanges.subscribe(value => {
-                console.log(this.form);
+                console.log('form');
                 this.modelChange.emit(value);
             });
             // this.changeDetector.markForCheck();
-            // this.changeDetector.detectChanges();
+            this.changeDetector.detectChanges();
         }
     }
-
 }

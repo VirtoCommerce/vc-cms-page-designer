@@ -432,34 +432,6 @@
                         "type": "text"
                     },
                     {
-                        "id": "width",
-                        "label": "Width",
-                        "type": "select",
-                        "default": "auto",
-                        "options": [
-                            {
-                                "value": "auto",
-                                "label": "auto"
-                            },
-                            {
-                                "value": "20%",
-                                "label": "20%"
-                            },
-                            {
-                                "value": "25%",
-                                "label": "25%"
-                            },
-                            {
-                                "value": "33%",
-                                "label": "33%"
-                            },
-                            {
-                                "value": "50%",
-                                "label": "50%"
-                            }
-                        ]
-                    },
-                    {
                         "id": "url",
                         "label": "Link",
                         "type": "url",
@@ -478,30 +450,14 @@
                     {
                         "title": "Left column",
                         "image": "http://dev-cms-vm.westeurope.cloudapp.azure.com/v2/admin/Assets/blogs/Bachalpsee_reflection.jpg",
-                        "content": "Bachalpsee is a lake close to the First above Grindelwald in the Bernese Oberland, Switzerland. <a href='https://en.wikipedia.org/wiki/Bachalpsee'>See more on Wiki</a>",
-                        "width": "auto"
+                        "content": "Bachalpsee is a lake close to the First above Grindelwald in the Bernese Oberland, Switzerland. <a href='https://en.wikipedia.org/wiki/Bachalpsee'>See more on Wiki</a>"
                     },
                     {
                         "title": "Right column",
                         "image": "http://dev-cms-vm.westeurope.cloudapp.azure.com/v2/admin/Assets/blogs/Galunggung.jpg",
-                        "content": "Mount Galunggung is an active stratovolcano in West Java, Indonesia. <a href='https://en.wikipedia.org/wiki/Galunggung'>See more on Wiki</a>",
-                        "width": "auto"
+                        "content": "Mount Galunggung is an active stratovolcano in West Java, Indonesia. <a href='https://en.wikipedia.org/wiki/Galunggung'>See more on Wiki</a>"
                     }
                 ]
-            },
-            {
-                "id": "frame",
-                "label": "Show frame",
-                "type": "checkbox",
-                "default": false,
-                "tab": "Settings"
-            },
-            {
-                "id": "nowrap",
-                "label": "No wrap",
-                "type": "checkbox",
-                "default": false,
-                "tab": "Settings"
             },
             {
                 "id": "columnsWidth",
@@ -514,87 +470,12 @@
                         "label": "auto"
                     },
                     {
-                        "value": "columns-2",
-                        "label": "2 per row"
-                    },
-                    {
-                        "value": "columns-3",
+                        "value": "col-md-6 col-lg-4",
                         "label": "3 per row"
                     },
                     {
-                        "value": "columns-4",
+                        "value": "col-6 col-sm-4 col-lg-3",
                         "label": "4 per row"
-                    },
-                    {
-                        "value": "columns-5",
-                        "label": "5 per row"
-                    }
-                ],
-                "tab": "Settings"
-            },
-            {
-                "id": "columnsAlignment",
-                "label": "Columns alignment",
-                "type": "select",
-                "default": "align-columns-center",
-                "options": [
-                    {
-                        "value": "align-columns-left",
-                        "label": "Left"
-                    },
-                    {
-                        "value": "align-columns-center",
-                        "label": "Center"
-                    },
-                    {
-                        "value": "align-columns-right",
-                        "label": "Right"
-                    },
-                    {
-                        "value": "align-columns-stretch",
-                        "label": "Stretch"
-                    }
-                ],
-                "tab": "Settings"
-            },
-            {
-                "id": "imageAlignment",
-                "label": "Image alignment",
-                "type": "select",
-                "default": "align-left",
-                "options": [
-                    {
-                        "value": "align-left",
-                        "label": "Left"
-                    },
-                    {
-                        "value": "align-center",
-                        "label": "Center"
-                    },
-                    {
-                        "value": "align-right",
-                        "label": "Right"
-                    }
-                ],
-                "tab": "Settings"
-            },
-            {
-                "id": "titleAlignment",
-                "label": "Title alignment",
-                "type": "select",
-                "default": "align-left",
-                "options": [
-                    {
-                        "value": "align-left",
-                        "label": "Left"
-                    },
-                    {
-                        "value": "align-center",
-                        "label": "Center"
-                    },
-                    {
-                        "value": "align-right",
-                        "label": "Right"
                     }
                 ],
                 "tab": "Settings"
