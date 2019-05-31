@@ -167,7 +167,7 @@
     },
     "text-over-image": {
         "name": "Text over image",
-        "icon": "text-over-image",
+        "icon": "image-text",
         "displayField": "name",
         "settings": [
             {
@@ -224,6 +224,94 @@
                 "styles": [
                     { "value": "btn--orange", "label": "Orange button" },
                     { "value": "btn--white", "label": "White button" }
+                ]
+            }
+        ]
+    },
+    "cards": {
+        "name": "Cards list",
+        "icon": "text-columns",
+        "displayField": "name",
+        "settings": [
+            {
+                "id": "name",
+                "label": "Block name",
+                "type": "string",
+                "default": "Text",
+                "tab": "Settings"
+            },
+            {
+                "id": "title",
+                "label": "Title",
+                "type": "string",
+                "default": "Yellowstone National Park",
+                "autofocus": true
+            },
+            {
+                "id": "style",
+                "label": "Block style",
+                "type": "select",
+                "default": "light",
+                "options": [
+                    {
+                        "value": "light",
+                        "label": "Light"
+                    },
+                    {
+                        "value": "dark",
+                        "label": "Dark"
+                    }
+                ],
+                "tab": "Settings"
+            },
+            {
+                "id": "items",
+                "label": "Items",
+                "type": "list",
+                "addText": "Add item",
+                "removeText": "Remove item",
+                "displayField": "title",
+                "element": [
+                    {
+                        "id": "title",
+                        "label": "Title",
+                        "type": "string"
+                    },
+                    {
+                        "id": "image",
+                        "label": "Upload picture",
+                        "type": "image",
+                        "previewWidth": 120,
+                        "previewHeight": 80
+                    },
+                    {
+                        "id": "text",
+                        "label": "Content",
+                        "type": "text"
+                    },
+                    {
+                        "id": "link",
+                        "label": "Link",
+                        "type": "url",
+                        "textLabel": "Text",
+                        "styleLabel": "Link style",
+                        "styles": [
+                            { "value": "btn--orange btn--round", "label": "Orange button" },
+                            { "value": "btn--white btn--round", "label": "White button" }
+                        ]
+                    }       
+                ],
+                "default": [
+                    {
+                        "title": "Left column",
+                        "image": "http://dev-cms-vm.westeurope.cloudapp.azure.com/v2/admin/Assets/blogs/Bachalpsee_reflection.jpg",
+                        "content": "Bachalpsee is a lake close to the First above Grindelwald in the Bernese Oberland, Switzerland. <a href='https://en.wikipedia.org/wiki/Bachalpsee'>See more on Wiki</a>"
+                    },
+                    {
+                        "title": "Right column",
+                        "image": "http://dev-cms-vm.westeurope.cloudapp.azure.com/v2/admin/Assets/blogs/Galunggung.jpg",
+                        "content": "Mount Galunggung is an active stratovolcano in West Java, Indonesia. <a href='https://en.wikipedia.org/wiki/Galunggung'>See more on Wiki</a>"
+                    }
                 ]
             }
         ]
@@ -304,7 +392,7 @@
         ]
     },
     "two-columns-text": {
-        "name": "Text layout",
+        "name": "Two columns text",
         "icon": "text",
         "displayField": "name",
         "settings": [
@@ -340,28 +428,31 @@
                 "tab": "Settings"
             },
             {
-                "id": "contentTop",
-                "label": "Top content",
+                "id": "contentBefore",
+                "label": "Content",
                 "type": "text",
                 "default": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
             },
             {
-                "id": "contentLeft",
-                "label": "Left content",
-                "type": "text",
-                "default": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-            },
-            {
-                "id": "contentRight",
-                "label": "Right content",
-                "type": "text",
-                "default": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-            },
-            {
-                "id": "contentBottom",
-                "label": "Bottom content",
-                "type": "text",
-                "default": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+                "id": "items",
+                "label": "Items",
+                "type": "list",
+                "addText": "Add item",
+                "removeText": "Remove item",
+                "displayField": "title",
+                "element": [
+                    {
+                        "id": "title",
+                        "label": "Title",
+                        "type": "string"
+                    },
+                    {
+                        "id": "text",
+                        "label": "Text",
+                        "type": "text"
+                    }
+                ],
+                "default": [ ]
             }
         ]
     },
