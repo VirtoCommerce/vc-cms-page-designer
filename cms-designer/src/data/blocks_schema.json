@@ -185,6 +185,12 @@
                 "autofocus": true
             },
             {
+                "id": "subTitle",
+                "label": "Subtitle",
+                "type": "string",
+                "default": ""
+            },
+            {
                 "id": "image",
                 "label": "Upload picture",
                 "type": "image",
@@ -205,11 +211,8 @@
                 "textLabel": "Text",
                 "styleLabel": "Link style",
                 "styles": [
-                    { "value": "btn", "label": "Button" },
-                    { "value": "btn btn--orange btn--lg", "label": "Orange button" },
-                    { "value": "btn btn--lg", "label": "Gray button" },
-                    { "value": "benefits__link", "label": "Link"},
-                    { "value": "btn btn--orange btn--round", "label": "Round orange"}
+                    { "value": "btn--orange", "label": "Orange button" },
+                    { "value": "btn--white", "label": "White button" }
                 ]
             },
             {
@@ -219,11 +222,8 @@
                 "textLabel": "Text",
                 "styleLabel": "Link style",
                 "styles": [
-                    { "value": "btn", "label": "Button" },
-                    { "value": "btn btn--orange btn--lg", "label": "Orange button" },
-                    { "value": "btn btn--lg", "label": "Gray button" },
-                    { "value": "benefits__link", "label": "Link"},
-                    { "value": "btn btn--orange btn--round", "label": "Round orange"}
+                    { "value": "btn--orange", "label": "Orange button" },
+                    { "value": "btn--white", "label": "White button" }
                 ]
             }
         ]
@@ -303,7 +303,7 @@
             }
         ]
     },
-    "text-layout": {
+    "two-columns-text": {
         "name": "Text layout",
         "icon": "text",
         "displayField": "name",
@@ -365,7 +365,179 @@
             }
         ]
     },
+    "list-with-images": {
+        "name": "List with images",
+        "icon": "text-columns",
+        "settings": [
+            {
+                "id": "name",
+                "label": "Block name",
+                "type": "string",
+                "default": "List with images",
+                "tab": "Settings"
+            },
+            {
+                "id": "title",
+                "label": "Title",
+                "type": "string",
+                "default": "All you need in one place",
+                "autofocus": true
+            },
+            {
+                "id": "intro",
+                "label": "Intro",
+                "type": "text"
+            },
+            {
+                "id": "style",
+                "label": "Block style",
+                "type": "select",
+                "default": "light",
+                "options": [
+                    {
+                        "value": "light",
+                        "label": "Light"
+                    },
+                    {
+                        "value": "dark",
+                        "label": "Dark"
+                    }
+                ],
+                "tab": "Settings"
+            },
+            {
+                "id": "colStyle",
+                "label": "Columns",
+                "type": "select",
+                "default": "col-lg-6",
+                "options": [
+                    {
+                        "value": "col-lg-6",
+                        "label": "2 per row"
+                    },
+                    {
+                        "value": "col-md-6 col-lg-4",
+                        "label": "3 per row"
+                    },
+                    {
+                        "value": "col-6 col-sm-4 col-lg-3",
+                        "label": "4 per row"
+                    }
+                ],
+                "tab": "Settings"
+            },
+            {
+                "id": "items",
+                "label": "Items",
+                "type": "list",
+                "addText": "Add item",
+                "removeText": "Remove item",
+                "displayField": "title",
+                "element": [
+                    {
+                        "id": "image",
+                        "label": "Upload picture",
+                        "type": "image",
+                        "previewWidth": 120,
+                        "previewHeight": 80
+                    },
+                    {
+                        "id": "title",
+                        "label": "Title",
+                        "type": "string"
+                    },
+                    {
+                        "id": "text",
+                        "label": "Text",
+                        "type": "text"
+                    }
+                ],
+                "default": [ ]
+            }
+        ]
+    },
+    "image-with-text-overlay": {
+        "hide": true,
+        "name": "Image with text overlay",
+        "icon": "fas fa-file-contract",
+        "settings": [
+            {
+                "id": "name",
+                "label": "Block name",
+                "type": "string",
+                "default": "Image with text overlay",
+                "autofocus": true
+            },
+            {
+                "id": "textColor",
+                "label": "Text color",
+                "type": "color",
+                "default": "black"
+            },
+            {
+                "id": "textOpacity",
+                "label": "Text opacity",
+                "type": "number",
+                "default": "opacity"
+            },
+            {
+                "id": "image",
+                "label": "Upload picture",
+                "type": "image",
+                "previewWidth": 120,
+                "previewHeight": 80,
+                "default": "http://dev-cms-vm.westeurope.cloudapp.azure.com/v2/admin/Assets/blogs/Grand_Canyon.jpg"
+            },
+            {
+                "id": "align",
+                "label": "Choose text alignment",
+                "type": "select",
+                "default": "center",
+                "options": [
+                    {
+                        "label": "Left",
+                        "value": "left"
+                    },
+                    {
+                        "label": "Center",
+                        "value": "center"
+                    },
+                    {
+                        "label": "Right",
+                        "value": "right"
+                    }
+                ]
+            },
+            {
+                "id": "width",
+                "label": "Block width",
+                "type": "select",
+                "default": "screen",
+                "options": [
+                    {
+                        "label": "Screen",
+                        "value": "screen"
+                    },
+                    {
+                        "label": "Container",
+                        "value": "container"
+                    },
+                    {
+                        "label": "Small",
+                        "value": "small"
+                    }
+                ]
+            },
+            {
+                "id": "content",
+                "label": "Content",
+                "type": "text",
+                "default": "The Grand Canyon is a steep-sided canyon carved by the Colorado River in Arizona, United States.  <a href='https://en.wikipedia.org/wiki/Grand_Canyon'>See more on Wiki</a>"
+            }
+        ]
+    },
     "textcolumns-with-images": {
+        "hide": true,
         "name": "Text columns with images",
         "icon": "text-columns",
         "settings": [
@@ -483,6 +655,7 @@
         ]
     },
     "image-carousel": {
+        "hide": true,
         "name": "Image carousel",
         "icon": "image-carousel",
         "displayField": "name",
@@ -548,6 +721,7 @@
         ]
     },
     "contacts-form": {
+        "hide": true,
         "name": "Contacts form",
         "icon": "contacts-form",
         "displayField": "name",
@@ -608,6 +782,7 @@
         ]
     },
     "text-with-form": {
+        "hide": true,
         "name": "Text with form",
         "icon": "text-with-form",
         "displayField": "name",
@@ -647,151 +822,6 @@
                     }
                 ],
                 "tab": "Settings"
-            }
-        ]
-    },
-    "list-with-images": {
-        "name": "List with images",
-        "icon": "text-columns",
-        "settings": [
-            {
-                "id": "name",
-                "label": "Block name",
-                "type": "string",
-                "default": "List with images",
-                "tab": "Settings"
-            },
-            {
-                "id": "title",
-                "label": "Title",
-                "type": "string",
-                "default": "All you need in one place",
-                "autofocus": true
-            },
-            {
-                "id": "style",
-                "label": "Block style",
-                "type": "select",
-                "default": "light",
-                "options": [
-                    {
-                        "value": "light",
-                        "label": "Light"
-                    },
-                    {
-                        "value": "dark",
-                        "label": "Dark"
-                    }
-                ],
-                "tab": "Settings"
-            },
-            {
-                "id": "items",
-                "label": "Items",
-                "type": "list",
-                "addText": "Add item",
-                "removeText": "Remove item",
-                "displayField": "title",
-                "element": [
-                    {
-                        "id": "image",
-                        "label": "Upload picture",
-                        "type": "image",
-                        "previewWidth": 120,
-                        "previewHeight": 80
-                    },
-                    {
-                        "id": "title",
-                        "label": "Title",
-                        "type": "string"
-                    },
-                    {
-                        "id": "text",
-                        "label": "Text",
-                        "type": "text"
-                    }
-                ],
-                "default": [ ]
-            }
-        ]
-    },
-    "image-with-text-overlay": {
-        "hide": true,
-        "name": "Image with text overlay",
-        "icon": "fas fa-file-contract",
-        "settings": [
-            {
-                "id": "name",
-                "label": "Block name",
-                "type": "string",
-                "default": "Image with text overlay",
-                "autofocus": true
-            },
-            {
-                "id": "textColor",
-                "label": "Text color",
-                "type": "color",
-                "default": "black"
-            },
-            {
-                "id": "textOpacity",
-                "label": "Text opacity",
-                "type": "number",
-                "default": "opacity"
-            },
-            {
-                "id": "image",
-                "label": "Upload picture",
-                "type": "image",
-                "previewWidth": 120,
-                "previewHeight": 80,
-                "default": "http://dev-cms-vm.westeurope.cloudapp.azure.com/v2/admin/Assets/blogs/Grand_Canyon.jpg"
-            },
-            {
-                "id": "align",
-                "label": "Choose text alignment",
-                "type": "select",
-                "default": "center",
-                "options": [
-                    {
-                        "label": "Left",
-                        "value": "left"
-                    },
-                    {
-                        "label": "Center",
-                        "value": "center"
-                    },
-                    {
-                        "label": "Right",
-                        "value": "right"
-                    }
-                ]
-            },
-            {
-                "id": "width",
-                "label": "Block width",
-                "type": "select",
-                "default": "screen",
-                "options": [
-                    {
-                        "label": "Screen",
-                        "value": "screen"
-                    },
-                    {
-                        "label": "Container",
-                        "value": "container"
-                    },
-                    {
-                        "label": "Small",
-                        "value": "small"
-                    }
-                ]
-            },
-            {
-                "id": "content",
-                "label": "Content",
-                "type": "text",
-                "default": "The Grand Canyon is a steep-sided canyon carved by the Colorado River in Arizona, United States.  <a href='https://en.wikipedia.org/wiki/Grand_Canyon'>See more on Wiki</a>"
             }
         ]
     },
