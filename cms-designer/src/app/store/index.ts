@@ -1,5 +1,4 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { AppSettings } from '@app/services';
 
 import * as fromRoot from './root.reducer';
 import * as fromTheme from '@themes/store';

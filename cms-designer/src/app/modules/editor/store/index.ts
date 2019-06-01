@@ -2,7 +2,6 @@ import { createFeatureSelector, createSelector } from '@ngrx/store';
 
 import * as fromRoot from 'src/app/store';
 import * as fromEditor from './editor.reducer';
-import { environment } from 'src/environments/environment';
 
 export interface State extends fromRoot.State {
     editor: fromEditor.EditorState;
@@ -75,7 +74,7 @@ export const getPageTitle = createSelector(
     getPage,
     page => {
         if (page != null && page.settings) {
-            return page.settings.header || `CMS Editor (${environment.version})`;
+            return page.settings.header || 'CMS Editor';
         }
         return 'CMS Editor';
     }

@@ -16,6 +16,7 @@ import * as themeActions from '@themes/store/theme.actions';
 
 import { BlockValuesModel, BlockSchema } from '@shared/models';
 import { map } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 
 @Component({
     selector: 'app-root',
@@ -31,6 +32,8 @@ export class AppComponent implements OnInit {
         { title: 'Edit languages', icon: 'lang', type: 'lang' },
         { title: 'Edit navigation', icon: 'nav', type: 'nav' }
     ];
+
+    version = environment.version;
 
     storeUrl$ = this.store.select(fromRoot.getPreviewUrl).pipe(
         map(x => !!x ? this.sanitizer.bypassSecurityTrustResourceUrl(x) : null)
