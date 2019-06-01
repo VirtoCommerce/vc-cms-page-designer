@@ -271,7 +271,7 @@ export class RootEffects {
     sendPageToStore$ = this.actions$.pipe(
         ofType<rootActions.PreviewReady>(rootActions.RootActionTypes.PreviewReady),
         withLatestFrom(
-            this.editorStore$.select(fromEditor.getPage),
+            this.editorStore$.select(fromEditor.getPageForEdit),
             this.rootStore$.select(fromRoot.getPrimaryIsLoaded),
             this.rootStore$.select(fromRoot.getSecondaryIsLoaded),
             this.rootStore$.select(fromRoot.getSecondaryFrameId),

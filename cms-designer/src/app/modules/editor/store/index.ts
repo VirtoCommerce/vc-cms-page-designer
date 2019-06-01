@@ -34,6 +34,15 @@ export const getPage = createSelector(
     state => state.page
 );
 
+export const getPageForEdit = createSelector(
+    getEditorFeatureState,
+    getBlocksSchema,
+    (state, schema) => state.page && schema ? <any>{
+        ...state.page,
+        content: state.page.content.filter(x => schema[x.type])
+    } : null
+);
+
 export const getCurrentSectionItem = createSelector(
     getEditorFeatureState,
     getPage,

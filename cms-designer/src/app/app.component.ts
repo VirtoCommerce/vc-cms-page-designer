@@ -43,7 +43,7 @@ export class AppComponent implements OnInit {
     currentSectionItem$ = this.store.select(fromEditor.getCurrentSectionItem);
     addNewSectionMode$ = this.store.select(fromEditor.getAddNewSectionMode);
     blocksSchema$ = this.store.select(fromEditor.getBlocksSchema);
-    page$ = this.store.select(fromEditor.getPage);
+    page$ = this.store.select(fromEditor.getPageForEdit);
     schemaNotLoaded$ = this.store.select(fromEditor.getSchemaNotLoaded);
     pageNotLoaded$ = this.store.select(fromEditor.getPageNotLoaded);
     hoveredId$ = this.store.select(fromEditor.getHoveredId);
