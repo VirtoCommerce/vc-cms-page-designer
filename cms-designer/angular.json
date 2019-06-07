@@ -43,6 +43,7 @@
                         "assets": [
                             "src/favicon.ico",
                             "src/assets",
+                            "src/external",
                             "src/data/settings.json",
                             "src/data/page_data.page",
                             "src/data/settings_data.json",
