@@ -18,14 +18,16 @@ export class TextItemComponent extends BaseControlComponent<TextControlDescripto
             },
             { name: 'align', items: ['JustifyLeft', 'JustifyCenter', 'JustifyRight'] },
             { name: 'lists', items: ['NumberedList', 'BulletedList', 'Outdent', 'Indent'] },
-            { name: 'insert', items: ['Image', 'Table', 'Anchor'] },
+            { name: 'insert', items: ['Anchor'] },
             { name: 'link', items: ['Link', 'Unlink'] },
-            { name: 'styles', items: ['Styles'] },
+            { name: 'styles', items: ['Format', 'Styles'] },
             { name: 'tools', items: ['Maximize'] },
             { name: 'document', items: ['Source'] }
         ],
         extraPlugins: 'stylescombo',
         removeButtons: '',
+        format_tags: 'p;h2;h3;h4',
+        contentsCss: `${AppSettings.storeBaseUrl}${AppSettings.contentCssPath}`,
         stylesSet: [
             { name: 'Normal', element: 'p', attributes: [ ] },
             { name: 'Medium size text', element: 'p', attributes: { class: 'section__descr--medium' } },
