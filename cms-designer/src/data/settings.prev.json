@@ -1,6 +1,7 @@
 {
     "storeBaseUrl": "https://vc-com-new-initial-storefront-core.azurewebsites.net",
     "storePreviewPath": "/designer-preview",
+    "contentCssPath": "/themes/assets/style.min.css",
     "baseUrl": "/designer/",
     "platformUrl": "https://vc-com-new-initial-platform.azurewebsites.net",
     "tokenUrl": "/token"

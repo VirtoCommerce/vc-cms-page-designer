@@ -84,7 +84,7 @@
                 "id": "title",
                 "label": "Title",
                 "type": "string",
-                "default": "Yellowstone National Park",
+                "default": "Block title",
                 "autofocus": true
             },
             {
@@ -125,7 +125,7 @@
                 "id": "image",
                 "label": "Upload picture",
                 "type": "image",
-                "default": "http://dev-cms-vm.westeurope.cloudapp.azure.com/v2/admin/Assets/blogs/yellowstone.jpg",
+                "default": { "url": "https://vc4test.blob.core.windows.net/blogs/Partner%20Community.png" },
                 "previewWidth": 120,
                 "previewHeight": 80
             },
@@ -133,7 +133,7 @@
                 "id": "content",
                 "label": "Content",
                 "type": "text",
-                "default": "Yellowstone National Park is an American national park located in Wyoming, Montana, and Idaho.  <a href='https://en.wikipedia.org/wiki/Yellowstone_National_Park'>See more on Wiki</a>"
+                "default": "Useful content"
             },
             {
                 "id": "url1",
@@ -162,6 +162,27 @@
                     { "value": "benefits__link", "label": "Link"},
                     { "value": "btn btn--orange btn--round", "label": "Round orange"}
                 ]
+            },
+            {
+                "id": "noTop",
+                "label": "Remove top margin",
+                "type": "checkbox",
+                "tab": "Settings",
+                "default": false
+            },
+            {
+                "id": "noBottom",
+                "label": "Remove bottom margin",
+                "type": "checkbox",
+                "tab": "Settings",
+                "default": false
+            },
+            {
+                "id": "noPad",
+                "label": "Remove paddings",
+                "type": "checkbox",
+                "tab": "Settings",
+                "default": false
             }
         ]
     },
@@ -181,7 +202,7 @@
                 "id": "title",
                 "label": "Title",
                 "type": "string",
-                "default": "Yellowstone National Park",
+                "default": "Block title",
                 "autofocus": true
             },
             {
@@ -194,7 +215,7 @@
                 "id": "image",
                 "label": "Upload picture",
                 "type": "image",
-                "default": "http://dev-cms-vm.westeurope.cloudapp.azure.com/v2/admin/Assets/blogs/yellowstone.jpg",
+                "default": { "url": "https://vc4test.blob.core.windows.net/blogs/agiledefinitionheader.png" },
                 "previewWidth": 120,
                 "previewHeight": 80
             },
@@ -202,7 +223,7 @@
                 "id": "content",
                 "label": "Content",
                 "type": "text",
-                "default": "Yellowstone National Park is an American national park located in Wyoming, Montana, and Idaho.  <a href='https://en.wikipedia.org/wiki/Yellowstone_National_Park'>See more on Wiki</a>"
+                "default": "Short block content"
             },
             {
                 "id": "url1",
@@ -225,6 +246,27 @@
                     { "value": "btn--orange", "label": "Orange button" },
                     { "value": "btn--white", "label": "White button" }
                 ]
+            },
+            {
+                "id": "noTop",
+                "label": "Remove top margin",
+                "type": "checkbox",
+                "tab": "Settings",
+                "default": false
+            },
+            {
+                "id": "noBottom",
+                "label": "Remove bottom margin",
+                "type": "checkbox",
+                "tab": "Settings",
+                "default": false
+            },
+            {
+                "id": "noPad",
+                "label": "Remove paddings",
+                "type": "checkbox",
+                "tab": "Settings",
+                "default": false
             }
         ]
     },
@@ -303,16 +345,57 @@
                 ],
                 "default": [
                     {
-                        "title": "Left column",
-                        "image": "http://dev-cms-vm.westeurope.cloudapp.azure.com/v2/admin/Assets/blogs/Bachalpsee_reflection.jpg",
-                        "content": "Bachalpsee is a lake close to the First above Grindelwald in the Bernese Oberland, Switzerland. <a href='https://en.wikipedia.org/wiki/Bachalpsee'>See more on Wiki</a>"
+                        "title": "What is a Hosted Shopping Cart?",
+                        "image": { "url": "https://vc4test.blob.core.windows.net/blogs/hostedshoppingct.jpeg" },
+                        "text": "Hosted Shopping Cart Definition and Uses",
+                        "link": {
+                            "urlText": "Read more",
+                            "style": "btn--orange btn--round",
+                            "url": "#"
+                        }
                     },
                     {
-                        "title": "Right column",
-                        "image": "http://dev-cms-vm.westeurope.cloudapp.azure.com/v2/admin/Assets/blogs/Galunggung.jpg",
-                        "content": "Mount Galunggung is an active stratovolcano in West Java, Indonesia. <a href='https://en.wikipedia.org/wiki/Galunggung'>See more on Wiki</a>"
+                        "title": "Inventory Management",
+                        "image": { "url": "https://vc4test.blob.core.windows.net/blogs/inventory.jpeg" },
+                        "text": "What is Inventory Management? Why is it important in ecommerce?",
+                        "link": {
+                            "urlText": "Read more",
+                            "style": "btn--orange btn--round",
+                            "url": "#"
+                        }
+                    },
+                    {
+                        "title": "What is Backorder?",
+                        "image": { "url": "https://vc4test.blob.core.windows.net/blogs/agilephoto.jpeg" },
+                        "text": "Learn more on how to handle backorders and fulfillment",
+                        "link": {
+                            "urlText": "Read more",
+                            "style": "btn--orange btn--round",
+                            "url": "#"
+                        }
                     }
                 ]
+            },
+            {
+                "id": "noTop",
+                "label": "Remove top margin",
+                "type": "checkbox",
+                "tab": "Settings",
+                "default": false
+            },
+            {
+                "id": "noBottom",
+                "label": "Remove bottom margin",
+                "type": "checkbox",
+                "tab": "Settings",
+                "default": false
+            },
+            {
+                "id": "noPad",
+                "label": "Remove paddings",
+                "type": "checkbox",
+                "tab": "Settings",
+                "default": false
             }
         ]
     },
@@ -332,7 +415,7 @@
                 "id": "title",
                 "label": "Title",
                 "type": "string",
-                "default": "Yellowstone National Park",
+                "default": "Block title",
                 "autofocus": true
             },
             {
@@ -373,7 +456,7 @@
                 "id": "content",
                 "label": "Content",
                 "type": "text",
-                "default": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+                "default": "Text block content"
             },
             {
                 "id": "url",
@@ -387,7 +470,33 @@
                     { "value": "btn btn--lg", "label": "Gray button" },
                     { "value": "benefits__link", "label": "Link"},
                     { "value": "btn btn--orange btn--round", "label": "Round orange"}
-                ]
+                ],
+                "default": {
+                    "urlText": "Read more",
+                    "url": "#",
+                    "style": "btn--orange btn--round"
+                }
+            },
+            {
+                "id": "noTop",
+                "label": "Remove top margin",
+                "type": "checkbox",
+                "tab": "Settings",
+                "default": false
+            },
+            {
+                "id": "noBottom",
+                "label": "Remove bottom margin",
+                "type": "checkbox",
+                "tab": "Settings",
+                "default": false
+            },
+            {
+                "id": "noPad",
+                "label": "Remove paddings",
+                "type": "checkbox",
+                "tab": "Settings",
+                "default": false
             }
         ]
     },
@@ -407,7 +516,7 @@
                 "id": "title",
                 "label": "Title",
                 "type": "string",
-                "default": "Yellowstone National Park",
+                "default": "Block title",
                 "autofocus": true
             },
             {
@@ -431,7 +540,7 @@
                 "id": "contentBefore",
                 "label": "Content",
                 "type": "text",
-                "default": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+                "default": "Intro text for the block"
             },
             {
                 "id": "items",
@@ -442,17 +551,43 @@
                 "displayField": "title",
                 "element": [
                     {
-                        "id": "title",
-                        "label": "Title",
-                        "type": "string"
-                    },
-                    {
                         "id": "text",
                         "label": "Text",
                         "type": "text"
                     }
                 ],
-                "default": [ ]
+                "default": [
+                    {
+                        "text": "Left column content"
+                    },
+                    {
+                        "text": "Right column content"
+                    },
+                    {
+                        "text": "Last item content it it exists"
+                    }
+                ]
+            },
+            {
+                "id": "noTop",
+                "label": "Remove top margin",
+                "type": "checkbox",
+                "tab": "Settings",
+                "default": false
+            },
+            {
+                "id": "noBottom",
+                "label": "Remove bottom margin",
+                "type": "checkbox",
+                "tab": "Settings",
+                "default": false
+            },
+            {
+                "id": "noPad",
+                "label": "Remove paddings",
+                "type": "checkbox",
+                "tab": "Settings",
+                "default": false
             }
         ]
     },
@@ -477,7 +612,8 @@
             {
                 "id": "intro",
                 "label": "Intro",
-                "type": "text"
+                "type": "text",
+                "default": "Intro text for the block"
             },
             {
                 "id": "style",
@@ -543,7 +679,237 @@
                         "type": "text"
                     }
                 ],
-                "default": [ ]
+                "default": [
+                    {
+                        "image": { "url": "https://vc4test.blob.core.windows.net/blogs/icon_1.png" },
+                        "title": "Conditional Promotions",
+                        "text": "<p>Flexible promotion module provides the right targeted incentives to specific customers for certain products or categories.</p>"
+                    },
+                    {
+                        "image": { "url": "https://vc4test.blob.core.windows.net/blogs/icon_3.png" },
+                        "title": "Coupons &amp; Tracking",
+                        "text": "<p>Use promo codes and coupons to run targeted promotions, and easily track the results and revenue for each coupon.</p>"
+                    },
+                    {
+                        "image": { "url": "https://vc4test.blob.core.windows.net/blogs/icon_5.png" },
+                        "title": "Minimum Advertised Price (MAP) Support Tools",
+                        "text": "<p>Ensure that third party sellers are not hurting your brand by selling your products at prices lower than they should be.</p>"
+                    },
+                    {
+                        "image": { "url": "https://vc4test.blob.core.windows.net/blogs/icon_2.png" },
+                        "title": "Customer Segmenting",
+                        "text": "<p>Leverage the flexibility to segment your customers endlessly, ensuring they received promotions targeted exactly to their wants and needs.</p>"
+                    }
+                ]
+            },
+            {
+                "id": "noTop",
+                "label": "Remove top margin",
+                "type": "checkbox",
+                "tab": "Settings",
+                "default": false
+            },
+            {
+                "id": "noBottom",
+                "label": "Remove bottom margin",
+                "type": "checkbox",
+                "tab": "Settings",
+                "default": false
+            },
+            {
+                "id": "noPad",
+                "label": "Remove paddings",
+                "type": "checkbox",
+                "tab": "Settings",
+                "default": false
+            }
+        ]
+    },
+    "image": {
+        "name": "Simple image",
+        "icon": "image",
+        "settings": [
+            {
+                "id": "name",
+                "label": "Block name",
+                "type": "string",
+                "default": "Simple image",
+                "tab": "Settings",
+                "autofocus": true
+            },
+            {
+                "id": "title",
+                "label": "Title",
+                "type": "string",
+                "default": "Block title",
+                "autofocus": true
+            },
+            {
+                "id": "style",
+                "label": "Block style",
+                "type": "select",
+                "default": "light",
+                "tab": "Settings",
+                "options": [
+                    {
+                        "value": "light",
+                        "label": "Light"
+                    },
+                    {
+                        "value": "dark",
+                        "label": "Dark"
+                    }
+                ]
+            },
+            {
+                "id": "image",
+                "label": "Upload picture",
+                "type": "image",
+                "previewWidth": 120,
+                "previewHeight": 80,
+                "default": { "url": "https://vc4test.blob.core.windows.net/blogs/hero.png" }
+            },
+            {
+                "id": "noTop",
+                "label": "Remove top margin",
+                "type": "checkbox",
+                "tab": "Settings",
+                "default": false
+            },
+            {
+                "id": "noBottom",
+                "label": "Remove bottom margin",
+                "type": "checkbox",
+                "tab": "Settings",
+                "default": false
+            },
+            {
+                "id": "noPad",
+                "label": "Remove paddings",
+                "type": "checkbox",
+                "tab": "Settings",
+                "default": false
+            }
+        ]
+    },
+    "download-case-studies-form": {
+        "name": "Download Case studies form",
+        "icon": "image-text",
+        "displayField": "name",
+        "settings": [
+            {
+                "id": "name",
+                "label": "Block name",
+                "type": "string",
+                "tab": "Settings",
+                "default": "Download Case studies form"
+            },
+            {
+                "id": "style",
+                "label": "Block style",
+                "type": "select",
+                "default": "light",
+                "tab": "Settings",
+                "options": [
+                    {
+                        "value": "light",
+                        "label": "Light"
+                    },
+                    {
+                        "value": "dark",
+                        "label": "Dark"
+                    }
+                ]
+            },
+            {
+                "id": "noTop",
+                "label": "Remove top margin",
+                "type": "checkbox",
+                "tab": "Settings",
+                "default": true
+            },
+            {
+                "id": "noBottom",
+                "label": "Remove bottom margin",
+                "type": "checkbox",
+                "tab": "Settings",
+                "default": true
+            },
+            {
+                "id": "noPad",
+                "label": "Remove paddings",
+                "type": "checkbox",
+                "tab": "Settings",
+                "default": true
+            },
+            {
+                "id": "title",
+                "label": "Title",
+                "type": "string",
+                "default": "Download Case Studies"
+            },
+            {
+                "id": "buttonText",
+                "label": "Button text",
+                "type": "string",
+                "default": "Download Case Studies"
+            },
+            {
+                "id": "description",
+                "label": "Description",
+                "type": "text",
+                "default": "By clicking «Download Case Studies» I agree to the Virto Commerce <a href=\"#\">Terms</a> and <a href=\"#\">Privacy</a>."
+            }
+        ]
+    },
+    "divider": {
+        "name": "Divider",
+        "icon": "image-text",
+        "displayField": "name",
+        "settings": [
+            {
+                "id": "name",
+                "label": "Block name",
+                "type": "string",
+                "default": "Divider"
+            },
+            {
+                "id": "style",
+                "label": "Block style",
+                "type": "select",
+                "default": "light",
+                "tab": "Settings",
+                "options": [
+                    {
+                        "value": "light",
+                        "label": "Light"
+                    },
+                    {
+                        "value": "dark",
+                        "label": "Dark"
+                    }
+                ]
+            },
+            {
+                "id": "noTop",
+                "label": "Remove top margin",
+                "type": "checkbox",
+                "tab": "Settings",
+                "default": true
+            },
+            {
+                "id": "noBottom",
+                "label": "Remove bottom margin",
+                "type": "checkbox",
+                "tab": "Settings",
+                "default": true
+            },
+            {
+                "id": "noPad",
+                "label": "Remove paddings",
+                "type": "checkbox",
+                "tab": "Settings",
+                "default": true
             }
         ]
     },
@@ -577,7 +943,7 @@
                 "type": "image",
                 "previewWidth": 120,
                 "previewHeight": 80,
-                "default": "http://dev-cms-vm.westeurope.cloudapp.azure.com/v2/admin/Assets/blogs/Grand_Canyon.jpg"
+                "default": { "url": "http://dev-cms-vm.westeurope.cloudapp.azure.com/v2/admin/Assets/blogs/Grand_Canyon.jpg" }
             },
             {
                 "id": "align",
@@ -983,75 +1349,6 @@
                         "image": "http://dev-cms-vm.westeurope.cloudapp.azure.com/v2/admin/Assets/blogs/Paris_Opera.jpeg"
                     }
                 ]
-            }
-        ]
-    },
-    "image": {
-        "hide": true,
-        "name": "Simple image",
-        "icon": "image",
-        "settings": [
-            {
-                "id": "name",
-                "label": "Block name",
-                "type": "string",
-                "default": "Simple image",
-                "autofocus": true
-            },
-            {
-                "id": "title",
-                "label": "Title",
-                "type": "string",
-                "default": "Yellowstone National Park",
-                "autofocus": true
-            },
-            {
-                "id": "style",
-                "label": "Block style",
-                "type": "select",
-                "default": "light",
-                "options": [
-                    {
-                        "value": "light",
-                        "label": "Light"
-                    },
-                    {
-                        "value": "dark",
-                        "label": "Dark"
-                    }
-                ]
-            },
-            {
-                "id": "size",
-                "label": "Choose size",
-                "type": "select",
-                "default": "medium",
-                "options": [
-                    {
-                        "label": "Small",
-                        "value": "small"
-                    },
-                    {
-                        "label": "Medium",
-                        "value": "medium"
-                    },
-                    {
-                        "label": "Large",
-                        "value": "large"
-                    },
-                    {
-                        "label": "Extra Large",
-                        "value": "xlarge"
-                    }
-                ]
-            },
-            {
-                "id": "image",
-                "label": "Upload picture",
-                "type": "image",
-                "previewWidth": 120,
-                "previewHeight": 80,
-                "default": "http://dev-cms-vm.westeurope.cloudapp.azure.com/v2/admin/Assets/blogs/Bajkał_lake.jpg"
             }
         ]
     },

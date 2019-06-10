@@ -36,7 +36,7 @@ export class EditorEffects {
         map(blockSchema => {
             if (!!blockSchema) {
                 const result = <BlockValuesModel>{};
-                blockSchema.settings.forEach(x => result[x.id] = x['default'] || null);
+                blockSchema.settings.forEach(x => result[x.id] = x['preview'] || x['default'] || null);
                 result.type = blockSchema.type;
                 return result;
             }
@@ -78,6 +78,7 @@ export class EditorEffects {
                 id: page.content.length ? Math.max(...page.content.map(v => <number>v.id || 0)) + 1 : 1,
                 type: blockSchema.type
             };
+            blockSchema.settings.forEach(x => block[x.id] = x['default'] || null);
             return block;
         }),
         mergeMap(item =>

@@ -1,6 +1,7 @@
 {
     "storeBaseUrl": "/",
     "storePreviewPath": "/",
+    "contentCssPath": "/themes/assets/style.min.css",
     "baseUrl": "/",
     "platformUrl": "/",
     "tokenUrl": "/"

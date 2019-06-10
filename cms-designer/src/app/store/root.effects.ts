@@ -146,7 +146,7 @@ export class RootEffects {
             if (previewReady) {
                 this.preview.reload(frameId);
             }
-            return of(new rootActions.PreviewLoading(true));
+            return of(new rootActions.PreviewLoading(true, 'update draft success'));
         })
     );
 
@@ -283,7 +283,7 @@ export class RootEffects {
             && draftUploaded && page != null),
         switchMap(([action, page]) => {
             this.preview.page(page.content, action.payload);
-            return of(new rootActions.PreviewLoading(true));
+            return of(new rootActions.PreviewLoading(true, 'preview ready'));
         })
     );
 
@@ -358,9 +358,10 @@ export class RootEffects {
             primaryFrameId, secondaryFrameId
         ]),
         map(([primary, source, primaryFrameId, secondaryFrameId]) => primary === source ? primaryFrameId : secondaryFrameId),
+        tap(x => console.log('toggle frames', x)),
         switchMap(loadedFrameId => [
             new rootActions.ToggleFrames(loadedFrameId),
-            new rootActions.PreviewLoading(false)
+            new rootActions.PreviewLoading(false, 'swap frames')
         ])
     );
 

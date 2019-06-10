@@ -30,7 +30,7 @@ export class LoadData implements Action {
 export class PreviewLoading implements Action {
     readonly type = RootActionTypes.PreviewLoading;
 
-    constructor(public payload: boolean) { }
+    constructor(public payload: boolean, public source: string) { }
 }
 
 export class PreviewReady implements Action {
