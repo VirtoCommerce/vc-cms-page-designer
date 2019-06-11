@@ -27,6 +27,8 @@ export class Renderer {
         }
         vm.element = this.createElement(vm);
         this.container.replaceChild(vm.element, element);
+        this.interactor.select(vm);
+        this.hover(vm);
     }
 
     insert(vm: BlockViewModel, index: number) {

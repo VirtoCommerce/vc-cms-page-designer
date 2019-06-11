@@ -120,10 +120,11 @@ export class PreviewInteractor {
         }
         const rect = measureElement(source);
         const doubleWidth = this.borderWidth * 2;
-        target.style.top = rect.top + 'px';
-        target.style.left = rect.left + 'px';
-        target.style.height = (rect.height - doubleWidth) + 'px';
-        target.style.width = (rect.width - doubleWidth) + 'px';
+        const delta = 0;
+        target.style.top = (rect.top + delta) + 'px';
+        target.style.left = (rect.left + delta) + 'px';
+        target.style.height = (rect.height - 2 * delta) + 'px';
+        target.style.width = (rect.width - 2 * delta) + 'px';
         target.style.display = 'block';
     }
 }

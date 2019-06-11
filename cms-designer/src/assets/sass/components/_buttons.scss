@@ -74,6 +74,11 @@
         padding: 0;
     }
 
+    &--align-right
+    {
+        margin-left: auto;
+    }
+
     &:disabled
     {
         @extend %disabled;
@@ -91,7 +96,16 @@
             width: .875rem;
         }
 
-        &--redo
+		&--expand,
+		&--collapse
+		{
+            background-image: url(../i/undo.svg);
+            height: 1.0625rem;
+			width: .875rem;
+		}
+
+        &--redo,
+		&--collapse
         {
             transform: rotateY(180deg);
         }
