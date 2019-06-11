@@ -332,8 +332,8 @@ exports.DndInteractor = DndInteractor;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Environment = {
     RenderBlockApiUrl: '/designer-preview/block',
-    // DesignerUrl: 'http://localhost/'
-    DesignerUrl: 'http://vc-admin-test.azurewebsites.net/designer'
+    DesignerUrl: 'http://localhost/'
+    // DesignerUrl: 'http://vc-admin-test.azurewebsites.net/designer'
     // DesignerUrl: 'https://vc-com-new-initial-platform.azurewebsites.net/designer'
 };
 
@@ -1105,10 +1105,11 @@ class PreviewInteractor {
         }
         const rect = helpers_1.measureElement(source);
         const doubleWidth = this.borderWidth * 2;
-        target.style.top = rect.top + 'px';
-        target.style.left = rect.left + 'px';
-        target.style.height = (rect.height - doubleWidth) + 'px';
-        target.style.width = (rect.width - doubleWidth) + 'px';
+        const delta = 0;
+        target.style.top = (rect.top + delta) + 'px';
+        target.style.left = (rect.left + delta) + 'px';
+        target.style.height = (rect.height - 2 * delta) + 'px';
+        target.style.width = (rect.width - 2 * delta) + 'px';
         target.style.display = 'block';
     }
 }
@@ -1147,6 +1148,8 @@ class Renderer {
         }
         vm.element = this.createElement(vm);
         this.container.replaceChild(vm.element, element);
+        this.interactor.select(vm);
+        this.hover(vm);
     }
     insert(vm, index) {
         vm.element = this.createElement(vm);

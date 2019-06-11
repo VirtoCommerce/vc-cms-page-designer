@@ -24,7 +24,7 @@ export class TextItemComponent extends BaseControlComponent<TextControlDescripto
             { name: 'tools', items: ['Maximize'] },
             { name: 'document', items: ['Source'] }
         ],
-        extraPlugins: 'stylescombo',
+        extraPlugins: 'stylescombo,justify',
         removeButtons: '',
         format_tags: 'p;h2;h3;h4',
         contentsCss: `${AppSettings.storeBaseUrl}${AppSettings.contentCssPath}`,
