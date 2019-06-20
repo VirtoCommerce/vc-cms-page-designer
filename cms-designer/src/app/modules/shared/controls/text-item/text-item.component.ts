@@ -33,25 +33,6 @@ export class TextItemComponent extends BaseControlComponent<TextControlDescripto
             { name: 'Medium size text', element: 'p', attributes: { class: 'section__descr--medium' } },
             { name: 'Gray color text', element: 'p', attributes: { class: 'section__descr--gray' } }
         ]
-        // [
-        //     { name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ] },
-        //     { name: 'colors', groups: [ 'colors' ] },
-        //     { name: 'clipboard', groups: [ 'clipboard' ] },
-        //     { name: 'editing', groups: [ 'find', 'selection', 'spellchecker', 'editing' ] },
-        //     { name: 'forms', groups: [ 'forms' ] },
-        //     { name: 'paragraph', groups: [ 'align', 'list', 'indent', 'blocks', 'bidi', 'paragraph' ] },
-        //     { name: 'links', groups: [ 'links' ] },
-        //     { name: 'insert', groups: [ 'insert' ] },
-        //     { name: 'styles', groups: [ 'styles' ] },
-        //     { name: 'tools', groups: [ 'tools' ] },
-        //     { name: 'others', groups: [ 'others' ] },
-        //     { name: 'about', groups: [ 'about' ] },
-        //     { name: 'document', groups: [ 'mode', 'document', 'doctools' ] }
-        // ],
-        // removeButtons:
-        //     'Find,SelectAll,Scayt,Replace,Cut,Copy,Paste,PasteText,Save,NewPage,Preview,Print,Templates,Form,Checkbox,' +
-        //     'Radio,TextField,Textarea,Select,Button,ImageButton,HiddenField,CopyFormatting,BidiLtr,BidiRtl,Language,Flash,' +
-        //     'HorizontalRule,Smiley,SpecialChar,PageBreak,Iframe,ShowBlocks,About,CreateDiv,undo'
     };
 
     constructor() {
@@ -61,7 +42,6 @@ export class TextItemComponent extends BaseControlComponent<TextControlDescripto
     registerOnChange(fn: any): void {
         this.onChange = (newValue) => {
             if (this.value !== newValue) {
-                console.log(this.value, newValue);
                 fn(newValue);
             }
         };
