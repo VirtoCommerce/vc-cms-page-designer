@@ -1,0 +1,362 @@
+input,
+button,
+textarea,
+select
+{
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+}
+
+.form-control
+{
+    padding: .25rem .75rem;
+
+    @extend %component-input;
+
+    & ~ .form-control
+    {
+        margin-top: .625rem;
+    }
+
+    &:focus
+    {
+        background: $gray-dark;
+    }
+
+    &:disabled
+    {
+        opacity: .5;
+        pointer-events: none;
+    }
+}
+
+.form-group
+{
+    margin-bottom: 1.25rem;
+    display: block;
+
+    &:last-child
+    {
+        margin-bottom: 0;
+    }
+}
+
+label
+{
+    display: block;
+    font-size: .8125rem;
+    line-height: 1;
+    margin-bottom: .625rem;
+}
+
+.form-text
+{
+    color: $gray;
+    font-size: .8125rem;
+    margin-top: .625rem;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+// Input files
+.form-file
+{
+    position: relative;
+}
+
+.form-file__control
+{
+    height: 2.375rem;
+    overflow: hidden;
+
+    & ~ .form-text
+    {
+        margin-top: .625rem;
+    }
+}
+
+.form-file__input
+{
+    cursor: pointer;
+    font-size: 20rem;
+    height: 2.375rem;
+    opacity: 0;
+    position: relative;
+    width: 100%;
+    z-index: 2;
+
+    &:hover ~ .form-file__label
+    {
+        background: $gray-dark;
+    }
+}
+
+.form-file__label
+{
+    align-items: center;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    left: 0;
+    margin: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+
+    @extend %component-input;
+}
+
+.form-file__uploaded
+{
+    max-width: $left-aside;
+    margin-top: 1.25rem;
+    position: relative;
+}
+
+.form-file__remove
+{
+    background: $red;
+    border-radius: 5rem;
+    cursor: pointer;
+    height: 2.125rem;
+    position: absolute;
+    right: .625rem;
+    top: .625rem;
+    width: 2.15rem;
+
+    &::after
+    {
+        background: url(../i/remove_sections.svg) no-repeat;
+        content: ' ';
+        height: 1.0625rem;
+        left: 50%;
+        position: absolute;
+        transform: translate(-50%, -50%);
+        top: 50%;
+        width: .9375rem;
+    }
+}
+
+.form-file__pic
+{
+    border-radius: .25rem;
+    display: block;
+    max-width: 100%;
+}
+
+// Input checkbox and radio
+.form-checkbox,
+.form-radio
+{
+    display: flex;
+    height: 1.5rem;
+    position: relative;
+
+    @extend %no-select;
+
+    & ~ .form-checkbox,
+    & ~ .form-radio,
+    & ~ .form-switch
+    {
+        margin-top: .625rem;
+    }
+
+    &__input
+    {
+        left: 0;
+        opacity: 0;
+        position: absolute;
+        top: 0;
+
+        &:checked ~ .form-checkbox__label::before,
+        &:checked ~ .form-radio__label::before
+        {
+            background: $blue;
+            border-color: $blue;
+        }
+
+        &:checked ~ .form-checkbox__label::after
+        {
+            background: url(../i/checkbox.svg) no-repeat scroll 50% 50%;
+            background-size: .625rem .5rem;
+            content: ' ';
+            height: 1.5rem;
+            left: 0;
+            position: absolute;
+            top: 0;
+            width: 1.5rem;
+        }
+    }
+
+    &__label
+    {
+        align-items: center;
+        cursor: pointer;
+        display: flex;
+        margin: 0;
+        padding-left: 2.125rem;
+
+        &::before
+        {
+            background: #fff;
+            border: 2px solid rgba(0,0,0,.1);
+            border-radius: .25rem;
+            box-sizing: border-box;
+            content: ' ';
+            height: 1.5rem;
+            left: 0;
+            position: absolute;
+            top: 0;
+            transition: all .15s;
+            width: 1.5rem;
+        }
+    }
+}
+
+.form-radio
+{
+    &__input
+    {
+        &:checked ~ .form-radio__label::after
+        {
+            background: #fff;
+            border-radius: 10rem;
+            content: ' ';
+            height: .5rem;
+            left: .5rem;
+            position: absolute;
+            top: .5rem;
+            width: .5rem;
+        }
+    }
+
+    &__label
+    {
+        &::before
+        {
+            border-radius: 10rem;
+        }
+    }
+}
+
+// Input switch
+.form-switch
+{
+    display: flex;
+    height: 1.5rem;
+    position: relative;
+
+    @extend %no-select;
+
+    & ~ .form-switch
+    {
+        margin-top: .625rem;
+    }
+
+    &__input
+    {
+        left: 0;
+        opacity: 0;
+        position: absolute;
+        top: 0;
+
+        &:checked ~ .form-switch__label
+        {
+            &::after
+            {
+                left: 1.625rem;
+            }
+
+            &::before
+            {
+                background: $blue;
+                border-color: $blue;
+            }
+        }
+    }
+
+    &__label
+    {
+        align-items: center;
+        cursor: pointer;
+        display: flex;
+        margin: 0;
+        padding-left: 3.625rem;
+
+        &::after,
+        &::before
+        {
+            content: ' ';
+            position: absolute;
+            transition: all .35s;
+        }
+
+        &::after
+        {
+            background: #fff;
+            border-radius: 5rem;
+            height: 1.25rem;
+            left: 2px;
+            top: 2px;
+            width: 1.25rem;
+        }
+
+        &::before
+        {
+            background: $gray-dark;
+            border: 2px solid rgba(0,0,0,.1);
+            border-radius: 5rem;
+            box-sizing: border-box;
+            height: 1.5rem;
+            left: 0;
+            top: 0;
+            transition: all .15s;
+            width: 3rem;
+        }
+    }
+}
+
+.form-checkbox,
+.form-radio,
+.form-switch
+{
+    &__input:disabled ~ [class*='form-']::before
+    {
+        @extend %disabled;
+    }
+}
+
+.form-actions
+{
+    display: flex;
+
+    .btn ~ .btn
+    {
+        margin: 0 0 0 .625rem;
+    }
+}
+
+// Form Color
+
+.form-color {
+
+    display: flex;
+    align-items: center;
+
+    &__bg
+    {
+        border: 2px solid rgba(0,0,0,.1);
+        border-radius: 3px;
+        box-sizing: border-box;
+        height: 1.5rem;
+        margin-right: .625rem;
+        width: 1.5rem;
+    }
+
+    &__text
+    {
+        font-size: .8125rem;
+    }
+}

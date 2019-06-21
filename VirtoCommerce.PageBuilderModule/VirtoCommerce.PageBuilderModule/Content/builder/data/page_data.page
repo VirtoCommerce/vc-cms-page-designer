@@ -1,0 +1,117 @@
+[
+    {
+        "type": "settings",
+        "title": "testt",
+        "permalink": "testt",
+        "name": "Settings"
+    },
+    {
+        "align": "left",
+        "content": "This is a paragraph where you can describe your chosen product, collection, or blog posts. Add some text to make this block attractive to your customers",
+        "imageSize": "medium",
+        "name": "Image with text",
+        "type": "image-with-text",
+        "url": "http://download.seaicons.com/icons/sora-meliae/matrilineare/1024/Places-folder-pictures-icon.png"
+    },
+    {
+        "type": "image-carousel",
+        "name": "Image carousel",
+        "images": [
+            {
+                "url": "http://www.flowermeaning.com/flower-pics/Zinnia-4.jpg",
+                "title": "Image content 1",
+                "content": "Tell your story through images"
+            },
+            {
+                "url": "https://www.sciencenews.org/sites/default/files/2017/08/main/articles/story-3_main.jpg",
+                "title": "Image content 2",
+                "content": "Tell your story through images"
+            },
+            {
+                "url": "https://www.sciencenews.org/sites/default/files/2017/08/main/articles/story-3_main.jpg",
+                "title": "Image content",
+                "content": "Tell your story through images"
+            }
+        ],
+        "autoRotate": true,
+        "rotationFrequency": "7000",
+        "contentSize": "medium",
+        "blockWidth": "screen"
+    },
+    {
+        "type": "image",
+        "name": "Image",
+        "url": "http://download.seaicons.com/icons/sora-meliae/matrilineare/1024/Places-folder-pictures-icon.png",
+        "imageSize": "medium"
+    },
+    {
+        "type": "textcolumns-with-images",
+        "name": "Text columns with images",
+        "columns": [
+            {
+                "url": "https://www.infographicdesignteam.com/blog/wp-content/uploads/2016/08/social-media-facebook-post35.jpg",
+                "title": "Column 1",
+                "content": "Share blog posts, products, or promotions with your customers. Use this text to describe products, share details on availability and style, or as a space to display recent reviews or FAQs.",
+                "width": "33%"
+            },
+            {
+                "url": "https://www.infographicdesignteam.com/blog/wp-content/uploads/2016/08/social-media-facebook-post35.jpg",
+                "title": "Column 2",
+                "content": "Share blog posts, products, or promotions with your customers. Use this text to describe products, share details on availability and style, or as a space to display recent reviews or FAQs.",
+                "width": "33%"
+            },
+            {
+                "url": "https://www.infographicdesignteam.com/blog/wp-content/uploads/2016/08/social-media-facebook-post35.jpg",
+                "title": "Column 3",
+                "content": "Share blog posts, products, or promotions with your customers. Use this text to describe products, share details on availability and style, or as a space to display recent reviews or FAQs.",
+                "width": "33%"
+            },
+            {
+                "id": "i5",
+                "url": "https://www.infographicdesignteam.com/blog/wp-content/uploads/2016/08/social-media-facebook-post35.jpg",
+                "title": "Column title",
+                "content": "Text",
+                "width": "33%"
+            }
+        ],
+        "columnCount": "3",
+        "imageAlignment": "top",
+        "width": "33%",
+        "imageSize": "medium"
+    },
+    {
+        "type": "textcolumns-with-images",
+        "name": "Text columns with images",
+        "columns": [
+            {
+                "url": "https://www.infographicdesignteam.com/blog/wp-content/uploads/2016/08/social-media-facebook-post35.jpg",
+                "title": "Column 1",
+                "content": "Share blog posts, products, or promotions with your customers. Use this text to describe products, share details on availability and style, or as a space to display recent reviews or FAQs.",
+                "width": "33%"
+            },
+            {
+                "url": "https://www.infographicdesignteam.com/blog/wp-content/uploads/2016/08/social-media-facebook-post35.jpg",
+                "title": "Column 2",
+                "content": "Share blog posts, products, or promotions with your customers. Use this text to describe products, share details on availability and style, or as a space to display recent reviews or FAQs.",
+                "width": "33%"
+            },
+            {
+                "url": "https://www.infographicdesignteam.com/blog/wp-content/uploads/2016/08/social-media-facebook-post35.jpg",
+                "title": "Column 3",
+                "content": "Share blog posts, products, or promotions with your customers. Use this text to describe products, share details on availability and style, or as a space to display recent reviews or FAQs.",
+                "width": "33%"
+            },
+            {
+                "id": "i8",
+                "url": "https://www.infographicdesignteam.com/blog/wp-content/uploads/2016/08/social-media-facebook-post35.jpg",
+                "title": "Column title",
+                "content": "Text",
+                "width": "33%"
+            }
+        ],
+        "columnCount": "3",
+        "imageAlignment": "top",
+        "width": "33%",
+        "imageSize": "medium"
+    }
+]

@@ -1,0 +1,51 @@
+@charset "UTF-8";
+
+@import "_theme-variables";
+@import "_reboot";
+@import "_custom";
+
+%no-select
+{
+-webkit-touch-callout: none;
+  -webkit-user-select: none;
+   -khtml-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+%component-footer
+{
+    border-top: 1px solid $border-color;
+    box-sizing: border-box;
+    display: flex;
+    height: 4.875rem;
+    padding: 1.25rem .9375rem;
+}
+
+%component-input
+{
+    background: $gray-light;
+    border-radius: .25rem;
+    border: 1px solid $border-color;
+    box-sizing: border-box;
+    font-size: .8125rem;
+    height: 2.375rem;
+    width: 100%;
+}
+
+%disabled
+{
+    opacity: .3;
+    pointer-events: none;
+}
+
+.fill-row {
+    flex-grow: 1;
+}
+
+.flex-container {
+    display: flex;
+    flex: 1 0 0;
+    align-items: center;
+}

@@ -1,0 +1,112 @@
+// Collection item
+.collection-item
+{
+    background: $gray-light;
+    border: 1px solid $border-color;
+    border-radius: .25rem;
+
+    &__header
+    {
+        align-items: center;
+        border-bottom: 1px solid $border-color;
+        display: flex;
+        height: 2.5rem;
+        padding: 0 .9375rem;
+    }
+
+    &__t
+    {
+        font-size: .875rem;
+        font-weight: bold;
+    }
+
+    &__body,
+    &__footer
+    {
+        padding: .9375rem;
+    }
+
+    .form-control
+    {
+        background: #fff;
+    }
+
+    &__footer
+    {
+        border-top: 1px solid $border-color;
+        display: flex;
+
+        & > :first-child
+        {
+            margin-right: .9375rem;
+        }
+    }
+}
+
+// Collections list
+.list__item
+{
+    align-items: center;
+    background: $gray-light;
+    border: 1px solid $border-color;
+    border-radius: .25rem;
+    display: flex;
+    height: 2.5rem;
+    margin-bottom: .3125rem;
+    padding: 0 .75rem;
+
+    &.cdk-drag-placeholder {
+        background-color: $gray-dark;
+    }
+
+    .list__name
+    {
+        font-size: .875rem;
+    }
+
+    .list__actions
+    {
+        align-items: center;
+        display: flex;
+        margin-left: auto;
+
+        &-item
+        {
+            cursor: pointer;
+            margin-left: .625rem;
+
+            &--edit
+            {
+                background: url(../i/edit.svg) no-repeat;
+                height: 1rem;
+                width: 1rem;
+            }
+
+            &--remove
+            {
+                background: url(../i/remove_sections_red.svg) no-repeat;
+                height: 1.0625rem;
+                width: .9375rem;
+            }
+
+            &--drag
+            {
+                background: url(../i/drag.svg) no-repeat;
+                cursor: move;
+                height: .75rem;
+                width: .4375rem;
+            }
+        }
+    }
+}
+
+.collection-item,
+.collection-list
+{
+    margin: 1.25rem 0;
+
+    &:nth-child(n+2)
+    {
+        margin-top: 0;
+    }
+}

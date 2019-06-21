@@ -1,0 +1,125 @@
+.content
+{
+    display: flex;
+    flex: 1 0 0;
+    justify-content: center;
+    max-width: 100%;
+    position: relative;
+
+    iframe
+    {
+        border: none;
+        height: 100%;
+        width: 100%;
+    }
+}
+
+.content__iframe
+{
+    background: #fff;
+    border: 1px solid $border-color;
+    box-sizing: border-box;
+    height: 100%;
+    position: relative;
+    width: 100%;
+}
+
+[data-view="desktop"],
+[data-view="mobile"],
+[data-view="tablet"]
+{
+    .content
+    {
+        padding: 1.25rem;
+    }
+}
+
+[data-view="tablet"]
+{
+    .content__iframe
+    {
+        width: 48rem;
+    }
+}
+
+[data-view="mobile"]
+{
+    .content__iframe
+    {
+        width: 30rem;
+    }
+}
+
+// Loader
+.loader
+{
+    align-items: center;
+    display: flex;
+    height: 2.5rem;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+
+    &__text
+    {
+        font-size: 1.125rem;
+        font-weight: bold;
+        padding: 0 .9375rem;
+        position: relative;
+        z-index: 10;
+    }
+
+    &__progress
+    {
+        animation: loader-animated 1s linear infinite;
+        background-color: $border-color;
+        background-image: linear-gradient(-45deg,#d7d9df 25%,transparent 25%,transparent 50%,#d7d9df 50%,#d7d9df 75%,transparent 75%,transparent);
+        background-size: 2rem 2rem;
+        bottom: 0;
+        left: 0;
+        position: absolute;
+        right: 0;
+        top: 0;
+        z-index: 5;
+    }
+}
+
+// Empty page
+.error-page
+{
+    align-items: center;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    padding: 1rem 0;
+
+    &__pic
+    {
+        margin-bottom: 1.25rem;
+        width: 27.25rem;
+    }
+
+    &__t
+    {
+        font-size: 1.875rem;
+        font-weight: bold;
+        line-height: 1.1;
+        text-align: center;
+    }
+}
+
+
+@keyframes loader-animated {
+    0%
+    {
+        background-position: 2rem 0;
+    }
+
+    100%
+    {
+        background-position: 0 0;
+    }
+}

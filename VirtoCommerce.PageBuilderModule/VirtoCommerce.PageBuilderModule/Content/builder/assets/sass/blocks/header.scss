@@ -1,0 +1,67 @@
+.header
+{
+    background: #fff;
+    display: flex;
+    height: 4.375rem;
+    box-shadow: 0 1px 3px 0 rgba(0,0,0,.05), 0 1px 0 0 $border-color;
+    position: relative;
+    z-index: 500;
+
+    &-aside
+    {
+        align-items: center;
+        border-right: 1px solid $border-color;
+        box-sizing: border-box;
+        display: flex;
+        flex: 0 0 $left-aside;
+        max-width: $left-aside;
+        padding: 0 .9375rem;
+    }
+
+    &-link
+    {
+        align-items: center;
+        color: inherit;
+        display: flex;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    &-nav
+    {
+        display: flex;
+        flex: 1 0 0;
+        justify-content: center;
+        max-width: 100%;
+        padding: 0 1.25rem;
+    }
+
+    &-icon
+    {
+        margin-right: .9375rem;
+        transition: transform .35s;
+    }
+
+    &-text
+    {
+        padding: 0;
+    }
+
+    &-actions
+    {
+        display: flex;
+        position: absolute;
+        right: 1.25rem;
+        top: 1rem;
+
+        .btn
+        {
+            margin-left: .9375rem;
+
+            & ~ .btn
+            {
+                margin-top: 0;
+            }
+        }
+    }
+}

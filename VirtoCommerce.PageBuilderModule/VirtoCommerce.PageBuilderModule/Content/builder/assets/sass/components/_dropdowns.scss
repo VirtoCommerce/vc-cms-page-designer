@@ -1,0 +1,126 @@
+.dropdown
+{
+    display: inline-block;
+    height: 2.375rem;
+    position: relative;
+    width: 100%;
+
+    @extend %no-select;
+
+    & ~ .dropdown
+    {
+        margin-top: .625rem;
+    }
+
+    &__toggle
+    {
+        align-items: center;
+        background: $gray-light;
+        border: 1px solid $border-color;
+        border-radius: .25rem;
+        box-sizing: border-box;
+        cursor: pointer;
+        display: flex;
+        font-size: .8125rem;
+        height: 100%;
+        padding: 0 .9375rem;
+
+        &::after
+        {
+            background: url(../i/carret.svg) no-repeat;
+            content: ' ';
+            height: .4375rem;
+            position: absolute;
+            right: .9375rem;
+            top: 50%;
+            transform: translateY(-50%) rotate(0);
+            width: .5625rem;
+        }
+    }
+
+    &__menu
+    {
+        background: #fff;
+        border-radius: .25rem;
+        box-shadow: 0 0 .5rem 0 rgba(0,0,0,.12);
+        display: none;
+        left: 0;
+        margin: .625rem 0 0;
+        padding: .625rem 0;
+        position: absolute;
+        right: 0;
+        top: 100%;
+        z-index: 5;
+
+        &-item
+        {
+            align-items: center;
+            color: inherit;
+            cursor: pointer;
+            display: flex;
+            font-size: .8125rem;
+            height: 2.5rem;
+            padding: 0 .9375rem;
+            text-decoration: none;
+
+            &:hover
+            {
+                background: $gray-dark;
+            }
+
+            &-icon
+            {
+                background-repeat: no-repeat;
+                height: 1.25rem;
+                margin-right: .625rem;
+                width: 1.25rem;
+
+                &--html
+                {
+                    background-image: url(../i/theme_actions_edit_html.svg);
+                }
+
+                &--lang
+                {
+                    background-image: url(../i/theme_actions_edit_lang.svg);
+                }
+
+                &--nav
+                {
+                    background-image: url(../i/theme_actions_edit_nav.svg);
+                }
+            }
+        }
+    }
+    &.open &__menu {
+        display: block;
+    }
+    &--show
+    {
+        .dropdown__toggle
+        {
+            background: $gray-dark;
+            border-color: $gray-dark;
+        }
+
+        .dropdown__toggle::after
+        {
+            transform: translateY(-50%) rotate(180deg);
+        }
+
+        .dropdown__menu
+        {
+            display: block;
+        }
+    }
+
+    &--up
+    {
+        .dropdown__menu
+        {
+            bottom: 100%;
+            margin: 0 0 .625rem ;
+            top: auto;
+        }
+    }
+}

@@ -1,0 +1,118 @@
+.tabs
+{
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 5;
+    flex: 1 0 0;
+    flex-direction: column;
+
+    &__buttons
+    {
+        width: 100%;
+        display: flex;
+        height: 3.125rem;
+    }
+
+    &__item
+    {
+        align-items: center;
+        color: inherit;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        position: relative;
+        text-decoration: none;
+        width: 3.125rem;
+
+        @extend %no-select;
+
+        &::after
+        {
+            background: $primary-color;
+            bottom: 0;
+            content: ' ';
+            height: 2px;
+            left: 50%;
+            position: absolute;
+            transform: translateX(-50%);
+            transition: width .35s;
+            width: 0;
+        }
+
+        &--active::after
+        {
+            width: 100%;
+
+            .tabs__text
+            {
+                color: $primary-color;
+            }
+        }
+    }
+
+    &__text
+    {
+        color: $gray;
+        font-size: .8125rem;
+    }
+
+    &__icon
+    {
+        background-repeat: no-repeat;
+    }
+
+    &__icon--desktop
+    {
+        background-image: url(../i/desktop.svg);
+        height: 1.5rem;
+        width: 1.5rem;
+    }
+
+    &__icon--mobile
+    {
+        background-image: url(../i/mobile.svg);
+        height: 1.5rem;
+        width: 1rem;
+    }
+
+    &__icon--tablet
+    {
+        background-image: url(../i/tablet.svg);
+        height: 1.5rem;
+        width: 1.25rem;
+    }
+
+    &__icon--full
+    {
+        background-image: url(../i/full_width.svg);
+        height: 1.5rem;
+        width: 1.5rem;
+    }
+
+    &--large
+    {
+        .tabs__buttons
+        {
+            height: 4.375rem;
+        }
+        .tabs__item
+        {
+            width: 4.375rem;
+        }
+    }
+
+    &--full
+    {
+        .tabs__item
+        {
+            flex: 1 0 0;
+            max-width: 100%;
+        }
+    }
+
+    &--shadow
+    {
+        box-shadow: 0 1px 0 0 $border-color;
+    }
+}

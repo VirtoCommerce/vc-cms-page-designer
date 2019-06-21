@@ -1,0 +1,252 @@
+.list-group-item
+{
+    align-items: center;
+    background: #fff;
+    border-color: $border-color;
+    border-style: solid;
+    border-width: 1px 0;
+    box-sizing: border-box;
+    color: inherit;
+    display: flex;
+    flex: 1 0 0;
+    height: 3.125rem;
+    cursor: pointer;
+    margin-top: -1px;
+    padding: 0 .9375rem;
+    position: relative;
+    text-decoration: none;
+
+    &::after
+    {
+        background: $blue;
+        content: ' ';
+        height: 0;
+        position: absolute;
+        right: 0;
+        top: 0;
+        transition: height .35s;
+        width: 2px;
+    }
+
+    &:hover, &.under-preview, &.hovered
+    {
+        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 0 0 #eaedf3;
+        background-color: #e9ecf2;
+        .list-group-add
+        {
+            left: 0;
+            opacity: 1;
+        }
+
+        &::after
+        {
+            height: 100%;
+        }
+    }
+
+    &.highlight
+    {
+        background: $gray-dark;
+        border: 2px dashed $gray;
+    }
+
+    &-header,
+    &-footer
+    {
+        margin-bottom: 1.25rem;
+        margin-top: 1.25rem;
+    }
+
+    &:first-child
+    {
+        margin-top: 1.25rem;
+    }
+
+    &--first,
+    &--first:first-child
+    {
+        margin: 0;
+    }
+
+    &.disabled
+    {
+        > *
+        {
+            opacity: .25;
+        }
+    }
+
+    &.add
+    {
+        .list-group-text
+        {
+            color: $blue;
+        }
+    }
+}
+
+.list-group-icon
+{
+    background-repeat: no-repeat;
+    height: 1.25rem;
+    margin-right: .625rem;
+    width: 1.25rem;
+
+    &[data-name="header"]
+    {
+        background-image: url(../i/header.svg);
+    }
+
+    &[data-name="footer"]
+    {
+        background-image: url(../i/footer.svg);
+    }
+
+    &[data-name="image"]
+    {
+        background-image: url(../i/image.svg);
+    }
+
+    &[data-name="image-text"]
+    {
+        background-image: url(../i/image_with_text.svg);
+        height: 1.1875rem;
+    }
+
+    &[data-name="image-carousel"]
+    {
+        background-image: url(../i/image_carousel.svg);
+    }
+
+    &[data-name="text"]
+    {
+        background-image: url(../i/text.svg);
+    }
+
+    &[data-name="text-columns"]
+    {
+        background-image: url(../i/text_columns.svg);
+        height: 1.1875rem;
+    }
+
+    &[data-name="category"]
+    {
+        background-image: url(../i/category.svg);
+    }
+
+    &[data-name="add"]
+    {
+        background-image: url(../i/add.svg);
+    }
+
+    &[data-name="presets"]
+    {
+        background-image: url(../i/presets.svg);
+    }
+
+    &[data-name="colors"]
+    {
+        background-image: url(../i/colors.svg);
+        width: 1.0625rem;
+    }
+
+    &[data-name="typography"]
+    {
+        background-image: url(../i/typography.svg);
+    }
+
+    &[data-name="homepage"]
+    {
+        background-image: url(../i/homepage.svg);
+    }
+
+    &[data-name="homepage-slideshow"]
+    {
+        background-image: url(../i/image_carousel.svg);
+    }
+
+    &[data-name="homepage-featured-content"],
+    &[data-name="homepage-featured-product"]
+    {
+        background-image: url(../i/featured.svg);
+    }
+
+    &[data-name="homepage-subscribe"]
+    {
+        background-image: url(../i/subscribe.svg);
+        height: 1.125rem;
+    }
+
+    &[data-name="collection-page"],
+    &[data-name="product-page"]
+    {
+        background-image: url(../i/copy.svg);
+    }
+
+    &[data-name="cart-page"]
+    {
+        background-image: url(../i/cart.svg);
+        height: 1.0625rem;
+    }
+
+    &[data-name="social-media"]
+    {
+        background-image: url(../i/social.svg);
+    }
+}
+
+.list-group-text
+{
+    font-size: .8125rem;
+
+    &--title
+    {
+        font-size: 1.125rem;
+        font-weight: 600;
+    }
+}
+
+.list-group-actions
+{
+    align-items: center;
+    display: flex;
+    margin-left: auto;
+
+    [class*="list-group"]
+    {
+        margin-left: .9375rem;
+    }
+}
+
+.list-group-visible
+{
+    background: url(../i/visible.svg) no-repeat;
+    height: .75rem;
+    width: 1rem;
+
+    &.hidden
+    {
+        background-image: url(../i/hidden.svg);
+        height: .875rem;
+    }
+}
+
+.list-group-drag
+{
+    background: url(../i/drag.svg) no-repeat;
+    cursor: move;
+    height: .75rem;
+    width: .4375rem;
+}
+
+.list-group-add
+{
+    background: url(../i/add.svg) no-repeat;
+    height: 1.25rem;
+    left: -.25rem;
+    margin-left: auto;
+    opacity: 0;
+    position: relative;
+    transition: all .35s;
+    width: 1.25rem;
+}

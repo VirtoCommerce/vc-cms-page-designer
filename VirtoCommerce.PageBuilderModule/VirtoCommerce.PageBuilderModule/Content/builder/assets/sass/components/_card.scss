@@ -1,0 +1,29 @@
+.card
+{
+    background: $gray-light;
+    border: 1px solid $border-color;
+    border-radius: .25rem;
+    padding: .625rem;
+
+    &__icon
+    {
+        background-repeat: no-repeat;
+        height: 1.25rem;
+        width: 1.25rem;
+
+        &--help
+        {
+            background-image: url(../i/help.svg);
+        }
+    }
+
+    &__text
+    {
+        font-size: .8125rem;
+
+        p
+        {
+            margin: .5rem 0;
+        }
+    }
+}

@@ -1,0 +1,123 @@
+.left-panel
+{
+    background: #fff;
+    border-right: 1px solid $border-color;
+    box-sizing: border-box;
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    flex: 0 0 $left-aside;
+    max-width: $left-aside;
+
+    &-toggable {
+        z-index: 15;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        background: #fff;
+        transition: width .5s;
+        &.opened {
+            position: absolute;
+            box-shadow: 0 0 20px #999;
+        }
+    }
+    &-toolbar {
+        padding: .9375rem;
+        background: white;
+        display: flex;
+    }
+    .error-page
+    {
+        &__pic
+        {
+            width: 14.75rem;
+        }
+
+        &__t
+        {
+            font-size: 1.125rem;
+            line-height: 1.3;
+            margin-bottom: 1.5rem;
+        }
+    }
+
+    &-content
+    {
+        flex: 1 0 0;
+        flex-direction: column;
+        padding: .9375rem;
+        position: relative;
+        overflow-x: hidden;
+        overflow-y: auto;
+
+        .list-group
+        {
+            margin: -.9375rem -.9375rem 0;
+        }
+
+        .form
+        {
+            margin-bottom: .9375rem;
+        }
+    }
+
+    &-footer
+    {
+        @extend %component-footer;
+
+        > :first-child
+        {
+            margin-right: .625rem;
+        }
+    }
+
+    .tabs
+    {
+        background: $gray-light;
+    }
+
+    .tabs__content
+    {
+        background: #fff;
+        display: none;
+        flex-direction: column;
+        flex: 1 0 0;
+        overflow: auto;
+
+        &--active
+        {
+            display: flex;
+        }
+    }
+
+    .tabs__content-main
+    {
+        flex: 1 0 0;
+        overflow: auto;
+    }
+
+    .tabs__content-footer
+    {
+        @extend %component-footer;
+
+        .dropdown
+        {
+            flex: 1 0 0;
+            max-width: 100%;
+        }
+
+        .btn-group
+        {
+            margin-left: .9375rem;
+        }
+    }
+}
+
+[data-view="full"]
+{
+    .left-panel
+    {
+        display: none;
+    }
+}
