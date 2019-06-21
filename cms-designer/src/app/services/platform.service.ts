@@ -6,13 +6,14 @@ import { ApiUrlsService } from './api-url.service';
 import { PresetsModel } from '@themes/models';
 import { BlockValuesModel, BlocksSchema } from '@shared/models';
 import { EnvironmentSettings } from '@app/models';
+import { WindowRef } from './window-ref';
 
 import { AppSettings } from './app.settings';
 
 @Injectable()
 export class PlatformService {
 
-    constructor(private http: HttpClient, private urls: ApiUrlsService) { }
+    constructor(private http: HttpClient, private urls: ApiUrlsService, private windowRef: WindowRef) { }
 
     downloadPreset<T>(filename: string): Observable<T> {
         return this.downloadModel<T>('themes', `/default/config/${filename}`);
@@ -41,8 +42,10 @@ export class PlatformService {
     initSettings(): Promise<any> {
         return this.http.get<EnvironmentSettings>('data/settings.json').pipe(
             tap(x => {
-                console.log(x);
                 Object.assign(AppSettings, x);
+                if (!AppSettings.platformUrl) {
+                    AppSettings.platformUrl = this.windowRef.nativeWindow.location.origin + '/';
+                }
             })
         ).toPromise();
     }

@@ -25,7 +25,7 @@ import { RootEffects } from './store/root.effects';
 import { reducer } from './store/root.reducer';
 import { environment } from '../environments/environment';
 import { HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
-import { AppHttpInterceptor, ApiUrlsService, PreviewService } from '@app/services';
+import { AppHttpInterceptor, ApiUrlsService, PreviewService, WindowRef } from '@app/services';
 import { LoadingComponent } from './components/loading/loading.component';
 import { RefreshTokenInterceptor } from './services/refresh-token.interceptor';
 
@@ -73,10 +73,10 @@ import { RefreshTokenInterceptor } from './services/refresh-token.interceptor';
         },
         {
             provide: PlatformService,
-            useFactory: (http: HttpClient, urls: ApiUrlsService) => {
-                return new PlatformService(http, urls);
+            useFactory: (http: HttpClient, urls: ApiUrlsService, windowRef: WindowRef) => {
+                return new PlatformService(http, urls, windowRef);
             },
-            deps: [ HttpClient, ApiUrlsService ]
+            deps: [ HttpClient, ApiUrlsService, WindowRef ]
         },
         {
             provide: PreviewService,
