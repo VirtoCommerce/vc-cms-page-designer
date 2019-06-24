@@ -332,8 +332,8 @@ exports.DndInteractor = DndInteractor;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Environment = {
     RenderBlockApiUrl: '/designer-preview/block',
-    // DesignerUrl: 'http://localhost/'
-    DesignerUrl: 'http://vc-admin-test.azurewebsites.net/designer'
+    DesignerUrl: 'http://localhost/'
+    // DesignerUrl: 'http://vc-admin-test.azurewebsites.net/designer'
     // DesignerUrl: 'https://vc-com-new-initial-platform.azurewebsites.net/designer'
 };
 
@@ -699,8 +699,8 @@ class PageHandler extends base_handler_1.BaseHandler {
             list.forEach(x => {
                 this.renderer.add(x);
             });
-            var $ = window['jQuery'];
-            $(".carousel-block").carousel();
+            // var $: any = window['jQuery'];
+            // $(".carousel-block").carousel();
             service_locator_1.ServiceLocator.getMessages().renderComplete();
         });
     }
@@ -915,8 +915,8 @@ class UpdateHandler extends base_handler_1.BaseHandler {
             vm.htmlString = result;
             this.renderer.update(vm);
             this.renderer.select(vm);
-            var $ = window['jQuery'];
-            $(".carousel-block").carousel();
+            // var $: any = window['jQuery'];
+            // $(".carousel-block").carousel();
         });
     }
 }

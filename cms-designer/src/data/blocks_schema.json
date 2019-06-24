@@ -762,6 +762,30 @@
                 ]
             },
             {
+                "id": "size",
+                "label": "Block size",
+                "type": "select",
+                "default": "middle",
+                "options": [
+                    {
+                        "value": "normal",
+                        "label": "Normal"
+                    },
+                    {
+                        "value": "middle",
+                        "label": "Middle"
+                    },
+                    {
+                        "value": "block",
+                        "label": "Block"
+                    },
+                    {
+                        "value": "page",
+                        "label": "Page"
+                    }
+                ]
+            },
+            {
                 "id": "image",
                 "label": "Upload picture",
                 "type": "image",

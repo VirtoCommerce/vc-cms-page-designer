@@ -23,8 +23,8 @@ export class PageHandler extends BaseHandler {
             list.forEach(x => {
                 this.renderer.add(x);
             });
-            var $: any = window['jQuery'];
-            $(".carousel-block").carousel();
+            // var $: any = window['jQuery'];
+            // $(".carousel-block").carousel();
             ServiceLocator.getMessages().renderComplete();
         });
     }
