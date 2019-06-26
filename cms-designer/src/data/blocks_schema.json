@@ -886,6 +886,171 @@
             }
         ]
     },
+    "custom-form": {
+        "name": "Custom Form",
+        "icon": "image-text",
+        "displayField": "name",
+        "settings": [
+            {
+                "id": "name",
+                "label": "Block name",
+                "type": "string",
+                "default": "Custom form"
+            },
+            {
+                "id": "style",
+                "label": "Block style",
+                "type": "select",
+                "default": "light",
+                "tab": "Settings",
+                "options": [
+                    {
+                        "value": "light",
+                        "label": "Light"
+                    },
+                    {
+                        "value": "dark",
+                        "label": "Dark"
+                    }
+                ]
+            },
+            {
+                "id": "noTop",
+                "label": "Remove top margin",
+                "type": "checkbox",
+                "tab": "Settings",
+                "default": true
+            },
+            {
+                "id": "noBottom",
+                "label": "Remove bottom margin",
+                "type": "checkbox",
+                "tab": "Settings",
+                "default": true
+            },
+            {
+                "id": "noPad",
+                "label": "Remove paddings",
+                "type": "checkbox",
+                "tab": "Settings",
+                "default": true
+            },
+            {
+                "id": "title",
+                "label": "Title",
+                "type": "string",
+                "default": "Join our network"
+            },
+            {
+                "id": "intro",
+                "label": "Intro",
+                "type": "text",
+                "default": "<p>Please fill out the below form, and someone from our partner program will be in touch.</p>"
+            },
+            {
+                "id": "fields",
+                "label": "Fields",
+                "type": "list",
+                "addText": "Add field",
+                "removeText": "Remove field",
+                "displayField": "label",
+                "element": [
+                    {
+                        "id": "label",
+                        "label": "Label",
+                        "type": "string"
+                    },
+                    {
+                        "id": "name",
+                        "label": "Field name",
+                        "type": "string"
+                    },
+                    {
+                        "id": "type",
+                        "label": "Field type",
+                        "type": "select",
+                        "options": [
+                            {
+                                "value": "text",
+                                "label": "String"
+                            },
+                            {
+                                "value": "textarea",
+                                "label": "Textarea"
+                            }
+                        ]
+                    },
+                    {
+                        "id": "fullrow",
+                        "label": "Full row",
+                        "type": "checkbox"
+                    }
+                ],
+                "default": [
+                    {
+                        "label": "Full name",
+                        "name": "fullname",
+                        "type": "string",
+                        "fullrow": false
+                    },
+                    {
+                        "label": "Email",
+                        "name": "email",
+                        "type": "string",
+                        "fullrow": false
+                    },
+                    {
+                        "label": "Phone",
+                        "name": "phone",
+                        "type": "string",
+                        "fullrow": false
+                    },
+                    {
+                        "label": "Company",
+                        "name": "company",
+                        "type": "string",
+                        "fullrow": false
+                    },
+                    {
+                        "label": "Job Title",
+                        "name": "jobtitle",
+                        "type": "string",
+                        "fullrow": false
+                    },
+                    {
+                        "label": "Website",
+                        "name": "website",
+                        "type": "string",
+                        "fullrow": false
+                    },
+                    {
+                        "label": "Region",
+                        "name": "region",
+                        "type": "string",
+                        "fullrow": true
+                    },
+                    {
+                        "label": "Comments",
+                        "name": "comments",
+                        "type": "textarea",
+                        "fullrow": true
+                    }
+                ]
+            },
+            {
+                "id": "outtro",
+                "label": "Outtro",
+                "type": "text",
+                "default": "By clicking «Send Message» I agree to the Virto Commerce <a href=\"#\">Terms</a> and <a href=\"#\">Privacy</a>."
+            },
+            {
+                "id": "buttonText",
+                "label": "Button text",
+                "type": "string",
+                "default": "Send Message"
+            }
+        ]
+    },
     "divider": {
         "name": "Divider",
         "icon": "image-text",
