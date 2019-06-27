@@ -150,7 +150,6 @@
                             "extractLicenses": true,
                             "vendorChunk": false,
                             "buildOptimizer": true,
-                            "baseHref": "/content/builder/",
                             "resourcesOutputPath": "assets"
                         },
                         "prev": {
