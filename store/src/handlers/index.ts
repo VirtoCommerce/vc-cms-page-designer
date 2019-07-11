@@ -10,6 +10,7 @@ export * from './select.handler';
 export * from './show.handler';
 export * from './swap.handler';
 export * from './update.handler';
+export * from './reset.handler';
 
 export * from './reload.handler';
 export * from './page.handler';

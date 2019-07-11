@@ -1,7 +1,8 @@
 {
     "compileOnSave": true,
     "compilerOptions": {
-        "outDir": "c:/work/cms-designer/virtocommerce.com/vc-content/theme/assets/js/",
+        // "outDir": "c:/work/cms-designer/virtocommerce.com/vc-content/theme/assets/js/",
+        "outDir": "dist",
         "sourceMap": true,
         "module": "commonjs",
         "target": "es6"

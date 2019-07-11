@@ -97,8 +97,18 @@ export class RootEffects {
         ofType<rootActions.SaveData>(rootActions.RootActionTypes.SaveData),
         switchMapTo([
             new editorActions.SavePage(),
+            new rootActions.ResetStorefrontCache()
             // new themeActions.SaveTheme()
         ])
+    );
+
+    @Effect({ dispatch: false })
+    resetStorefrontCache = this.actions$.pipe(
+        ofType<rootActions.ResetStorefrontCache>(rootActions.RootActionTypes.ResetStorefrontCache),
+        withLatestFrom(this.rootStore$.select(fromRoot.getPrimaryFrameId)),
+        tap(([, frameId]) => {
+            this.preview.resetCache(frameId);
+        })
     );
 
     @Effect()
@@ -188,7 +198,7 @@ export class RootEffects {
         filter(action => !!action.payload),
         withLatestFrom(this.rootStore$.select(fromRoot.getPrimaryFrameId)),
         tap(([action, frameId]) => {
-            this.preview.selectBlock(<number>action.payload, frameId);
+            this.preview.selectBlock(action.payload, frameId);
         })
     );
 
@@ -385,7 +395,7 @@ export class RootEffects {
         ofType<editorActions.ClonePageItem>(editorActions.EditorActionTypes.ClonePageItem),
         withLatestFrom(this.rootStore$.select(fromRoot.getPrimaryFrameId)),
         tap(([action, primaryFrameId]) => {
-            this.preview.cloneBlock(<number>action.payload.oldBlock.id, <number>action.payload.newBlock.id, primaryFrameId);
+            this.preview.cloneBlock(action.payload.oldBlock.id, action.payload.newBlock.id, primaryFrameId);
         })
     );
 }

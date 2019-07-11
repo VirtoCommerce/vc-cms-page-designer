@@ -6,11 +6,11 @@ export class HttpService {
 
     }
 
-    post(model: any): Promise<string> {
+    postTo(endpoint: string, model: any) {
         // https://gist.github.com/codecorsair/e14ec90cee91fa8f56054afaa0a39f13
         return new Promise<string>((resolve, reject) => {
             const xhr = new XMLHttpRequest();
-            xhr.open('post', this.endpoint);
+            xhr.open('post', endpoint);
 
             xhr.setRequestHeader('Accept', 'application/json, text/javascript, text/plain')
             xhr.setRequestHeader('Cache-Control', 'no-cache');
@@ -35,6 +35,10 @@ export class HttpService {
             //   resolve(errorResponse(xhr, 'Request took longer than expected.'));
             // };
         });
+    }
+
+    post(model: any): Promise<string> {
+        return this.postTo(this.endpoint, model);
     }
 
 /*

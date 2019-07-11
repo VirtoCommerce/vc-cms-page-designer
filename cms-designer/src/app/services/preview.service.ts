@@ -38,6 +38,10 @@ export class PreviewService {
         this.send('preview', block, frameId);
     }
 
+    resetCache(frameId: string) {
+        this.send('reset', { }, frameId);
+    }
+
     changeOrder(currentIndex: number, newIndex: number, frameId: string) {
         this.send('swap', { currentIndex, newIndex }, frameId);
     }
