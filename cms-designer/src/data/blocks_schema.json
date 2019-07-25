@@ -879,6 +879,12 @@
                 "default": "Download Case Studies"
             },
             {
+                "id": "fileName",
+                "label": "File",
+                "type": "file",
+                "default": "Browse..."
+            },
+            {
                 "id": "description",
                 "label": "Description",
                 "type": "text",
