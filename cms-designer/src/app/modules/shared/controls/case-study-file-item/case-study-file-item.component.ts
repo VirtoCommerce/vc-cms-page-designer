@@ -4,8 +4,8 @@ import { StringControlDescriptor } from '@shared/models';
 
 @Component({
     selector: 'case-study-file-item',
-    templateUrl: './case-study-file-item.html',
-    styleUrls: ['./case-study-file-item.scss']
+    templateUrl: './case-study-file-item.component.html',
+    styleUrls: ['./case-study-file-item.component.scss']
 })
 export class CaseStudyFileItemComponent extends BaseControlComponent<StringControlDescriptor> {
 

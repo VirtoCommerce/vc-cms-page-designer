@@ -1,2 +1,2 @@
 <label>{{descriptor.label}}</label>
-<input #control type="file" class="form-control" [value]="{{descriptor.default}}" (keyup)="onChange($event.target.value)">
+<input #control type="file" class="form-control" [value]="value" (keyup)="onChange($event.target.value)">
