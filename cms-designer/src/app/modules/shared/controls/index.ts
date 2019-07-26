@@ -6,7 +6,7 @@ export * from './text-item/text-item.component';
 export * from './string-item/string-item.component';
 export * from './number-item/number-item.component';
 export * from './url-item/url-item.component';
-export * from './case-study-file-item/case-study-file-item.component'
+export * from './file-item/file-item.component';
 
 import { CheckboxItemComponent } from './checkbox-item/checkbox-item.component';
 import { ColorItemComponent } from './color-item/color-item.component';

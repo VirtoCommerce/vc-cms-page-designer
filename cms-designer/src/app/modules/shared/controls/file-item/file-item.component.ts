@@ -1,14 +1,14 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { FilesService } from '@shared/services';
 import { BaseControlComponent } from '../base-control.component';
-import { StringControlDescriptor } from '@shared/models';
+import { FileItemControlDescriptor } from '@shared/models';
 
 @Component({
     selector: 'file-item',
     templateUrl: './file-item.component.html',
     styleUrls: ['./file-item.component.scss']
 })
-export class FileItemComponent extends BaseControlComponent<StringControlDescriptor> {
+export class FileItemComponent extends BaseControlComponent<FileItemControlDescriptor> {
 
     @ViewChild('control') control: ElementRef;
 

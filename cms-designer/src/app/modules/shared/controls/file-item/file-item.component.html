@@ -1,3 +1,6 @@
 <label>{{descriptor.label}}</label>
-<input #control type="file" class="form-control" [value]="value" (keyup)="onChange($event.target.value)">
-{{value}}
+<label class="btn btn-default">
+    Choose file
+    <input #control type="file" class="form-control" (change)="onChange($event)" hidden />
+</label>
+<a href="{{value}}">{{value}}</a>
