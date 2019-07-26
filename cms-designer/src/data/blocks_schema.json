@@ -879,10 +879,10 @@
                 "default": "Download Case Studies"
             },
             {
-                "id": "fileName",
+                "id": "downloadUrl",
                 "label": "File",
                 "type": "file",
-                "default": "Browse..."
+                "default": "Choose file"
             },
             {
                 "id": "description",

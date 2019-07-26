@@ -16,7 +16,7 @@ import { TextItemComponent } from './text-item/text-item.component';
 import { StringItemComponent } from './string-item/string-item.component';
 import { NumberItemComponent } from './number-item/number-item.component';
 import { UrlItemComponent } from './url-item/url-item.component';
-import { CaseStudyFileItemComponent } from './case-study-file-item/case-study-file-item.component'
+import { FileItemComponent } from './file-item/file-item.component'
 
 export const CONTROLS = [
     CheckboxItemComponent,
@@ -27,5 +27,5 @@ export const CONTROLS = [
     StringItemComponent,
     NumberItemComponent,
     UrlItemComponent,
-    CaseStudyFileItemComponent
+    FileItemComponent
 ];

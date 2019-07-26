@@ -8,7 +8,7 @@ import {
     StringItemComponent,
     TextItemComponent,
     UrlItemComponent,
-    CaseStudyFileItemComponent
+    FileItemComponent
 } from '.';
 
 @Injectable({
@@ -26,7 +26,7 @@ export class ControlsFactory {
         this.controls['string'] = StringItemComponent;
         this.controls['text'] = TextItemComponent;
         this.controls['url'] = UrlItemComponent;
-        this.controls['file'] = CaseStudyFileItemComponent;
+        this.controls['file'] = FileItemComponent;
     }
 
     resolve(type: string): Type<any> {
