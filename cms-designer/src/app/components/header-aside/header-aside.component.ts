@@ -2,7 +2,17 @@ import { Input, Output, EventEmitter, OnInit, Component } from '@angular/core';
 
 @Component({
     selector: 'app-header-aside',
-    templateUrl: './header-aside.component.html'
+    templateUrl: './header-aside.component.html',
+    styles: [`
+        :host {
+            max-width: 100%;
+        }
+        :host .header-text {
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+        }
+    `]
 })
 export class HeaderAsideComponent implements OnInit {
 

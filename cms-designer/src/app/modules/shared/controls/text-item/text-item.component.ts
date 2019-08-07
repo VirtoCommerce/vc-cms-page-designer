@@ -27,11 +27,11 @@ export class TextItemComponent extends BaseControlComponent<TextControlDescripto
         extraPlugins: 'stylescombo,justify',
         removeButtons: '',
         format_tags: 'p;h2;h3;h4',
-        contentsCss: `${AppSettings.storeBaseUrl}${AppSettings.contentCssPath}`,
+        contentsCss: AppSettings.contentCssPath,
         stylesSet: [
-            { name: 'Normal', element: 'p', attributes: [ ] },
-            { name: 'Medium size text', element: 'p', attributes: { class: 'section__descr--medium' } },
-            { name: 'Gray color text', element: 'p', attributes: { class: 'section__descr--gray' } }
+            { name: 'Normal', element: 'span', attributes: { class: 'section__descr--normal' } },
+            { name: 'Medium size text', element: 'span', attributes: { class: 'section__descr--medium' } },
+            { name: 'Gray color text', element: 'span', attributes: { class: 'section__descr--gray' } }
         ]
     };
 
