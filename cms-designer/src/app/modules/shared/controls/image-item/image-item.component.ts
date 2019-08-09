@@ -36,6 +36,11 @@ export class ImageItemComponent extends BaseControlComponent<ImageControlDescrip
         };
     }
 
+    changeAlt(value: string) {
+        this.setValue({ altText: value });
+        this.onChange(this.value);
+    }
+
     changeWidth(value: number) {
         this.setValue({ width: (value || undefined) });
         this.onChange(this.value);
@@ -65,4 +70,5 @@ interface ImageDescriptor {
     url?: string;
     width?: number;
     height?: number;
+    altText?: string;
 }

@@ -8,6 +8,10 @@
     <div class="form-text">{{ value.url }}</div>
     <div *ngIf="value.url" class="form-file__uploaded"><img class="form-file__pic" [src]="value.url" alt="" />
         <span (click)="removeImage($event)" class="form-file__remove"></span></div>
+    <div>
+        <label>Alt-text</label>
+        <input type="text" class="form-control" [value]="value.altText" (keyup)="changeAlt($event.target.value)">
+    </div>
     <div *ngIf="descriptor.allowSetSize">
         <label>Sizes</label>
         <div class="sizes">
