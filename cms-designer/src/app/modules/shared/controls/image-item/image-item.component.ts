@@ -62,6 +62,9 @@ export class ImageItemComponent extends BaseControlComponent<ImageControlDescrip
             value = { url: value };
         }
         const result = { ...this.value, ...value };
+        if (!result.altText) {
+            result.altText = null;
+        }
         super.setValue(result);
     }
 }
