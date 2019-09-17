@@ -4,17 +4,17 @@ const webpack = require('webpack');
 const ROOT = path.resolve(__dirname, 'src');
 const DESTINATION = path.resolve(__dirname, 'dist');
 
-let designerUrl;
+let platformUrl;
 const setupApi = function(env) {
     switch (env.mode) {
         case 'production':
-            designerUrl = "''";
+            platformUrl = "'https://admin.virtocommerce.com/'";
             break;
         case 'staging':
-            designerUrl = "'http://vc-admin-test.azurewebsites.net/'";
+            platformUrl = "'http://vc-admin-test.azurewebsites.net/'";
             break;
         case 'development':
-            designerUrl = "'http://localhost/'";
+            platformUrl = "'http://localhost/'";
             break;
     }
 };
@@ -43,7 +43,7 @@ module.exports = (env, argv) => {
 
         plugins: [
             new webpack.DefinePlugin({
-                __DESIGNER_URL__: designerUrl
+                __PLATFORM_URL__: platformUrl
             })
         ],
 

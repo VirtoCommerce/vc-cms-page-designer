@@ -1,7 +1,7 @@
-declare var __DESIGNER_URL__: string;
+declare var __PLATFORM_URL__: string;
 
 export const Environment = {
     RenderBlockApiUrl: '/designer-preview/block',
     ResetCacheApiUrl: '/designer-preview/reset-cache',
-    DesignerUrl: __DESIGNER_URL__
+    DesignerUrl: __PLATFORM_URL__
 }
