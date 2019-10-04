@@ -56,11 +56,7 @@ export class ImageItemComponent extends BaseControlComponent<ImageControlDescrip
         this.onChange(this.value);
     }
 
-    setValue(value: ImageDescriptor|string) {
-        // TODO: remove before relese. used for backward compatibility when develop
-        if (typeof value === 'string') {
-            value = { url: value };
-        }
+    setValue(value: ImageDescriptor) {
         const result = { ...this.value, ...value };
         if (!result.altText) {
             result.altText = null;
